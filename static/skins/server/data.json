@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Grass",
+    "url": "https://anthive.io/skins/server/1/",
+    "background": "https://anthive.io/skins/server/1/background.png",
+    "foodsmall": "https://anthive.io/skins/server/1/foodsmall.png",
+    "foodmid": "https://anthive.io/skins/server/1/foodmid.png",
+    "foodbig": "https://anthive.io/skins/server/1/foodbig.png"
+  },
+  {
+    "id": 2,
+    "name": "Sand",
+    "url": "https://anthive.io/skins/server/2/",
+    "background": "https://anthive.io/skins/server/2/background.png",
+    "foodsmall": "https://anthive.io/skins/server/2/foodsmall.png",
+    "foodmid": "https://anthive.io/skins/server/2/foodmid.png",
+    "foodbig": "https://anthive.io/skins/server/2/foodbig.png"
+  },
+  {
+    "id": 3,
+    "name": "Picnic",
+    "url": "https://anthive.io/skins/server/3/",
+    "background": "https://anthive.io/skins/server/3/background.png",
+    "foodsmall": "https://anthive.io/skins/server/3/foodsmall.png",
+    "foodmid": "https://anthive.io/skins/server/3/foodmid.png",
+    "foodbig": "https://anthive.io/skins/server/3/foodbig.png"
+  },
+  {
+    "id": 4,
+    "name": "Space",
+    "url": "https://anthive.io/skins/server/4/",
+    "background": "https://anthive.io/skins/server/4/background.png",
+    "foodsmall": "https://anthive.io/skins/server/4/foodsmall.png",
+    "foodmid": "https://anthive.io/skins/server/4/foodmid.png",
+    "foodbig": "https://anthive.io/skins/server/4/foodbig.png"
+  },
+  {
+    "id": 5,
+    "name": "green-fodder",
+    "url": "https://anthive.io/skins/server/5/",
+    "background": "https://anthive.io/skins/server/5/background.png",
+    "foodsmall": "https://anthive.io/skins/server/5/foodsmall.png",
+    "foodmid": "https://anthive.io/skins/server/5/foodmid.png",
+    "foodbig": "https://anthive.io/skins/server/5/foodbig.png"
+  }
+]

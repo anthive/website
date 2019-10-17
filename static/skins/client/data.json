@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Fire ant",
+    "url": "https://anthive.io/skins/client/1/",
+    "ant": "https://anthive.io/skins/client/1/ant.png",
+    "antBig": "https://anthive.io/skins/client/1/antBig.png",
+    "hive": "https://anthive.io/skins/client/1/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/1/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  },
+  {
+    "id": 2,
+    "name": "Albino ant",
+    "url": "https://anthive.io/skins/client/2/",
+    "ant": "https://anthive.io/skins/client/2/ant.png",
+    "antBig": "https://anthive.io/skins/client/2/antBig.png",
+    "hive": "https://anthive.io/skins/client/2/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/2/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  },
+  {
+    "id": 3,
+    "name": "Rick",
+    "url": "https://anthive.io/skins/client/3/",
+    "ant": "https://anthive.io/skins/client/3/ant.png",
+    "antBig": "https://anthive.io/skins/client/3/antBig.png",
+    "hive": "https://anthive.io/skins/client/3/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/3/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  },
+  {
+    "id": 4,
+    "name": "Morty",
+    "url": "https://anthive.io/skins/client/4/",
+    "ant": "https://anthive.io/skins/client/4/ant.png",
+    "antBig": "https://anthive.io/skins/client/4/antBig.png",
+    "hive": "https://anthive.io/skins/client/4/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/4/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  },
+  {
+    "id": 5,
+    "name": "Galactic Federation",
+    "url": "https://anthive.io/skins/client/5/",
+    "ant": "https://anthive.io/skins/client/5/ant.png",
+    "antBig": "https://anthive.io/skins/client/5/antBig.png",
+    "hive": "https://anthive.io/skins/client/5/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/5/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  },
+  {
+    "id": 6,
+    "name": "Ant man",
+    "url": "https://anthive.io/skins/client/6/",
+    "ant": "https://anthive.io/skins/client/6/ant.png",
+    "antBig": "https://anthive.io/skins/client/6/antBig.png",
+    "hive": "https://anthive.io/skins/client/6/hive.png",
+    "hiveBig": "https://anthive.io/skins/client/6/hiveBig.png",
+    "events": ["badeat", "badload", "badmove", "badunload", "birth", "collision", "death", "error", "noaction", "slow"]
+  }
+]
