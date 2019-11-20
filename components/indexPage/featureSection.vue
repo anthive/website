@@ -50,33 +50,32 @@ export default {
 </script>
 
 <style>
-	.feature-section__layout {
-		position: relative;
-	}
+.feature-section__layout {
+	position: relative;
+}
 
-	.feature-section__layout:before {
-		content: "";
-		display: block;
-		position: absolute;
-		top: -80px;
-		right: -25%;
-		width: 100%;
-		height: 300px;
-		background-color: #FAFAFA;
-		border-radius: 100%;
-	}
-	
-	.feature-section__layout:after {
-		content: "";
-		display: block;
-		position: absolute;
-		top: -90px;
-		left: -20%;
-		width: 100%;
-		height: 300px;
-		background: #FAFAFA;
-		border-radius: 100%;
-		z-index: -1;
-	}
+.feature-section__layout:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -80px;
+	right: -25%;
+	width: 100%;
+	height: 300px;
+	background-color: #FAFAFA;
+	border-radius: 100%;
+}
 
+.feature-section__layout:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -90px;
+	left: -20%;
+	width: 100%;
+	height: 300px;
+	background: #FAFAFA;
+	border-radius: 100%;
+	z-index: -1;
+}
 </style>

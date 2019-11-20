@@ -39,19 +39,19 @@
 import Logo from '@/components/logo';
 
 export default {
-  name: 'defaultHeader',
-  data: () => ({
-  }),
-  mounted() {
-  },
-  components: {
-  	Logo
-  }
+	name: 'defaultHeader',
+	data: () => ({
+	}),
+	mounted() {
+	},
+	components: {
+		Logo
+	}
 }
 </script>
 
 <style>
-	a{ 
-		text-decoration: none;
-	} 
+a { 
+	text-decoration: none;
+} 
 </style>

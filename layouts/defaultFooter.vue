@@ -7,13 +7,13 @@
 
 <script>
 export default {
-  name: 'defaultFooter',
-  data: () => ({
-  }),
-  mounted() {
-  },
-  components: {
-  }
+	name: 'defaultFooter',
+	data: () => ({
+	}),
+	mounted() {
+	},
+	components: {
+	}
 }
 </script>
 

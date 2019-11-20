@@ -76,7 +76,7 @@
 </template>
 
 <style>
-  .rules__card {
+.rules__card {
 	margin-top: -178px;
-  }
+}
 </style>

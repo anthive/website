@@ -11,16 +11,16 @@ import defaultHeader from '@/layouts/defaultHeader';
 import defaultFooter from '@/layouts/defaultFooter';
 
 export default {
-  components: {
-    defaultHeader,
-    defaultFooter
-  },
-  data() {
-    return {
-    }
-  },
-  methods: {
-  },
+	components: {
+		defaultHeader,
+		defaultFooter
+	},
+	data() {
+		return {
+		}
+	},
+	methods: {
+	},
 }
 </script>
 

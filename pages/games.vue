@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style>
-	.games__card {
-		margin-top: -178px;
-	}
+.games__card {
+	margin-top: -178px;
+}
 </style>

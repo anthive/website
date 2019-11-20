@@ -39,110 +39,115 @@
 
 <script>
 import userInfoFull from "@/components/UserInfoFull";
+
 var player = null;
+// change to cons or let
 export default {
-  data: () => ({
-    status: "Loading...",
-    theme: 1,
-    players: [],
-    totalTicks: 0,
-    currentTick: 0,
-    percentTick: 0,
-    currentSpeed: 4,
-    isPlaying: true,
-    showActionsState: false
-  }),
-  components: {
-    userInfoFull
-  },
-  mounted() {
-    const base = "https://storage.googleapis.com/anthive-prod-games/";
-    const gameid = this.$route.query.id || "";
-    const version = this.$route.query.v || "";
-    const dataUrl = base + version + "/" + gameid + ".zip";
-    if (dataUrl != null){
-      player = new AnthivePlayer(dataUrl,"#player");
-      player.on(AnthivePlayer.onReady, () => {
-        this.totalTicks = player.total;
-        this.players = player.players;
-        this.theme = player.theme;
-        var width = player.size.width * 20 + 'px'
-        this.$refs.playerWrap.style.minWidth = width
-        this.$refs.playerActions.style.width = width
-      });
-      player.on(AnthivePlayer.onFrameRendered, () => {
-        this.currentTick = player.currentIndex + 1;
-        this.percentTick = (this.currentTick / this.totalTicks) * 100
-      });
-    } else {
-      this.status = "Can't find game."
-    }
-  },
-  methods: {
-    showActions() {
-      this.showActionsState = !this.showActionsState
-    },
-    navigate(dir) {
-      this.isPlaying = false;
-      if(dir == "prev") {
-        player.prev()
-      } else {
-        player.next()
-      }
-    },
-    playPause() {
-      if (this.isPlaying){
-        player.pause()
-        this.isPlaying = false;
-        this.$refs.playerWrap.style.backgroundColor = 'rgba(0, 0, 0, .3)'
-      }else {
-        player.play()
-        this.isPlaying = true;
-        this.$refs.playerWrap.style.backgroundColor = 'transparent'
-      }
-    },
-    setSpeed(value) {
-      this.currentSpeed = value
-      player.speed = value
-    },
-  }
+	data: () => ({
+		status: "Loading...",
+		theme: 1,
+		players: [],
+		totalTicks: 0,
+		currentTick: 0,
+		percentTick: 0,
+		currentSpeed: 4,
+		isPlaying: true,
+		showActionsState: false
+	}),
+	components: {
+		userInfoFull
+	},
+	mounted() {
+		const base = "https://storage.googleapis.com/anthive-prod-games/";
+		const gameid = this.$route.query.id || "";
+		const version = this.$route.query.v || "";
+		const dataUrl = base + version + "/" + gameid + ".zip";
+		if (dataUrl != null) {
+			player = new AnthivePlayer(dataUrl,"#player");
+			player.on(AnthivePlayer.onReady, () => {
+				this.totalTicks = player.total;
+				this.players = player.players;
+				this.theme = player.theme;
+				var width = player.size.width * 20 + 'px';
+				// change to cons or let
+				this.$refs.playerWrap.style.minWidth = width;
+				this.$refs.playerActions.style.width = width;
+			});
+			player.on(AnthivePlayer.onFrameRendered, () => {
+				this.currentTick = player.currentIndex + 1;
+				this.percentTick = (this.currentTick / this.totalTicks) * 100;
+			});
+		} else {
+			this.status = "Can't find game.";
+		}
+	},
+	methods: {
+		showActions() {
+			this.showActionsState = !this.showActionsState;
+		},
+		navigate(dir) {
+			this.isPlaying = false;
+			if (dir == "prev") {
+				player.prev();
+			} else {
+				player.next();
+			}
+		},
+		playPause() {
+			if (this.isPlaying) {
+				player.pause();
+				this.isPlaying = false;
+				this.$refs.playerWrap.style.backgroundColor = 'rgba(0, 0, 0, .3)';
+			} else {
+				player.play();
+				this.isPlaying = true;
+				this.$refs.playerWrap.style.backgroundColor = 'transparent';
+			}
+		},
+		setSpeed(value) {
+			this.currentSpeed = value;
+			player.speed = value;
+		},
+  	}
 }
 </script>
+
 <style>
 #player {
-  background-repeat: repeat;
+  	background-repeat: repeat;
 }
-.players {
 
-}
 .game__vs-separator {
-  position: relative;
-  top: -80px;
+	position: relative;
+	top: -80px;
 }
+
 .player__section {
-  position: relative;
+  	position: relative;
 }
+
 .player__actions {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  min-width: 480px;
-  background: rgba(0, 0, 0, .3);
-  z-index: 10;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	min-width: 480px;
+	background: rgba(0, 0, 0, .3);
+	z-index: 10;
 }
-.player__progress {
-}
+
 .v-btn--disabled {
-  background: rgba(255, 255, 255, .2);
+  	background: rgba(255, 255, 255, .2);
 }
+
 .v-btn--disabled > .v-btn__content {
-  color: rgba(255, 255, 255, .8);
+  	color: rgba(255, 255, 255, .8);
 }
+
 .player__wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 </style>

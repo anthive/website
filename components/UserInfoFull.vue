@@ -67,15 +67,15 @@ export default {
 </script>
 
 <style>
-	.user-info-full {
-		display: inline-block;
-		border-radius: 5px;
-		overflow: hidden;
-	}
+.user-info-full {
+	display: inline-block;
+	border-radius: 5px;
+	overflow: hidden;
+}
 
-	.user-info-full__meta-item-title {
-		display: inline-block;
-		width: 53px;
-		margin-right: 5px;
-	}
+.user-info-full__meta-item-title {
+	display: inline-block;
+	width: 53px;
+	margin-right: 5px;
+}
 </style>
