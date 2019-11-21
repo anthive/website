@@ -29,10 +29,12 @@
 				Logo
 		v-spacer
 		v-toolbar-items.hidden-sm-and-down.mr-2
-			v-btn(to="/games/" text) Games
+			v-btn(to="/games/" text) {{ $t('btnGame') }}
 			v-btn(to="/leaderboard/" text) Leaderboard
 			v-btn(to="/rules/" text) Rules
 			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) Login
+			nuxt-link(v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')") EN
+			nuxt-link(v-if="$i18n.locale !== 'ru'" :to="switchLocalePath('ru')") RU
 </template>
 
 <script>

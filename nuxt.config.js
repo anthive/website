@@ -48,7 +48,25 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    ['@nuxtjs/google-analytics', {id: 'UA-122954385-1'}]
+    ['@nuxtjs/google-analytics', {id: 'UA-122954385-1'}],
+    [
+      'nuxt-i18n',
+      {
+        locales: ['en', 'ru'],
+        defaultLocale: 'en',
+        vueI18n: {
+          fallbackLocale: 'en',
+          messages: {
+            en: {
+              btnGame: 'Game'
+            },
+            ru: {
+              btnGame: 'Игра'
+            }
+          }
+        }
+      }
+    ]
   ],
   /*
   ** Axios module configuration
