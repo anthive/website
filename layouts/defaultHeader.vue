@@ -29,10 +29,15 @@
 				Logo
 		v-spacer
 		v-toolbar-items.hidden-sm-and-down.mr-2
-			v-btn(to="/games/" text) Games
-			v-btn(to="/leaderboard/" text) Leaderboard
-			v-btn(to="/rules/" text) Rules
-			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) Login
+			v-btn(to="/games/" text) {{ $t('btnGames') }}
+			v-btn(to="/leaderboard/" text) {{ $t('btnLeaderboard') }}
+			v-btn(to="/rules/" text) {{ $t('btnRules') }}
+			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) {{ $t('btnLogin') }}
+			v-btn(v-for="el in locales"
+				:key="el.code"
+				:class="{ active: (el.code === locale) }"
+				@click="switchLanguage(el.code)") {{ el.name }}
+				 
 </template>
 
 <script>
@@ -46,7 +51,17 @@ export default {
   },
   components: {
   	Logo
-  }
+  },
+  computed: {
+      locales() { return this.$store.state.locales },
+      locale() { return this.$store.state.locale }
+    },
+    methods: {
+      switchLanguage (localeCode) {
+        document.cookie = `locale=${localeCode}`;
+        location.reload();
+      }
+    }
 }
 </script>
 

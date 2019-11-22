@@ -40,7 +40,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify', '@/plugins/i18n.js'],
 
   /*
   ** Nuxt.js modules
@@ -57,10 +57,15 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  router: {
+    middleware: 'i18n'
+  },
+
   /*
   ** Build configuration
   */
   build: {
+    vendor: ['vue-i18n'],
     /*
     ** You can extend webpack config here
     */
