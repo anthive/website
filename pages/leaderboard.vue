@@ -17,9 +17,9 @@
 											v-card-text.pa-0.caption v.{{ player.Version }}
 								v-list-item-content.pl-5
 									v-list-item-title( :class="(index < 3) && 'title'") {{player.Username}}
-									v-list-item-subtitle {{player.Games}} games
+									v-list-item-subtitle {{player.Games}} {{ $t('leadGames') }}
 								v-list-tile-action.pr-3
-									v-list-item-subtitle {{us.scoreString(player.Wealth)}} wealth
+									v-list-item-subtitle {{us.scoreString(player.Wealth)}} {{ $t('leadWealth') }}
 								v-list-tile-action.pr-3
 									span(:class="(index < 3) && 'title'") {{player.Wg}}
 										v-icon.orange--text.text--lighten-2(class="ml-1") bubble_chart

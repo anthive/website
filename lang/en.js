@@ -69,6 +69,7 @@ export default {
     gamesWealth: 'Wealth',
     gamesDate: 'Date',
 
-    // user
-    mAgo: 'm ago',
+    // ----------------------------- LEADERBOARD PAGE
+    leadGames: 'games',
+    leadWealth: 'wealth',
 }

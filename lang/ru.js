@@ -69,6 +69,7 @@ export default {
     gamesWealth: 'Очки',
     gamesDate: 'Дата',
 
-    // user
-    mAgo: 'м назад',
+    // ----------------------------- LEADERBOARD PAGE
+    leadGames: 'игр',
+    leadWealth: 'очков',
 }
