@@ -17,7 +17,7 @@
 						p {{ $t('videoText2') }}
 						p {{ $t('videoText3') }}
 						p {{ $t('videoText4') }}
-					v-btn.ma-3(to='/rules/', color='brown white--text') {{ $t('rules') }}
+					v-btn.ma-3(:to="localePath('rules')", color='brown white--text') {{ $t('rules') }}
 </template>
 
 <script>

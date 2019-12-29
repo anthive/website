@@ -41,9 +41,8 @@
                         v-card-title.pt-3.display-1.font-weight-thin {{ $t('step3Title') }}
                         v-card-text.subheading
                             | {{ $t('step3Text') }}  
-                            a(href='/leaderboard/', style='color: blue;') {{ $t('step3leaderboard') }} 
-                            | .
-                        v-btn.ma-3(to='/rules/', color='brown white--text') {{ $t('rules') }}
+                            a(:to="localePath('leaderboard')", style='color: blue;') {{ $t('step3leaderboard') }} 
+                        v-btn.ma-3(:to="localePath('rules')", color='brown white--text') {{ $t('rules') }}
 </template>
 
 <script>
