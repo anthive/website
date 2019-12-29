@@ -16,7 +16,8 @@
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/google-analytics": "^2.0.2",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.11.0",
+    "serialize-javascript": "^2.1.2",
     "vue-google-charts": "^0.3.2",
     "vue-resource": "^1.5.1",
     "vuetify": "^2.0.18"
