@@ -4,13 +4,13 @@
 			v-col(cols="12", lg="5")
 				v-card.elevation-3.white.pa-2.pl-4.ant-card-scientist
 					v-card-title.layout(primary-title)
-						.headline.brown--text.text-xs-left.px-3 Badges and Ranking
+						.headline.brown--text.text-xs-left.px-3 {{ $t('badgesTitle') }}
 					v-card-text
-						| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sapien velit, sodales in elementum sed, facilisis suscipit massa.
+						| {{ $t('badgesText1')}}
 					v-card-text
-						| Maecenas efficitur lectus non ligula accumsan euismod in a quam. Vivamus finibus tincidunt tellus vitae aliquet. Suspendisse justo ipsum, pharetra non pretium ut, scelerisque ac mi.
+						| {{ $t('badgesText2')}}
 					v-card-text
-						| Pellentesque hendrerit sodales tortor, in faucibus diam tempus ac. Donec convallis fringilla mauris vitae tristique.
+						| {{ $t('badgesText3')}}
 			v-col(cols="10", lg="3" sm="6", md="5")
 				v-img(src='/img/badges_trinity.png', aspect-ratio='1', contain)
 </template>

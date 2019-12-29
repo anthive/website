@@ -4,12 +4,12 @@
             v-container
                 v-row.justify-center.align-start
                     v-col.mb-4.text-center(cols= "12" md="6")
-                        div.white--text.mb-5.mt-0.display-2.font-weight-thin You are not playing a game
-                        div.headline.font-weight-bold.orange--text.text--darken-1 Turn-based strategy game for your AI
-                        div.hidden-sm-and-down.mt-2.title.font-weight-regular Start your new coding adventure with 3 simple steps
+                        div.white--text.mb-5.mt-0.display-2.font-weight-thin {{ $t('slogan1') }}
+                        div.headline.font-weight-bold.orange--text.text--darken-1 {{ $t('slogan2') }}
+                        div.hidden-sm-and-down.mt-2.title.font-weight-regular {{ $t('slogan3') }}
                     v-col.d-flex.justify-center(md="6")
                         div.ant-player( @click="playPausePlayer()" id="player" )
-                            h2.loading Loading...
+                            h2.loading {{ $t('loading') }}
 </template>
 
 <script>

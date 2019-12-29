@@ -8,31 +8,33 @@
 					v-list-item-icon
 						v-icon videogame_asset
 					v-list-item-content
-						v-list-item-title Games
+						v-list-item-title {{ $t('games') }}
 				v-list-item(to="/leaderboard/")
 					v-list-item-icon
 						v-icon poll
 					v-list-item-content
-						v-list-item-title Leaderboard
+						v-list-item-title {{ $t('leaderboard') }}
 				v-list-item(to="/rules/")
 					v-list-item-icon
 						v-icon import_contacts
 					v-list-item-content
-						v-list-item-title Rules
+						v-list-item-title {{ $t('rules') }}
 				v-list-item.green--text(href="https://profile.anthive.io/login/")
 					v-list-item-icon
 						v-icon.green--text person
 					v-list-item-content
-						v-list-item-title Login
+						v-list-item-title {{ $t('login') }}
 		v-toolbar-title
 			router-link(to="/") 
 				Logo
 		v-spacer
 		v-toolbar-items.hidden-sm-and-down.mr-2
-			v-btn(to="/games/" text) Games
-			v-btn(to="/leaderboard/" text) Leaderboard
-			v-btn(to="/rules/" text) Rules
-			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) Login
+			v-btn(to="/games/" text) {{ $t('games') }}
+			v-btn(to="/leaderboard/" text) {{ $t('leaderboard') }}
+			v-btn(to="/rules/" text) {{ $t('rules') }}
+			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) {{ $t('login') }}
+			v-btn(:to="switchLocalePath('en')" text) {{ $t('en') }}
+			v-btn(:to="switchLocalePath('ru')" text) {{ $t('ru') }}
 </template>
 
 <script>

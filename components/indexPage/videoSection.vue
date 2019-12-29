@@ -11,13 +11,13 @@
 			v-col(cols="11", lg='6')
 				v-card.pa-3.transparent(flat)
 					v-card-title
-						.headline.brown--text.text-xs-left.px-2 Get Started!
+						.headline.brown--text.text-xs-left.px-2 {{ $t('videoTitle') }}
 					v-card-text.subheading
-						p This is a turn-based strategy game for your Bot.
-						p Compute, contemplate and plan each step of your ants. Send commands to your ants in order for them to collect food, bring it to your hive, and to grow your colony.
-						p A player with the biggest colony and least errors wins the game. To start the game please follow three steps below.
-						p For detailed rules please visit link
-					v-btn.ma-3(to='/rules/', color='brown white--text') Rules
+						p {{ $t('videoText1') }}
+						p {{ $t('videoText2') }}
+						p {{ $t('videoText3') }}
+						p {{ $t('videoText4') }}
+					v-btn.ma-3(to='/rules/', color='brown white--text') {{ $t('rules') }}
 </template>
 
 <script>

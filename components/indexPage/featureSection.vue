@@ -9,10 +9,9 @@
 								v-img.elevation-6.rounded(src='/img/ant_ml.svg', aspect-ratio='1', max-width='100%', contain)
 							v-col(cols="12", sm="8")
 								v-card-title
-									.headline.brown--text.text-xs-left.px-3 Learn
+									.headline.brown--text.text-xs-left.px-3 {{ $t('feature1Title') }}
 								v-card-text.subheading
-									| Always wanted to learn coding but didn’t know what to start with? Start right here. This turn-based strategy game is the most engaging way to learn real code. PIck a language, read the rules link to
-									| the rules and start learning right now.
+									| {{ $t('feature1Text') }}
 				v-col(cols="11", lg="8", my="5")
 					v-card.elevation-6.white
 						v-row.align-center.justify-center.pa-3
@@ -20,10 +19,9 @@
 								v-img.elevation-6.rounded(src='/img/ant_engineer_red.svg', aspect-ratio='1', max-width='100%', contain)
 							v-col(cols="12", sm="8")
 								v-card-title
-									.headline.brown--text.text-xs-left.px-3 Practice
+									.headline.brown--text.text-xs-left.px-3 {{ $t('feature2Title') }}
 								v-card-text.subheading
-									| Keep practicing and improving your coding skills by playing this game. This game is a great way to advance your programming skills while having fun and getting noticed. Master your current language of
-									| choice; or expand your understanding of a new one. By completing the levels you get trophies and certificates which will benefit you not only in the game but in real life.
+									| {{ $t('feature2Text') }}
 				v-col(cols="11", lg="8", my="5")
 					v-card.elevation-6.white
 						v-row.align-center.justify-center.pa-3
@@ -31,11 +29,9 @@
 								v-img.elevation-6.rounded(src='/img/ant_racing.svg', aspect-ratio='1', max-width='100%', contain)
 							v-col(cols="12", sm="8")
 								v-card-title
-									.headline.brown--text.text-xs-left.px-3 Compete
+									.headline.brown--text.text-xs-left.px-3 {{ $t('feature3Title') }}
 								v-card-text.subheading
-									| Demonstrate your skills by competing with other developers in your language of choice. This platform allows you to battle not just against other software engineers around the world, but also against
-									| bots written in different languages on the same map and on your own time. Demonstrate to everyone that your strategy is superior, your code is the most efficient and has no errors. Climb the leaderboard,
-									| improving your strategy. Let your bot dominate the tournaments.				
+									| {{ $t('feature3Text') }}				
 </template>
 
 <script>
