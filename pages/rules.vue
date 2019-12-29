@@ -4,7 +4,7 @@
 		v-row.justify-center
 			v-col(cols="11", md="8")
 				v-card.white.text-xs-left.pa-3.elevation-6.rules__card(flat='', tile='')
-					v-card-title.font-weight-bold.mb-5 Rules
+					v-card-title.font-weight-bold.mb-5 {{ $t('rules') }}
 					v-card-text
 						p
 							| AntHIve.IO is a turn-based coding game. Command your ants to collect food and return it to your hive to grow your colony. A player with the biggest colony and least errors wins the game.

@@ -7,6 +7,11 @@ export default {
     en: 'En',
     ru: 'Ru',
 
+    // footer
+    issueOnGithub: 'Issue on GitHub',
+
+    // ----------------------------- HOME PAGE
+
     // parallax section
     slogan1: 'You are not playing a game',
     slogan2: 'Turn-based strategy game for your AI',
@@ -53,6 +58,17 @@ export default {
     feedbackText2: 'Tell us on our github repo and we will fix it!',
     feedbackBtn2: 'Report issue',
 
-    // footer
-    issueOnGithub: 'Issue on GitHub',
+    // ----------------------------- GAMES PAGE
+    gamesTitle1: 'All battles:',
+    gamesTitle2: 'Explore, watch, replay, learn strategies',
+
+    // table
+    gamesLoading: 'Loading... Please wait',
+    gamesPlayer: 'Player',
+    gamesTicks: 'Ticks',
+    gamesWealth: 'Wealth',
+    gamesDate: 'Date',
+
+    // user
+    mAgo: 'm ago',
 }

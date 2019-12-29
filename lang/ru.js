@@ -7,7 +7,12 @@ export default {
     en: 'Англ',
     ru: 'Рус',
 
-    //parallax section
+    // footer
+    issueOnGithub: 'Сообщить об ошибке на Github',
+
+    // ----------------------------- HOME PAGE
+
+    // parallax section
     slogan1: 'Ты не просто играешь в игру',
     slogan2: 'Пошаговая стратегия по развитию твоего ИИ',
     slogan3: 'Начни свое новое кодинг-приключение за 3 простых шага',
@@ -53,6 +58,17 @@ export default {
     feedbackText2: 'Сообщий о ней нам в нашем gitgub репозитории и мы ее исправим!',
     feedbackBtn2: 'Сообщить об ошибке',
 
-    // footer
-    issueOnGithub: 'Сообщить об ошибке на Github',
+    // ----------------------------- GAMES PAGE
+    gamesTitle1: 'Все битвы:',
+    gamesTitle2: 'Исследуйте, смотрите, воспроизводите, изучайте стратегии',
+
+    // table
+    gamesLoading: 'Загрузка... Пожалуйста подождите',
+    gamesPlayer: 'Игрок',
+    gamesTicks: 'Тик',
+    gamesWealth: 'Очки',
+    gamesDate: 'Дата',
+
+    // user
+    mAgo: 'м назад',
 }
