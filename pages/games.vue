@@ -6,8 +6,8 @@
 				v-card.games__card( flat tile class="white text-xs-left pa-3 elevation-6 ")
 					v-card-title.mb-10
 						h1.headline
-							span.grey--text All battles:
-							span.ml-2 Explore, watch, replay, learn strategies
+							span.grey--text {{ $t('gamesTitle1') }}
+							span.ml-2 {{ $t('gamesTitle2') }}
 					v-card-text
 						GamesTable(:Filters="filters" :PageSize=17 :ShowTitle="false")
 </template>

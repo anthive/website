@@ -3,7 +3,7 @@
   #games-table
     v-data-table(
       :loading="loading"
-      loading-text="Loading... Please wait"
+      :loading-text="$t('gamesLoading')"
       :headers="columns"
       :items="items"
       hide-default-header
@@ -12,13 +12,13 @@
     )
       template(v-slot:header="{ props: { headers } }") 
         tr
-          th(class="text-xs-left") Players
+          th(class="text-xs-left") {{ $t('gamesPlayer') }}
           th(
             v-for="(column, index) in headers"
             :class="dataTableClasses(column)"
             :key="index"
             @click="doSort(column)"
-          ) {{ column.text }}
+          ) {{ $t(column.text)  }}
             v-icon(
               small
               v-if="(column.hasOwnProperty('sort')) && column.sort =='desc'"
@@ -87,20 +87,20 @@ export default {
     sort:[],
     columns: [
       {
-        text: "Ticks",
+        text: "gamesTicks",
         align: "left",
         sortable: true,
         value: "Age"
       },
       {
-        text: "Wealth",
+        text: "gamesWealth",
         align: "right",
         sortable: true,
         sort: "desc",
         value: "Wealth"
       },
       {
-        text: "Date",
+        text: "gamesDate",
         align: "right",
         sortable: true,
         value: "Played"

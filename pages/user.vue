@@ -16,10 +16,10 @@
             v-icon(size="20" class="mr-2") public
             a(:href="user.blog" target="_blank") {{ user.blog }}
       v-col(cols="11" lg="7" xl="5")
-        h3.headline.mt-1.mb-3 Bot performance in the last 10 days
+        h3.headline.mt-1.mb-3 {{ $t('userTitle') }}
         Chart.elevation-1(:values="userChartData" username="kezlya")
       v-col.mt-4(cols="11" lg="8")
-        h3(class="headline mt-1 mb-3") User games:
+        h3(class="headline mt-1 mb-3") {{ $t('userGames') }}
           //TODO: use v-on span(class="grey--text") ({{ totalGames }})
         gamesTable(:Filters="filters" :PageSize=17)
 </template>

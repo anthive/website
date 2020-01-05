@@ -23,24 +23,24 @@
 					v-card-text.py-2.mx-auto.text-center.font-weight-bold {{ username }}
 
 				v-col.pa-1.text-left(cols="5")
-					v-card-text.pt-0.pb-0.pl-8.grey--text.text--darken-2.caption.text-xs-center Bot info
+					v-card-text.pt-0.pb-0.pl-8.grey--text.text--darken-2.caption.text-xs-center {{ $t('infoBotInfo') }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title.mr-n1 Span:
+						span.user-info-full__meta-item-title.mr-n1 {{ $t('infoSpan') }}
 						span Y{{ span[0] }}, X{{ span[1] }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title Ticks:
+						span.user-info-full__meta-item-title {{ $t('infoTicks') }}
 						span {{ stats.Age }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title Ants:
+						span.user-info-full__meta-item-title {{ $t('infoAnts') }}
 						span {{ stats.Ants }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title HiveSize:
+						span.user-info-full__meta-item-title {{ $t('infoHiveSize') }}
 						span {{ stats.Hive }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title Errors:
+						span.user-info-full__meta-item-title {{ $t('infoErrors') }}
 						span {{ stats.Errors }}
 					v-card-text.py-0.caption
-						span.user-info-full__meta-item-title Earned:
+						span.user-info-full__meta-item-title {{ $t('infoEarned') }}
 						span.font-weight-bold {{ score }}
 </template>
 
