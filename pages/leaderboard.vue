@@ -28,45 +28,23 @@
 
 <script>
 import userService from "@/services/User";
-import axios from "axios";
+import {searchBots} from "@/services/Search";
+
 export default {
 	name: "Leaderboard",
 	data: () => ({
 		us: userService,
-		players:[],
-		elastic: axios.create({
-			baseURL: 'https://search.anthive.io/',
-			timeout: 3000
-		})
+		players:[]
 	}),
 	created() {
-		this.getPlayers();
+		this.getLeaders();
 	},
 	methods:{
-		async getPlayers(){
-			console.log("loading best players");
-
-			const query = {
-				"size": 100,
-				"sort": [
-					{
-						"Wg": {
-							"order": "desc"
-						}
-					}
-				]
-			};
-			const resp = await this.elastic.get("/bots-prod/_search", this.wrap(query));
-			this.players = resp.data.hits.hits.map(b => {
-				return b._source;
+		async getLeaders(){
+			const sort = [{"Wg": {"order": "desc"}}]
+			searchBots(sort, 1, 100, null).then(leaders =>{
+				this.players = leaders
 			});
-		},
-		wrap(query){
-			return { params: {
-					source: JSON.stringify(query),
-					source_content_type: 'application/json'
-				}
-			};
 		},
 		pictureUrl(username,size){
 			return this.us.photoUrl(username, size);

@@ -1,4 +1,3 @@
-
 <template lang="pug">
   #games-table
     v-data-table(
@@ -60,7 +59,7 @@
 <script>
 import userInfo from "@/components/UserInfo";
 import userService from "@/services/User";
-import searchService from "@/services/Search";
+import {searchGames} from "@/services/Search";
 
 export default {
   name: "gamesTable",
@@ -177,14 +176,9 @@ export default {
 
     async loadGames(){
       this.loading = true;
-      searchService.searchGames(this.sort, this.currentPage, this.PageSize, this.Filters).then(games =>{
+      searchGames(this.sort, this.currentPage, this.PageSize, this.Filters).then(games =>{
         if (games != null) {
-          this.pages = Math.ceil(games.total/this.PageSize);
-          // TODO:
-          // use $emit  to pass data back to parent games.total;
-          // https://forum.vuejs.org/t/passing-data-back-to-parent/1201
-          console.log(games);
-          
+          this.pages = Math.ceil(games.total/this.PageSize);        
           this.items = games.hits;
         }
         this.loading = false;

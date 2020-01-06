@@ -53,9 +53,11 @@ export default {
   created() {
     var username = this.$route.query.username;
 
-    if(username == '') {
+    if(username === '' ||username === undefined ) {
       this.$router.push('/leaderboard')
+      return;
     }
+    console.log("tttttttt", username);
 
     this.filters = [{ "term":  { "Players.Username.keyword": username}}];
     this.us.getUserdata(username).then((result) => {
