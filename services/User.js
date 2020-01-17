@@ -1,3 +1,5 @@
+export default User;
+
 import axios from "axios";
 
 const baseURL = "https://anthive.io/";
@@ -5,12 +7,14 @@ const githubURL = "https://api.github.com/";
 
 class User {
   static getUserdata(username) {
+    if (username === '' || username === undefined) return
+
     var ghAxios = axios.create({
       baseURL: githubURL,
-      timeout: 3000
+      timeout: 30000
     });
 
-    return ghAxios.get('users/'+username)
+    return ghAxios.get('users/' + username)
       .then((res) => {
         var user = res.data;
 
@@ -21,63 +25,54 @@ class User {
           location: user.location,
           blog: (user.blog != '') ? user.blog : null
         };
-      })
-      .catch((err) => {
-        if(err.response.status == 404) {
-          return {
-            name: username,
-            avatar: this.photoUrl(username, 250),
-            company: null,
-            location: null,
-            blog: null
-          }
-        }
-      });
+      }).catch(handleError);
   }
 
-  static photoUrl(username, size){
+
+
+  static photoUrl(username, size) {
     if (username.startsWith('sample-')) {
       return this.langUrl(username.substring(7));
     }
-    return "https://github.com/"+username+".png?size="+size;
+    return "https://github.com/" + username + ".png?size=" + size;
   }
 
-  static langUrl(lang){
-    return baseURL+"skins/lang/"+lang+".png";
+  static langUrl(lang) {
+    return baseURL + "skins/lang/" + lang + ".png";
   }
 
-  static antUrl(skin, big=false) {
-    if (big){
-      return baseURL+"skins/client/"+skin+"/antBig.png";
+  static antUrl(skin, big = false) {
+    if (big) {
+      return baseURL + "skins/client/" + skin + "/antBig.png";
     }
-    return baseURL+"skins/client/"+skin+"/ant.png";
+    return baseURL + "skins/client/" + skin + "/ant.png";
   }
 
-  static hiveUrl(skin, big=false) {
-    if (big){
-      return baseURL+"skins/client/"+skin+"/hiveBig.png";
+  static hiveUrl(skin, big = false) {
+    if (big) {
+      return baseURL + "skins/client/" + skin + "/hiveBig.png";
     }
-    return baseURL+"skins/client/"+skin+"/hive.png";
+    return baseURL + "skins/client/" + skin + "/hive.png";
   }
 
-  static scoreString(value){
-    var suffixes = ["", "K", "M", "B","t"];
-    var suffixNum = Math.floor(((""+value).length-1)/3);
+  static scoreString(value) {
+    var suffixes = ["", "K", "M", "B", "t"];
+    var suffixNum = Math.floor((("" + value).length - 1) / 3);
     //console.log(value, suffixNum);
-    var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(2));
-    return shortValue+suffixes[suffixNum];
+    var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(2));
+    return shortValue + suffixes[suffixNum];
   }
 
-  static timeAgo(epochStamp){
+  static timeAgo(epochStamp) {
     const diff = Math.round(new Date()) - epochStamp;
     const periods = {
-          month: 30 * 24 * 60 * 60 * 1000,
-          week: 7 * 24 * 60 * 60 * 1000,
-          day: 24 * 60 * 60 * 1000,
-          hour: 60 * 60 * 1000,
-          minute: 60 * 1000,
-          second: 1000,
-        };
+      month: 30 * 24 * 60 * 60 * 1000,
+      week: 7 * 24 * 60 * 60 * 1000,
+      day: 24 * 60 * 60 * 1000,
+      hour: 60 * 60 * 1000,
+      minute: 60 * 1000,
+      second: 1000,
+    };
     if (diff > periods.month) {
       // it was at least a month ago
       return Math.floor(diff / periods.month) + "m ago";
@@ -96,4 +91,16 @@ class User {
   }
 }
 
-export default User;
+
+function handleError(error) {
+  if (error.response) {
+    console.log(error.response.data);
+  } else if (error.request) {
+    console.log(error.request);
+  } else {
+    console.log('Error', error.message);
+  }
+  console.log(error.config.url);
+  console.log(error.config.params);
+}
+

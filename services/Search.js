@@ -1,35 +1,54 @@
+export { searchGames, searchBots };
+
 import axios from "axios";
 
 const esAxios = axios.create({
   baseURL: 'https://search.anthive.io/',
-  timeout: 3000
+  timeout: 30000
 });
 
-class Search  {
-
-  wrap(query){
-    return { params: {
-        source: JSON.stringify(query),
-        source_content_type: 'application/json'
-      }
-    };
-  }
-
-  async searchGames(sort, page, size, filter) {
-    const handle = "/games-prod/_search";
-    const query = {
-      size: size,
-      sort: sort,
-      from: size*(page-1),
-      query: { bool: { filter: filter }}
-    };
-    //console.log("filters",filter);
-    const resp = await esAxios.get(handle, this.wrap(query));
-    if(resp.status == 200){
-      return resp.data.hits;
+function query(sort, page, size, filter) {
+  const es_syntax = {
+    size: size,
+    sort: sort,
+    from: size * (page - 1)
+  };
+  return {
+    params: {
+      source: JSON.stringify(es_syntax),
+      source_content_type: 'application/json'
     }
-    return null;
+  };
+};
+
+function handleError(error) {
+  if (error.response) {
+    console.log(error.response.data);
+  } else if (error.request) {
+    console.log(error.request);
+  } else {
+    console.log('Error', error.message);
   }
+  console.log(error.config.url);
+  console.log(error.config.params);
 }
 
-export default new Search();
+async function searchGames(sort, page, size, filter) {
+  console.log("searchGames");
+
+  const handle = "/games-prod/_search";
+  const q = query(sort, page, size, filter);
+
+  const resp = await esAxios.get(handle, q).catch(handleError);
+  return resp.data.hits;
+}
+
+async function searchBots(sort, page, size, filter) {
+  console.log("searchBots");
+
+  const handle = "/bots-prod/_search";
+  const q = query(sort, page, size, filter);
+
+  const resp = await esAxios.get(handle, q).catch(handleError);
+  return resp.data.hits.hits.map(bots => bots._source);
+}
