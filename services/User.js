@@ -1,6 +1,3 @@
-// export { getUserdata, photoUrl, langUrl,antUrl ,hiveUrl,scoreString,timeAgo}
-export default User;
-
 import axios from "axios";
 
 const baseURL = "https://anthive.io/";
@@ -16,26 +13,17 @@ class User {
     this.Wg = ''
   }
 
-  async getUser(id) {
-    console.log('fill Profile User func')
-    this.Id = id
-    let filled = await Fire.firestore()
-      .collection(usersFBCollection)
-      .doc(id)
-      .get()
-      .then(doc => {
-        const data = doc.data()
-        if (data) return true
-        else return false
-      })
-      .catch(error => console.error(error.message))
-    if (filled) await this.init(id)
-    else await this.save(id)
-
-    return filled
+  async initUser(user) {
+    console.log('init user')
+    this.Username = user.Username
+    this.Lang = user.Lang
+    this.Version = user.Version
+    this.Games = user.Games
+    this.Wealth = user.Wealth
+    this.Wg = user.Wg
   }
 
-  static getUserdata() {
+  getUserdata() {
     if (this.Username === '' || this.Username === undefined) return
 
     var ghAxios = axios.create({
@@ -46,7 +34,6 @@ class User {
     return ghAxios.get('users/' + this.Username)
       .then((res) => {
         var user = res.data;
-        console.log('--------', user)
         return {
           name: (user.name != null) ? user.name : this.Username,
           avatar: this.photoUrl(250),
@@ -57,32 +44,32 @@ class User {
       }).catch(handleError);
   }
 
-  static photoUrl(size = 70) {
+  photoUrl(size = 70) {
     if (this.Username.startsWith('sample-')) {
-      return langUrl(this.Username.substring(7));
+      return this.langUrl(this.Username.substring(7));
     }
     return "https://github.com/" + this.Username + ".png?size=" + size;
   }
 
-  static langUrl(lang = this.Lang) {
+  langUrl(lang = this.Lang) {
     return baseURL + "skins/lang/" + lang + ".png";
   }
 
-  static antUrl(skin, big = false) {
+  antUrl(skin, big = false) {
     if (big) {
       return baseURL + "skins/client/" + skin + "/antBig.png";
     }
     return baseURL + "skins/client/" + skin + "/ant.png";
   }
 
-  static hiveUrl(skin, big = false) {
+  hiveUrl(skin, big = false) {
     if (big) {
       return baseURL + "skins/client/" + skin + "/hiveBig.png";
     }
     return baseURL + "skins/client/" + skin + "/hive.png";
   }
 
-  static scoreString() {
+  scoreString() {
     var suffixes = ["", "K", "M", "B", "t"];
     var suffixNum = Math.floor((("" + this.Wealth).length - 1) / 3);
     //console.log(value, suffixNum);
@@ -90,7 +77,7 @@ class User {
     return shortValue + suffixes[suffixNum];
   }
 
-  static timeAgo(epochStamp) {
+  timeAgo(epochStamp) {
     const diff = Math.round(new Date()) - epochStamp;
     const periods = {
       month: 30 * 24 * 60 * 60 * 1000,
@@ -115,7 +102,7 @@ class User {
       return Math.floor(diff / periods.second) + "s ago";
     }
     return "Just now";
-  }
+  } 
 }
 
 function handleError(error) {
@@ -130,3 +117,4 @@ function handleError(error) {
   console.log(error.config.params);
 }
 
+export default User;
