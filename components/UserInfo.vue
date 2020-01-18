@@ -1,9 +1,9 @@
 <template lang="pug">
 	.d-inline-block
 		.user-info.grey.lighten-4.elevation-3.d-flex
-			v-img.user-info__avatar.d-inline-block.flex-grow-0(:src="us.photoUrl(username, 96)" width="48" height="48"  aspect-ratio="1" class="lighten-4")
-			v-img.user-info__avatar-lang(:src="us.langUrl(lang)"  width="48" height="48"  aspect-ratio="1"  class="lighten-2")
-			.text-xs-center.user-info__skin(:style="'background: green url('+us.hiveUrl(skin)+');'")
+			//- v-img.user-info__avatar.d-inline-block.flex-grow-0(:src="us.photoUrl(username, 96)" width="48" height="48"  aspect-ratio="1" class="lighten-4")
+			//- v-img.user-info__avatar-lang(:src="us.langUrl(lang)"  width="48" height="48"  aspect-ratio="1"  class="lighten-2")
+			//- .text-xs-center.user-info__skin(:style="'background: green url('+us.hiveUrl(skin)+');'")
 				v-img.mx-auto(:src="us.antUrl(skin)" width="20")
 				span.black--text.text-center.d-block.user-info__version v.{{ version }}
 			.text-center.flex-grow-1.pt-3.px-5

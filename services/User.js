@@ -76,34 +76,35 @@ class User {
     var shortValue = parseFloat((suffixNum != 0 ? (this.Wealth / Math.pow(1000, suffixNum)) : this.Wealth).toPrecision(2));
     return shortValue + suffixes[suffixNum];
   }
-
-  timeAgo(epochStamp) {
-    const diff = Math.round(new Date()) - epochStamp;
-    const periods = {
-      month: 30 * 24 * 60 * 60 * 1000,
-      week: 7 * 24 * 60 * 60 * 1000,
-      day: 24 * 60 * 60 * 1000,
-      hour: 60 * 60 * 1000,
-      minute: 60 * 1000,
-      second: 1000,
-    };
-    if (diff > periods.month) {
-      // it was at least a month ago
-      return Math.floor(diff / periods.month) + "m ago";
-    } else if (diff > periods.week) {
-      return Math.floor(diff / periods.week) + "w ago";
-    } else if (diff > periods.day) {
-      return Math.floor(diff / periods.day) + "d ago";
-    } else if (diff > periods.hour) {
-      return Math.floor(diff / periods.hour) + "h ago";
-    } else if (diff > periods.minute) {
-      return Math.floor(diff / periods.minute) + "m ago";
-    } else if (diff > periods.second) {
-      return Math.floor(diff / periods.second) + "s ago";
-    }
-    return "Just now";
-  } 
 }
+
+function timeAgo(epochStamp) {
+  const diff = Math.round(new Date()) - epochStamp;
+  const periods = {
+    month: 30 * 24 * 60 * 60 * 1000,
+    week: 7 * 24 * 60 * 60 * 1000,
+    day: 24 * 60 * 60 * 1000,
+    hour: 60 * 60 * 1000,
+    minute: 60 * 1000,
+    second: 1000,
+  };
+  if (diff > periods.month) {
+    // it was at least a month ago
+    return Math.floor(diff / periods.month) + "m ago";
+  } else if (diff > periods.week) {
+    return Math.floor(diff / periods.week) + "w ago";
+  } else if (diff > periods.day) {
+    return Math.floor(diff / periods.day) + "d ago";
+  } else if (diff > periods.hour) {
+    return Math.floor(diff / periods.hour) + "h ago";
+  } else if (diff > periods.minute) {
+    return Math.floor(diff / periods.minute) + "m ago";
+  } else if (diff > periods.second) {
+    return Math.floor(diff / periods.second) + "s ago";
+  }
+  return "Just now";
+} 
+
 
 function handleError(error) {
   if (error.response) {
@@ -116,5 +117,4 @@ function handleError(error) {
   console.log(error.config.url);
   console.log(error.config.params);
 }
-
-export default User;
+export { User, timeAgo }

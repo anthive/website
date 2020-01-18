@@ -2,7 +2,7 @@ export { searchGames, searchBots };
 
 import axios from "axios";
 
-import User from "@/services/User";
+import { User } from "@/services/User";
 
 const esAxios = axios.create({
   baseURL: 'https://search.anthive.io/',

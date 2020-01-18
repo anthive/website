@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import userService from "@/services/User";
+// import userService from "@/services/User";
 import GamesTable from "@/components/gamesTable";
 
 export default {
 	name: 'defaultHeader',
 	data: () => ({
-		us: userService,
+		// us: userService,
 		filters: [],
 		user: {}
 	}),
