@@ -2,12 +2,12 @@
 	section.video_bg.my-12
 		v-row.video_filter.align-center.justify-space-around
 			v-col(cols="11", lg='3')
-				v-card.py-3.transparent(@click='dialog = !dialog', style='cursor: pointer;')
-					v-img(src='/img/play_button.png', style='margin: 0 auto;', aspect-ratio='1', max-width='128px', contain='')
+				v-card.video-preview.transparent(@click='dialog = !dialog', style='cursor: pointer;')
+					v-img(src='/img/play_button.png', style='margin: 0 auto; filter: invert(1);', aspect-ratio='1', max-width='128px', contain='')
 				.text-xs-center
-					v-dialog(v-model='dialog', width='70%')
+					v-dialog(v-model='dialog', width='47%')
 						v-card
-							iframe(width='100%', height='500', src='https://www.youtube.com/embed/8CKeXZQdKKU', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen)
+							iframe(v-if="dialog", width='100%', height='500', src='https://www.youtube.com/embed/RP8t8O-O2gY', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen)
 			v-col(cols="11", lg='6')
 				v-card.pa-3.transparent(flat)
 					v-card-title
@@ -23,7 +23,7 @@
 <script>
 export default {
 	data: () => ({
-		dialog: false
+		dialog: false,
 	}),
 	mounted() {
 	},
@@ -33,6 +33,11 @@ export default {
 </script>
 
 <style>
+	.video-preview {
+		background-image: url(/img/video-preview.jpg);
+		background-position: center center;
+		padding: 100px 0;
+	}
 	.video_bg {
   	    background-image: url(/img/howto_bg.png);
         background-size: 90% 90%;
