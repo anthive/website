@@ -27,7 +27,7 @@
 <script>
 import Chart from '@/components/chart';
 import gamesTable from "@/components/gamesTable";
-import userService from "@/services/User";
+import { User } from "@/services/User";
 import axios from "axios";
 
 export default {
@@ -35,7 +35,7 @@ export default {
   data: () => ({
     status: null,
     user: {},
-    us: userService,
+    us: null,
     filters: [],
     userChartData: [
       ['Jan 1',        938,         522],
@@ -57,10 +57,10 @@ export default {
       this.$router.push('/leaderboard')
       return;
     }
-    console.log("tttttttt", username);
-
+    this.us = new User();
     this.filters = [{ "term":  { "Players.Username.keyword": username}}];
     this.us.getUserdata(username).then((result) => {
+      console.log('result', result)
       this.user = result
     })
   },

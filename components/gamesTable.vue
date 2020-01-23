@@ -31,12 +31,9 @@
           td.py-1.text-xs-left(@click.self="openGame(item)")
             userInfo.ma-3(
               v-for="(player, pIndex) in item._source.Players"
+              :player="player"
               :key="player.id"
-              :username="player.Username"
-              :lang="player.Lang"
-              :version="player.Version"
-              :skin="player.Skin"
-              :score="player.Wealth"
+             
             )
           td.games-table__meta.subheading(
             @click="openGame(item)"

@@ -11,19 +11,34 @@ class User {
     this.Games = ''
     this.Wealth = ''
     this.Wg = ''
+    // this.Span = ''
+    // this.Picture = ''
+    // this.FC = ''
+    // this.Skin = ''
+    // this.X = ''
+    // this.Y = ''
+    // this.Stats = ''
   }
 
   async initUser(user) {
-    console.log('init user')
+    console.log('init user', user)
     this.Username = user.Username
     this.Lang = user.Lang
     this.Version = user.Version
     this.Games = user.Games
     this.Wealth = user.Wealth
     this.Wg = user.Wg
+    // this.Span = user.Span
+    // this.Picture = user.Picture
+    // this.FC = user.FC
+    // this.Skin = user.Skin
+    // this.X = user.X
+    // this.Y = user.Y
+    // this.Stats = user.Stats
   }
 
-  getUserdata() {
+  async getUserdata(username) {
+    this.Username = username
     if (this.Username === '' || this.Username === undefined) return
 
     var ghAxios = axios.create({
@@ -103,7 +118,7 @@ function timeAgo(epochStamp) {
     return Math.floor(diff / periods.second) + "s ago";
   }
   return "Just now";
-} 
+}
 
 
 function handleError(error) {
@@ -117,4 +132,7 @@ function handleError(error) {
   console.log(error.config.url);
   console.log(error.config.params);
 }
-export { User, timeAgo }
+export {
+  User,
+  timeAgo
+}
