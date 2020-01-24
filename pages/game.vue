@@ -56,7 +56,7 @@ export default {
     const dataUrl = base + version + "/" + gameid + ".zip";
     if (dataUrl != null){
       console.log(dataUrl)
-      player = new AnthivePlayer(dataUrl,"#player");
+      player = new AnthivePlayer("#player", dataUrl);
       player.on(AnthivePlayer.onReady, () => {
         this.totalTicks = player.total;
         this.players = player.players;
