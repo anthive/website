@@ -28,7 +28,6 @@
 import Chart from '@/components/chart'
 import gamesTable from '@/components/gamesTable'
 import { User } from '@/services/User'
-import axios from 'axios'
 
 export default {
   name: 'user',

@@ -6,8 +6,7 @@
   "author": "Vitaly Kezlya",
   "scripts": {
     "build": "nuxt build",
-    "lint": "eslint --ext .js,.vue --ignore-path .eslintignore .",
-    "fixlint": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
+    "lint": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
     "dev": "nuxt",
     "generate": "nuxt generate",
     "precommit": "npm run lint",
@@ -33,6 +32,7 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-vue": "^4.0.0",
+    "husky": "^4.2.1",
     "nodemon": "^1.11.0",
     "prettier": "1.14.3",
     "pug": "^2.0.3",
@@ -44,5 +44,10 @@
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-vuetify": "^0.6.3",
     "vuetify-loader": "^1.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }

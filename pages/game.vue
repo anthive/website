@@ -56,7 +56,9 @@ export default {
     const dataUrl = base + version + '/' + gameid + '.zip'
     if (dataUrl != null) {
       console.log(dataUrl)
+      // eslint-disable-next-line
       player = new AnthivePlayer(dataUrl, '#player')
+      // eslint-disable-next-line
       player.on(AnthivePlayer.onReady, () => {
         this.totalTicks = player.total
         this.players = player.players
@@ -65,6 +67,7 @@ export default {
         this.$refs.playerWrap.style.minWidth = width
         this.$refs.playerActions.style.width = width
       })
+      // eslint-disable-next-line
       player.on(AnthivePlayer.onFrameRendered, () => {
         this.currentTick = player.currentIndex + 1
         this.percentTick = (this.currentTick / this.totalTicks) * 100

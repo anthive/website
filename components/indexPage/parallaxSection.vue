@@ -22,6 +22,7 @@ export default {
   mounted() {
     const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
     // const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/LyJ6Lfq3FG8sbE0KO3bp.zip'
+    // eslint-disable-next-line
     homepagePlayer = new AnthivePlayer(dataUrl, '#player')
   },
   methods: {
