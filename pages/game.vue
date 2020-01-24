@@ -27,7 +27,7 @@
               v-btn.white--text(@click="setSpeed(2)" title="Speed 2x" :disabled="currentSpeed == 2" icon) 2x
               v-btn.white--text(active-class="btn-disabled" @click="setSpeed(4)" title="Speed 4x" :disabled="currentSpeed == 4" icon) 4x
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
-        div(id="player" :style="{background: '#ccc url(/skins/server/'+theme+'/background.png)' }")
+        div(id="player")
           h2.px-2.white--text(class="loading") {{status}}
 </template>
 
@@ -106,6 +106,7 @@ export default {
 <style>
 #player {
   background-repeat: repeat;
+  background-color: #388e3c;
 }
 .players {
 
