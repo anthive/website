@@ -31,12 +31,9 @@
           td.py-1.text-xs-left(@click.self="openGame(item)")
             userInfo.ma-3(
               v-for="(player, pIndex) in item._source.Players"
+              :player="player"
               :key="player.id"
-              :username="player.Username"
-              :lang="player.Lang"
-              :version="player.Version"
-              :skin="player.Skin"
-              :score="player.Wealth"
+             
             )
           td.games-table__meta.subheading(
             @click="openGame(item)"
@@ -58,7 +55,7 @@
 
 <script>
 import userInfo from "@/components/UserInfo";
-import userService from "@/services/User";
+import { timeAgo } from "@/services/User";
 import {searchGames} from "@/services/Search";
 
 export default {
@@ -79,7 +76,7 @@ export default {
     }
   },
   data: () => ({
-    us: userService,
+    // us: userService,
     loading: false,
     pages: 0,
     currentPage: 1,
@@ -164,7 +161,7 @@ export default {
           value = data._source.Age
           break;
         case 'Played':
-          value = this.us.timeAgo(data._source.Played)+"<br><span class='grey--text'>by "+
+          value = timeAgo(data._source.Played)+"<br><span class='grey--text'>by "+
             data._source.Author+"</span>"
           break;
         case 'Wealth':

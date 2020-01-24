@@ -4,13 +4,7 @@
       v-col.players.text-center(cols="12" md="8")
         template(v-for="(player, index) in players")
           userInfoFull(
-            :username="player.Username"
-            :lang="player.Lang"
-            :version="player.Version"
-            :skin="player.Skin"
-            :score="player.Wealth"
-            :span="[player.Y, player.X]"
-            :stats="player.Stats"
+            :player="player"
           )
           span.game__vs-separator.mx-4(v-if="index+1<players.length") VS
       v-col.pa-0.player__section(cols="auto" style="overflow: auto;")
@@ -61,6 +55,7 @@ export default {
     const version = this.$route.query.v || "";
     const dataUrl = base + version + "/" + gameid + ".zip";
     if (dataUrl != null){
+      console.log(dataUrl)
       player = new AnthivePlayer(dataUrl,"#player");
       player.on(AnthivePlayer.onReady, () => {
         this.totalTicks = player.total;

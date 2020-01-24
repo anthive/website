@@ -2,6 +2,8 @@ export { searchGames, searchBots };
 
 import axios from "axios";
 
+import { User } from "@/services/User";
+
 const esAxios = axios.create({
   baseURL: 'https://search.anthive.io/',
   timeout: 30000
@@ -50,5 +52,10 @@ async function searchBots(sort, page, size, filter) {
   const q = query(sort, page, size, filter);
 
   const resp = await esAxios.get(handle, q).catch(handleError);
-  return resp.data.hits.hits.map(bots => bots._source);
+  
+  return resp.data.hits.hits.map(bots => {
+    const user = new User();
+    user.initUser(bots._source);
+    return user
+  });
 }
