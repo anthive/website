@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import defaultHeader from '@/layouts/defaultHeader';
-import defaultFooter from '@/layouts/defaultFooter';
+import defaultHeader from '@/layouts/defaultHeader'
+import defaultFooter from '@/layouts/defaultFooter'
 
 export default {
   components: {
@@ -16,11 +16,9 @@ export default {
     defaultFooter
   },
   data() {
-    return {
-    }
+    return {}
   },
-  methods: {
-  },
+  methods: {}
 }
 </script>
 

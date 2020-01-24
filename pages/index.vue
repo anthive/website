@@ -16,10 +16,8 @@ import videoSection from '../components/indexPage/videoSection.vue'
 import badgesSection from '../components/indexPage/badgesSection.vue'
 import feedbackSection from '../components/indexPage/feedbackSection.vue'
 
-
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
   components: {
     parallaxSection,
     stepsSection,
@@ -27,15 +25,14 @@ export default {
     videoSection,
     badgesSection,
     feedbackSection
-  },
+  }
 }
 </script>
 
 <style>
-a{ 
-		text-decoration: none;
-	} 
-
+a {
+  text-decoration: none;
+}
 
 .brown a {
   color: #fff !important;
@@ -53,8 +50,6 @@ a{
   color: #fff !important;
   text-decoration: none;
 }
-
-
 
 .ant-card-scientist {
   background-image: url(/img/ant_ml_25.png);

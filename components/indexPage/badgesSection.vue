@@ -17,15 +17,11 @@
 
 <script>
 export default {
-	data: () => ({
-	}),
-	mounted() {
-	},
-	components: {
-	}
+  data: () => ({}),
+  mounted() {},
+  components: {}
 }
 </script>
 
 <style>
-
 </style>
