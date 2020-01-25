@@ -15,16 +15,29 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-      { rel: 'apple-touch-icon', sizes: '152x152', href: '/apple-touch-icon.png' },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png'
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '152x152',
+        href: '/apple-touch-icon.png'
+      },
       {
         rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
-      },
+        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+      }
     ],
-    script: [ { src: '/js/anthive-3.2.js' } ],
+    script: [{ src: '/js/anthive-3.2.js' }]
   },
 
   /*
@@ -48,23 +61,25 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    ['@nuxtjs/google-analytics', {id: 'UA-122954385-1'}],
-    ['nuxt-i18n',
-    {
-      locales: [
-        {
-          code: 'en',
-          file: 'en.js'
-        },
-        {
-          code: 'ru',
-          file: 'ru.js'
-        }
-      ],
-      defaultLocale: 'en',
-      lazy: true,
-      langDir: 'lang/'
-    }]
+    ['@nuxtjs/google-analytics', { id: 'UA-122954385-1' }],
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            code: 'en',
+            file: 'en.js'
+          },
+          {
+            code: 'ru',
+            file: 'ru.js'
+          }
+        ],
+        defaultLocale: 'en',
+        lazy: true,
+        langDir: 'lang/'
+      }
+    ]
   ],
   /*
   ** Axios module configuration
@@ -91,6 +106,6 @@ module.exports = {
         })
       }
     },
-    "quiet": false
+    quiet: false
   }
 }

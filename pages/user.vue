@@ -25,10 +25,9 @@
 </template>
 
 <script>
-import Chart from '@/components/chart';
-import gamesTable from "@/components/gamesTable";
-import { User } from "@/services/User";
-import axios from "axios";
+import Chart from '@/components/chart'
+import gamesTable from '@/components/gamesTable'
+import { User } from '@/services/User'
 
 export default {
   name: 'user',
@@ -38,28 +37,28 @@ export default {
     us: null,
     filters: [],
     userChartData: [
-      ['Jan 1',        938,         522],
-      ['Jan 2',       1120,        599],
-      ['Jan 3',       1167,        587],
-      ['Jan 4',      1110,        615],
-      ['Jan 5',       691,         629],
-      ['Jan 6',       712,         810],
-      ['Jan 7',       810,         950],
-      ['Jan 8',       950,         1100],
-      ['Jan 9',       1100,         1350],
-      ['Jan 10',       1200,         1150]
-    ],
+      ['Jan 1', 938, 522],
+      ['Jan 2', 1120, 599],
+      ['Jan 3', 1167, 587],
+      ['Jan 4', 1110, 615],
+      ['Jan 5', 691, 629],
+      ['Jan 6', 712, 810],
+      ['Jan 7', 810, 950],
+      ['Jan 8', 950, 1100],
+      ['Jan 9', 1100, 1350],
+      ['Jan 10', 1200, 1150]
+    ]
   }),
   created() {
-    var username = this.$route.query.username;
+    var username = this.$route.query.username
 
-    if(username === '' ||username === undefined ) {
+    if (username === '' || username === undefined) {
       this.$router.push('/leaderboard')
-      return;
+      return
     }
-    this.us = new User();
-    this.filters = [{ "term":  { "Players.Username.keyword": username}}];
-    this.us.getUserdata(username).then((result) => {
+    this.us = new User()
+    this.filters = [{ term: { 'Players.Username.keyword': username } }]
+    this.us.getUserdata(username).then(result => {
       console.log('result', result)
       this.user = result
     })

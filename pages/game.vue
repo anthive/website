@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import userInfoFull from "@/components/UserInfoFull";
-var player = null;
+import userInfoFull from '@/components/UserInfoFull'
+var player = null
 export default {
   data: () => ({
-    status: "Loading...",
+    status: 'Loading...',
     theme: 1,
     players: [],
     totalTicks: 0,
@@ -50,25 +50,28 @@ export default {
     userInfoFull
   },
   mounted() {
-    const base = "https://storage.googleapis.com/anthive-prod-games/";
-    const gameid = this.$route.query.id || "";
-    const version = this.$route.query.v || "";
-    const dataUrl = base + version + "/" + gameid + ".zip";
-    if (dataUrl != null){
+    const base = 'https://storage.googleapis.com/anthive-prod-games/'
+    const gameid = this.$route.query.id || ''
+    const version = this.$route.query.v || ''
+    const dataUrl = base + version + '/' + gameid + '.zip'
+    if (dataUrl != null) {
       console.log(dataUrl)
-      player = new AnthivePlayer(dataUrl,"#player");
+      // eslint-disable-next-line
+      player = new AnthivePlayer(dataUrl, '#player')
+      // eslint-disable-next-line
       player.on(AnthivePlayer.onReady, () => {
-        this.totalTicks = player.total;
-        this.players = player.players;
-        this.theme = player.theme;
+        this.totalTicks = player.total
+        this.players = player.players
+        this.theme = player.theme
         var width = player.size.width * 20 + 'px'
         this.$refs.playerWrap.style.minWidth = width
         this.$refs.playerActions.style.width = width
-      });
+      })
+      // eslint-disable-next-line
       player.on(AnthivePlayer.onFrameRendered, () => {
-        this.currentTick = player.currentIndex + 1;
+        this.currentTick = player.currentIndex + 1
         this.percentTick = (this.currentTick / this.totalTicks) * 100
-      });
+      })
     } else {
       this.status = "Can't find game."
     }
@@ -78,28 +81,28 @@ export default {
       this.showActionsState = !this.showActionsState
     },
     navigate(dir) {
-      this.isPlaying = false;
-      if(dir == "prev") {
+      this.isPlaying = false
+      if (dir == 'prev') {
         player.prev()
       } else {
         player.next()
       }
     },
     playPause() {
-      if (this.isPlaying){
+      if (this.isPlaying) {
         player.pause()
-        this.isPlaying = false;
+        this.isPlaying = false
         this.$refs.playerWrap.style.backgroundColor = 'rgba(0, 0, 0, .3)'
-      }else {
+      } else {
         player.play()
-        this.isPlaying = true;
+        this.isPlaying = true
         this.$refs.playerWrap.style.backgroundColor = 'transparent'
       }
     },
     setSpeed(value) {
       this.currentSpeed = value
       player.speed = value
-    },
+    }
   }
 }
 </script>
@@ -108,7 +111,6 @@ export default {
   background-repeat: repeat;
 }
 .players {
-
 }
 .game__vs-separator {
   position: relative;
@@ -122,16 +124,16 @@ export default {
   bottom: 0;
   width: 100%;
   min-width: 480px;
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
 .player__progress {
 }
 .v-btn--disabled {
-  background: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.2);
 }
 .v-btn--disabled > .v-btn__content {
-  color: rgba(255, 255, 255, .8);
+  color: rgba(255, 255, 255, 0.8);
 }
 .player__wrap {
   position: absolute;

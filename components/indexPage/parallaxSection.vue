@@ -13,33 +13,34 @@
 </template>
 
 <script>
-let homepagePlayer = null;
+let homepagePlayer = null
 
 export default {
   data: () => ({
-    isPlaying: true,
+    isPlaying: true
   }),
   mounted() {
-    const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip';
+    const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
     // const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/LyJ6Lfq3FG8sbE0KO3bp.zip'
-    homepagePlayer = new AnthivePlayer(dataUrl, '#player');
+    // eslint-disable-next-line
+    homepagePlayer = new AnthivePlayer(dataUrl, '#player')
   },
   methods: {
     playPausePlayer() {
-      if (this.isPlaying){
-        homepagePlayer.pause();
-        this.isPlaying = false;
-      }else {
-        homepagePlayer.play();
-        this.isPlaying = true;
+      if (this.isPlaying) {
+        homepagePlayer.pause()
+        this.isPlaying = false
+      } else {
+        homepagePlayer.play()
+        this.isPlaying = true
       }
-    },
+    }
   }
 }
 </script>
 
 <style scoped>
-    .ant-player {
-        background-image: url('https://anthive.io/skins/server/1/background.png');
-    }
+.ant-player {
+  background-image: url('https://anthive.io/skins/server/1/background.png');
+}
 </style>>
