@@ -1,47 +1,47 @@
 <template lang="pug">
 	.user-info-full.elevation-1
-		v-card(:to="{ path: '/user/?username=' + player.Username }")
+		v-card(:to="{ path: '/user/?username=' + us.Username }")
 			v-row.px-3
 				v-col.pa-0(cols="7")
 					.d-flex
 						v-avatar(size="100" tile)
-							v-img(:src="us.photoUrl(player.Username, 100)" class="grey lighten-4")
+							v-img(:src="us.photoUrl(100)" class="grey lighten-4")
 								v-row.align-end
 									v-col.pa-0
 										v-avatar(size="30" tile)
-											v-img(:src="us.langUrl(player.Lang)")
+											v-img(:src="us.langUrl(us.Lang)")
 									v-col.pa-0
 										v-avatar.grey.lighten-4(size="30" tile)
-											span v.{{ player.Version }}
+											span v.{{ us.Version }}
 						v-avatar(size="100" tile)
-							v-img(:src="us.hiveUrl(player.Skin, true)")
+							v-img(:src="us.hiveUrl(true)")
 								v-row.align-end.justify-center
 									v-col.pa-0
 										v-avatar(size="70" tile)
 											v-img(:src="us.antUrl(true)")
 	
-					v-card-text.py-2.mx-auto.text-center.font-weight-bold {{ player.Username }}
+					v-card-text.py-2.mx-auto.text-center.font-weight-bold {{ us.Username }}
 
 				v-col.pa-1.text-left(cols="5")
 					v-card-text.pt-0.pb-0.pl-8.grey--text.text--darken-2.caption.text-xs-center {{ $t('infoBotInfo') }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title.mr-n1 {{ $t('infoSpan') }}
-						span Y{{ player.Y }}, X{{ player.X }}
+						span Y{{ us.y }}, X{{ us.x }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoTicks') }}
-						span {{ player.Stats.Age }}
+						span {{ player.stats.age }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoAnts') }}
-						span {{ player.Stats.Ants }}
+						span {{ player.stats.ants }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoHiveSize') }}
-						span {{ player.Stats.Hive }}
+						span {{ player.stats.hive }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoErrors') }}
-						span {{ player.Stats.Errors }}
+						span {{ player.stats.errors }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoEarned') }}
-						span.font-weight-bold {{ player.Wealth }}
+						span.font-weight-bold {{ player.wealth }}
 </template>
 
 <script>

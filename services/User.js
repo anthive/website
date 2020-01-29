@@ -11,30 +11,19 @@ class User {
     this.Games = ''
     this.Wealth = ''
     this.Wg = ''
-    // this.Span = ''
-    // this.Picture = ''
-    // this.FC = ''
-    // this.Skin = ''
-    // this.X = ''
-    // this.Y = ''
-    // this.Stats = ''
+    this.Skin = ''
+    this.Stats = {}
   }
 
   async initUser(user) {
     console.log('init user', user)
-    this.Username = user.Username
-    this.Lang = user.Lang
-    this.Version = user.Version
-    this.Games = user.Games
-    this.Wealth = user.Wealth
-    this.Wg = user.Wg
-    // this.Span = user.Span
-    // this.Picture = user.Picture
-    // this.FC = user.FC
-    // this.Skin = user.Skin
-    // this.X = user.X
-    // this.Y = user.Y
-    // this.Stats = user.Stats
+    this.Username = user.name
+    this.Lang = user.lang
+    this.Version = user.version
+    this.Games = user.games
+    this.Wealth = user.wealth
+    this.Wg = user.wg
+    this.Skin = user.skin
   }
 
   async getUserdata(username) {
@@ -70,18 +59,18 @@ class User {
     return baseURL + "skins/lang/" + lang + ".png";
   }
 
-  antUrl(skin, big = false) {
+  antUrl(big = false) {
     if (big) {
-      return baseURL + "skins/client/" + skin + "/antBig.png";
+      return baseURL + "skins/client/" + this.Skin + "/antBig.png";
     }
-    return baseURL + "skins/client/" + skin + "/ant.png";
+    return baseURL + "skins/client/" + this.Skin + "/ant.png";
   }
 
-  hiveUrl(skin, big = false) {
+  hiveUrl(big = false) {
     if (big) {
-      return baseURL + "skins/client/" + skin + "/hiveBig.png";
+      return baseURL + "skins/client/" + this.Skin + "/hiveBig.png";
     }
-    return baseURL + "skins/client/" + skin + "/hive.png";
+    return baseURL + "skins/client/" + this.Skin + "/hive.png";
   }
 
   scoreString() {

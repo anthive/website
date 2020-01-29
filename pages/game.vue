@@ -57,13 +57,8 @@ export default {
     if (dataUrl != null){
       console.log(dataUrl)
       player = new AnthivePlayer("#player", dataUrl);
-      player.on(AnthivePlayer.onReady, () => {
-        this.totalTicks = player.total;
-        this.players = player.players;
-        this.theme = player.theme;
-        var width = player.size.width * 20 + 'px'
-        this.$refs.playerWrap.style.minWidth = width
-        this.$refs.playerActions.style.width = width
+      player.on(AnthivePlayer.event.READY, () => {
+        this.players = player.framer.playerList;
       });
       player.on(AnthivePlayer.onFrameRendered, () => {
         this.currentTick = player.currentIndex + 1;
