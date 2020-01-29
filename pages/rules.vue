@@ -9,11 +9,11 @@
 </template>
 
 <style>
-  .rules__card {
-	margin-top: -178px;
-  }
+.rules__card {
+  margin-top: -178px;
+}
 
-  .white-space {
-	  white-space: pre-line;
-  }
+.white-space {
+  white-space: pre-line;
+}
 </style>

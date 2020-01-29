@@ -22,75 +22,73 @@
 
 <script>
 export default {
-	data: () => ({
-		dialog: false,
-	}),
-	mounted() {
-	},
-	components: {
-	}
+  data: () => ({
+    dialog: false
+  }),
+  mounted() {},
+  components: {}
 }
 </script>
 
 <style>
-	.video-preview {
-		background-image: url(/img/video-preview.jpg);
-		background-position: center center;
-		padding: 100px 0;
-	}
-	.video_bg {
-  	    background-image: url(/img/howto_bg.png);
-        background-size: 90% 90%;
-    }
+.video-preview {
+  background-image: url(/img/video-preview.jpg);
+  background-position: center center;
+  padding: 100px 0;
+}
+.video_bg {
+  background-image: url(/img/howto_bg.png);
+  background-size: 90% 90%;
+}
 
-    .video_filter {
-        min-height: 400px;
-        height: 100%;
-        width: 100%;
-        background: rgba(250, 250, 250, 0.95);
-        background: -moz-radial-gradient(
-	        center,
-	        ellipse cover,
-	        rgba(250, 250, 250, 0.95) 0%,
-	        rgba(250, 250, 250, 1) 53%,
-	        rgba(250, 250, 250, 1) 100%
-        );
-        background: -webkit-gradient(
-	    radial,
-	    center center,
-	    0px,
-	    center center,
-	    100%,
-	    color-stop(0%, rgba(250, 250, 250, 0.95)),
-	    color-stop(53%, rgba(250, 250, 250, 1)),
-	    color-stop(100%, rgba(250, 250, 250, 1))
-        );
-        background: -webkit-radial-gradient(
-	center,
-	ellipse cover,
-	rgba(250, 250, 250, 0.95) 0%,
-	rgba(250, 250, 250, 1) 53%,
-	rgba(250, 250, 250, 1) 100%
+.video_filter {
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
+  background: rgba(250, 250, 250, 0.95);
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(250, 250, 250, 0.95) 0%,
+    rgba(250, 250, 250, 1) 53%,
+    rgba(250, 250, 250, 1) 100%
+  );
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(0%, rgba(250, 250, 250, 0.95)),
+    color-stop(53%, rgba(250, 250, 250, 1)),
+    color-stop(100%, rgba(250, 250, 250, 1))
+  );
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(250, 250, 250, 0.95) 0%,
+    rgba(250, 250, 250, 1) 53%,
+    rgba(250, 250, 250, 1) 100%
   );
   background: -o-radial-gradient(
-	center,
-	ellipse cover,
-	rgba(250, 250, 250, 0.95) 0%,
-	rgba(250, 250, 250, 1) 53%,
-	rgba(250, 250, 250, 1) 100%
+    center,
+    ellipse cover,
+    rgba(250, 250, 250, 0.95) 0%,
+    rgba(250, 250, 250, 1) 53%,
+    rgba(250, 250, 250, 1) 100%
   );
   background: -ms-radial-gradient(
-	center,
-	ellipse cover,
-	#fff351f2 0%,
-	rgba(250, 250, 250, 1) 53%,
-	rgba(250, 250, 250, 1) 100%
+    center,
+    ellipse cover,
+    #fff351f2 0%,
+    rgba(250, 250, 250, 1) 53%,
+    rgba(250, 250, 250, 1) 100%
   );
   background: radial-gradient(
-	ellipse at center,
-	rgba(250, 250, 250, 0.95) 0%,
-	rgba(250, 250, 250, 1) 53%,
-	rgba(250, 250, 250, 1) 100%
+    ellipse at center,
+    rgba(250, 250, 250, 0.95) 0%,
+    rgba(250, 250, 250, 1) 53%,
+    rgba(250, 250, 250, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#fafafa', GradientType=1 );
 }

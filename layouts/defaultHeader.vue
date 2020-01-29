@@ -38,22 +38,20 @@
 </template>
 
 <script>
-import Logo from '@/components/logo';
+import Logo from '@/components/logo'
 
 export default {
   name: 'defaultHeader',
-  data: () => ({
-  }),
-  mounted() {
-  },
+  data: () => ({}),
+  mounted() {},
   components: {
-  	Logo
+    Logo
   }
 }
 </script>
 
 <style>
-	a{ 
-		text-decoration: none;
-	} 
+a {
+  text-decoration: none;
+}
 </style>
