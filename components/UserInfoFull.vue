@@ -26,22 +26,22 @@
 					v-card-text.pt-0.pb-0.pl-8.grey--text.text--darken-2.caption.text-xs-center {{ $t('infoBotInfo') }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title.mr-n1 {{ $t('infoSpan') }}
-						span Y{{ us.y }}, X{{ us.x }}
+						span Y{{ player.Y }}, X{{ player.X }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoTicks') }}
-						span {{ player.stats.age }}
+						span {{ player.Stats.Age }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoAnts') }}
-						span {{ player.stats.ants }}
+						span {{ player.Stats.Ants }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoHiveSize') }}
-						span {{ player.stats.hive }}
+						span {{ player.Stats.Hive }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoErrors') }}
-						span {{ player.stats.errors }}
+						span {{ player.Stats.Errors }}
 					v-card-text.py-0.caption
 						span.user-info-full__meta-item-title {{ $t('infoEarned') }}
-						span.font-weight-bold {{ player.wealth }}
+						span.font-weight-bold {{ player.Wealth }}
 </template>
 
 <script>

@@ -60,10 +60,10 @@ export default {
       player.on(AnthivePlayer.event.READY, () => {
         this.players = player.framer.playerList;
       });
-      player.on(AnthivePlayer.onFrameRendered, () => {
-        this.currentTick = player.currentIndex + 1;
-        this.percentTick = (this.currentTick / this.totalTicks) * 100
-      });
+      // player.on(AnthivePlayer.onFrameRendered, () => {
+      //   this.currentTick = player.currentIndex + 1;
+      //   this.percentTick = (this.currentTick / this.totalTicks) * 100
+      // });
     } else {
       this.status = "Can't find game."
     }

@@ -17,13 +17,13 @@ class User {
 
   async initUser(user) {
     console.log('init user', user)
-    this.Username = user.name
-    this.Lang = user.lang
-    this.Version = user.version
-    this.Games = user.games
-    this.Wealth = user.wealth
-    this.Wg = user.wg
-    this.Skin = user.skin
+    this.Username = user.Username
+    this.Lang = user.Lang
+    this.Version = user.Version
+    this.Games = user.Games
+    this.Wealth = user.Wealth
+    this.Wg = user.Wg
+    this.Skin = user.Skin
   }
 
   async getUserdata(username) {

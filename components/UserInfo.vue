@@ -1,16 +1,16 @@
 <template lang="pug">
 	.d-inline-block
-		//- .user-info.grey.lighten-4.elevation-3.d-flex(v-if="us.Username")
-			//- v-img.user-info__avatar.d-inline-block.flex-grow-0(:src="us.photoUrl(100)" width="48" height="48"  aspect-ratio="1" class="lighten-4")
-			//- v-img.user-info__avatar-lang(:src="us.langUrl(us.Lang)"  width="48" height="48"  aspect-ratio="1"  class="lighten-2")
-			//- .text-xs-center.user-info__skin(:style="'background: green url('+us.hiveUrl()+');'")
-			//- 	v-img.mx-auto(:src="us.antUrl()" width="20")
-			//- 	span.black--text.text-center.d-block.user-info__version v.{{ us.Version }}
-			//- .text-center.flex-grow-1.pt-3.px-5
-			//- 	a.user-info__link.black--text.font-weight-bold(:href="'/user/?username='+us.Username") {{ us.Username }}
-			//- .orange.lighten-5.pt-2
-			//- 	span.orange--text.title.font-weight-bold.mx-3 {{ us.Wealth }}
-			//- 		v-icon.orange--text.text--lighten-1(size="20") bubble_chart
+		.user-info.grey.lighten-4.elevation-3.d-flex
+			v-img.user-info__avatar.d-inline-block.flex-grow-0(:src="us.photoUrl(100)" width="48" height="48"  aspect-ratio="1" class="lighten-4")
+			v-img.user-info__avatar-lang(:src="us.langUrl(us.Lang)"  width="48" height="48"  aspect-ratio="1"  class="lighten-2")
+			.text-xs-center.user-info__skin(:style="'background: green url('+us.hiveUrl()+');'")
+				v-img.mx-auto(:src="us.antUrl()" width="20")
+				span.black--text.text-center.d-block.user-info__version v.{{ us.Version }}
+			.text-center.flex-grow-1.pt-3.px-5
+				a.user-info__link.black--text.font-weight-bold(:href="'/user/?username='+us.Username") {{ us.Username }}
+			.orange.lighten-5.pt-2
+				span.orange--text.title.font-weight-bold.mx-3 {{ us.Wealth }}
+					v-icon.orange--text.text--lighten-1(size="20") bubble_chart
 </template>
 
 <script>
@@ -22,14 +22,12 @@ export default {
 		player: Object
 	},
 	data: () => ({
-		us: null
+		us: null,
 	}),
-	сreated() {
-		this.us = new User();
-		this.us.initUser(this.player);
+	created() {
+		this.us = new User()
+		this.us.initUser(this.player)
 	},
-	methods: {
-	}
 };
 </script>
 
