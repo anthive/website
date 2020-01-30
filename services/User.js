@@ -11,13 +11,8 @@ class User {
     this.Games = ''
     this.Wealth = ''
     this.Wg = ''
-    // this.Span = ''
-    // this.Picture = ''
-    // this.FC = ''
-    // this.Skin = ''
-    // this.X = ''
-    // this.Y = ''
-    // this.Stats = ''
+    this.Skin = ''
+    this.Stats = {}
   }
 
   async initUser(user) {
@@ -28,13 +23,7 @@ class User {
     this.Games = user.Games
     this.Wealth = user.Wealth
     this.Wg = user.Wg
-    // this.Span = user.Span
-    // this.Picture = user.Picture
-    // this.FC = user.FC
-    // this.Skin = user.Skin
-    // this.X = user.X
-    // this.Y = user.Y
-    // this.Stats = user.Stats
+    this.Skin = user.Skin
   }
 
   async getUserdata(username) {
@@ -72,24 +61,23 @@ class User {
     return baseURL + 'skins/lang/' + lang + '.png'
   }
 
-  antUrl(skin, big = false) {
+  antUrl(big = false) {
     if (big) {
-      return baseURL + 'skins/client/' + skin + '/antBig.png'
+      return baseURL + 'skins/client/' + this.Skin + '/antBig.png'
     }
-    return baseURL + 'skins/client/' + skin + '/ant.png'
+    return baseURL + 'skins/client/' + this.Skin + '/ant.png'
   }
 
-  hiveUrl(skin, big = false) {
+  hiveUrl(big = false) {
     if (big) {
-      return baseURL + 'skins/client/' + skin + '/hiveBig.png'
+      return baseURL + 'skins/client/' + this.Skin + '/hiveBig.png'
     }
-    return baseURL + 'skins/client/' + skin + '/hive.png'
+    return baseURL + 'skins/client/' + this.Skin + '/hive.png'
   }
 
   scoreString() {
     var suffixes = ['', 'K', 'M', 'B', 't']
     var suffixNum = Math.floor((('' + this.Wealth).length - 1) / 3)
-    //console.log(value, suffixNum);
     var shortValue = parseFloat((suffixNum != 0 ? this.Wealth / Math.pow(1000, suffixNum) : this.Wealth).toPrecision(2))
     return shortValue + suffixes[suffixNum]
   }

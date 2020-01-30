@@ -27,7 +27,7 @@
               v-btn.white--text(@click="setSpeed(2)" title="Speed 2x" :disabled="currentSpeed == 2" icon) 2x
               v-btn.white--text(active-class="btn-disabled" @click="setSpeed(4)" title="Speed 4x" :disabled="currentSpeed == 4" icon) 4x
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
-        div(id="player" :style="{background: '#ccc url(/skins/server/'+theme+'/background.png)' }")
+        div(id="player")
           h2.px-2.white--text(class="loading") {{status}}
 </template>
 
@@ -55,22 +55,11 @@ export default {
     const version = this.$route.query.v || ''
     const dataUrl = base + version + '/' + gameid + '.zip'
     if (dataUrl != null) {
-      console.log(dataUrl)
       // eslint-disable-next-line
-      player = new AnthivePlayer(dataUrl, '#player')
+      player = new AnthivePlayer('#player', dataUrl)
       // eslint-disable-next-line
-      player.on(AnthivePlayer.onReady, () => {
-        this.totalTicks = player.total
-        this.players = player.players
-        this.theme = player.theme
-        var width = player.size.width * 20 + 'px'
-        this.$refs.playerWrap.style.minWidth = width
-        this.$refs.playerActions.style.width = width
-      })
-      // eslint-disable-next-line
-      player.on(AnthivePlayer.onFrameRendered, () => {
-        this.currentTick = player.currentIndex + 1
-        this.percentTick = (this.currentTick / this.totalTicks) * 100
+      player.on(AnthivePlayer.event.READY, () => {
+        this.players = player.framer.playerList
       })
     } else {
       this.status = "Can't find game."
@@ -109,8 +98,7 @@ export default {
 <style>
 #player {
   background-repeat: repeat;
-}
-.players {
+  background-color: #388e3c;
 }
 .game__vs-separator {
   position: relative;
@@ -126,8 +114,6 @@ export default {
   min-width: 480px;
   background: rgba(0, 0, 0, 0.3);
   z-index: 10;
-}
-.player__progress {
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);

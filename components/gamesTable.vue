@@ -32,7 +32,7 @@
             userInfo.ma-3(
               v-for="(player, pIndex) in item._source.Players"
               :player="player"
-              :key="player.id"
+              :key="pIndex"
              
             )
           td.games-table__meta.subheading(

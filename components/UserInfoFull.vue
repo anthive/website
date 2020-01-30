@@ -1,26 +1,26 @@
 <template lang="pug">
 	.user-info-full.elevation-1
-		v-card(:to="{ path: '/user/?username=' + player.Username }")
+		v-card(:to="{ path: '/user/?username=' + us.Username }")
 			v-row.px-3
 				v-col.pa-0(cols="7")
 					.d-flex
 						v-avatar(size="100" tile)
-							v-img(:src="us.photoUrl(player.Username, 100)" class="grey lighten-4")
+							v-img(:src="us.photoUrl(100)" class="grey lighten-4")
 								v-row.align-end
 									v-col.pa-0
 										v-avatar(size="30" tile)
-											v-img(:src="us.langUrl(player.Lang)")
+											v-img(:src="us.langUrl(us.Lang)")
 									v-col.pa-0
 										v-avatar.grey.lighten-4(size="30" tile)
-											span v.{{ player.Version }}
+											span v.{{ us.Version }}
 						v-avatar(size="100" tile)
-							v-img(:src="us.hiveUrl(player.Skin, true)")
+							v-img(:src="us.hiveUrl(true)")
 								v-row.align-end.justify-center
 									v-col.pa-0
 										v-avatar(size="70" tile)
 											v-img(:src="us.antUrl(true)")
 	
-					v-card-text.py-2.mx-auto.text-center.font-weight-bold {{ player.Username }}
+					v-card-text.py-2.mx-auto.text-center.font-weight-bold {{ us.Username }}
 
 				v-col.pa-1.text-left(cols="5")
 					v-card-text.pt-0.pb-0.pl-8.grey--text.text--darken-2.caption.text-xs-center {{ $t('infoBotInfo') }}
