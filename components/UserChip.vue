@@ -1,6 +1,6 @@
 <template lang="pug">
 	.user-info-full.elevation-1
-		v-card.user-info-full__card.pa-2(@click="showBotInfo = !showBotInfo" color="#D8D8D8")
+		v-card.user-info-full__card.pa-2(@click="handlerClickChip" color="#D8D8D8")
 			v-row.px-3
 				v-col.pa-0(cols="7")
 					.d-flex
@@ -50,12 +50,22 @@ import { User } from '@/services/User'
 export default {
   name: 'usesrInfo',
   props: {
-    player: Object
+    player: Object,
+    locale: String
   },
   data: () => ({
     us: null,
     showBotInfo: false
   }),
+  methods: {
+    handlerClickChip() {
+      if (this.locale) {
+        this.$router.push('/user/?username=' + this.us.Username)
+        return
+      }
+      this.showBotInfo = !this.showBotInfo
+    }
+  },
   created() {
     this.us = new User()
     this.us.initUser(this.player)
@@ -68,7 +78,7 @@ export default {
   display: inline-block;
   border-radius: 38px;
   overflow: hidden;
-  width: 285px;
+  width: 279px;
 }
 
 .user-info-full__ant-img {

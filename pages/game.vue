@@ -60,13 +60,18 @@ export default {
       player = new AnthivePlayer('#player', dataUrl)
       // eslint-disable-next-line
       player.on(AnthivePlayer.event.READY, () => {
-        this.players = player.framer.playerList
+        this.players = player.framer.playerList.sort(this.compare)
       })
     } else {
       this.status = "Can't find game."
     }
   },
   methods: {
+    compare(a, b) {
+      if (a.Wealth < b.Wealth) return 1
+      if (a.Wealth > b.Wealth) return -1
+      return 0
+    },
     showActions() {
       this.showActionsState = !this.showActionsState
     },
