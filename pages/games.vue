@@ -13,28 +13,25 @@
 </template>
 
 <script>
-import GamesTable from "@/components/gamesTable";
+import GamesTable from '@/components/gamesTable'
 
 export default {
-	name: 'defaultHeader',
-	data: () => ({
-		filters: [],
-		user: {}
-	}),
-	created() {
-		this.filters = [
-			{"term": { "Age": 1000 }},
-			{"range": { "Wealth": { "gte": 1000, "lte": 3000 }}}
-		];
-	},
-	components: {
-		GamesTable
-	}
+  name: 'defaultHeader',
+  data: () => ({
+    filters: [],
+    user: {}
+  }),
+  created() {
+    this.filters = [{ term: { Age: 1000 } }, { range: { Wealth: { gte: 1000, lte: 3000 } } }]
+  },
+  components: {
+    GamesTable
+  }
 }
 </script>
 
 <style>
-	.games__card {
-		margin-top: -178px;
-	}
+.games__card {
+  margin-top: -178px;
+}
 </style>

@@ -28,29 +28,29 @@
 </template>
 
 <script>
-import {searchBots} from "@/services/Search";
+import { searchBots } from '@/services/Search'
 
 export default {
-	name: "Leaderboard",
-	data: () => ({
-		players:[],
-	}),
-	created() {
-		this.getLeaders();
-	},
-	methods:{
-		async getLeaders(){
-			const sort = [{"Wg": {"order": "desc"}}]
-			searchBots(sort, 1, 100, null).then(leaders =>{
-				console.log('start search')
-				this.players = leaders
-			});
-		},
-	}
-};
+  name: 'Leaderboard',
+  data: () => ({
+    players: []
+  }),
+  created() {
+    this.getLeaders()
+  },
+  methods: {
+    async getLeaders() {
+      const sort = [{ Wg: { order: 'desc' } }]
+      searchBots(sort, 1, 100, null).then(leaders => {
+        console.log('start search')
+        this.players = leaders
+      })
+    }
+  }
+}
 </script>
 <style>
 .leaderboard__card {
-	margin-top: -350px;
+  margin-top: -350px;
 }
 </style>

@@ -14,60 +14,60 @@
 </template>
 
 <script>
-import { User } from "@/services/User";
+import { User } from '@/services/User'
 
 export default {
-	name: "usesrInfo",
-	props: {
-		player: Object
-	},
-	data: () => ({
-		us: null,
-	}),
-	created() {
-		this.us = new User()
-		this.us.initUser(this.player)
-	},
-};
+  name: 'usesrInfo',
+  props: {
+    player: Object
+  },
+  data: () => ({
+    us: null
+  }),
+  created() {
+    this.us = new User()
+    this.us.initUser(this.player)
+  }
+}
 </script>
 
 <style scoped lang="scss">
-	.user-info {
-		height: 48px;
-		max-width: 300px;
-		position: relative;
-		border-radius: 8px;
-		overflow: hidden;
-		cursor: default;
-		z-index: 3;
+.user-info {
+  height: 48px;
+  max-width: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: default;
+  z-index: 3;
 
-		&__avatar{
-			border-radius: 0;
-			z-index: 2;
+  &__avatar {
+    border-radius: 0;
+    z-index: 2;
 
-			&:hover + .user-info__avatar-lang{
-				margin-left: 47px;
-			}
-			&:hover  ~ .user-info__skin{
-				margin-left: 94px;
-			}
-		}
-		&__avatar-lang{
-			position: absolute;
-			z-index: 1;
-			transition: all ease .5s;
-		}
-		&__skin {
-			position: absolute;
-			width: 48px;
-			z-index: 1;
-			transition: all ease .5s;
-		}
-		&__version {
-			background: rgba(255, 255, 255, .8);
-		}
-		&__link:hover {
-			text-decoration: underline;
-		}
-	}
+    &:hover + .user-info__avatar-lang {
+      margin-left: 47px;
+    }
+    &:hover ~ .user-info__skin {
+      margin-left: 94px;
+    }
+  }
+  &__avatar-lang {
+    position: absolute;
+    z-index: 1;
+    transition: all ease 0.5s;
+  }
+  &__skin {
+    position: absolute;
+    width: 48px;
+    z-index: 1;
+    transition: all ease 0.5s;
+  }
+  &__version {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  &__link:hover {
+    text-decoration: underline;
+  }
+}
 </style>

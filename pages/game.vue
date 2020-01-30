@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import userInfoFull from "@/components/UserInfoFull";
-var player = null;
+import userInfoFull from '@/components/UserInfoFull'
+var player = null
 export default {
   data: () => ({
-    status: "Loading...",
+    status: 'Loading...',
     theme: 1,
     players: [],
     totalTicks: 0,
@@ -50,16 +50,17 @@ export default {
     userInfoFull
   },
   mounted() {
-    const base = "https://storage.googleapis.com/anthive-prod-games/";
-    const gameid = this.$route.query.id || "";
-    const version = this.$route.query.v || "";
-    const dataUrl = base + version + "/" + gameid + ".zip";
-    if (dataUrl != null){
-      console.log(dataUrl)
-      player = new AnthivePlayer("#player", dataUrl);
+    const base = 'https://storage.googleapis.com/anthive-prod-games/'
+    const gameid = this.$route.query.id || ''
+    const version = this.$route.query.v || ''
+    const dataUrl = base + version + '/' + gameid + '.zip'
+    if (dataUrl != null) {
+      // eslint-disable-next-line
+      player = new AnthivePlayer('#player', dataUrl)
+      // eslint-disable-next-line
       player.on(AnthivePlayer.event.READY, () => {
-        this.players = player.framer.playerList;
-      });
+        this.players = player.framer.playerList
+      })
     } else {
       this.status = "Can't find game."
     }
@@ -69,28 +70,28 @@ export default {
       this.showActionsState = !this.showActionsState
     },
     navigate(dir) {
-      this.isPlaying = false;
-      if(dir == "prev") {
+      this.isPlaying = false
+      if (dir == 'prev') {
         player.prev()
       } else {
         player.next()
       }
     },
     playPause() {
-      if (this.isPlaying){
+      if (this.isPlaying) {
         player.pause()
-        this.isPlaying = false;
+        this.isPlaying = false
         this.$refs.playerWrap.style.backgroundColor = 'rgba(0, 0, 0, .3)'
-      }else {
+      } else {
         player.play()
-        this.isPlaying = true;
+        this.isPlaying = true
         this.$refs.playerWrap.style.backgroundColor = 'transparent'
       }
     },
     setSpeed(value) {
       this.currentSpeed = value
       player.speed = value
-    },
+    }
   }
 }
 </script>
@@ -111,14 +112,14 @@ export default {
   bottom: 0;
   width: 100%;
   min-width: 480px;
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
 .v-btn--disabled {
-  background: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.2);
 }
 .v-btn--disabled > .v-btn__content {
-  color: rgba(255, 255, 255, .8);
+  color: rgba(255, 255, 255, 0.8);
 }
 .player__wrap {
   position: absolute;

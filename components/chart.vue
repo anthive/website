@@ -67,8 +67,8 @@ export default {
 </script>
 
 <style>
-  #user-chart {
-    height: auto;
-    background: #FFF3E0;
-  }
+#user-chart {
+  height: auto;
+  background: #fff3e0;
+}
 </style>

@@ -54,12 +54,12 @@
 </template>
 
 <script>
-import userInfo from "@/components/UserInfo";
-import { timeAgo } from "@/services/User";
-import {searchGames} from "@/services/Search";
+import userInfo from '@/components/UserInfo'
+import { timeAgo } from '@/services/User'
+import { searchGames } from '@/services/Search'
 
 export default {
-  name: "gamesTable",
+  name: 'gamesTable',
   components: {
     userInfo
   },
@@ -80,113 +80,112 @@ export default {
     loading: false,
     pages: 0,
     currentPage: 1,
-    sort:[],
+    sort: [],
     columns: [
       {
-        text: "gamesTicks",
-        align: "left",
+        text: 'gamesTicks',
+        align: 'left',
         sortable: true,
-        value: "Age"
+        value: 'Age'
       },
       {
-        text: "gamesWealth",
-        align: "right",
+        text: 'gamesWealth',
+        align: 'right',
         sortable: true,
-        sort: "desc",
-        value: "Wealth"
+        sort: 'desc',
+        value: 'Wealth'
       },
       {
-        text: "gamesDate",
-        align: "right",
+        text: 'gamesDate',
+        align: 'right',
         sortable: true,
-        value: "Played"
+        value: 'Played'
       }
     ],
     items: []
   }),
   created() {
     this.preapareSort()
-    this.loadGames();
+    this.loadGames()
   },
   methods: {
     changePage(pageNumber) {
-      this.currentPage = pageNumber;
-      this.loadGames();
+      this.currentPage = pageNumber
+      this.loadGames()
     },
 
     doSort(field) {
-      if (!field.sortable) return;
+      if (!field.sortable) return
 
       if (field.sort == null) {
-        field.sort = "asc";
-      } else if (field.sort == "asc"){
-        field.sort = "desc";
-      } else if (field.sort == "desc"){
-        field.sort = null;
+        field.sort = 'asc'
+      } else if (field.sort == 'asc') {
+        field.sort = 'desc'
+      } else if (field.sort == 'desc') {
+        field.sort = null
       }
 
       this.preapareSort()
-      this.loadGames();
+      this.loadGames()
     },
 
-    preapareSort(){
-      this.sort = [];
+    preapareSort() {
+      this.sort = []
       this.columns.forEach(col => {
-        if (col.sort != null){
-          let sr = {};
-          sr[col.value] = col.sort;
-          this.sort.push(sr);
+        if (col.sort != null) {
+          let sr = {}
+          sr[col.value] = col.sort
+          this.sort.push(sr)
         }
-      });
+      })
     },
 
     dataTableClasses(column) {
       return [
-        "column",
-        column.sortable ? "sortable" : "",
+        'column',
+        column.sortable ? 'sortable' : '',
         //column.sort != null ? "desc" : "asc",
-        column.sort != null ? "active" : ""
-      ];
+        column.sort != null ? 'active' : ''
+      ]
     },
 
-    openGame(data){
-      this.$router.push("/game/?id="+data._id+"&v="+data._source.Version);
+    openGame(data) {
+      this.$router.push('/game/?id=' + data._id + '&v=' + data._source.Version)
     },
 
     //READY
     getColumnData(data, field) {
-      let value = '';
+      let value = ''
       switch (field.value) {
         case 'Age':
           value = data._source.Age
-          break;
+          break
         case 'Played':
-          value = timeAgo(data._source.Played)+"<br><span class='grey--text'>by "+
-            data._source.Author+"</span>"
-          break;
+          value = timeAgo(data._source.Played) + "<br><span class='grey--text'>by " + data._source.Author + '</span>'
+          break
         case 'Wealth':
           value = data._source.Wealth
-          break;
+          break
       }
-      return value;
+      return value
     },
 
-    async loadGames(){
-      this.loading = true;
-      searchGames(this.sort, this.currentPage, this.PageSize, this.Filters).then(games =>{
+    async loadGames() {
+      this.loading = true
+      searchGames(this.sort, this.currentPage, this.PageSize, this.Filters).then(games => {
         if (games != null) {
-          this.pages = Math.ceil(games.total/this.PageSize);        
-          this.items = games.hits;
+          this.pages = Math.ceil(games.total / this.PageSize)
+          this.items = games.hits
         }
-        this.loading = false;
-      });
+        this.loading = false
+      })
     }
   }
-};
+}
 </script>
 
 <style>
-  .games-table__meta {
-    min-width: 100px;
-  }
+.games-table__meta {
+  min-width: 100px;
+}
 </style>

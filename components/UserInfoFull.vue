@@ -45,33 +45,33 @@
 </template>
 
 <script>
-import { User } from "@/services/User";
+import { User } from '@/services/User'
 
 export default {
-	name: "usesrInfo",
-	props: {
-		player: Object
-	},
-	data: () => ({
-		us: null,
-	}),
-	created() {
-		this.us = new User()
-		this.us.initUser(this.player)
-	},
-};
+  name: 'usesrInfo',
+  props: {
+    player: Object
+  },
+  data: () => ({
+    us: null
+  }),
+  created() {
+    this.us = new User()
+    this.us.initUser(this.player)
+  }
+}
 </script>
 
 <style>
-	.user-info-full {
-		display: inline-block;
-		border-radius: 5px;
-		overflow: hidden;
-	}
+.user-info-full {
+  display: inline-block;
+  border-radius: 5px;
+  overflow: hidden;
+}
 
-	.user-info-full__meta-item-title {
-		display: inline-block;
-		width: 53px;
-		margin-right: 5px;
-	}
+.user-info-full__meta-item-title {
+  display: inline-block;
+  width: 53px;
+  margin-right: 5px;
+}
 </style>

@@ -47,17 +47,14 @@
 
 <script>
 export default {
-    data: () => ({
-    }),
-    mounted() {
-    },
-    components: {
-    }
+  data: () => ({}),
+  mounted() {},
+  components: {}
 }
 </script>
 
 <style>
-    a{ 
-		text-decoration: none;
-	} 
+a {
+  text-decoration: none;
+}
 </style>
