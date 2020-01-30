@@ -29,6 +29,7 @@
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
         div(id="player")
           h2.px-2.white--text(class="loading") {{status}}
+        .end-game-layout(v-if="isGameEnd")
 </template>
 
 <script>
@@ -44,7 +45,8 @@ export default {
     percentTick: 0,
     currentSpeed: 4,
     isPlaying: true,
-    showActionsState: false
+    showActionsState: false,
+    isGameEnd: false
   }),
   components: {
     userInfoFull
@@ -60,6 +62,10 @@ export default {
       // eslint-disable-next-line
       player.on(AnthivePlayer.event.READY, () => {
         this.players = player.framer.playerList
+      })
+      // eslint-disable-next-line
+      player.on(AnthivePlayer.event.END, () => {
+        this.isGameEnd = true
       })
     } else {
       this.status = "Can't find game."
@@ -127,5 +133,13 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+}
+.end-game-layout {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.88);
+  top: 0;
+  left: 0;
 }
 </style>
