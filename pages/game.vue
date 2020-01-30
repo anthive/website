@@ -1,12 +1,13 @@
 <template lang="pug">
   section
-    v-row.flex-column.align-center.ma-8()
-      v-col.players.text-center(cols="12" md="8")
+    v-row.flex-nowrap.ma-8()
+      .d-flex.flex-column.mr-5.mt-n2
         template(v-for="(player, index) in players")
-          userInfoFull(
-            :player="player"
-          )
-          span.game__vs-separator.mx-4(v-if="index+1<players.length") VS
+          .d-flex
+            span.d-flex.flex-column.justify-center.headline.mr-4.font-weight-bold {{ index + 1 }}
+            userChip.my-2(
+              :player="player"
+            )
       v-col.pa-0.player__section(cols="auto" style="overflow: auto;")
         .player__actions( @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerActions" v-show="showActionsState")
           v-progress-linear.my-0(height="5" color="warning" :value="percentTick")
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import userInfoFull from '@/components/UserInfoFull'
+import userChip from '@/components/UserChip'
 var player = null
 export default {
   data: () => ({
@@ -47,7 +48,7 @@ export default {
     showActionsState: false
   }),
   components: {
-    userInfoFull
+    userChip
   },
   mounted() {
     const base = 'https://storage.googleapis.com/anthive-prod-games/'
