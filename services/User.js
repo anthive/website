@@ -76,7 +76,6 @@ class User {
   scoreString() {
     var suffixes = ["", "K", "M", "B", "t"];
     var suffixNum = Math.floor((("" + this.Wealth).length - 1) / 3);
-    //console.log(value, suffixNum);
     var shortValue = parseFloat((suffixNum != 0 ? (this.Wealth / Math.pow(1000, suffixNum)) : this.Wealth).toPrecision(2));
     return shortValue + suffixes[suffixNum];
   }

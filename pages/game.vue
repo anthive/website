@@ -60,10 +60,6 @@ export default {
       player.on(AnthivePlayer.event.READY, () => {
         this.players = player.framer.playerList;
       });
-      // player.on(AnthivePlayer.onFrameRendered, () => {
-      //   this.currentTick = player.currentIndex + 1;
-      //   this.percentTick = (this.currentTick / this.totalTicks) * 100
-      // });
     } else {
       this.status = "Can't find game."
     }
@@ -103,9 +99,6 @@ export default {
   background-repeat: repeat;
   background-color: #388e3c;
 }
-.players {
-
-}
 .game__vs-separator {
   position: relative;
   top: -80px;
@@ -120,8 +113,6 @@ export default {
   min-width: 480px;
   background: rgba(0, 0, 0, .3);
   z-index: 10;
-}
-.player__progress {
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, .2);
