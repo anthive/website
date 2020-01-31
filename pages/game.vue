@@ -1,12 +1,13 @@
 <template lang="pug">
   section
-    v-row.flex-column.align-center.ma-8()
-      v-col.players.text-center(cols="12" md="8")
+    v-row.flex-nowrap.ma-8()
+      .d-flex.flex-column.mr-5.mt-n2
         template(v-for="(player, index) in players")
-          userInfoFull(
-            :player="player"
-          )
-          span.game__vs-separator.mx-4(v-if="index+1<players.length") VS
+          .d-flex
+            span.d-flex.flex-column.justify-center.headline.mr-4.font-weight-bold {{ index + 1 }}
+            userChip.my-2(
+              :player="player"
+            )
       v-col.pa-0.player__section(cols="auto" style="overflow: auto;")
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
         div(id="player")
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-import userInfoFull from '@/components/UserInfoFull'
+import userChip from '@/components/UserChip'
 var player = null
 export default {
   data: () => ({
@@ -45,7 +46,7 @@ export default {
     isGameEnd: false
   }),
   components: {
-    userInfoFull
+    userChip
   },
   mounted() {
     const base = 'https://storage.googleapis.com/anthive-prod-games/'
@@ -57,7 +58,7 @@ export default {
       player = new AnthivePlayer('#player', dataUrl)
       // eslint-disable-next-line
       player.on(AnthivePlayer.event.READY, () => {
-        this.players = player.framer.playerList
+        this.players = player.framer.playerList.sort(this.compare)
       })
       // eslint-disable-next-line
       player.on(AnthivePlayer.event.END, () => {
@@ -71,6 +72,14 @@ export default {
     replay() {
       // add play game event from anthive-player
       this.isGameEnd = false
+    },
+    compare(a, b) {
+      if (a.Wealth < b.Wealth) return 1
+      if (a.Wealth > b.Wealth) return -1
+      return 0
+    },
+    showActions() {
+      this.showActionsState = !this.showActionsState
     },
     async copyToClipboard() {
       try {
