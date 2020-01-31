@@ -25,7 +25,7 @@
                   v-icon mdi-facebook
                 v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentUrl}`")
                   v-icon mdi-twitter
-                v-btn.mx-3(fab dark color="#333333")
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentUrl}`")
                   v-icon mdi-email
                 v-tooltip(top)
                   template(v-slot:activator="{ on }")
