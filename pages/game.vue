@@ -50,7 +50,7 @@ export default {
   mounted() {
     const base = 'https://storage.googleapis.com/anthive-prod-games/'
     const gameid = this.$route.query.id || ''
-    const version = this.$route.query.v || ''
+    const version = this.$route.query.v || '3.0'
     const dataUrl = base + version + '/' + gameid + '.zip'
     if (dataUrl != null) {
       // eslint-disable-next-line
