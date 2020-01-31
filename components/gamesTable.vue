@@ -29,11 +29,11 @@
       template(v-slot:item=" { item } ")
         tr(style="cursor: pointer;")
           td.py-1.text-xs-left(@click.self="openGame(item)")
-            userInfo.ma-3(
+            userChip.ma-1(
               v-for="(player, pIndex) in item._source.Players"
               :player="player"
               :key="pIndex"
-             
+              locale="table"
             )
           td.games-table__meta.subheading(
             @click="openGame(item)"
@@ -55,13 +55,15 @@
 
 <script>
 import userInfo from '@/components/UserInfo'
+import userChip from '@/components/UserChip'
 import { timeAgo } from '@/services/User'
 import { searchGames } from '@/services/Search'
 
 export default {
   name: 'gamesTable',
   components: {
-    userInfo
+    userInfo,
+    userChip
   },
   props: {
     PageSize: {
