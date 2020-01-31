@@ -8,28 +8,30 @@
           )
           span.game__vs-separator.mx-4(v-if="index+1<players.length") VS
       v-col.pa-0.player__section(cols="auto" style="overflow: auto;")
-        .player__actions( @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerActions" v-show="showActionsState")
-          v-progress-linear.my-0(height="5" color="warning" :value="percentTick")
-          v-toolbar.transparent(v-if="players.length>0" flat)
-            v-toolbar-items
-              v-btn(@click="navigate('prev')" title="Previous" icon)
-                v-icon.white--text skip_previous
-              v-btn(@click="playPause()" :title="isPlaying ? 'pause':'play'" icon)
-                v-icon.white--text {{ isPlaying ? 'pause':'play_arrow' }}
-              v-btn(@click="navigate('next')" title="Next" icon)
-                v-icon.white--text skip_next
-            v-toolbar-title.body-2.white--text {{ currentTick }} / {{ totalTicks }}
-            v-spacer
-            v-toolbar-title.body-2
-              v-icon.white--text fast_forward
-            v-toolbar-items
-              v-btn.white--text(@click="setSpeed(1)" title="Speed 1x" :disabled="currentSpeed == 1" icon) 1x
-              v-btn.white--text(@click="setSpeed(2)" title="Speed 2x" :disabled="currentSpeed == 2" icon) 2x
-              v-btn.white--text(active-class="btn-disabled" @click="setSpeed(4)" title="Speed 4x" :disabled="currentSpeed == 4" icon) 4x
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
         div(id="player")
           h2.px-2.white--text(class="loading") {{status}}
         .end-game-layout(v-if="isGameEnd")
+          .layout-buttons
+            v-btn.layout-button.mb-6(color="#00BF70" dark width="320" height="72" block) Request rematch
+            v-btn.layout-button(color="#333333" dark width="320" height="72" block @click="replay()") Replay
+              v-icon.ml-1(dark) autorenew
+            .social-share
+              p Share the game
+              .d-flex.justify-center
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=Anthive.io game`")
+                  v-icon mdi-linkedin
+                v-btn.mx-3(fab dark color="#333333" target="_blank" href="https://www.facebook.com/sharer/sharer.php")
+                  v-icon mdi-facebook
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentUrl}`")
+                  v-icon mdi-twitter
+                v-btn.mx-3(fab dark color="#333333")
+                  v-icon mdi-email
+                v-tooltip(top)
+                  template(v-slot:activator="{ on }")
+                    v-btn.mx-3(fab dark color="#333333" v-on="on" @click="copyToClipboard()") 
+                      v-icon mdi-file-document-box-multiple
+                  span Copy URL
 </template>
 
 <script>
@@ -40,12 +42,6 @@ export default {
     status: 'Loading...',
     theme: 1,
     players: [],
-    totalTicks: 0,
-    currentTick: 0,
-    percentTick: 0,
-    currentSpeed: 4,
-    isPlaying: true,
-    showActionsState: false,
     isGameEnd: false
   }),
   components: {
@@ -72,31 +68,21 @@ export default {
     }
   },
   methods: {
-    showActions() {
-      this.showActionsState = !this.showActionsState
+    replay() {
+      // add play game event from anthive-player
+      this.isGameEnd = false
     },
-    navigate(dir) {
-      this.isPlaying = false
-      if (dir == 'prev') {
-        player.prev()
-      } else {
-        player.next()
+    async copyToClipboard() {
+      try {
+        await this.$copyText(this.currentUrl)
+      } catch (er) {
+        console.error(er)
       }
-    },
-    playPause() {
-      if (this.isPlaying) {
-        player.pause()
-        this.isPlaying = false
-        this.$refs.playerWrap.style.backgroundColor = 'rgba(0, 0, 0, .3)'
-      } else {
-        player.play()
-        this.isPlaying = true
-        this.$refs.playerWrap.style.backgroundColor = 'transparent'
-      }
-    },
-    setSpeed(value) {
-      this.currentSpeed = value
-      player.speed = value
+    }
+  },
+  computed: {
+    currentUrl() {
+      return `https://anthive.io${this.$route.fullPath}`
     }
   }
 }
@@ -112,14 +98,6 @@ export default {
 }
 .player__section {
   position: relative;
-}
-.player__actions {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  min-width: 480px;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 10;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);
@@ -141,5 +119,26 @@ export default {
   background-color: rgba(0, 0, 0, 0.88);
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.layout-buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.layout-button {
+  text-transform: none;
+  font-weight: 600;
+  font-size: 24px !important;
+  letter-spacing: 1px;
+}
+.social-share {
+  margin-top: 80px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
 }
 </style>
