@@ -14,7 +14,7 @@
           h2.px-2.white--text(class="loading") {{status}}
         .end-game-layout(v-if="isGameEnd")
           .layout-buttons
-            v-btn.layout-button.mb-6(color="#00BF70" dark width="320" height="72" block) Request rematch
+            v-btn.layout-button.mb-6(color="#00BF70" dark width="320" height="72" block :href="`https://profile.anthive.io/new-game/?rematch=${this.gameId}`") Request rematch
             v-btn.layout-button(color="#333333" dark width="320" height="72" block @click="replay()") Replay
               v-icon.ml-1(dark) autorenew
             .social-share
@@ -70,7 +70,8 @@ export default {
   },
   methods: {
     replay() {
-      // add play game event from anthive-player
+      player.control.frame = 0
+      player.control.play()
       this.isGameEnd = false
     },
     compare(a, b) {
@@ -95,6 +96,9 @@ export default {
     },
     currentEncudeUrl() {
       return encodeURIComponent(this.currentUrl)
+    },
+    gameId() {
+      return this.$route.query.id
     }
   }
 }
