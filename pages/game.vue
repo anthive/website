@@ -12,27 +12,28 @@
         .player__wrap(@click="playPause()" @mouseover="showActionsState = true" @mouseleave="showActionsState = false" ref="playerWrap")
         div(id="player")
           h2.px-2.white--text(class="loading") {{status}}
-        .end-game-layout(v-if="isGameEnd")
-          .layout-buttons
-            v-btn.layout-button.mb-6(color="#00BF70" dark width="320" height="72" block :href="`https://profile.anthive.io/new-game/?rematch=${this.gameId}`") Request rematch
-            v-btn.layout-button(color="#333333" dark width="320" height="72" block @click="replay()") Replay
-              v-icon.ml-1(dark) autorenew
-            .social-share
-              p Share the game
-              .d-flex.justify-center
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`")
-                  v-icon mdi-linkedin
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`")
-                  v-icon mdi-facebook
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`")
-                  v-icon mdi-twitter
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`")
-                  v-icon mdi-email
-                v-tooltip(top)
-                  template(v-slot:activator="{ on }")
-                    v-btn.mx-3(fab dark color="#333333" v-on="on" @click="copyToClipboard()") 
-                      v-icon mdi-file-document-box-multiple
-                  span Copy URL
+        v-slide-y-transition
+          .end-game-layout(v-show="isGameEnd")
+            .layout-buttons
+              v-btn.layout-button.mb-6(color="#00BF70" dark width="320" height="72" block :href="`https://profile.anthive.io/new-game/?rematch=${this.gameId}`") Request rematch
+              v-btn.layout-button(color="#333333" dark width="320" height="72" block @click="replay()") Replay
+                v-icon.ml-1(dark) autorenew
+              .social-share
+                p Share the game
+                .d-flex.justify-center
+                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`")
+                    v-icon mdi-linkedin
+                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`")
+                    v-icon mdi-facebook
+                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`")
+                    v-icon mdi-twitter
+                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`")
+                    v-icon mdi-email
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on }")
+                      v-btn.mx-3(fab dark color="#333333" v-on="on" @click="copyToClipboard()") 
+                        v-icon mdi-file-document-box-multiple
+                    span Copy URL
 </template>
 
 <script>
