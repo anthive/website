@@ -20,13 +20,13 @@
             .social-share
               p Share the game
               .d-flex.justify-center
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=Anthive.io game`")
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`")
                   v-icon mdi-linkedin
-                v-btn.mx-3(fab dark color="#333333" target="_blank" href="https://www.facebook.com/sharer/sharer.php")
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`")
                   v-icon mdi-facebook
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentUrl}`")
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`")
                   v-icon mdi-twitter
-                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentUrl}`")
+                v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`")
                   v-icon mdi-email
                 v-tooltip(top)
                   template(v-slot:activator="{ on }")
@@ -51,7 +51,7 @@ export default {
   mounted() {
     const base = 'https://storage.googleapis.com/anthive-prod-games/'
     const gameid = this.$route.query.id || ''
-    const version = this.$route.query.v || '3.0'
+    const version = this.$route.query.v || ''
     const dataUrl = base + version + '/' + gameid + '.zip'
     if (dataUrl != null) {
       // eslint-disable-next-line
@@ -92,6 +92,9 @@ export default {
   computed: {
     currentUrl() {
       return `https://anthive.io${this.$route.fullPath}`
+    },
+    currentEncudeUrl() {
+      return encodeURIComponent(this.currentUrl)
     }
   }
 }
