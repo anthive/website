@@ -1,6 +1,10 @@
 
 <template lang="pug">
-    #editor function foo(items) { var x = "All this is syntax highlighted"; return x;
+    #editor.
+            function foo(items) { 
+              var x = "All this is syntax highlighted";
+              return x;
+            }}
 </template>
 <script>
 /* eslint-disable */
@@ -13,7 +17,8 @@ export default {
   mounted() {
     var editor = ace.edit('editor')
     editor.setTheme('ace/theme/monokai')
-    editor.session.setMode('ace/mode/golang')
+    editor.session.setMode('ace/mode/javascript')
+    // editor.session.setMode('ace/mode/golang')
     console.log(ace)
   },
   methods: {}
