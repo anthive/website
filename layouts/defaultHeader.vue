@@ -29,6 +29,7 @@
 				Logo
 		v-spacer
 		v-toolbar-items.hidden-sm-and-down.mr-2
+			v-btn(:to="localePath('sandbox')" text) {{ "sandbox" }}
 			v-btn(:to="localePath('games')" text) {{ $t('games') }}
 			v-btn(:to="localePath('leaderboard')" text) {{ $t('leaderboard') }}
 			v-btn(:to="localePath('rules')" text) {{ $t('rules') }}
