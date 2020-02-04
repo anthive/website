@@ -2,12 +2,13 @@
     section
         v-container
             v-row.justify-center.align-start
-                v-col.mb-4.text-center(cols= "12" md="4")
-                    v-textarea#textarea(:value="playerRequest" height="200" placeholder="Loading..." ref="textarea" solo dark dense no-resize readonly)
-                    p(v-if="frame") Ticks: {{ frame }} / {{ totalFrame }} 
-                v-col.d-flex.justify-center(md="6")
-                    div.ant-player.ah-container( id="player" )
-                        h2.loading {{ $t('loading') }}
+                v-col.d-flex(cols="12" md="8")
+                  v-col.mb-4.d-flex.justify-center(cols= "12" md="6")
+                      v-textarea#textarea(:value="playerRequest" height="200" placeholder="Loading..." ref="textarea" solo dark dense no-resize readonly) 
+                  v-col.d-flex.justify-center(md="6")
+                      div.ant-player.ah-container(id="player")
+                          h2.loading {{ $t('loading') }}
+            p.text-center(v-if="frame") Ticks: {{ frame }} / {{ totalFrame }}
 </template>
 
 <script>
@@ -17,12 +18,12 @@ export default {
     playerRequest: '',
     status: 'Loading...',
     player: null,
-    requests: [
+    responses: [
       '{"antId":{"act":"move","dir":"right"}}',
       '{"antId":{"act":"move","dir":"up"}}',
       '{"antId":{"act":"move","dir":"down"}}'
     ],
-    responses: ['Ant moved right', 'Ant moved up', 'Ant moved down'],
+    requests: ['Move the ant to the right', 'Move the ant to the up', 'Move the ant to the down'],
     counter: 0
   }),
   mounted() {
@@ -58,8 +59,9 @@ export default {
     },
     addDataToTextarea() {
       if (this.counter === 3) this.counter = 0
-      this.playerRequest += `REQUEST #${this.frame + 1}: ${this.requests[this.counter]}\n`
-      this.playerRequest += `RESPONSE: ${this.responses[this.counter]}\n\n`
+      const request = `REQUEST #${this.frame + 1}: ${this.requests[this.counter]}\n\n`
+      const response = `RESPONSE: ${this.responses[this.counter]}\n\n`
+      this.playerRequest = request + response
       this.counter++
     }
   },
@@ -77,5 +79,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+#textarea {
+  max-width: 460px !important;
+}
+
+#player {
+  height: 200px;
+}
 </style>
