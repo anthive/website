@@ -19,29 +19,30 @@
 								v-col.pa-1
 									v-avatar(size="30")
 										v-img(:src="us.langUrl(us.Lang)")
-		v-card.px-5.pb-6.pt-4(v-if="showBotInfo" :to="{ path: '/user/?username=' + us.Username }" color="#EEEEEE")
-			.pa-0.subtitle-1.font-weight-medium {{ $t('infoBotInfo') }}
-				.d-flex
-					v-col.col-6.pa-0
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoSpan') }}
-							span Y{{ player.Y }}, X{{ player.X }}
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoTicks') }}
-							span {{ player.Stats.Age }}
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoAnts') }}
-							span {{ player.Stats.Ants }}
-					v-col.col-6.pa-0
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoHiveSize') }}
-							span {{ player.Stats.Hive }}
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoErrors') }}
-							span {{ player.Stats.Errors }}
-						v-card-text.pa-0.body-2
-							span.mr-1 {{ $t('infoEarned') }}
-							span {{ player.Wealth }}
+		v-expand-transition
+			v-card.transition-fast-in-fast-out(v-if="showBotInfo" :to="{ path: '/user/?username=' + us.Username }" color="#EEEEEE")
+				.px-5.pb-6.pt-4.subtitle-1.font-weight-medium {{ $t('infoBotInfo') }}
+					.d-flex
+						v-col.col-6.pa-0
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoSpan') }}
+								span Y{{ player.Y }}, X{{ player.X }}
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoTicks') }}
+								span {{ player.Stats.Age }}
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoAnts') }}
+								span {{ player.Stats.Ants }}
+						v-col.col-6.pa-0
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoHiveSize') }}
+								span {{ player.Stats.Hive }}
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoErrors') }}
+								span {{ player.Stats.Errors }}
+							v-card-text.pa-0.body-2
+								span.mr-1 {{ $t('infoEarned') }}
+								span {{ player.Wealth }}
 </template>
 
 <script>
