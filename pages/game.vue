@@ -21,15 +21,27 @@
               .social-share
                 p Share the game
                 .d-flex.justify-center
-                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`")
-                    v-icon mdi-linkedin
-                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`")
-                    v-icon mdi-facebook
-                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`")
-                    v-icon mdi-twitter
-                  v-btn.mx-3(fab dark color="#333333" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`")
-                    v-icon mdi-email
-                  v-tooltip(top)
+                  v-tooltip(bottom)
+                    template(v-slot:activator="{ on }")
+                      v-btn.mx-3(fab dark color="#333333" v-on="on" target="_blank" :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`")
+                        v-icon mdi-linkedin
+                    span Share on Linkedin
+                  v-tooltip(bottom)
+                    template(v-slot:activator="{ on }")
+                      v-btn.mx-3(fab dark color="#333333" v-on="on" target="_blank" :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`")
+                        v-icon mdi-facebook
+                    span Share on Facebook
+                  v-tooltip(bottom)
+                    template(v-slot:activator="{ on }")
+                      v-btn.mx-3(fab dark color="#333333" v-on="on" target="_blank" :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`")
+                        v-icon mdi-twitter
+                    span Share on Twitter
+                  v-tooltip(bottom)
+                    template(v-slot:activator="{ on }")
+                      v-btn.mx-3(fab dark color="#333333" v-on="on" target="_blank" :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`")
+                        v-icon mdi-email
+                    span Send by Email
+                  v-tooltip(bottom)
                     template(v-slot:activator="{ on }")
                       v-btn.mx-3(fab dark color="#333333" v-on="on" @click="copyToClipboard()") 
                         v-icon mdi-file-document-box-multiple
