@@ -1,38 +1,67 @@
-
-// <template lang="pug">
-<template >
-  //- div
-  //-   #editor
-  //-   #editor2
-            
+<template lang="pug" >
+  v-card {{editors}}
+    v-toolbar(color='grey' dark flat)
+      v-toolbar-title Your Sandbox
+      template(v-slot:extension)
+        v-tabs(v-model='tab' show-arrows)
+          v-tabs-slider(color='yellow')
+          v-tab(v-for="(lang, key) in langs" :key='key') {{ lang }}
+    v-tabs-items(v-model='tab')
+      v-tab-item(eager v-for="(lang, key) in langs" :key='key')
+        v-card(height='300' flat='')
+          v-card-text
+            div.editor(:id='key')
 </template>
 <script>
-import axios from 'axios'
-
 /* eslint-disable */
+import axios from 'axios'
 import ace from 'ace-builds'
 import 'ace-builds/src-min-noconflict/theme-monokai'
+import 'ace-builds/src-min-noconflict/ext-language_tools'
 import 'ace-builds/src-min-noconflict/mode-javascript'
 import 'ace-builds/src-min-noconflict/snippets/javascript'
+import 'ace-builds/src-min-noconflict/worker-javascript'
+
 import 'ace-builds/src-min-noconflict/mode-golang'
 import 'ace-builds/src-min-noconflict/snippets/golang'
+import 'ace-builds/src-min-noconflict/mode-c_cpp'
+import 'ace-builds/src-min-noconflict/snippets/c_cpp'
+import 'ace-builds/src-min-noconflict/mode-php'
+import 'ace-builds/src-min-noconflict/snippets/php'
+import 'ace-builds/src-min-noconflict/mode-python'
+import 'ace-builds/src-min-noconflict/snippets/python'
 
 export default {
   data: () => ({
-    isPlaying: true,
+    langs : { 
+      javascript: 'JavaScript',
+      python: 'Python',
+      golang: 'Golang',
+      php: 'PHP',
+      c_cpp: 'C++'
+    },
+    botTemplates : { 
+      javascript: 'https://raw.githubusercontent.com/anthive/js/master/run.js',
+      python: 'https://raw.githubusercontent.com/anthive/python/master/run.py',
+      golang: 'https://raw.githubusercontent.com/anthive/go/master/main.go',
+      php: 'https://raw.githubusercontent.com/anthive/php/master/run.php',
+      c_cpp: 'https://raw.githubusercontent.com/anthive/cpp/master/bot.cpp'
+    },
+    tab: null,
+    editors: {},
     ed: null,
-     ed2: null
   }),
   mounted() {
-    
-    this.ed = ace.edit("editor", {
-        theme: "ace/theme/monokai",
-        mode: "ace/mode/javascript",
-        autoScrollEditorIntoView: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-    });
+    this.initEditors()
+    // this.ed = ace.edit("JavaScript", {
+    //     theme: "ace/theme/monokai",
+    //     mode: "ace/mode/javascript",
+    //     highlightGutterLine: false,
+    //     autoScrollEditorIntoView: true,
+    //     enableBasicAutocompletion: true,
+    //     enableSnippets: true,
+    //     enableLiveAutocompletion: true
+    // });
     // this.ed2 = ace.edit("editor2", {
     //     theme: "ace/theme/monokai",
     //     mode: "ace/mode/javascript",
@@ -41,24 +70,55 @@ export default {
     //     enableSnippets: true,
     //     enableLiveAutocompletion: true
     // });
-    axios.get('https://raw.githubusercontent.com/anthive/js/master/run.js')
-    .then((response) => {
-    // handle success
-    this.ed.setValue(response.data)
-    // this.ed2.setValue(response.data)
-    console.log(response.data, this.ed);
-  })
+  //   axios.get('https://raw.githubusercontent.com/anthive/js/master/run.js')
+  //   .then((response) => {
+  //   // handle success
+  //   this.ed.setValue(response.data)
+  //   // this.ed2.setValue(response.data)
+  //   console.log(response.data, this.ed);
+  // })
     // var editor = ace.edit('editor')
     // editor.setTheme('ace/theme/monokai')
     // editor.session.setMode('ace/mode/javascript')
     // // editor.session.setMode('ace/mode/golang')
     // console.log(ace)
   },
-  methods: {}
+  methods: {
+    initEditors() {
+      for (const lang in this.botTemplates) {
+        if (this.botTemplates.hasOwnProperty(lang)) {
+          console.log(23423, lang);
+          const ed = ace.edit(lang, {
+            theme: "ace/theme/monokai",
+            mode: `ace/mode/${lang}`,
+            autoScrollEditorIntoView: true,
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+          })
+          axios.get(this.botTemplates[lang])
+            .then(res => ed.setValue(res.data))
+            .then(() => this.editors[land] = ed)
+            .catch(er => console.log(er))
+        }
+      }    
+    },
+    initEditors2() {
+       this.ed = ace.edit("javascript", {
+        theme: "ace/theme/monokai",
+        mode: "ace/mode/javascript",
+        highlightGutterLine: false,
+        autoScrollEditorIntoView: true,
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+    }
+  }
 }
 </script>
 <style>
-#editor, #editor2 {
+.editor {
   position: absolute;
   top: 0;
   right: 0;
