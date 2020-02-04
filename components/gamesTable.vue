@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import userInfo from '@/components/UserInfo'
 import userChip from '@/components/UserChip'
 import { timeAgo } from '@/services/User'
 import { searchGames } from '@/services/Search'
@@ -62,7 +61,6 @@ import { searchGames } from '@/services/Search'
 export default {
   name: 'gamesTable',
   components: {
-    userInfo,
     userChip
   },
   props: {
