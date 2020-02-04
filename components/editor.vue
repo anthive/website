@@ -68,10 +68,7 @@ export default {
     onChangeTab(lang) {
       console.log(lang)
       this.currentLangTab = lang
-      this.$emit('update:valueCode', {
-        lang: lang,
-        value: `${this.editors[lang].getValue()}`
-      })
+      this.emitVavueCode(lang)
     },
     initEditors() {
       for (const lang in this.botTemplates) {
@@ -80,27 +77,33 @@ export default {
             theme: "ace/theme/monokai",
             mode: `ace/mode/${lang}`,
             fontSize: 14,
+            printMargin: false,
             autoScrollEditorIntoView: true,
             enableBasicAutocompletion: true,
             enableSnippets: true,
             enableLiveAutocompletion: true
           })
-          ed.on('change',(z) => {
-            if(this.currentLangTab === lang) {
-              this.$emit('update:valueCode', {
-                lang: lang,
-                value: `${this.editors[lang].getValue()}`
-              })
-            }
-          })
+          ed.on('change',(z) => this.emitVavueCode(lang))
           axios.get(this.botTemplates[lang])
             .then(res => {
               ed.setValue(res.data)
               this.editors[lang] = ed
+              console.log(44)
+              this.emitVavueCode(lang)
             })
             .catch(er => console.log(er))
         }
       }    
+    },
+    emitVavueCode(lang) {
+      console.log(5, lang)
+      if(this.currentLangTab === lang) {
+        console.log(6)
+        this.$emit('update:valueCode', {
+          lang: lang,
+          value: `${this.editors[lang].getValue()}`
+        })
+      }
     },
     initEditors2() {
        this.ed = ace.edit("javascript", {
