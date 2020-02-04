@@ -1,31 +1,64 @@
 
-<template lang="pug">
-    #editor.
-            function foo(items) { 
-              var x = "All this is syntax highlighted";
-              return x;
-            }}
+// <template lang="pug">
+<template >
+  //- div
+  //-   #editor
+  //-   #editor2
+            
 </template>
 <script>
+import axios from 'axios'
+
 /* eslint-disable */
-// import ace from 'ace-builds'
+import ace from 'ace-builds'
+import 'ace-builds/src-min-noconflict/theme-monokai'
+import 'ace-builds/src-min-noconflict/mode-javascript'
+import 'ace-builds/src-min-noconflict/snippets/javascript'
+import 'ace-builds/src-min-noconflict/mode-golang'
+import 'ace-builds/src-min-noconflict/snippets/golang'
 
 export default {
   data: () => ({
-    isPlaying: true
+    isPlaying: true,
+    ed: null,
+     ed2: null
   }),
   mounted() {
-    var editor = ace.edit('editor')
-    editor.setTheme('ace/theme/monokai')
-    editor.session.setMode('ace/mode/javascript')
-    // editor.session.setMode('ace/mode/golang')
-    console.log(ace)
+    
+    this.ed = ace.edit("editor", {
+        theme: "ace/theme/monokai",
+        mode: "ace/mode/javascript",
+        autoScrollEditorIntoView: true,
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+    // this.ed2 = ace.edit("editor2", {
+    //     theme: "ace/theme/monokai",
+    //     mode: "ace/mode/javascript",
+    //     autoScrollEditorIntoView: true,
+    //     enableBasicAutocompletion: true,
+    //     enableSnippets: true,
+    //     enableLiveAutocompletion: true
+    // });
+    axios.get('https://raw.githubusercontent.com/anthive/js/master/run.js')
+    .then((response) => {
+    // handle success
+    this.ed.setValue(response.data)
+    // this.ed2.setValue(response.data)
+    console.log(response.data, this.ed);
+  })
+    // var editor = ace.edit('editor')
+    // editor.setTheme('ace/theme/monokai')
+    // editor.session.setMode('ace/mode/javascript')
+    // // editor.session.setMode('ace/mode/golang')
+    // console.log(ace)
   },
   methods: {}
 }
 </script>
 <style>
-#editor {
+#editor, #editor2 {
   position: absolute;
   top: 0;
   right: 0;

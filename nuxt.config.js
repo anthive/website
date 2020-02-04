@@ -33,7 +33,7 @@ module.exports = {
         href: '/apple-touch-icon.png'
       }
     ],
-    script: [{ src: '/js/anthive-4.0.js' }, { src: 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js' }]
+    script: [{ src: '/js/anthive-4.0.js' }]
   },
 
   /*
