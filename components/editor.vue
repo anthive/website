@@ -82,6 +82,7 @@ export default {
             .get(this.botTemplates[lang])
             .then(res => {
               ed.setValue(res.data)
+              ed.clearSelection()
               this.editors[lang] = ed
               this.emitVavueCode(lang)
             })
