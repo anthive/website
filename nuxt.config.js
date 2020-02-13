@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Headers of the page
@@ -31,10 +31,6 @@ module.exports = {
         rel: 'apple-touch-icon',
         sizes: '152x152',
         href: '/apple-touch-icon.png'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
       }
     ],
     script: [{ src: '/js/anthive-4.0.js' }]
