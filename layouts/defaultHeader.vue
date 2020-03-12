@@ -1,5 +1,5 @@
 <template  lang="pug">
-	v-app-bar( hide-on-scroll app fixed)
+	v-app-bar( hide-on-scroll app fixed :clipped-left='$vuetify.breakpoint.lgAndUp')
 		v-menu.hidden-md-and-up(offset-y transition="scale-transition")
 			template(v-slot:activator="{ on }")
 				v-app-bar-nav-icon.hidden-md-and-up(v-on="on")
