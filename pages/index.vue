@@ -30,6 +30,28 @@ export default {
 </script>
 
 <style>
+.texture-arrows {
+  will-change: clip-path, padding-top, padding-bottom;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition: clip-path 0.2s ease-out 0s, padding-top 0.2s ease-out 0s, padding-bottom 0.2s ease-out 0s;
+  background: url(/img/texture/texture-arrows.png) 0px 0px / 300px 300px,
+    linear-gradient(315deg, rgb(24, 13, 28) 0.57%, rgb(69, 38, 80) 100%) 0% 0% / cover;
+  background-image: url(/img/texture/texture-arrows.png),
+    linear-gradient(315deg, rgb(24, 13, 28) 0.57%, rgb(69, 38, 80) 100%);
+  background-repeat: repeat;
+}
+
+.texture-scrabble {
+  will-change: clip-path, padding-top, padding-bottom;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition: clip-path 0.2s ease-out 0s, padding-top 0.2s ease-out 0s, padding-bottom 0.2s ease-out 0s;
+  background: url(/img/texture/texture-scrabble.png) 0px 0px / 300px 300px,
+    linear-gradient(315deg, rgb(24, 13, 28) 0.57%, rgb(69, 38, 80) 100%) 0% 0% / cover;
+  background-image: url(/img/texture/texture-scrabble.png),
+    linear-gradient(315deg, rgb(24, 13, 28) 0.57%, rgb(69, 38, 80) 100%);
+  background-repeat: repeat;
+}
+
 a {
   text-decoration: none;
 }
