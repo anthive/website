@@ -32,7 +32,7 @@ module.exports = {
         sizes: '152x152',
         href: '/apple-touch-icon.png'
       },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap' }
     ],
     script: [{ src: '/js/anthive-4.0.js' }]
   },

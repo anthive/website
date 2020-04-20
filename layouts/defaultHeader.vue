@@ -28,7 +28,8 @@
 			router-link(:to="localePath('index')") 
 				Logo
 		v-spacer
-		v-toolbar-items.hidden-sm-and-down.mr-2
+		.hidden-sm-and-down.mr-2
+			AntHiveBtn(:to="localePath('sandbox')" ) Get Started
 			v-btn(:to="localePath('sandbox')" text) {{ "sandbox" }}
 			v-btn(:to="localePath('games')" text) {{ $t('games') }}
 			v-btn(:to="localePath('leaderboard')" text) {{ $t('leaderboard') }}
@@ -40,13 +41,15 @@
 
 <script>
 import Logo from '@/components/logo'
+import AntHiveBtn from '@/components/AntHiveBtn'
 
 export default {
   name: 'defaultHeader',
   data: () => ({}),
   mounted() {},
   components: {
-    Logo
+    Logo,
+    AntHiveBtn
   }
 }
 </script>
