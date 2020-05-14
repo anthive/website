@@ -1,8 +1,14 @@
 <template  lang="pug">
-	v-app-bar( hide-on-scroll app fixed)
+	v-app-bar( app fixed)
+		v-toolbar-title
+			router-link(:to="localePath('index')") 
+				Logo
+		v-spacer
 		v-menu.hidden-md-and-up(offset-y transition="scale-transition")
 			template(v-slot:activator="{ on }")
-				v-app-bar-nav-icon.hidden-md-and-up(v-on="on")
+				// TODO: open menu
+				AntHiveBtn.hidden-md-and-up(v-on="on") menu
+					v-icon keyboard_arrow_right
 			v-list.hidden-md-and-up.pa-2
 				v-list-item(:to="localePath('games')")
 					v-list-item-icon
@@ -24,29 +30,29 @@
 						v-icon.green--text person
 					v-list-item-content
 						v-list-item-title {{ $t('login') }}
-		v-toolbar-title
-			router-link(:to="localePath('index')") 
-				Logo
-		v-spacer
-		v-toolbar-items.hidden-sm-and-down.mr-2
-			v-btn(:to="localePath('sandbox')" text) {{ "sandbox" }}
-			v-btn(:to="localePath('games')" text) {{ $t('games') }}
-			v-btn(:to="localePath('leaderboard')" text) {{ $t('leaderboard') }}
-			v-btn(:to="localePath('rules')" text) {{ $t('rules') }}
-			v-btn(href="https://profile.anthive.io/login/" class="green darken-2 white--text" text) {{ $t('login') }}
-			v-btn(:to="switchLocalePath('en')" text) {{ $t('en') }}
-			v-btn(:to="switchLocalePath('ru')" text) {{ $t('ru') }}
+		
+		.hidden-sm-and-down.mr-6
+			AntHiveBtn(:to="localePath('games')") {{ $t('games') }}
+			AntHiveBtn(:to="localePath('leaderboard')") {{ $t('leaderboard') }}
+			AntHiveBtn(:to="localePath('rules')") {{ $t('rules') }}
+			AntHiveBtn(href="https://profile.anthive.io/login/") {{ $t('login') }}
+			AntHiveBtn(:to="switchLocalePath('en')") {{ $t('en') }}
+			AntHiveBtn(:to="switchLocalePath('ru')") {{ $t('ru') }}
+			AntHiveBtn(:to="localePath('sandbox')" fill) {{ "sandbox" }}
+
 </template>
 
 <script>
 import Logo from '@/components/logo'
+import AntHiveBtn from '@/components/AntHiveBtn'
 
 export default {
   name: 'defaultHeader',
   data: () => ({}),
   mounted() {},
   components: {
-    Logo
+    Logo,
+    AntHiveBtn
   }
 }
 </script>
