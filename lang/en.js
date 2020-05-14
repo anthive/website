@@ -67,7 +67,7 @@ export default {
   feedbackText1: 'Stay in touch and get latest news first!',
   feedbackTitle2: 'Found an issue?',
   feedbackText2: 'Tell us on our github repo and we will fix it!',
-  feedbackBtn2: 'Report issue',
+  feedbackBtn2: 'Report',
 
   // ----------------------------- GAMES PAGE
   gamesTitle1: 'All battles:',

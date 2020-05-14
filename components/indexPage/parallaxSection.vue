@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax class="parallax" src="/img/bg-test2.jpg" height="700"
+    <v-parallax class="parallax" src="/img/bg-test.jpg" height="700"
       ><v-container :fluid="false"
         ><v-row class="justify-center align-start"
           ><v-col class="mb-4" cols="12" md="6"

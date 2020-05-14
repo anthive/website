@@ -48,7 +48,6 @@ module.exports = {
 
   css: ['~/assets/style/app.styl', '~/assets/style/fonts.css', '~/assets/style/textures.css'],
 
-
   /*
   ** Plugins to load before mounting the App
   */

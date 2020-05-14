@@ -68,7 +68,7 @@ export default {
   feedbackText1: 'Оставайся на связи и получай последние новости первым!',
   feedbackTitle2: 'Нашел ошибку?',
   feedbackText2: 'Сообщий о ней нам в нашем gitgub репозитории и мы ее исправим!',
-  feedbackBtn2: 'Сообщить об ошибке',
+  feedbackBtn2: 'Сообщить',
 
   // ----------------------------- GAMES PAGE
   gamesTitle1: 'Все битвы:',
