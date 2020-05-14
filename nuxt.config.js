@@ -31,7 +31,8 @@ module.exports = {
         rel: 'apple-touch-icon',
         sizes: '152x152',
         href: '/apple-touch-icon.png'
-      }
+      },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap' }
     ],
     script: [{ src: '/js/anthive-4.0.js' }]
   },
@@ -44,7 +45,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~/assets/style/app.styl'],
+  css: ['~/assets/style/app.styl', '~/assets/style/fonts.css'],
 
   /*
   ** Plugins to load before mounting the App
