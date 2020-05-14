@@ -16,7 +16,6 @@
 </template>
 <script>
 import editor from '@/components/editor.vue'
-
 export default {
   data: () => ({
     valueCode: {},
@@ -25,7 +24,7 @@ export default {
   mounted() {
     const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
     // eslint-disable-next-line
-	new AnthivePlayer('#player', dataUrl)
+    new AnthivePlayer('#player', dataUrl)
   },
   methods: {
     onClickRun() {

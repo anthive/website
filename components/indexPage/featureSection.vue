@@ -1,38 +1,66 @@
-<template lang="pug">
-	section.feature-section
-		v-parallax(src='/img/leaderboard_bg.png', height='100%')
-			v-row.feature-section__layout.my-5.justify-center
-				v-col(cols="11", lg="8", my="5")
-					v-card.elevation-6.white
-						v-row.align-center.justify-center.pa-3
-							v-col.pa-2(cols="4")
-								v-img.elevation-6.rounded(src='/img/ant_ml.svg', aspect-ratio='1', max-width='100%', contain)
-							v-col(cols="12", sm="8")
-								v-card-title
-									.headline.brown--text.text-xs-left.px-3 {{ $t('feature1Title') }}
-								v-card-text.subheading
-									| {{ $t('feature1Text') }}
-				v-col(cols="11", lg="8", my="5")
-					v-card.elevation-6.white
-						v-row.align-center.justify-center.pa-3
-							v-col.pa-2(cols="4")
-								v-img.elevation-6.rounded(src='/img/ant_engineer_red.svg', aspect-ratio='1', max-width='100%', contain)
-							v-col(cols="12", sm="8")
-								v-card-title
-									.headline.brown--text.text-xs-left.px-3 {{ $t('feature2Title') }}
-								v-card-text.subheading
-									| {{ $t('feature2Text') }}
-				v-col(cols="11", lg="8", my="5")
-					v-card.elevation-6.white
-						v-row.align-center.justify-center.pa-3
-							v-col.pa-2(cols="4")
-								v-img.elevation-6.rounded(src='/img/ant_racing.svg', aspect-ratio='1', max-width='100%', contain)
-							v-col(cols="12", sm="8")
-								v-card-title
-									.headline.brown--text.text-xs-left.px-3 {{ $t('feature3Title') }}
-								v-card-text.subheading
-									| {{ $t('feature3Text') }}				
+<template>
+  <section class="feature-section">
+    <v-container class="pt-12">
+      <v-row class="feature-section__layout my-5 justify-center">
+        <v-col cols="4" lg="4" my="5">
+          <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
+            <v-row class="pa-3">
+              
+              <v-col cols="12" sm="12">
+                <v-card-title class="pt-0">
+                  <div class="f-rubic f-text-large primary--text">
+                    {{ $t("feature1Title") }}
+                  </div>
+                </v-card-title>
+                 <v-card-text class="f-rubic f-text-small primary--text pr-12">{{
+                  $t("feature1Text")
+                }}</v-card-text>
+              </v-col>
+            </v-row>
+			<div class="feature-section__feature-bg feature-section__feature-bg-1"></div>
+          </v-card>
+        </v-col>
+        <v-col cols="4" lg="4" my="5">
+          <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
+            <v-row class="align-center justify-center pa-3">
+             
+              <v-col cols="12" sm="12">
+                <v-card-title class="pt-0">
+                  <div class="f-rubic f-text-large primary--text">
+                    {{ $t("feature2Title") }}
+                  </div>
+                </v-card-title>
+                 <v-card-text class="f-rubic f-text-small primary--text pr-12">{{
+                  $t("feature2Text")
+                }}</v-card-text>
+              </v-col>
+            </v-row>
+			<div class="feature-section__feature-bg feature-section__feature-bg-2"></div>
+          </v-card>
+        </v-col>
+        <v-col cols="4" lg="4" my="5">
+          <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
+            <v-row class="align-center justify-center pa-3">
+              
+              <v-col cols="12" sm="12">
+                <v-card-title class="pt-0">
+                  <div class="f-rubic f-text-large primary--text">
+                    {{ $t("feature3Title") }}
+                  </div>
+                </v-card-title>
+                <v-card-text class="f-rubic f-text-small primary--text pr-12"
+                  >{{ $t("feature3Text") }}
+                </v-card-text>
+              </v-col>
+            </v-row>
+			<div class="feature-section__feature-bg feature-section__feature-bg-3"></div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </section>
 </template>
+
 
 <script>
 export default {
@@ -42,33 +70,43 @@ export default {
 }
 </script>
 
-<style>
-.feature-section__layout {
-  position: relative;
+<style lang="scss" scope>
+.container {
+  @media only screen and (min-width: 1200px) {
+    max-width: 1300px;
+  }
 }
-
-.feature-section__layout:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: -80px;
-  right: -25%;
-  width: 100%;
-  height: 300px;
-  background-color: #fafafa;
-  border-radius: 100%;
-}
-
-.feature-section__layout:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: -90px;
-  left: -20%;
-  width: 100%;
-  height: 300px;
-  background: #fafafa;
-  border-radius: 100%;
-  z-index: -1;
+.feature-section {
+  background-color: #f6f6f8;
+  clip-path: polygon(0% 3.49vw, 100% 0%, 100% 100%, 0% 100%);
+  margin-top: -48px;
+  &__feature {
+    position: relative;
+  }
+  &__feature:hover {
+    box-shadow: 0 3px 20px 7px rgba(225, 86, 124, 0.15) !important;
+  }
+  &__feature-bg {
+    clip-path: polygon(-1% 3.49vw, 101% 0%, 101% 101%, -1% 101%);
+    height: 220px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+  &__feature-bg-1 {
+    background: url('/img/ant_ml.jpg') center no-repeat;
+    background-size: contain;
+    background-color: #007588;
+  }
+  &__feature-bg-2 {
+    background: url('/img/ant_engineer_red.jpg') center no-repeat;
+    background-size: contain;
+    background-color: #ff7f55;
+  }
+  &__feature-bg-3 {
+    background: url('/img/ant_racing.jpg') center no-repeat;
+    background-size: contain;
+    background-color: #007588;
+  }
 }
 </style>

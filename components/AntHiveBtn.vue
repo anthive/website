@@ -2,7 +2,7 @@
 	//- .wrapper-btn
 	v-btn.btn.f-rubik.font-weight-medium( 
 		v-bind="$attrs" 
-		rounded :color="fill && 'accent'" 
+		rounded :color="'accent'" 
 		:fill="fill" 
 		:class="{'white--text': fill, 'primary--text': !fill }" 
 		:text="!fill")

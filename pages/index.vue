@@ -5,7 +5,6 @@
     <featureSection></featureSection>
     <videoSection></videoSection>
     <badgesSection></badgesSection>
-    <feedbackSection></feedbackSection>
   </div>
 </template>
 <script>
@@ -14,7 +13,6 @@ import stepsSection from '../components/indexPage/stepsSection.vue'
 import featureSection from '../components/indexPage/featureSection.vue'
 import videoSection from '../components/indexPage/videoSection.vue'
 import badgesSection from '../components/indexPage/badgesSection.vue'
-import feedbackSection from '../components/indexPage/feedbackSection.vue'
 
 export default {
   data: () => ({}),
@@ -23,8 +21,7 @@ export default {
     stepsSection,
     featureSection,
     videoSection,
-    badgesSection,
-    feedbackSection
+    badgesSection
   }
 }
 </script>
