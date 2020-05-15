@@ -5,7 +5,7 @@
     tag="footer"
     absolute
   >
-    <div class="footer__copyright f-rubik col-3 text-center">
+    <div col="12" md="3" class="footer__copyright f-rubik text-center">
       <span>AntHive.IO</span>
       <span class="mx-2">
         Copyright&copy;, {{ new Date().getFullYear() }}
@@ -13,7 +13,7 @@
       
     </div>
 
-    <div class="footer__subscribe f-rubik col-6 text-center">
+    <div col="12" md="6" class="footer__subscribe f-rubik text-center">
       <span class="mr-2">{{ $t("feedbackText1") }}</span>
       <AntHiveBtn
         href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&amp;p=oi&amp;m=1131440677000&amp;sit=hmwc8c9mb&amp;f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
@@ -23,7 +23,7 @@
         >{{ $t("subscribe") }}</AntHiveBtn
       >
     </div>
-    <div class="footer__issue col-3 f-rubik text-center">
+    <div col="12" md="3" class="footer__issue f-rubik text-center">
       <span>{{ $t("feedbackTitle2") }}</span>
       <AntHiveBtn
         href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&amp;p=oi&amp;m=1131440677000&amp;sit=hmwc8c9mb&amp;f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
@@ -39,17 +39,19 @@
 
 
 <script>
-import AntHiveBtn from '@/components/AntHiveBtn'
 export default {
   name: 'defaultFooter',
   data: () => ({}),
   mounted() {},
-  components: { AntHiveBtn }
+  components: {}
 }
 </script>
 
 <style lang="scss" scoped>
 .footer {
+  @media screen and (max-width: 960px) {
+    flex-direction: column;
+  }
   &__copyright {
     color: white;
   }

@@ -54,18 +54,18 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn :to="localePath('games')">{{ $t("games") }}</AntHiveBtn>
-        <AntHiveBtn :to="localePath('leaderboard')">{{
+        <AntHiveBtn primary :to="localePath('games')">{{ $t("games") }}</AntHiveBtn>
+        <AntHiveBtn primary :to="localePath('leaderboard')">{{
           $t("leaderboard")
         }}</AntHiveBtn>
-        <AntHiveBtn :to="localePath('rules')">{{ $t("rules") }}</AntHiveBtn>
-        <AntHiveBtn href="https://profile.anthive.io/login/">{{
+        <AntHiveBtn primary :to="localePath('rules')">{{ $t("rules") }}</AntHiveBtn>
+        <AntHiveBtn primary href="https://profile.anthive.io/login/">{{
           $t("login")
         }}</AntHiveBtn>
-        <AntHiveBtn class="ml-3" :to="switchLocalePath('en')">{{
+        <AntHiveBtn primary class="ml-3" :to="switchLocalePath('en')">{{
           $t("en")
         }}</AntHiveBtn>
-        <AntHiveBtn class="ml-3" :to="switchLocalePath('ru')">{{
+        <AntHiveBtn primary class="ml-3" :to="switchLocalePath('ru')">{{
           $t("ru")
         }}</AntHiveBtn>
         <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
@@ -78,15 +78,13 @@
 
 <script>
 import Logo from '@/components/logo'
-import AntHiveBtn from '@/components/AntHiveBtn'
 
 export default {
   name: 'defaultHeader',
   data: () => ({}),
   mounted() {},
   components: {
-    Logo,
-    AntHiveBtn
+    Logo
   }
 }
 </script>

@@ -46,12 +46,17 @@ module.exports = {
   ** Global CSS
   */
 
-  css: ['~/assets/style/app.styl', '~/assets/style/fonts.css', '~/assets/style/textures.css'],
+  css: [
+    '~/assets/style/app.styl',
+    '~/assets/style/style.css',
+    '~/assets/style/fonts.css',
+    '~/assets/style/textures.css'
+  ],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/vuetify'],
+  plugins: ['@/plugins/vuetify', '@/plugins/anthive'],
 
   /*
   ** Nuxt.js modules

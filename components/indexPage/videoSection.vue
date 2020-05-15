@@ -34,13 +34,12 @@
 
 
 <script>
-import AntHiveBtn from '@/components/AntHiveBtn'
 export default {
   data: () => ({
     dialog: false
   }),
   mounted() {},
-  components: { AntHiveBtn }
+  components: {}
 }
 </script>
 

@@ -9,11 +9,11 @@
       >
       <v-row justify-center>
         <v-col class="pa-2 justify-left" cols="12" md="4">
-          <v-card class="elevation-0 white" height="100%">
-            <v-card-title class="pt-3 f-rubik f-text-large primary--text">{{
+          <v-card class="steps__step elevation-0 white" height="100%">
+            <v-card-title  class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
               $t("step1Title")
             }}</v-card-title>
-            <v-card-text class="f-rubik f-text primary--text"
+            <v-card-text class=" f-rubik f-text primary--text"
               >{{ $t("step1Text1") }}
               <a href="https://github.com/new/import" class="accent--text">{{
                 $t("import")
@@ -23,33 +23,33 @@
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
                 <a href="https://github.com/anthive/js" target="_blank"
-                  ><img class="mx-1" width="50px" src="/lang-icons/js.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/js.svg"
                 /></a>
                 <a href="https://github.com/anthive/python" target="_blank"
-                  ><img class="mx-1" width="50px" src="/lang-icons/python.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/python.svg"
                 /></a>
                 <a href="https://github.com/anthive/go" target="_blank"
-                  ><img class="mx-1" width="50px" src="/lang-icons/go.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/go.svg"
                 /></a>
                 <a href="https://github.com/anthive/cpp" target="_blank"
                   ><img
-                    class="mx-1"
-                    width="50px"
+                    class=" steps__lang-panel-img"
+                    width="40px"
                     src="/lang-icons/c-plus-plus.svg"
                 /></a>
                 <a href="https://github.com/anthive/php" target="_blank"
                   ><img
-                    class="mx-1 my-3"
-                    width="50px"
-                    src="/lang-icons/php.svg"
+                    class=" steps__lang-panel-img"
+                    width="40px"
+                    src="/lang-icons/php.png"
                 /></a>
               </div>
             </div>
           </v-card>
         </v-col>
         <v-col class="pa-2 justify-left" cols="12" md="4">
-          <v-card class="elevation-0 white" height="100%">
-            <v-card-title class="pt-3 f-rubik f-text-large primary--text">{{
+          <v-card class="steps__step elevation-0 white" height="100%">
+            <v-card-title class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
               $t("step2Title")
             }}</v-card-title>
             <v-card-text class="f-rubik f-text primary--text"
@@ -65,11 +65,11 @@
           </v-card>
         </v-col>
         <v-col class="pa-2 justify-left" cols="12" md="4">
-          <v-card class="elevation-0 white" height="100%">
-            <v-card-title class="pt-3 f-rubik f-text-large primary--text">{{
+          <v-card class="steps__step elevation-0 white" height="100%">
+            <v-card-title class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
               $t("step3Title")
             }}</v-card-title>
-            <v-card-text class="f-rubik f-text primary--text"
+            <v-card-text class=" f-rubik f-text primary--text"
               >{{ $t("step3Text") }}
               <a :to="localePath('leaderboard')" class="accent--text"
                 >{{ $t("step3leaderboard") }}
@@ -87,11 +87,10 @@
 
 
 <script>
-import AntHiveBtn from '@/components/AntHiveBtn'
 export default {
   data: () => ({}),
   mounted() {},
-  components: { AntHiveBtn }
+  components: {}
 }
 </script>
 
@@ -100,6 +99,22 @@ export default {
   background-color: white;
   clip-path: polygon(0% 0%, 100% 3.49vw, 100% 100%, 0% 100%);
   margin-top: -95px;
+  &__lang-panel-img {
+    box-sizing: content-box;
+    padding: 10px;
+    transition: 0.7s;
+    border-radius: 10px;
+  }
+  &__lang-panel-img:hover {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    transition: 0.7s;
+  }
+  &__step-title {
+    justify-content: center;
+  }
+  &__step {
+    text-align: center;
+  }
 }
 
 a {

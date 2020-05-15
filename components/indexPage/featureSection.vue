@@ -2,7 +2,7 @@
   <section class="feature-section">
     <v-container class="pt-12">
       <v-row class="feature-section__layout my-5 justify-center">
-        <v-col cols="4" lg="4" my="5">
+        <v-col cols="12" md="4" my="5">
           <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
             <v-row class="pa-3">
               
@@ -20,7 +20,7 @@
 			<div class="feature-section__feature-bg feature-section__feature-bg-1"></div>
           </v-card>
         </v-col>
-        <v-col cols="4" lg="4" my="5">
+        <v-col cols="12" md="4" my="5">
           <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
             <v-row class="align-center justify-center pa-3">
              
@@ -38,7 +38,7 @@
 			<div class="feature-section__feature-bg feature-section__feature-bg-2"></div>
           </v-card>
         </v-col>
-        <v-col cols="4" lg="4" my="5">
+        <v-col cols="12" md="4" my="5">
           <v-card height="570" max-width="340" class="feature-section__feature elevation-2 white">
             <v-row class="align-center justify-center pa-3">
               
@@ -75,13 +75,25 @@ export default {
   @media only screen and (min-width: 1200px) {
     max-width: 1300px;
   }
+  @media only screen and (max-width: 1200px) {
+    max-width: 1300px;
+  }
 }
 .feature-section {
   background-color: #f6f6f8;
   clip-path: polygon(0% 3.49vw, 100% 0%, 100% 100%, 0% 100%);
   margin-top: -48px;
+  &__layout {
+    @media screen and (max-width: 960px) {
+      flex-direction: column;
+      margin: auto;
+    }
+  }
   &__feature {
     position: relative;
+    @media screen and (max-width: 960px) {
+      margin: auto;
+    }
   }
   &__feature:hover {
     box-shadow: 0 3px 20px 7px rgba(225, 86, 124, 0.15) !important;
