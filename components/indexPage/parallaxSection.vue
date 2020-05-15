@@ -19,7 +19,7 @@
               <AntHiveBtn fill class="mx-0 mr-1">{{
                 $t("buttonJoin")
               }}</AntHiveBtn>
-              <AntHiveBtn class="">{{ $t("buttonSandbox") }}</AntHiveBtn>
+              <AntHiveBtn :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="">{{ $t("buttonSandbox") }}</AntHiveBtn>
             </div></v-col
           ><v-col></v-col></v-row></v-container
     ></v-parallax>
