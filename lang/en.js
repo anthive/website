@@ -69,6 +69,11 @@ export default {
   feedbackText2: 'Tell us on our github repo and we will fix it!',
   feedbackBtn2: 'Report',
 
+  // screenshot section
+  screenshot1Title: 'ScreenShot 1',
+  screenshot2Title: 'ScreenShot 2',
+  screenshot3Title: 'ScreenShot 3',
+
   // ----------------------------- GAMES PAGE
   gamesTitle1: 'All battles:',
   gamesTitle2: 'Explore, watch, replay, learn strategies',

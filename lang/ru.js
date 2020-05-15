@@ -70,6 +70,11 @@ export default {
   feedbackText2: 'Сообщий о ней нам в нашем gitgub репозитории и мы ее исправим!',
   feedbackBtn2: 'Сообщить',
 
+  // screenshot section
+  screenshot1Title: 'Скриншот 1',
+  screenshot2Title: 'Скриншот 2',
+  screenshot3Title: 'Скриншот 3',
+
   // ----------------------------- GAMES PAGE
   gamesTitle1: 'Все битвы:',
   gamesTitle2: 'Исследуйте, смотрите, воспроизводите, изучайте стратегии',

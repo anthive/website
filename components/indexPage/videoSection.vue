@@ -2,7 +2,7 @@
 <section class="video_bg my-12">
   <div class="f-rubik f-title primary--text text-center">{{ $t('sectionTitle') }}</div>
   <v-row class="video_filter align-center justify-space-around">
-    <v-col cols="11" lg="3">
+    <v-col cols="11" lg="6">
       <v-card class="video-preview transparent" @click="dialog = !dialog" style="cursor: pointer;">
         <v-img src="/img/play_button.png" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain=""></v-img>
       </v-card>
@@ -14,7 +14,7 @@
         </v-dialog>
       </div>
     </v-col>
-    <v-col cols="11" lg="6">
+    <v-col cols="11" lg="11">
       <v-card class="pa-3 transparent" flat>
         <v-card-title>
           <div class="f-rubik f-text-large primary--text">{{ $t('videoTitle') }}</div>
@@ -28,7 +28,8 @@
       </v-card>
     </v-col>
   </v-row>
-  <hr class="video-preview__line">
+  <v-container> <hr class="left-to-right-line"></v-container>
+ 
 </section>
 </template>
 
@@ -48,36 +49,6 @@ export default {
   background-image: url(/img/video-preview.jpg);
   background-position: center center;
   padding: 100px 0;
-  &__line {
-    transition: transform 0.2s ease-out;
-    will-change: transform;
-    transform: rotate(2deg);
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    height: 1px;
-    position: relative;
-    border: 0;
-  }
-  &__line::before,
-  &__line::after {
-    display: block;
-    content: '';
-    position: absolute;
-    width: 50%;
-    border-top: 1px solid #ececf1;
-    -webkit-transition: -webkit-transform 0.2s ease-out;
-    -webkit-transition: transform 0.2s ease-out;
-    transition: transform 0.2s ease-out;
-    will-change: transform;
-  }
-  &__line::before {
-    transform: translateY(-5px);
-    left: 0;
-  }
-  &__line::after {
-    transform: translateY(5px);
-    right: 0;
-  }
 }
 
 .video_filter {

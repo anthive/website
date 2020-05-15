@@ -5,6 +5,9 @@
     <featureSection></featureSection>
     <videoSection></videoSection>
     <badgesSection></badgesSection>
+     <partnersSection></partnersSection>
+     <screenshotsSection></screenshotsSection>
+     <dividerSection></dividerSection>
   </div>
 </template>
 <script>
@@ -13,6 +16,9 @@ import stepsSection from '../components/indexPage/stepsSection.vue'
 import featureSection from '../components/indexPage/featureSection.vue'
 import videoSection from '../components/indexPage/videoSection.vue'
 import badgesSection from '../components/indexPage/badgesSection.vue'
+import partnersSection from '../components/indexPage/partnersSection.vue'
+import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
+import dividerSection from '../components/indexPage/dividerSection.vue'
 
 export default {
   data: () => ({}),
@@ -21,7 +27,10 @@ export default {
     stepsSection,
     featureSection,
     videoSection,
-    badgesSection
+    badgesSection,
+    partnersSection,
+    screenshotsSection,
+    dividerSection
   }
 }
 </script>
