@@ -1,19 +1,27 @@
-<template lang="pug">
-	section
-		v-parallax(src="/img/pre-footer.jpg", height='300')
-		v-row.mx-2
-			v-col(cols="12")
-				v-card(min-height="700").white.pa-3.elevation-6.rules__card
-					v-card-title {{ "sandbox" }}
-					v-row
-						v-col.conte(cols="12" md="6")
-							//- v-card-text.white-space {{ $t('rulesText') }}
-							editor(:valueCode.sync="valueCode")
-								//- code.python def openFile(path): file = open(path, "r") content = file.read() file.close() return content
-						v-col(cols="12" md="6")
-							#player
-							v-btn.my-5(@click="onClickRun" block color="green" dark) run sandbox
+<template>
+  <section>
+    <v-parallax src="/img/pre-footer.jpg" height="300"></v-parallax>
+    <v-row class="mx-2">
+      <v-col cols="12">
+        <v-card class="white pa-3 elevation-6 rules__card" min-height="700">
+          <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
+          <v-row>
+            <v-col class="conte" cols="12" md="6">
+              <editor :valueCode.sync="valueCode"></editor>
+            </v-col>
+            <v-col cols="12" md="6">
+              <div id="player"></div>
+              <AntHiveBtn fill class="my-5" @click="onClickRun" block color="green" dark
+                >Run sandbox</AntHiveBtn
+              >
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </section>
 </template>
+
 <script>
 import editor from '@/components/editor.vue'
 export default {
