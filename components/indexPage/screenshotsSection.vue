@@ -1,8 +1,8 @@
 <template>
   <section class="creenshots">
     <v-row class="align-center justify-space-around mx-0 pa-0">
-      <v-col class="my-12" cols="12" lg="6">
-        <v-card class="creenshots__card elevation-0 white pa-2 pl-4">
+      <v-col cols="12" lg="6">
+        <v-card class="creenshots__card elevation-0 white mt-10 pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-title primary--text text-center">
               {{ $t("screenshot1Title") }}
@@ -16,7 +16,7 @@
         </v-card>
       </v-col>
       <v-col cols="10" lg="3" sm="6" md="5">
-        <v-img  class="elevation-6" src="/img/screenshots/screen1.png" aspect-ratio="1" contain></v-img>
+        <v-img  class="mt-10 elevation-6" src="/img/screenshots/screen1.png" aspect-ratio="1" contain></v-img>
       </v-col>
     </v-row>
     <v-container> <hr class="left-to-right-line"></v-container>
@@ -75,7 +75,7 @@ export default {
 .creenshots {
   clip-path: polygon(0% 3.49vw, 100% 0%, 100% 100%, 0% 100%);
   background: white;
-  margin-top: -50px;
+  margin-top: -66px;
   padding-bottom: 100px;
   &__card {
   }

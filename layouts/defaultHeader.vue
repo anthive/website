@@ -10,10 +10,10 @@
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->
-          <AntHiveBtn class="hidden-md-and-up" v-on="on"
+          <v-btn rounded class="accent hidden-md-and-up" v-on="on"
             >menu
-            <v-icon>keyboard_arrow_right</v-icon>
-          </AntHiveBtn>
+            <v-icon>mdi-chevron-right</v-icon> 
+          </v-btn>
         </template>
         <v-list class="hidden-md-and-up pa-2">
           <v-list-item :to="localePath('games')">
