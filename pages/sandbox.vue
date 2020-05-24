@@ -1,6 +1,6 @@
 <template lang="pug">
 	section
-		v-parallax(src='/img/home_bg.png', height='300')
+		v-parallax(src="/img/pre-footer.jpg", height='300')
 		v-row.mx-2
 			v-col(cols="12")
 				v-card(min-height="700").white.pa-3.elevation-6.rules__card
