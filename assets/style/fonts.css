@@ -21,13 +21,19 @@
 }
 
 .f-title {
-  font-size: 36px;
+  font-size: 36px !important;
 }
 
 .f-text {
-  font-size: 16px;
+  font-size: 16px !important;
+  line-height:25px !important;
+}
+
+.f-text-small {
+  font-size: 0.875rem !important;
+  line-height:28px !important;
 }
 
 .f-text-large {
-  font-size: 24px;
+  font-size: 24px !important;
 }

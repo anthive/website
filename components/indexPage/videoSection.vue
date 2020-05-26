@@ -1,24 +1,38 @@
-<template lang="pug">
-	section.video_bg.my-12
-		v-row.video_filter.align-center.justify-space-around
-			v-col(cols="11", lg='3')
-				v-card.video-preview.transparent(@click='dialog = !dialog', style='cursor: pointer;')
-					v-img(src='/img/play_button.png', style='margin: 0 auto; filter: invert(1);', aspect-ratio='1', max-width='128px', contain='')
-				.text-xs-center
-					v-dialog(v-model='dialog', width='47%')
-						v-card
-							iframe(v-if="dialog", width='100%', height='500', src='https://www.youtube.com/embed/RP8t8O-O2gY', frameborder='0', allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture', allowfullscreen)
-			v-col(cols="11", lg='6')
-				v-card.pa-3.transparent(flat)
-					v-card-title
-						.headline.brown--text.text-xs-left.px-2 {{ $t('videoTitle') }}
-					v-card-text.subheading
-						p {{ $t('videoText1') }}
-						p {{ $t('videoText2') }}
-						p {{ $t('videoText3') }}
-						p {{ $t('videoText4') }}
-					v-btn.ma-3(:to="localePath('rules')", color='brown white--text') {{ $t('rules') }}
+<template>
+<section class="video_bg my-12">
+  <div class="f-rubik f-title primary--text text-center">{{ $t('sectionTitle') }}</div>
+  <v-row class="video_filter align-center justify-space-around">
+    <v-col cols="11" lg="6">
+      <v-card class="video-preview transparent" @click="dialog = !dialog" style="cursor: pointer;">
+        <v-img src="/img/play_button.png" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain=""></v-img>
+      </v-card>
+      <div class="text-xs-center">
+        <v-dialog v-model="dialog" width="47%">
+          <v-card>
+            <iframe v-if="dialog" width="100%" height="500" src="https://www.youtube.com/embed/RP8t8O-O2gY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </v-card>
+        </v-dialog>
+      </div>
+    </v-col>
+    <v-col cols="11" lg="11">
+      <v-card class="pa-3 transparent" flat>
+        <v-card-title>
+          <div class="f-rubik f-text-large primary--text">{{ $t('videoTitle') }}</div>
+        </v-card-title>
+        <v-card-text class="f-rubik f-text primary--text">
+          <p>{{ $t('videoText1') }}</p>
+          <p>{{ $t('videoText2') }}</p>
+          <p>{{ $t('videoText3') }}</p>
+        </v-card-text>
+        <AntHiveBtn fill class="ma-3" :to="localePath('rules')" color="brown white--text">{{ $t('rules') }}</AntHiveBtn>
+      </v-card>
+    </v-col>
+  </v-row>
+  <v-container> <hr class="left-to-right-line"></v-container>
+ 
+</section>
 </template>
+
 
 <script>
 export default {
@@ -30,15 +44,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .video-preview {
   background-image: url(/img/video-preview.jpg);
   background-position: center center;
   padding: 100px 0;
-}
-.video_bg {
-  background-image: url(/img/howto_bg.png);
-  background-size: 90% 90%;
 }
 
 .video_filter {

@@ -1,0 +1,70 @@
+.v-application .headline,
+.v-application .title,
+.v-application,
+.v-application .v-card__title {
+  font-family: Rubik, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
+  word-break: break-word !important;
+}
+
+.right-to-left-line {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+  transform: rotate(-2deg);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  height: 1px;
+  position: relative;
+  border: 0;
+}
+
+.right-to-left-line::before,
+.right-to-left-line::after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 50%;
+  border-top: 1px solid #ececf1;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+.right-to-left-line::after {
+  transform: translateY(-5px);
+  left: 0;
+}
+.right-to-left-line::before {
+  transform: translateY(5px);
+  right: 0;
+}
+
+.left-to-right-line {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+  transform: rotate(2deg);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  height: 1px;
+  position: relative;
+  border: 0;
+}
+.left-to-right-line::before,
+.left-to-right-line::after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 50%;
+  border-top: 1px solid #ececf1;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+.left-to-right-line::before {
+  transform: translateY(-5px);
+  left: 0;
+}
+.left-to-right-line::after {
+  transform: translateY(5px);
+  right: 0;
+}
