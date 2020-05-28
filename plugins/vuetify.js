@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -11,14 +11,12 @@ export default ctx => {
       iconfont: 'mdi'
     },
     theme: {
-      dark: false, // From 2.0 You have to select the theme dark or light here
-      primary: '#121212', // a color that is not in the material colors palette
-      accent: colors.grey.darken3,
-      secondary: colors.amber.darken3,
-      info: colors.teal.lighten1,
-      warning: colors.amber.base,
-      error: colors.deepOrange.accent4,
-      success: colors.green.accent3
+      themes: {
+        light: {
+          primary: '#362d59',
+          accent: '#e1567c'
+        }
+      }
     }
   })
 

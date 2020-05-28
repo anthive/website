@@ -1,6 +1,6 @@
 <template lang="pug">
 	section
-		v-parallax(src="/img/leaderboard_bg.png" height="400")
+		v-parallax(src="/img/bg.jpg" height="400")
 		v-row.justify-center
 			v-col(cols="11" md="9")
 				v-card.leaderboard__card

@@ -17,8 +17,11 @@ export default {
   slogan2: 'Turn-based strategy game for your AI',
   slogan3: 'Start your new coding adventure with 3 simple steps',
   loading: 'Loading...',
+  buttonJoin: `Join with Github`,
+  buttonSandbox: `Try sandbox now`,
 
   // steps section
+  stepsTitle: '3 steps to join Anthive',
   step1Title: 'Get a sample bot',
   step1Text1: 'Choose coding language that you prefer. Git clone sample repository or',
   import: 'import',
@@ -36,19 +39,19 @@ export default {
     'Always wanted to learn coding but didn’t know what to start with? Start right here. This turn-based strategy game is the most engaging way to learn real code. PIck a language, read the rules link to the rules and start learning right now.',
   feature2Title: 'Practice',
   feature2Text:
-    'Keep practicing and improving your coding skills by playing this game. This game is a great way to advance your programming skills while having fun and getting noticed. Master your current language of choice; or expand your understanding of a new one. By completing the levels you get trophies and certificates which will benefit you not only in the game but in real life.',
+    'This game is a great way to advance your programming skills while having fun and getting noticed. Master your current language of choice; or expand your understanding of a new one. By completing the levels you get trophies and certificates which will benefit you not only in the game but in real life.',
   feature3Title: 'Compete',
   feature3Text:
-    'Demonstrate your skills by competing with other developers in your language of choice. This platform allows you to battle not just against other software engineers around the world, but also against bots written in different languages on the same map and on your own time. Demonstrate to everyone that your strategy is superior, your code is the most efficient and has no errors. Climb the leaderboard, improving your strategy. Let your bot dominate the tournaments.',
+    'Demonstrate your skills by competing with other developers in your language of choice. Demonstrate to everyone that your strategy is superior, your code is the most efficient and has no errors. Climb the leaderboard, improving your strategy. Let your bot dominate the tournaments.',
 
   // video section
-  videoTitle: 'Get Started!',
-  videoText1: 'This is a turn-based strategy game for your Bot.',
-  videoText2:
+  sectionTitle: 'Get Started!',
+  videoTitle: 'This is a turn-based strategy game for your Bot.',
+  videoText1:
     'Compute, contemplate and plan each step of your ants. Send commands to your ants in order for them to collect food, bring it to your hive, and to grow your colony. ',
-  videoText3:
+  videoText2:
     'A player with the biggest colony and least errors wins the game. To start the game please follow three steps below.',
-  videoText4: 'For detailed rules please visit link',
+  videoText3: 'For detailed rules please visit link',
 
   // badges section
   badgesTitle: 'Badges and Ranking',
@@ -64,7 +67,12 @@ export default {
   feedbackText1: 'Stay in touch and get latest news first!',
   feedbackTitle2: 'Found an issue?',
   feedbackText2: 'Tell us on our github repo and we will fix it!',
-  feedbackBtn2: 'Report issue',
+  feedbackBtn2: 'Report',
+
+  // screenshot section
+  screenshot1Title: 'ScreenShot 1',
+  screenshot2Title: 'ScreenShot 2',
+  screenshot3Title: 'ScreenShot 3',
 
   // ----------------------------- GAMES PAGE
   gamesTitle1: 'All battles:',

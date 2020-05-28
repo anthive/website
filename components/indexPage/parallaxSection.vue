@@ -1,15 +1,29 @@
-<template lang="pug">
-    section
-        v-parallax(src="/img/home_bg.png" height="700")
-            v-container
-                v-row.justify-center.align-start
-                    v-col.mb-4.text-center(cols= "12" md="6")
-                        div.white--text.mb-5.mt-0.display-2.font-weight-thin {{ $t('slogan1') }}
-                        div.headline.font-weight-bold.orange--text.text--darken-1 {{ $t('slogan2') }}
-                        div.hidden-sm-and-down.mt-2.title.font-weight-regular {{ $t('slogan3') }}
-                    v-col.d-flex.justify-center(md="6")
-                        div.ant-player( id="player" )
-                            h2.loading {{ $t('loading') }}
+<template>
+  <section>
+    <v-parallax class="parallax" src="/img/bg.jpg" height="700"
+      ><v-container class="parallax__container" :fluid="false"
+        ><v-row class="justify-center align-start"
+          ><v-col class="mb-4" cols="12" md="6"
+            ><div
+              class="mb-5 mt-0 f-title f-rubik primary--text font-weight-bold"
+            >
+              {{ $t("slogan1") }}
+            </div>
+            <div class="f-text f-rubik primary--text">
+              {{ $t("slogan2") }}
+            </div>
+            <div class="hidden-sm-and-down mt-2 f-text f-rubik primary--text">
+              {{ $t("slogan3") }}
+            </div>
+            <div class="mt-3">
+              <AntHiveBtn fill class="mx-0 mt-3 mr-1">{{
+                $t("buttonJoin")
+              }}</AntHiveBtn>
+              <AntHiveBtn :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("buttonSandbox") }}</AntHiveBtn>
+            </div></v-col
+          ><v-col></v-col></v-row></v-container
+    ></v-parallax>
+  </section>
 </template>
 
 <script>
@@ -17,14 +31,28 @@ export default {
   data: () => ({
     isPlaying: true
   }),
-  mounted() {
-    const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
-    // eslint-disable-next-line
-    new AnthivePlayer('#player', dataUrl)
-  },
+  mounted() {},
+  components: {},
   methods: {}
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.container {
+  @media only screen and (min-width: 1200px) {
+    max-width: 1300px;
+  }
+}
+.parallax {
+  position: relative;
+  transition: clip-path 0.2s ease-out, padding-top 0.2s ease-out, padding-bottom 0.2s ease-out;
+  will-change: clip-path, padding-top, padding-bottom;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  &__container {
+    @media screen and (max-width: 800px) {
+      position: absolute;
+      top: 30px;
+    }
+  }
+}
 </style>

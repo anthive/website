@@ -1,0 +1,39 @@
+@font-face {
+  font-family: Maison-mono;
+  src: url(../fonts/Maison-mono.woff2);
+}
+
+@font-face {
+  font-family: Maison;
+  src: url(../fonts/Maison.woff2);
+}
+
+.f-rubik {
+  font-family: Rubik, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
+}
+
+.f-maison {
+  font-family: Maison, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
+}
+
+.f-maison-mono {
+  font-family: Maison-mono, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
+}
+
+.f-title {
+  font-size: 36px !important;
+}
+
+.f-text {
+  font-size: 16px !important;
+  line-height:25px !important;
+}
+
+.f-text-small {
+  font-size: 0.875rem !important;
+  line-height:28px !important;
+}
+
+.f-text-large {
+  font-size: 24px !important;
+}
