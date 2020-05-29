@@ -10,8 +10,8 @@
         >
           <v-card-title class="mb-10">
             <h1 class="headline">
-              <span class="grey--text">{{ $t("gamesTitle1") }}</span
-              ><span class="ml-2">{{ $t("gamesTitle2") }}</span>
+              <span class="primary--text  font-weight-medium">{{ $t("gamesTitle1") }}</span
+              ><span class="primary--text ml-2">{{ $t("gamesTitle2") }}</span>
             </h1>
           </v-card-title>
           <v-card-text>

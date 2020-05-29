@@ -9,7 +9,6 @@
 <script>
 import sidebar from '@/components/rulesPage/sidebar'
 import ruleContent from '@/pages/rules/_rule'
-
 export default {
   components: {
     sidebar,
@@ -63,7 +62,6 @@ export default {
   flex-wrap: wrap;
   flex-direction: column;
 }
-
 .card {
   width: 100%;
   max-width: 950px;
@@ -71,7 +69,6 @@ export default {
   height: 100%;
   padding: 40px;
 }
-
 .rules .list-children {
   padding-left: 58px;
 }
