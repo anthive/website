@@ -1,7 +1,12 @@
 const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'spa',
+
+  env: {
+    esUrl: process.env.NUXT_ENV_ES_URL || 'http://localhost:3000'
+  },
 
   /*
   ** Headers of the page

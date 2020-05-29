@@ -123,6 +123,7 @@ export default {
   created() {
     this.preapareSort()
     this.loadGames()
+    console.log(process.env)
   },
   methods: {
     changePage(pageNumber) {

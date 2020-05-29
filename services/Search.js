@@ -5,7 +5,7 @@ import axios from 'axios'
 import { User } from '@/services/User'
 
 const esAxios = axios.create({
-  baseURL: 'http://localhost:9200/',
+  baseURL: process.env.baseUrl,
   timeout: 30000
 })
 
