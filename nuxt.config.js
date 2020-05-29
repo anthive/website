@@ -5,7 +5,7 @@ module.exports = {
   mode: 'spa',
 
   env: {
-    esUrl: process.env.NUXT_ENV_ES_URL || 'http://localhost:3000'
+    esUrl: process.env.NUXT_ENV_ES_URL
   },
 
   /*
@@ -68,6 +68,8 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/dotenv',
+
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'nuxt-clipboard2',

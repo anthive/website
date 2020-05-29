@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { searchBots } from '@/services/Search'
+import { search } from '@/services/Bots'
 
 export default {
   name: 'Leaderboard',
@@ -41,7 +41,7 @@ export default {
   methods: {
     async getLeaders() {
       const sort = [{ Wg: { order: 'desc' } }]
-      searchBots(sort, 1, 100, null).then(leaders => {
+      search(sort, 1, 100, null).then(leaders => {
         console.log('start search')
         this.players = leaders
       })

@@ -72,7 +72,7 @@
 <script>
 import userChip from '@/components/UserChip'
 import { timeAgo } from '@/services/User'
-import { searchGames } from '@/services/Search'
+import { search } from '@/services/Games'
 
 export default {
   name: 'gamesTable',
@@ -123,7 +123,6 @@ export default {
   created() {
     this.preapareSort()
     this.loadGames()
-    console.log(process.env)
   },
   methods: {
     changePage(pageNumber) {
@@ -189,7 +188,7 @@ export default {
 
     async loadGames() {
       this.loading = true
-      searchGames(this.sort, this.currentPage, this.PageSize, this.Filters).then(games => {
+      search(this.sort, this.currentPage, this.PageSize, this.Filters).then(games => {
         if (games != null) {
           this.pages = Math.ceil(games.total.value / this.PageSize)
           this.items = games.hits
