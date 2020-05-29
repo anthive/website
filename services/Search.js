@@ -5,7 +5,7 @@ import axios from 'axios'
 import { User } from '@/services/User'
 
 const esAxios = axios.create({
-  baseURL: 'https://search.anthive.io/',
+  baseURL: 'http://localhost:9200/',
   timeout: 30000
 })
 

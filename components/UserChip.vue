@@ -127,6 +127,12 @@ export default {
   created() {
     this.us = new User()
     this.us.initUser(this.player)
+  },
+  watch: {
+    player() {
+      this.us = new User()
+      this.us.initUser(this.player)
+    }
   }
 }
 </script>
