@@ -1,6 +1,9 @@
 # AntHive.IO
 AntHIve.IO is a turn-based coding game. For detailed rules please visit [Rules Section ](https://anthive.io/rules/)
 
+## Preview
+https://anthive-qa.netlify.app/
+
 ## Run locally
 ```
 npm i

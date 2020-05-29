@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app fixed>
+  <v-app-bar app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
     <v-container class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
