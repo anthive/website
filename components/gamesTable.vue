@@ -11,7 +11,7 @@
     >
       <template v-slot:header="{ props: { headers } }">
         <tr>
-          <th class="text-xs-left">{{ $t("gamesPlayer") }}</th>
+          <th class="primary--text text-xs-left">{{ $t("gamesPlayer") }}</th>
           <th
             class="primary--text"
             v-for="(column, index) in headers"
@@ -72,7 +72,7 @@
 <script>
 import userChip from '@/components/UserChip'
 import { timeAgo } from '@/services/User'
-import { search } from '@/services/Games'
+import { search } from '@/services/Game'
 
 export default {
   name: 'gamesTable',

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { search } from '@/services/Bots'
+import { search } from '@/services/Bot'
 
 export default {
   name: 'Leaderboard',
