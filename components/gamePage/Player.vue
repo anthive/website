@@ -50,7 +50,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
-                    :href="`https://www.linkedin.com/shareArticle?mini=true&amp;url=${currentEncudeUrl}&amp;title=Anthive.io game`"
+                    :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                   >
                     <v-icon>mdi-linkedin</v-icon>
                   </v-btn> </template
@@ -80,7 +80,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
-                    :href="`http://twitter.com/share?url=/&amp;text=Anthive.io Game - ${currentEncudeUrl}`"
+                    :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                   >
                     <v-icon>mdi-twitter</v-icon>
                   </v-btn> </template
@@ -95,7 +95,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
-                    :href="`mailto:?subject=Anthive.io&amp;body=Game - ${currentEncudeUrl}`"
+                    :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                   >
                     <v-icon>mdi-email</v-icon>
                   </v-btn> </template
