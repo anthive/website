@@ -16,9 +16,9 @@ const SEARCH_HANDLER = () => `${BASE_HANDLER()}/_search`
 async function search(sort, page, size, filter) {
   console.log('searchBots')
 
-  const q = query(sort, page, size, filter)
+  const querySearch = query(sort, page, size, filter)
 
-  const resp = await esAxios.get(SEARCH_HANDLER(), q).catch(handleError)
+  const resp = await esAxios.get(SEARCH_HANDLER(), querySearch).catch(handleError)
 
   return resp.data.hits.hits.map(bots => {
     const user = new User()

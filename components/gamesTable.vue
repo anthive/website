@@ -22,12 +22,12 @@
             {{ $t(column.text) }}
             <v-icon
               small
-              v-if="(column.hasOwnProperty('sort')) &amp;&amp; column.sort =='desc'"
+              v-if="(column.hasOwnProperty('sort')) && column.sort =='desc'"
               >arrow_upward</v-icon
             >
             <v-icon
               small
-              v-if="(column.hasOwnProperty('sort')) &amp;&amp; column.sort == 'asc'"
+              v-if="(column.hasOwnProperty('sort')) && column.sort == 'asc'"
               >arrow_downward</v-icon
             >
           </th>
