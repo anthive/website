@@ -6,7 +6,7 @@
     rounded
     :color="primary ? 'primary' : 'accent'"
     :fill="fill"
-    :class="{'white--text': fill, 'primary--text': !fill & !primary,  }"
+    :class="{'white--text': fill, 'primary--text': !fill && !primary,  }"
     :text="!fill"
   >
     <slot></slot>
