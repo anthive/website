@@ -1,7 +1,12 @@
 const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'spa',
+
+  env: {
+    esUrl: process.env.NUXT_ENV_ES_URL
+  },
 
   /*
   ** Headers of the page
@@ -63,6 +68,8 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/dotenv',
+
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'nuxt-clipboard2',

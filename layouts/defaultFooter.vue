@@ -16,7 +16,7 @@
     <div col="12" md="6" class="footer__subscribe f-rubik text-center">
       <span class="mr-2">{{ $t("feedbackText1") }}</span>
       <AntHiveBtn
-        href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&amp;p=oi&amp;m=1131440677000&amp;sit=hmwc8c9mb&amp;f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
+        href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&p=oi&m=1131440677000&sit=hmwc8c9mb&f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
         target="_blank"
         fill
         color="brown white--text darken-2 mx-0"
@@ -26,7 +26,7 @@
     <div col="12" md="3" class="footer__issue f-rubik text-center">
       <span>{{ $t("feedbackTitle2") }}</span>
       <AntHiveBtn
-        href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&amp;p=oi&amp;m=1131440677000&amp;sit=hmwc8c9mb&amp;f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
+        href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&p=oi&m=1131440677000&sit=hmwc8c9mb&f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
         target="_blank"
         color="brown white--text darken-2 mx-0"
         >{{ $t("feedbackBtn2") }}</AntHiveBtn
