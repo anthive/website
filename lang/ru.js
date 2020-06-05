@@ -8,7 +8,10 @@ export default {
   ru: 'Рус',
 
   // footer
-  issueOnGithub: 'Сообщить об ошибке на Github',
+  ReadFooter: 'Ознакомьтесь с',
+  AndFooter: 'и',
+  PrivacyPolicy: 'Политикой конфиденциальности',
+  TermsofService: 'Условиями использования',
 
   // ----------------------------- HOME PAGE
 
