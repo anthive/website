@@ -42,7 +42,7 @@
           </v-list-item>
           <v-list-item
             class="green--text"
-            href="https://profile.anthive.io/login/"
+            href="https://profile.anthive.io/login"
           >
             <v-list-item-icon>
               <v-icon class="green--text">person</v-icon>
