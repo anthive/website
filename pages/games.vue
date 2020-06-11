@@ -1,10 +1,9 @@
 <template>
   <section>
     <v-parallax src="/img/bg.jpg" height="350"></v-parallax>
-    <v-row align="center" justify="center">
-      <v-col cols="11" md="10">
+      <v-container>
         <v-card
-          class="games__card white text-xs-left pa-3 elevation-6"
+          class="games__card white text-xs-left elevation-6"
           flat
           tile
         >
@@ -22,8 +21,7 @@
             ></GamesTable>
           </v-card-text>
         </v-card>
-      </v-col>
-    </v-row>
+     </v-container>
   </section>
 </template>
 

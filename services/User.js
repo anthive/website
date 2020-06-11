@@ -24,6 +24,7 @@ class User {
     this.Wealth = user.Wealth
     this.Wg = user.Wg
     this.Skin = user.Skin
+    this.Stats = user.Stats
   }
 
   async getUserdata(username) {

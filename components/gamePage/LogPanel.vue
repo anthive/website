@@ -1,25 +1,23 @@
 <template>
   <div class="log-panel__wrap mt-3">
-    <div class="log-panel__tabs texture-scrabble py-2" dark hide-slider>
+    <div class="log-panel__tabs py-2 accent elevation-6" dark>
       <AntHiveBtn
         :class="{ 'v-btn--active': currentLogTab == 'request' }"
         @click="currentLogTab = 'request'"
-        class="mx-2"
-        fill
+        class="mx-2" primary fill
         >Requests</AntHiveBtn
       >
       <AntHiveBtn
         :class="{ 'v-btn--active': currentLogTab == 'response' }"
         @click="currentLogTab = 'response'"
         class="mx-2"
-        fill
+        primary fill
         >Response</AntHiveBtn
       >
       <AntHiveBtn
         :class="{ 'v-btn--active': currentLogTab == 'logs' }"
         @click="currentLogTab = 'logs'"
-        class="mx-2"
-        fill
+        class="mx-2" primary fill
         >Logs</AntHiveBtn
       >
     </div>

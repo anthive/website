@@ -1,60 +1,75 @@
 <template>
   <div id="games-table">
-    <v-data-table
-      class="text-xs-center"
-      :loading="loading"
-      :loading-text="$t('gamesLoading')"
-      :headers="columns"
-      :items="items"
-      hide-default-header
-      hide-default-footer
-    >
-      <template v-slot:header="{ props: { headers } }">
-        <tr>
-          <th class="primary--text text-xs-left">{{ $t("gamesPlayer") }}</th>
-          <th
-            class="primary--text"
-            v-for="(column, index) in headers"
-            :class="dataTableClasses(column)"
-            :key="index"
-            @click="doSort(column)"
+    <v-card
+      class="games-table__item"
+      :key="index"
+      v-for="(item, index) in items"
+      ><div class="d-flex align-center">
+        <img
+          v-if="!$vuetify.breakpoint.smAndDown"
+          class="games-table__item-cover"
+          height="100"
+          width="80"
+          :src="`https://anthive.io/skins/server/${item._source.MapSettings.Skin}/background.png`"
+        />
+        <div
+          :class="{ 'flex-column': $vuetify.breakpoint.smAndDown }"
+          class="d-flex col-12 col-md-11 justify-space-between align-center"
+        >
+          <div class="col-12 col-md-2 justify-center justify-md-start d-flex align-center">
+            <AuthorChip
+              class="ml-md-n11 mr-5"
+              :author="item._source.Author"
+              :date="item._source.Played"
+            ></AuthorChip>
+          </div>
+          <div
+            v-if="item._source.Players.length > 4"
+            class="games-table__players-container justify-center col-12 col-md-3"
           >
-            {{ $t(column.text) }}
-            <v-icon
-              small
-              v-if="(column.hasOwnProperty('sort')) && column.sort =='desc'"
-              >arrow_upward</v-icon
+            <UserIcon
+              class="ml-1"
+              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
+              :player="player"
+              :key="pIndex"
+              locale="table"
+            ></UserIcon>
+            <v-avatar
+              @click="openGame(item)"
+              class="games-table__players-more ml-1"
+              size="34"
             >
-            <v-icon
-              small
-              v-if="(column.hasOwnProperty('sort')) && column.sort == 'asc'"
-              >arrow_downward</v-icon
-            >
-          </th>
-        </tr>
-      </template>
-      <template v-slot:item="{ item }">
-        <tr style="cursor: pointer;">
-          <td class="games-table__players-list py-1 text-xs-left" @click.self="openGame(item)">
-            <userChip
-              class="ma-1"
+              +{{ item._source.Players.length - 4 }}
+            </v-avatar>
+          </div>
+          <div v-else class="games-table__players-container justify-center col-12 col-md-3">
+            <UserIcon
+              class="ml-1"
               :isOpened="true"
               v-for="(player, pIndex) in item._source.Players"
               :player="player"
               :key="pIndex"
               locale="table"
-            ></userChip>
-          </td>
-          <td
-            class="games-table__meta subheading"
-            @click="openGame(item)"
-            v-for="(column, index) in columns"
-            :key="index"
-            v-html="getColumnData(item, column)"
-          ></td>
-        </tr>
-      </template>
-    </v-data-table>
+            ></UserIcon>
+          </div>
+          <div class="games-table__stats-container justify-center col-12 col-md-3">
+            <div class="games-table__stat">
+              <div class="games-table__stat-value">{{ item._source.Age }}</div>
+              <div class="games-table__stat-name">Ticks</div>
+            </div>
+            <div class="games-table__stat">
+              <div class="games-table__stat-value">
+                {{ item._source.Wealth }}
+              </div>
+              <div class="games-table__stat-name">Wealth</div>
+            </div>
+          </div>
+          <div class="games-table__action-container col-12 col-md-2">
+            <AntHiveBtn @click="openGame(item)" fill>View Game</AntHiveBtn>
+          </div>
+        </div>
+      </div></v-card
+    >
     <v-toolbar flat>
       <v-pagination
         class="mx-auto"
@@ -69,15 +84,22 @@
 </template>
 
 
+
+
+
 <script>
-import userChip from '@/components/UserChip'
+import UserChip from '@/components/UserInfo/UserChip'
+import AuthorChip from '@/components/UserInfo/AuthorChip'
+import UserIcon from '@/components/UserInfo/UserIcon'
 import { timeAgo } from '@/services/User'
 import { search } from '@/services/Game'
 
 export default {
   name: 'gamesTable',
   components: {
-    userChip
+    UserChip,
+    UserIcon,
+    AuthorChip
   },
   props: {
     PageSize: {
@@ -201,7 +223,64 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
 .games-table {
+  &__item {
+    border-radius: 12px !important;
+    margin: 10px 0;
+  }
+  &__item-cover {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+  }
+  &__players-container {
+    display: flex;
+    align-items: center;
+  }
+  &__players-more {
+    color: white;
+    transition: 0.5s;
+    background-color: $color-accent;
+    cursor: pointer;
+  }
+  &__players-more:hover {
+    border: 2px solid $color-accent;
+    background: white;
+    color: black;
+    transition: 0.5s;
+  }
+  &__stats-container {
+    display: flex;
+    font-weight: 700;
+    text-align: center;
+  }
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+    position: relative;
+  }
+  &__stat::after {
+    content: '';
+    width: 1px;
+    height: 26px;
+    background-color: #3a315c7a;
+    position: absolute;
+    top: 6px;
+    right: -18px;
+  }
+  &__stat:last-child::after {
+    display: none;
+  }
+  &__stat-value {
+    color: $color-accent;
+  }
+  &__stat-name {
+    color: $color-primary;
+  }
+  &__action-container {
+    text-align: center;
+  }
   &__meta {
     min-width: 100px;
   }

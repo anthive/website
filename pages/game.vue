@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-row class="flex-nowrap ma-8">
+    <v-row class="texture-scrabble flex-nowrap pa-8">
       <PlayersList
         v-show="gameLoaded"
         v-bind:players="players"
@@ -11,7 +11,9 @@
         <GamePlayer :status="status" :isGameEnd="isGameEnd"></GamePlayer>
         <GameLogPanel v-show="gameLoaded"></GameLogPanel>
       </div>
+     
     </v-row>
+     <v-parallax src="/img/pre-footer.jpg" height="300"></v-parallax>
   </section>
 </template>
 
@@ -79,9 +81,9 @@ export default {
   background: #fff;
 }
 .player-zone__wrap {
-  width: 90%;
+  width: 95%;
 }
 .player-zone__wrap.collapsed {
-  width: 55%;
+  width: 78%;
 }
 </style>

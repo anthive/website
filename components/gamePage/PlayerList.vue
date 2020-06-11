@@ -1,22 +1,26 @@
 <template>
   <div class="players__wrap">
-    <div class="players__list-toggle" @click="togglePlayerList()">
-      <v-icon
-        class="players__list-toggle-icon mdi"
-        color="white"
-        size="40"
-        :class="[showPlayerList ? 'mdi-chevron-left' : 'mdi-chevron-right']"
-      ></v-icon>
-    </div>
-    <div class="d-flex flex-column mr-5 players__list texture-scrabble">
+    <div class="d-flex flex-column mr-5 players__list elevation-3">
+      <v-card class="d-flex align-center" @click="togglePlayerList()" tile color="accent"
+        ><v-icon
+          class="py-3 px-1 text-center mdi"
+          color="white"
+          size="40"
+          :class="[showPlayerList ? 'mdi-chevron-left' : 'mdi-chevron-right']"
+        ></v-icon
+      > <v-card-text v-if="showPlayerList" class="pa-3 white--text">Click to see full info</v-card-text></v-card>
       <div :key="index" v-for="(player, index) in players">
-        <div class="d-flex">
-          <userChip
-            :player="player"
-            :number="index + 1"
-            :isOpened="showPlayerList"
-          ></userChip>
-        </div>
+        <v-card
+          v-if="showPlayerList"
+          @click="1 + 1"
+          tile
+          class="pa-2 elevation-0"
+        >
+          <UserChip :player="player" :number="index + 1"></UserChip>
+        </v-card>
+        <v-card v-else @click="1 + 1" tile class="pa-2 elevation-0">
+          <UserIcon :player="player" :number="index + 1"></UserIcon>
+        </v-card>
       </div>
     </div>
   </div>
@@ -24,11 +28,14 @@
 
 
 <script>
-import userChip from '@/components/UserChip'
+import UserChip from '@/components/UserInfo/UserChip'
+import UserIcon from '@/components/UserInfo/UserIcon'
+
 export default {
   name: 'PlayersList',
   components: {
-    userChip
+    UserChip,
+    UserIcon
   },
   data: () => ({
     showPlayerList: false
@@ -54,7 +61,7 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
-  background-color: #1a1a1a;
+  background-color: #fff;
 }
 .players__list-toggle {
   position: absolute;
