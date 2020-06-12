@@ -7,11 +7,11 @@
           <div :key="index" v-for="(player, index) in players">
             <p>{{ player.text }}</p>
             <v-list-item
-              :class="(index &lt; 3) &amp;&amp; 'orange lighten-5'"
+              :class="(index < 3) && 'orange lighten-5'"
               :to="{ path: '/user/?username=' + player.Username }"
               ><span
                 class="ml-2"
-                :class=" (index &lt; 3) &amp;&amp; 'title orange--text'"
+                :class=" (index < 3) && 'title orange--text'"
                 >{{ index + 1 }}</span
               >
               <v-list-item-avatar class="ml-5" size="70">
@@ -28,7 +28,7 @@
                 </div>
               </v-list-item-avatar>
               <v-list-item-content class="pl-5">
-                <v-list-item-title :class="(index &lt; 3) &amp;&amp; 'title'">{{
+                <v-list-item-title :class="(index < 3) && 'title'">{{
                   player.Username
                 }}</v-list-item-title>
                 <v-list-item-subtitle
@@ -43,7 +43,7 @@
                 >
               </v-list-item-action>
               <v-list-item-action class="pr-3"
-                ><span :class="(index &lt; 3) &amp;&amp; 'title'"
+                ><span :class="(index < 3) && 'title'"
                   >{{ player.Wg }}
                   <v-icon class="orange--text text--lighten-2 ml-1"
                     >bubble_chart</v-icon
