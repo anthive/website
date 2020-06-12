@@ -3,10 +3,10 @@
     <v-container class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <Logo></Logo>
+          <Logo />
         </router-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->

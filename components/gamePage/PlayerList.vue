@@ -16,15 +16,15 @@
           tile
           class="pa-2 elevation-0"
         >
-          <UserChip :player="player" :number="index + 1"></UserChip>
+          <UserChip :player="player" :number="index + 1" />
         </v-card>
         <v-card v-else @click="showUserCard(player)" tile class="pa-2 elevation-0">
-          <UserIcon :player="player" :number="index + 1"></UserIcon>
+          <UserIcon :player="player" :number="index + 1" />
         </v-card>
       </div>
     </div>
      <v-dialog v-model="isShowUserCard" width="380">
-       <UserCard :player="selectedPlayer"></UserCard>
+       <UserCard :player="selectedPlayer" />
     </v-dialog>
   </div>
 </template>
@@ -48,7 +48,10 @@ export default {
     selectedPlayer: {}
   }),
   props: {
-    players: Array
+    players: {
+      type: Array,
+      required: true
+    }
   },
   methods: {
     showUserCard(player) {
@@ -63,7 +66,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/style/global.scss';
 .players__wrap {
   position: relative;
 }
@@ -72,7 +76,7 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
-  background-color: #fff;
+  background-color: $color-white;
 }
 .players__list-toggle {
   position: absolute;
@@ -88,11 +92,11 @@ export default {
   font-size: 40px;
   margin: 10px;
   margin-left: 0px;
-  color: white;
+  background-color: $color-white;
 }
 .players__list::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  background-color: $color-white;
 }
 .players__list::-webkit-scrollbar {
   width: 5px;

@@ -45,7 +45,7 @@
               class="ml-md-n11 mr-5"
               :author="item._source.Author"
               :date="item._source.Played"
-            ></AuthorChip>
+            />
           </div>
           <div
             v-if="item._source.Players.length > 4"
@@ -56,8 +56,7 @@
               :key="pIndex"
               v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
             >
-              <UserIcon class="ml-1" :player="player" locale="table"></UserIcon
-            ></a>
+              <UserIcon class="ml-1" :player="player" locale="table"/></a>
 
             <v-avatar
               @click="openGame(item)"
@@ -79,7 +78,7 @@
             <UserIcon
               class="ml-1"
               :player="player"
-            ></UserIcon></a>
+            /></a>
           </div>
           <div
             class="games-table__stats-container justify-center col-12 col-md-3"
@@ -112,7 +111,7 @@
       ></v-pagination>
     </v-toolbar>
     <v-dialog v-model="isShowUserCard" width="380">
-      <UserCard :player="selectedPlayer"></UserCard>
+      <UserCard :player="selectedPlayer" />
     </v-dialog>
   </div>
 </template>

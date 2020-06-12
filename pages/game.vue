@@ -5,16 +5,14 @@
       <PlayersList
         v-show="gameLoaded"
         v-bind:players="players"
-        @togglePlayerList="showPlayerList = !showPlayerList"
-      >
-      </PlayersList>
+        @togglePlayerList="showPlayerList = !showPlayerList" />
       <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
-        <GamePlayer :status="status" :isGameEnd="isGameEnd"></GamePlayer>
-        <GameLogPanel v-show="gameLoaded"></GameLogPanel>
+        <GamePlayer :status="status" :isGameEnd="isGameEnd" />
+        <GameLogPanel v-show="gameLoaded" />
       </div>
      
     </v-row>
-     <v-parallax src="/img/pre-footer.jpg" height="300"></v-parallax>
+     <v-parallax src="/img/pre-footer.jpg" height="300" />
   </section>
 </template>
 
