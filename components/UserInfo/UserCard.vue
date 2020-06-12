@@ -16,7 +16,6 @@
         <span class="primary--text f-text-large d-block text-center">{{
           player.Username
         }}</span>
-        
       </div>
       <div class="user-card__bot-info">
         <v-avatar class="user-card__bot-info-icon" size="50">
@@ -29,7 +28,9 @@
           <span class="user-icon__version">v.{{ us.Version }}</span>
         </v-avatar>
       </div>
-      <span class="f-text-large text-center d-block primary--text">{{ $t("infoBotInfo") }}</span>
+      <span class="f-text-large text-center d-block primary--text">{{
+        $t("infoBotInfo")
+      }}</span>
       <div class="user-card__user-stats">
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{
@@ -60,24 +61,18 @@
           <span class="user-card__user-stat-key">{{ $t("infoErrors") }}</span>
         </div>
         <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-                  player.Wealth
-                }}</span>
-          <span class="user-card__user-stat-key">{{
-                  $t("infoEarned")
-                }}</span>
+          <span class="user-card__user-stat-value">{{ player.Wealth }}</span>
+          <span class="user-card__user-stat-key">{{ $t("infoEarned") }}</span>
         </div>
       </div>
       <div class="user-card__actions">
-        <AntHiveBtn class="mx-auto my-2 d-block" fill>{{
-                  $t("infoProfile")
-                }}</AntHiveBtn>
+        <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" fill>{{
+          $t("infoProfile")
+        }}</AntHiveBtn>
       </div>
     </div>
   </v-card>
 </template>
-
-
 
 <script>
 import { User } from '@/services/User'
@@ -99,6 +94,11 @@ export default {
     player() {
       this.us = new User()
       this.us.initUser(this.player)
+    }
+  },
+  methods: {
+    toProfile() {
+      this.$router.push(`user/?username=${this.us.Username}`)
     }
   }
 }
