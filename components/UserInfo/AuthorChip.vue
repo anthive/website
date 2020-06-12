@@ -22,8 +22,7 @@ export default {
   name: 'AuthorChip',
   props: {
     author: String,
-    date: Number,
-    isOpened: Boolean
+    date: Number
   },
   data: () => ({}),
   methods: {

@@ -16,7 +16,6 @@ class User {
   }
 
   async initUser(user) {
-    console.log('init user', user)
     this.Username = user.Username
     this.Lang = user.Lang
     this.Version = user.Version

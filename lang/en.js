@@ -98,12 +98,13 @@ export default {
 
   // ----------------------------- USER INFO FULL PAGE
   infoBotInfo: 'Bot info',
-  infoSpan: 'Span:',
-  infoTicks: 'Ticks:',
-  infoAnts: 'Ants:',
-  infoHiveSize: 'HiveSize:',
-  infoErrors: 'Errors:',
-  infoEarned: 'Earned:',
+  infoSpan: 'Span',
+  infoTicks: 'Ticks',
+  infoAnts: 'Ants',
+  infoHiveSize: 'HiveSize',
+  infoErrors: 'Errors',
+  infoEarned: 'Earned',
+  infoProfile: 'Profile',
 
   // ----------------------------- RULES PAGE
   rulesText:

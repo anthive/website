@@ -1,6 +1,7 @@
 <template>
   <section>
     <v-row class="texture-scrabble flex-nowrap pa-8">
+        
       <PlayersList
         v-show="gameLoaded"
         v-bind:players="players"

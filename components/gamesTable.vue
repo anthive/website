@@ -1,5 +1,27 @@
 <template>
   <div id="games-table">
+    <v-row class="d-flex justify-end mx-3">
+          <div class="primary--text text-xs-left font-weight-bold">Sort:</div>
+          <div
+            class="primary--text games-table__sort-item"
+            v-for="(column, index) in columns"
+            :class="dataTableClasses(column)"
+            :key="index"
+            @click="doSort(column)"
+          >
+            {{ $t(column.text) }}
+            <v-icon
+              small
+              v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
+              >arrow_upward</v-icon
+            >
+            <v-icon
+              small
+              v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
+              >arrow_downward</v-icon
+            >
+          </div>
+        </v-row>
     <v-card
       class="games-table__item"
       :key="index"
@@ -16,7 +38,9 @@
           :class="{ 'flex-column': $vuetify.breakpoint.smAndDown }"
           class="d-flex col-12 col-md-11 justify-space-between align-center"
         >
-          <div class="col-12 col-md-2 justify-center justify-md-start d-flex align-center">
+          <div
+            class="col-12 col-md-2 justify-center justify-md-start d-flex align-center"
+          >
             <AuthorChip
               class="ml-md-n11 mr-5"
               :author="item._source.Author"
@@ -27,13 +51,14 @@
             v-if="item._source.Players.length > 4"
             class="games-table__players-container justify-center col-12 col-md-3"
           >
-            <UserIcon
-              class="ml-1"
-              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
-              :player="player"
+            <a
+              @click="showUserCard(player)"
               :key="pIndex"
-              locale="table"
-            ></UserIcon>
+              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
+            >
+              <UserIcon class="ml-1" :player="player" locale="table"></UserIcon
+            ></a>
+
             <v-avatar
               @click="openGame(item)"
               class="games-table__players-more ml-1"
@@ -42,17 +67,23 @@
               +{{ item._source.Players.length - 4 }}
             </v-avatar>
           </div>
-          <div v-else class="games-table__players-container justify-center col-12 col-md-3">
+          <div
+            v-else
+            class="games-table__players-container justify-center col-12 col-md-3"
+          >
+            <a
+              @click="showUserCard(player)"
+              :key="pIndex"
+              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
+            >
             <UserIcon
               class="ml-1"
-              :isOpened="true"
-              v-for="(player, pIndex) in item._source.Players"
               :player="player"
-              :key="pIndex"
-              locale="table"
-            ></UserIcon>
+            ></UserIcon></a>
           </div>
-          <div class="games-table__stats-container justify-center col-12 col-md-3">
+          <div
+            class="games-table__stats-container justify-center col-12 col-md-3"
+          >
             <div class="games-table__stat">
               <div class="games-table__stat-value">{{ item._source.Age }}</div>
               <div class="games-table__stat-name">Ticks</div>
@@ -80,14 +111,15 @@
         color="accent"
       ></v-pagination>
     </v-toolbar>
+    <v-dialog v-model="isShowUserCard" width="380">
+      <UserCard :player="selectedPlayer"></UserCard>
+    </v-dialog>
   </div>
 </template>
 
 
-
-
-
 <script>
+import UserCard from '@/components/UserInfo/UserCard'
 import UserChip from '@/components/UserInfo/UserChip'
 import AuthorChip from '@/components/UserInfo/AuthorChip'
 import UserIcon from '@/components/UserInfo/UserIcon'
@@ -99,7 +131,8 @@ export default {
   components: {
     UserChip,
     UserIcon,
-    AuthorChip
+    AuthorChip,
+    UserCard
   },
   props: {
     PageSize: {
@@ -119,6 +152,8 @@ export default {
     pages: 0,
     currentPage: 1,
     sort: [],
+    isShowUserCard: false,
+    selectedPlayer: {},
     columns: [
       {
         text: 'gamesTicks',
@@ -151,7 +186,10 @@ export default {
       this.currentPage = pageNumber
       this.loadGames()
     },
-
+    showUserCard(player) {
+      this.selectedPlayer = player
+      this.isShowUserCard = true
+    },
     doSort(field) {
       if (!field.sortable) return
 
@@ -225,6 +263,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .games-table {
+  &__sort-item {
+    margin-left: 10px;
+    cursor: pointer;
+  }
   &__item {
     border-radius: 12px !important;
     margin: 10px 0;

@@ -13,9 +13,7 @@ export default {
   name: 'usersInfo',
   props: {
     player: Object,
-    locale: String,
-    number: Number,
-    isOpened: Boolean
+    locale: String
   },
   data: () => ({
     us: null

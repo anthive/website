@@ -12,17 +12,20 @@
       <div :key="index" v-for="(player, index) in players">
         <v-card
           v-if="showPlayerList"
-          @click="1 + 1"
+          @click="showUserCard(player)"
           tile
           class="pa-2 elevation-0"
         >
           <UserChip :player="player" :number="index + 1"></UserChip>
         </v-card>
-        <v-card v-else @click="1 + 1" tile class="pa-2 elevation-0">
+        <v-card v-else @click="showUserCard(player)" tile class="pa-2 elevation-0">
           <UserIcon :player="player" :number="index + 1"></UserIcon>
         </v-card>
       </div>
     </div>
+     <v-dialog v-model="isShowUserCard" width="380">
+       <UserCard :player="selectedPlayer"></UserCard>
+    </v-dialog>
   </div>
 </template>
 
@@ -30,20 +33,28 @@
 <script>
 import UserChip from '@/components/UserInfo/UserChip'
 import UserIcon from '@/components/UserInfo/UserIcon'
+import UserCard from '@/components/UserInfo/UserCard'
 
 export default {
   name: 'PlayersList',
   components: {
     UserChip,
-    UserIcon
+    UserIcon,
+    UserCard
   },
   data: () => ({
-    showPlayerList: false
+    showPlayerList: false,
+    isShowUserCard: false,
+    selectedPlayer: {}
   }),
   props: {
     players: Array
   },
   methods: {
+    showUserCard(player) {
+      this.selectedPlayer = player
+      this.isShowUserCard = true
+    },
     togglePlayerList() {
       this.showPlayerList = !this.showPlayerList
       this.$emit('togglePlayerList')
