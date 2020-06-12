@@ -15,7 +15,7 @@ async function search(sort, page, size, filter) {
 
   const querySearch = query(sort, page, size, filter)
 
-  const url = SEARCH_HANDLER + '/' + process.env.INDEX + '/_search'
+  const url = SEARCH_HANDLER + '/' + process.env.INDEX_GAMES + '/_search'
   const resp = await esAxios.post(url, querySearch).catch(handleError)
   return resp.data.hits
 }

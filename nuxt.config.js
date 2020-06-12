@@ -4,12 +4,6 @@ require('dotenv').config()
 module.exports = {
   mode: 'spa',
 
-  env: {
-    API_URL: process.env.API_URL,
-    INDEX_GAMES: process.env.INDEX_GAMES,
-    INDEX_USER: process.env.INDEX_USER
-  },
-
   /*
   ** Headers of the page
   */
