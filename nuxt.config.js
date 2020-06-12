@@ -4,10 +4,6 @@ require('dotenv').config()
 module.exports = {
   mode: 'spa',
 
-  env: {
-    esUrl: process.env.NUXT_ENV_ES_URL
-  },
-
   /*
   ** Headers of the page
   */
