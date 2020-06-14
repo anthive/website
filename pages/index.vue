@@ -1,13 +1,13 @@
 <template >
   <div>
-    <parallaxSection></parallaxSection>
-    <stepsSection></stepsSection>
-    <featureSection></featureSection>
-    <videoSection></videoSection>
-    <badgesSection></badgesSection>
-     <partnersSection></partnersSection>
-     <screenshotsSection></screenshotsSection>
-     <dividerSection></dividerSection>
+    <parallaxSection />
+    <stepsSection />
+    <featureSection />
+    <videoSection />
+    <badgesSection />
+     <partnersSection />
+     <screenshotsSection />
+     <dividerSection />
   </div>
 </template>
 <script>

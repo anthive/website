@@ -16,7 +16,6 @@ class User {
   }
 
   async initUser(user) {
-    console.log('init user', user)
     this.Username = user.Username
     this.Lang = user.Lang
     this.Version = user.Version
@@ -24,6 +23,7 @@ class User {
     this.Wealth = user.Wealth
     this.Wg = user.Wg
     this.Skin = user.Skin
+    this.Stats = user.Stats
   }
 
   async getUserdata(username) {

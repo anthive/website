@@ -1,42 +1,63 @@
 <template>
   <div class="players__wrap">
-    <div class="players__list-toggle" @click="togglePlayerList()">
-      <v-icon
-        class="players__list-toggle-icon mdi"
-        color="white"
-        size="40"
-        :class="[showPlayerList ? 'mdi-chevron-left' : 'mdi-chevron-right']"
-      ></v-icon>
-    </div>
-    <div class="d-flex flex-column mr-5 players__list texture-scrabble">
+    <div class="d-flex flex-column mr-5 players__list elevation-3">
+      <v-card class="d-flex align-center" @click="togglePlayerList()" tile color="accent"
+        ><v-icon
+          class="py-3 px-1 text-center mdi"
+          color="white"
+          size="40"
+          :class="[showPlayerList ? 'mdi-chevron-left' : 'mdi-chevron-right']"
+        ></v-icon
+      > <v-card-text v-if="showPlayerList" class="pa-3 white--text">Click to see full info</v-card-text></v-card>
       <div :key="index" v-for="(player, index) in players">
-        <div class="d-flex">
-          <userChip
-            :player="player"
-            :number="index + 1"
-            :isOpened="showPlayerList"
-          ></userChip>
-        </div>
+        <v-card
+          v-if="showPlayerList"
+          @click="showUserCard(player)"
+          tile
+          class="pa-2 elevation-0"
+        >
+          <UserChip :player="player" :number="index + 1" />
+        </v-card>
+        <v-card v-else @click="showUserCard(player)" tile class="pa-2 elevation-0">
+          <UserIcon :player="player" :number="index + 1" />
+        </v-card>
       </div>
     </div>
+     <v-dialog v-model="isShowUserCard" width="380">
+       <UserCard :player="selectedPlayer" />
+    </v-dialog>
   </div>
 </template>
 
 
 <script>
-import userChip from '@/components/UserChip'
+import UserChip from '@/components/UserInfo/UserChip'
+import UserIcon from '@/components/UserInfo/UserIcon'
+import UserCard from '@/components/UserInfo/UserCard'
+
 export default {
   name: 'PlayersList',
   components: {
-    userChip
+    UserChip,
+    UserIcon,
+    UserCard
   },
   data: () => ({
-    showPlayerList: false
+    showPlayerList: false,
+    isShowUserCard: false,
+    selectedPlayer: {}
   }),
   props: {
-    players: Array
+    players: {
+      type: Array,
+      required: true
+    }
   },
   methods: {
+    showUserCard(player) {
+      this.selectedPlayer = player
+      this.isShowUserCard = true
+    },
     togglePlayerList() {
       this.showPlayerList = !this.showPlayerList
       this.$emit('togglePlayerList')
@@ -45,7 +66,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/style/global.scss';
 .players__wrap {
   position: relative;
 }
@@ -54,7 +76,7 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
-  background-color: #1a1a1a;
+  background-color: $color-white;
 }
 .players__list-toggle {
   position: absolute;
@@ -70,11 +92,11 @@ export default {
   font-size: 40px;
   margin: 10px;
   margin-left: 0px;
-  color: white;
+  background-color: $color-white;
 }
 .players__list::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
+  background-color: $color-white;
 }
 .players__list::-webkit-scrollbar {
   width: 5px;

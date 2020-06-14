@@ -2,16 +2,12 @@ export { query, handleError }
 
 function query(sort, page, size) {
   const es_syntax = {
+    query: { match_all: {} },
     size: size,
     sort: sort,
     from: size * (page - 1)
   }
-  return {
-    params: {
-      source: JSON.stringify(es_syntax),
-      source_content_type: 'application/json'
-    }
-  }
+  return es_syntax
 }
 
 function handleError(error) {

@@ -1,6 +1,6 @@
 <template >
   <div>
-    <tutorialSection></tutorialSection>
+    <tutorialSection />
   </div>
 </template>
 <script>

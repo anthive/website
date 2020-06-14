@@ -99,12 +99,13 @@ export default {
 
   // ----------------------------- USER INFO FULL PAGE
   infoBotInfo: 'Информация о боте',
-  infoSpan: 'Спан:',
-  infoTicks: 'Тики:',
-  infoAnts: 'Муравьи:',
-  infoHiveSize: 'Размер муравейника:',
-  infoErrors: 'Ошибки:',
-  infoEarned: 'Очки:',
+  infoSpan: 'Спан',
+  infoTicks: 'Тики',
+  infoAnts: 'Муравьи',
+  infoHiveSize: 'Муравейник',
+  infoErrors: 'Ошибки',
+  infoEarned: 'Очки',
+  infoProfile: 'Профиль',
 
   // ----------------------------- RULES PAGE
   rulesText:

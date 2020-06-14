@@ -1,13 +1,13 @@
 <template>
   <section>
-    <v-parallax src="/img/pre-footer.jpg" height="300"></v-parallax>
+    <v-parallax src="/img/pre-footer.jpg" height="300" />
     <v-row class="mx-2">
       <v-col cols="12">
         <v-card class="white pa-3 elevation-6 rules__card" min-height="700">
           <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
           <v-row>
             <v-col class="conte" cols="12" md="6">
-              <editor :valueCode.sync="valueCode"></editor>
+              <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
               <div id="player"></div>

@@ -1,5 +1,5 @@
 <template>
-  <img class="anthive-logo" src="/img/anthive_logo.png" alt="" />
+  <img class="anthive-logo" src="/img/anthive_logo.svg" alt="" />
 </template>
 
 <style>

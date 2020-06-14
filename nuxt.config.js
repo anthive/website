@@ -5,7 +5,9 @@ module.exports = {
   mode: 'spa',
 
   env: {
-    esUrl: process.env.NUXT_ENV_ES_URL
+    API_URL: process.env.API_URL,
+    INDEX_GAMES: process.env.INDEX_GAMES,
+    INDEX_USER: process.env.INDEX_USER
   },
 
   /*
@@ -56,6 +58,7 @@ module.exports = {
     '~/assets/style/app.styl',
     '~/assets/style/style.css',
     '~/assets/style/fonts.css',
+    '~/assets/style/global.scss',
     '~/assets/style/textures.css'
   ],
 

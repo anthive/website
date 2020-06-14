@@ -1,6 +1,6 @@
 <template>
   <section class="divider texture-scrabble">
-    <v-parallax src="/img/pre-footer.jpg" height="300"></v-parallax>
+    <v-parallax src="/img/pre-footer.jpg" height="300" />
   </section>
 </template>
 
