@@ -13,6 +13,8 @@ class User {
     this.Wg = ''
     this.Skin = ''
     this.Stats = {}
+    this.TotalGames = 0
+    this.TotalWealth = 0
   }
 
   async initUser(user) {
@@ -24,6 +26,8 @@ class User {
     this.Wg = user.Wg
     this.Skin = user.Skin
     this.Stats = user.Stats
+    this.TotalGames = user.TotalGames
+    this.TotalWealth = user.TotalWealth
   }
 
   async getUserdata(username) {

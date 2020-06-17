@@ -1,5 +1,5 @@
 <template>
-  <v-card class="user-card">
+  <v-card class="user-card" width="380">
     <v-img
       class="user-card__img"
       width="380"
@@ -7,17 +7,26 @@
       src="/img/bg.jpg"
     ></v-img>
     <div class="user-card__container">
+      <!-- Avatar container -->
       <div class="user-card__avatar-container">
         <v-avatar class="user-card__avatar" size="80">
           <v-img :src="us.photoUrl(80)"></v-img>
         </v-avatar>
       </div>
+      <!-- Username container -->
       <div class="user-card__user_info">
         <span class="primary--text f-text-large d-block text-center">{{
           player.Username
         }}</span>
       </div>
-      <div class="user-card__bot-info">
+      <!-- Leaderboard place -->
+      <div v-if="place != 0" class="user-card__user_info">
+        <span class="accent--text f-text-large d-block text-center"
+          >{{ place }} place</span
+        >
+      </div>
+      <!-- Bot settings -->
+      <div v-if="us.Lang" class="user-card__bot-info">
         <v-avatar class="user-card__bot-info-icon" size="50">
           <v-img :src="us.antUrl(true)"> </v-img>
         </v-avatar>
@@ -28,10 +37,28 @@
           <span class="user-icon__version">v.{{ us.Version }}</span>
         </v-avatar>
       </div>
-      <span class="f-text-large text-center d-block primary--text">{{
-        $t("infoBotInfo")
-      }}</span>
-      <div class="user-card__user-stats">
+      <span
+        v-if="player.Stats.Ants"
+        class="f-text-large text-center d-block primary--text"
+        >{{ $t("infoBotInfo") }}</span
+      >
+      <!-- Leaderboard stats -->
+      <div v-if="player.TotalWealth" class="user-card__user-stats">
+        <div class="user-card__user-stat">
+          <span class="user-card__user-stat-value">{{
+            player.TotalGames
+          }}</span>
+          <span class="user-card__user-stat-key">Total Games</span>
+        </div>
+        <div class="user-card__user-stat">
+          <span class="user-card__user-stat-value">{{
+            player.TotalWealth
+          }}</span>
+          <span class="user-card__user-stat-key">Total Wealth</span>
+        </div>
+      </div>
+      <!-- Games stats -->
+      <div v-if="player.Stats.Ants" class="user-card__user-stats">
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{
             player.Stats.Ants
@@ -65,6 +92,7 @@
           <span class="user-card__user-stat-key">{{ $t("infoEarned") }}</span>
         </div>
       </div>
+      <!-- Actions -->
       <div class="user-card__actions">
         <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" fill>{{
           $t("infoProfile")
@@ -80,8 +108,8 @@ import { User } from '@/services/User'
 export default {
   name: 'userChip',
   props: {
-    player: Object,
-    locale: String
+    player: { type: Object, required: true },
+    place: { type: Number, default: 0 }
   },
   data: () => ({
     us: null
@@ -98,7 +126,7 @@ export default {
   },
   methods: {
     toProfile() {
-      this.$router.push(`user/?username=${this.us.Username}`)
+      this.$router.push(`/user/?username=${this.us.Username}`)
     }
   }
 }

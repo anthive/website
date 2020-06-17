@@ -1,32 +1,51 @@
-<template lang="pug">
-  section
-    v-row.ma-10.justify-center
-      v-col(cols="11" lg="3")
-        v-card(max-width="250")
-          v-img(min-width="250" :src="user.avatar" v-if="user.avatar")
-          v-card-title
-            h3(class="headline") {{ user.name }}
-          v-card-text(class="user__card-text pt-0" v-if="user.company")
-            v-icon(size="20" class="mr-2") people
-            span {{ user.company }}
-          v-card-text(class="user__card-text pt-0" v-if="user.location")
-            v-icon(size="20" class="mr-2") place
-            span {{ user.location }}
-          v-card-text(class="user__card-text pt-0" v-if="user.blog")
-            v-icon(size="20" class="mr-2") public
-            a(:href="user.blog" target="_blank") {{ user.blog }}
-      v-col(cols="11" lg="7" xl="5")
-        h3.headline.mt-1.mb-3 {{ $t('userTitle') }}
-        Chart.elevation-1(:values="userChartData" username="kezlya")
-      v-col.mt-4(cols="11" lg="8")
-        h3(class="headline mt-1 mb-3") {{ $t('userGames') }}
-          //TODO: use v-on span(class="grey--text") ({{ totalGames }})
-        gamesTable(:Filters="filters" :PageSize=17)
+<template>
+  <section>
+    <v-row class="ma-10 justify-center">
+      <v-col cols="11" lg="3">
+        <v-card max-width="250">
+          <v-img min-width="250" :src="user.avatar" v-if="user.avatar"></v-img>
+          <v-card-title>
+            <h3 class="headline">{{ user.name }}</h3>
+          </v-card-title>
+          <v-card-text class="user__card-text pt-0" v-if="user.company">
+            <v-icon class="mr-2" size="20">people</v-icon
+            ><span>{{ user.company }}</span></v-card-text
+          >
+          <v-card-text class="user__card-text pt-0" v-if="user.location">
+            <v-icon class="mr-2" size="20">place</v-icon
+            ><span>{{ user.location }}</span></v-card-text
+          >
+          <v-card-text class="user__card-text pt-0" v-if="user.blog">
+            <v-icon class="mr-2" size="20">public</v-icon
+            ><a :href="user.blog" target="_blank">{{
+              user.blog
+            }}</a></v-card-text
+          >
+        </v-card>
+      </v-col>
+      <v-col cols="11" lg="7" xl="5">
+        <h3 class="headline mt-1 mb-3">{{ $t("userTitle") }}</h3>
+        <Chart
+          class="elevation-1"
+          :values="userChartData"
+          username="kezlya"
+        ></Chart>
+      </v-col>
+      <v-col class="mt-4" cols="11" lg="8">
+        <h3 class="headline mt-1 mb-3">
+          {{ $t("userGames") }}
+          <!--TODO: use v-on span(class="grey--text") ({{ totalGames }})-->
+        </h3>
+        <gamesTable :Filters="filters" :PageSize="17"></gamesTable>
+      </v-col>
+    </v-row>
+  </section>
 </template>
 
 <script>
 import Chart from '@/components/chart'
 import gamesTable from '@/components/gamesTable'
+import UserCard from '@/components/UserInfo/UserCard'
 import { User } from '@/services/User'
 
 export default {
@@ -50,6 +69,7 @@ export default {
     ]
   }),
   created() {
+    console.log(this.$route)
     var username = this.$route.query.username
 
     if (username === '' || username === undefined) {
@@ -57,7 +77,7 @@ export default {
       return
     }
     this.us = new User()
-    this.filters = [{ term: { 'Players.Username.keyword': username } }]
+    this.filters = { term: { 'Players.Username': username } }
     this.us.getUserdata(username).then(result => {
       console.log('result', result)
       this.user = result
@@ -65,7 +85,8 @@ export default {
   },
   components: {
     gamesTable,
-    Chart
+    Chart,
+    UserCard
   }
 }
 </script>
