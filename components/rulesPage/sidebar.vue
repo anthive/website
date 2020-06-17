@@ -17,7 +17,6 @@
             v-for='rule in chapter.rules'
             :key='rule.id'
             link
-            @click="setCurrentRule(rule)"
             :to="{ path: `/rules/${rule.id}` }"
           >
             <v-list-item-content>
@@ -36,14 +35,11 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters(['getRules'])
-  },
-  methods: {
-    ...mapActions(['setCurrentRule'])
   }
 }
 </script>

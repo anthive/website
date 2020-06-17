@@ -7,18 +7,18 @@
         </template>
       </v-breadcrumbs>
       <div class="display-1 mb-6">{{ rule.title }}</div>
-      <p v-html="rule.text" />
+      <p v-html="$md.render(rule.text)" />
     </section>
   </v-container>
 </template>
 
 <script>
 export default {
-  data: () => ({}),
   props: {
     rule: {
       type: Object,
-      default: () => {}
+      default: null,
+      required: true
     }
   },
   computed: {

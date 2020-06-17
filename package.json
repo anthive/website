@@ -16,8 +16,10 @@
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-analytics": "^2.0.2",
+    "@nuxtjs/markdownit": "^1.2.9",
     "ace-builds": "^1.4.8",
     "cross-env": "^5.2.0",
+    "markdown-it": "^11.0.0",
     "nuxt": "^2.11.0",
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.4.1",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@mdi/font": "^4.4.95",
     "@nuxtjs/eslint-config": "^2.0.0",
+    "@nuxtjs/markdownit-loader": "^1.1.1",
     "babel-eslint": "^8.2.6",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^3.1.0",
