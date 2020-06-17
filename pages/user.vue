@@ -69,7 +69,6 @@ export default {
     ]
   }),
   created() {
-    console.log(this.$route)
     var username = this.$route.query.username
 
     if (username === '' || username === undefined) {

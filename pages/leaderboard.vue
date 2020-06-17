@@ -13,7 +13,7 @@
           <div class="d-flex col-3 justify-space-around">
             <span class="primary--text">Top by: </span>
             <div
-              :class="{'accent--text': column.value == sortBy}"
+              :class="{ 'accent--text': column.value === sortBy }"
               class="primary--text leaderboard__sort-item"
               v-for="(column, index) in columns"
               :key="index"
@@ -24,7 +24,8 @@
           </div>
         </v-card-title>
         <span class="primary--text text-center d-block title my-4"
-          >Top 3 <span v-if="sortBy=='totalWealth'">wealthy</span> <span v-if="sortBy=='totalGames'">hard</span> AntHive players
+          >Top 3 <span v-if="sortBy === 'totalWealth'">wealthy</span>
+          <span v-if="sortBy === 'totalGames'">hard</span> AntHive players
         </span>
         <div class="d-flex justify-space-around">
           <UserCard
@@ -35,7 +36,8 @@
           />
         </div>
         <span class="primary--text text-center d-block title my-4"
-          >Top 100 <span v-if="sortBy=='totalWealth'">wealthy</span> <span v-if="sortBy=='totalGames'">hard</span> AntHive players
+          >Top 100 <span v-if="sortBy === 'totalWealth'">wealthy</span>
+          <span v-if="sortBy === 'totalGames'">hard</span> AntHive players
         </span>
         <LeaderCard
           class="my-3"
@@ -97,9 +99,6 @@ export default {
     async getLeaders() {
       let sortQuery = {}
       sortQuery[this.sortBy] = 'desc'
-      console.log(sortQuery)
-
-      console.log(this.sortBy)
       search(sortQuery).then(leaders => {
         console.log('start search')
         this.players = leaders
