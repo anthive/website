@@ -2,7 +2,7 @@
   <section id="inspire" class="rules">
     <sidebar />
     <v-card class="card">
-      <rule-content :rule="getCurrentRule" />
+      <rule-content :rule="currentRule" />
     </v-card>
   </section>
 </template>
@@ -18,7 +18,19 @@ export default {
     ruleContent
   },
   computed: {
-    ...mapGetters(['getRules', 'getCurrentRule'])
+    ...mapGetters(['getRules']),
+    ruleId() {
+      return this.$route.params.rule
+    },
+    currentRule() {
+      if (!this.ruleId) return this.getRules[0].rules[0]
+      let rule
+      this.getRules.some(chapter => {
+        rule = chapter.rules.find(rule => rule.id === this.ruleId)
+        return rule
+      })
+      return rule
+    }
   }
 }
 </script>
