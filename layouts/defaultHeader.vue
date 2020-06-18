@@ -62,12 +62,6 @@
         <AntHiveBtn primary href="https://profile.anthive.io/login/">{{
           $t("login")
         }}</AntHiveBtn>
-        <AntHiveBtn primary class="ml-3" :to="switchLocalePath('en')">{{
-          $t("en")
-        }}</AntHiveBtn>
-        <AntHiveBtn primary class="ml-3" :to="switchLocalePath('ru')">{{
-          $t("ru")
-        }}</AntHiveBtn>
         <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
           "sandbox"
         }}</AntHiveBtn>
@@ -81,8 +75,6 @@ import Logo from '@/components/logo'
 
 export default {
   name: 'defaultHeader',
-  data: () => ({}),
-  mounted() {},
   components: {
     Logo
   }

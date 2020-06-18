@@ -73,7 +73,7 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/dotenv',
-
+    '@nuxtjs/markdownit',
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'nuxt-clipboard2',
@@ -97,6 +97,13 @@ module.exports = {
       }
     ]
   ],
+  markdownit: {
+    injected: true,
+    typographer: true,
+    linkify: true,
+    emoji: true,
+    toc: true
+  },
   /*
   ** Axios module configuration
   */

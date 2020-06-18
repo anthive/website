@@ -13,7 +13,7 @@
       
     </div>
 
-    <div col="12" md="6" class="footer__subscribe f-rubik text-center">
+    <div col="12" md="3" class="footer__subscribe f-rubik text-center">
       <span class="mr-2"> {{ $t("ReadFooter") }} <nuxt-link class="accent--text" to="/tos">{{ $t("TermsofService") }}</nuxt-link> {{ $t("AndFooter") }} <nuxt-link class="accent--text" to="/pp">{{ $t("PrivacyPolicy") }}</nuxt-link></span>
       
     </div>
@@ -26,6 +26,20 @@
         >{{ $t("feedbackBtn2") }}</AntHiveBtn
       >
     </div>
+    <div col="12" md="2" class="text-center footer__locale-select">
+      <v-select
+        v-model="selectedLocale"
+        class="footer__locale-select"
+        :items="locales"
+        prepend-icon="public"
+        dense
+        dark
+        flat
+        hide-details
+        :menu-props="{ top: true, offsetY: true }"
+        @input="switchLocale"
+      ></v-select>
+    </div>
   </v-footer>
 </template>
 
@@ -35,25 +49,50 @@
 <script>
 export default {
   name: 'defaultFooter',
-  data: () => ({}),
-  mounted() {},
-  components: {}
+  data: () => ({
+    locales: ['English', 'Русский'],
+    selectedLocale: ''
+  }),
+  created() {
+    this.selectedLocale = this.$i18n.locale === 'en' ? this.locales[0] : this.locales[1]
+  },
+  methods: {
+    switchLocale(locale) {
+      let localeParam
+      switch (locale) {
+        case 'English':
+          localeParam = 'en'
+          break
+        case 'Русский':
+          localeParam = 'ru'
+          break
+      }
+      this.$router.push(this.switchLocalePath(localeParam))
+    }
+  }
 }
 </script>
-
+<style>
+.footer__locale-select .v-input__slot:before,
+.footer__locale-select .v-input__slot:after {
+  display: none;
+}
+</style>
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .footer {
   @media screen and (max-width: 960px) {
     flex-direction: column;
   }
-  &__copyright {
-    color: white;
+  &__copyright,
+  &__subscribe,
+  &__issue,
+  &__locale-select {
+    color: $color-white;
   }
-  &__subscribe {
-    color: white;
-  }
-  &__issue {
-    color: white;
+  &__locale-select {
+    max-width: 150px;
   }
 }
 </style>
