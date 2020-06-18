@@ -7,7 +7,8 @@ module.exports = {
   env: {
     API_URL: process.env.API_URL,
     INDEX_GAMES: process.env.INDEX_GAMES,
-    INDEX_USER: process.env.INDEX_USER
+    INDEX_USER: process.env.INDEX_USER,
+    INDEX_STATS: process.env.INDEX_STATS
   },
 
   /*

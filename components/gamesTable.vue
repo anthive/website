@@ -140,9 +140,13 @@ export default {
       default: () => 10
     },
     Filters: {
-      type: Array,
+      type: Object,
       required: true,
-      default: () => []
+      default() {
+        return {
+          match_all: {}
+        }
+      }
     }
   },
   data: () => ({

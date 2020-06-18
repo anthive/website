@@ -1,14 +1,4 @@
-export { query, handleError }
-
-function query(sort, page, size) {
-  const es_syntax = {
-    query: { match_all: {} },
-    size: size,
-    sort: sort,
-    from: size * (page - 1)
-  }
-  return es_syntax
-}
+export { handleError }
 
 function handleError(error) {
   if (error.response) {

@@ -1,28 +1,53 @@
 export { search }
 
 import axios from 'axios'
-import { query, handleError } from '@/services/Search'
+import { handleError } from '@/services/Search'
 
 import { User } from '@/services/User'
 
 const esAxios = axios.create({
-  baseURL: process.env.esUrl,
+  baseURL: process.env.API_URL,
   timeout: 30000
 })
 
-const BASE_HANDLER = () => `/bots-prod`
-const SEARCH_HANDLER = () => `${BASE_HANDLER()}/_search`
+const SEARCH_HANDLER = '/search'
 
-async function search(sort, page, size, filter) {
+async function search(sortBy) {
   console.log('searchBots')
 
-  const querySearch = query(sort, page, size, filter)
+  const querySearch = {
+    size: 0,
+    aggs: {
+      ByUsername: {
+        terms: {
+          field: 'Username.keyword',
+          size: 100,
+          order: sortBy
+        },
+        aggs: {
+          totalGames: {
+            sum: {
+              field: 'GamesCount'
+            }
+          },
+          totalWealth: {
+            sum: {
+              field: 'Wealth'
+            }
+          }
+        }
+      }
+    }
+  }
 
-  const resp = await esAxios.get(SEARCH_HANDLER(), querySearch).catch(handleError)
+  const url = SEARCH_HANDLER + '/' + process.env.INDEX_STATS + '/_search'
+  const resp = await esAxios.post(url, querySearch).catch(handleError)
 
-  return resp.data.hits.hits.map(bots => {
+  return resp.data.aggregations.ByUsername.buckets.map(u => {
     const user = new User()
-    user.initUser(bots._source)
+    user.Username = u.key
+    user.TotalGames = u.totalGames.value
+    user.TotalWealth = u.totalWealth.value
     return user
   })
 }

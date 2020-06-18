@@ -15,7 +15,6 @@
           </v-card-title>
           <v-card-text>
             <GamesTable
-              :Filters="filters"
               :PageSize="17"
               :ShowTitle="false"
             /> 
@@ -34,9 +33,7 @@ export default {
     filters: [],
     user: {}
   }),
-  created() {
-    this.filters = [{ term: { Age: 1000 } }, { range: { Wealth: { gte: 1000, lte: 3000 } } }]
-  },
+
   components: {
     GamesTable
   }
