@@ -5,9 +5,9 @@
     <featureSection />
     <videoSection />
     <badgesSection />
-     <partnersSection />
-     <screenshotsSection />
-     <dividerSection />
+    <partnersSection />
+    <screenshotsSection />
+    <dividerSection />
   </div>
 </template>
 <script>
@@ -21,7 +21,6 @@ import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
 import dividerSection from '../components/indexPage/dividerSection.vue'
 
 export default {
-  data: () => ({}),
   components: {
     parallaxSection,
     stepsSection,
