@@ -29,7 +29,7 @@
         </span>
         <div class="d-flex justify-space-around">
           <UserCard
-            :key="player.Username"
+            :key="player.Username + index"
             v-for="(player, index) in players.slice(0, 3)"
             :place="index + 1"
             :player="player"
