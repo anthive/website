@@ -29,8 +29,8 @@
         </span>
         <div class="d-flex justify-space-around">
           <UserCard
-            :key="index"
-            v-for="(player, index) in top3Players"
+            :key="player.Username"
+            v-for="(player, index) in players.slice(0, 3)"
             :place="index + 1"
             :player="player"
           />
@@ -41,8 +41,8 @@
         </span>
         <LeaderCard
           class="my-3"
-          :key="index"
-          v-for="(player, index) in top100Players"
+          :key="player.Username + index"
+          v-for="(player, index) in players.slice(3)"
           :place="index + 4"
           :leader="player"
         />
@@ -80,20 +80,6 @@ export default {
   }),
   created() {
     this.getLeaders()
-  },
-  computed: {
-    top3Players() {
-      let players = this.players
-      return players.filter((player, index) => {
-        return index <= 2
-      })
-    },
-    top100Players() {
-      let players = this.players
-      return players.filter((player, index) => {
-        return index > 2
-      })
-    }
   },
   methods: {
     async getLeaders() {
