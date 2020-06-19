@@ -1,9 +1,9 @@
 <template lang="pug" >
   v-card(height="500" ) 
     v-tabs(v-model='tab' show-arrows background-color="grey darken-2" dark)
-      v-tabs-slider(color='yellow')
+      v-tabs-slider(color='#e1567c')
       v-tab(@change="onChangeTab(key)" v-for="(lang, key) in langs" :key='key' ) {{ lang }}
-    v-tabs-items(v-model='tab')
+    v-tabs-items.editor-content(v-model='tab')
       v-tab-item(eager v-for="(lang, key) in langs" :key='key')
         v-card(height='450' flat)
           v-card-text
@@ -101,12 +101,28 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
+@import '@/assets/style/global.scss';
+
 .editor {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
+}
+// editor scrollbar
+.ace_scrollbar.ace_scrollbar-v {
+  z-index: 1;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-green-900;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-accent;
+  }
 }
 </style>
