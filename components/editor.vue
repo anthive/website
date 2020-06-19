@@ -1,8 +1,13 @@
 <template>
   <v-card height="500"> 
     <v-tabs v-model="tab" show-arrows background-color="grey darken-2" dark>
-      <v-tabs-slider color="#e1567c"></v-tabs-slider>
-      <v-tab @change="onChangeTab(key)" v-for="(lang, key) in langs" :key="key">{{ lang }}</v-tab>
+      <v-tabs-slider color="#e1567c" />
+      <v-tab
+        @change="onChangeTab(key)"
+        v-for="(lang, key) in langs"
+        :key="key"
+      >{{ lang }}</v-tab
+      >
     </v-tabs>
     <v-tabs-items class="editor-content" v-model="tab">
       <v-tab-item eager v-for="(lang, key) in langs" :key="key">
