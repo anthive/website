@@ -5,28 +5,86 @@
     tag="footer"
     absolute
   >
-    <div col="12" md="3" class="footer__copyright f-rubik text-center">
+
+    <!-- Copyright -->
+    <div col="12" md="3" class="footer__copyright f-rubik">
       <span>AntHive.IO</span>
       <span class="mx-2">
         Copyright&copy;, {{ new Date().getFullYear() }}
       </span>
-      
     </div>
 
-    <div col="12" md="3" class="footer__subscribe f-rubik text-center">
-      <span class="mr-2"> {{ $t("ReadFooter") }} <nuxt-link class="accent--text" to="/tos">{{ $t("TermsofService") }}</nuxt-link> {{ $t("AndFooter") }} <nuxt-link class="accent--text" to="/pp">{{ $t("PrivacyPolicy") }}</nuxt-link></span>
-      
+    <!-- PP and TOS links -->
+    <div col="12" md="3" class="footer__subscribe f-rubik">
+      <span class="mr-2">
+
+        {{ $t("ReadFooter") }}
+
+        <nuxt-link class="accent--text ml-1" to="/tos">
+          {{ $t("TermsofService") }}
+        </nuxt-link>
+
+        {{ $t("AndFooter") }}
+
+        <nuxt-link class="accent--text" to="/pp">
+          {{ $t("PrivacyPolicy") }}
+        </nuxt-link>
+
+      </span>
     </div>
-    <div col="12" md="3" class="footer__issue f-rubik text-center">
+
+    <!-- Report issue -->
+    <div col="12" md="3" class="footer__issue f-rubik">
       <span>{{ $t("feedbackTitle2") }}</span>
-      <AntHiveBtn
+      <a
         href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&p=oi&m=1131440677000&sit=hmwc8c9mb&f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
         target="_blank"
-        color="brown white--text darken-2 mx-0"
-        >{{ $t("feedbackBtn2") }}</AntHiveBtn
+        class="accent--text text-uppercase ml-1"
+        >{{ $t("feedbackBtn2") }}</a
       >
     </div>
-    <div col="12" md="2" class="text-center footer__locale-select">
+
+    <!-- Social networks icons -->
+    <div col="12" md="2" class="footer__social">
+      <a
+        href="https://twitter.com/anthiveio"
+        title="Our Twitter page"
+        target="_blank"
+      >
+        <v-icon class="footer__social--icon">mdi-twitter</v-icon>
+      </a>
+      <a
+        href="https://www.facebook.com/AntHive.IO/"
+        title="Our Facebook page"
+        target="_blank"
+      >
+        <v-icon class="footer__social--icon">mdi-facebook</v-icon>
+      </a>
+      <a
+        href="https://www.instagram.com/anthiveio/"
+        title="Our Instagram accoutn"
+        target="_blank"
+      >
+        <v-icon class="footer__social--icon">mdi-instagram</v-icon>
+      </a>
+      <a
+        href="https://www.youtube.com/channel/UCx1KBAlciwcRuehIiOfnDVg"
+        title="Our Youtube channel"
+        target="_blank"
+      >
+        <v-icon class="footer__social--icon">mdi-youtube</v-icon>
+      </a>
+      <a
+        href="https://www.twitch.tv/anthiveio"
+        title="Our Twitch accoutn"
+        target="_blank"
+      >
+        <v-icon class="footer__social--icon">mdi-twitch</v-icon>
+      </a>
+    </div>
+
+    <!-- Languagues -->
+    <div col="12" md="2" class="footer__locale-select">
       <v-select
         v-model="selectedLocale"
         class="footer__locale-select"
@@ -40,6 +98,7 @@
         @input="switchLocale"
       ></v-select>
     </div>
+
   </v-footer>
 </template>
 
@@ -82,17 +141,31 @@ export default {
 @import '@/assets/style/global.scss';
 
 .footer {
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: $screen-lg) {
     flex-direction: column;
+  }
+  &__locale-select {
+    max-width: 170px;
+    margin: 1px 0 2px;
+  }
+  &__social {
+    margin-top: -3px;
+  }
+  &__social--icon {
+    margin: 0 5px;
+    color: $color-white !important;
   }
   &__copyright,
   &__subscribe,
   &__issue,
+  &__social,
   &__locale-select {
     color: $color-white;
-  }
-  &__locale-select {
-    max-width: 150px;
+    text-align: center;
+    padding: 0 7px;
+    @media screen and (max-width: $screen-lg) {
+      margin: 3px 0;
+    }
   }
 }
 </style>
