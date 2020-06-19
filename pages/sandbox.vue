@@ -10,7 +10,7 @@
               <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
-              <div id="player"></div>
+              <div id="player" />
               <AntHiveBtn fill class="my-5" @click="onClickRun" block color="green" dark
                 >Run sandbox</AntHiveBtn
               >
