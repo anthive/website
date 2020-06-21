@@ -37,9 +37,9 @@
     <div col="12" md="3" class="footer__issue f-rubik">
       <span>{{ $t("feedbackTitle2") }}</span>
       <a
-        href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&p=oi&m=1131440677000&sit=hmwc8c9mb&f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
+        href="https://github.com/anthive/website/issues"
         target="_blank"
-        class="accent--text text-uppercase ml-1"
+        class="accent--text ml-1"
         >{{ $t("feedbackBtn2") }}</a
       >
     </div>

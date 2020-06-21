@@ -69,7 +69,7 @@ export default {
   // feedback section
   subscribe: 'Подписаться',
   feedbackText1: 'Оставайся на связи и получай последние новости первым!',
-  feedbackTitle2: 'Нашел ошибку?',
+  feedbackTitle2: 'Нашли ошибку?',
   feedbackText2: 'Сообщий о ней нам в нашем gitgub репозитории и мы ее исправим!',
   feedbackBtn2: 'Сообщить',
 
