@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax src="/img/pre-footer.jpg" align="" height="300"></v-parallax>
+    <v-parallax :src="require('@/assets/img/pre-footer.jpg')" align="" height="300" />
     <v-row class="justify-center">
       <v-col cols="11" md="8">
         <v-card

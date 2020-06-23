@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax src="/img/bg.jpg" height="350"></v-parallax>
+    <v-parallax :src="require('@/assets/img/bg.jpg')" height="350" />
       <v-container>
         <v-card
           class="games__card white text-xs-left elevation-6"

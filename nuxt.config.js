@@ -10,7 +10,6 @@ module.exports = {
     INDEX_USER: process.env.INDEX_USER,
     INDEX_STATS: process.env.INDEX_STATS
   },
-
   /*
   ** Headers of the page
   */
@@ -80,6 +79,13 @@ module.exports = {
     'nuxt-clipboard2',
     ['@nuxtjs/google-analytics', { id: 'UA-122954385-1' }],
     [
+      'nuxt-imagemin',
+      {
+        optipng: { optimizationLevel: 5 },
+        gifsicle: { optimizationLevel: 5 }
+      }
+    ],
+    [
       'nuxt-i18n',
       {
         locales: [
@@ -96,8 +102,13 @@ module.exports = {
         lazy: true,
         langDir: 'lang/'
       }
-    ]
+    ],
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: 'https://anthive.io',
+    routes: ['/rules', '/rules/rule', '/ru/rules/rule']
+  },
   markdownit: {
     injected: true,
     typographer: true,

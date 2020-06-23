@@ -2,7 +2,7 @@
   <v-card class="py-3 mx-auto d-flex justify-center align-center" width="700px">
     <div>
       <v-avatar class="user-icon__avatar" size="60">
-        <v-img class="" :src="us.photoUrl(100)"></v-img>
+        <v-img class="" :src="us.photoUrl(100)" />
       </v-avatar>
     </div>
     <div class="d-flex flex-column">

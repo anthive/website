@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax src="/img/home_bg.png" height="500">
+    <v-parallax src="~/assets/home_bg.png" height="500">
       <v-row class="justify-space-around align-center">
         <v-col class="pa-2" cols="12" sm="6" md="5" lg="4" xl="3">
           <v-card

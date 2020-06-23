@@ -3,7 +3,7 @@
     <v-row class="ma-10 justify-center">
       <v-col cols="11" lg="3">
         <v-card max-width="250">
-          <v-img min-width="250" :src="user.avatar" v-if="user.avatar"></v-img>
+          <v-img min-width="250" :src="user.avatar" v-if="user.avatar" />
           <v-card-title>
             <h3 class="headline">{{ user.name }}</h3>
           </v-card-title>

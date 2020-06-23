@@ -106,17 +106,17 @@ export default {
     bottom: 0;
   }
   &__feature-bg-1 {
-    background: url('/img/ant_ml.jpg') center no-repeat;
+    background: url('~assets/img/ant_ml.jpg') center no-repeat;
     background-size: contain;
     background-color: #007588;
   }
   &__feature-bg-2 {
-    background: url('/img/ant_engineer_red.jpg') center no-repeat;
+    background: url('~assets/img/ant_engineer_red.jpg') center no-repeat;
     background-size: contain;
     background-color: #ff7f55;
   }
   &__feature-bg-3 {
-    background: url('/img/ant_racing.jpg') center no-repeat;
+    background: url('~assets/img/ant_racing.jpg') center no-repeat;
     background-size: contain;
     background-color: #007588;
   }
