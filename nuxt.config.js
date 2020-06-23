@@ -2,7 +2,7 @@ const pkg = require('./package')
 require('dotenv').config()
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
 
   env: {
     API_URL: process.env.API_URL,

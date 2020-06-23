@@ -1,9 +1,11 @@
-<template lang="pug">
-    v-app(id="inspire")
-      defaultHeader
-      v-content
-        nuxt
-      defaultFooter
+<template>
+  <v-app id="inspire">
+    <defaultHeader />
+    <v-main>
+      <nuxt />
+    </v-main>
+    <defaultFooter />
+  </v-app>
 </template>
 
 <script>
@@ -34,6 +36,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
