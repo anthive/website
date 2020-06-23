@@ -31,6 +31,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/eslint-config": "^2.0.2",
     "@nuxtjs/markdownit-loader": "^1.1.1",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
     "babel-eslint": "^8.2.6",
     "cross-env": "^7.0.2",
     "eslint": "^5.16.0",

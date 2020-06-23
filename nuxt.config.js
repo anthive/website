@@ -72,6 +72,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/markdownit',
     // Doc: https://github.com/nuxt-community/axios-module#usage
