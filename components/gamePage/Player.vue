@@ -2,7 +2,6 @@
   <v-col
     class="pa-0 player__section"
     cols="auto"
-    style="overflow: auto; height: 500px; widht: 50%;"
   >
     <div
       class="player__wrap"
