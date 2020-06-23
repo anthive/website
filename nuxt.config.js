@@ -77,6 +77,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'nuxt-clipboard2',
+    'nuxt-purgecss',
     ['@nuxtjs/google-analytics', { id: 'UA-122954385-1' }],
     [
       'nuxt-i18n',
