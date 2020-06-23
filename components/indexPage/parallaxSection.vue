@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax class="parallax" :src="require('@/assets/img/bg.jpg')" height="700"
+    <v-parallax class="parallax" src="/img/bg.jpg" height="700"
       ><v-container class="parallax__container" :fluid="false"
         ><v-row class="justify-center align-start"
           ><v-col class="mb-4" cols="12" md="6"

@@ -3,13 +3,13 @@
 </template>
  
 <script>
-  import rules from 'rules.md'
- 
-  export default {
-    computed: {
-      rules() {
-        return rules
-      }
+import rules from './rules.md'
+
+export default {
+  computed: {
+    rules() {
+      return rules
     }
   }
-</script> 
+}
+</script>

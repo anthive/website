@@ -16,7 +16,7 @@
         </v-card>
       </v-col>
       <v-col cols="10" lg="3" sm="6" md="5">
-        <v-img :src="require('@/assets/img/badges_trinity.png')" aspect-ratio="1" contain />
+        <v-img src="/img/badges_trinity.png" aspect-ratio="1" contain />
       </v-col>
     </v-row>
   </section>

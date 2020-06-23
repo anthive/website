@@ -79,13 +79,6 @@ module.exports = {
     'nuxt-clipboard2',
     ['@nuxtjs/google-analytics', { id: 'UA-122954385-1' }],
     [
-      'nuxt-imagemin',
-      {
-        optipng: { optimizationLevel: 5 },
-        gifsicle: { optimizationLevel: 5 }
-      }
-    ],
-    [
       'nuxt-i18n',
       {
         locales: [
@@ -106,8 +99,7 @@ module.exports = {
     '@nuxtjs/sitemap'
   ],
   sitemap: {
-    hostname: 'https://anthive.io',
-    routes: ['/rules', '/rules/rule', '/ru/rules/rule']
+    hostname: 'https://anthive.io'
   },
   markdownit: {
     injected: true,

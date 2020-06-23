@@ -4,7 +4,7 @@
       class="user-card__img"
       width="380"
       height="125"
-      :src="require('@/assets/img/bg.jpg')"
+      src="/img/bg.jpg"
     />
     <div class="user-card__container">
       <!-- Avatar container -->

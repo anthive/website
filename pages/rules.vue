@@ -2,35 +2,32 @@
   <section id="inspire" class="rules">
     <sidebar />
     <v-card class="card">
-      <rule-content :rule="currentRule" />
+      <!-- <rule-content :rule="currentRule" /> -->
     </v-card>
   </section>
 </template>
 
 <script>
 import sidebar from '@/components/rulesPage/sidebar'
-import ruleContent from '@/pages/rules/_rule'
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    sidebar,
-    ruleContent
+    sidebar
   },
   computed: {
-    ...mapGetters(['getRules']),
     ruleId() {
       return this.$route.params.rule
-    },
-    currentRule() {
-      if (!this.ruleId) return this.getRules[0].rules[0]
-      let rule
-      this.getRules.some(chapter => {
-        rule = chapter.rules.find(rule => rule.id === this.ruleId)
-        return rule
-      })
-      return rule
     }
+    // currentRule() {
+    //   if (!this.ruleId) return this.getRules[0].rules[0]
+    //   let rule
+    //   this.getRules.some(chapter => {
+    //     rule = chapter.rules.find(rule => rule.id === this.ruleId)
+    //     return rule
+    //   })
+    //   return rule
+    // }
   }
 }
 </script>

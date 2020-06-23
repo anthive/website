@@ -4,7 +4,7 @@
   <v-row class="video_filter align-center justify-space-around">
     <v-col cols="11" lg="6">
       <v-card class="video-preview transparent" @click="dialog = !dialog" style="cursor: pointer;">
-        <v-img :src="require('@/assets/img/play_button.png')" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain="" />
+        <v-img src="/img/play_button.png" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain="" />
       </v-card>
       <div class="text-xs-center">
         <v-dialog v-model="dialog" width="47%">
@@ -46,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .video-preview {
-  background-image: url(~assets/img/video-preview.jpg);
+  background-image: url(/img/video-preview.jpg);
   background-position: center center;
   padding: 100px 0;
 }

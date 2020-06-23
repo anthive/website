@@ -12,7 +12,7 @@
       </div>
      
     </v-row>
-     <v-parallax :src="require('@/assets/img/pre-footer.jpg')" height="300" />
+     <v-parallax src="/img/pre-footer.jpg" height="300" />
   </section>
 </template>
 

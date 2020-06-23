@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax :src="require('@/assets/img/pre-footer.jpg')" height="300" />
+    <v-parallax src="/img/pre-footer.jpg" height="300" />
     <v-row class="mx-2">
       <v-col cols="12">
         <v-card class="white pa-3 elevation-6 rules__card" min-height="700">
