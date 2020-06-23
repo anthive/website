@@ -102,11 +102,9 @@ module.exports = {
     hostname: 'https://anthive.io'
   },
   markdownit: {
-    injected: true,
-    typographer: true,
+    preset: 'default',
     linkify: true,
-    emoji: true,
-    toc: true
+    breaks: true
   },
   /*
   ** Axios module configuration

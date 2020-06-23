@@ -8,7 +8,7 @@ Bot is your code that can be written in any language. It's listening on port 707
 sample code
 ```
 
-#Sim
+# Sim
 Sim is a virtual environment that keeps a state of the game. It enforces rules and collects statistics. Sim sends HTTP request to each Bot of current game with JSON payload that represents the state of the Map.
 
 #Tick
