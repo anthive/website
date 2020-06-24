@@ -2,7 +2,7 @@
   <div class="d-flex align-center">
     <div>
       <v-avatar class="user-icon__avatar" size="32">
-        <v-img class="" :src="photoUrl()"></v-img>
+        <v-img class="" :src="photoUrl()" />
       </v-avatar>
     </div>
     <div class="ml-2 d-flex flex-column">

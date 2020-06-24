@@ -2,7 +2,7 @@ const pkg = require('./package')
 require('dotenv').config()
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
 
   env: {
     API_URL: process.env.API_URL,
@@ -10,7 +10,6 @@ module.exports = {
     INDEX_USER: process.env.INDEX_USER,
     INDEX_STATS: process.env.INDEX_STATS
   },
-
   /*
   ** Headers of the page
   */
@@ -72,6 +71,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/markdownit',
     // Doc: https://github.com/nuxt-community/axios-module#usage
@@ -95,14 +95,16 @@ module.exports = {
         lazy: true,
         langDir: 'lang/'
       }
-    ]
+    ],
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: 'https://anthive.io'
+  },
   markdownit: {
-    injected: true,
-    typographer: true,
+    preset: 'default',
     linkify: true,
-    emoji: true,
-    toc: true
+    breaks: true
   },
   /*
   ** Axios module configuration

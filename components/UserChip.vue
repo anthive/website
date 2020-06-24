@@ -11,10 +11,10 @@
         <v-col class="pa-0 ml-2" cols="7">
           <div class="d-flex">
             <v-avatar class="py-4 user-info-full__avatar" size="60">
-              <v-img class="grey lighten-4" :src="us.photoUrl(100)"></v-img>
+              <v-img class="grey lighten-4" :src="us.photoUrl(100)" />
             </v-avatar>
             <v-avatar class="user-info-full__ant-img ml-n4" size="32">
-              <v-img :src="us.antUrl(true)"> </v-img>
+              <v-img :src="us.antUrl(true)" />
             </v-avatar>
           </div>
         </v-col>
@@ -99,7 +99,7 @@
             </v-col>
             <v-col class="pa-1">
               <v-avatar class="elevation-6" size="30">
-                <v-img :src="us.langUrl(us.Lang)"></v-img>
+                <v-img :src="us.langUrl(us.Lang)" />
               </v-avatar>
             </v-col>
           </div>

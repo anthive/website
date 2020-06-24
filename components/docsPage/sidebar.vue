@@ -2,7 +2,7 @@
   <v-navigation-drawer :clipped='$vuetify.breakpoint.lgAndUp' app>
     <v-list dense>
 
-      <template v-for='chapter in getRules'>
+      <template v-for='chapter in docs'>
         <v-list-group :key='chapter.chapterName'>
           
           <template v-slot:activator>
@@ -35,12 +35,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  computed: {
-    ...mapGetters(['getRules'])
-  }
+  data: () => ({
+    docs: {} // TODO: docs structure
+  })
 }
 </script>
 

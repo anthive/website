@@ -1,3 +1,5 @@
 /static/js/
 node_modules/
 dist/
+# PWA
+sw.*

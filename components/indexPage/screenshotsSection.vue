@@ -16,13 +16,13 @@
         </v-card>
       </v-col>
       <v-col cols="10" lg="3" sm="6" md="5">
-        <v-img  class="mt-10 elevation-6" src="/img/screenshots/screen1.png" aspect-ratio="1" contain></v-img>
+        <v-img  class="mt-10 elevation-6" src="/img/screenshots/screen1.png" aspect-ratio="1" contain />
       </v-col>
     </v-row>
     <v-container> <hr class="left-to-right-line"></v-container>
     <v-row class="align-center justify-space-around mx-0 pa-0">
          <v-col cols="10" lg="3" sm="6" md="5">
-        <v-img class="elevation-6" src="/img/screenshots/screen2.png" aspect-ratio="1" contain></v-img>
+        <v-img class="elevation-6" src="/img/screenshots/screen2.png" aspect-ratio="1" contain />
       </v-col>
       <v-col class="" cols="12" lg="6">
         <v-card class="creenshots__card elevation-0 white pa-2 pl-4">
@@ -56,7 +56,7 @@
         </v-card>
       </v-col>
       <v-col cols="10" lg="3" sm="6" md="5">
-        <v-img  class="elevation-6" src="/img/screenshots/screen3.png" aspect-ratio="1" contain></v-img>
+        <v-img class="elevation-6" src="/img/screenshots/screen3.png" aspect-ratio="1" contain />
       </v-col>
     </v-row>
   </section>

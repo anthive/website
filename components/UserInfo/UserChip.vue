@@ -2,7 +2,7 @@
   <div class="d-flex align-center">
     <div>
       <v-avatar class="user-icon__avatar" size="32">
-        <v-img class="" :src="us.photoUrl(100)"></v-img>
+        <v-img class="" :src="us.photoUrl(100)" />
       </v-avatar>
       
     </div>
@@ -12,7 +12,7 @@
               <v-img :src="us.antUrl(true)"> </v-img>
             </v-avatar>
              <v-avatar size="18">
-                <v-img :src="us.langUrl(us.Lang)"></v-img>
+                <v-img :src="us.langUrl(us.Lang)" />
               </v-avatar>
               <v-avatar class="ml-1" size="23">
                 <span class="user-icon__version">v.{{ us.Version }}</span>

@@ -4,7 +4,7 @@
   <v-row class="video_filter align-center justify-space-around">
     <v-col cols="11" lg="6">
       <v-card class="video-preview transparent" @click="dialog = !dialog" style="cursor: pointer;">
-        <v-img src="/img/play_button.png" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain=""></v-img>
+        <v-img src="/img/play_button.png" style="margin: 0 auto; filter: invert(1);" aspect-ratio="1" max-width="128px" contain="" />
       </v-card>
       <div class="text-xs-center">
         <v-dialog v-model="dialog" width="47%">

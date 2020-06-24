@@ -5,12 +5,12 @@
       width="380"
       height="125"
       src="/img/bg.jpg"
-    ></v-img>
+    />
     <div class="user-card__container">
       <!-- Avatar container -->
       <div class="user-card__avatar-container">
         <v-avatar class="user-card__avatar" size="80">
-          <v-img :src="us.photoUrl(80)"></v-img>
+          <v-img :src="us.photoUrl(80)" />
         </v-avatar>
       </div>
       <!-- Username container -->
@@ -28,10 +28,10 @@
       <!-- Bot settings -->
       <div v-if="us.Lang" class="user-card__bot-info">
         <v-avatar class="user-card__bot-info-icon" size="50">
-          <v-img :src="us.antUrl(true)"> </v-img>
+          <v-img :src="us.antUrl(true)" />
         </v-avatar>
         <v-avatar class="user-card__bot-info-icon" size="50">
-          <v-img :src="us.langUrl(us.Lang)"></v-img>
+          <v-img :src="us.langUrl(us.Lang)" />
         </v-avatar>
         <v-avatar class="user-card__bot-info-icon" size="50">
           <span class="user-icon__version">v.{{ us.Version }}</span>
