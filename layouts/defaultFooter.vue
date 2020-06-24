@@ -141,6 +141,7 @@ export default {
 @import '@/assets/style/global.scss';
 
 .footer {
+  margin-top: 30px;
   @media screen and (max-width: $screen-lg) {
     flex-direction: column;
   }

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-row class="texture-scrabble flex-nowrap pa-8">
+    <v-row class="texture-scrabble flex-nowrap mx-auto">
         
       <PlayersList
         v-show="gameLoaded"
@@ -80,9 +80,9 @@ export default {
   background: #fff;
 }
 .player-zone__wrap {
-  width: 95%;
+  width: 100%;
 }
 .player-zone__wrap.collapsed {
-  width: 78%;
+  width: 86%;
 }
 </style>

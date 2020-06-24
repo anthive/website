@@ -1,6 +1,6 @@
 <template>
   <div class="players__wrap">
-    <div class="d-flex flex-column mr-5 players__list elevation-3">
+    <div class="d-flex flex-column players__list">
       <v-card class="d-flex align-center" @click="togglePlayerList()" tile color="accent"
         ><v-icon
           class="py-3 px-1 text-center mdi"
@@ -72,11 +72,14 @@ export default {
   position: relative;
 }
 .players__list {
-  height: 987px;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
   background-color: $color-white;
+  &--toggled {
+    min-width: 250px;
+  }
 }
 .players__list-toggle {
   position: absolute;
