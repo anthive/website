@@ -19,7 +19,7 @@
               <AntHiveBtn href="https://profile.anthive.io/login?joinWith=github" fill class="mx-0 mt-3 mr-1">{{
                 $t("buttonJoin")
               }}</AntHiveBtn>
-              <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("buttonSandbox") }}</AntHiveBtn>
+              <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("buttonSandbox") }}</AntHiveBtn> -->
             </div></v-col
           ><v-col></v-col></v-row></v-container
     ></v-parallax>
