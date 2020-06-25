@@ -1,6 +1,5 @@
 <template>
   <section id="inspire" class="docs">
-    <sidebar />
     <v-card class="card">
       <div v-html="rules" />
     </v-card>
