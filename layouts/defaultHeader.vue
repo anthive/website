@@ -1,6 +1,6 @@
 <template>
-  <v-app-bar app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
-    <v-container class="d-flex align-center">
+  <v-app-bar class="header" app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
+    <v-container  class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
           <Logo />
@@ -84,5 +84,13 @@ export default {
 <style>
 a {
   text-decoration: none;
+}
+</style>
+
+<style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
+.header {
+  background: $color-white !important;
 }
 </style>
