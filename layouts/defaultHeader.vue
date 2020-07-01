@@ -62,9 +62,9 @@
         <AntHiveBtn primary href="https://profile.anthive.io/login/">{{
           $t("login")
         }}</AntHiveBtn>
-        <!-- <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
+        <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
           "sandbox"
-        }}</AntHiveBtn> -->
+        }}</AntHiveBtn>
       </div>
     </v-container>
   </v-app-bar>

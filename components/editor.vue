@@ -13,7 +13,7 @@
       <v-tab-item eager v-for="(lang, key) in langs" :key="key">
         <v-card height="450" flat>
           <v-card-text>
-            <div class="editor" :id="key"></div>
+            <div class="editor" :id="key" />
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -22,20 +22,10 @@
 </template>
 <script>
 import axios from 'axios'
-import ace from 'ace-builds'
-import 'ace-builds/src-min-noconflict/theme-monokai'
-import 'ace-builds/src-min-noconflict/ext-language_tools'
-import 'ace-builds/src-min-noconflict/mode-javascript'
-import 'ace-builds/src-min-noconflict/snippets/javascript'
-import 'ace-builds/src-min-noconflict/mode-golang'
-import 'ace-builds/src-min-noconflict/snippets/golang'
-import 'ace-builds/src-min-noconflict/mode-c_cpp'
-import 'ace-builds/src-min-noconflict/snippets/c_cpp'
-import 'ace-builds/src-min-noconflict/mode-php'
-import 'ace-builds/src-min-noconflict/snippets/php'
-import 'ace-builds/src-min-noconflict/mode-python'
-import 'ace-builds/src-min-noconflict/snippets/python'
-
+if (process.client) {
+  var ace = require('ace-builds')
+  require('ace-builds/src-min-noconflict/theme-monokai')
+}
 export default {
   data: () => ({
     langs: {
@@ -77,6 +67,8 @@ export default {
     },
     initEditors() {
       for (const lang in this.botTemplates) {
+        require(`ace-builds/src-min-noconflict/mode-${lang}`)
+        require(`ace-builds/src-min-noconflict/snippets/${lang}`)
         if (this.botTemplates.hasOwnProperty(lang)) {
           const ed = ace.edit(lang, {
             theme: 'ace/theme/monokai',
