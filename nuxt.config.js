@@ -102,9 +102,11 @@ module.exports = {
     hostname: 'https://anthive.io'
   },
   markdownit: {
-    preset: 'default',
+    preset: 'commonmark',
     linkify: true,
-    breaks: true
+    breaks: true,
+    hatml: true,
+    langPrefix: ''
   },
   /*
   ** Axios module configuration
