@@ -37,7 +37,7 @@
             <v-col class="col-4 pa-0">
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.span")
+                  $t("userInfo.span")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text "
                   >Y{{ player.Y }}, X{{ player.X }}</span
@@ -45,7 +45,7 @@
               >
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.ticks")
+                  $t("userInfo.ticks")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
                   player.Stats.Age
@@ -55,7 +55,7 @@
             <v-col class="col-4 pa-0">
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.ants")
+                  $t("userInfo.ants")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
                   player.Stats.Ants
@@ -63,7 +63,7 @@
               >
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.hiveSize")
+                  $t("userInfo.hiveSize")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
                   player.Stats.Hive
@@ -73,7 +73,7 @@
             <v-col class="col-4 pa-0">
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.errors")
+                  $t("userInfo.errors")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
                   player.Stats.Errors
@@ -81,7 +81,7 @@
               >
               <v-card-text class="pa-0 body-2"
                 ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfoPage.earned")
+                  $t("userInfo.earned")
                 }}</span
                 ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
                   player.Wealth

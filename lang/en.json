@@ -17,7 +17,7 @@
     "feedbackBtn":"Report"
   },
 
-  "homePage": {
+  "home": {
     "slogan1":"You are not playing a game",
     "slogan2":"Turn-based strategy game for your AI",
     "slogan3":"Start your new coding adventure with 3 simple steps",
@@ -52,15 +52,13 @@
     "badgesText3":"Pellentesque hendrerit sodales tortor, in faucibus diam tempus ac. Donec convallis fringilla mauris vitae tristique.",
     "subscribe":"Subscribe",
     "feedbackText1":"Stay in touch and get latest news first!",
-    
     "feedbackText2":"Tell us on our github repo and we will fix it!",
-    
     "screenshot1Title":"ScreenShot 1",
     "screenshot2Title":"ScreenShot 2",
     "screenshot3Title":"ScreenShot 3"
   },
 
-  "gamesPage": {
+  "games": {
     "title1":"All battles:",
     "title2":"Explore, watch, replay, learn strategies",
     "loading":"Loading... Please wait",
@@ -70,17 +68,14 @@
     "date":"Date"
   },
 
-  "leaderoardPage": {
+  "leaderoard": {
     "games":"games",
     "wealth":"wealth"
   },
 
-  "userPage": {
+  "userInfo": {
     "games":"User games:",
-    "title":"Bot performance in the last 10 days"
-  },
-
-  "userInfoPage": {
+    "title":"Bot performance in the last 10 days",
     "botInfo":"Bot info",
     "span":"Span",
     "ticks":"Ticks",

@@ -4,21 +4,21 @@
       <v-row
         ><span
           class="f-rubik f-title text-center primary--text mx-auto mt-12 mb-5"
-          >{{ $t("homePage.stepsTitle") }}</span
+          >{{ $t("home.stepsTitle") }}</span
         ></v-row
       >
       <v-row justify-center>
         <v-col class="pa-2 justify-left" cols="12" md="4">
           <v-card class="steps__step elevation-0 white" height="100%">
             <v-card-title  class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
-              $t("homePage.step1Title")
+              $t("home.step1Title")
             }}</v-card-title>
             <v-card-text class=" f-rubik f-text primary--text"
-              >{{ $t("homePage.step1Text1") }}
+              >{{ $t("home.step1Text1") }}
               <a href="https://github.com/new/import" class="accent--text">{{
-                $t("homePage.import")
+                $t("home.import")
               }}</a>
-              {{ $t("homePage.step1Text2") }}
+              {{ $t("home.step1Text2") }}
             </v-card-text>
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
@@ -50,29 +50,29 @@
         <v-col class="pa-2 justify-left" cols="12" md="4">
           <v-card class="steps__step elevation-0 white" height="100%">
             <v-card-title class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
-              $t("homePage.step2Title")
+              $t("home.step2Title")
             }}</v-card-title>
             <v-card-text class="f-rubik f-text primary--text"
-              >{{ $t("homePage.step2Text") }}
+              >{{ $t("home.step2Text") }}
             </v-card-text>
             <AntHiveBtn
               class="ma-3"
               :to="localePath('rules')"
               fill
               href="https://profile.anthive.io/login/"
-              >{{ $t("homePage.profile") }}</AntHiveBtn
+              >{{ $t("home.profile") }}</AntHiveBtn
             >
           </v-card>
         </v-col>
         <v-col class="pa-2 justify-left" cols="12" md="4">
           <v-card class="steps__step elevation-0 white" height="100%">
             <v-card-title class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
-              $t("homePage.step3Title")
+              $t("home.step3Title")
             }}</v-card-title>
             <v-card-text class=" f-rubik f-text primary--text"
-              >{{ $t("homePage.step3Text") }}
+              >{{ $t("home.step3Text") }}
               <a :to="localePath('leaderboard')" class="accent--text"
-                >{{ $t("homePage.step3leaderboard") }}
+                >{{ $t("home.step3leaderboard") }}
               </a></v-card-text
             >
             <AntHiveBtn class="ma-3" :to="localePath('rules')" fill>{{

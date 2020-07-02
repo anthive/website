@@ -9,11 +9,11 @@
               <v-col cols="12" sm="12">
                 <v-card-title class="pt-0">
                   <div class="f-rubic f-text-large primary--text">
-                    {{ $t("homePage.feature1Title") }}
+                    {{ $t("home.feature1Title") }}
                   </div>
                 </v-card-title>
                  <v-card-text class="f-rubic f-text-small primary--text pr-12">{{
-                  $t("homePage.feature1Text")
+                  $t("home.feature1Text")
                 }}</v-card-text>
               </v-col>
             </v-row>
@@ -27,11 +27,11 @@
               <v-col cols="12" sm="12">
                 <v-card-title class="pt-0">
                   <div class="f-rubic f-text-large primary--text">
-                    {{ $t("homePage.feature2Title") }}
+                    {{ $t("home.feature2Title") }}
                   </div>
                 </v-card-title>
                  <v-card-text class="f-rubic f-text-small primary--text pr-12">{{
-                  $t("homePage.feature2Text")
+                  $t("home.feature2Text")
                 }}</v-card-text>
               </v-col>
             </v-row>
@@ -45,11 +45,11 @@
               <v-col cols="12" sm="12">
                 <v-card-title class="pt-0">
                   <div class="f-rubic f-text-large primary--text">
-                    {{ $t("homePage.feature3Title") }}
+                    {{ $t("home.feature3Title") }}
                   </div>
                 </v-card-title>
                 <v-card-text class="f-rubic f-text-small primary--text pr-12"
-                  >{{ $t("homePage.feature3Text") }}
+                  >{{ $t("home.feature3Text") }}
                 </v-card-text>
               </v-col>
             </v-row>

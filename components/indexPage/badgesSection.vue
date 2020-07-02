@@ -5,13 +5,13 @@
         <v-card class="badges__card elevation-0 white pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-title primary--text text-center">
-              {{ $t("homePage.badgesTitle") }}
+              {{ $t("home.badgesTitle") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("homePage.badgesText1") }}</p>
-            <p>{{ $t("homePage.badgesText2") }}</p>
-            <p>{{ $t("homePage.badgesText3") }}</p>
+            ><p>{{ $t("home.badgesText1") }}</p>
+            <p>{{ $t("home.badgesText2") }}</p>
+            <p>{{ $t("home.badgesText3") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
