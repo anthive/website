@@ -9,16 +9,16 @@
             height="100%"
           >
             <div class="headline text-xs-left px-0 brown--text text--lighten-2">
-              {{ $t("subscribe") }}
+              {{ $t("homePage.subscribe") }}
             </div>
             <v-card-text class="body-1 text-xs-left px-0 grey--text">{{
-              $t("feedbackText1")
+              $t("homePage.feedbackText1")
             }}</v-card-text>
             <v-btn
               href="https://visitor.r20.constantcontact.com/d.jsp?llr=iei6rx6ab&p=oi&m=1131440677000&sit=hmwc8c9mb&f=c1095ec4-d2a5-4f31-85e6-9f5d16f7d72c"
               target="_blank"
               color="brown white--text darken-2 mx-0"
-              >{{ $t("subscribe") }}</v-btn
+              >{{ $t("homePage.subscribe") }}</v-btn
             >
           </v-card>
         </v-col>
@@ -29,15 +29,15 @@
             height="100%"
           >
             <div class="headline text-xs-left px-0 brown--text text--lighten-2">
-              {{ $t("feedbackTitle2") }}
+              {{ $t("footer.feedbackTitle") }}
             </div>
             <v-card-text class="body-1 text-xs-left px-0 grey--text">{{
-              $t("feedbackText2")
+              $t("homePage.feedbackText2")
             }}</v-card-text>
             <v-btn
               href="https://github.com/anthive/io/issues"
               color="brown white--text darken-2 mx-0"
-              >{{ $t("feedbackBtn2") }}</v-btn
+              >{{ $t("footer.feedbackBtn") }}</v-btn
             >
           </v-card>
         </v-col>

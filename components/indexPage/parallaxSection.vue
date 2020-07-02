@@ -7,19 +7,19 @@
             ><div
               class="mb-5 mt-0 f-title f-rubik primary--text font-weight-bold"
             >
-              {{ $t("slogan1") }}
+              {{ $t("homePage.slogan1") }}
             </div>
             <div class="f-text f-rubik primary--text">
-              {{ $t("slogan2") }}
+              {{ $t("homePage.slogan2") }}
             </div>
             <div class="hidden-sm-and-down mt-2 f-text f-rubik primary--text">
-              {{ $t("slogan3") }}
+              {{ $t("homePage.slogan3") }}
             </div>
             <div class="mt-3">
               <AntHiveBtn href="https://profile.anthive.io/login?joinWith=github" fill class="mx-0 mt-3 mr-1">{{
-                $t("buttonJoin")
+                $t("homePage.buttonJoin")
               }}</AntHiveBtn>
-              <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("buttonSandbox") }}</AntHiveBtn> -->
+              <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("homePage.buttonSandbox") }}</AntHiveBtn> -->
             </div></v-col
           ><v-col></v-col></v-row></v-container
     ></v-parallax>

@@ -1,6 +1,6 @@
 <template>
 <section class="video_bg my-12">
-  <div class="f-rubik f-title primary--text text-center">{{ $t('sectionTitle') }}</div>
+  <div class="f-rubik f-title primary--text text-center">{{ $t('homePage.sectionTitle') }}</div>
   <v-row class="video_filter align-center justify-space-around">
     <v-col cols="11" lg="6">
       <v-card class="video-preview transparent" @click="dialog = !dialog" style="cursor: pointer;">
@@ -17,14 +17,14 @@
     <v-col cols="11" lg="11">
       <v-card class="pa-3 transparent" flat>
         <v-card-title>
-          <div class="f-rubik f-text-large primary--text">{{ $t('videoTitle') }}</div>
+          <div class="f-rubik f-text-large primary--text">{{ $t("homePage.videoTitle") }}</div>
         </v-card-title>
         <v-card-text class="f-rubik f-text primary--text">
-          <p>{{ $t('videoText1') }}</p>
-          <p>{{ $t('videoText2') }}</p>
-          <p>{{ $t('videoText3') }}</p>
+          <p>{{ $t("homePage.videoText1") }}</p>
+          <p>{{ $t("homePage.videoText2") }}</p>
+          <p>{{ $t("homePage.videoText3") }}</p>
         </v-card-text>
-        <AntHiveBtn fill class="ma-3" :to="localePath('rules')" color="brown white--text">{{ $t('rules') }}</AntHiveBtn>
+        <AntHiveBtn fill class="ma-3" :to="localePath('rules')" color="brown white--text">{{ $t('header.rules') }}</AntHiveBtn>
       </v-card>
     </v-col>
   </v-row>

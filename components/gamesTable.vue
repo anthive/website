@@ -159,20 +159,20 @@ export default {
     selectedPlayer: {},
     columns: [
       {
-        text: 'gamesTicks',
+        text: 'gamesPage.ticks',
         align: 'left',
         sortable: true,
         value: 'Age'
       },
       {
-        text: 'gamesWealth',
+        text: 'gamesPage.wealth',
         align: 'right',
         sortable: true,
         sort: 'desc',
         value: 'Wealth'
       },
       {
-        text: 'gamesDate',
+        text: 'gamesPage.date',
         align: 'right',
         sortable: true,
         value: 'Played'

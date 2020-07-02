@@ -5,13 +5,13 @@
         <v-card class="creenshots__card elevation-0 white mt-10 pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-title primary--text text-center">
-              {{ $t("screenshot1Title") }}
+              {{ $t("homePage.screenshot1Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("badgesText1") }}</p>
-            <p>{{ $t("badgesText2") }}</p>
-            <p>{{ $t("badgesText3") }}</p>
+            ><p>{{ $t("homePage.badgesText1") }}</p>
+            <p>{{ $t("homePage.badgesText2") }}</p>
+            <p>{{ $t("homePage.badgesText3") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -28,13 +28,13 @@
         <v-card class="creenshots__card elevation-0 white pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-title primary--text text-center">
-              {{ $t("screenshot2Title") }}
+              {{ $t("homePage.screenshot2Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("badgesText1") }}</p>
-            <p>{{ $t("badgesText2") }}</p>
-            <p>{{ $t("badgesText3") }}</p>
+            ><p>{{ $t("homePage.badgesText1") }}</p>
+            <p>{{ $t("homePage.badgesText2") }}</p>
+            <p>{{ $t("homePage.badgesText3") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -45,13 +45,13 @@
         <v-card class="creenshots__card elevation-0 white pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-title primary--text text-center">
-              {{ $t("screenshot3Title") }}
+              {{ $t("homePage.screenshot3Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("badgesText1") }}</p>
-            <p>{{ $t("badgesText2") }}</p>
-            <p>{{ $t("badgesText3") }}</p>
+            ><p>{{ $t("homePage.badgesText1") }}</p>
+            <p>{{ $t("homePage.badgesText2") }}</p>
+            <p>{{ $t("homePage.badgesText3") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
