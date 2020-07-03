@@ -5,6 +5,9 @@ logs
 npm-debug.log*
 report.*
 
+### package-lock
+package-lock.json
+
 # Runtime data
 pids
 *.pid

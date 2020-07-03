@@ -21,7 +21,7 @@
               <v-icon>videogame_asset</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ $t("games") }}</v-list-item-title>
+              <v-list-item-title>{{ $t("header.games") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="localePath('leaderboard')">
@@ -29,7 +29,7 @@
               <v-icon>poll</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ $t("leaderboard") }}</v-list-item-title>
+              <v-list-item-title>{{ $t("header.leaderboard") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="localePath('rules')">
@@ -37,7 +37,7 @@
               <v-icon>import_contacts</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ $t("rules") }}</v-list-item-title>
+              <v-list-item-title>{{ $t("header.rules") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item
@@ -48,23 +48,23 @@
               <v-icon class="green--text">person</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ $t("login") }}</v-list-item-title>
+              <v-list-item-title>{{ $t("header.login") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn primary :to="localePath('games')">{{ $t("games") }}</AntHiveBtn>
+        <AntHiveBtn primary :to="localePath('games')">{{ $t("header.games") }}</AntHiveBtn>
         <AntHiveBtn primary :to="localePath('leaderboard')">{{
-          $t("leaderboard")
+          $t("header.leaderboard")
         }}</AntHiveBtn>
-        <AntHiveBtn primary :to="localePath('rules')">{{ $t("rules") }}</AntHiveBtn>
+        <AntHiveBtn primary :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
         <AntHiveBtn primary href="https://profile.anthive.io/login/">{{
-          $t("login")
+          $t("header.login")
         }}</AntHiveBtn>
-        <!-- <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
+        <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
           "sandbox"
-        }}</AntHiveBtn> -->
+        }}</AntHiveBtn>
       </div>
     </v-container>
   </v-app-bar>

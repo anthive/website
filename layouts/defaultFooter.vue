@@ -18,16 +18,16 @@
     <div col="12" md="3" class="footer__subscribe f-rubik">
       <span class="mr-2">
 
-        {{ $t("ReadFooter") }}
+        {{ $t("footer.read") }}
 
         <nuxt-link class="accent--text ml-1" to="/tos">
-          {{ $t("TermsofService") }}
+          {{ $t("footer.termsofService") }}
         </nuxt-link>
 
-        {{ $t("AndFooter") }}
+        {{ $t("footer.and") }}
 
         <nuxt-link class="accent--text" to="/pp">
-          {{ $t("PrivacyPolicy") }}
+          {{ $t("footer.privacyPolicy") }}
         </nuxt-link>
 
       </span>
@@ -35,12 +35,12 @@
 
     <!-- Report issue -->
     <div col="12" md="3" class="footer__issue f-rubik">
-      <span>{{ $t("feedbackTitle2") }}</span>
+      <span>{{ $t("footer.feedbackTitle") }}</span>
       <a
         href="https://github.com/anthive/website/issues"
         target="_blank"
         class="accent--text ml-1"
-        >{{ $t("feedbackBtn2") }}</a
+        >{{ $t("footer.feedbackBtn") }}</a
       >
     </div>
 

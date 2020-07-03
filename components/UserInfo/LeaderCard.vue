@@ -14,7 +14,7 @@
         earned: <span class="primary--text">{{ us.TotalWealth }}</span></span
       >
     </div>
-    <div><AntHiveBtn @click="toProfile()" class="ml-6" primary fill>{{$t("infoProfile")}}</AntHiveBtn></div>
+    <div><AntHiveBtn @click="toProfile()" class="ml-6" primary fill>{{$t("userInfo.profile")}}</AntHiveBtn></div>
   </v-card>
 </template>
 
