@@ -1,5 +1,5 @@
 [build]
-  command = "npm run generate"
+  command = "npm i && npm run generate"
   publish = "dist/"
 
 # This a rule for Single Page Applications
