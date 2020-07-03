@@ -40,7 +40,7 @@
       <span
         v-if="player.Stats.Ants"
         class="f-text-large text-center d-block primary--text"
-        >{{ $t("infoBotInfo") }}</span
+        >{{ $t("userInfo.botInfo") }}</span
       >
       <!-- Leaderboard stats -->
       <div v-if="player.TotalWealth" class="user-card__user-stats">
@@ -63,39 +63,39 @@
           <span class="user-card__user-stat-value">{{
             player.Stats.Ants
           }}</span>
-          <span class="user-card__user-stat-key">{{ $t("infoAnts") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.ants") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value"
             >Y{{ player.Y }}, X{{ player.X }}</span
           >
-          <span class="user-card__user-stat-key">{{ $t("infoSpan") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.span") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{ player.Stats.Age }}</span>
-          <span class="user-card__user-stat-key">{{ $t("infoTicks") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.ticks") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{
             player.Stats.Hive
           }}</span>
-          <span class="user-card__user-stat-key">{{ $t("infoHiveSize") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.hiveSize") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{
             player.Stats.Errors
           }}</span>
-          <span class="user-card__user-stat-key">{{ $t("infoErrors") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.errors") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{ player.Wealth }}</span>
-          <span class="user-card__user-stat-key">{{ $t("infoEarned") }}</span>
+          <span class="user-card__user-stat-key">{{ $t("userInfo.earned") }}</span>
         </div>
       </div>
       <!-- Actions -->
       <div class="user-card__actions">
         <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" fill>{{
-          $t("infoProfile")
+          $t("userInfo.profile")
         }}</AntHiveBtn>
       </div>
     </div>

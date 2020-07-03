@@ -81,19 +81,20 @@ module.exports = {
     [
       'nuxt-i18n',
       {
+        lazy: true,
         locales: [
           {
             code: 'en',
-            file: 'en.js'
+            file: 'en.json'
           },
           {
             code: 'ru',
-            file: 'ru.js'
+            file: 'ru.json'
           }
         ],
-        defaultLocale: 'en',
-        lazy: true,
-        langDir: 'lang/'
+        loadLanguagesAsync: true,
+        langDir: 'lang/',
+        defaultLocale: 'en'
       }
     ],
     '@nuxtjs/sitemap'
