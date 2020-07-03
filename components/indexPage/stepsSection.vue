@@ -23,25 +23,25 @@
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
                 <a href="https://github.com/anthive/js" target="_blank"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/js.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/js.png"
                 /></a>
                 <a href="https://github.com/anthive/python" target="_blank"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/python.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/python3.png"
                 /></a>
                 <a href="https://github.com/anthive/go" target="_blank"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/lang-icons/go.svg"
+                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/go.png"
                 /></a>
                 <a href="https://github.com/anthive/cpp" target="_blank"
                   ><img
                     class=" steps__lang-panel-img"
                     width="40px"
-                    src="/lang-icons/c-plus-plus.svg"
+                    src="/skins/lang/cpp.png"
                 /></a>
                 <a href="https://github.com/anthive/php" target="_blank"
                   ><img
                     class=" steps__lang-panel-img"
                     width="40px"
-                    src="/lang-icons/php.png"
+                    src="/skins/lang/php.png"
                 /></a>
               </div>
             </div>
