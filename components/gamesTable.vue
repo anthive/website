@@ -33,6 +33,7 @@
           height="100"
           width="80"
           :src="`https://anthive.io/skins/server/${item._source.MapSettings.Skin}/background.png`"
+          alt="Background"
         />
         <div
           :class="{ 'flex-column': $vuetify.breakpoint.smAndDown }"
