@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <v-parallax src="/img/bg.jpg" height="400" />
+  <section class="texture-arrows">
+    <!-- <v-parallax src="/img/bg.jpg" height="400" /> -->
     <v-container class="px-2">
       <v-card class="leaderboard__card">
         <v-card-title class="mb-3 d-flex justify-space-between align-center">
@@ -100,7 +100,6 @@ export default {
 <style lang="scss" scoped>
 .leaderboard {
   &__card {
-    margin-top: -350px;
     padding-bottom: 10px;
   }
   &__sort-item {

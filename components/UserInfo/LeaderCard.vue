@@ -1,9 +1,9 @@
 <template>
-  <v-card class="py-3 mx-auto d-flex justify-center align-center" width="700px">
+  <v-card class="leader-card">
     <div>
-      <v-avatar class="user-icon__avatar" size="60">
+      <div class="user-icon__avatar">
         <v-img class="" :src="us.photoUrl(100)" />
-      </v-avatar>
+      </div>
     </div>
     <div class="d-flex flex-column">
       <span class="primary--text f-text-large">{{ us.Username }}, {{place}} place</span>
@@ -14,7 +14,7 @@
         earned: <span class="primary--text">{{ us.TotalWealth }}</span></span
       >
     </div>
-    <div><AntHiveBtn @click="toProfile()" class="ml-6" primary fill>{{$t("userInfo.profile")}}</AntHiveBtn></div>
+    <div><AntHiveBtn @click="toProfile()" class="ml-6" color="accent">{{$t("userInfo.profile")}}</AntHiveBtn></div>
   </v-card>
 </template>
 
@@ -50,11 +50,24 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
+
+.leader-card {
+  max-width: 700px;
+  padding: 12px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  align-items: center;
+}
+
 .user-icon {
   &__avatar {
-    border: 2px solid $color-red-400;
+    width: 60px;
+    height: 60px;
+    border-radius: $border-radius-default;
+    border: 2px solid $color-red-300;
     box-sizing: content-box;
-    margin: 0 15px;
   }
 }
 </style>

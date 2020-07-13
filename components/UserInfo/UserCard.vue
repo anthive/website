@@ -9,9 +9,9 @@
     <div class="user-card__container">
       <!-- Avatar container -->
       <div class="user-card__avatar-container">
-        <v-avatar class="user-card__avatar" size="80">
+        <div class="user-card__avatar">
           <v-img :src="us.photoUrl(80)" />
-        </v-avatar>
+        </div>
       </div>
       <!-- Username container -->
       <div class="user-card__user_info">
@@ -94,7 +94,7 @@
       </div>
       <!-- Actions -->
       <div class="user-card__actions">
-        <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" fill>{{
+        <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" color="accent">{{
           $t("userInfo.profile")
         }}</AntHiveBtn>
       </div>
@@ -106,7 +106,7 @@
 import { User } from '@/services/User'
 
 export default {
-  name: 'userChip',
+  name: 'userCard',
   props: {
     player: { type: Object, required: true },
     place: { type: Number, default: 0 }
@@ -144,9 +144,13 @@ export default {
     padding: 5px 10px;
   }
   &__avatar {
-    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: $border-radius-default;
+    background-color: $color-red-300;
+    position: relative;
     margin: -50px auto 0 auto;
-    border: 3px solid $color-red-400;
+    border: 3px solid $color-red-300;
     box-sizing: content-box;
   }
   &__bot-info {
@@ -173,8 +177,8 @@ export default {
     flex-direction: column;
   }
   &__user-stat-key {
-    color: $color-red-400;
-    font-weight: 700;
+    color: $color-red-300;
+    font-weight: 500;
   }
   &__user-stat-value {
     color: $color-violet-900;
