@@ -62,6 +62,6 @@ export default {
   min-height: 400px;
   height: 100%;
   width: 100%;
-  background: white;
+  background: $color-white;
 }
 </style>

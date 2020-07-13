@@ -1,6 +1,5 @@
 <template>
   <section class="texture-arrows">
-    <!-- <v-parallax src="/img/bg.jpg" height="400" /> -->
     <v-container class="px-2">
       <v-card class="leaderboard__card">
         <v-card-title class="mb-3 d-flex justify-space-between align-center">
