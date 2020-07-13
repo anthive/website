@@ -55,7 +55,7 @@ export default {
 @import '@/assets/style/global.scss';
 .user-icon {
   &__avatar {
-    border: 2px solid $color-accent;
+    border: 2px solid $color-red-400;
     box-sizing: content-box;
   }
   &__ant-img {

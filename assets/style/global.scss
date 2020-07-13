@@ -1,14 +1,25 @@
-// ---COLORS---
+// fonts
+$font-small: 12px;
+$font-medium: 16px;
+$font-big: 24px;
+
+// colors
 $color-black: #000000;
 $color-white: #ffffff;
 
-//primary
-$color-primary: #362d59;
+// vialet
+$color-violet-100: #c6becf; 
+$color-violet-500: #9585a3;
+$color-violet-800: #645574;
+$color-violet-900: #362d59;
 
-//accent
-$color-accent: #e1567c;
+// accent
+$color-red-300: #e1567c;
+$color-red-400: #a75d71;
+$color-red-500: #9d2747;
 
 // grey
+$color-grey-10: #fafafa;
 $color-grey-50: #f0eeed;
 $color-grey-100: #d9d9d9;
 $color-grey-200: #cdcdd2;
@@ -21,6 +32,9 @@ $color-grey-900: #222;
 // blue 
 $color-blue-900: #1b2432;
 
+// orange
+$color-orange-500: #f77b01;
+
 // green
 $color-green-800: #2f3129;
 $color-green-900: #272822;
@@ -28,8 +42,16 @@ $color-green-900: #272822;
 // orange
 $color-orange-500: #f77b01;
 
-// ---SCREENS---
+// screens
 $screen-xs: '320px';
 $screen-sm: '768px';
 $screen-md: '1024px';
 $screen-lg: '1440px';
+
+// borders
+$border-radius-tile: 0px;
+$border-radius-default: 3px;
+
+// shadow
+$box-shadow-default: 0 3px 20px 2px rgba(0, 0, 0, 0.15);
+$box-shadow-hover: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);

@@ -1,9 +1,9 @@
 <template>
-  <section class="steps pt-10 pb-12">
+  <section class="steps">
     <v-container>
       <v-row
         ><span
-          class="f-rubik f-title text-center primary--text mx-auto mt-12 mb-5"
+          class="f-rubik f-subtitle text-center primary--text mx-auto mt-12 mb-5"
           >{{ $t("home.stepsTitle") }}</span
         ></v-row
       >
@@ -58,7 +58,7 @@
             <AntHiveBtn
               class="ma-3"
               :to="localePath('rules')"
-              fill
+              color="accent"
               href="https://profile.anthive.io/login/"
               >{{ $t("home.profile") }}</AntHiveBtn
             >
@@ -75,7 +75,7 @@
                 >{{ $t("home.step3leaderboard") }}
               </a></v-card-text
             >
-            <AntHiveBtn class="ma-3" :to="localePath('rules')" fill>{{
+            <AntHiveBtn class="ma-3" :to="localePath('rules')" color="accent">{{
               $t("header.rules")
             }}</AntHiveBtn>
           </v-card>
@@ -85,29 +85,23 @@
   </section>
 </template>
 
-
-<script>
-export default {
-  data: () => ({}),
-  mounted() {},
-  components: {}
-}
-</script>
-
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .steps {
-  background-color: white;
+  background-color: $color-white;
   clip-path: polygon(0% 0%, 100% 3.49vw, 100% 100%, 0% 100%);
-  margin-top: -95px;
+  margin-top: -130px;
+  padding: 70px 0 90px;
   &__lang-panel-img {
     box-sizing: content-box;
-    padding: 10px;
-    transition: 0.7s;
-    border-radius: 10px;
+    margin: 10px;
+    transition: 0.1s;
+    border-radius: $border-radius-default;
   }
   &__lang-panel-img:hover {
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    transition: 0.7s;
+    box-shadow: $box-shadow-hover;
+    transition: 0.1s;
   }
   &__step-title {
     justify-content: center;

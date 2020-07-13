@@ -146,7 +146,7 @@ export default {
   &__avatar {
     display: block;
     margin: -50px auto 0 auto;
-    border: 3px solid $color-accent;
+    border: 3px solid $color-red-400;
     box-sizing: content-box;
   }
   &__bot-info {
@@ -173,11 +173,11 @@ export default {
     flex-direction: column;
   }
   &__user-stat-key {
-    color: $color-accent;
+    color: $color-red-400;
     font-weight: 700;
   }
   &__user-stat-value {
-    color: $color-primary;
+    color: $color-violet-900;
     font-weight: 500;
   }
 }

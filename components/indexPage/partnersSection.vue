@@ -27,22 +27,13 @@
   </section>
 </template>
 
-
-
-<script>
-export default {
-  data: () => ({}),
-  mounted() {},
-  components: {},
-  methods: {}
-}
-</script>
-
 <style lang="scss" scoped>
 .justify-space-evenly {
   justify-content: space-evenly !important;
 }
 .partners {
+  margin-top: -75px;
+  padding: 40px 0;
   clip-path: polygon(0% 0%, 100% 3.49vw, 100% 100%, 0% 100%);
   &__row {
     height: 300px;

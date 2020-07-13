@@ -4,11 +4,11 @@
       ><v-container class="parallax__container" :fluid="false"
         ><v-row class="justify-center align-start"
           ><v-col class="mb-4" cols="12" md="6"
-            ><div
-              class="mb-5 mt-0 f-title f-rubik primary--text font-weight-bold"
+            ><h1
+              class="mb-5 mt-0 f-title f-rubik primary--text"
             >
               {{ $t("home.slogan1") }}
-            </div>
+            </h1>
             <div class="f-text f-rubik primary--text">
               {{ $t("home.slogan2") }}
             </div>
@@ -16,7 +16,7 @@
               {{ $t("home.slogan3") }}
             </div>
             <div class="mt-3">
-              <AntHiveBtn href="https://profile.anthive.io/login?joinWith=github" fill class="mx-0 mt-3 mr-1">{{
+              <AntHiveBtn color="accent" href="https://profile.anthive.io/login?joinWith=github" class="mx-0 mt-3 mr-1">{{
                 $t("home.buttonJoin")
               }}</AntHiveBtn>
               <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("home.buttonSandbox") }}</AntHiveBtn> -->

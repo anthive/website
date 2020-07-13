@@ -125,7 +125,7 @@ export default {
     background: $color-green-900;
   }
   &::-webkit-scrollbar-thumb {
-    background: $color-accent;
+    background: $color-red-400;
   }
 }
 </style>

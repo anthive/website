@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-avatar class="user-icon__avatar" size="32">
+    <div class="user-icon__avatar">
       <v-img class="" :src="us.photoUrl(100)" />
-    </v-avatar>
+    </div>
   </div>
 </template>
 
@@ -33,9 +33,13 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
+
 .user-icon {
   &__avatar {
-    border: 2px solid $color-accent;
+    width: 32px;
+    height: 32px;
+    border-radius: $border-radius-default;
+    border: 2px solid $color-red-400;
     box-sizing: content-box;
   }
 }

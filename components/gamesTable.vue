@@ -1,27 +1,27 @@
 <template>
-  <div id="games-table">
+  <div id="games-table" class="games-table">
     <v-row class="d-flex justify-end mx-3">
-          <div class="primary--text text-xs-left font-weight-bold">Sort:</div>
-          <div
-            class="primary--text games-table__sort-item"
-            v-for="(column, index) in columns"
-            :class="dataTableClasses(column)"
-            :key="index"
-            @click="doSort(column)"
-          >
-            {{ $t(column.text) }}
-            <v-icon
-              small
-              v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
-              >arrow_upward</v-icon
-            >
-            <v-icon
-              small
-              v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
-              >arrow_downward</v-icon
-            >
-          </div>
-        </v-row>
+      <div class="primary--text text-xs-left font-weight-bold">Sort:</div>
+      <div
+        class="primary--text games-table__sort-item"
+        v-for="(column, index) in columns"
+        :class="dataTableClasses(column)"
+        :key="index"
+        @click="doSort(column)"
+      >
+        {{ $t(column.text) }}
+        <v-icon
+          small
+          v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
+          >arrow_upward</v-icon
+        >
+        <v-icon
+          small
+          v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
+          >arrow_downward</v-icon
+        >
+      </div>
+    </v-row>
     <v-card
       class="games-table__item"
       :key="index"
@@ -42,7 +42,7 @@
             class="col-12 col-md-2 justify-center justify-md-start d-flex align-center"
           >
             <AuthorChip
-              class="ml-md-n11 mr-5"
+              class="ml-md-n13 mr-5"
               :author="item._source.Author"
               :date="item._source.Played"
             />
@@ -58,13 +58,12 @@
             >
               <UserIcon class="ml-1" :player="player" locale="table"/></a>
 
-            <v-avatar
+            <div
               @click="openGame(item)"
               class="games-table__players-more ml-1"
-              size="34"
             >
-              +{{ item._source.Players.length - 4 }}
-            </v-avatar>
+              <span>+{{ item._source.Players.length - 4 }}</span>
+            </div>
           </div>
           <div
             v-else
@@ -95,7 +94,7 @@
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-2">
-            <AntHiveBtn @click="openGame(item)" fill>View Game</AntHiveBtn>
+            <AntHiveBtn @click="openGame(item)"  color="accent">View Game</AntHiveBtn>
           </div>
         </div>
       </div></v-card
@@ -265,33 +264,41 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
+
 .games-table {
   &__sort-item {
     margin-left: 10px;
     cursor: pointer;
   }
   &__item {
-    border-radius: 12px !important;
+    border-radius: $border-radius-default !important;
     margin: 10px 0;
   }
   &__item-cover {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-top-left-radius: $border-radius-default;
+    border-bottom-left-radius: $border-radius-default;
   }
   &__players-container {
     display: flex;
     align-items: center;
   }
   &__players-more {
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 34px;
+    height: 34px;
+    color: $color-white;
     transition: 0.5s;
-    background-color: $color-accent;
+    border-radius: $border-radius-default;
+    background-color: $color-red-300;
+    border: 2px solid $color-red-300;
     cursor: pointer;
   }
   &__players-more:hover {
-    border: 2px solid $color-accent;
-    background: white;
-    color: black;
+    border: 2px solid $color-red-500;
+    background: $color-red-500;
     transition: 0.5s;
   }
   &__stats-container {
@@ -318,10 +325,11 @@ export default {
     display: none;
   }
   &__stat-value {
-    color: $color-accent;
+    color: $color-red-300;
   }
   &__stat-name {
-    color: $color-primary;
+    font-weight: 500;
+    color: $color-violet-900;
   }
   &__action-container {
     text-align: center;
