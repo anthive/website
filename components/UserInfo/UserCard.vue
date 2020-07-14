@@ -4,7 +4,7 @@
       class="user-card__img"
       width="380"
       height="125"
-      src="/img/bg.jpg"
+      src="/img/bg.webp"
     />
     <div class="user-card__container">
       <!-- Avatar container -->

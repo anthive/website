@@ -38,11 +38,9 @@ module.exports = {
         rel: 'apple-touch-icon',
         sizes: '152x152',
         href: '/apple-touch-icon.png'
-      },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Material+Icons' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap' }
+      }
     ],
-    script: [{ src: '/js/anthive-4.0.js' }]
+    script: [{ src: '/js/anthive-4.0.js', defer: true }]
   },
 
   /*
@@ -62,6 +60,15 @@ module.exports = {
     '~/assets/style/textures.css'
   ],
 
+  webfontloader: {
+    google: {
+      families: ['Rubik:n3,n4,n5,n6', 'Material+Icons:'],
+      urls: [
+        'https://fonts.googleapis.com/css?family=Rubik:300,400,500,600&display=swap',
+        'https://fonts.googleapis.com/css?family=Material+Icons:&display=swap',
+      ],
+    }
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -71,6 +78,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-webfontloader',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     '@nuxtjs/markdownit',
@@ -120,6 +128,11 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    buildModules: [
+      '@nuxtjs/axios',
+      '@nuxtjs/vuetify',
+      'nuxt-webfontloader',
+    ],
     /*
     ** You can extend webpack config here
     */

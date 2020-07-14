@@ -303,7 +303,7 @@ export default {
   }
   &__stats-container {
     display: flex;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
   }
   &__stat {

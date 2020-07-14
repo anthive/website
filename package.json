@@ -23,6 +23,7 @@
     "nuxt": "^2.13.2",
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.12.2",
+    "nuxt-webfontloader": "^1.1.0",
     "serialize-javascript": "^2.1.2",
     "vue-google-charts": "^0.3.3",
     "vue-resource": "^1.5.1",
