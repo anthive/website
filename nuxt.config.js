@@ -62,11 +62,7 @@ module.exports = {
 
   webfontloader: {
     google: {
-      families: ['Rubik:n3,n4,n5,n6', 'Material+Icons:'],
-      urls: [
-        'https://fonts.googleapis.com/css?family=Rubik:300,400,500,600&display=swap',
-        'https://fonts.googleapis.com/css?family=Material+Icons:&display=swap',
-      ],
+      families: ['Rubik:300,400,500,600&display=swap']
     }
   },
   /*

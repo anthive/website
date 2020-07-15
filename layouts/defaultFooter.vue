@@ -89,7 +89,7 @@
         v-model="selectedLocale"
         class="footer__locale-select"
         :items="locales"
-        prepend-icon="public"
+        prepend-icon="mdi-earth"
         dense
         dark
         flat

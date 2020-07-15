@@ -77,8 +77,8 @@ export default {
       }
     ]
   }),
-  created() {
-    this.getLeaders()
+  async fetch() {
+    await this.getLeaders()
   },
   methods: {
     async getLeaders() {
