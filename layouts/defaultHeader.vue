@@ -54,15 +54,15 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn primary :to="localePath('games')">{{ $t("header.games") }}</AntHiveBtn>
-        <AntHiveBtn primary :to="localePath('leaderboard')">{{
+        <AntHiveBtn text color="primary" :to="localePath('games')">{{ $t("header.games") }}</AntHiveBtn>
+        <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
         }}</AntHiveBtn>
-        <AntHiveBtn primary :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn primary href="https://profile.anthive.io/login/">{{
+        <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
+        <AntHiveBtn text color="primary" href="https://profile.anthive.io/login/">{{
           $t("header.login")
         }}</AntHiveBtn>
-        <AntHiveBtn class="ml-3" :to="localePath('sandbox')" fill>{{
+        <AntHiveBtn color="accent" class="ml-3" :to="localePath('sandbox')">{{
           "sandbox"
         }}</AntHiveBtn>
       </div>

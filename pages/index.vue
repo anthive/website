@@ -7,7 +7,6 @@
     <badgesSection />
     <partnersSection />
     <screenshotsSection />
-    <dividerSection />
   </div>
 </template>
 <script>
@@ -18,7 +17,6 @@ import videoSection from '../components/indexPage/videoSection.vue'
 import badgesSection from '../components/indexPage/badgesSection.vue'
 import partnersSection from '../components/indexPage/partnersSection.vue'
 import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
-import dividerSection from '../components/indexPage/dividerSection.vue'
 
 export default {
   components: {
@@ -28,8 +26,7 @@ export default {
     videoSection,
     badgesSection,
     partnersSection,
-    screenshotsSection,
-    dividerSection
+    screenshotsSection
   }
 }
 </script>

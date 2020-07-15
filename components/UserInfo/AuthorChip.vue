@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex align-center">
     <div>
-      <v-avatar class="user-icon__avatar" size="32">
+      <div class="user-icon__avatar">
         <v-img class="" :src="photoUrl()" />
-      </v-avatar>
+      </div>
     </div>
     <div class="ml-2 d-flex flex-column">
       <div class="d-flex align-center">
@@ -27,7 +27,7 @@ export default {
   data: () => ({}),
   methods: {
     photoUrl() {
-      return 'https://github.com/' + this.author + '.png?size=32'
+      return 'https://github.com/' + this.author + '.png?size=50'
     },
     dateCreate(date) {
       return timeAgo(date)
@@ -38,9 +38,13 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
+
 .user-icon {
   &__avatar {
-    border: 2px solid $color-accent;
+    border-radius: $border-radius-default;
+    width: 50px;
+    height: 50px;
+    border: 2px solid $color-red-400;
     box-sizing: content-box;
     background-color: white;
   }

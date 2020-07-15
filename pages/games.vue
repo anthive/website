@@ -1,11 +1,8 @@
 <template>
-  <section>
-    <v-parallax src="/img/bg.jpg" height="350" />
+  <section class="texture-arrows">
       <v-container>
         <v-card
-          class="games__card white text-xs-left elevation-6"
-          flat
-          tile
+          class="games__card white text-xs-left"
         >
           <v-card-title class="mb-10">
             <h1 class="headline">
@@ -40,8 +37,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .games__card {
-  margin-top: -178px;
+  border-radius: $border-radius-default !important;
 }
 </style>
