@@ -11,17 +11,21 @@
       <img
         :height="$vuetify.breakpoint.smAndDown ? 20 : 40"
         src="/partners/git.png"
+        alt="git"
       /><img
         :height="$vuetify.breakpoint.smAndDown ? 20 : 40"
         src="/partners/autodesc.png"
+        alt="autodesc"
       />
       <img
         :height="$vuetify.breakpoint.smAndDown ? 20 : 40"
         src="/partners/pp.png"
+        alt="pp"
       />
       <img
         :height="$vuetify.breakpoint.smAndDown ? 20 : 40"
         src="/partners/nytimes.png"
+        alt="nytimes"
       />
     </div>
   </section>
