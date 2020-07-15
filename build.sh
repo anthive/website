@@ -2,6 +2,7 @@
 
 git checkout master
 git pull
-npm ci
+rm -rf node_modules
+npm i
 npm run generate
 echo "done"
