@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax class="parallax" src="/img/bg.webp" height="700"
+    <div class="header-section" height="500"
       ><v-container class="parallax__container" :fluid="false"
         ><v-row class="justify-center align-start"
           ><v-col class="mb-4" cols="12" md="6"
@@ -9,20 +9,18 @@
             >
               {{ $t("home.slogan1") }}
             </h1>
-            <div class="f-text f-rubik primary--text">
+            <v-col class="pa-0" cols="6"><h2 class="f-text f-rubik primary--text font-weight-medium">
               {{ $t("home.slogan2") }}
-            </div>
-            <div class="hidden-sm-and-down mt-2 f-text f-rubik primary--text">
-              {{ $t("home.slogan3") }}
-            </div>
+            </h2></v-col>
+            
             <div class="mt-3">
-              <AntHiveBtn color="accent" href="https://profile.anthive.io/login?joinWith=github" class="mx-0 mt-3 mr-1">{{
-                $t("home.buttonJoin")
+              <AntHiveBtn color="accent" to="/sandbox" class="mx-0 mt-3 mr-1">{{
+                $t("home.sandbox")
               }}</AntHiveBtn>
               <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("home.buttonSandbox") }}</AntHiveBtn> -->
             </div></v-col
           ><v-col></v-col></v-row></v-container
-    ></v-parallax>
+    ></div>
   </section>
 </template>
 
@@ -30,10 +28,7 @@
 export default {
   data: () => ({
     isPlaying: true
-  }),
-  mounted() {},
-  components: {},
-  methods: {}
+  })
 }
 </script>
 
@@ -43,16 +38,13 @@ export default {
     max-width: 1300px;
   }
 }
-.parallax {
+.header-section {
+  background: url('/img/bg.webp') 50% 110%;
+  background-size: cover;
+  padding: 100px 20px 140px;
   position: relative;
   transition: clip-path 0.2s ease-out, padding-top 0.2s ease-out, padding-bottom 0.2s ease-out;
   will-change: clip-path, padding-top, padding-bottom;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  &__container {
-    @media screen and (max-width: 800px) {
-      position: absolute;
-      top: 30px;
-    }
-  }
 }
 </style>

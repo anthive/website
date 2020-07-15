@@ -1,32 +1,26 @@
 <template >
   <div>
-    <parallaxSection />
+    <headerSection />
     <stepsSection />
-    <featureSection />
-    <videoSection />
-    <badgesSection />
     <partnersSection />
-    <screenshotsSection />
+    <featureSection />
   </div>
 </template>
 <script>
-import parallaxSection from '../components/indexPage/parallaxSection.vue'
+import headerSection from '../components/indexPage/headerSection.vue'
 import stepsSection from '../components/indexPage/stepsSection.vue'
 import featureSection from '../components/indexPage/featureSection.vue'
-import videoSection from '../components/indexPage/videoSection.vue'
-import badgesSection from '../components/indexPage/badgesSection.vue'
+// import videoSection from '../components/indexPage/videoSection.vue'
+// import badgesSection from '../components/indexPage/badgesSection.vue'
 import partnersSection from '../components/indexPage/partnersSection.vue'
-import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
+// import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
 
 export default {
   components: {
-    parallaxSection,
+    headerSection,
     stepsSection,
     featureSection,
-    videoSection,
-    badgesSection,
-    partnersSection,
-    screenshotsSection
+    partnersSection
   }
 }
 </script>
