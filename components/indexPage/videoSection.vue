@@ -50,7 +50,7 @@ export default {
 }
 
 .video-preview {
-  background-image: url(/img/video-preview.jpg);
+  background-image: url(/img/video-preview.webp);
   background-position: center center;
   background-size: cover;
   padding: 100px 0;

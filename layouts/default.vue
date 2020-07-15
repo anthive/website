@@ -1,9 +1,9 @@
 <template>
   <v-app id="inspire">
     <defaultHeader />
-    <v-main>
+    <v-content>
       <nuxt />
-    </v-main>
+    </v-content>
     <defaultFooter />
   </v-app>
 </template>

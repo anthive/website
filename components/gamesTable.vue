@@ -13,12 +13,12 @@
         <v-icon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
-          >arrow_upward</v-icon
+          >mdi-arrow-up</v-icon
         >
         <v-icon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
-          >arrow_downward</v-icon
+          >mdi-arrow-down</v-icon
         >
       </div>
     </v-row>
@@ -105,7 +105,7 @@
         class="mx-auto"
         @input="changePage($event)"
         v-model="currentPage"
-        :length="pages"
+        :length="pages-1"
         total-visible="10"
         color="accent"
       ></v-pagination>
@@ -141,7 +141,6 @@ export default {
     },
     Filters: {
       type: Object,
-      required: true,
       default() {
         return {
           match_all: {}
@@ -180,9 +179,9 @@ export default {
     ],
     items: []
   }),
-  created() {
-    this.preapareSort()
-    this.loadGames()
+  async fetch() {
+    await this.preapareSort()
+    await this.loadGames()
   },
   methods: {
     changePage(pageNumber) {
@@ -304,7 +303,7 @@ export default {
   }
   &__stats-container {
     display: flex;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
   }
   &__stat {
