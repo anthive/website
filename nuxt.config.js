@@ -125,8 +125,6 @@ module.exports = {
   */
   build: {
     buildModules: [
-      '@nuxtjs/axios',
-      '@nuxtjs/vuetify',
       'nuxt-webfontloader',
     ],
     /*
