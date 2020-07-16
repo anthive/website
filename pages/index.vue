@@ -3,24 +3,25 @@
     <headerSection />
     <stepsSection />
     <partnersSection />
-    <featureSection />
+    <badgesSection />
+    <screenshotsSection />
   </div>
 </template>
 <script>
 import headerSection from '../components/indexPage/headerSection.vue'
 import stepsSection from '../components/indexPage/stepsSection.vue'
-import featureSection from '../components/indexPage/featureSection.vue'
+// import featureSection from '../components/indexPage/featureSection.vue'
 // import videoSection from '../components/indexPage/videoSection.vue'
 // import badgesSection from '../components/indexPage/badgesSection.vue'
 import partnersSection from '../components/indexPage/partnersSection.vue'
-// import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
+import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
 
 export default {
   components: {
     headerSection,
     stepsSection,
-    featureSection,
-    partnersSection
+    partnersSection,
+    screenshotsSection
   }
 }
 </script>

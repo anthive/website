@@ -86,9 +86,6 @@
   &__step-title {
     justify-content: center;
   }
-  &__step {
-    text-align: center;
-  }
 }
 
 a {

@@ -5,13 +5,11 @@
         <v-card class="sreenshots__card elevation-0 white mt-10 pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-subtitle primary--text text-center">
-              {{ $t("home.screenshot1Title") }}
+              {{ $t("home.feature1Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("home.badgesText1") }}</p>
-            <p>{{ $t("home.badgesText2") }}</p>
-            <p>{{ $t("home.badgesText3") }}</p>
+            ><p>{{ $t("home.feature1Text") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -28,13 +26,11 @@
         <v-card class="sreenshots__card elevation-0 white pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-subtitle primary--text text-center">
-              {{ $t("home.screenshot2Title") }}
+              {{ $t("home.feature2Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("home.badgesText1") }}</p>
-            <p>{{ $t("home.badgesText2") }}</p>
-            <p>{{ $t("home.badgesText3") }}</p>
+            ><p>{{ $t("home.feature2Text") }}</p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -45,13 +41,11 @@
         <v-card class="sreenshots__card elevation-0 white pa-2 pl-4">
           <v-card-title class="layout" primary-title>
             <div class="f-rubik f-subtitle primary--text text-center">
-              {{ $t("home.screenshot3Title") }}
+              {{ $t("home.feature3Title") }}
             </div>
           </v-card-title>
           <v-card-text class="f-rubik f-text primary--text"
-            ><p>{{ $t("home.badgesText1") }}</p>
-            <p>{{ $t("home.badgesText2") }}</p>
-            <p>{{ $t("home.badgesText3") }}</p>
+            ><p>{{ $t("home.feature3Text") }}</p>
           </v-card-text>
         </v-card>
       </v-col>

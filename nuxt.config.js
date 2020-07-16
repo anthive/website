@@ -124,9 +124,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    buildModules: [
-      'nuxt-webfontloader',
-    ],
+    buildModules: ['nuxt-webfontloader'],
     /*
     ** You can extend webpack config here
     */
