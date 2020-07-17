@@ -8,18 +8,12 @@
 
     <!-- Copyright -->
     <div col="12" md="3" class="footer__copyright f-rubik">
-      <span>AntHive.IO</span>
-      <span class="mx-2">
-        Copyright&copy;, {{ new Date().getFullYear() }}
-      </span>
+      <span>AntHive.IO &copy; {{ new Date().getFullYear() }}</span>
     </div>
 
     <!-- PP and TOS links -->
     <div col="12" md="3" class="footer__subscribe f-rubik">
       <span class="mr-2">
-
-        {{ $t("footer.read") }}
-
         <nuxt-link class="accent--text ml-1" to="/tos">
           {{ $t("footer.termsofService") }}
         </nuxt-link>
@@ -29,18 +23,16 @@
         <nuxt-link class="accent--text" to="/pp">
           {{ $t("footer.privacyPolicy") }}
         </nuxt-link>
-
       </span>
     </div>
 
     <!-- Report issue -->
     <div col="12" md="3" class="footer__issue f-rubik">
-      <span>{{ $t("footer.feedbackTitle") }}</span>
       <a
         href="https://github.com/anthive/website/issues"
         target="_blank"
         class="accent--text ml-1"
-        >{{ $t("footer.feedbackBtn") }}</a
+        >{{ $t("footer.report") }}</a
       >
     </div>
 
@@ -139,7 +131,7 @@ export default {
 
 .footer {
   margin-top: 30px;
-  @media screen and (max-width: $screen-lg) {
+  @media screen and (max-width: $screen-md) {
     flex-direction: column;
   }
   &__locale-select {

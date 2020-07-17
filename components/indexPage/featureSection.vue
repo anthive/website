@@ -65,10 +65,10 @@
 @import '@/assets/style/global.scss';
 
 .container {
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: $screen-md) {
     max-width: 1300px;
   }
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: $screen-md) {
     max-width: 1300px;
   }
 }
@@ -79,7 +79,7 @@
   padding-top: 90px;
   padding-bottom: 140px;
   &__layout {
-    @media screen and (max-width: 960px) {
+    @media screen and (max-width: $screen-md) {
       flex-direction: column;
       margin: auto;
     }
@@ -87,7 +87,7 @@
   &__feature {
     position: relative;
     box-shadow: $box-shadow-default !important;
-    @media screen and (max-width: 960px) {
+    @media screen and (max-width: $screen-md) {
       margin: auto;
     }
   }

@@ -124,11 +124,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    buildModules: [
-      '@nuxtjs/axios',
-      '@nuxtjs/vuetify',
-      'nuxt-webfontloader',
-    ],
+    buildModules: ['nuxt-webfontloader'],
     /*
     ** You can extend webpack config here
     */

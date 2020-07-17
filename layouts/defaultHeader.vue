@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="header" app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
+  <v-app-bar height="64" class="header" app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
     <v-container  class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
@@ -62,8 +62,8 @@
         <AntHiveBtn text color="primary" href="https://profile.anthive.io/login/">{{
           $t("header.login")
         }}</AntHiveBtn>
-        <AntHiveBtn color="accent" class="ml-3" :to="localePath('sandbox')">{{
-          "sandbox"
+        <AntHiveBtn href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+           $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
     </v-container>
