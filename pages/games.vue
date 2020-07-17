@@ -6,8 +6,8 @@
         >
           <v-card-title class="mb-10">
             <h1 class="headline">
-              <span class="primary--text  font-weight-medium">{{ $t("games.title1") }}</span
-              ><span class="primary--text ml-2">{{ $t("games.title2") }}</span>
+              <span class="primary--text font-weight-medium">{{ $t("games.title1") }}</span>
+              <span class="primary--text ml-2">{{ $t("games.title2") }}</span>
             </h1>
           </v-card-title>
           <v-card-text>
@@ -42,5 +42,11 @@ export default {
 
 .games__card {
   border-radius: $border-radius-default !important;
+}
+
+@media screen and (max-width: $screen-sm) {
+  .headline {
+    text-align: center;
+  }
 }
 </style>

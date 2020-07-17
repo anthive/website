@@ -2,14 +2,14 @@
   <section>
     <div class="header-section" height="500"
       ><v-container class="parallax__container" :fluid="false"
-        ><v-row class="justify-center align-start"
+        ><v-row class="header-section__content"
           ><v-col class="mb-4" cols="12" md="6"
             ><h1
               class="mb-5 mt-0 f-title f-rubik primary--text"
             >
               {{ $t("home.slogan1") }}
             </h1>
-            <v-col class="pa-0" cols="6"><h2 class="f-text f-rubik primary--text font-weight-medium">
+            <v-col class="pa-0" cols="12" sm="6"><h2 class="f-text f-rubik primary--text font-weight-medium">
               {{ $t("home.slogan2") }}
             </h2></v-col>
             
@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .container {
   @media only screen and (min-width: 1200px) {
     max-width: 1300px;
@@ -46,5 +48,19 @@ export default {
   transition: clip-path 0.2s ease-out, padding-top 0.2s ease-out, padding-bottom 0.2s ease-out;
   will-change: clip-path, padding-top, padding-bottom;
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+  }
+}
+@media screen and (max-width: $screen-sm) {
+  .header-section {
+    padding-top: 60px;
+    &__content {
+      text-align: center;
+    }
+  }
 }
 </style>

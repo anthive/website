@@ -1,9 +1,9 @@
 <template>
-  <section>
-    <v-row class="ma-10 justify-center">
+  <section class="user">
+    <v-row class="justify-center">
       <v-col cols="11" lg="3">
-        <v-card max-width="250">
-          <v-img min-width="250" :src="user.avatar" v-if="user.avatar" />
+        <v-card>
+          <v-img  :src="user.avatar" v-if="user.avatar" />
           <v-card-title>
             <h3 class="headline">{{ user.name }}</h3>
           </v-card-title>
@@ -89,11 +89,14 @@ export default {
   }
 }
 </script>
-<style>
-.user__card-text {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+<style lang="scss" scoped>
+.user {
+  overflow-x: hidden;
+  &__card-text {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 </style>

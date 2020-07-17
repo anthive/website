@@ -32,6 +32,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .justify-space-evenly {
   justify-content: space-evenly !important;
 }
@@ -41,10 +43,22 @@
   clip-path: polygon(0% 0%, 100% 3.49vw, 100% 100%, 0% 100%);
   &__row {
     height: 300px;
-    @media only screen and (max-width: 600px) {
+  }
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .partners {
+    &__row {
       flex-direction: column;
       height: 450px;
     }
+  }
+}
+
+@media screen and (max-width: $screen-sm) {
+  .partners {
+    padding-top: 10px;
+    padding-bottom: 50px;
   }
 }
 </style>

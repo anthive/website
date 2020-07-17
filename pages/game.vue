@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="game texture-arrows">
     <v-row class="texture-scrabble flex-nowrap mx-auto">
         
       <PlayersList
@@ -10,9 +10,7 @@
         <GamePlayer :status="status" :isGameEnd="isGameEnd" />
         <GameLogPanel v-show="gameLoaded" />
       </div>
-     
     </v-row>
-     <v-parallax src="/img/pre-footer.jpg" height="300" />
   </section>
 </template>
 
@@ -84,5 +82,12 @@ export default {
 }
 .player-zone__wrap.collapsed {
   width: 86%;
+}
+</style>
+
+<style lang="scss" scoped>
+.game {
+  height: 100%;
+  overflow-x: hidden;
 }
 </style>

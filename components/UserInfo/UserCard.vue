@@ -1,8 +1,7 @@
 <template>
-  <v-card class="user-card" width="380">
+  <v-card class="user-card">
     <v-img
       class="user-card__img"
-      width="380"
       height="125"
       src="/img/bg.webp"
     />
@@ -136,6 +135,8 @@ export default {
 @import '@/assets/style/global.scss';
 .user-card {
   border-radius: 12px !important;
+  width: 100%;
+  max-width: 370px;
   &__img {
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
