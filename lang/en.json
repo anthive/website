@@ -29,7 +29,7 @@
     "step3Title": "For IT companies",
     "step3Text": "Hackathons are good, need another one. The company needs a reliable skills assessment tool. It's biases and time-consuming to judge potential employees based on a \"take-home coding test\". Bind the team in a competitive environment in a fun and company beneficial way. Whatever is your reason we can facilitate with automated tools.",
     "feature1Title": "Learn",
-    "feature1Text": "Always wanted to learn coding but didn’t know what to start with? Start right here. This turn-based strategy game is the most engaging way to learn real code. PIck a language, read the rules link to the rules and start learning right now.",
+    "feature1Text": "Always wanted to learn to code but didn’t where to start? Start right here. This turn-based strategy game is the most engaging way to learn real code. Pick a language JS, Python, C++, GO, or PHP,  read the rules, and start learning right now.",
     "feature2Title": "Practice",
     "feature2Text": "This game is a great way to advance your programming skills while having fun and getting noticed. Master your current language of choice; or expand your understanding of a new one. By completing the levels you get trophies and certificates which will benefit you not only in the game but in real life.",
     "feature3Title": "Compete",
@@ -45,10 +45,7 @@
     "badgesText3": "Pellentesque hendrerit sodales tortor, in faucibus diam tempus ac. Donec convallis fringilla mauris vitae tristique.",
     "subscribe": "Subscribe",
     "feedbackText1": "Stay in touch and get latest news first!",
-    "feedbackText2": "Tell us on our github repo and we will fix it!",
-    "screenshot1Title": "ScreenShot 1",
-    "screenshot2Title": "ScreenShot 2",
-    "screenshot3Title": "ScreenShot 3"
+    "feedbackText2": "Tell us on our github repo and we will fix it!"
   },
 
   "games": {
