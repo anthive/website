@@ -1,5 +1,4 @@
 # Terminology and how AntHive works
-##  `
 
 ## Golas
 The general goal is to collect food and grow your colony. Making as few errors as possible. A [carrier](https://profile.anthive.io/career) mode has more specialized goals like find the shortest path, overcome limited food, tunnels management, performance, etc.
@@ -26,20 +25,6 @@ Bot is your code that can be written in any language. It's listening on port `:7
       "dir": "up"
     }
   ]
-}
-```
-
-## Green note
-``` green-note
-Note
-Discover is Sentry’s powerful query builder for aggregating raw event data and has its own unique syntax not covered here. For more information, see full Discover documentation.
-}
-```
-
-## Orange note
-``` orange-note
-Note
-Discover is Sentry’s powerful query builder for aggregating raw event data and has its own unique syntax not covered here. For more information, see full Discover documentation.
 }
 ```
 
