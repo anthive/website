@@ -1,6 +1,6 @@
 <template>
   <div id="games-table" class="games-table">
-    <v-row class="d-flex justify-end mx-3">
+    <v-row class="games-table__sort">
       <div class="primary--text text-xs-left font-weight-bold">Sort:</div>
       <div
         class="primary--text games-table__sort-item"
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-2">
-            <AntHiveBtn @click="openGame(item)"  color="accent">View Game</AntHiveBtn>
+            <AntHiveBtn @click="openGame(item)" width="100%" color="accent">View Game</AntHiveBtn>
           </div>
         </div>
       </div></v-card
@@ -266,6 +266,11 @@ export default {
 @import '@/assets/style/global.scss';
 
 .games-table {
+  &__sort {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 3px;
+  }
   &__sort-item {
     margin-left: 10px;
     cursor: pointer;
@@ -289,6 +294,7 @@ export default {
     text-align: center;
     width: 34px;
     height: 34px;
+    min-width: 34px;
     color: $color-white;
     transition: 0.5s;
     border-radius: $border-radius-default;
@@ -339,6 +345,15 @@ export default {
   }
   &__players-list {
     width: 560px;
+  }
+}
+
+@media screen and (max-width: $screen-sm) {
+  .games-table {
+    &__sort {
+      margin: 0;
+      justify-content: space-between;
+    }
   }
 }
 </style>

@@ -91,4 +91,12 @@
 a {
   text-decoration: none;
 }
+
+@media screen and (max-width: $screen-sm) {
+  .steps {
+    &__lang-panel {
+      text-align: center;
+    }
+  }
+}
 </style>

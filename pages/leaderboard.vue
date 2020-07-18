@@ -1,5 +1,5 @@
 <template>
-  <section class="texture-arrows">
+  <section class="leaderboard texture-arrows">
     <v-container class="px-2">
       <v-card class="leaderboard__card">
         <v-card-title class="mb-3 d-flex justify-space-between align-center">
@@ -9,7 +9,7 @@
               >The most skillful AntHive players
             </span>
           </h1>
-          <div class="d-flex col-3 justify-space-around">
+          <div class="d-flex col-12 col-md-3 justify-space-around">
             <span class="primary--text">Top by: </span>
             <div
               :class="{ 'accent--text': column.value === sortBy }"
@@ -26,8 +26,9 @@
           >Top 3 <span v-if="sortBy === 'totalWealth'">wealthy</span>
           <span v-if="sortBy === 'totalGames'">hard</span> AntHive players
         </span>
-        <div class="d-flex justify-space-around">
+        <div class="leaderboard__top-players">
           <UserCard
+            class="leaderboard__user-card"
             :key="player.Username + index"
             v-for="(player, index) in players.slice(0, 3)"
             :place="index + 1"
@@ -97,13 +98,38 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
 .leaderboard {
   &__card {
-    padding-bottom: 10px;
+    padding: 0 10px 10px;
+  }
+  &__user-card {
+    margin-bottom: 15px;
   }
   &__sort-item {
     margin-left: 10px;
     cursor: pointer;
+  }
+  &__top-players {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: $screen-lg) {
+  .leaderboard {
+    &__top-players {
+      width: auto;
+      flex-direction: column;
+    }
+    .headline {
+      width: 100%;
+      text-align: center;
+    }
+    &__user-card {
+      margin: 0 auto 15px;
+    }
   }
 }
 </style>

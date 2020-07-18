@@ -70,4 +70,11 @@ export default {
     box-sizing: content-box;
   }
 }
+@media screen and (max-width: $screen-lg) {
+  .user-icon {
+    &__avatar {
+      margin-right: 10px;
+    }
+  }
+}
 </style>

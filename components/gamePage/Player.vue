@@ -153,10 +153,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 #player {
   background-repeat: repeat;
-  background-color: #388e3c;
+  background-color: $color-red-300;
 }
 .game__vs-separator {
   position: relative;
