@@ -4,7 +4,8 @@
     "leaderboard": "Leaderboard",
     "rules": "Rules",
     "login": "Login",
-    "buttonJoin": "Get Started"
+    "buttonJoin": "Get Started",
+    "menu":"menu"
   },
 
   "footer": {
