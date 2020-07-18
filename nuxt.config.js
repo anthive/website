@@ -139,6 +139,7 @@ module.exports = {
         })
       }
     },
+    transpile: ['countup.js', 'vue-countup-v2'],
     quiet: false
   }
 }

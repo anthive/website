@@ -3,7 +3,6 @@
     <headerSection />
     <stepsSection />
     <partnersSection />
-    <badgesSection />
     <screenshotsSection />
   </div>
 </template>
