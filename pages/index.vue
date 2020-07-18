@@ -2,7 +2,7 @@
   <div>
     <headerSection />
     <stepsSection />
-    <partnersSection />
+    <countersSection />
     <screenshotsSection />
   </div>
 </template>
@@ -12,14 +12,14 @@ import stepsSection from '../components/indexPage/stepsSection.vue'
 // import featureSection from '../components/indexPage/featureSection.vue'
 // import videoSection from '../components/indexPage/videoSection.vue'
 // import badgesSection from '../components/indexPage/badgesSection.vue'
-import partnersSection from '../components/indexPage/partnersSection.vue'
+import countersSection from '../components/indexPage/countersSection.vue'
 import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
 
 export default {
   components: {
     headerSection,
     stepsSection,
-    partnersSection,
+    countersSection,
     screenshotsSection
   }
 }
