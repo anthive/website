@@ -9,25 +9,26 @@
       "
     >
       <v-col md="4" class="counters__counter">
-        <div class="counters__counter-name">Bots</div>
+        <div class="counters__counter-name">{{ $t("home.Ants") }}</div>
         <div class="counters__counter-number">
-          <ICountUp :delay="delay" :endVal="endVal.Bots" :options="options" />
+          <ICountUp :delay="delay" :endVal="endVal.Ants" :options="options" />
         </div>
       </v-col>
 
       <v-col md="4" class="counters__counter">
-        <div class="counters__counter-name">Games</div>
+        <div class="counters__counter-name">{{ $t("home.Games") }}</div>
         <div class="counters__counter-number">
           <ICountUp :delay="delay" :endVal="endVal.Games" :options="options" />
         </div>
       </v-col>
 
       <v-col md="4" class="counters__counter">
-        <div class="counters__counter-name">Ants</div>
+        <div class="counters__counter-name">{{ $t("home.Bots") }}</div>
         <div class="counters__counter-number">
-          <ICountUp :delay="delay" :endVal="endVal.Ants" :options="options" />
+          <ICountUp :delay="delay" :endVal="endVal.Bots" :options="options" />
         </div>
       </v-col>
+
     </div>
   </section>
 </template>
