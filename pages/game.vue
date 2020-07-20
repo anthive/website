@@ -5,7 +5,8 @@
       <PlayersList
         v-show="gameLoaded"
         v-bind:players="players"
-        @togglePlayerList="showPlayerList = !showPlayerList" />
+        @togglePlayerList="showPlayerList = !showPlayerList"
+      />
       <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
         <GamePlayer :status="status" :isGameEnd="isGameEnd" />
       </div>
@@ -78,9 +79,7 @@ export default {
 }
 .player-zone__wrap {
   width: 100%;
-}
-.player-zone__wrap.collapsed {
-  width: 86%;
+  padding-left: 50px;
 }
 </style>
 

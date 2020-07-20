@@ -69,7 +69,9 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .players__wrap {
-  position: relative;
+  position: absolute;
+  z-index: 10000;
+  height: 100%;
 }
 .players__list {
   height: 100%;

@@ -17,7 +17,7 @@
           >
           <v-card-text class="user__card-text pt-0" v-if="user.blog">
             <v-icon class="mr-2" size="20">public</v-icon
-            ><a :href="user.blog" target="_blank">{{
+            ><a :href="user.blog" target="_blank" rel="noreferrer">{{
               user.blog
             }}</a></v-card-text
           >

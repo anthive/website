@@ -31,6 +31,7 @@
       <a
         href="https://github.com/anthive/website/issues"
         target="_blank"
+        rel="noreferrer"
         class="accent--text ml-1"
         >{{ $t("footer.report") }}</a
       >
@@ -41,6 +42,7 @@
       <a
         href="https://twitter.com/anthiveio"
         title="Our Twitter page"
+        rel="noreferrer"
         target="_blank"
       >
         <v-icon class="footer__social--icon">mdi-twitter</v-icon>
@@ -48,6 +50,7 @@
       <a
         href="https://www.facebook.com/AntHive.IO/"
         title="Our Facebook page"
+        rel="noreferrer"
         target="_blank"
       >
         <v-icon class="footer__social--icon">mdi-facebook</v-icon>
@@ -55,6 +58,7 @@
       <a
         href="https://www.instagram.com/anthiveio/"
         title="Our Instagram accoutn"
+        rel="noreferrer"
         target="_blank"
       >
         <v-icon class="footer__social--icon">mdi-instagram</v-icon>
@@ -62,6 +66,7 @@
       <a
         href="https://www.youtube.com/channel/UCx1KBAlciwcRuehIiOfnDVg"
         title="Our Youtube channel"
+        rel="noreferrer"
         target="_blank"
       >
         <v-icon class="footer__social--icon">mdi-youtube</v-icon>
@@ -69,9 +74,10 @@
       <a
         href="https://www.twitch.tv/anthiveio"
         title="Our Twitch accoutn"
+        rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-twitch</v-icon>
+        <v-icon class="footer__social--icon">mdi-menu-up</v-icon>
       </a>
     </div>
 
