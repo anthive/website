@@ -8,7 +8,6 @@
         @togglePlayerList="showPlayerList = !showPlayerList" />
       <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
         <GamePlayer :status="status" :isGameEnd="isGameEnd" />
-        <GameLogPanel v-show="gameLoaded" />
       </div>
     </v-row>
   </section>

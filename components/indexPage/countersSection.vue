@@ -98,8 +98,8 @@ export default {
 
 @media screen and (max-width: $screen-sm) {
   .counters {
-    padding-top: 10px;
-    padding-bottom: 50px;
+    padding-top: 60px;
+    padding-bottom: 120px;
   }
 }
 </style>
