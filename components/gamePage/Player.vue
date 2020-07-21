@@ -33,7 +33,7 @@
             width="320"
             height="72"
             block
-            @click="replay()"
+            @click="$emit('replay')"
             >Replay
             <AntHiveIcon class="ml-1" color="white">autorenew</AntHiveIcon>
           </v-btn>
