@@ -49,6 +49,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
+                    rel="noreferrer"
                     :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                   >
                     <v-icon>mdi-linkedin</v-icon>
@@ -64,6 +65,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
+                    rel="noreferrer"
                     :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
                   >
                     <v-icon>mdi-facebook</v-icon>
@@ -79,7 +81,8 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
-                    :href="`http://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
+                    rel="noreferrer"
+                    :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                   >
                     <v-icon>mdi-twitter</v-icon>
                   </v-btn> </template
@@ -94,6 +97,7 @@
                     color="#333333"
                     v-on="on"
                     target="_blank"
+                    rel="noreferrer"
                     :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                   >
                     <v-icon>mdi-email</v-icon>
@@ -158,7 +162,6 @@ export default {
 
 #player {
   background-repeat: repeat;
-  background-color: $color-red-300;
 }
 .game__vs-separator {
   position: relative;

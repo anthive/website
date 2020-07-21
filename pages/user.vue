@@ -17,19 +17,14 @@
           >
           <v-card-text class="user__card-text pt-0" v-if="user.blog">
             <v-icon class="mr-2" size="20">public</v-icon
-            ><a :href="user.blog" target="_blank">{{
+            ><a :href="user.blog" target="_blank" rel="noreferrer">{{
               user.blog
             }}</a></v-card-text
           >
         </v-card>
       </v-col>
       <v-col cols="11" lg="7" xl="5">
-        <h3 class="headline mt-1 mb-3">{{ $t("userInfo.title") }}</h3>
-        <Chart
-          class="elevation-1"
-          :values="userChartData"
-          username="kezlya"
-        ></Chart>
+        <!-- TODO: implement Chart -->
       </v-col>
       <v-col class="mt-4" cols="11" lg="8">
         <h3 class="headline mt-1 mb-3">
