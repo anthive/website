@@ -35,7 +35,7 @@
             block
             @click="replay()"
             >Replay
-            <v-icon class="ml-1" dark>autorenew</v-icon>
+            <AntHiveIcon class="ml-1" color="white">autorenew</AntHiveIcon>
           </v-btn>
           <div class="social-share">
             <p>Share the game</p>
@@ -52,7 +52,7 @@
                     rel="noreferrer"
                     :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                   >
-                    <v-icon>mdi-linkedin</v-icon>
+                    <AntHiveIcon color="grey">linkedin</AntHiveIcon>
                   </v-btn> </template
                 ><span>Share on Linkedin</span>
               </v-tooltip>
@@ -68,7 +68,7 @@
                     rel="noreferrer"
                     :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
                   >
-                    <v-icon>mdi-facebook</v-icon>
+                    <AntHiveIcon color="grey">facebook</AntHiveIcon>
                   </v-btn> </template
                 ><span>Share on Facebook</span>
               </v-tooltip>
@@ -84,7 +84,7 @@
                     rel="noreferrer"
                     :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                   >
-                    <v-icon>mdi-twitter</v-icon>
+                    <AntHiveIcon color="grey">twitter</AntHiveIcon>
                   </v-btn> </template
                 ><span>Share on Twitter</span>
               </v-tooltip>
@@ -100,7 +100,7 @@
                     rel="noreferrer"
                     :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                   >
-                    <v-icon>mdi-email</v-icon>
+                    <AntHiveIcon color="grey">email</AntHiveIcon>
                   </v-btn> </template
                 ><span>Send by Email</span>
               </v-tooltip>
@@ -114,7 +114,7 @@
                     v-on="on"
                     @click="copyToClipboard()"
                   >
-                    <v-icon>mdi-file-document-box-multiple</v-icon>
+                    <AntHiveIcon color="grey">file-document-box-multiple</AntHiveIcon>
                   </v-btn> </template
                 ><span>Copy URL</span>
               </v-tooltip>
@@ -128,8 +128,13 @@
 
 
 <script>
+import AntHiveIcon from '@/components/global/AntHiveIcon'
+
 export default {
   name: 'GamePlayer',
+  components: {
+    AntHiveIcon
+  },
   props: {
     status: String,
     isGameEnd: Boolean

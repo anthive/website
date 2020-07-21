@@ -10,15 +10,15 @@
         @click="doSort(column)"
       >
         {{ $t(column.text) }}
-        <v-icon
+        <AntHiveIcon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
-          >mdi-arrow-up</v-icon
+          >arrow-up</AnthiveIcon
         >
-        <v-icon
+        <AntHiveIcon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
-          >mdi-arrow-down</v-icon
+          >arrow-down</AnthiveIcon
         >
       </div>
     </v-row>
@@ -108,6 +108,8 @@
         :length="pages-1"
         total-visible="10"
         color="accent"
+        next-icon=">"
+        prev-icon="<"
       ></v-pagination>
     </v-toolbar>
     <v-dialog v-model="isShowUserCard" width="380">
@@ -122,6 +124,7 @@ import UserCard from '@/components/UserInfo/UserCard'
 import UserChip from '@/components/UserInfo/UserChip'
 import AuthorChip from '@/components/UserInfo/AuthorChip'
 import UserIcon from '@/components/UserInfo/UserIcon'
+import AntHiveIcon from '@/components/global/AntHiveIcon'
 import { timeAgo } from '@/services/User'
 import { search } from '@/services/Game'
 
@@ -131,7 +134,8 @@ export default {
     UserChip,
     UserIcon,
     AuthorChip,
-    UserCard
+    UserCard,
+    AntHiveIcon
   },
   props: {
     PageSize: {

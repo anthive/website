@@ -45,7 +45,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-twitter</v-icon>
+        <AntHiveIcon color="white" class="footer__social--icon">twitter</AntHiveIcon>
       </a>
       <a
         href="https://www.facebook.com/AntHive.IO/"
@@ -53,7 +53,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-facebook</v-icon>
+        <AntHiveIcon color="white" class="footer__social--icon">facebook</AntHiveIcon>
       </a>
       <a
         href="https://www.instagram.com/anthiveio/"
@@ -61,7 +61,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-instagram</v-icon>
+        <AntHiveIcon color="white" class="footer__social--icon">instagram</AntHiveIcon>
       </a>
       <a
         href="https://www.youtube.com/channel/UCx1KBAlciwcRuehIiOfnDVg"
@@ -69,7 +69,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-youtube</v-icon>
+        <AntHiveIcon color="white" class="footer__social--icon">youtube</AntHiveIcon>
       </a>
       <a
         href="https://www.twitch.tv/anthiveio"
@@ -77,7 +77,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <v-icon class="footer__social--icon">mdi-menu-up</v-icon>
+        <AntHiveIcon color="white" class="footer__social--icon">twitch</AntHiveIcon>
       </a>
     </div>
 
@@ -85,9 +85,7 @@
     <div col="12" md="2" class="footer__locale-select">
       <v-select
         v-model="selectedLocale"
-        class="footer__locale-select"
         :items="locales"
-        prepend-icon="mdi-earth"
         dense
         dark
         flat
@@ -95,14 +93,21 @@
         :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"
       ></v-select>
+      <AntHiveIcon color="white" class="footer__locale-select--earth-icon">earth</AntHiveIcon>
+      <AntHiveIcon color="white" class="footer__locale-select--up-icon">chevron-up</AntHiveIcon>
     </div>
 
   </v-footer>
 </template>
 
 <script>
+import AntHiveIcon from '@/components/global/AntHiveIcon'
+
 export default {
   name: 'defaultFooter',
+  components: {
+    AntHiveIcon
+  },
   data: () => ({
     locales: ['English', 'Русский'],
     selectedLocale: ''
@@ -141,8 +146,19 @@ export default {
     flex-direction: column;
   }
   &__locale-select {
-    max-width: 170px;
+    position: relative;
+    max-width: 120px;
     margin: 1px 0 2px;
+  }
+  &__locale-select--earth-icon {
+    position: absolute;
+    left: -25px;
+    top: 5px;
+  }
+  &__locale-select--up-icon {
+    position: absolute;
+    right: 0;
+    top: 5px;
   }
   &__social {
     margin-top: -3px;
