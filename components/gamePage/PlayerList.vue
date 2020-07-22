@@ -2,12 +2,11 @@
   <div class="players__wrap">
     <div class="d-flex flex-column players__list">
       <v-card class="d-flex align-center" @click="togglePlayerList()" tile color="accent"
-        ><v-icon
+        ><AntHiveIcon
           class="py-3 px-1 text-center mdi"
           color="white"
-          size="40"
-          :class="[showPlayerList ? 'mdi-chevron-left' : 'mdi-chevron-right']"
-        ></v-icon
+          big
+        >{{ showPlayerList ? 'chevron-left' : 'chevron-right' }}</AnthiveIcon
       > <v-card-text v-if="showPlayerList" class="pa-3 white--text">Click to see full info</v-card-text></v-card>
       <div :key="index" v-for="(player, index) in players">
         <v-card
@@ -34,13 +33,15 @@
 import UserChip from '@/components/UserInfo/UserChip'
 import UserIcon from '@/components/UserInfo/UserIcon'
 import UserCard from '@/components/UserInfo/UserCard'
+import AntHiveIcon from '@/components/global/AntHiveIcon'
 
 export default {
   name: 'PlayersList',
   components: {
     UserChip,
     UserIcon,
-    UserCard
+    UserCard,
+    AntHiveIcon
   },
   data: () => ({
     showPlayerList: false,

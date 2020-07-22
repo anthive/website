@@ -8,15 +8,15 @@
             <h3 class="headline">{{ user.name }}</h3>
           </v-card-title>
           <v-card-text class="user__card-text pt-0" v-if="user.company">
-            <v-icon class="mr-2" size="20">people</v-icon
+            <AntHiveIcon class="mr-2">people</AnthiveIcon
             ><span>{{ user.company }}</span></v-card-text
           >
           <v-card-text class="user__card-text pt-0" v-if="user.location">
-            <v-icon class="mr-2" size="20">place</v-icon
+            <AntHiveIcon class="mr-2">place</AnthiveIcon
             ><span>{{ user.location }}</span></v-card-text
           >
           <v-card-text class="user__card-text pt-0" v-if="user.blog">
-            <v-icon class="mr-2" size="20">public</v-icon
+            <AntHiveIcon class="mr-2">public</AnthiveIcon
             ><a :href="user.blog" target="_blank" rel="noreferrer">{{
               user.blog
             }}</a></v-card-text
@@ -42,9 +42,16 @@ import Chart from '@/components/chart'
 import gamesTable from '@/components/gamesTable'
 import UserCard from '@/components/UserInfo/UserCard'
 import { User } from '@/services/User'
+import AntHiveIcon from '@/components/global/AntHiveIcon'
 
 export default {
   name: 'user',
+  components: {
+    gamesTable,
+    Chart,
+    UserCard,
+    AntHiveIcon
+  },
   data: () => ({
     status: null,
     user: {},
@@ -76,11 +83,6 @@ export default {
       console.log('result', result)
       this.user = result
     })
-  },
-  components: {
-    gamesTable,
-    Chart,
-    UserCard
   }
 }
 </script>
