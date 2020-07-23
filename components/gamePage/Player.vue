@@ -11,7 +11,7 @@
       ref="playerWrap"
     ></div>
     <div id="player">
-      <h2 class="px-2 white--text loading">{{ status }}</h2>
+      <h2 class="px-2 white--text loading">{{ $t(`game.${status}`) }}</h2>
     </div>
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
@@ -24,7 +24,7 @@
             height="72"
             block
             :href="`https://profile.anthive.io/new-game/?rematch=${this.gameId}`"
-            >Request rematch</v-btn
+            >{{ $t('game.requestRematch') }}</v-btn
           >
           <v-btn
             class="layout-button"
@@ -34,11 +34,11 @@
             height="72"
             block
             @click="$emit('replay')"
-            >Replay
+            >{{ $t('game.replay') }}
             <AntHiveIcon class="ml-1" color="white">autorenew</AntHiveIcon>
           </v-btn>
           <div class="social-share">
-            <p>Share the game</p>
+            <p>{{ $t('game.shareGame') }}</p>
             <div class="d-flex justify-center">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -54,7 +54,7 @@
                   >
                     <AntHiveIcon color="grey">linkedin</AntHiveIcon>
                   </v-btn> </template
-                ><span>Share on Linkedin</span>
+                ><span>{{ $t('game.shareOn') }} Linkedin</span>
               </v-tooltip>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -70,7 +70,7 @@
                   >
                     <AntHiveIcon color="grey">facebook</AntHiveIcon>
                   </v-btn> </template
-                ><span>Share on Facebook</span>
+                ><span>{{ $t('game.shareOn') }} Facebook</span>
               </v-tooltip>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -86,7 +86,7 @@
                   >
                     <AntHiveIcon color="grey">twitter</AntHiveIcon>
                   </v-btn> </template
-                ><span>Share on Twitter</span>
+                ><span>{{ $t('game.shareOn') }} Twitter</span>
               </v-tooltip>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -102,7 +102,7 @@
                   >
                     <AntHiveIcon color="grey">email</AntHiveIcon>
                   </v-btn> </template
-                ><span>Send by Email</span>
+                ><span>{{ $t('game.sendBy') }} Email</span>
               </v-tooltip>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -116,7 +116,7 @@
                   >
                     <AntHiveIcon color="grey">file-document-box-multiple</AntHiveIcon>
                   </v-btn> </template
-                ><span>Copy URL</span>
+                ><span>{{ $t('game.copyUrl') }}</span>
               </v-tooltip>
             </div>
           </div>

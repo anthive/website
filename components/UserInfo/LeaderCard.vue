@@ -6,15 +6,14 @@
       </div>
     </div>
     <div class="d-flex flex-column">
-      <span class="primary--text f-text-large">{{ us.Username }}, {{place}} place</span>
+      <span class="primary--text f-text-large">{{ us.Username }}, {{ place }} {{ $t('leaderboard.place') }}</span>
 
       <span class="accent--text f-text"
-        >Total games played:
-        <span class="primary--text">{{ us.TotalGames }}</span> Total wealth
-        earned: <span class="primary--text">{{ us.TotalWealth }}</span></span
+        >{{ $t('leaderboard.totalGames') }}:
+        <span class="primary--text">{{ us.TotalGames }}</span> {{ $t('leaderboard.totalWealth') }}: <span class="primary--text">{{ us.TotalWealth }}</span></span
       >
     </div>
-    <div><AntHiveBtn @click="toProfile()" class="ml-6" color="accent">{{$t("userInfo.profile")}}</AntHiveBtn></div>
+    <div><AntHiveBtn @click="toProfile()" class="ml-6" color="accent">{{ $t("userInfo.profile") }}</AntHiveBtn></div>
   </v-card>
 </template>
 

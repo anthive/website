@@ -7,10 +7,10 @@
     </div>
     <div class="ml-2 d-flex flex-column">
       <div class="d-flex align-center">
-        <span class="primary--text f-text">By {{ author }}</span>
+        <span class="primary--text f-text">{{ author }}</span>
       </div>
 
-      <span class="accent--text">{{ dateCreate(date) }}</span>
+      <span class="accent--text">{{ getTimeAgo + $t(`games.${getTextTimeAgo}`) }}</span>
     </div>
   </div>
 </template>
@@ -24,13 +24,17 @@ export default {
     author: String,
     date: Number
   },
-  data: () => ({}),
   methods: {
     photoUrl() {
       return 'https://github.com/' + this.author + '.png?size=50'
+    }
+  },
+  computed: {
+    getTimeAgo() {
+      return timeAgo(this.date).time || ''
     },
-    dateCreate(date) {
-      return timeAgo(date)
+    getTextTimeAgo() {
+      return timeAgo(this.date).text
     }
   }
 }

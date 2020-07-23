@@ -58,12 +58,44 @@
     "player": "Игрок",
     "ticks": "Тики",
     "wealth": "Очки",
-    "date": "Дата"
+    "date": "Дата",
+    "viewGame": "Посмотреть игру",
+    "sort": "Сортировать",
+    "monthsAgo": "м назад",
+    "weeksAgo": "н назад",
+    "daysAgo": "д назад",
+    "hoursAgo": "ч назад",
+    "minutesAgo": "м назад",
+    "secondsAgo": "с назад",
+    "justNow": "Только что"
   },
 
-  "leaderoard": {
+  "game": {
+    "loading": "Загрузка...",
+    "requestRematch": "Рематч",
+    "shareGame": "Поделться игрой",
+    "replay": "Повтор",
+    "shareOn": "Поделиться в",
+    "sendBy": "Отправить по",
+    "copyUrl": "Скопировать ссылку",
+    "sidebarTitle": "Свернуть"
+  },
+
+  "leaderboard": {
+    "title1": "Таблица лидеров",
+    "title2": "Самые скиловые игроки AntHive",
     "games": "игр",
-    "wealth": "очков"
+    "wealth": "очков",
+    "topBy": "Сортировать по",
+    "byGames": "Играм",
+    "byWealth": "Очкам",
+    "top3wealthy": "Топ 3 игроков AntHive по очкам",
+    "top3hard": "Топ 3 игроков AntHive по количеству игр",
+    "top100wealthy": "Топ 100 игроков AntHive по очкам",
+    "top100hard": "Топ 100 игроков AntHive по количеству игр",
+    "place": "место",
+    "totalGames": "Всего игр",
+    "totalWealth": "Всего очков"
   },
 
   "userInfo": {

@@ -1,7 +1,7 @@
 <template>
   <div id="games-table" class="games-table">
     <v-row class="games-table__sort">
-      <div class="primary--text text-xs-left font-weight-bold">Sort:</div>
+      <div class="primary--text text-xs-left font-weight-bold">{{ $t("games.sort") }}:</div>
       <div
         class="primary--text games-table__sort-item"
         v-for="(column, index) in columns"
@@ -59,12 +59,13 @@
             >
               <UserIcon class="ml-1" :player="player" locale="table"/></a>
 
-            <div
-              @click="openGame(item)"
+            <AntHiveBtn
+              color="accent"
+              :to="localePath({ name: 'game', query: {id: item._id, v: item._source.Version} })"
               class="games-table__players-more ml-1"
             >
               <span>+{{ item._source.Players.length - 4 }}</span>
-            </div>
+            </AntHiveBtn>
           </div>
           <div
             v-else
@@ -85,17 +86,17 @@
           >
             <div class="games-table__stat">
               <div class="games-table__stat-value">{{ item._source.Age }}</div>
-              <div class="games-table__stat-name">Ticks</div>
+              <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
             </div>
             <div class="games-table__stat">
               <div class="games-table__stat-value">
                 {{ item._source.Wealth }}
               </div>
-              <div class="games-table__stat-name">Wealth</div>
+              <div class="games-table__stat-name">{{ $t("games.wealth") }}</div>
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-2">
-            <AntHiveBtn @click="openGame(item)" width="100%" color="accent">View Game</AntHiveBtn>
+            <AntHiveBtn :to="localePath({ name: 'game', query: {id: item._id, v: item._source.Version} })" width="100%" color="accent">{{ $t("games.viewGame") }}</AntHiveBtn>
           </div>
         </div>
       </div></v-card
@@ -125,7 +126,6 @@ import UserChip from '@/components/UserInfo/UserChip'
 import AuthorChip from '@/components/UserInfo/AuthorChip'
 import UserIcon from '@/components/UserInfo/UserIcon'
 import AntHiveIcon from '@/components/global/AntHiveIcon'
-import { timeAgo } from '@/services/User'
 import { search } from '@/services/Game'
 
 export default {
@@ -235,23 +235,6 @@ export default {
       this.$router.push('/game/?id=' + data._id + '&v=' + data._source.Version)
     },
 
-    //READY
-    getColumnData(data, field) {
-      let value = ''
-      switch (field.value) {
-        case 'Age':
-          value = data._source.Age
-          break
-        case 'Played':
-          value = timeAgo(data._source.Played) + "<br><span class='primary--text'>by " + data._source.Author + '</span>'
-          break
-        case 'Wealth':
-          value = data._source.Wealth
-          break
-      }
-      return value
-    },
-
     async loadGames() {
       this.loading = true
       search(this.sort, this.currentPage, this.PageSize, this.Filters).then(games => {
@@ -292,24 +275,11 @@ export default {
     align-items: center;
   }
   &__players-more {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 34px;
+    padding: 0 !important;
+    display: flex !important;
+    min-width: 38px !important;
     height: 34px;
-    min-width: 34px;
-    color: $color-white;
-    transition: 0.5s;
-    border-radius: $border-radius-default;
-    background-color: $color-red-300;
-    border: 2px solid $color-red-300;
-    cursor: pointer;
-  }
-  &__players-more:hover {
-    border: 2px solid $color-red-500;
-    background: $color-red-500;
-    transition: 0.5s;
+    min-height: 36px;
   }
   &__stats-container {
     display: flex;

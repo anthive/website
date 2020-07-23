@@ -21,7 +21,7 @@
       <!-- Leaderboard place -->
       <div v-if="place != 0" class="user-card__user_info">
         <span class="accent--text f-text-large d-block text-center"
-          >{{ place }} place</span
+          >{{ place }} {{ $t('leaderboard.place') }}</span
         >
       </div>
       <!-- Bot settings -->
@@ -47,13 +47,13 @@
           <span class="user-card__user-stat-value">{{
             player.TotalGames
           }}</span>
-          <span class="user-card__user-stat-key">Total Games</span>
+          <span class="user-card__user-stat-key">{{ $t('leaderboard.totalGames') }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{
             player.TotalWealth
           }}</span>
-          <span class="user-card__user-stat-key">Total Wealth</span>
+          <span class="user-card__user-stat-key">{{ $t('leaderboard.totalWealth') }}</span>
         </div>
       </div>
       <!-- Games stats -->
@@ -93,7 +93,7 @@
       </div>
       <!-- Actions -->
       <div class="user-card__actions">
-        <AntHiveBtn @click="toProfile()" class="mx-auto my-2 d-block" color="accent">{{
+        <AntHiveBtn :to="localePath({ name: 'user', query: {username: us.Username} })" class="mx-auto my-2" color="accent">{{
           $t("userInfo.profile")
         }}</AntHiveBtn>
       </div>
@@ -122,11 +122,6 @@ export default {
       this.us = new User()
       this.us.initUser(this.player)
     }
-  },
-  methods: {
-    toProfile() {
-      this.$router.push(`/user/?username=${this.us.Username}`)
-    }
   }
 }
 </script>
@@ -143,6 +138,9 @@ export default {
   }
   &__container {
     padding: 5px 10px;
+  }
+  &__actions {
+    text-align: center;
   }
   &__avatar {
     width: 80px;

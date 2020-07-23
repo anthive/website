@@ -45,8 +45,8 @@ export default {
 <style lang="scss" scoped>
 .anthive-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 .small {
   width: 16px;

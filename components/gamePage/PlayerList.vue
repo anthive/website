@@ -7,7 +7,7 @@
           color="white"
           big
         >{{ showPlayerList ? 'chevron-left' : 'chevron-right' }}</AnthiveIcon
-      > <v-card-text v-if="showPlayerList" class="pa-3 white--text">Click to see full info</v-card-text></v-card>
+      > <v-card-text v-if="showPlayerList" class="pa-3 white--text">{{ $t('game.sidebarTitle') }}</v-card-text></v-card>
       <div :key="index" v-for="(player, index) in players">
         <v-card
           v-if="showPlayerList"
