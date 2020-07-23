@@ -118,6 +118,13 @@ export default {
     &__score {
       text-align: center;
     }
+    &__avatar-name {
+      padding-left: 0;
+    }
+    &__name {
+      line-height: normal;
+      padding-top: 12px;
+    }
   }
 }
 </style>
