@@ -45,12 +45,12 @@ export default {
     sortBy: 'totalWealth',
     columns: [
       {
-        text: 'byGames',
+        text: 'games',
         sortable: true,
         value: 'totalGames'
       },
       {
-        text: 'byWealth',
+        text: 'wealth',
         sortable: true,
         value: 'totalWealth'
       }
