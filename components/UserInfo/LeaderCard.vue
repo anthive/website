@@ -1,27 +1,50 @@
 <template>
-  <v-card class="leader-card">
-    <div>
-      <div class="user-icon__avatar">
-        <v-img class="" :src="us.photoUrl(100)" />
-      </div>
-    </div>
-    <div class="d-flex flex-column">
-      <span class="primary--text f-text-large">{{ us.Username }}, {{ place }} {{ $t('leaderboard.place') }}</span>
-
-      <span class="accent--text f-text"
-        >{{ $t('leaderboard.totalGames') }}:
-        <span class="primary--text">{{ us.TotalGames }}</span> {{ $t('leaderboard.totalWealth') }}: <span class="primary--text">{{ us.TotalWealth }}</span></span
-      >
-    </div>
-    <div><AntHiveBtn @click="toProfile()" class="ml-6" color="accent">{{ $t("userInfo.profile") }}</AntHiveBtn></div>
-  </v-card>
+  <div class="px-3">
+    <v-row class="leader-card">
+      <v-col cols="1" class="leader-card__places">
+        <AntHiveIcon
+          color="#362d59"
+          big
+          v-if="place === 1"
+          >rank1</AnthiveIcon
+        >
+        <AntHiveIcon
+          color="#362d59"
+          big
+          v-else-if="place === 2"
+          >rank2</AnthiveIcon
+        >
+        <AntHiveIcon
+          color="#362d59"
+          big
+          v-else-if="place === 3"
+          >rank3</AnthiveIcon
+        >
+        <span v-else class="leader-card__place-text">{{ place }}</span>
+      </v-col>
+      <v-col cols="7">
+        <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
+          <div class="leader-card__avatar-name">
+            <v-img class="leader-card__avatar" :src="us.photoUrl(100)" />
+            <span class="leader-card__name">{{ us.Username }}</span>
+          </div>
+        </router-link>
+      </v-col>
+      <v-col cols="2" class="leader-card__score">{{ us.TotalGames }}</v-col>
+      <v-col cols="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import { User } from '@/services/User'
+import AntHiveIcon from '@/components/global/AntHiveIcon'
 
 export default {
   name: 'userChip',
+  components: {
+    AntHiveIcon
+  },
   props: {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
@@ -38,11 +61,6 @@ export default {
       this.us = new User()
       this.us.initUser(this.leader)
     }
-  },
-  methods: {
-    toProfile() {
-      this.$router.push(`/user/?username=${this.us.Username}`)
-    }
   }
 }
 </script>
@@ -51,26 +69,53 @@ export default {
 @import '@/assets/style/global.scss';
 
 .leader-card {
-  max-width: 700px;
-  padding: 12px;
+  padding: 12px 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
   align-items: center;
-}
+  box-sizing: border-box;
+  margin-bottom: -1px;
+  border-top: 1px solid $color-red-300;
 
-.user-icon {
+  &__place-icon {
+    width: 36px;
+  }
+
+  &__place-text {
+    font-size: 22px;
+    font-weight: 500;
+    padding-left: 11px;
+  }
+
+  &__avatar-name {
+    display: flex;
+    padding-left: 20px;
+  }
+
+  &__name {
+    font-weight: 500;
+    margin-left: 10px;
+    line-height: 60px;
+  }
+
   &__avatar {
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     border-radius: $border-radius-default;
     border: 2px solid $color-red-300;
     box-sizing: content-box;
   }
+
+  &__score {
+    text-align: right;
+  }
 }
 @media screen and (max-width: $screen-lg) {
-  .user-icon {
+  .leader-card {
     &__avatar {
       margin-right: 10px;
     }

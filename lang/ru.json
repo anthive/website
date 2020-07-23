@@ -84,8 +84,8 @@
   "leaderboard": {
     "title1": "Таблица лидеров",
     "title2": "Самые скиловые игроки AntHive",
-    "games": "игр",
-    "wealth": "очков",
+    "games": "Игры",
+    "wealth": "Очки",
     "topBy": "Сортировать по",
     "byGames": "Играм",
     "byWealth": "Очкам",
@@ -93,9 +93,10 @@
     "top3hard": "Топ 3 игроков AntHive по количеству игр",
     "top100wealthy": "Топ 100 игроков AntHive по очкам",
     "top100hard": "Топ 100 игроков AntHive по количеству игр",
-    "place": "место",
+    "place": "Место",
     "totalGames": "Всего игр",
-    "totalWealth": "Всего очков"
+    "totalWealth": "Всего очков",
+    "player": "Игрок"
   },
 
   "userInfo": {

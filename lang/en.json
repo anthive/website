@@ -84,8 +84,8 @@
   "leaderboard": {
     "title1": "Leaderboard",
     "title2": "The most skillful AntHive players",
-    "games": "games",
-    "wealth": "wealth",
+    "games": "Games",
+    "wealth": "Wealth",
     "topBy": "Top by",
     "byGames": "Games",
     "byWealth": "Wealth",
@@ -93,9 +93,10 @@
     "top3hard": "Top 3 hard AntHive players",
     "top100wealthy": "Top 3 wealthy AntHive players",
     "top100hard": "Top 3 hard AntHive players",
-    "place": "place",
+    "place": "Place",
     "totalGames": "Total games played",
-    "totalWealth": "Total wealth earned"
+    "totalWealth": "Total wealth earned",
+    "player": "Player"
   },
 
   "userInfo": {
