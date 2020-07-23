@@ -99,19 +99,19 @@ function timeAgo(epochStamp) {
   }
   if (diff > periods.month) {
     // it was at least a month ago
-    return Math.floor(diff / periods.month) + 'm ago'
+    return { time: Math.floor(diff / periods.month), text: 'monthsAgo' }
   } else if (diff > periods.week) {
-    return Math.floor(diff / periods.week) + 'w ago'
+    return { time: Math.floor(diff / periods.week), text: 'weeksAgo' }
   } else if (diff > periods.day) {
-    return Math.floor(diff / periods.day) + 'd ago'
+    return { time: Math.floor(diff / periods.day), text: 'daysAgo' }
   } else if (diff > periods.hour) {
-    return Math.floor(diff / periods.hour) + 'h ago'
+    return { time: Math.floor(diff / periods.hour), text: 'hoursAgo' }
   } else if (diff > periods.minute) {
-    return Math.floor(diff / periods.minute) + 'm ago'
+    return { time: Math.floor(diff / periods.minute), text: 'minutesAgo' }
   } else if (diff > periods.second) {
-    return Math.floor(diff / periods.second) + 's ago'
+    return { time: Math.floor(diff / periods.second), text: 'secondsAgo' }
   }
-  return 'Just now'
+  return { time: null, text: 'justNow' }
 }
 
 function handleError(error) {

@@ -22,7 +22,7 @@ import GamePlayer from '@/components/gamePage/Player'
 var player = null
 export default {
   data: () => ({
-    status: 'Loading...',
+    status: 'loading',
     theme: 1,
     players: [],
     isGameEnd: false,

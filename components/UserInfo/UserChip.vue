@@ -18,7 +18,7 @@
             <span class="user-chip__version">v.{{ us.Version }}</span>
           </v-avatar>
         </div>
-      <span class="accent--text">Wealth: {{ us.Wealth }}, Ticks: {{ us.Stats.Age }}</span>
+      <span class="accent--text">{{ $t('games.wealth') }}: {{ us.Wealth }}, {{ $t('games.ticks') }}: {{ us.Stats.Age }}</span>
     </div>
   </div>
 </template>

@@ -4,13 +4,13 @@
       <v-card class="leaderboard__card">
         <v-card-title class="mb-3 d-flex justify-space-between align-center">
           <h1 class="headline">
-            <span class="primary--text font-weight-medium">Leaderboard:</span>
+            <span class="primary--text font-weight-medium">{{ $t("leaderboard.title1") }}:</span>
             <span class="primary--text ml-2"
-              >The most skillful AntHive players
+              >{{ $t("leaderboard.title2") }}
             </span>
           </h1>
           <div class="d-flex col-12 col-md-3 justify-space-around">
-            <span class="primary--text">Top by: </span>
+            <span class="primary--text">{{$t("leaderboard.topBy")}}: </span>
             <div
               :class="{ 'accent--text': column.value === sortBy }"
               class="primary--text leaderboard__sort-item"
@@ -18,13 +18,13 @@
               :key="index"
               @click="doSort(column.value)"
             >
-              {{ column.text }}
+              {{ $t(`leaderboard.${column.text}`) }}
             </div>
           </div>
         </v-card-title>
         <span class="primary--text text-center d-block title my-4"
-          >Top 3 <span v-if="sortBy === 'totalWealth'">wealthy</span>
-          <span v-if="sortBy === 'totalGames'">hard</span> AntHive players
+          ><span v-if="sortBy === 'totalWealth'">{{ $t("leaderboard.top3wealthy") }}</span>
+          <span v-if="sortBy === 'totalGames'">{{ $t("leaderboard.top3hard") }}</span>
         </span>
         <div class="leaderboard__top-players">
           <UserCard
@@ -36,8 +36,8 @@
           />
         </div>
         <span class="primary--text text-center d-block title my-4"
-          >Top 100 <span v-if="sortBy === 'totalWealth'">wealthy</span>
-          <span v-if="sortBy === 'totalGames'">hard</span> AntHive players
+          ><span v-if="sortBy === 'totalWealth'">{{ $t("leaderboard.top100wealthy") }}</span>
+          <span v-if="sortBy === 'totalGames'">{{ $t("leaderboard.top100wealthy") }}</span>
         </span>
         <LeaderCard
           class="my-3"
@@ -67,12 +67,12 @@ export default {
     sortBy: 'totalWealth',
     columns: [
       {
-        text: 'Games',
+        text: 'byGames',
         sortable: true,
         value: 'totalGames'
       },
       {
-        text: 'Wealth',
+        text: 'byWealth',
         sortable: true,
         value: 'totalWealth'
       }
