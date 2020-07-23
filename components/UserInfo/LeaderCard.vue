@@ -69,7 +69,6 @@ export default {
 @import '@/assets/style/global.scss';
 
 .leader-card {
-  padding: 12px 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
