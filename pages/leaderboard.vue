@@ -2,13 +2,13 @@
   <section class="leaderboard texture-arrows">
     <v-card class="leaderboard__table">
       <v-row class="leaderboard__table-head">
-        <v-col cols="1" class="leader-card__places">
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
           <span>{{ $t('leaderboard.place') }}</span>
         </v-col>
-        <v-col cols="7" class="pl-7">
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="7" class="pl-7">
           <span>{{ $t('leaderboard.player') }}</span>
         </v-col>
-        <v-col cols="2"
+        <v-col cols="6" sm="2"
           :class="{ 'accent--text': column.value === sortBy }"
           class="leaderboard__table-score"
           v-for="(column, index) in columns"
@@ -125,6 +125,13 @@ export default {
     }
     &__user-card {
       margin: 0 auto 15px;
+    }
+  }
+}
+@media screen and (max-width: $screen-md) {
+  .leaderboard {
+    &__table-score {
+      text-align: center;
     }
   }
 }

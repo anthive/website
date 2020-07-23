@@ -1,7 +1,7 @@
 <template>
   <div class="px-3">
     <v-row class="leader-card">
-      <v-col cols="1" class="leader-card__places">
+      <v-col cols="2" sm="1" class="leader-card__places">
         <AntHiveIcon
           color="#362d59"
           big
@@ -22,7 +22,7 @@
         >
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
-      <v-col cols="7">
+      <v-col cols="7" sm="7">
         <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
           <div class="leader-card__avatar-name">
             <v-img class="leader-card__avatar" :src="us.photoUrl(100)" />
@@ -30,8 +30,8 @@
           </div>
         </router-link>
       </v-col>
-      <v-col cols="2" class="leader-card__score">{{ us.TotalGames }}</v-col>
-      <v-col cols="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
+      <v-col cols="3" sm="2" class="leader-card__score">{{ us.TotalGames }} <div v-if="$vuetify.breakpoint.smAndDown">{{ us.TotalWealth }}</div></v-col>
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
     </v-row>
   </div>
 </template>
@@ -113,10 +113,10 @@ export default {
     text-align: right;
   }
 }
-@media screen and (max-width: $screen-lg) {
+@media screen and (max-width: $screen-md) {
   .leader-card {
-    &__avatar {
-      margin-right: 10px;
+    &__score {
+      text-align: center;
     }
   }
 }
