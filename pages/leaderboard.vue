@@ -1,53 +1,31 @@
 <template>
   <section class="leaderboard texture-arrows">
-    <v-container class="px-2">
-      <v-card class="leaderboard__card">
-        <v-card-title class="mb-3 d-flex justify-space-between align-center">
-          <h1 class="headline">
-            <span class="primary--text font-weight-medium">{{ $t("leaderboard.title1") }}:</span>
-            <span class="primary--text ml-2"
-              >{{ $t("leaderboard.title2") }}
-            </span>
-          </h1>
-          <div class="d-flex col-12 col-md-3 justify-space-around">
-            <span class="primary--text">{{$t("leaderboard.topBy")}}: </span>
-            <div
-              :class="{ 'accent--text': column.value === sortBy }"
-              class="primary--text leaderboard__sort-item"
-              v-for="(column, index) in columns"
-              :key="index"
-              @click="doSort(column.value)"
-            >
-              {{ $t(`leaderboard.${column.text}`) }}
-            </div>
-          </div>
-        </v-card-title>
-        <span class="primary--text text-center d-block title my-4"
-          ><span v-if="sortBy === 'totalWealth'">{{ $t("leaderboard.top3wealthy") }}</span>
-          <span v-if="sortBy === 'totalGames'">{{ $t("leaderboard.top3hard") }}</span>
-        </span>
-        <div class="leaderboard__top-players">
-          <UserCard
-            class="leaderboard__user-card"
-            :key="player.Username + index"
-            v-for="(player, index) in players.slice(0, 3)"
-            :place="index + 1"
-            :player="player"
-          />
-        </div>
-        <span class="primary--text text-center d-block title my-4"
-          ><span v-if="sortBy === 'totalWealth'">{{ $t("leaderboard.top100wealthy") }}</span>
-          <span v-if="sortBy === 'totalGames'">{{ $t("leaderboard.top100wealthy") }}</span>
-        </span>
-        <LeaderCard
-          class="my-3"
-          :key="player.Username + index"
-          v-for="(player, index) in players.slice(3)"
-          :place="index + 4"
-          :leader="player"
-        />
-      </v-card>
-    </v-container>
+    <v-card class="leaderboard__table">
+      <v-row class="leaderboard__table-head">
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
+          <span>{{ $t('leaderboard.place') }}</span>
+        </v-col>
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="7" class="pl-7">
+          <span>{{ $t('leaderboard.player') }}</span>
+        </v-col>
+        <v-col cols="6" sm="2"
+          :class="{ 'accent--text': column.value === sortBy }"
+          class="leaderboard__table-score"
+          v-for="(column, index) in columns"
+          :key="index"
+          @click="doSort(column.value)"
+        >
+          {{ $t(`leaderboard.${column.text}`) }}
+        </v-col>
+      </v-row>
+      <LeaderCard
+        class="leaderboard__table-player"
+        :key="player.Username + index"
+        v-for="(player, index) in players"
+        :place="index + 1"
+        :leader="player"
+      />
+    </v-card>
   </section>
 </template>
 
@@ -67,12 +45,12 @@ export default {
     sortBy: 'totalWealth',
     columns: [
       {
-        text: 'byGames',
+        text: 'games',
         sortable: true,
         value: 'totalGames'
       },
       {
-        text: 'byWealth',
+        text: 'wealth',
         sortable: true,
         value: 'totalWealth'
       }
@@ -100,8 +78,26 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
+  padding: 40px 0;
   &__card {
     padding: 0 10px 10px;
+  }
+  &__table {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  &__table-head {
+    padding: 0 12px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  &__table-score {
+    text-align: right;
+    cursor: pointer;
+  }
+  &__table-player {
+    margin: 0;
   }
   &__user-card {
     margin-bottom: 15px;
@@ -129,6 +125,13 @@ export default {
     }
     &__user-card {
       margin: 0 auto 15px;
+    }
+  }
+}
+@media screen and (max-width: $screen-md) {
+  .leaderboard {
+    &__table-score {
+      text-align: center;
     }
   }
 }

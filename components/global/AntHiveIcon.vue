@@ -36,6 +36,7 @@ export default {
         background-color: ${this.color};
         -webkit-mask: url(/img/${this.getIconName}.svg) no-repeat center;
         mask: url(/img/${this.getIconName}.svg) no-repeat center;
+        mask-size: cover;
       `
     }
   }
