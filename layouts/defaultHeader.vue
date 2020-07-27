@@ -43,7 +43,7 @@
           $t("header.leaderboard")
         }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+        <AntHiveBtn v-if="!isUserLogged" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
@@ -53,11 +53,18 @@
 
 <script>
 import Logo from '@/components/logo'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'defaultHeader',
   components: {
     Logo
+  },
+  computed: {
+    ...mapGetters(['getUserAuthStatus']),
+    isUserLogged() {
+      return this.getUserAuthStatus
+    }
   }
 }
 </script>
