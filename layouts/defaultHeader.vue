@@ -43,7 +43,7 @@
           $t("header.leaderboard")
         }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+        <AntHiveBtn onClick="ga('send', 'event', 'getstarted', 'redirect');" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
