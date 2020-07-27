@@ -43,7 +43,7 @@
           $t("header.leaderboard")
         }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+        <AntHiveBtn @click="handlerClickGetStarted" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
@@ -58,6 +58,12 @@ export default {
   name: 'defaultHeader',
   components: {
     Logo
+  },
+  methods: {
+    handlerClickGetStarted() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect' })
+      window.location.href = 'https://profile.anthive.io/'
+    }
   }
 }
 </script>
