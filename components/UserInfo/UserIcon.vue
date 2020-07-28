@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="user-icon__avatar">
-      <v-img class="" :src="us.photoUrl(100)" />
+      <v-img :src="us.photoUrl(100)" />
     </div>
   </div>
 </template>

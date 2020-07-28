@@ -237,13 +237,11 @@ export default {
 
     async loadGames() {
       this.loading = true
-      search(this.sort, this.currentPage, this.PageSize, this.Filters).then(games => {
-        if (games != null) {
-          this.pages = Math.ceil(games.total.value / this.PageSize)
-          this.items = games.hits
-        }
-        this.loading = false
-      })
+      const games = await search(this.sort, this.currentPage, this.PageSize, this.Filters)
+      if (!games) return
+      this.pages = Math.ceil(games.total.value / this.PageSize)
+      this.items = games.hits
+      this.loading = false
     }
   }
 }
