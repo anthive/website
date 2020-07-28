@@ -1,7 +1,7 @@
 class Cookie {
   static set(...values) {
     const cookieLifetime = new Date(Date.now() + 1000 * 60 * 60 * 24)
-    const options = `; path=/; domain=localhost; expires=${cookieLifetime};`
+    const options = `; path=/; domain=anthive.io; expires=${cookieLifetime};`
 
     values.forEach(value => {
       document.cookie = value + ' ' + options
