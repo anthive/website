@@ -43,7 +43,7 @@
           $t("header.leaderboard")
         }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn v-if="!isUserLogged" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+        <AntHiveBtn v-if="!isUserLogged" @click="handlerClickGetStarted" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
@@ -64,6 +64,12 @@ export default {
     ...mapGetters(['getUserAuthStatus']),
     isUserLogged() {
       return this.getUserAuthStatus
+    }
+  },
+  methods: {
+    handlerClickGetStarted() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect' })
+      window.location.href = 'https://profile.anthive.io/'
     }
   }
 }

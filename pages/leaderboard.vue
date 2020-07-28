@@ -63,10 +63,7 @@ export default {
     async getLeaders() {
       let sortQuery = {}
       sortQuery[this.sortBy] = 'desc'
-      search(sortQuery).then(leaders => {
-        console.log('start search')
-        this.players = leaders
-      })
+      this.players = await search(sortQuery)
     },
     async doSort(sort) {
       this.sortBy = sort
