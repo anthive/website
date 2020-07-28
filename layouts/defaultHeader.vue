@@ -58,7 +58,7 @@
           {{ getUser.userName }}
         </v-chip>
         
-        <AntHiveBtn v-else @click="handlerClickGetStarted" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+        <AntHiveBtn v-else @click="handlerClickGetStarted" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
