@@ -12,6 +12,7 @@
 import defaultHeader from '@/layouts/defaultHeader'
 import defaultFooter from '@/layouts/defaultFooter'
 import { mapMutations } from 'vuex'
+import Cookie from '@/services/Cookie'
 
 export default {
   components: {
@@ -19,16 +20,15 @@ export default {
     defaultFooter
   },
   methods: {
-    ...mapMutations(['setUserAuthStatus'])
+    ...mapMutations(['setUser'])
   },
   created() {
     if (process.client) {
-      const isUserLogged = ('; ' + document.cookie)
-        .split('; auth=')
-        .pop()
-        .split(';')
-        .shift()
-      this.setUserAuthStatus(!!isUserLogged)
+      const user = {
+        userName: Cookie.get('userName'),
+        userAvatar: Cookie.get('userAvatar')
+      }
+      this.setUser(user)
     }
   }
 }

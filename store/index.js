@@ -1,13 +1,13 @@
 export const state = () => ({
-  isUserLogged: false
+  user: null
 })
 
 export const getters = {
-  getUserAuthStatus: state => state.isUserLogged
+  getUser: state => state.user
 }
 
 export const mutations = {
-  setUserAuthStatus(state, boolean) {
-    state.isUserLogged = boolean
+  setUser(state, user) {
+    state.user = user
   }
 }

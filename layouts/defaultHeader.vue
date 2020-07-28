@@ -43,7 +43,22 @@
           $t("header.leaderboard")
         }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
-        <AntHiveBtn v-if="!isUserLogged" @click="handlerClickGetStarted" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
+
+        <v-chip
+          v-if="getUser"
+          label
+          class="header__user-chip"
+          color="accent"
+          pill
+          @click="handlerClickGetStarted"
+        >
+          <v-avatar tile :left="!$vuetify.breakpoint.mdAndDown">
+            <v-img :src="getUser.userAvatar" />
+          </v-avatar>
+          {{ getUser.userName }}
+        </v-chip>
+        
+        <AntHiveBtn v-else @click="handlerClickGetStarted" href="https://profile.anthive.io/" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>
@@ -61,10 +76,7 @@ export default {
     Logo
   },
   computed: {
-    ...mapGetters(['getUserAuthStatus']),
-    isUserLogged() {
-      return this.getUserAuthStatus
-    }
+    ...mapGetters(['getUser'])
   },
   methods: {
     handlerClickGetStarted() {
@@ -86,5 +98,8 @@ a {
 
 .header {
   background: $color-white !important;
+  &__user-chip {
+    margin-left: 10px;
+  }
 }
 </style>
