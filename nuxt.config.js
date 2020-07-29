@@ -101,7 +101,8 @@ module.exports = {
         defaultLocale: 'en'
       }
     ],
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }]
   ],
   sitemap: {
     hostname: 'https://anthive.io'

@@ -8,6 +8,6 @@ export const getters = {
 
 export const mutations = {
   setUser(state, user) {
-    state.user = user
+    state.user = user && user.userName && user.userAvatar ? user : null
   }
 }

@@ -12,7 +12,6 @@
 import defaultHeader from '@/layouts/defaultHeader'
 import defaultFooter from '@/layouts/defaultFooter'
 import { mapMutations } from 'vuex'
-import Cookie from '@/services/Cookie'
 
 export default {
   components: {
@@ -23,13 +22,11 @@ export default {
     ...mapMutations(['setUser'])
   },
   created() {
-    if (process.client) {
-      const user = {
-        userName: Cookie.get('userName'),
-        userAvatar: Cookie.get('userAvatar')
-      }
-      this.setUser(user)
+    const user = {
+      userName: this.$cookiz.get('userName'),
+      userAvatar: this.$cookiz.get('userAvatar')
     }
+    this.setUser(user)
   }
 }
 </script>
