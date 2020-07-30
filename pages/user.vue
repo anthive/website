@@ -80,7 +80,6 @@ export default {
     this.us = new User()
     this.filters = { term: { 'Players.Username': username } }
     this.us.getUserdata(username).then(result => {
-      console.log('result', result)
       this.user = result
     })
   }

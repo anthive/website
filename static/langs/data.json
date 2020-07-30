@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Javascript",
+    "img": "https://anthive.io/skins/lang/js.png",
+    "sample": "https://github.com/anthive/js"
+  },
+  {
+    "name": "C++",
+    "img": "https://anthive.io/skins/lang/cpp.png",
+    "sample": "https://github.com/anthive/cpp"
+  },
+  {
+    "name": "Go",
+    "img": "https://anthive.io/skins/lang/go.png",
+    "sample": "https://github.com/anthive/go"
+  },
+  {
+    "name": "Python",
+    "img": "https://anthive.io/skins/lang/python3.png",
+    "sample": "https://github.com/anthive/python"
+  },
+  {
+    "name": "PHP",
+    "img": "https://anthive.io/skins/lang/php.png",
+    "sample": "https://github.com/anthive/php"
+  }
+]

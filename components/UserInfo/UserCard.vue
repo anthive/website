@@ -18,14 +18,8 @@
           player.Username
         }}</span>
       </div>
-      <!-- Leaderboard place -->
-      <div v-if="place != 0" class="user-card__user_info">
-        <span class="accent--text f-text-large d-block text-center"
-          >{{ place }} {{ $t('leaderboard.place') }}</span
-        >
-      </div>
       <!-- Bot settings -->
-      <div v-if="us.Lang" class="user-card__bot-info">
+      <div class="user-card__bot-info">
         <v-avatar class="user-card__bot-info-icon" size="50">
           <v-img :src="us.antUrl(true)" />
         </v-avatar>
@@ -41,21 +35,7 @@
         class="f-text-large text-center d-block primary--text"
         >{{ $t("userInfo.botInfo") }}</span
       >
-      <!-- Leaderboard stats -->
-      <div v-if="player.TotalWealth" class="user-card__user-stats">
-        <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-            player.TotalGames
-          }}</span>
-          <span class="user-card__user-stat-key">{{ $t('leaderboard.totalGames') }}</span>
-        </div>
-        <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-            player.TotalWealth
-          }}</span>
-          <span class="user-card__user-stat-key">{{ $t('leaderboard.totalWealth') }}</span>
-        </div>
-      </div>
+
       <!-- Games stats -->
       <div v-if="player.Stats.Ants" class="user-card__user-stats">
         <div class="user-card__user-stat">
@@ -111,16 +91,18 @@ export default {
     place: { type: Number, default: 0 }
   },
   data: () => ({
-    us: null
+    us: null,
+    bot: {}
   }),
   created() {
+    this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
     this.us = new User()
-    this.us.initUser(this.player)
+    this.us.initUser(this.bot)
   },
   watch: {
     player() {
       this.us = new User()
-      this.us.initUser(this.player)
+      this.us.initUser(this.bot)
     }
   }
 }

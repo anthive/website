@@ -50,16 +50,19 @@ export default {
     place: { type: Number, required: true }
   },
   data: () => ({
-    us: null
+    us: null,
+    bot: {}
   }),
   created() {
+    this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
     this.us = new User()
-    this.us.initUser(this.leader)
+    this.us.initUser(this.bot)
   },
   watch: {
     leader() {
+      this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
       this.us = new User()
-      this.us.initUser(this.leader)
+      this.us.initUser(this.bot)
     }
   }
 }

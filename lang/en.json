@@ -54,6 +54,7 @@
   "games": {
     "title1": "All battles:",
     "title2": "Explore, watch, replay, learn strategies",
+    "version": "Version",
     "loading": "Loading... Please wait",
     "player": "Player",
     "ticks": "Ticks",
