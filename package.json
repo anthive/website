@@ -19,6 +19,7 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/sitemap": "^2.4.0",
     "ace-builds": "^1.4.11",
+    "cookie-universal-nuxt": "^2.1.4",
     "countup.js": "^2.0.5",
     "markdown-it": "^11.0.0",
     "nuxt": "^2.13.2",
