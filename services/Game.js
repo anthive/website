@@ -14,7 +14,7 @@ function lowercaseObjectKeys(object) {
   return Object.keys(object).reduce((c, k) => ((c[k.toLowerCase()] = object[k]), c), {})
 }
 
-async function search(sort, page, size, version = '4.0', username = 'kezlya') {
+async function search(sort, page, size, version = '4.0', username) {
   const adapterV3 = data => {
     const resp = {}
     resp.total = data.total.value
