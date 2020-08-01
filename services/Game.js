@@ -14,11 +14,8 @@ function lowercaseObjectKeys(object) {
   return Object.keys(object).reduce((c, k) => ((c[k.toLowerCase()] = object[k]), c), {})
 }
 
-async function search(sort, page, size, version = '3.0') {
-  console.log('searchGames')
-
+async function search(sort, page, size, version = '4.0', username = 'kezlya') {
   const adapterV3 = data => {
-    console.log(data)
     const resp = {}
     resp.total = data.total.value
     resp.games = data.hits.map(g => {
@@ -38,7 +35,6 @@ async function search(sort, page, size, version = '3.0') {
       })
       return g
     })
-    console.log(resp)
     return resp
   }
 
@@ -56,19 +52,29 @@ async function search(sort, page, size, version = '3.0') {
     '4.0': adapterV4
   }
 
-  const versionQueries = {
-    '3.0': {
-      term: { Version: '3.0' }
-    },
-    '4.0': {
-      term: { version: '4.0' }
-    }
+  const versionMatches = {
+    '3.0': { match: { Version: '3.0' } },
+    '4.0': { match: { version: '4.0' } }
+  }
+
+  const usernameMatches = {
+    '3.0': { match: { 'Players.Username': username } },
+    '4.0': { match: { 'bots.username': username } }
+  }
+
+  const matches = [versionMatches[version]]
+  if (username) {
+    matches.unshift(usernameMatches[version])
   }
 
   const adapter = adapters[version]
 
   const querySearch = {
-    query: versionQueries[version],
+    query: {
+      bool: {
+        must: matches
+      }
+    },
     size: size,
     sort: sort,
     from: size * (page - 1)
@@ -78,8 +84,5 @@ async function search(sort, page, size, version = '3.0') {
   const resp = await esAxios.post(url, querySearch).catch(handleError)
 
   const data = adapter(resp.data.hits)
-
-  console.log(data)
-
   return data
 }

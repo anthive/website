@@ -31,7 +31,7 @@
           {{ $t("userInfo.games") }}
           <!--TODO: use v-on span(class="grey--text") ({{ totalGames }})-->
         </h3>
-        <gamesTable :Filters="filters" :PageSize="17"></gamesTable>
+        <gamesTable :Username="us.Username" :Filters="filters" :PageSize="17"></gamesTable>
       </v-col>
     </v-row>
   </section>

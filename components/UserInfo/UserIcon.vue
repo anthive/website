@@ -39,6 +39,7 @@ export default {
 
 .user-icon {
   &__avatar {
+    cursor: pointer;
     width: 32px;
     height: 32px;
     border-radius: $border-radius-default;
