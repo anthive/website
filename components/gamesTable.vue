@@ -286,6 +286,11 @@ export default {
       this.items = response.games
       this.loading = false
     }
+  },
+  watch: {
+    version() {
+      this.loadGames()
+    }
   }
 }
 </script>
