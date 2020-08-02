@@ -18,16 +18,16 @@ class User {
   }
 
   async initUser(user) {
-    this.Username = user.Username
-    this.Lang = user.Lang
-    this.Version = user.Version
-    this.Games = user.Games
-    this.Wealth = user.Wealth
-    this.Wg = user.Wg
-    this.Skin = user.Skin
-    this.Stats = user.Stats
-    this.TotalGames = user.TotalGames
-    this.TotalWealth = user.TotalWealth
+    this.Username = user.username
+    this.Lang = user.lang
+    this.Version = user.version
+    this.Games = user.games
+    this.Wealth = user.wealth
+    this.Wg = user.wg
+    this.Skin = user.skin
+    this.Stats = user.stats
+    this.TotalGames = user.totalgames
+    this.TotalWealth = user.totalwealth
   }
 
   async getUserdata(username) {
@@ -55,7 +55,7 @@ class User {
   }
 
   photoUrl(size = 70) {
-    if (this.Username.startsWith('sample-')) {
+    if (this.Username && this.Username.startsWith('sample-')) {
       return this.langUrl(this.Username.substring(7))
     }
     return 'https://github.com/' + this.Username + '.png?size=' + size

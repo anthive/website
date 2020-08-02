@@ -13,8 +13,6 @@ const esAxios = axios.create({
 const SEARCH_HANDLER = '/search'
 
 async function search(sortBy) {
-  console.log('searchBots')
-
   const querySearch = {
     size: 0,
     aggs: {

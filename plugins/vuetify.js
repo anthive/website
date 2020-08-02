@@ -14,7 +14,9 @@ export default ctx => {
       themes: {
         light: {
           primary: '#362d59',
-          accent: '#e1567c'
+          accent: '#e1567c',
+          danger: '#e03e2f',
+          success: '#6c5fc7'
         }
       }
     }

@@ -1,10 +1,10 @@
 <template>
-  <section class="texture-arrows">
-      <v-container>
+  <section class="games texture-arrows">
+      <v-container class="games__container">
         <v-card
           class="games__card white text-xs-left"
         >
-          <v-card-title class="mb-10">
+          <v-card-title>
             <h1 class="headline">
               <span class="primary--text font-weight-medium">{{ $t("games.title1") }}</span>
               <span class="primary--text ml-2">{{ $t("games.title2") }}</span>
@@ -40,8 +40,14 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
-.games__card {
-  border-radius: $border-radius-default !important;
+.games {
+  padding: 40px 0;
+  &__container {
+    padding: 0;
+  }
+  &__card {
+    border-radius: $border-radius-default !important;
+  }
 }
 
 @media screen and (max-width: $screen-sm) {

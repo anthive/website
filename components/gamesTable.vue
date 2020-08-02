@@ -1,7 +1,21 @@
 <template>
   <div id="games-table" class="games-table">
     <v-row class="games-table__sort">
-      <div class="primary--text text-xs-left font-weight-bold">{{ $t("games.sort") }}:</div>
+      <div>
+        <span class="primary--text f-text">Season </span
+        ><v-btn-toggle v-model="version" color="success" dense class="mx-2">
+          <v-btn value="3.0">
+            3
+          </v-btn>
+
+          <v-btn value="4.0">
+            4
+          </v-btn>
+        </v-btn-toggle>
+      </div>
+      <div class="primary--text text-xs-left font-weight-bold">
+        {{ $t("games.sort") }}:
+      </div>
       <div
         class="primary--text games-table__sort-item"
         v-for="(column, index) in columns"
@@ -13,12 +27,12 @@
         <AntHiveIcon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
-          >arrow-up</AnthiveIcon
+          >arrow-up</AntHiveIcon
         >
         <AntHiveIcon
           small
           v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
-          >arrow-down</AnthiveIcon
+          >arrow-down</AntHiveIcon
         >
       </div>
     </v-row>
@@ -26,13 +40,13 @@
       class="games-table__item"
       :key="index"
       v-for="(item, index) in items"
-      ><div class="d-flex align-center">
+      ><div v-if="item.bots" class="d-flex align-center">
         <img
           v-if="!$vuetify.breakpoint.smAndDown"
           class="games-table__item-cover"
           height="100"
           width="80"
-          :src="`https://anthive.io/skins/server/${item._source.MapSettings.Skin}/background.png`"
+          :src="`https://anthive.io/skins/server/${item.map.theme}/background.png`"
           alt="Background"
         />
         <div
@@ -44,59 +58,87 @@
           >
             <AuthorChip
               class="ml-md-n13 mr-5"
-              :author="item._source.Author"
-              :date="item._source.Played"
+              :author="item.author"
+              :date="item.finished"
             />
           </div>
           <div
-            v-if="item._source.Players.length > 4"
+            v-if="item.bots && item.bots.length > 4"
             class="games-table__players-container justify-center col-12 col-md-3"
           >
-            <a
-              @click="showUserCard(player)"
+            <div
               :key="pIndex"
-              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
+              v-for="(player, pIndex) in item.bots.slice(0, 4)"
+              @click="openProfile(player.username)"
             >
-              <UserIcon class="ml-1" :player="player" locale="table"/></a>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <div v-on="on">
+                    <UserIcon class="ml-1" :player="player" locale="table" />
+                  </div>
+                </template>
+                {{ player.username }}
+              </v-tooltip>
+            </div>
 
             <AntHiveBtn
               color="accent"
-              :to="localePath({ name: 'game', query: {id: item._id, v: item._source.Version} })"
+              :to="
+                localePath({
+                  name: 'game',
+                  query: { id: item.id, v: item.version },
+                })
+              "
               class="games-table__players-more ml-1"
             >
-              <span>+{{ item._source.Players.length - 4 }}</span>
+              <span>+{{ item.bots.length - 4 }}</span>
             </AntHiveBtn>
           </div>
           <div
-            v-else
+            v-if="item.bots && item.bots.length <= 4"
             class="games-table__players-container justify-center col-12 col-md-3"
           >
-            <a
-              @click="showUserCard(player)"
+            <div
               :key="pIndex"
-              v-for="(player, pIndex) in item._source.Players.slice(0, 4)"
+              v-for="(player, pIndex) in item.bots.slice(0, 4)"
+              @click="openProfile(player.username)"
             >
-            <UserIcon
-              class="ml-1"
-              :player="player"
-            /></a>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <div v-on="on">
+                    <UserIcon class="ml-1" :player="player" />
+                  </div>
+                </template>
+                {{ player.username }}
+              </v-tooltip>
+            </div>
           </div>
           <div
             class="games-table__stats-container justify-center col-12 col-md-3"
           >
             <div class="games-table__stat">
-              <div class="games-table__stat-value">{{ item._source.Age }}</div>
+              <div class="games-table__stat-value">{{ item.age }}</div>
               <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
             </div>
-            <div class="games-table__stat">
+            <div v-if="item.wealth" class="games-table__stat">
               <div class="games-table__stat-value">
-                {{ item._source.Wealth }}
+                {{ item.wealth }}
               </div>
               <div class="games-table__stat-name">{{ $t("games.wealth") }}</div>
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-2">
-            <AntHiveBtn :to="localePath({ name: 'game', query: {id: item._id, v: item._source.Version} })" width="100%" color="accent">{{ $t("games.viewGame") }}</AntHiveBtn>
+            <AntHiveBtn
+              :to="
+                localePath({
+                  name: 'game',
+                  query: { id: item.id, v: item.version },
+                })
+              "
+              width="100%"
+              color="accent"
+              >{{ $t("games.viewGame") }}</AntHiveBtn
+            >
           </div>
         </div>
       </div></v-card
@@ -106,19 +148,15 @@
         class="mx-auto"
         @input="changePage($event)"
         v-model="currentPage"
-        :length="pages-1"
+        :length="pages"
         total-visible="10"
         color="accent"
         next-icon=">"
         prev-icon="<"
       ></v-pagination>
     </v-toolbar>
-    <v-dialog v-model="isShowUserCard" width="380">
-      <UserCard :player="selectedPlayer" />
-    </v-dialog>
   </div>
 </template>
-
 
 <script>
 import UserCard from '@/components/UserInfo/UserCard'
@@ -143,6 +181,10 @@ export default {
       required: true,
       default: () => 10
     },
+    Username: {
+      type: String,
+      default: ''
+    },
     Filters: {
       type: Object,
       default() {
@@ -156,10 +198,9 @@ export default {
     // us: userService,
     loading: false,
     pages: 0,
+    version: '4.0',
     currentPage: 1,
     sort: [],
-    isShowUserCard: false,
-    selectedPlayer: {},
     columns: [
       {
         text: 'games.ticks',
@@ -191,10 +232,6 @@ export default {
     changePage(pageNumber) {
       this.currentPage = pageNumber
       this.loadGames()
-    },
-    showUserCard(player) {
-      this.selectedPlayer = player
-      this.isShowUserCard = true
     },
     doSort(field) {
       if (!field.sortable) return
@@ -235,13 +272,24 @@ export default {
       this.$router.push('/game/?id=' + data._id + '&v=' + data._source.Version)
     },
 
+    openProfile(username) {
+      this.$router.push('/user?username=' + username)
+    },
+
     async loadGames() {
       this.loading = true
-      const games = await search(this.sort, this.currentPage, this.PageSize, this.Filters)
-      if (!games) return
-      this.pages = Math.ceil(games.total.value / this.PageSize)
-      this.items = games.hits
+      const response = await search(this.sort, this.currentPage, this.PageSize, this.version, this.Username)
+      if (!response) return
+      this.pages = Math.ceil(
+        response.total % this.PageSize > 0 ? response.total / this.PageSize : response.total / this.PageSize - 1
+      )
+      this.items = response.games
       this.loading = false
+    }
+  },
+  watch: {
+    version() {
+      this.loadGames()
     }
   }
 }
@@ -254,6 +302,7 @@ export default {
   &__sort {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     margin: 0 3px;
   }
   &__sort-item {

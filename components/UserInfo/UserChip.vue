@@ -1,7 +1,7 @@
 <template>
   <div class="user-chip">
     <div>
-      <v-avatar class="user-chip__avatar" size="32">
+      <v-avatar tile class="user-chip__avatar" size="32">
         <v-img class="" :src="us.photoUrl(100)" />
       </v-avatar>
     </div>
@@ -18,7 +18,6 @@
             <span class="user-chip__version">v.{{ us.Version }}</span>
           </v-avatar>
         </div>
-      <span class="accent--text">{{ $t('games.wealth') }}: {{ us.Wealth }}, {{ $t('games.ticks') }}: {{ us.Stats.Age }}</span>
     </div>
   </div>
 </template>
@@ -35,16 +34,18 @@ export default {
     locale: String
   },
   data: () => ({
-    us: null
+    us: null,
+    bot: {}
   }),
   created() {
+    this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
     this.us = new User()
-    this.us.initUser(this.player)
+    this.us.initUser(this.bot)
   },
   watch: {
     player() {
       this.us = new User()
-      this.us.initUser(this.player)
+      this.us.initUser(this.bot)
     }
   }
 }
@@ -58,6 +59,7 @@ export default {
   align-items: center;
   &__avatar {
     border: 2px solid $color-red-400;
+    border-radius: $border-radius-default !important;
     box-sizing: content-box;
   }
   &__name {

@@ -16,16 +16,19 @@ export default {
     locale: String
   },
   data: () => ({
-    us: null
+    us: null,
+    bot: {}
   }),
   created() {
+    this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
     this.us = new User()
-    this.us.initUser(this.player)
+    this.us.initUser(this.bot)
   },
   watch: {
     player() {
+      this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
       this.us = new User()
-      this.us.initUser(this.player)
+      this.us.initUser(this.bot)
     }
   }
 }
@@ -36,6 +39,7 @@ export default {
 
 .user-icon {
   &__avatar {
+    cursor: pointer;
     width: 32px;
     height: 32px;
     border-radius: $border-radius-default;
