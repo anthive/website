@@ -45,7 +45,7 @@
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
 
         <v-chip
-          v-if="getUser"
+          v-show="getUser"
           label
           class="header__user-chip"
           color="accent"
@@ -53,12 +53,12 @@
           @click="handlerClickGetStarted"
         >
           <v-avatar tile :left="!$vuetify.breakpoint.mdAndDown">
-            <v-img :src="getUser.userAvatar" />
+            <v-img :src="(getUser) ? getUser.userAvatar : '/favicon-32x32.png'" />
           </v-avatar>
-          {{ getUser.userName }}
+          {{ (getUser) ? getUser.userName : 'login' }}
         </v-chip>
         
-        <AntHiveBtn v-else @click="handlerClickGetStarted" color="accent" class="ml-3">{{
+        <AntHiveBtn v-show="(getUser==null)" @click="handlerClickGetStarted" color="accent" class="ml-3">{{
            $t("header.buttonJoin")
         }}</AntHiveBtn>
       </div>

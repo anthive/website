@@ -72,10 +72,8 @@ export default {
   }),
   created() {
     var username = this.$route.query.username
-
     if (username === '' || username === undefined) {
-      this.$router.push('/leaderboard')
-      return
+      username = 'anthive'
     }
     this.us = new User()
     this.filters = { term: { 'Players.Username': username } }
