@@ -19,7 +19,7 @@
 <script>
 import { timeAgo } from '@/services/User'
 export default {
-  name: 'AuthorChip',
+  name: 'GamesAuthorChip',
   props: {
     author: String,
     date: Number

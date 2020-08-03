@@ -3,7 +3,7 @@
     <v-container  class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <Logo />
+          <img class="header__logo" src="/img/anthive_logo.svg" alt="Logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -67,14 +67,10 @@
 </template>
 
 <script>
-import Logo from '@/components/logo'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'defaultHeader',
-  components: {
-    Logo
-  },
+  name: 'TheHeader',
   computed: {
     ...mapGetters(['getUser'])
   },
@@ -98,6 +94,9 @@ a {
 
 .header {
   background: $color-white !important;
+  &__logo {
+    width: 115px;
+  }
   &__user-chip {
     margin-left: 10px;
   }

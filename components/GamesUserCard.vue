@@ -85,7 +85,7 @@
 import { User } from '@/services/User'
 
 export default {
-  name: 'userCard',
+  name: 'GamesUserCard',
   props: {
     player: { type: Object, required: true },
     place: { type: Number, default: 0 }

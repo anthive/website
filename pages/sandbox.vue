@@ -6,7 +6,7 @@
           <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
-              <editor :valueCode.sync="valueCode" />
+              <SandboxEditor :valueCode.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
               <div id="player" />
@@ -22,8 +22,11 @@
 </template>
 
 <script>
-import editor from '@/components/editor.vue'
+import SandboxEditor from '@/components/SandboxEditor.vue'
 export default {
+  components: {
+    SandboxEditor
+  },
   data: () => ({
     valueCode: {},
     isPlaying: true
@@ -38,9 +41,6 @@ export default {
       //   sebd in firebase
       console.log(this.valueCode)
     }
-  },
-  components: {
-    editor
   }
 }
 </script>

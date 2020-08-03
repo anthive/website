@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import GamesTable from '@/components/gamesTable'
+import GamesTable from '@/components/GamesTable'
 
 export default {
   name: 'defaultHeader',

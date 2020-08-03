@@ -19,7 +19,7 @@
 <script>
 import { GChart } from 'vue-google-charts'
 export default {
-  name: 'Chart',
+  name: 'AreaChart',
   data: () => ({
     chartData: [['Day', 'Score', 'Avg Score']],
     chartOptions: {

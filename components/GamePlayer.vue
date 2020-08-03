@@ -128,7 +128,7 @@
 
 
 <script>
-import AntHiveIcon from '@/components/global/AntHiveIcon'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'GamePlayer',

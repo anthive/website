@@ -159,15 +159,15 @@
 </template>
 
 <script>
-import UserCard from '@/components/UserInfo/UserCard'
-import UserChip from '@/components/UserInfo/UserChip'
-import AuthorChip from '@/components/UserInfo/AuthorChip'
-import UserIcon from '@/components/UserInfo/UserIcon'
-import AntHiveIcon from '@/components/global/AntHiveIcon'
+import UserCard from '@/components/GamesUserCard'
+import UserChip from '@/components/GamesUserChip'
+import AuthorChip from '@/components/GamesAuthorChip'
+import UserIcon from '@/components/GamesUserIcon'
+import AntHiveIcon from '@/components/AntHiveIcon'
 import { search } from '@/services/Game'
 
 export default {
-  name: 'gamesTable',
+  name: 'GamesTable',
   components: {
     UserChip,
     UserIcon,

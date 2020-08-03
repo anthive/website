@@ -1,15 +1,15 @@
 <template >
   <div>
-    <tutorialSection />
+    <HomeTutorial />
   </div>
 </template>
 <script>
-import tutorialSection from '../components/indexPage/tutorialSection.vue'
+import HomeTutorial from '../components/HomeTutorial.vue'
 
 export default {
   data: () => ({}),
   components: {
-    tutorialSection
+    HomeTutorial
   }
 }
 </script>

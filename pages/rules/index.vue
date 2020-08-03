@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import sidebar from '@/components/docsPage/sidebar'
+import DocsSidebar from '@/components/DocsSidebar'
 
 export default {
   components: {
-    sidebar
+    DocsSidebar
   },
   computed: {
     rules() {
