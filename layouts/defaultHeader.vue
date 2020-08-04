@@ -81,7 +81,7 @@ export default {
       return this.getUser && this.getUser.userAvatar ? this.getUser.userAvatar : '/img/default-user-avatar.png'
     },
     getUserName() {
-      return this.getUser && this.getUser.userName ? this.getUser.userName : 'Player'
+      return this.getUser && this.getUser.userName ? this.getUser.userName : 'anthive'
     }
   },
   methods: {
