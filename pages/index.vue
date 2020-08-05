@@ -1,26 +1,26 @@
 <template >
   <div>
-    <headerSection />
-    <stepsSection />
-    <countersSection />
-    <screenshotsSection />
+    <HomeSlogan />
+    <HomeSteps />
+    <HomeCounters />
+    <HomeScreenshots />
   </div>
 </template>
 <script>
-import headerSection from '../components/indexPage/headerSection.vue'
-import stepsSection from '../components/indexPage/stepsSection.vue'
-// import featureSection from '../components/indexPage/featureSection.vue'
-// import videoSection from '../components/indexPage/videoSection.vue'
-// import badgesSection from '../components/indexPage/badgesSection.vue'
-import countersSection from '../components/indexPage/countersSection.vue'
-import screenshotsSection from '../components/indexPage/screenshotsSection.vue'
+import HomeSlogan from '../components/HomeSlogan.vue'
+import HomeSteps from '../components/HomeSteps.vue'
+// import HomeFeature from '../components/HomeFeature.vue'
+// import HomeVideo from '../components/HomeVideo.vue'
+// import HomeBadges from '../components/HomeBadges.vue'
+import HomeCounters from '../components/HomeCounters.vue'
+import HomeScreenshots from '../components/HomeScreenshots.vue'
 
 export default {
   components: {
-    headerSection,
-    stepsSection,
-    countersSection,
-    screenshotsSection
+    HomeSlogan,
+    HomeSteps,
+    HomeCounters,
+    HomeScreenshots
   }
 }
 </script>

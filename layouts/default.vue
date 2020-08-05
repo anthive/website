@@ -1,22 +1,22 @@
 <template>
   <v-app id="inspire">
-    <defaultHeader />
+    <TheHeader />
     <v-main>
       <nuxt />
     </v-main>
-    <defaultFooter />
+    <TheFooter />
   </v-app>
 </template>
 
 <script>
-import defaultHeader from '@/layouts/defaultHeader'
-import defaultFooter from '@/layouts/defaultFooter'
+import TheHeader from '@/components/TheHeader'
+import TheFooter from '@/components/TheFooter'
 import { mapMutations } from 'vuex'
 
 export default {
   components: {
-    defaultHeader,
-    defaultFooter
+    TheHeader,
+    TheFooter
   },
   methods: {
     ...mapMutations(['setUser'])

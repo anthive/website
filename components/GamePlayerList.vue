@@ -15,32 +15,32 @@
           tile
           class="pa-2 elevation-0"
         >
-          <UserChip :player="player" :number="index + 1" />
+          <GamesUserChip :player="player" :number="index + 1" />
         </v-card>
         <v-card v-else @click="showUserCard(player)" tile class="pa-2 elevation-0">
-          <UserIcon :player="player" :number="index + 1" />
+          <GamesUserIcon :player="player" :number="index + 1" />
         </v-card>
       </div>
     </div>
      <v-dialog v-model="isShowUserCard" width="380">
-       <UserCard :player="selectedPlayer" />
+       <GamesUserCard :player="selectedPlayer" />
     </v-dialog>
   </div>
 </template>
 
 
 <script>
-import UserChip from '@/components/UserInfo/UserChip'
-import UserIcon from '@/components/UserInfo/UserIcon'
-import UserCard from '@/components/UserInfo/UserCard'
-import AntHiveIcon from '@/components/global/AntHiveIcon'
+import GamesUserChip from '@/components/GamesUserChip'
+import GamesUserIcon from '@/components/GamesUserIcon'
+import GamesUserCard from '@/components/GamesUserCard'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'PlayersList',
+  name: 'GamePlayersList',
   components: {
-    UserChip,
-    UserIcon,
-    UserCard,
+    GamesUserChip,
+    GamesUserIcon,
+    GamesUserCard,
     AntHiveIcon
   },
   data: () => ({

@@ -28,7 +28,7 @@
 import { User } from '@/services/User'
 
 export default {
-  name: 'userChip',
+  name: 'GamesUserChip',
   props: {
     player: Object,
     locale: String

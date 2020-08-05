@@ -18,7 +18,7 @@
           {{ $t(`leaderboard.${column.text}`) }}
         </v-col>
       </v-row>
-      <LeaderCard
+      <GamesLeaderCard
         class="leaderboard__table-player"
         :key="player.Username + index"
         v-for="(player, index) in players"
@@ -31,13 +31,13 @@
 
 <script>
 import { search } from '@/services/Bot'
-import LeaderCard from '@/components/UserInfo/LeaderCard'
-import UserCard from '@/components/UserInfo/UserCard'
+import GamesLeaderCard from '@/components/GamesLeaderCard'
+import GamesUserCard from '@/components/GamesUserCard'
 
 export default {
   components: {
-    LeaderCard,
-    UserCard
+    GamesLeaderCard,
+    GamesUserCard
   },
   name: 'Leaderboard',
   data: () => ({

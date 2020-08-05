@@ -36,6 +36,7 @@
 
 <script>
 export default {
+  name: 'DocsSidebar',
   data: () => ({
     docs: {} // TODO: docs structure
   })

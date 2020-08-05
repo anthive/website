@@ -10,7 +10,7 @@
 import { User } from '@/services/User'
 
 export default {
-  name: 'usersInfo',
+  name: 'GamesUsersInfo',
   props: {
     player: Object,
     locale: String

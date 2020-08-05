@@ -38,10 +38,10 @@
 
 <script>
 import { User } from '@/services/User'
-import AntHiveIcon from '@/components/global/AntHiveIcon'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'userChip',
+  name: 'GamesLeaderCard',
   components: {
     AntHiveIcon
   },

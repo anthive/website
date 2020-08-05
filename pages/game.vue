@@ -2,7 +2,7 @@
   <section class="game texture-arrows">
     <v-row class="texture-scrabble flex-nowrap mx-auto">
         
-      <PlayersList
+      <GamePlayerList
         v-show="gameLoaded"
         v-bind:players="players"
         @togglePlayerList="showPlayerList = !showPlayerList"
@@ -16,9 +16,9 @@
 
 
 <script>
-import GameLogPanel from '@/components/gamePage/LogPanel'
-import PlayersList from '@/components/gamePage/PlayerList'
-import GamePlayer from '@/components/gamePage/Player'
+import GameLogPanel from '@/components/GameLogPanel'
+import GamePlayerList from '@/components/GamePlayerList'
+import GamePlayer from '@/components/GamePlayer'
 var player = null
 export default {
   data: () => ({
@@ -31,7 +31,7 @@ export default {
   }),
   components: {
     GameLogPanel,
-    PlayersList,
+    GamePlayerList,
     GamePlayer
   },
   mounted() {
