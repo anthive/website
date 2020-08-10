@@ -107,6 +107,9 @@ module.exports = {
   sitemap: {
     hostname: 'https://anthive.io'
   },
+  workbox: {
+    clientsClaim: false
+  },
   markdownit: {
     preset: 'commonmark',
     linkify: true,
