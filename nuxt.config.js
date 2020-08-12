@@ -11,6 +11,14 @@ module.exports = {
     INDEX_STATS: process.env.INDEX_STATS
   },
   /*
+  ** Set cache age for static folder
+  */
+  render: {
+    static: {
+      maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year
+    }
+  },
+  /*
   ** Headers of the page
   */
   head: {
