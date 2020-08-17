@@ -14,10 +14,6 @@
             </h2></v-col>
             
             <div class="mt-3">
-              <AntHiveBtn color="accent" to="/sandbox" class="mx-0 mt-3 mr-1">{{
-                $t("home.sandbox")
-              }}</AntHiveBtn>
-              <!-- <AntHiveBtn :to="'/sandbox'" :fill="$vuetify.breakpoint.smAndDown" :primary="$vuetify.breakpoint.smAndDown"  class="mt-3">{{ $t("home.buttonSandbox") }}</AntHiveBtn> -->
             </div></v-col
           ><v-col></v-col></v-row></v-container
     ></div>
