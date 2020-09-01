@@ -5,7 +5,7 @@
         <v-col class="pa-2 justify-left" cols="12" md="4">
           <v-card class="steps__step elevation-0 white" height="100%">
             <v-card-title  class="steps__step-title pt-3 f-rubik f-text-large primary--text">{{
-              $t("home.step1Title") 
+              $t("home.step1Title")
             }}</v-card-title>
             <v-card-text class=" f-rubik f-text primary--text"
               >{{ $t("home.step1Text") }}
