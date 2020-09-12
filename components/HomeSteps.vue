@@ -12,28 +12,8 @@
             </v-card-text>
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
-                <a href="https://github.com/anthive/js" target="_blank" rel="noreferrer"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/js.png" alt="js"
-                /></a>
-                <a href="https://github.com/anthive/python" target="_blank" rel="noreferrer"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/python3.png" alt="python3"
-                /></a>
-                <a href="https://github.com/anthive/go" target="_blank" rel="noreferrer"
-                  ><img class=" steps__lang-panel-img" width="40px" src="/skins/lang/go.png" alt="go"
-                /></a>
-                <a href="https://github.com/anthive/cpp" target="_blank" rel="noreferrer"
-                  ><img
-                    class=" steps__lang-panel-img"
-                    width="40px"
-                    src="/skins/lang/cpp.png"
-                    alt="cpp"
-                /></a>
-                <a href="https://github.com/anthive/php" target="_blank" rel="noreferrer"
-                  ><img
-                    class=" steps__lang-panel-img"
-                    width="40px"
-                    src="/skins/lang/php.png"
-                    alt="php"
+                <a :key="lang.id" v-for="lang in langs" :href="lang.sample" target="_blank" rel="noreferrer"
+                  ><img class="steps__lang-panel-img" width="40px" :src="lang.img" :alt="lang.id"
                 /></a>
               </div>
             </div>
@@ -64,6 +44,29 @@
     </v-container>
   </section>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: 'HomeSteps',
+  data() {
+    return {
+      langs: []
+    }
+  },
+  mounted() {
+    this.fetchLangs()
+  },
+  methods: {
+    fetchLangs() {
+      axios.get('langs/data.json').then(resp => {
+        this.langs = resp.data
+      })
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
