@@ -27,7 +27,14 @@ import axios from 'axios'
 export default {
   data: () => ({
     valueCode: {},
-    isPlaying: true
+    isPlaying: true,
+    extentions: {
+      golang: 'go',
+      javascript: 'js',
+      php: 'php',
+      python: 'py',
+      c_cpp: 'cpp'
+    }
   }),
   mounted() {
     const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
@@ -36,13 +43,32 @@ export default {
   },
   methods: {
     onClickRun() {
-      console.log(this.valueCode)
-      const formData = new FormData()
-      formData.append('file', new File([new Blob([this.valueCode.value])], 'main.php'))
+      const lang = this.valueCode.lang
+      const text = this.valueCode.value
+
+      const fileExt = this.extentions[lang]
+      const fileName = `bot.${fileExt}`
+      const file = this.createFile(fileName, text)
+
+      const url = `https://5b2f7c032473.ngrok.io/sandbox/${fileExt}/${fileName}`
+
+      const formData = this.createData(file)
+      this.sendCodeToSim(url, formData)
+    },
+    createFile(fileName, text) {
+      const blob = new Blob([text])
+      return new File([blob], `${fileName}`)
+    },
+    createData(file) {
+      const data = new FormData()
+      data.append('file', file)
+      return data
+    },
+    sendCodeToSim(url, data) {
       axios({
         method: 'post',
-        url: '',
-        data: formData,
+        url,
+        data,
         headers: { 'Content-Type': 'multipart/form-data' }
       })
     }
