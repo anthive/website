@@ -50,7 +50,7 @@ export default {
       const fileName = `bot.${fileExt}`
       const file = this.createFile(fileName, text)
 
-      const url = `https://5b2f7c032473.ngrok.io/sandbox/${fileExt}/${fileName}`
+      const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}/${fileName}`
 
       const formData = this.createData(file)
       this.sendCodeToSim(url, formData)
