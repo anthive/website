@@ -36,11 +36,6 @@ export default {
       c_cpp: 'cpp'
     }
   }),
-  mounted() {
-    // const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
-    // eslint-disable-next-line
-    // new AnthivePlayer('#player', dataUrl)
-  },
   methods: {
     async onClickRun() {
       const lang = this.valueCode.lang
@@ -49,15 +44,12 @@ export default {
       const fileExt = this.extentions[lang]
       const fileName = `bot.${fileExt}`
       const file = this.createFile(fileName, text)
+      const formData = this.createData(file)
 
       const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}/${fileName}`
-
-      const formData = this.createData(file)
       try {
         const gameId = await this.sendCodeToSim(url, formData)
-        const gameUrl = `https://storage.googleapis.com/anthive-prod-sandbox/4.0/${gameId.data}.zip`
-        // eslint-disable-next-line
-        new AnthivePlayer('#player', gameUrl)
+        this.initGame(gameId)
       } catch (err) {
         console.log(err)
       }
@@ -72,12 +64,18 @@ export default {
       return data
     },
     async sendCodeToSim(url, data) {
-      return await axios({
+      const simResp = await axios({
         method: 'post',
         url,
         data,
         headers: { 'Content-Type': 'multipart/form-data' }
       })
+      return simResp.data
+    },
+    initGame(id) {
+      const gameUrl = `https://storage.googleapis.com/anthive-prod-sandbox/4.0/${id}.zip`
+      // eslint-disable-next-line
+      new AnthivePlayer('#player', gameUrl)
     }
   },
   components: {
