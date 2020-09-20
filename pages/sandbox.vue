@@ -37,12 +37,12 @@ export default {
     }
   }),
   mounted() {
-    const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
+    // const dataUrl = 'https://storage.googleapis.com/anthive-dev-games/Kj5A2SydOFlqgLIu35Br.zip'
     // eslint-disable-next-line
-    new AnthivePlayer('#player', dataUrl)
+    // new AnthivePlayer('#player', dataUrl)
   },
   methods: {
-    onClickRun() {
+    async onClickRun() {
       const lang = this.valueCode.lang
       const text = this.valueCode.value
 
@@ -53,7 +53,14 @@ export default {
       const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}/${fileName}`
 
       const formData = this.createData(file)
-      this.sendCodeToSim(url, formData)
+      try {
+        const gameId = await this.sendCodeToSim(url, formData)
+        const gameUrl = `https://storage.googleapis.com/anthive-prod-sandbox/4.0/${gameId.data}.zip`
+        // eslint-disable-next-line
+        new AnthivePlayer('#player', gameUrl)
+      } catch (err) {
+        console.log(err)
+      }
     },
     createFile(fileName, text) {
       const blob = new Blob([text])
@@ -64,8 +71,8 @@ export default {
       data.append('file', file)
       return data
     },
-    sendCodeToSim(url, data) {
-      axios({
+    async sendCodeToSim(url, data) {
+      return await axios({
         method: 'post',
         url,
         data,
