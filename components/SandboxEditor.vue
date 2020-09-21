@@ -44,7 +44,7 @@ export default {
       c_cpp: 'https://raw.githubusercontent.com/anthive/cpp/master/bot.cpp'
     },
     currentLangTab: 'javascript',
-    tab: 0,
+    tab: null,
     editors: {}
   }),
   props: {
