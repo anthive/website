@@ -25,6 +25,7 @@ import axios from 'axios'
 if (process.client) {
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
+  require('ace-builds/src-min-noconflict/ext-language_tools')
 }
 export default {
   data: () => ({
@@ -53,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.initEditors()
+    this.initEditors(this.currentLangTab)
   },
   beforeDestroy() {
     for (const lang in this.editors) {
@@ -64,11 +65,14 @@ export default {
     onChangeTab(lang) {
       this.currentLangTab = lang
       this.emitVavueCode(lang)
+      this.initEditors(lang)
     },
-    initEditors() {
-      for (const lang in this.botTemplates) {
-        require(`ace-builds/src-min-noconflict/mode-${lang}`)
-        require(`ace-builds/src-min-noconflict/snippets/${lang}`)
+    async initEditors(lang) {
+      new Promise(async resolve => {
+        await require(`ace-builds/src-min-noconflict/mode-${lang}`)
+        await require(`ace-builds/src-min-noconflict/snippets/${lang}`)
+        return resolve()
+      }).then(() => {
         if (this.botTemplates.hasOwnProperty(lang)) {
           const ed = ace.edit(lang, {
             theme: 'ace/theme/monokai',
@@ -91,7 +95,7 @@ export default {
             })
             .catch(er => console.error(er))
         }
-      }
+      })
     },
     emitVavueCode(lang) {
       if (this.currentLangTab === lang && !!this.editors[lang]) {

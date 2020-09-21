@@ -46,7 +46,7 @@ export default {
       const file = this.createFile(fileName, text)
       const formData = this.createData(file)
 
-      const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}/${fileName}`
+      const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}`
       try {
         const gameId = await this.sendCodeToSim(url, formData)
         this.initGame(gameId)
