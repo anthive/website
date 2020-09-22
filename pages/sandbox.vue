@@ -10,7 +10,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <div id="player" />
-              <AntHiveBtn fill class="my-5" @click="onClickRun" block color="green" dark
+              <AntHiveBtn :loading="loading" fill class="my-5" @click="onClickRun" block color="green" dark
                 >Run sandbox</AntHiveBtn
               >
             </v-col>
@@ -25,6 +25,15 @@
 import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
 export default {
+  components: {
+    editor
+  },
+  mounted() {
+    const gameId = this.$route.query.game
+    if (gameId) {
+      this.initGame(gameId)
+    }
+  },
   data: () => ({
     valueCode: {},
     isPlaying: true,
@@ -34,10 +43,13 @@ export default {
       php: 'php',
       python: 'py',
       c_cpp: 'cpp'
-    }
+    },
+    loading: false
   }),
   methods: {
     async onClickRun() {
+      this.loading = true
+
       const lang = this.valueCode.lang
       const text = this.valueCode.value
 
@@ -50,8 +62,11 @@ export default {
       try {
         const gameId = await this.sendCodeToSim(url, formData)
         this.initGame(gameId)
+        this.$router.push({ path: this.$route.path, query: { game: gameId } })
       } catch (err) {
         console.log(err)
+      } finally {
+        this.loading = false
       }
     },
     createFile(fileName, text) {
@@ -77,9 +92,6 @@ export default {
       // eslint-disable-next-line
       new AnthivePlayer('#player', gameUrl)
     }
-  },
-  components: {
-    editor
   }
 }
 </script>
