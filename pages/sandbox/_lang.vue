@@ -5,6 +5,7 @@
         <v-card class="white pa-3 elevation-6" min-height="700">
           <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
           <v-row>
+
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
@@ -28,49 +29,34 @@ export default {
   components: {
     editor
   },
+  data: () => ({
+    valueCode: {},
+    loading: false
+  }),
   mounted() {
-    const gameId = this.$route.query.game
+    const gameId = this.$route.query.box
     if (gameId) {
       this.initGame(gameId)
     }
   },
-  data: () => ({
-    valueCode: {},
-    isPlaying: true,
-    extentions: {
-      golang: 'go',
-      javascript: 'js',
-      php: 'php',
-      python: 'py',
-      c_cpp: 'cpp'
-    },
-    loading: false
-  }),
   methods: {
     async onClickRun() {
       this.loading = true
-
-      const lang = this.valueCode.lang
-      const text = this.valueCode.value
-
-      const fileExt = this.extentions[lang]
-      const fileName = `bot.${fileExt}`
-      const file = this.createFile(fileName, text)
+      const file = this.createFile()
       const formData = this.createData(file)
-
-      const url = `https://d9033e18f217.ngrok.io/sandbox/${fileExt}`
       try {
-        const gameId = await this.sendCodeToSim(url, formData)
+        const gameId = await this.sendCodeToSim(formData)
         this.initGame(gameId)
-        this.$router.push({ path: this.$route.path, query: { game: gameId } })
+        this.$router.push({ path: this.$route.path, query: { box: gameId } })
       } catch (err) {
         console.log(err)
       } finally {
         this.loading = false
       }
     },
-    createFile(fileName, text) {
-      const blob = new Blob([text])
+    createFile() {
+      const fileName = `bot.${this.valueCode.extention}`
+      const blob = new Blob([this.valueCode.value])
       return new File([blob], `${fileName}`)
     },
     createData(file) {
@@ -78,7 +64,8 @@ export default {
       data.append('file', file)
       return data
     },
-    async sendCodeToSim(url, data) {
+    async sendCodeToSim(data) {
+      const url = `https://d9033e18f217.ngrok.io/sandbox/${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,

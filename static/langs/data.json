@@ -1,38 +1,55 @@
 [
   {
     "id": "js",
+    "extention": "js",
+    "editor": "javascript",
     "name": "Javascript",
     "img": "https://anthive.io/skins/lang/js.png",
-    "sample": "https://github.com/anthive/js"
+    "sample": "https://github.com/anthive/js",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/js/master/run.js"
   },
   {
     "id": "cpp",
+    "extention": "cpp",
+    "editor": "c_cpp",
     "name": "C++",
     "img": "https://anthive.io/skins/lang/cpp.png",
-    "sample": "https://github.com/anthive/cpp"
+    "sample": "https://github.com/anthive/cpp",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/cpp/master/bot.cpp"
   },
   {
     "id": "csharp",
+    "extention": "cs",
+    "editor": "csharp",
     "name": "C#",
     "img": "https://anthive.io/skins/lang/csharp.png",
     "sample": "https://github.com/anthive/csharp"
   },
   {
     "id": "go",
+    "extention": "go",
+    "editor": "golang",
     "name": "Go",
     "img": "https://anthive.io/skins/lang/go.png",
-    "sample": "https://github.com/anthive/go"
+    "sample": "https://github.com/anthive/go",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/go/master/main.go"
   },
   {
     "id": "python",
+    "extention": "py",
+    "editor": "python",
     "name": "Python",
     "img": "https://anthive.io/skins/lang/python.png",
-    "sample": "https://github.com/anthive/python"
+    "sample": "https://github.com/anthive/python",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/python/master/run.py"
   },
   {
     "id": "php",
+    "extention": "php",
+    "editor": "php",
     "name": "PHP",
     "img": "https://anthive.io/skins/lang/php.png",
-    "sample": "https://github.com/anthive/php"
+    "sample": "https://github.com/anthive/php",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/php/master/run.php"
   }
 ]
