@@ -41,12 +41,6 @@ export default {
     tab: 0,
     editors: {}
   }),
-  watch: {
-    valueCode(newValueCode) {
-      this.editor.setValue(newValueCode.value)
-      this.editor.clearSelection()
-    }
-  },
   async mounted() {
     await this.fetchLangs()
     this.currentLangTab = this.langs.find(lang => {
@@ -93,6 +87,7 @@ export default {
 
         this.editor.setValue(code)
         this.editor.clearSelection()
+        this.editor.on('change', () => this.emitValueCode(lang))
         this.editors[lang] = this.editor
         this.emitValueCode(lang)
       })
