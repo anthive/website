@@ -31,6 +31,7 @@
           {{ $t("userInfo.games") }}
           <!--TODO: use v-on span(class="grey--text") ({{ totalGames }})-->
         </h3>
+        <GamesTable :Username="us.Username" :Filters="filters" :PageSize="17" />
       </v-col>
     </v-row>
   </section>
@@ -38,6 +39,7 @@
 
 <script>
 import AreaChart from '@/components/AreaChart'
+import GamesTable from '@/components/GamesTable'
 import GamesUserCard from '@/components/GamesUserCard'
 import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
@@ -45,6 +47,7 @@ import AntHiveIcon from '@/components/AntHiveIcon'
 export default {
   name: 'user',
   components: {
+    GamesTable,
     AreaChart,
     GamesUserCard,
     AntHiveIcon

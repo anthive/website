@@ -1,6 +1,13 @@
 const pkg = require('./package')
 require('dotenv').config()
 
+import data from './static/langs/data.json'
+let sandboxRoutes = () => {
+  return new Promise(resolve => {
+    resolve(data.map(lang => `sandbox/${lang.extention}`))
+  })
+}
+
 module.exports = {
   mode: 'universal',
 
@@ -151,12 +158,12 @@ module.exports = {
         })
       }
     },
-    
+
     transpile: ['countup.js', 'vue-countup-v2'],
     quiet: false
   },
 
   generate: {
-    routes: ['/sandbox/js']
+    routes: sandboxRoutes
   }
 }
