@@ -65,7 +65,7 @@ export default {
       return data
     },
     async sendCodeToSim(data) {
-      const url = `https://d9033e18f217.ngrok.io/sandbox/${this.valueCode.extention}`
+      const url = `https://99b4eafc4a7e.ngrok.io/sandbox/${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,
