@@ -51,7 +51,6 @@ class User {
           blog: user.blog != '' ? user.blog : null
         }
       })
-      .catch(handleError)
   }
 
   photoUrl(size = 70) {
@@ -112,17 +111,5 @@ function timeAgo(epochStamp) {
     return { time: Math.floor(diff / periods.second), text: 'secondsAgo' }
   }
   return { time: null, text: 'justNow' }
-}
-
-function handleError(error) {
-  if (error.response) {
-    console.log(error.response.data)
-  } else if (error.request) {
-    console.log(error.request)
-  } else {
-    console.log('Error', error.message)
-  }
-  console.log(error.config.url)
-  console.log(error.config.params)
 }
 export { User, timeAgo }
