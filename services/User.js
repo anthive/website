@@ -39,18 +39,16 @@ class User {
       timeout: 30000
     })
 
-    return ghAxios
-      .get('users/' + this.Username)
-      .then(res => {
-        var user = res.data
-        return {
-          name: user.name != null ? user.name : this.Username,
-          avatar: this.photoUrl(250),
-          company: user.company,
-          location: user.location,
-          blog: user.blog != '' ? user.blog : null
-        }
-      })
+    return ghAxios.get('users/' + this.Username).then(res => {
+      var user = res.data
+      return {
+        name: user.name != null ? user.name : this.Username,
+        avatar: this.photoUrl(250),
+        company: user.company,
+        location: user.location,
+        blog: user.blog != '' ? user.blog : null
+      }
+    })
   }
 
   photoUrl(size = 70) {
