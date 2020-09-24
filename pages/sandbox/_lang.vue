@@ -5,17 +5,50 @@
         <v-card class="white pa-3 elevation-6" min-height="700">
           <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
           <v-row>
-
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
               <div id="player" />
-              <AntHiveBtn :loading="loading" fill class="my-5" @click="onClickRun" block color="green" dark
+              <AntHiveBtn
+                :loading="loading"
+                fill
+                class="my-5"
+                @click="onClickRun"
+                block
+                color="green"
+                dark
                 >Run sandbox</AntHiveBtn
               >
             </v-col>
           </v-row>
+          <v-tabs
+            v-if="simLogs && botLogs"
+            v-model="tab"
+            background-color="grey darken-2"
+            dark
+          >
+            <v-tab> Simulation </v-tab>
+            <v-tab> Bot </v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="tab">
+            <v-tab-item>
+              <v-card color="basil" flat>
+                <v-card-text>
+                  <pre>{{ simLogs }}</pre>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item>
+              <v-card color="basil" flat>
+                <v-card-text>
+                  <pre>{{ botLogs }}</pre>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs-items>
         </v-card>
       </v-col>
     </v-row>
@@ -31,6 +64,9 @@ export default {
   },
   data: () => ({
     valueCode: {},
+    simLogs: '',
+    botLogs: '',
+    tab: 0,
     loading: false
   }),
   mounted() {
@@ -47,6 +83,7 @@ export default {
       try {
         const gameId = await this.sendCodeToSim(formData)
         this.initGame(gameId)
+        this.initLogs(gameId)
         this.$router.push({ path: this.$route.path, query: { box: gameId } })
       } catch (err) {
         console.log(err)
@@ -65,7 +102,7 @@ export default {
       return data
     },
     async sendCodeToSim(data) {
-      const url = `https://99b4eafc4a7e.ngrok.io/sandbox/${this.valueCode.extention}`
+      const url = `${process.env.SIMULATION_URL}${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,
@@ -75,9 +112,18 @@ export default {
       return simResp.data
     },
     initGame(id) {
-      const gameUrl = `https://storage.googleapis.com/anthive-prod-sandbox/4.0/${id}.zip`
+      const gameUrl = `${process.env.SANDBOX_BUCKET}${id}.zip`
       // eslint-disable-next-line
       new AnthivePlayer('#player', gameUrl)
+    },
+    async initLogs(id) {
+      this.botLogs = await this.getLogs(id, 'bot')
+      this.simLogs = await this.getLogs(id, 'sim')
+    },
+    async getLogs(id, type) {
+      const logsUrl = `${process.env.SANDBOX_BUCKET}${id}-${type}.txt`
+      const resp = await axios.post(logsUrl)
+      return resp.data
     }
   }
 }

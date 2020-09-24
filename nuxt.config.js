@@ -13,6 +13,8 @@ module.exports = {
 
   env: {
     API_URL: process.env.API_URL,
+    SIMULATION_URL: process.env.SIMULATION_URL,
+    SANDBOX_BUCKET: process.env.SANDBOX_BUCKET,
     INDEX_GAMES: process.env.INDEX_GAMES,
     INDEX_USER: process.env.INDEX_USER,
     INDEX_STATS: process.env.INDEX_STATS

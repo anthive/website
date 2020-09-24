@@ -1,6 +1,6 @@
 <template>
   <v-card color="#272822" height="500"> 
-    <v-tabs hide-slider active-class="editor__active-tab" v-model="tab" show-arrows background-color="grey darken-2" dark>
+    <v-tabs active-class="editor__active-tab" v-model="tab" show-arrows background-color="grey darken-2" dark>
       <v-tabs-slider color="#e1567c" />
       <v-tab
         :disabled="!lang.sampleCode"
@@ -98,9 +98,7 @@ export default {
       return resp.data
     },
     async getGameCode() {
-      const codeUrl = `https://storage.googleapis.com/anthive-prod-sandbox/4.0/${this.$route.query.box}.${
-        this.$route.params.lang
-      }`
+      const codeUrl = `${process.env.SANDBOX_BUCKET}${this.$route.query.box}.${this.$route.params.lang}`
       const resp = await axios.get(codeUrl)
       return resp.data
     },
