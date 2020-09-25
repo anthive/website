@@ -122,7 +122,7 @@ export default {
     },
     async getLogs(id, type) {
       const logsUrl = `${process.env.SANDBOX_BUCKET}${id}-${type}.txt`
-      const resp = await axios.post(logsUrl)
+      const resp = await axios.get(logsUrl)
       return resp.data
     }
   }
