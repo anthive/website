@@ -18,7 +18,7 @@
                 block
                 color="green"
                 dark
-                >Run sandbox</AntHiveBtn
+                >Run sandbox </AntHiveBtn
               >
             </v-col>
           </v-row>
