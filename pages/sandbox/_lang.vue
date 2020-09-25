@@ -73,6 +73,7 @@ export default {
     const gameId = this.$route.query.box
     if (gameId) {
       this.initGame(gameId)
+      this.initLogs(gameId)
     }
   },
   methods: {
