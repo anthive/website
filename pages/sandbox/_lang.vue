@@ -34,7 +34,7 @@
 
           <v-tabs-items v-model="tab">
             <v-tab-item>
-              <v-card color="basil" flat>
+              <v-card class="sandbox__content-logs-wrap" flat>
                 <v-card-text>
                   <pre>{{ simLogs }}</pre>
                 </v-card-text>
@@ -42,7 +42,7 @@
             </v-tab-item>
 
             <v-tab-item>
-              <v-card color="basil" flat>
+              <v-card class="sandbox__content-logs-wrap" flat>
                 <v-card-text>
                   <pre>{{ botLogs }}</pre>
                 </v-card-text>
@@ -135,6 +135,10 @@ export default {
   &__content {
     position: relative;
     height: 600px;
+  }
+  &__content-logs-wrap {
+    overflow-y: scroll;
+    max-height: 450px;
   }
 }
 </style>
