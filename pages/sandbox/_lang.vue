@@ -8,7 +8,7 @@
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col class="mt-6" cols="12" md="6">
               <div id="player" />
               <AntHiveBtn
                 :loading="loading"
@@ -103,7 +103,8 @@ export default {
       return data
     },
     async sendCodeToSim(data) {
-      const url = `${process.env.SIMULATION_URL}${this.valueCode.extention}`
+      const url = `${process.env.API_URL}sandbox/${this.valueCode.extention}`
+      //const url = `${process.env.SIMULATION_URL}${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,

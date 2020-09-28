@@ -1,28 +1,48 @@
 <template>
-  <v-card color="#272822" height="500"> 
-    <v-tabs active-class="editor__active-tab" v-model="tab" show-arrows background-color="grey darken-2" dark>
-      <v-tabs-slider color="#e1567c" />
-      <v-tab
-        :disabled="!lang.sampleCode"
-        @change="onChangeTab(lang)"
-        v-for="(lang, key) in langs"
-        :key="key"
-      >{{ lang.name }}</v-tab
+  <div>
+    <span v-if="currentLangTab.sample"
+      >Source code: <a class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></span
+    >
+    <v-card color="#272822" height="500">
+      <v-tabs
+        active-class="editor__active-tab"
+        v-model="tab"
+        show-arrows
+        background-color="grey darken-2"
+        dark
       >
-    </v-tabs>
-    <v-tabs-items class="editor-content" v-model="tab">
-      <v-tab-item :transition="false" :reverse-transition="false" eager v-for="(lang, key) in langs" :key="key">
-        <v-card color="#272822" height="450" flat>  
-          <v-card-text>
-            <div class="editor" :id="lang.editor" />
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-  </v-card>
+        <v-tabs-slider color="#e1567c" />
+        <v-tab
+          :disabled="!lang.sampleCode"
+          @change="onChangeTab(lang)"
+          v-for="(lang, key) in langs"
+          :key="key"
+          >{{ lang.name }}</v-tab
+        >
+      </v-tabs>
+      <v-tabs-items class="editor-content" v-model="tab">
+        <v-tab-item
+          :transition="false"
+          :reverse-transition="false"
+          eager
+          v-for="(lang, key) in langs"
+          :key="key"
+        >
+          <v-card color="#272822" height="450" flat>
+            <v-card-text>
+              <div class="editor" :id="lang.editor" />
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-card>
+  </div>
 </template>
+
 <script>
 import axios from 'axios'
+import langs from '../static/langs/data.json'
+
 if (process.client) {
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
@@ -39,7 +59,8 @@ export default {
     langs: {},
     editor: null,
     tab: 0,
-    editors: {}
+    editors: {},
+    currentLangTab: {}
   }),
   async mounted() {
     await this.fetchLangs()
@@ -103,8 +124,7 @@ export default {
       return resp.data
     },
     async fetchLangs() {
-      const resp = await axios.get('/langs/data.json')
-      this.langs = resp.data
+      this.langs = langs
     },
     emitValueCode(lang) {
       if (this.currentLangTab.editor === lang && !!this.editors[lang]) {
