@@ -1,7 +1,7 @@
 <template>
   <div>
     <span v-if="currentLangTab.sample"
-      >Source code: <a class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></span
+      >Source code: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></span
     >
     <v-card color="#272822" height="500">
       <v-tabs
