@@ -1,7 +1,6 @@
 export { search }
 
 import axios from 'axios'
-import { handleError } from '@/services/Search'
 
 import { User } from '@/services/User'
 
@@ -39,7 +38,7 @@ async function search(sortBy) {
   }
 
   const url = SEARCH_HANDLER + '/' + process.env.INDEX_STATS + '/_search'
-  const resp = await esAxios.post(url, querySearch).catch(handleError)
+  const resp = await esAxios.post(url, querySearch)
 
   return resp.data.aggregations.ByUsername.buckets.map(u => {
     const user = new User()

@@ -39,19 +39,16 @@ class User {
       timeout: 30000
     })
 
-    return ghAxios
-      .get('users/' + this.Username)
-      .then(res => {
-        var user = res.data
-        return {
-          name: user.name != null ? user.name : this.Username,
-          avatar: this.photoUrl(250),
-          company: user.company,
-          location: user.location,
-          blog: user.blog != '' ? user.blog : null
-        }
-      })
-      .catch(handleError)
+    return ghAxios.get('users/' + this.Username).then(res => {
+      var user = res.data
+      return {
+        name: user.name != null ? user.name : this.Username,
+        avatar: this.photoUrl(250),
+        company: user.company,
+        location: user.location,
+        blog: user.blog != '' ? user.blog : null
+      }
+    })
   }
 
   photoUrl(size = 70) {
@@ -112,17 +109,5 @@ function timeAgo(epochStamp) {
     return { time: Math.floor(diff / periods.second), text: 'secondsAgo' }
   }
   return { time: null, text: 'justNow' }
-}
-
-function handleError(error) {
-  if (error.response) {
-    console.log(error.response.data)
-  } else if (error.request) {
-    console.log(error.request)
-  } else {
-    console.log('Error', error.message)
-  }
-  console.log(error.config.url)
-  console.log(error.config.params)
 }
 export { User, timeAgo }

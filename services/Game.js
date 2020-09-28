@@ -1,7 +1,6 @@
 export { search }
 
 import axios from 'axios'
-import { handleError } from '@/services/Search'
 
 const esAxios = axios.create({
   baseURL: process.env.API_URL,
@@ -81,7 +80,7 @@ async function search(sort, page, size, version = '4.0', username) {
   }
 
   const url = SEARCH_HANDLER + '/' + process.env.INDEX_GAMES + '/_search'
-  const resp = await esAxios.post(url, querySearch).catch(handleError)
+  const resp = await esAxios.post(url, querySearch)
 
   const data = adapter(resp.data.hits)
   return data

@@ -1,59 +1,76 @@
 <template>
-  <v-card height="500"> 
-    <v-tabs v-model="tab" show-arrows background-color="grey darken-2" dark>
-      <v-tabs-slider color="#e1567c" />
-      <v-tab
-        @change="onChangeTab(key)"
-        v-for="(lang, key) in langs"
-        :key="key"
-      >{{ lang }}</v-tab
+  <div>
+    <span v-if="currentLangTab.sample"
+      >Source code: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></span
+    >
+    <v-card color="#272822" height="500">
+      <v-tabs
+        active-class="editor__active-tab"
+        v-model="tab"
+        show-arrows
+        background-color="grey darken-2"
+        dark
       >
-    </v-tabs>
-    <v-tabs-items class="editor-content" v-model="tab">
-      <v-tab-item eager v-for="(lang, key) in langs" :key="key">
-        <v-card height="450" flat>
-          <v-card-text>
-            <div class="editor" :id="key" />
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-  </v-card>
+        <v-tabs-slider color="#e1567c" />
+        <v-tab
+          :disabled="!lang.sampleCode"
+          @change="onChangeTab(lang)"
+          v-for="(lang, key) in langs"
+          :key="key"
+          >{{ lang.name }}</v-tab
+        >
+      </v-tabs>
+      <v-tabs-items class="editor-content" v-model="tab">
+        <v-tab-item
+          :transition="false"
+          :reverse-transition="false"
+          eager
+          v-for="(lang, key) in langs"
+          :key="key"
+        >
+          <v-card color="#272822" height="450" flat>
+            <v-card-text>
+              <div class="editor" :id="lang.editor" />
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-card>
+  </div>
 </template>
+
 <script>
 import axios from 'axios'
+import langs from '../static/langs/data.json'
+
 if (process.client) {
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
+  require('ace-builds/src-min-noconflict/ext-language_tools')
 }
 export default {
-  data: () => ({
-    langs: {
-      javascript: 'JavaScript',
-      python: 'Python',
-      golang: 'Golang',
-      php: 'PHP',
-      c_cpp: 'C++'
-    },
-    botTemplates: {
-      javascript: 'https://raw.githubusercontent.com/anthive/js/master/run.js',
-      python: 'https://raw.githubusercontent.com/anthive/python/master/run.py',
-      golang: 'https://raw.githubusercontent.com/anthive/go/master/main.go',
-      php: 'https://raw.githubusercontent.com/anthive/php/master/run.php',
-      c_cpp: 'https://raw.githubusercontent.com/anthive/cpp/master/bot.cpp'
-    },
-    currentLangTab: 'javascript',
-    tab: 0,
-    editors: {}
-  }),
   props: {
     valueCode: {
       type: Object,
       default: () => {}
     }
   },
-  mounted() {
-    this.initEditors()
+  data: () => ({
+    langs: {},
+    editor: null,
+    tab: 0,
+    editors: {},
+    currentLangTab: {}
+  }),
+  async mounted() {
+    await this.fetchLangs()
+    this.currentLangTab = this.langs.find(lang => {
+      return lang.extention === this.$route.params.lang
+    })
+    this.tab = this.langs.findIndex(lang => {
+      return lang.extention === this.$route.params.lang
+    })
+    await this.initEditors(this.currentLangTab.editor)
   },
   beforeDestroy() {
     for (const lang in this.editors) {
@@ -62,40 +79,57 @@ export default {
   },
   methods: {
     onChangeTab(lang) {
-      this.currentLangTab = lang
-      this.emitVavueCode(lang)
+      this.$router.push(`/sandbox/${lang.extention}`)
     },
-    initEditors() {
-      for (const lang in this.botTemplates) {
-        require(`ace-builds/src-min-noconflict/mode-${lang}`)
-        require(`ace-builds/src-min-noconflict/snippets/${lang}`)
-        if (this.botTemplates.hasOwnProperty(lang)) {
-          const ed = ace.edit(lang, {
-            theme: 'ace/theme/monokai',
-            mode: `ace/mode/${lang}`,
-            fontSize: 14,
-            printMargin: false,
-            autoScrollEditorIntoView: true,
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true
-          })
-          ed.on('change', () => this.emitVavueCode(lang))
-          axios
-            .get(this.botTemplates[lang])
-            .then(res => {
-              ed.setValue(res.data)
-              ed.clearSelection()
-              this.editors[lang] = ed
-              this.emitVavueCode(lang)
-            })
-            .catch(er => console.error(er))
+    async initEditors(lang) {
+      new Promise(async resolve => {
+        await require(`ace-builds/src-min-noconflict/mode-${lang}`)
+        await require(`ace-builds/src-min-noconflict/snippets/${lang}`)
+        return resolve()
+      }).then(async () => {
+        this.editor = ace.edit(lang, {
+          theme: 'ace/theme/monokai',
+          mode: `ace/mode/${lang}`,
+          fontSize: 14,
+          printMargin: false,
+          autoScrollEditorIntoView: true,
+          enableBasicAutocompletion: true,
+          enableSnippets: true,
+          enableLiveAutocompletion: true
+        })
+
+        let getCode = this.getDefaultGameCode
+
+        if (this.$route.query.box) {
+          getCode = this.getGameCode
         }
-      }
+
+        const code = await getCode()
+
+        this.editor.setValue(code)
+        this.editor.clearSelection()
+        this.editor.on('change', () => this.emitValueCode(lang))
+        this.editors[lang] = this.editor
+        this.emitValueCode(lang)
+      })
     },
-    emitVavueCode(lang) {
-      if (this.currentLangTab === lang && !!this.editors[lang]) {
+    async getDefaultGameCode() {
+      const codeUrl = this.currentLangTab.sampleCode
+      const resp = await axios.get(codeUrl)
+      return resp.data
+    },
+    async getGameCode() {
+      const codeUrl = `${process.env.SANDBOX_BUCKET}${this.$route.query.box}.${this.$route.params.lang}`
+      const resp = await axios.get(codeUrl)
+      return resp.data
+    },
+    async fetchLangs() {
+      this.langs = langs
+    },
+    emitValueCode(lang) {
+      if (this.currentLangTab.editor === lang && !!this.editors[lang]) {
         this.$emit('update:valueCode', {
+          extention: this.currentLangTab.extention,
           lang: lang,
           value: `${this.editors[lang].getValue()}`
         })
@@ -106,7 +140,6 @@ export default {
 </script>
 <style lang="scss">
 @import '@/assets/style/global.scss';
-
 .editor {
   position: absolute;
   top: 0;
@@ -114,12 +147,28 @@ export default {
   bottom: 0;
   left: 0;
   overflow: hidden;
+  &__active-tab {
+    color: $color-red-300 !important;
+  }
 }
 // editor scrollbar
 .ace_scrollbar.ace_scrollbar-v {
   z-index: 1;
   &::-webkit-scrollbar {
     width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-green-900;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-red-400;
+  }
+}
+
+.ace_scrollbar.ace_scrollbar-h {
+  z-index: 1;
+  &::-webkit-scrollbar {
+    height: 8px;
   }
   &::-webkit-scrollbar-track {
     background: $color-green-900;

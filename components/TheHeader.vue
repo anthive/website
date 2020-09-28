@@ -1,6 +1,12 @@
 <template>
-  <v-app-bar height="64" class="header" app fixed :clipped-left='$vuetify.breakpoint.lgAndUp'>
-    <v-container  class="d-flex align-center">
+  <v-app-bar
+    height="64"
+    class="header"
+    app
+    fixed
+    :clipped-left="$vuetify.breakpoint.lgAndUp"
+  >
+    <v-container class="d-flex align-center">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
           <img class="header__logo" src="/img/anthive_logo.svg" alt="Logo" />
@@ -22,7 +28,9 @@
           </v-list-item>
           <v-list-item :to="localePath('leaderboard')">
             <v-list-item-content>
-              <v-list-item-title>{{ $t("header.leaderboard") }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("header.leaderboard")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="localePath('rules')">
@@ -30,19 +38,33 @@
               <v-list-item-title>{{ $t("header.rules") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item :to="localePath('sandbox/js')">
+            <v-list-item-content>
+              <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item href="https://profile.anthive.io/login">
             <v-list-item-content>
-              <v-list-item-title>{{ $t("header.buttonJoin") }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t("header.buttonJoin")
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn text color="primary" :to="localePath('games')">{{ $t("header.games") }}</AntHiveBtn>
+        <AntHiveBtn text color="primary" :to="localePath('games')">{{
+          $t("header.games")
+        }}</AntHiveBtn>
         <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
         }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('rules')">{{ $t("header.rules") }}</AntHiveBtn>
+        <AntHiveBtn text color="primary" :to="localePath('rules')">{{
+          $t("header.rules")
+        }}</AntHiveBtn>
+        <AntHiveBtn text color="primary" :to="localePath('sandbox')">{{
+          $t("header.sandbox")
+        }}</AntHiveBtn>
 
         <v-chip
           v-show="getUser"
@@ -57,10 +79,14 @@
           </v-avatar>
           {{ getUserName }}
         </v-chip>
-        
-        <AntHiveBtn v-show="!getUser" @click="handlerClickGetStarted" color="accent" class="ml-3">{{
-           $t("header.buttonJoin")
-        }}</AntHiveBtn>
+
+        <AntHiveBtn
+          v-show="!getUser"
+          @click="handlerClickGetStarted"
+          color="accent"
+          class="ml-3"
+          >{{ $t("header.buttonJoin") }}</AntHiveBtn
+        >
       </div>
     </v-container>
   </v-app-bar>
