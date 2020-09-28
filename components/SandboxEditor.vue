@@ -164,4 +164,17 @@ export default {
     background: $color-red-400;
   }
 }
+
+.ace_scrollbar.ace_scrollbar-h {
+  z-index: 1;
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-green-900;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-red-400;
+  }
+}
 </style>

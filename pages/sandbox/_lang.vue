@@ -104,7 +104,6 @@ export default {
     },
     async sendCodeToSim(data) {
       const url = `${process.env.API_URL}sandbox/${this.valueCode.extention}`
-      //const url = `${process.env.SIMULATION_URL}${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,
