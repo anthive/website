@@ -38,7 +38,7 @@
               <v-list-item-title>{{ $t("header.rules") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="localePath('sandbox/js')">
+          <v-list-item :to="localePath('sandbox')">
             <v-list-item-content>
               <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
             </v-list-item-content>

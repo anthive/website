@@ -9,8 +9,6 @@ let sandboxRoutes = () => {
 }
 
 module.exports = {
-  mode: 'universal',
-
   env: {
     API_URL: process.env.API_URL,
     SIMULATION_URL: process.env.SIMULATION_URL,
