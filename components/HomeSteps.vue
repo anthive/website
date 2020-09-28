@@ -12,7 +12,7 @@
             </v-card-text>
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
-                <nuxt-link :key="lang.id" v-for="lang in langs" :to="localePath({ path: `sandbox/${lang.extention}` })" rel="noreferrer"
+                <nuxt-link :key="lang.id" v-for="lang in langs" :to="localePath({ path: `/sandbox/${lang.extention}` })" rel="noreferrer"
                   ><img class="steps__lang-panel-img" width="40px" :src="lang.img" :alt="lang.id"
                 /></nuxt-link>
               </div>
