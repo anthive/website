@@ -12,9 +12,9 @@
             </v-card-text>
             <div class="text-xs-left">
               <div class="steps__lang-panel mx-3">
-                <a :key="lang.id" v-for="lang in langs" :href="lang.sample" target="_blank" rel="noreferrer"
+                <nuxt-link :key="lang.id" v-for="lang in langs" :to="localePath({ path: `sandbox/${lang.extention}` })" rel="noreferrer"
                   ><img class="steps__lang-panel-img" width="40px" :src="lang.img" :alt="lang.id"
-                /></a>
+                /></nuxt-link>
               </div>
             </div>
           </v-card>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import langs from '../static/langs/data.json'
 
 export default {
   name: 'HomeSteps',
@@ -56,13 +56,11 @@ export default {
     }
   },
   mounted() {
-    this.fetchLangs()
+    this.getLangs()
   },
   methods: {
-    fetchLangs() {
-      axios.get('langs/data.json').then(resp => {
-        this.langs = resp.data
-      })
+    getLangs() {
+      this.langs = langs
     }
   }
 }
