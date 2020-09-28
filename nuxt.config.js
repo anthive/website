@@ -10,6 +10,10 @@ module.exports = {
     INDEX_USER: process.env.INDEX_USER,
     INDEX_STATS: process.env.INDEX_STATS
   },
+  // Doc: https://web.dev/maskable-icon-audit/?utm_source=lighthouse&utm_medium=devtools
+  icon: {
+    purpose: ['maskable', 'any']
+  },
   /*
   ** Set cache age for static folder
   */
@@ -29,7 +33,11 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
       {
         rel: 'icon',
         type: 'image/png',
