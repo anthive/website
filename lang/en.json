@@ -112,5 +112,17 @@
     "errors": "Errors",
     "earned": "Earned",
     "profile": "Profile"
+  },
+
+  "sandbox": {
+    "loading": "Loading",
+    "runDansbox": "Run sandbox",
+    "bot": "Bot",
+    "sim": "Sim",
+    "loadingText1": "Switch on the light",
+    "loadingText2": "Shape the landscape",
+    "loadingText3": "Put the food on",
+    "loadingText4": "Growing ants",
+    "loadingText5": "Running the game"
   }
 }

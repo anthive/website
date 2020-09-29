@@ -9,7 +9,13 @@
               <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col class="mt-6" cols="12" md="6">
-              <div id="player" />
+              <div class="sandbox__player" :class="{ 'disable': loading }" >
+                <div id="player" />
+                <div class="sandbox__loading-text" v-if="loadingText">
+                  <h4>{{ $t("sandbox.loading") }}</h4>
+                  <p>{{ $t(`sandbox.${loadingText}`) }}</p>
+                </div>
+              </div>
               <AntHiveBtn
                 :loading="loading"
                 fill
@@ -18,7 +24,7 @@
                 block
                 color="green"
                 dark
-                >Run sandbox </AntHiveBtn
+                >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
               >
             </v-col>
           </v-row>
@@ -28,15 +34,15 @@
             background-color="grey darken-2"
             dark
           >
-            <v-tab> Simulation </v-tab>
-            <v-tab> Bot </v-tab>
+            <v-tab> {{ $t("sandbox.bot") }} </v-tab>
+            <v-tab> {{ $t("sandbox.sim") }} </v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
             <v-tab-item>
               <v-card class="sandbox__content-logs-wrap" flat>
                 <v-card-text>
-                  <pre>{{ simLogs }}</pre>
+                  <pre>{{ botLogs }}</pre>
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -44,7 +50,7 @@
             <v-tab-item>
               <v-card class="sandbox__content-logs-wrap" flat>
                 <v-card-text>
-                  <pre>{{ botLogs }}</pre>
+                  <pre>{{ simLogs }}</pre>
                 </v-card-text>
               </v-card>
             </v-tab-item>
@@ -67,7 +73,9 @@ export default {
     simLogs: '',
     botLogs: '',
     tab: 0,
-    loading: false
+    loading: false,
+    listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
+    loadingText: ''
   }),
   mounted() {
     const gameId = this.$route.query.box
@@ -77,8 +85,20 @@ export default {
     }
   },
   methods: {
+    showLoadingText(i = 0) {
+      if (!this.loading) {
+        this.loadingText = ''
+        return
+      }
+      if (i >= this.listOfLoadingText.length) return
+      setTimeout(() => {
+        this.loadingText = this.listOfLoadingText[i]
+        this.showLoadingText(i + 1)
+      }, 3000)
+    },
     async onClickRun() {
       this.loading = true
+      this.showLoadingText()
       const file = this.createFile()
       const formData = this.createData(file)
       try {
@@ -118,6 +138,7 @@ export default {
       new AnthivePlayer('#player', gameUrl)
     },
     async initLogs(id) {
+      this.botLogs = this.simLogs = 'Loading...'
       this.botLogs = await this.getLogs(id, 'bot')
       this.simLogs = await this.getLogs(id, 'sim')
     },
@@ -136,6 +157,28 @@ export default {
   &__content {
     position: relative;
     height: 600px;
+  }
+  &__player {
+    position: relative;
+    &.disable::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.5;
+    }
+  }
+  &__loading-text {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   &__content-logs-wrap {
     overflow-y: scroll;

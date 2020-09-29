@@ -112,5 +112,17 @@
     "errors": "Ошибки",
     "earned": "Очки",
     "profile": "Профиль"
+  },
+
+  "sandbox": {
+    "loading": "Загрузка",
+    "runDansbox": "Запустить игру",
+    "bot": "Бот",
+    "sim": "Сим",
+    "loadingText1": "Включаем освещение",
+    "loadingText2": "Формируем ландшафт",
+    "loadingText3": "Накладываем еду",
+    "loadingText4": "Выращиваем муравья",
+    "loadingText5": "Запускаем игру"
   }
 }

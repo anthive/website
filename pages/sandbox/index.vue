@@ -7,7 +7,7 @@
 <script>
 export default {
   mounted() {
-    this.$router.push('/sandbox/js')
+    this.$router.push(`${this.localePath('sandbox')}/js`)
   }
 }
 </script>
