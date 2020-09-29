@@ -11,19 +11,20 @@
             <v-col class="mt-6" cols="12" md="6">
               <div class="sandbox__player" :class="{ 'disable': loading }" >
                 <div id="player" />
-                <div class="sandbox__loading-text" v-if="loadingText">
+                <div class="sandbox__loading-text" v-if="loading">
                   <h4>{{ $t("sandbox.loading") }}</h4>
-                  <p>{{ $t(`sandbox.${loadingText}`) }}</p>
+                  <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
                 </div>
               </div>
               <AntHiveBtn
                 :loading="loading"
+                :disabled="!isCodeChanged"
                 fill
                 class="my-5"
                 @click="onClickRun"
                 block
+                :light="!isCodeChanged"
                 color="green"
-                dark
                 >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
               >
             </v-col>
@@ -64,6 +65,7 @@
 <script>
 import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
+var player = null
 export default {
   components: {
     editor
@@ -75,8 +77,14 @@ export default {
     tab: 0,
     loading: false,
     listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
-    loadingText: ''
+    loadingText: '',
+    savedCode: ''
   }),
+  computed: {
+    isCodeChanged() {
+      return this.valueCode.value !== this.savedCode
+    }
+  },
   mounted() {
     const gameId = this.$route.query.box
     if (gameId) {
@@ -99,6 +107,9 @@ export default {
     async onClickRun() {
       this.loading = true
       this.showLoadingText()
+      if (player && player.control) player.control.stop()
+      this.botLogs = this.simLogs = 'Loading...'
+      this.savedCode = this.valueCode.value
       const file = this.createFile()
       const formData = this.createData(file)
       try {
@@ -135,10 +146,9 @@ export default {
     initGame(id) {
       const gameUrl = `${process.env.SANDBOX_BUCKET}${id}.zip`
       // eslint-disable-next-line
-      new AnthivePlayer('#player', gameUrl)
+      player = new AnthivePlayer('#player', gameUrl)
     },
     async initLogs(id) {
-      this.botLogs = this.simLogs = 'Loading...'
       this.botLogs = await this.getLogs(id, 'bot')
       this.simLogs = await this.getLogs(id, 'sim')
     },
