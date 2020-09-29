@@ -161,6 +161,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .sandbox {
   overflow-x: hidden;
   height: 100%;
@@ -177,14 +179,14 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: black;
+      background-color: $color-black;
       opacity: 0.5;
     }
   }
   &__loading-text {
     position: absolute;
     z-index: 1;
-    color: white;
+    color: $color-white;
     top: 50%;
     text-align: center;
     left: 50%;
