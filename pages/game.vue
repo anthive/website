@@ -13,7 +13,7 @@
     </v-row>
 
     <div v-else class="game__game-not-found">
-      <h2 class="mb-10">{{ $t('game.cantFindGame') }}</h2>
+      <h2 class="mb-10">{{ $t('game.cantFindGame') }} #{{ gameId }}</h2>
       <p>{{ $t('game.checkOut') }}</p>
       <div class="game_games-links">
         <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
@@ -44,7 +44,8 @@ export default {
     players: [],
     isGameEnd: false,
     gameLoaded: false,
-    showPlayerList: false
+    showPlayerList: false,
+    gameId: ''
   }),
   components: {
     GameLogPanel,
@@ -53,9 +54,9 @@ export default {
   },
   mounted() {
     const base = 'https://storage.googleapis.com/anthive-prod-games/'
-    const gameid = this.$route.query.id || ''
+    this.gameId = this.$route.query.id || ''
     const version = this.$route.query.v || ''
-    const dataUrl = base + version + '/' + gameid + '.zip'
+    const dataUrl = base + version + '/' + this.gameId + '.zip'
     if (this.isGameFound(dataUrl)) {
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', dataUrl)
