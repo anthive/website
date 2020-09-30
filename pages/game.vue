@@ -17,13 +17,13 @@
       <p>{{ $t('game.checkOut') }}</p>
       <div class="game_games-links">
         <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
-          <img class="game__game-image" src="img/game1.png" alt="game">
+          <img class="game__game-image" src="/img/game1.png" alt="game">
         </a>
         <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
-          <img class="game__game-image" src="img/game2.png" alt="game">
+          <img class="game__game-image" src="/img/game2.png" alt="game">
         </a>
         <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
-          <img class="game__game-image" src="img/game3.png" alt="game">
+          <img class="game__game-image" src="/img/game3.png" alt="game">
         </a>
       </div>
       <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
