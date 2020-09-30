@@ -48,14 +48,6 @@
         <AntHiveIcon color="white" class="footer__social--icon">twitter</AntHiveIcon>
       </a>
       <a
-        href="https://www.facebook.com/AntHive.IO/"
-        title="Our Facebook page"
-        rel="noreferrer"
-        target="_blank"
-      >
-        <AntHiveIcon color="white" class="footer__social--icon">facebook</AntHiveIcon>
-      </a>
-      <a
         href="https://www.instagram.com/anthiveio/"
         title="Our Instagram accoutn"
         rel="noreferrer"
@@ -64,7 +56,7 @@
         <AntHiveIcon color="white" class="footer__social--icon">instagram</AntHiveIcon>
       </a>
       <a
-        href="https://www.youtube.com/channel/UCx1KBAlciwcRuehIiOfnDVg"
+        href="https://www.youtube.com/channel/UCP9SHUqnSdGEiEHbqIudMxw"
         title="Our Youtube channel"
         rel="noreferrer"
         target="_blank"
