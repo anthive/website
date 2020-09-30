@@ -1,16 +1,33 @@
 <template>
   <section class="game texture-arrows">
-    <v-row class="texture-scrabble flex-nowrap mx-auto">
-        
+
+    <v-row v-if="isGameAvailable" class="texture-scrabble flex-nowrap mx-auto">
       <GamePlayerList
         v-show="gameLoaded"
         v-bind:players="players"
         @togglePlayerList="showPlayerList = !showPlayerList"
       />
       <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
-        <GamePlayer :status="status" :isGameEnd="isGameEnd"  @replay="replay()" />
+        <GamePlayer :isGameEnd="isGameEnd"  @replay="replay()" />
       </div>
     </v-row>
+
+    <div v-else class="game__game-not-found">
+      <h2 class="mb-10">{{ $t('game.cantFindGame') }}</h2>
+      <p>{{ $t('game.checkOut') }}</p>
+      <div class="game_games-links">
+        <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
+          <img class="game__game-image" src="img/game1.png" alt="game">
+        </a>
+        <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
+          <img class="game__game-image" src="img/game2.png" alt="game">
+        </a>
+        <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
+          <img class="game__game-image" src="img/game3.png" alt="game">
+        </a>
+      </div>
+      <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
+    </div>
   </section>
 </template>
 
@@ -22,7 +39,7 @@ import GamePlayer from '@/components/GamePlayer'
 var player = null
 export default {
   data: () => ({
-    status: 'loading',
+    isGameAvailable: true,
     theme: 1,
     players: [],
     isGameEnd: false,
@@ -39,7 +56,7 @@ export default {
     const gameid = this.$route.query.id || ''
     const version = this.$route.query.v || ''
     const dataUrl = base + version + '/' + gameid + '.zip'
-    if (dataUrl != null) {
+    if (this.isGameFound(dataUrl)) {
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', dataUrl)
       // eslint-disable-next-line
@@ -52,10 +69,16 @@ export default {
         this.isGameEnd = true
       })
     } else {
-      this.status = "Can't find game."
+      this.isGameAvailable = false
     }
   },
   methods: {
+    isGameFound(url) {
+      const request = new XMLHttpRequest()
+      request.open('HEAD', url, false)
+      request.send()
+      return request.status !== 404
+    },
     replay() {
       player.control.frame = 0
       player.control.play()
@@ -84,8 +107,39 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
 .game {
   height: 100%;
   overflow-x: hidden;
+
+  &__game-not-found {
+    width: 100%;
+    text-align: center;
+    color: $color-white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__game-image {
+    margin: 0 5px;
+    border: 2px solid $color-red-500;
+    border-radius: 2px;
+    transform: scale(0.98);
+    transition: 0.2s;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  &__link {
+    display: inline-block;
+    color: $color-white;
+    text-decoration: underline;
+    margin-top: 10px;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
 }
 </style>
