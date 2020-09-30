@@ -8,7 +8,7 @@
         @togglePlayerList="showPlayerList = !showPlayerList"
       />
       <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
-        <GamePlayer :isGameEnd="isGameEnd"  @replay="replay()" />
+        <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
       </div>
     </v-row>
 
