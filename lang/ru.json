@@ -80,7 +80,10 @@
     "shareOn": "Поделиться в",
     "sendBy": "Отправить по",
     "copyUrl": "Скопировать ссылку",
-    "sidebarTitle": "Свернуть"
+    "sidebarTitle": "Свернуть",
+    "cantFindGame": "Игра не найдена",
+    "checkOut": "Посмотрите другие игры",
+    "goToGames": "или перейдите в раздел со всеми играми"
   },
 
   "leaderboard": {

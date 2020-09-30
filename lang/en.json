@@ -80,7 +80,10 @@
     "shareOn": "Share on",
     "sendBy": "Send by",
     "copyUrl": "Copy URL",
-    "sidebarTitle": "Hide full info"
+    "sidebarTitle": "Hide full info",
+    "cantFindGame": "Can't find game",
+    "checkOut": "Сheck out other games",
+    "goToGames": "or look at all the games"
   },
 
   "leaderboard": {

@@ -11,7 +11,7 @@
       ref="playerWrap"
     ></div>
     <div id="player">
-      <h2 class="px-2 white--text loading">{{ $t(`game.${status}`) }}</h2>
+      <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
@@ -136,7 +136,6 @@ export default {
     AntHiveIcon
   },
   props: {
-    status: String,
     isGameEnd: Boolean
   },
   computed: {
