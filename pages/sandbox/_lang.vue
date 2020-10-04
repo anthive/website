@@ -1,17 +1,16 @@
 <template>
-  <section class="texture-arrows sandbox">
-    <v-row class="mx-2">
-      <v-col cols="12">
-        <v-card class="white pa-3 elevation-6" min-height="700">
-          <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
+  <section class="sandbox">
+    <v-row class="px-2">
+      <v-col class="pa-0" cols="12">
+        <v-card class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col class="mt-6" cols="12" md="6">
-              <div class="sandbox__player" :class="{ 'disable': loading }" >
+              <div class="sandbox__player" :class="{ disable: loading }">
                 <div id="player" />
-                <div class="sandbox__loading-text" v-if="loading">
+                <div class="sandbox__loading-text" v-if="loading && $route.query.box">
                   <h4>{{ $t("sandbox.loading") }}</h4>
                   <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
                 </div>
@@ -20,42 +19,48 @@
                 :loading="loading"
                 :disabled="!isCodeChanged"
                 fill
-                class="my-5"
+                class="mb-5"
                 @click="onClickRun"
                 block
                 :light="!isCodeChanged"
                 color="green"
                 >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
               >
+              <div v-if="simLogs && botLogs">
+                <v-tabs v-model="tab" background-color="grey darken-2" dark>
+                  <v-tab> {{ $t("sandbox.bot") }} </v-tab>
+                  <v-tab> {{ $t("sandbox.sim") }} </v-tab>
+                </v-tabs>
+
+                <v-tabs-items v-model="tab">
+                  <v-tab-item>
+                    <v-card class="sandbox__content-logs-wrap" flat>
+                      <v-card-text>
+                        <pre>{{ botLogs }}</pre>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+
+                  <v-tab-item>
+                    <v-card class="sandbox__content-logs-wrap" flat>
+                      <v-card-text>
+                        <pre>{{ simLogs }}</pre>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                </v-tabs-items>
+              </div>
+              <div v-else>
+                <p>{{ $t("sandbox.description1") }}</p>
+                <p>{{ $t("sandbox.description2") }}</p>
+                <p>{{ $t("sandbox.description3") }}</p>
+                <p>{{ $t("sandbox.description4") }}</p>
+                <p>{{ $t("sandbox.description5") }}</p>
+                <p>{{ $t("sandbox.description6") }}</p>
+                <p>{{ $t("sandbox.description7") }}</p>
+              </div>
             </v-col>
           </v-row>
-          <v-tabs
-            v-if="simLogs && botLogs"
-            v-model="tab"
-            background-color="grey darken-2"
-            dark
-          >
-            <v-tab> {{ $t("sandbox.bot") }} </v-tab>
-            <v-tab> {{ $t("sandbox.sim") }} </v-tab>
-          </v-tabs>
-
-          <v-tabs-items v-model="tab">
-            <v-tab-item>
-              <v-card class="sandbox__content-logs-wrap" flat>
-                <v-card-text>
-                  <pre>{{ botLogs }}</pre>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card class="sandbox__content-logs-wrap" flat>
-                <v-card-text>
-                  <pre>{{ simLogs }}</pre>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-          </v-tabs-items>
         </v-card>
       </v-col>
     </v-row>
@@ -168,7 +173,6 @@ export default {
   height: 100%;
   &__content {
     position: relative;
-    height: 600px;
   }
   &__player {
     position: relative;
@@ -194,7 +198,7 @@ export default {
   }
   &__content-logs-wrap {
     overflow-y: scroll;
-    max-height: 450px;
+    max-height: 420px;
   }
 }
 </style>
