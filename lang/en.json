@@ -115,5 +115,24 @@
     "errors": "Errors",
     "earned": "Earned",
     "profile": "Profile"
+  },
+
+  "sandbox": {
+    "loading": "Loading",
+    "runDansbox": "Run sandbox",
+    "bot": "Bot Logs",
+    "sim": "Sim Logs",
+    "loadingText1": "Turn on lights",
+    "loadingText2": "Shape the landscape",
+    "loadingText3": "Put the food on",
+    "loadingText4": "Growing ants",
+    "loadingText5": "Running the game",
+    "description1": "We are deep believers that Games for Developers should be played not with PSEUDO code but actual programming language.",
+    "description2": "That way you directly improve your skills that directly apply at your job/hobbi.",
+    "description3": "We also not forcing you to use generic boilerplate. Therefore we do not hide infrastructure like http server. Feel free to tune it up for better performance.",
+    "description4": "We tend to keep sample code across languages the same. In order not to be biased towards particular coding language.",
+    "description5": "Sample code is NOT written based on best practises. It's NOT well architectured. It's just quick and dirty PoC written on napkin.",
+    "description6": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants.",
+    "description7": "Sandbox support only single file with no dependenses. However you can register and link your git repository with bot. Inside of repository you have full freedom. Proper file separation, dependensies, etc., to unleash your coding Ninja!"
   }
 }

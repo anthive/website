@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <span v-if="currentLangTab.sample"
-      >Source code: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></span
+  <div class="editor__wrap">
+    <h4 v-if="currentLangTab.sample"
+      >Source code: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h4
     >
-    <v-card color="#272822" height="500">
+    <v-card color="#272822" height="80vh">
       <v-tabs
         active-class="editor__active-tab"
         v-model="tab"
@@ -28,7 +28,7 @@
           v-for="(lang, key) in langs"
           :key="key"
         >
-          <v-card color="#272822" height="450" flat>
+          <v-card color="#272822" height="80vh" flat>
             <v-card-text>
               <div class="editor" :id="lang.editor" />
             </v-card-text>
@@ -147,6 +147,9 @@ export default {
   bottom: 0;
   left: 0;
   overflow: hidden;
+  &__wrap {
+    height: 100%;
+  }
   &__active-tab {
     color: $color-red-300 !important;
   }

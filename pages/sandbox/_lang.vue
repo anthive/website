@@ -1,54 +1,66 @@
 <template>
-  <section class="texture-arrows sandbox">
-    <v-row class="mx-2">
-      <v-col cols="12">
-        <v-card class="white pa-3 elevation-6" min-height="700">
-          <v-card-title class="primary--text">{{ "Sandbox" }}</v-card-title>
+  <section class="sandbox">
+    <v-row class="px-2">
+      <v-col class="pa-0" cols="12">
+        <v-card class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
             <v-col class="mt-6" cols="12" md="6">
-              <div id="player" />
+              <div class="sandbox__player" :class="{ disable: loading }">
+                <div id="player" />
+                <div class="sandbox__loading-text" v-if="loading && $route.query.box">
+                  <h4>{{ $t("sandbox.loading") }}</h4>
+                  <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
+                </div>
+              </div>
               <AntHiveBtn
                 :loading="loading"
+                :disabled="!isCodeChanged"
                 fill
-                class="my-5"
+                class="mb-5"
                 @click="onClickRun"
                 block
+                :light="!isCodeChanged"
                 color="green"
-                dark
-                >Run sandbox </AntHiveBtn
+                >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
               >
+              <div v-if="simLogs && botLogs">
+                <v-tabs v-model="tab" background-color="grey darken-2" dark>
+                  <v-tab> {{ $t("sandbox.bot") }} </v-tab>
+                  <v-tab> {{ $t("sandbox.sim") }} </v-tab>
+                </v-tabs>
+
+                <v-tabs-items v-model="tab">
+                  <v-tab-item>
+                    <v-card class="sandbox__content-logs-wrap" flat>
+                      <v-card-text>
+                        <pre>{{ botLogs }}</pre>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+
+                  <v-tab-item>
+                    <v-card class="sandbox__content-logs-wrap" flat>
+                      <v-card-text>
+                        <pre>{{ simLogs }}</pre>
+                      </v-card-text>
+                    </v-card>
+                  </v-tab-item>
+                </v-tabs-items>
+              </div>
+              <div v-else>
+                <p>{{ $t("sandbox.description1") }}</p>
+                <p>{{ $t("sandbox.description2") }}</p>
+                <p>{{ $t("sandbox.description3") }}</p>
+                <p>{{ $t("sandbox.description4") }}</p>
+                <p>{{ $t("sandbox.description5") }}</p>
+                <p>{{ $t("sandbox.description6") }}</p>
+                <p>{{ $t("sandbox.description7") }}</p>
+              </div>
             </v-col>
           </v-row>
-          <v-tabs
-            v-if="simLogs && botLogs"
-            v-model="tab"
-            background-color="grey darken-2"
-            dark
-          >
-            <v-tab> Simulation </v-tab>
-            <v-tab> Bot </v-tab>
-          </v-tabs>
-
-          <v-tabs-items v-model="tab">
-            <v-tab-item>
-              <v-card class="sandbox__content-logs-wrap" flat>
-                <v-card-text>
-                  <pre>{{ simLogs }}</pre>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-card class="sandbox__content-logs-wrap" flat>
-                <v-card-text>
-                  <pre>{{ botLogs }}</pre>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-          </v-tabs-items>
         </v-card>
       </v-col>
     </v-row>
@@ -58,6 +70,7 @@
 <script>
 import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
+var player = null
 export default {
   components: {
     editor
@@ -67,8 +80,16 @@ export default {
     simLogs: '',
     botLogs: '',
     tab: 0,
-    loading: false
+    loading: false,
+    listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
+    loadingText: '',
+    savedCode: ''
   }),
+  computed: {
+    isCodeChanged() {
+      return this.valueCode.value !== this.savedCode
+    }
+  },
   mounted() {
     const gameId = this.$route.query.box
     if (gameId) {
@@ -77,8 +98,23 @@ export default {
     }
   },
   methods: {
+    showLoadingText(i = 0) {
+      if (!this.loading) {
+        this.loadingText = ''
+        return
+      }
+      if (i >= this.listOfLoadingText.length) return
+      setTimeout(() => {
+        this.loadingText = this.listOfLoadingText[i]
+        this.showLoadingText(i + 1)
+      }, 3000)
+    },
     async onClickRun() {
       this.loading = true
+      this.showLoadingText()
+      if (player && player.control) player.control.stop()
+      this.botLogs = this.simLogs = 'Loading...'
+      this.savedCode = this.valueCode.value
       const file = this.createFile()
       const formData = this.createData(file)
       try {
@@ -115,7 +151,7 @@ export default {
     initGame(id) {
       const gameUrl = `${process.env.SANDBOX_BUCKET}${id}.zip`
       // eslint-disable-next-line
-      new AnthivePlayer('#player', gameUrl)
+      player = new AnthivePlayer('#player', gameUrl)
     },
     async initLogs(id) {
       this.botLogs = await this.getLogs(id, 'bot')
@@ -130,16 +166,39 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
 .sandbox {
   overflow-x: hidden;
   height: 100%;
   &__content {
     position: relative;
-    height: 600px;
+  }
+  &__player {
+    position: relative;
+    &.disable::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $color-black;
+      opacity: 0.5;
+    }
+  }
+  &__loading-text {
+    position: absolute;
+    z-index: 1;
+    color: $color-white;
+    top: 50%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   &__content-logs-wrap {
     overflow-y: scroll;
-    max-height: 450px;
+    max-height: 420px;
   }
 }
 </style>
