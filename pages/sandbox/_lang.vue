@@ -24,7 +24,7 @@
                 block
                 :light="!isCodeChanged"
                 color="green"
-                >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
+                >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
               >
               <div v-if="simLogs && botLogs">
                 <v-tabs v-model="tab" background-color="grey darken-2" dark>
@@ -51,13 +51,7 @@
                 </v-tabs-items>
               </div>
               <div v-else>
-                <p>{{ $t("sandbox.description1") }}</p>
-                <p>{{ $t("sandbox.description2") }}</p>
-                <p>{{ $t("sandbox.description3") }}</p>
-                <p>{{ $t("sandbox.description4") }}</p>
-                <p>{{ $t("sandbox.description5") }}</p>
-                <p>{{ $t("sandbox.description6") }}</p>
-                <p>{{ $t("sandbox.description7") }}</p>
+                <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
               </div>
             </v-col>
           </v-row>
@@ -111,6 +105,7 @@ export default {
     },
     async onClickRun() {
       this.loading = true
+      this.$ga.event({ eventCategory: 'sandbox', eventAction: 'run' })
       this.showLoadingText()
       if (player && player.control) player.control.stop()
       this.botLogs = this.simLogs = 'Loading...'
@@ -186,6 +181,9 @@ export default {
       background-color: $color-black;
       opacity: 0.5;
     }
+  }
+  &__description {
+    white-space: pre-line;
   }
   &__loading-text {
     position: absolute;

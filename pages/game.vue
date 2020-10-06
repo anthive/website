@@ -71,6 +71,7 @@ export default {
       })
     } else {
       this.isGameAvailable = false
+      this.$ga.event({ eventCategory: 'game', eventAction: 'notfound' })
     }
   },
   methods: {
