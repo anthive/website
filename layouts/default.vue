@@ -12,6 +12,7 @@
 import TheHeader from '@/components/TheHeader'
 import TheFooter from '@/components/TheFooter'
 import { mapMutations } from 'vuex'
+import { ImageActions } from '@/services/Image'
 
 export default {
   components: {
@@ -24,7 +25,7 @@ export default {
   created() {
     const user = {
       userName: this.$cookiz.get('userName'),
-      userAvatar: this.$cookiz.get('userAvatar')
+      userAvatar: ImageActions.getImageById(this.$cookiz.get('userAvatar'), 32)
     }
     this.setUser(user)
   }
