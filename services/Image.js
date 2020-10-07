@@ -15,7 +15,7 @@ class ImageActions {
     return data
   }
 
-  static getImageById(id, width, height) {
+  static getImageById(id, width, height = width) {
     return `${IMAGE_HANDLER}/${id}/${width}/${height}`
   }
 }
