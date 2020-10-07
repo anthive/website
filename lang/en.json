@@ -120,6 +120,7 @@
   "sandbox": {
     "loading": "Loading",
     "runSandbox": "Run sandbox",
+    "loginToSave": "Login to save",
     "bot": "Bot Logs",
     "sim": "Sim Logs",
     "loadingText1": "Turn on lights",

@@ -15,21 +15,30 @@
                   <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
                 </div>
               </div>
-              <AntHiveBtn
-                :loading="loading"
-                :disabled="!isCodeChanged"
-                fill
-                class="mb-5"
-                @click="onClickRun"
-                block
-                :light="!isCodeChanged"
-                color="green"
-                >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
-              >
+              <div class="sandbox__actions">
+                <AntHiveBtn
+                  :loading="loading"
+                  :disabled="!isCodeChanged"
+                  fill
+                  class="action-button"
+                  @click="onClickRun"
+                  :light="!isCodeChanged"
+                  color="green"
+                  >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
+                >
+                <AntHiveBtn
+                  fill
+                  class="action-button"
+                  @click="onClickLogin"
+                  color="accent"
+                  >{{ $t("sandbox.loginToSave") }}</AntHiveBtn
+                >
+              </div>
+              
               <div v-if="simLogs && botLogs">
                 <v-tabs v-model="tab" background-color="grey darken-2" dark>
-                  <v-tab> {{ $t("sandbox.bot") }} </v-tab>
-                  <v-tab> {{ $t("sandbox.sim") }} </v-tab>
+                  <v-tab @click="handlerClickLogs('bot')"> {{ $t("sandbox.bot") }} </v-tab>
+                  <v-tab @click="handlerClickLogs('sim')"> {{ $t("sandbox.sim") }} </v-tab>
                 </v-tabs>
 
                 <v-tabs-items v-model="tab">
@@ -92,6 +101,9 @@ export default {
     }
   },
   methods: {
+    handlerClickLogs(logsCategory) {
+      this.$ga.event({ eventCategory: 'game', eventAction: 'logs', eventValue: logsCategory })
+    },
     showLoadingText(i = 0) {
       if (!this.loading) {
         this.loadingText = ''
@@ -122,6 +134,10 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    onClickLogin() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
+      window.open('https://profile.anthive.io/')
     },
     createFile() {
       const fileName = `bot.${this.valueCode.extention}`
@@ -184,6 +200,15 @@ export default {
   }
   &__description {
     white-space: pre-line;
+  }
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .action-button {
+      width: 49%;
+    }
   }
   &__loading-text {
     position: absolute;

@@ -108,7 +108,7 @@ export default {
   },
   methods: {
     handlerClickGetStarted() {
-      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect' })
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'header' })
       window.location.href = 'https://profile.anthive.io/'
     }
   }
