@@ -72,7 +72,7 @@
         <AntHiveIcon color="white" class="footer__social--icon">twitch</AntHiveIcon>
       </a>
       <a
-        href="https://discord.com/channels/763448959322423296"
+        href="https://discord.gg/mbMvyt"
         title="Our Discord channel"
         rel="noreferrer"
         target="_blank"
