@@ -43,7 +43,7 @@
               <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :href="profilePage">
+          <v-list-item :href="profileURL">
             <v-list-item-content>
               <v-list-item-title>{{
                 $t("header.buttonJoin")
@@ -98,7 +98,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'TheHeader',
   data: () => ({
-    profilePage: process.env.PROFILE_URL
+    profileURL: process.env.PROFILE_URL
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -112,7 +112,7 @@ export default {
   methods: {
     handlerClickGetStarted() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'header' })
-      window.location.href = this.profilePage
+      window.location.href = this.profileURL
     }
   }
 }
