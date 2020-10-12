@@ -28,6 +28,8 @@
                 >
                 <AntHiveBtn
                   fill
+                  light
+                  :disabled="!gameId"
                   class="action-button"
                   @click="onClickLogin"
                   color="accent"
@@ -86,7 +88,8 @@ export default {
     loading: false,
     listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
     loadingText: '',
-    savedCode: ''
+    savedCode: '',
+    gameId: ''
   }),
   computed: {
     isCodeChanged() {
@@ -125,10 +128,10 @@ export default {
       const file = this.createFile()
       const formData = this.createData(file)
       try {
-        const gameId = await this.sendCodeToSim(formData)
-        this.initGame(gameId)
-        this.initLogs(gameId)
-        this.$router.push({ path: this.$route.path, query: { box: gameId } })
+        this.gameId = await this.sendCodeToSim(formData)
+        this.initGame(this.gameId)
+        this.initLogs(this.gameId)
+        this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
       } catch (err) {
         console.log(err)
       } finally {
@@ -137,7 +140,7 @@ export default {
     },
     onClickLogin() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
-      window.open('https://profile.anthive.io/')
+      window.location.href = `${process.env.PROFILE_URL}bots?box=${this.gameId}`
     },
     createFile() {
       const fileName = `bot.${this.valueCode.extention}`

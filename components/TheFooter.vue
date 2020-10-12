@@ -71,6 +71,14 @@
       >
         <AntHiveIcon color="white" class="footer__social--icon">twitch</AntHiveIcon>
       </a>
+      <a
+        href="https://discord.com/channels/763448959322423296"
+        title="Our Discord channel"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <AntHiveIcon color="white" class="footer__social--icon">discord</AntHiveIcon>
+      </a>
     </div>
 
     <!-- Languagues -->
