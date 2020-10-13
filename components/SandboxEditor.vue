@@ -1,7 +1,7 @@
 <template>
   <div class="editor__wrap">
     <h4 v-if="currentLangTab.sample"
-      >Source code: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h4
+      >{{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h4
     >
     <v-card color="#272822" height="80vh">
       <v-tabs
