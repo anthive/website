@@ -133,6 +133,7 @@
     "description4": "We tend to keep sample code across languages the same. In order not to be biased towards particular coding language.",
     "description5": "Sample code is NOT written based on best practises. It's NOT well architectured. It's just quick and dirty PoC written on napkin.",
     "description6": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants.",
-    "description7": "Sandbox support only single file with no dependenses. However you can register and link your git repository with bot. Inside of repository you have full freedom. Proper file separation, dependensies, etc., to unleash your coding Ninja!"
+    "description7": "Sandbox support only single file with no dependenses. However you can register and link your git repository with bot. Inside of repository you have full freedom. Proper file separation, dependensies, etc., to unleash your coding Ninja!",
+    "descriptionHelp": "Do you have any questions or difficulties ? See the $rules$ section or write to us in $discord$"
   }
 }

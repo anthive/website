@@ -58,6 +58,7 @@
                 <p>{{ $t("sandbox.description5") }}</p>
                 <p>{{ $t("sandbox.description6") }}</p>
                 <p>{{ $t("sandbox.description7") }}</p>
+                <p v-html="getHelpDOMElement" />
               </div>
             </v-col>
           </v-row>
@@ -88,6 +89,18 @@ export default {
   computed: {
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
+    },
+    getHelpDOMElement() {
+      const text = this.$t('sandbox.descriptionHelp')
+      const rulesDOMElement = `
+        <a
+          class="accent--text"
+          onClick="this.$ga.event({ eventCategory: 'rules', eventAction: 'redirect', eventLabel: 'fromSandbox' })"
+          href="/rules"
+        >${this.$t('header.rules')}</a>
+      `
+      const discordDOMElement = `<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>`
+      return text.replace('$rules$', rulesDOMElement).replace('$discord$', discordDOMElement)
     }
   },
   mounted() {
