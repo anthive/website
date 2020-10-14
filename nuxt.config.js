@@ -15,7 +15,8 @@ module.exports = {
     SANDBOX_BUCKET: process.env.SANDBOX_BUCKET,
     INDEX_GAMES: process.env.INDEX_GAMES,
     INDEX_USER: process.env.INDEX_USER,
-    INDEX_STATS: process.env.INDEX_STATS
+    INDEX_STATS: process.env.INDEX_STATS,
+    PROFILE_URL: process.env.PROFILE_URL
   },
   // Doc: https://web.dev/maskable-icon-audit/?utm_source=lighthouse&utm_medium=devtools
   icon: {

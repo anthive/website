@@ -43,7 +43,7 @@
               <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item href="https://profile.anthive.io/login">
+          <v-list-item :href="profileURL">
             <v-list-item-content>
               <v-list-item-title>{{
                 $t("header.buttonJoin")
@@ -97,6 +97,9 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'TheHeader',
+  data: () => ({
+    profileURL: process.env.PROFILE_URL
+  }),
   computed: {
     ...mapGetters(['getUser']),
     getUserAvatar() {
@@ -108,8 +111,8 @@ export default {
   },
   methods: {
     handlerClickGetStarted() {
-      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect' })
-      window.location.href = 'https://profile.anthive.io/'
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'header' })
+      window.location.href = this.profileURL
     }
   }
 }

@@ -23,7 +23,7 @@
             width="320"
             height="72"
             block
-            :href="`https://profile.anthive.io/new-game/?rematch=${this.gameId}`"
+            :href="getRematchURL"
             >{{ $t('game.requestRematch') }}</v-btn
           >
           <v-btn
@@ -147,6 +147,9 @@ export default {
     },
     gameId() {
       return this.$route.query.id
+    },
+    getRematchURL() {
+      return `${process.env.PROFILE_URL}new-game/?rematch=${this.gameId}`
     }
   },
   methods: {

@@ -15,21 +15,32 @@
                   <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
                 </div>
               </div>
-              <AntHiveBtn
-                :loading="loading"
-                :disabled="!isCodeChanged"
-                fill
-                class="mb-5"
-                @click="onClickRun"
-                block
-                :light="!isCodeChanged"
-                color="green"
-                >{{ $t("sandbox.runDansbox") }}</AntHiveBtn
-              >
+              <div class="sandbox__actions">
+                <AntHiveBtn
+                  :loading="loading"
+                  :disabled="!isCodeChanged"
+                  fill
+                  class="action-button"
+                  @click="onClickRun"
+                  :light="!isCodeChanged"
+                  color="green"
+                  >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
+                >
+                <AntHiveBtn
+                  fill
+                  light
+                  :disabled="!gameId"
+                  class="action-button"
+                  @click="onClickLogin"
+                  color="accent"
+                  >{{ $t("sandbox.loginToSave") }}</AntHiveBtn
+                >
+              </div>
+              
               <div v-if="simLogs && botLogs">
                 <v-tabs v-model="tab" background-color="grey darken-2" dark>
-                  <v-tab> {{ $t("sandbox.bot") }} </v-tab>
-                  <v-tab> {{ $t("sandbox.sim") }} </v-tab>
+                  <v-tab @click="handlerClickLogs('bot')"> {{ $t("sandbox.bot") }} </v-tab>
+                  <v-tab @click="handlerClickLogs('sim')"> {{ $t("sandbox.sim") }} </v-tab>
                 </v-tabs>
 
                 <v-tabs-items v-model="tab">
@@ -51,13 +62,7 @@
                 </v-tabs-items>
               </div>
               <div v-else>
-                <p>{{ $t("sandbox.description1") }}</p>
-                <p>{{ $t("sandbox.description2") }}</p>
-                <p>{{ $t("sandbox.description3") }}</p>
-                <p>{{ $t("sandbox.description4") }}</p>
-                <p>{{ $t("sandbox.description5") }}</p>
-                <p>{{ $t("sandbox.description6") }}</p>
-                <p>{{ $t("sandbox.description7") }}</p>
+                <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
                 <p v-html="getHelpDOMElement" />
               </div>
             </v-col>
@@ -84,7 +89,8 @@ export default {
     loading: false,
     listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
     loadingText: '',
-    savedCode: ''
+    savedCode: '',
+    gameId: ''
   }),
   computed: {
     isCodeChanged() {
@@ -111,6 +117,9 @@ export default {
     }
   },
   methods: {
+    handlerClickLogs(logsCategory) {
+      this.$ga.event({ eventCategory: 'game', eventAction: 'logs', eventValue: logsCategory })
+    },
     showLoadingText(i = 0) {
       if (!this.loading) {
         this.loadingText = ''
@@ -124,6 +133,7 @@ export default {
     },
     async onClickRun() {
       this.loading = true
+      this.$ga.event({ eventCategory: 'sandbox', eventAction: 'run' })
       this.showLoadingText()
       if (player && player.control) player.control.stop()
       this.botLogs = this.simLogs = 'Loading...'
@@ -131,15 +141,19 @@ export default {
       const file = this.createFile()
       const formData = this.createData(file)
       try {
-        const gameId = await this.sendCodeToSim(formData)
-        this.initGame(gameId)
-        this.initLogs(gameId)
-        this.$router.push({ path: this.$route.path, query: { box: gameId } })
+        this.gameId = await this.sendCodeToSim(formData)
+        this.initGame(this.gameId)
+        this.initLogs(this.gameId)
+        this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
       } catch (err) {
         console.log(err)
       } finally {
         this.loading = false
       }
+    },
+    onClickLogin() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
+      window.location.href = `${process.env.PROFILE_URL}bots?box=${this.gameId}`
     },
     createFile() {
       const fileName = `bot.${this.valueCode.extention}`
@@ -198,6 +212,18 @@ export default {
       height: 100%;
       background-color: $color-black;
       opacity: 0.5;
+    }
+  }
+  &__description {
+    white-space: pre-line;
+  }
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .action-button {
+      width: 49%;
     }
   }
   &__loading-text {
