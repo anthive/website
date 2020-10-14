@@ -1,103 +1,137 @@
 ## Introduction
 
-**AntHive** is a multiplayer competitive strategy in which each player creates his own colony of ants. Just like in real life, the ants harvest the **food**, build the **nests**, and protect themselves from **enemies**. Here, they'll have to prove their superiority in effectively expanding the colony in competition with other players.
+**AntHive** is a multiplayer competitive strategy in which each player creates his own colony of ants.
 
-**AntHive** is a game for people with programming skills. Unlike conventional strategies, ants in AntHive respond to events the way you program them. The current version supports Go, PHP, Javascript, C++, C#, Python. The code is stored in a Git repository. Github, Gitlab and Bitbucket are supported.
-You create a **boot** that controls the ants in your colony and sends it to one of the game modes. All games take place on a server without your participation. Once you get the result of the battle, you can change the bot and continue the game. 
+As in real life, ants get **food**, build **anthills**.
 
+[<img src="/img/game-animation.gif" alt="ants" width="100%"/>](//img/game-animation.gif)
 
-## Map, objects, events
+**AntHive** is a game for programmers with different skill levels. Unlike conventional strategies, ants in AntHive respond to events the way you program them.
 
-The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**. Each of the cells may contain different objects:
+<br>
 
-* Ant
-* Nest
-* Food
-* Ant in the nest of its color
-* Ant in the nest of its color with food
-* Nest with food
-* Ant with food
+## Basic task
 
+You create a **bot** that controls your colony's ants and runs it in one of the game modes. All games take place on a server without you being involved. 
 
-The food scattered on the map contains **1 to 9 units** food. It is visually represented by three types:
-* Small - up to 3 food units
-* Average - up to 6 units of food
-* Big - up to 9 food units
+<br>
 
-Events taking place in a cell:
-* the birth of an ant
-* the death of an ant
-* a simple ant
-* slowdown - occurs in a controversial situation where ants **different** bots try to move to the same cell during the same tick. In this case, the bot that **first** passes the order for ants to move into the cell and the ants of the other bots get a **slowdown** error. 
-* food upload error - an attempt to pick food from a cell where there is **no food**.
-* food unload error - an attempt to take food when the ants have no food.
-* wrong attempt to eat - an attempt to eat food from a neighboring cell where there is **no food**.
-* Collision - occurs when **illegal** move into a cage with another ant, food, out of the map.
+## Elements of the game
 
+### Map
 
+The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**. 
 
+![anthive-map](/img/map-debug-mode.png)
 
-## Gaming modes
+Each of the cells may contain objects:
+* Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
+* Anthill ![anthive](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
+* Food ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
-### Challenges
+<br>
 
-Here you have to overcome a series of difficult programming challenges. Challenges are designed with gradual complication and set tasks for all the skills that can be useful in the game and at work. Once you pass the first challenge, the following will open. Pass all the challenges to receive various awards and the title "Irrepressible".
-
-
-### Battle
-
-In this mode, the bots fight each other automatically 1 on 1. When you launch a bot into battle, it will fight with different opponents until it loses 5 times. This series of games is called **sprint**. 
-The bot gets rating points when it wins the battle and when it loses. The system automatically selects opponents close to you by level. 
-It's important that the bot makes as many wins as possible in one **sprint**, because in addition to the bot's points, it also raises the rating of its creator. 
-At the end of the Sprint you'll get the result and be able to watch all the games played, analyze them and edit the bot.
-
-      
-### Battle Mode Rules
-
-The game is played on maps of different set configuration. Each bot has its own starting point - a nest. Bots start the game with one ant. To increase the population of ants in the colony, you need to get food and bring to the hive. The new ant will appear when the hive will accumulate 9 food. There is not much food on the map, so the ants compete for it. 
-There are two types of food sources:
-* random food - it appears randomly at different points on the map and contains little food.
-* constant food - is at certain points on the map, contains inexhaustible amount of food
-
-
-The bot wins the game and gains more victory points for 1000 ticks of the server.
-	
-
-## Bot and ants
-
-**Bot** is a server code that expects requests from a simulation on port `:7070`. Inside the request is information about each ants, their position on the map, as well as the location of food on the map.
-The bot manages the ants by responding to HTTP requests from **simulation** that it "listens" on the port. 
-Based on the data from the request, **bot** decides the next **step** for **every** ant and sends it to the simulation. Each bot's response is an array with orders as to which action to take **ever ants** and in which direction.
-Ants can only **interact** with those **cells** on the map that are around them-left, right, top, bottom, and diagonally.
-
-The order contains a unique identifier for the ant (`antId`), action (`act`) and direction (`dir`), for example:
-
-`{ "antId": 1, "act": "unload", "dir": "up" } }`,
-
-After receiving an order, the simulation will process it and generate a new game state. 
-The complete cycle from receiving the order to generating a new game state is called **tic**.
-
-
+```
+One cell may have both an ant and an anthill and food at the same time
+```
+<br>
 
 ### Ant
 
-Each ant has a unique identifier and never repeats itself within the same nest. 
-To get a new ant you need to put 9 food in the nest and then the food in the nest is replaced by a new ant.
-Each ant has 9 health points. Every 10 ticks of the server takes away 1 health point from all ants on the map - they starve. In order to make up for your health, an ant must eat. 1 meal restores 1 health point for ants, but no more than 3. 
-Possible actions of ants :
-* <span style="background:black;color:red;">STAY</span> - stay in the cell
-* <span style="background:black;color:yellow;">MOVE</span> - move in the specified direction to **one cell**.
-* <span style="background:black;color:green;">EAT</span>- there is food **from the adjacent specified cell**.
-* <span style="background:black;color:blue;">TAKE</span> - take food **from the next specified cell**
-* <span style="background:black;color:orange;">PUT</span> - put food **on the adjacent specified cell**.
+**Birth**. To get a new ant you need to put 7 of food (in the challenge may be another amount) in the anthill, after which the food in the anthill is replaced by a new ant.
 
-Possible directions:
-Ants can move in any direction on the adjacent cell, including the diagonal. 
-* Up
-* Up-Right - diagonally up-right
-* Up-Left - diagonally up-left
-* Down
-* Down-Right - diagonally down to the right
-* Down-Left - diagonally down to left
-* Left
-* Right
+**Health**. Each ant has 9 health points.
+
+**Death**. Every 10 ticks (in the challenge may be another amount) of the server takes 1 health point from all ants on the map - they starve. When all health points expire, the ants die. After death, an ant turns into 1 food.  In order to make up for its health, an ant must eat. 1 meal restores 1 ant health point. 
+
+<br>
+
+### Actions(`act`):
+* `STAY` - stay on the cell
+* `MOVE` - move in the specified direction on one cell
+* `EAT` - there is food from the next specified cell
+* `TAKE` - take food from the next specified cell
+* `PUT` - put food on the next specified cell
+
+<br>
+
+### Directions(`dir`)
+
+Ants can move in any direction on the neighboring cell.
+* `UP`
+* `DOWN`
+* `LEFT`
+* `RIGHT`
+
+<br>
+
+### Food
+
+The food scattered on the map contains **1 to 9 units**. It is visually depicted in three types:
+* Small - up to 3 units of food ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
+* Average - up to 6 food units ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
+* Big - up to 9 food units ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+
+<br>
+
+### Anthill
+
+In order for the map cell to become an anthill, you must put 9 food in it. The size of the anthill is the main indicator of success in competition.
+
+<br>
+
+## Gaming modes
+
+### Battle
+
+Battle is an automatic mode, without players involved, where your bot competes with each opponent in a circle. This round of games is called **sprint**. The bot gets rating points when it wins the game and when it loses. The system automatically selects opponents close to you by level. It's important that the bot makes as many wins as possible in a single sprint, because in addition to the bot's points, it also raises the rating of its creator. At the end of the Sprint you will get the result and will be able to watch all the games played, analyze them and edit the bot.
+
+#### Battle mode rules
+
+The game is played on maps of different set configuration. Each bot has its own starting point - the anthill. Bots start the game with one ant. To increase the population of ants in the colony, you need to get food and bring to the anthill. The new ant will appear when the anthill will accumulate 9 food. Food on the map is not very much, so the ants compete for it.
+The bot wins the game, which will gain more victory points for 1000 ticks server.
+
+
+### _Challenges (coming soon)_
+
+_Here you have to overcome a series of difficult programming challenges. Which are designed with gradual complication and set tasks for different types of skills that can be useful in the game and in the work. Once you pass the first challenge, the following will open. Pass all the challenges to receive various awards and titles._
+
+<br>
+
+## Bot
+
+**Bot** is a server code that expects requests from a simulation on port:`7070`. Inside the request is information about each ants, their position on the map, as well as the location of food on the map. The bot manages the ants by responding to HTTP requests from **simulation** that it "listens" on the port. Based on the data from the request, **bot** decides the next **step** for **every** ant and sends it to the simulation. Each bot's response is an array with orders as to which action to take **ever ants** and in which direction. Ants can only **interact** with those **cells** on the card that are around them-left, right, top, and bottom.
+
+The order contains the ants unique identifier (`antId`), action (`act`) and direction (`dir`), for example:
+
+`{ "antId": 1, "act": "unload", "dir": "up" } }`,
+
+After receiving an order, the simulation will process it and generate a new game state. The complete cycle from receiving the order to generating the new game state is called **tic**.
+
+<br>.
+
+## Possible errors
+
+* **food taking error** is an attempt to take food from a cell where there is no food.
+* **feedback error** - an attempt to take food from a cell where there is no food.
+* **wrong eating** - an attempt to eat food from an adjacent cell where there is no food.
+* **collision** - occurs when you illegally move into a cage with another ant, food, out of the map. Each error reduces the number of final points per game.
+
+<br>
+
+## FAQ:
+
+**Question**: What happens when ants from different bots try to move to the same cell during the same tick?
+**Answer**: In this case, the bot that first passes to the simulation the order to move the ants into the cell will perform the movement, and the ants of the other bots will get an error with the deceleration parameter.
+
+
+**Question**: What programming language can I write my bot in ?
+**Answer**: The current version supports Go, PHP, Javascript, C++, C#, Python.
+
+
+**Question**: Where is the code stored ?
+**Answer**: The code is stored in Git repository. Supported by Github, Gitlab and Bitbucket.
+
+
+**Question**: Where does the food appear ?
+**Answer**: The food appears in quantity from 1 to 9 in random points of the map.
