@@ -4,7 +4,7 @@
 
 As in real life, ants get **food**, build **anthills**.
 
-[<img src="/img/game-animation.gif" alt="ants" width="100%"/>](//img/game-animation.gif)
+[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](//img/game-animation.gif)
 
 **AntHive** is a game for programmers with different skill levels. Unlike conventional strategies, ants in AntHive respond to events the way you program them.
 
@@ -22,12 +22,12 @@ You create a **bot** that controls your colony's ants and runs it in one of the 
 
 The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**. 
 
-![anthive-map](/img/map-debug-mode.png)
+[<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
 
 Each of the cells may contain objects:
-* Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-* Anthill ![anthive](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-* Food ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+* Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
+* Anthill [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
+* Food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
@@ -68,9 +68,9 @@ Ants can move in any direction on the neighboring cell.
 ### Food
 
 The food scattered on the map contains **1 to 9 units**. It is visually depicted in three types:
-* Small - up to 3 units of food ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-* Average - up to 6 food units ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-* Big - up to 9 food units ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+* Small - up to 3 units of food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
+* Average - up to 6 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
+* Big - up to 9 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 

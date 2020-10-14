@@ -4,7 +4,7 @@
 
 Как и в реальной жизни, муравьи добывают **еду**, строят **муравейники**.
 
-[<img src="/img/game-animation.gif" alt="ants" width="100%"/>](//img/game-animation.gif)
+[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](//img/game-animation.gif)
 
 **AntHive** - игра для программистов с разным уровнем навыков. В отличие от обычных стратегий, муравьи в AntHive реагируют на события так, как вы их запрограммируете.
 
@@ -22,12 +22,12 @@
 
 Игровая карта это плоскость состоящая из **ячеек**, каждая из которых имеет свои собственные координаты **X** и **Y**. Отсчет координат начинается **в верхнем левом углу карты**. 
 
-[<img src="/img/map-debug-mode.png" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
+[<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
 
 На каждой из ячеек могут находится объекты:
-* Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-* Муравейник ![anthive](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-* Еда ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+* Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
+* Муравейник [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
+* Еда [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
@@ -68,9 +68,9 @@
 ### Еда
 
 Еда, разбросанная по карте, содержит **от 1 до 9 единиц**. Визуально она изображена тремя типами:
-* Маленькая - до 3 единиц еды ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-* Средняя - до 6 единиц еды ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-* Большая - до 9 единиц еды ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+* Маленькая - до 3 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
+* Средняя - до 6 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
+* Большая - до 9 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
