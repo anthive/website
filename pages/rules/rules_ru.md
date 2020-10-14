@@ -25,12 +25,10 @@
 
 На каждой из ячеек могут находится объекты:
 * Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-
 * Муравейник (картинка) ![anthive](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-
 * Еда (картинка) ![antfood](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
-
+<br>
 
 ```
 На одной ячейке может быть и муравей и муравейник и еда одновременно
