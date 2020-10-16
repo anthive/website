@@ -161,7 +161,7 @@ module.exports = {
     preset: 'commonmark',
     linkify: true,
     breaks: true,
-    hatml: true,
+    html: true,
     langPrefix: ''
   },
   /*
