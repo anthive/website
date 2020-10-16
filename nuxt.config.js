@@ -53,7 +53,7 @@ module.exports = {
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: pkg.name },
       { name: 'twitter:description', content: pkg.description },
-      { name: 'twitter:image', content: 'summary_large_image' },
+      { name: 'twitter:image', content: 'summary_large_image' }
     ],
     link: [
       {
