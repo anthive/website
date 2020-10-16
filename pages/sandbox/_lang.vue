@@ -63,6 +63,7 @@
               </div>
               <div v-else>
                 <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
+                <p v-html="getHelpElement" />
               </div>
             </v-col>
           </v-row>
@@ -94,6 +95,18 @@ export default {
   computed: {
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
+    },
+    getHelpElement() {
+      const text = this.$t('sandbox.descriptionHelp')
+      const rulesElement = `
+        <a
+          class="accent--text"
+          onClick="$ga.event({ eventCategory: 'rules', eventAction: 'redirect', eventLabel: 'fromSandbox' })"
+          href="/rules"
+        >${this.$t('header.rules')}</a>
+      `
+      const discordElement = `<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>`
+      return text.replace('$rules$', rulesElement).replace('$discord$', discordElement)
     }
   },
   mounted() {
