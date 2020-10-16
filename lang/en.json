@@ -19,6 +19,9 @@
   },
 
   "home": {
+    "meta": {
+      "title": "AntHive.IO - Your new coding adventure"
+    },
     "slogan1": "Coding game",
     "slogan2": "AntHive.IO is a platform to learn and practice coding skills in a fun way.",
     "loading": "Loading...",
@@ -53,6 +56,10 @@
   },
 
   "games": {
+    "meta": {
+      "title": "Games - AntHive.IO",
+      "description": "Explore, watch, replay, learn strategies!"
+    },
     "title1": "All battles:",
     "title2": "Explore, watch, replay, learn strategies",
     "version": "Version",
@@ -73,6 +80,10 @@
   },
 
   "game": {
+    "meta": {
+      "title": "Game - AntHive.IO",
+      "description": "Explore, watch, replay, learn strategies!"
+    },
     "loading": "Loading...",
     "requestRematch": "Request rematch",
     "shareGame": "Share the game",
@@ -87,6 +98,10 @@
   },
 
   "leaderboard": {
+    "meta": {
+      "title": "Leaderboard - AntHive.IO",
+      "description": "The most skillful AntHive players"
+    },
     "title1": "Leaderboard",
     "title2": "The most skillful AntHive players",
     "games": "Games",
@@ -105,6 +120,9 @@
   },
 
   "userInfo": {
+    "meta": {
+      "description": "User Profile - AntHive.IO"
+    },
     "games": "User games:",
     "title": "Bot performance in the last 10 days",
     "botInfo": "Bot info",
@@ -118,6 +136,10 @@
   },
 
   "sandbox": {
+    "meta": {
+      "title": "Sandbox - AntHive.IO",
+      "description": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants"
+    },
     "loading": "Loading",
     "runSandbox": "Run sandbox",
     "loginToSave": "Login to save",
@@ -130,5 +152,24 @@
     "loadingText5": "Running the game",
     "description": "We are deep believers that Games for Developers should be played not with PSEUDO code but actual programming language.\n\nThat way you directly improve your skills that directly apply at your job/hobbi.\n\nWe also not forcing you to use generic boilerplate. Therefore we do not hide infrastructure like http server. Feel free to tune it up for better performance.\n\nWe tend to keep sample code across languages the same. In order not to be biased towards particular coding language.\n\nSample code is NOT written based on best practises. It's NOT well architectured. It's just quick and dirty PoC written on napkin.\n\nIn sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants.\n\nSandbox support only single file with no dependenses. However you can register and link your git repository with bot. Inside of repository you have full freedom. Proper file separation, dependensies, etc., to unleash your coding Ninja!",
     "sourceCode": "Source code"
+  },
+
+  "rules": {
+    "meta": {
+      "title": "Rules - AntHive.IO",
+      "description": "Terminology and how AntHive works"
+    }
+  },
+
+  "pp": {
+    "meta": {
+      "title": "Privacy policy - AntHive.IO"
+    }
+  },
+
+  "tos": {
+    "meta": {
+      "title": "Terms of Service - AntHive.IO"
+    }
   }
 }

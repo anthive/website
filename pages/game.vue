@@ -38,6 +38,17 @@ import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
 var player = null
 export default {
+  head() {
+    return {
+      title: this.$t('game.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('game.meta.description')
+        }
+      ]
+    }
+  },
   data: () => ({
     isGameAvailable: true,
     theme: 1,

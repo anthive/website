@@ -2,7 +2,7 @@
   "name": "AntHive.IO",
   "version": "1.0.0",
   "private": true,
-  "description": "Turn-based codding game",
+  "description": "AntHive.IO - Your new coding adventure",
   "author": "Vitaly Kezlya",
   "scripts": {
     "build": "nuxt build",

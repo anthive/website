@@ -38,7 +38,22 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      { name: 'msapplication-TileColor', content: '#da532c' },
+      { name: 'theme-color', content: '#ffffff' },
+      { name: 'name', itemscope: true, itemtype: 'http://schema.org/WebPage', content: pkg.name },
+      { name: 'description', itemscope: true, itemtype: 'http://schema.org/WebPage', content: pkg.description },
+      { name: 'image', itemscope: true, itemtype: 'http://schema.org/WebPage', content: '/meta.png' },
+      { property: 'og:locale', content: 'en_US' },
+      { property: 'og:url', content: 'https://anthive.io/' },
+      { property: 'og:type', content: 'Coding game' },
+      { property: 'og:title', content: pkg.name + '- Coding game' },
+      { property: 'og:description', content: pkg.description },
+      { property: 'og:image', content: '/meta.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: pkg.name },
+      { name: 'twitter:description', content: pkg.description },
+      { name: 'twitter:image', content: 'summary_large_image' },
     ],
     link: [
       {
@@ -60,8 +75,16 @@ module.exports = {
       },
       {
         rel: 'apple-touch-icon',
-        sizes: '152x152',
+        sizes: '180x180',
         href: '/apple-touch-icon.png'
+      },
+      {
+        rel: 'manifest',
+        href: '/site.webmanifest'
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg'
       }
     ],
     script: [{ src: '/js/anthive-4.0.js', defer: true }]

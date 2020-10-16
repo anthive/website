@@ -77,6 +77,17 @@ import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
 var player = null
 export default {
+  head() {
+    return {
+      title: this.$t('sandbox.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('sandbox.meta.description')
+        }
+      ]
+    }
+  },
   components: {
     editor
   },

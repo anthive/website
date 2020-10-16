@@ -26,6 +26,17 @@ import GamesTable from '@/components/GamesTable'
 
 export default {
   name: 'defaultHeader',
+  head() {
+    return {
+      title: this.$t('games.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('games.meta.description')
+        }
+      ]
+    }
+  },
   data: () => ({
     filters: [],
     user: {}
