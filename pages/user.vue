@@ -46,6 +46,17 @@ import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'user',
+  head() {
+    return {
+      title: `${this.user.name} - AntHive.IO`,
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('userInfo.meta.description')
+        }
+      ]
+    }
+  },
   components: {
     GamesTable,
     AreaChart,

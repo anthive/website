@@ -328,5 +328,18 @@
   </section>
 </template>
 
-<style>
-</style>
+<script>
+export default {
+  head() {
+    return {
+      title: this.$t('tos.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('tos.meta.title')
+        }
+      ]
+    }
+  }
+}
+</script>

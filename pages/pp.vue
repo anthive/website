@@ -14,6 +14,22 @@
   </section>
 </template>
 
+<script>
+export default {
+  head() {
+    return {
+      title: this.$t('pp.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('pp.meta.title')
+        }
+      ]
+    }
+  }
+}
+</script>
+
 <style>
 .policy__card {
   margin-top: -178px;

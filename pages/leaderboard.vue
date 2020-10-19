@@ -35,6 +35,17 @@ import GamesLeaderCard from '@/components/GamesLeaderCard'
 import GamesUserCard from '@/components/GamesUserCard'
 
 export default {
+  head() {
+    return {
+      title: this.$t('leaderboard.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('leaderboard.meta.description')
+        }
+      ]
+    }
+  },
   components: {
     GamesLeaderCard,
     GamesUserCard

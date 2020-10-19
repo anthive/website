@@ -10,6 +10,17 @@
 import DocsSidebar from '@/components/DocsSidebar'
 
 export default {
+  head() {
+    return {
+      title: this.$t('rules.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('rules.meta.description')
+        }
+      ]
+    }
+  },
   components: {
     DocsSidebar
   },

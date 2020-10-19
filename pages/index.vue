@@ -9,22 +9,20 @@
 <script>
 import HomeSlogan from '../components/HomeSlogan.vue'
 import HomeSteps from '../components/HomeSteps.vue'
-// import HomeFeature from '../components/HomeFeature.vue'
-// import HomeVideo from '../components/HomeVideo.vue'
-// import HomeBadges from '../components/HomeBadges.vue'
 import HomeCounters from '../components/HomeCounters.vue'
 import HomeScreenshots from '../components/HomeScreenshots.vue'
 
 export default {
-  head: {
-    title: 'Home page',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Home page description'
-      }
-    ]
+  head() {
+    return {
+      title: this.$t('home.meta.title'),
+      meta: [
+        {
+          name: 'description',
+          content: this.$t('home.meta.title')
+        }
+      ]
+    }
   },
   components: {
     HomeSlogan,
