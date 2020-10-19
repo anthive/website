@@ -164,7 +164,7 @@ export default {
     },
     onClickLogin() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
-      window.location.href = `${process.env.PROFILE_URL}bots?box=${this.gameId}`
+      window.location.href = `${process.env.PROFILE_URL}create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
     },
     createFile() {
       const fileName = `bot.${this.valueCode.extention}`
