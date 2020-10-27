@@ -12,11 +12,6 @@ export default {
   }
 }
 </script>
-<style>
-.v-ripple__container {
-  display: none !important;
-}
-</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
@@ -28,17 +23,6 @@ export default {
     font-weight: 600;
     font-size: 14px;
     text-transform: capitalize;
-  }
-  &.v-btn--active {
-    margin-bottom: -2px;
-    border-bottom: 2px solid;
-  }
-  &.v-btn--active:before {
-    display: none !important;
-    background: none;
-  }
-  & .v-ripple__container {
-    display: none !important;
   }
 }
 </style>

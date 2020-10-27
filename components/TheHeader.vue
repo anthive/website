@@ -53,18 +53,18 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn tile text :to="localePath('games')">{{
+        <nuxt-link class="header__link" :to="localePath('games')">{{
           $t("header.games")
-        }}</AntHiveBtn>
-        <AntHiveBtn tile text :to="localePath('leaderboard')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
-        }}</AntHiveBtn>
-        <AntHiveBtn tile text :to="localePath('rules')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('rules')">{{
           $t("header.rules")
-        }}</AntHiveBtn>
-        <AntHiveBtn tile text :to="localePath('sandbox')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('sandbox')">{{
           $t("header.sandbox")
-        }}</AntHiveBtn>
+        }}</nuxt-link>
 
         <v-chip
           v-show="getUser"
@@ -120,12 +120,6 @@ export default {
 }
 </script>
 
-<style>
-a {
-  text-decoration: none;
-}
-</style>
-
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
@@ -133,11 +127,28 @@ a {
   background: $color-violet-700 !important;
   color: $color-white;
   position: relative;
+
   &__logo {
     width: 198px;
     position: absolute;
     bottom: 0;
   }
+
+  &__link {
+    padding: 10px;
+    font-weight: 500;
+    color: $color-white;
+
+    &:hover {
+      text-decoration: none !important;
+      border-bottom: 2px solid;
+    }
+
+    &.nuxt-link-active {
+      border-bottom: 2px solid;
+    }
+  }
+
   &__user-chip {
     margin-left: 10px;
   }
