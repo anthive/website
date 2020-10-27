@@ -109,7 +109,7 @@ module.exports = {
 
   webfontloader: {
     google: {
-      families: ['Rubik:300,400,500,600&display=swap']
+      families: ['Montserrat:300,400,500,600,900&display=swap']
     }
   },
   /*

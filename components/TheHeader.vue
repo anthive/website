@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    height="64"
+    height="82"
     class="header"
     app
     fixed
@@ -16,7 +16,7 @@
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->
-          <v-btn class="accent hidden-md-and-up" v-on="on"
+          <v-btn tile class="accent hidden-md-and-up" v-on="on"
             >{{ $t("header.menu") }}
           </v-btn>
         </template>
@@ -53,21 +53,22 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn text color="primary" :to="localePath('games')">{{
+        <AntHiveBtn tile text :to="localePath('games')">{{
           $t("header.games")
         }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
+        <AntHiveBtn tile text :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
         }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('rules')">{{
+        <AntHiveBtn tile text :to="localePath('rules')">{{
           $t("header.rules")
         }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('sandbox')">{{
+        <AntHiveBtn tile text :to="localePath('sandbox')">{{
           $t("header.sandbox")
         }}</AntHiveBtn>
 
         <v-chip
           v-show="getUser"
+          tile
           label
           class="header__user-chip"
           color="accent"
@@ -81,6 +82,7 @@
         </v-chip>
 
         <AntHiveBtn
+          tile
           v-show="!getUser"
           @click="handlerClickGetStarted"
           color="accent"
@@ -128,9 +130,13 @@ a {
 @import '@/assets/style/global.scss';
 
 .header {
-  background: $color-white !important;
+  background: $color-violet-700 !important;
+  color: $color-white;
+  position: relative;
   &__logo {
-    width: 115px;
+    width: 198px;
+    position: absolute;
+    bottom: 0;
   }
   &__user-chip {
     margin-left: 10px;

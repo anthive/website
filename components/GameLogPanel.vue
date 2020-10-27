@@ -2,12 +2,14 @@
   <div class="log-panel__wrap mt-3">
     <div class="log-panel__tabs py-2 accent elevation-6" dark>
       <AntHiveBtn
+        tile
         :class="{ 'v-btn--active': currentLogTab == 'request' }"
         @click="currentLogTab = 'request'"
         class="mx-2" primary fill
         >Requests</AntHiveBtn
       >
       <AntHiveBtn
+        tile
         :class="{ 'v-btn--active': currentLogTab == 'response' }"
         @click="currentLogTab = 'response'"
         class="mx-2"
@@ -15,6 +17,7 @@
         >Response</AntHiveBtn
       >
       <AntHiveBtn
+        tile
         :class="{ 'v-btn--active': currentLogTab == 'logs' }"
         @click="currentLogTab = 'logs'"
         class="mx-2" primary fill

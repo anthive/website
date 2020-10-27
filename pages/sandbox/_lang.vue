@@ -20,6 +20,7 @@
                   :loading="loading"
                   :disabled="!isCodeChanged"
                   fill
+                  tile
                   class="action-button"
                   @click="onClickRun"
                   :light="!isCodeChanged"
@@ -28,6 +29,7 @@
                 >
                 <AntHiveBtn
                   fill
+                  tile
                   light
                   :disabled="!gameId"
                   class="action-button"

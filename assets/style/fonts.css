@@ -1,4 +1,4 @@
-.f-rubik {
+.f-montserrat {
   font-family: Rubik, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
 }
 
@@ -10,9 +10,14 @@
   font-family: Maison-mono, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
 }
 
+.f-montserrat {
+  font-family: Montserrat, -apple-system, Helvetica, Arial, sans-serif, Symbol !important;
+}
+
 .f-title {
-  font-size: 40px !important;
-  font-weight: 500 !important;
+  line-height: 1;
+  font-size: 45px !important;
+  font-weight: 600 !important;
 }
 
 .f-subtitle {

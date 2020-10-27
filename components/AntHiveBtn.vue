@@ -12,24 +12,33 @@ export default {
   }
 }
 </script>
-
+<style>
+.v-ripple__container {
+  display: none !important;
+}
+</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
 .anthive-btn {
-  border-radius: $border-radius-default !important;
   min-height: 40px;
+  box-shadow: none;
   &__text {
     line-height: 1;
-    font-weight: 600 !important;
+    font-weight: 600;
     font-size: 14px;
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
-  &.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $color-red-500 !important;
+  &.v-btn--active {
+    margin-bottom: -2px;
+    border-bottom: 2px solid;
+  }
+  &.v-btn--active:before {
+    display: none !important;
+    background: none;
+  }
+  & .v-ripple__container {
+    display: none !important;
   }
 }
 </style>
