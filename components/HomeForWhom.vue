@@ -51,7 +51,8 @@ export default {
 
   &__section {
     display: flex;
-    margin: 34px 0;
+    height: 180px;
+    margin: 50px 0;
 
     &:nth-child(2n) {
       margin-left: 128px;
@@ -84,7 +85,7 @@ export default {
     width: 535px;
     left: -188px;
     height: 640px;
-    top: 180px;
+    top: 212px;
     background: url(/img/bg-ornament.svg);
     transform: scaleX(-1);
   }
