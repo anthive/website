@@ -54,15 +54,19 @@ export default {
 }
 
 .header-section {
+  overflow: hidden;
+
   &__text-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 40px;
   }
+
   &__actions {
     margin-top: 20px;
   }
+
   .bg-ornament {
     position: absolute;
     width: 535px;
