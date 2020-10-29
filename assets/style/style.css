@@ -15,6 +15,10 @@ h5 {
   color: #4c377f;
 }
 
+a {
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: underline !important;
 }

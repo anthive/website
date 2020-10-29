@@ -4,10 +4,12 @@
       <div class="leaderboard__header header">
         <div class="header__img-wrap">
           <v-img src="/img/leaderboard-title-icon.svg" />
+          <!-- TODO: dynamic -->
           <div class="header__lang">C++</div>
         </div>
         <div class="header__title-wrap">
-          <h1 class="header__title">Leaderboard</h1>
+          <h1 class="header__title">{{ $t('leaderboard.title') }}</h1>
+          <!-- TODO: dynamic -->
           <p class="header__subtitle">Country</p>
           <div class="header__info">
             <v-tooltip right nudge-left>
@@ -16,53 +18,49 @@
                   <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
                 </div>
               </template>
-              Leaderboard
+              {{ $t('leaderboard.description') }}
             </v-tooltip>
           </div>
         </div>
       </div>
 
       <v-card tile class="leaderboard__filter filter">
-        <div class="filter__langs">
-          <div class="filter__title">Languages:</div>
-          <div class="filter__langs-icons">
-            <img
-              :key="lang.id"
-              v-for="lang in langs"
-              class="filter__lang-icon"
-              width="40px"
-              :src="lang.img"
-              :alt="lang.id" 
-            />
-          </div>
-        </div>
-        <div class="filter__countries">
-          <div class="filter__title">Countries:</div>
-          <v-select
-            :menu-props="{ offsetY: true }"
-            class="anthive-select"
-            :items="countries"
-          ></v-select>
-        </div>
-        <div class="filter__cities">
-          <div class="filter__title">City:</div>
-          <v-select
-            :menu-props="{ offsetY: true }"
-            item-color="red"
-            class="anthive-select"
-            :items="cities"
-          ></v-select>
-        </div>
+        <v-row>
+          <v-col cols="12" sm="4" class="filter__langs">
+            <div class="filter__title">{{ $t('leaderboard.languages') }}:</div>
+            <div class="filter__langs-icons">
+              <img
+                :key="lang.id"
+                v-for="lang in langs"
+                class="filter__lang-icon"
+                width="40px"
+                :src="lang.img"
+                :alt="lang.id" 
+              />
+            </div>
+          </v-col>
+          <v-col cols="12" sm="5" class="filter__countries">
+            <div class="filter__title">{{ $t('leaderboard.countries') }}:</div>
+            <v-select
+              :menu-props="{ offsetY: true }"
+              class="anthive-select"
+              :items="countries"
+            ></v-select>
+          </v-col>
+          <v-col cols="12" sm="3" class="filter__cities">
+            <div class="filter__title">{{ $t('leaderboard.city') }}:</div>
+            <v-select
+              :menu-props="{ offsetY: true }"
+              item-color="red"
+              class="anthive-select"
+              :items="cities"
+            ></v-select>
+          </v-col>
+        </v-row>
       </v-card>
 
-      <v-card class="leaderboard__table">
+      <div class="leaderboard__table">
         <v-row class="leaderboard__table-head">
-          <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
-            <span>{{ $t('leaderboard.place') }}</span>
-          </v-col>
-          <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="7" class="pl-7">
-            <span>{{ $t('leaderboard.player') }}</span>
-          </v-col>
           <v-col cols="6" sm="2"
             :class="{ 'accent--text': column.value === sortBy }"
             class="leaderboard__table-score"
@@ -70,7 +68,18 @@
             :key="index"
             @click="doSort(column.value)"
           >
-            {{ $t(`leaderboard.${column.text}`) }}
+            <div class="leaderboard__table-score-title">{{ $t(`leaderboard.${column.text}`) }}
+              <div class="header__info">
+                <v-tooltip right nudge-left>
+                  <template v-slot:activator="{ on }">
+                    <div v-on="on">
+                      <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
+                    </div>
+                  </template>
+                  {{ $t(`leaderboard.${column.description}`) }}
+                </v-tooltip>
+              </div>
+            </div>
           </v-col>
         </v-row>
         <GamesLeaderCard
@@ -80,7 +89,7 @@
           :place="index + 1"
           :leader="player"
         />
-      </v-card>
+      </div>
     </v-container>
   </section>
 </template>
@@ -111,8 +120,8 @@ export default {
   },
   name: 'Leaderboard',
   data: () => ({
-    countries: ['russia', 'usa'],
-    cities: ['moscow', 'new yourk'],
+    countries: ['russia', 'usa'], // TODO
+    cities: ['moscow', 'new yourk'], // TODO
     langs: [],
     players: [],
     sortBy: 'totalWealth',
@@ -120,12 +129,14 @@ export default {
       {
         text: 'games',
         sortable: true,
-        value: 'totalGames'
+        value: 'totalGames',
+        description: 'games' // TODO: add description
       },
       {
-        text: 'wealth',
+        text: 'mmr',
         sortable: true,
-        value: 'totalWealth'
+        value: 'totalWealth',
+        description: 'mmr' // TODO: add description
       }
     ]
   }),
@@ -234,18 +245,26 @@ export default {
     padding: 0 10px 10px;
   }
   &__table {
-    max-width: 1000px;
     margin: 0 auto;
   }
   &__table-head {
+    justify-content: flex-end;
     padding: 0 12px;
     margin: 0;
     text-transform: uppercase;
     font-weight: 500;
   }
   &__table-score {
-    text-align: right;
+    text-align: center;
     cursor: pointer;
+    &:first-child {
+      text-align: left;
+      padding-left: 40px;
+    }
+  }
+  &__table-score-title {
+    display: inline;
+    position: relative;
   }
   &__table-player {
     margin: 0;
