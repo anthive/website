@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    height="64"
+    height="82"
     class="header"
     app
     fixed
@@ -16,7 +16,7 @@
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->
-          <v-btn class="accent hidden-md-and-up" v-on="on"
+          <v-btn tile class="accent hidden-md-and-up" v-on="on"
             >{{ $t("header.menu") }}
           </v-btn>
         </template>
@@ -53,21 +53,22 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <AntHiveBtn text color="primary" :to="localePath('games')">{{
+        <nuxt-link class="header__link" :to="localePath('games')">{{
           $t("header.games")
-        }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
-        }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('rules')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('rules')">{{
           $t("header.rules")
-        }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('sandbox')">{{
+        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('sandbox')">{{
           $t("header.sandbox")
-        }}</AntHiveBtn>
+        }}</nuxt-link>
 
         <v-chip
           v-show="getUser"
+          tile
           label
           class="header__user-chip"
           color="accent"
@@ -81,6 +82,7 @@
         </v-chip>
 
         <AntHiveBtn
+          tile
           v-show="!getUser"
           @click="handlerClickGetStarted"
           color="accent"
@@ -118,20 +120,35 @@ export default {
 }
 </script>
 
-<style>
-a {
-  text-decoration: none;
-}
-</style>
-
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
 .header {
-  background: $color-white !important;
+  background: $color-violet-700 !important;
+  color: $color-white;
+  position: relative;
+
   &__logo {
-    width: 115px;
+    width: 198px;
+    position: absolute;
+    bottom: 0;
   }
+
+  &__link {
+    padding: 10px;
+    font-weight: 500;
+    color: $color-white;
+
+    &:hover {
+      text-decoration: none !important;
+      border-bottom: 2px solid;
+    }
+
+    &.nuxt-link-active {
+      border-bottom: 2px solid;
+    }
+  }
+
   &__user-chip {
     margin-left: 10px;
   }

@@ -1,0 +1,140 @@
+<template>
+  <section class="statistics">
+    <div
+      class="statistics__row d-flex align-center"
+      :class="
+        $vuetify.breakpoint.xsOnly
+          ? 'justify-space-evenly'
+          : 'justify-space-around'
+      "
+    >
+      <v-col md="4" class="statistics__counter">
+        <div class="statistics__counter-name">{{ $t("home.ants") }}</div>
+        <div class="statistics__counter-number">
+          <ICountUp :delay="delay" :endVal="endVal.Ants" :options="options" />
+        </div>
+      </v-col>
+
+      <v-col md="4" class="statistics__counter">
+        <div class="statistics__counter-name">{{ $t("home.games") }}</div>
+        <div class="statistics__counter-number">
+          <ICountUp :delay="delay" :endVal="endVal.Games" :options="options" />
+        </div>
+      </v-col>
+
+      <v-col md="4" class="statistics__counter">
+        <div class="statistics__counter-name">{{ $t("home.bots") }}</div>
+        <div class="statistics__counter-number">
+          <ICountUp :delay="delay" :endVal="endVal.Bots" :options="options" />
+        </div>
+      </v-col>
+    </div>
+    <div class="statistics__actions">
+      <AntHiveBtn large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
+        $t("header.sandbox")
+      }}</AntHiveBtn>
+      <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
+        $t("header.buttonJoin")
+      }}</AntHiveBtn>
+    </div>
+    <div class="bg-ornament" />
+  </section>
+</template>
+
+<script>
+import ICountUp from 'vue-countup-v2'
+export default {
+  components: {
+    ICountUp
+  },
+  data() {
+    return {
+      profileURL: process.env.PROFILE_URL,
+      delay: 1000,
+      endVal: {
+        Games: 32156,
+        Bots: 42,
+        Ants: 704269
+      },
+      options: {
+        useEasing: true,
+        useGrouping: true,
+        separator: ',',
+        decimal: '.',
+        prefix: '',
+        suffix: ''
+      }
+    }
+  },
+  methods: {
+    handlerClickGetStarted() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'homepage' })
+      window.location.href = this.profileURL
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '@/assets/style/global.scss';
+
+.justify-space-evenly {
+  justify-content: space-evenly !important;
+}
+.statistics {
+  padding: 140px 0 80px;
+  position: relative;
+  overflow: hidden;
+
+  &__row {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__counter {
+    text-align: center;
+    color: $color-white;
+    font-size: 22px;
+    margin-bottom: 100px;
+    font-weight: 500;
+  }
+
+  &__counter-name {
+    color: $color-violet-700;
+  }
+
+  &__counter-number {
+    color: $color-violet-600;
+  }
+
+  &__actions {
+    text-align: center;
+  }
+
+  .bg-ornament {
+    position: absolute;
+    width: 535px;
+    right: -221px;
+    height: 640px;
+    top: -50px;
+    background: url(/img/bg-ornament.svg);
+    transform: rotate(270deg);
+  }
+}
+
+@media only screen and (max-width: $screen-sm) {
+  .statistics {
+    &__row {
+      flex-direction: column;
+      flex: unset !important;
+    }
+  }
+}
+
+@media screen and (max-width: $screen-sm) {
+  .statistics {
+    padding-top: 60px;
+    padding-bottom: 120px;
+  }
+}
+</style>
