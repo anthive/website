@@ -1,16 +1,14 @@
 <template >
   <div>
     <HomeSlogan />
-    <HomeSteps />
-    <HomeCounters />
-    <HomeScreenshots />
+    <HomeForWhom />
+    <HomeStatistics />
   </div>
 </template>
 <script>
 import HomeSlogan from '../components/HomeSlogan.vue'
-import HomeSteps from '../components/HomeSteps.vue'
-import HomeCounters from '../components/HomeCounters.vue'
-import HomeScreenshots from '../components/HomeScreenshots.vue'
+import HomeForWhom from '../components/HomeForWhom.vue'
+import HomeStatistics from '../components/HomeStatistics.vue'
 
 export default {
   head() {
@@ -26,9 +24,8 @@ export default {
   },
   components: {
     HomeSlogan,
-    HomeSteps,
-    HomeCounters,
-    HomeScreenshots
+    HomeForWhom,
+    HomeStatistics
   }
 }
 </script>

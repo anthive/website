@@ -73,7 +73,7 @@
       </div>
       <!-- Actions -->
       <div class="user-card__actions">
-        <AntHiveBtn :to="localePath({ name: 'user', query: {username: us.Username} })" class="mx-auto my-2" color="accent">{{
+        <AntHiveBtn tile :to="localePath({ name: 'user', query: {username: us.Username} })" class="mx-auto my-2" color="accent">{{
           $t("userInfo.profile")
         }}</AntHiveBtn>
       </div>
