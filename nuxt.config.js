@@ -11,11 +11,15 @@ let sandboxRoutes = () => {
 module.exports = {
   env: {
     API_URL: process.env.API_URL,
-    SIMULATION_URL: process.env.SIMULATION_URL,
-    SANDBOX_BUCKET: process.env.SANDBOX_BUCKET,
+
+    SANDBOX_STORAGE: process.env.SANDBOX_STORAGE,
+    SANDBOX_VERSION: process.env.SANDBOX_VERSION,
+    SANDBOX_API_URL: process.env.SANDBOX_API_URL,
+
     INDEX_GAMES: process.env.INDEX_GAMES,
     INDEX_USER: process.env.INDEX_USER,
     INDEX_STATS: process.env.INDEX_STATS,
+
     PROFILE_URL: process.env.PROFILE_URL
   },
   // Doc: https://web.dev/maskable-icon-audit/?utm_source=lighthouse&utm_medium=devtools
