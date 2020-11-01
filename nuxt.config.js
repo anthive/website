@@ -91,7 +91,7 @@ module.exports = {
         href: '/safari-pinned-tab.svg'
       }
     ],
-    script: [{ src: '/js/anthive-4.0.js', defer: true }]
+    script: [{ src: '/js/anthive-5.0.js', defer: true }]
   },
 
   /*
