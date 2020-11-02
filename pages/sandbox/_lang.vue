@@ -120,11 +120,22 @@ export default {
       return text.replace('$rules$', rulesElement).replace('$discord$', discordElement)
     }
   },
-  mounted() {
-    const gameId = this.$route.query.box
-    if (gameId) {
-      this.initGame(gameId)
-      this.initLogs(gameId)
+  async mounted() {
+    if (this.$route.query.box) {
+      this.gameId = this.$route.query.box
+      this.loading = true
+      this.showLoadingText()
+      await this.getGame()
+        .then(() => {
+          this.initGame()
+          this.initLogs()
+        })
+        .catch(err => {
+          this.botLogs = this.simLogs = err
+        })
+        .finally(() => {
+          this.loading = false
+        })
     }
   },
   methods: {
@@ -153,17 +164,18 @@ export default {
       const file = this.createFile()
       const formData = this.createData(file)
 
-      await this.getGame(formData)
-        .then(id => {
-          this.gameId = id
-          this.initGame(this.gameId)
-          this.initLogs(this.gameId)
+      const gameResp = await this.sendCodeToSim(formData)
+      this.gameId = gameResp.id
+
+      await this.getGame()
+        .then(() => {
+          this.initGame()
+          this.initLogs()
           this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
         })
         .catch(err => {
-          this.gameId = err.id
           this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-          this.botLogs = this.simLogs = err.text
+          this.botLogs = this.simLogs = err
         })
         .finally(() => {
           this.loading = false
@@ -183,28 +195,31 @@ export default {
       data.append('file', file)
       return data
     },
-    async getGame(formData) {
+    async getGame() {
       return await new Promise(async (resolve, reject) => {
-        let gameResp = await this.sendCodeToSim(formData)
-        if (gameResp.status === 'ready') resolve(gameResp.id)
+        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${this.gameId}.zip`
 
-        const maxTime = 60000
-        const callInterval = 5000
-        let passedTime = 0
-        const interval = setInterval(async () => {
-          passedTime += callInterval
-          let gameResp = await this.sendCodeToSim(formData)
+        axios
+          .head(gameUrl)
+          .then(resolve)
+          .catch(() => {
+            const maxTime = 60000
+            const callInterval = 5000
+            let passedTime = 0
 
-          if (gameResp.status === 'ready') {
-            clearInterval(interval)
-            resolve(gameResp.id)
-          }
+            const interval = setInterval(async () => {
+              passedTime += callInterval
+              axios.head(gameUrl).then(() => {
+                clearInterval(interval)
+                resolve()
+              })
 
-          if (passedTime === maxTime) {
-            clearInterval(interval)
-            reject({ id: gameResp.id, text: 'Please try again later' })
-          }
-        }, callInterval)
+              if (passedTime === maxTime) {
+                clearInterval(interval)
+                reject('Please try again later')
+              }
+            }, callInterval)
+          })
       })
     },
     async sendCodeToSim(data) {
@@ -217,14 +232,14 @@ export default {
       })
       return simResp.data
     },
-    initGame(id) {
-      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}.zip`
+    initGame() {
+      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', gameUrl)
     },
-    async initLogs(id) {
-      this.botLogs = await this.getLogs(id, 'bot')
-      this.simLogs = await this.getLogs(id, 'sim')
+    async initLogs() {
+      this.botLogs = await this.getLogs(this.gameId, 'bot')
+      this.simLogs = await this.getLogs(this.gameId, 'sim')
     },
     async getLogs(id, type) {
       const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}-${type}.txt`
