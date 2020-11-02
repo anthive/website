@@ -26,13 +26,13 @@
               <v-list-item-title>{{ $t("header.games") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="localePath('leaderboard')">
+          <!-- <v-list-item :to="localePath('leaderboard')">
             <v-list-item-content>
               <v-list-item-title>{{
                 $t("header.leaderboard")
               }}</v-list-item-title>
             </v-list-item-content>
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item :to="localePath('rules')">
             <v-list-item-content>
               <v-list-item-title>{{ $t("header.rules") }}</v-list-item-title>
@@ -56,9 +56,9 @@
         <AntHiveBtn text color="primary" :to="localePath('games')">{{
           $t("header.games")
         }}</AntHiveBtn>
-        <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
+        <!-- <AntHiveBtn text color="primary" :to="localePath('leaderboard')">{{
           $t("header.leaderboard")
-        }}</AntHiveBtn>
+        }}</AntHiveBtn> -->
         <AntHiveBtn text color="primary" :to="localePath('rules')">{{
           $t("header.rules")
         }}</AntHiveBtn>

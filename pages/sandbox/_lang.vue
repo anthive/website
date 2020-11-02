@@ -218,7 +218,7 @@ export default {
       return simResp.data
     },
     initGame(id) {
-      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${id}.zip`
+      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}.zip`
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', gameUrl)
     },
@@ -227,7 +227,7 @@ export default {
       this.simLogs = await this.getLogs(id, 'sim')
     },
     async getLogs(id, type) {
-      const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${id}-${type}.txt`
+      const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}-${type}.txt`
       const resp = await axios.get(logsUrl)
       return resp.data
     }
