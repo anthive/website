@@ -125,10 +125,10 @@ export default {
       this.gameId = this.$route.query.box
       this.loading = true
       this.showLoadingText()
-      await this.getGame(this.gameId)
+      await this.getGame()
         .then(() => {
-          this.initGame(this.gameId)
-          this.initLogs(this.gameId)
+          this.initGame()
+          this.initLogs()
         })
         .catch(err => {
           this.botLogs = this.simLogs = err
@@ -167,10 +167,10 @@ export default {
       const gameResp = await this.sendCodeToSim(formData)
       this.gameId = gameResp.id
 
-      await this.getGame(gameResp.id)
+      await this.getGame()
         .then(() => {
-          this.initGame(this.gameId)
-          this.initLogs(this.gameId)
+          this.initGame()
+          this.initLogs()
           this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
         })
         .catch(err => {
@@ -195,9 +195,9 @@ export default {
       data.append('file', file)
       return data
     },
-    async getGame(id) {
+    async getGame() {
       return await new Promise(async (resolve, reject) => {
-        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${id}.zip`
+        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${this.gameId}.zip`
 
         axios
           .head(gameUrl)
@@ -232,14 +232,14 @@ export default {
       })
       return simResp.data
     },
-    initGame(id) {
-      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${id}.zip`
+    initGame() {
+      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', gameUrl)
     },
-    async initLogs(id) {
-      this.botLogs = await this.getLogs(id, 'bot')
-      this.simLogs = await this.getLogs(id, 'sim')
+    async initLogs() {
+      this.botLogs = await this.getLogs(this.gameId, 'bot')
+      this.simLogs = await this.getLogs(this.gameId, 'sim')
     },
     async getLogs(id, type) {
       const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${id}-${type}.txt`

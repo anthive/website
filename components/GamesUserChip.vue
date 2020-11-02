@@ -2,20 +2,14 @@
   <div class="user-chip">
     <div>
       <v-avatar tile class="user-chip__avatar" size="32">
-        <v-img class="" :src="us.photoUrl(100)" />
+        <v-img class="" :src="getAvatar(player.Picture)" />
       </v-avatar>
     </div>
     <div class="ml-2 d-flex flex-column">
         <div class="d-flex align-center">
-          <span class="user-chip__name primary--text f-text">{{ us.Username }}</span>
-          <v-avatar class="user-chip__ant-img" size="18">
-            <v-img :src="us.antUrl(true)"> </v-img>
-          </v-avatar>
-          <v-avatar size="18">
-            <v-img :src="us.langUrl(us.Lang)" />
-          </v-avatar>
+          <span class="user-chip__name primary--text f-text">{{ player.Username }}</span>
           <v-avatar class="ml-1" size="23">
-            <span class="user-chip__version">v.{{ us.Version }}</span>
+            <span class="user-chip__version">v.{{ player.Version }}</span>
           </v-avatar>
         </div>
     </div>
@@ -25,27 +19,14 @@
 
 
 <script>
-import { User } from '@/services/User'
-
 export default {
   name: 'GamesUserChip',
   props: {
-    player: Object,
-    locale: String
+    player: Object
   },
-  data: () => ({
-    us: null,
-    bot: {}
-  }),
-  created() {
-    this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
-    this.us = new User()
-    this.us.initUser(this.bot)
-  },
-  watch: {
-    player() {
-      this.us = new User()
-      this.us.initUser(this.bot)
+  methods: {
+    getAvatar(id) {
+      return `${process.env.API_URL}images/${id}/100/100`
     }
   }
 }
