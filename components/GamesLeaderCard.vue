@@ -23,21 +23,20 @@
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
       <v-col cols="7" sm="7">
-        <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
+        <div>
           <div class="leader-card__avatar-name">
-            <v-img class="leader-card__avatar" :src="us.photoUrl(100)" />
-            <span class="leader-card__name">{{ us.Username }}</span>
+            <v-img class="leader-card__avatar" :src="getAvatar(leader.avatar)" />
+            <span class="leader-card__name">{{ leader.displayName }}</span>
           </div>
-        </router-link>
+        </div>
       </v-col>
-      <v-col cols="3" sm="2" class="leader-card__score">{{ us.TotalGames }} <div v-if="$vuetify.breakpoint.smAndDown">{{ us.TotalWealth }}</div></v-col>
-      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
+      <v-col cols="3" sm="2" class="leader-card__score">{{ leader.gamesPlayed }} <div v-if="$vuetify.breakpoint.smAndDown">{{ leader.score }}</div></v-col>
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ leader.score }}</v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
@@ -49,20 +48,9 @@ export default {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
   },
-  data: () => ({
-    us: null,
-    bot: {}
-  }),
-  created() {
-    this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
-    this.us = new User()
-    this.us.initUser(this.bot)
-  },
-  watch: {
-    leader() {
-      this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
-      this.us = new User()
-      this.us.initUser(this.bot)
+  methods: {
+    getAvatar(id) {
+      return `${process.env.API_URL}images/${id}/100/100`
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <section class="leaderboard texture-arrows">
-    <v-card class="leaderboard__table">
+  <v-card class="leaderboard__table">
       <v-row class="leaderboard__table-head">
         <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
           <span>{{ $t('leaderboard.place') }}</span>
@@ -9,18 +9,19 @@
           <span>{{ $t('leaderboard.player') }}</span>
         </v-col>
         <v-col cols="6" sm="2"
-          :class="{ 'accent--text': column.value === sortBy }"
           class="leaderboard__table-score"
-          v-for="(column, index) in columns"
-          :key="index"
-          @click="doSort(column.value)"
         >
-          {{ $t(`leaderboard.${column.text}`) }}
+          {{ $t(`leaderboard.byGames`) }}
+        </v-col>
+          <v-col cols="6" sm="2"
+          class="leaderboard__table-score"
+        >
+          {{ $t(`leaderboard.byScore`) }}
         </v-col>
       </v-row>
       <GamesLeaderCard
         class="leaderboard__table-player"
-        :key="player.Username + index"
+        :key="player.displayName + index"
         v-for="(player, index) in players"
         :place="index + 1"
         :leader="player"
@@ -30,9 +31,8 @@
 </template>
 
 <script>
-import { search } from '@/services/Bot'
+import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
-import GamesUserCard from '@/components/GamesUserCard'
 
 export default {
   head() {
@@ -47,39 +47,14 @@ export default {
     }
   },
   components: {
-    GamesLeaderCard,
-    GamesUserCard
+    GamesLeaderCard
   },
   name: 'Leaderboard',
   data: () => ({
-    players: [],
-    sortBy: 'totalWealth',
-    columns: [
-      {
-        text: 'games',
-        sortable: true,
-        value: 'totalGames'
-      },
-      {
-        text: 'wealth',
-        sortable: true,
-        value: 'totalWealth'
-      }
-    ]
+    players: []
   }),
   async fetch() {
-    await this.getLeaders()
-  },
-  methods: {
-    async getLeaders() {
-      let sortQuery = {}
-      sortQuery[this.sortBy] = 'desc'
-      this.players = await search(sortQuery)
-    },
-    async doSort(sort) {
-      this.sortBy = sort
-      await this.getLeaders()
-    }
+    this.players = await getBotsLeaderboard()
   }
 }
 </script>

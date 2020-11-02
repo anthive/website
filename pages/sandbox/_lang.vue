@@ -171,13 +171,12 @@ export default {
         .then(() => {
           this.initGame()
           this.initLogs()
-          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
         })
         .catch(err => {
-          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
           this.botLogs = this.simLogs = err
         })
         .finally(() => {
+          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
           this.loading = false
         })
     },
@@ -197,10 +196,11 @@ export default {
     },
     async getGame() {
       return await new Promise(async (resolve, reject) => {
-        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SANDBOX_VERSION}/${this.gameId}.zip`
+        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
 
         axios
           .head(gameUrl)
+          //if got the game, then we resolve
           .then(resolve)
           .catch(() => {
             const maxTime = 60000
@@ -209,12 +209,13 @@ export default {
 
             const interval = setInterval(async () => {
               passedTime += callInterval
+              //if got 404, create calls by interval until we get 200 status and resolve,
               axios.head(gameUrl).then(() => {
                 clearInterval(interval)
                 resolve()
               })
-
-              if (passedTime === maxTime) {
+              //or overcome the maximum interval, then reject
+              if (passedTime >= maxTime) {
                 clearInterval(interval)
                 reject('Please try again later')
               }
