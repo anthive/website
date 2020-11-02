@@ -4,36 +4,38 @@
 
 Как и в реальной жизни, муравьи добывают **еду**, строят **муравейники**.
 
-[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](//img/game-animation.gif)
+[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](/img/game-animation.gif)
 
 **AntHive** - игра для программистов с разным уровнем навыков. В отличие от обычных стратегий, муравьи в AntHive реагируют на события так, как вы их запрограммируете.
 
-<br>
+---
 
 ## Основная задача
 
-Вы создаете **бота**, который управляет муравьями вашей колонии и запускаете его в одном из игровых режимов. Все игры происходят на сервере без вашего участия. 
+Вы создаете **бота**, который управляет муравьями вашей колонии и запускаете его в одном из игровых режимов. Все игры происходят на сервере без вашего участия.
 
-<br>
+---
 
 ## Элементы игры
 
 ### Карта
 
-Игровая карта это плоскость состоящая из **ячеек**, каждая из которых имеет свои собственные координаты **X** и **Y**. Отсчет координат начинается **в верхнем левом углу карты**. 
+Игровая карта это плоскость состоящая из **ячеек**, каждая из которых имеет свои собственные координаты **X** и **Y**. Отсчет координат начинается **в верхнем левом углу карты**.
 
 [<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
 
 На каждой из ячеек могут находится объекты:
-* Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-* Муравейник [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-* Еда [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+
+- Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
+- Муравейник [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
+- Еда [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
 ```
 На одной ячейке может быть и муравей и муравейник и еда одновременно
 ```
+
 <br>
 
 ### Муравей
@@ -42,35 +44,38 @@
 
 **Здоровье**. У каждого муравья 9 очков здоровья.
 
-**Смерть**. Каждые 10 тиков (может отличаться в зависимости от испытания) сервера у всех муравьев на карте отнимается 1 очко здоровья - они голодают. По истечению всех очков здоровья муравей умирает. После смерти муравей превращается в 1 еду.  Для того, чтобы восполнить здоровье, муравей должен поесть. 1 еда восстанавливает 1 очко здоровья муравья. 
+**Смерть**. Каждые 10 тиков (может отличаться в зависимости от испытания) сервера у всех муравьев на карте отнимается 1 очко здоровья - они голодают. По истечению всех очков здоровья муравей умирает. После смерти муравей превращается в 1 еду. Для того, чтобы восполнить здоровье, муравей должен поесть. 1 еда восстанавливает 1 очко здоровья муравья.
 
 <br>
 
 ### Действия(`act`):
-* `STAY` - оставаться на клетке
-* `MOVE` - двигаться в указанном направлении на одну клетку
-* `EAT` - есть еду с соседней указанной клетки
-* `TAKE`- взять еду с соседней указанной клетки
-* `PUT` - положить еду на соседнюю указанную клетку
+
+- `STAY` - оставаться на клетке
+- `MOVE` - двигаться в указанном направлении на одну клетку
+- `EAT` - есть еду с соседней указанной клетки
+- `TAKE`- взять еду с соседней указанной клетки
+- `PUT` - положить еду на соседнюю указанную клетку
 
 <br>
 
 ### Направления(`dir`)
 
 Муравьи могут двигаться в любом направлении на соседнюю клеточку.
-* `UP` - вверх
-* `DOWN` - вниз
-* `LEFT` - влево
-* `RIGHT` - вправо
+
+- `UP` - вверх
+- `DOWN` - вниз
+- `LEFT` - влево
+- `RIGHT` - вправо
 
 <br>
 
 ### Еда
 
 Еда, разбросанная по карте, содержит **от 1 до 9 единиц**. Визуально она изображена тремя типами:
-* Маленькая - до 3 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-* Средняя - до 6 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-* Большая - до 9 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+
+- Маленькая - до 3 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
+- Средняя - до 6 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
+- Большая - до 9 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
@@ -78,7 +83,7 @@
 
 Для того что бы ячейка карты стала муравейником в нее необходимо положить 9 еды. Размер муравейника - основной показатель успеха в соперничестве.
 
-<br>
+---
 
 ## Игровые режимы
 
@@ -95,7 +100,7 @@
 
 _Здесь вам предстоит преодолеть череду сложных программистских испытаний. Которые спроектированы с постепенным усложнением и ставят задачи для разных видов навыков, которые могут пригодиться в игре и в работе. Как только вы пройдете первое испытание, откроется следующее. Пройдите все испытания, чтобы получить различные награды и звания._
 
-<br>
+---
 
 ## Бот
 
@@ -107,31 +112,27 @@ _Здесь вам предстоит преодолеть череду слож
 
 После получения приказа симуляция обработает его, и сгенерирует новое состояние игры. Полный цикл от получения приказа до формирования нового состояния игры называется **тиком**.
 
-<br>
+---
 
 ## Возможные ошибки
 
-* **ошибка взятия еды** - попытка взять еду из ячейки, в которой еда отсутствует.
-* **ошибка отдачи еды** - попытка положить еду в момент, когда у муравья отсутствует еда.
-* **неправильная попытка есть** - попытка поедания еды из соседней клетки, в которой отсутствует еда
-* **коллизия** - возникает при нелегальном движении в клетку с другим муравьем, едой, выходе за пределы карты. Каждая ошибка снижает количество итоговых очков за игру.
+- **ошибка взятия еды** - попытка взять еду из ячейки, в которой еда отсутствует.
+- **ошибка отдачи еды** - попытка положить еду в момент, когда у муравья отсутствует еда.
+- **неправильная попытка есть** - попытка поедания еды из соседней клетки, в которой отсутствует еда
+- **коллизия** - возникает при нелегальном движении в клетку с другим муравьем, едой, выходе за пределы карты. Каждая ошибка снижает количество итоговых очков за игру.
 
-<br>
+---
 
 ## FAQ:
 
 **Вопрос**: Что происходит когда муравьи разных ботов пытаются передвинуться на одну и ту же клетку в течение одного тика?
 **Ответ**: В данном случае бот, который первым передаст в симуляцию приказ о движении муравья в ячейку выполнит движение, а муравьи остальных ботов получат ошибку с параметром замедление.
 
-
 **Вопрос**: На каком языке программирования можно написать своего бота ?
 **Ответ**: В текущей версии поддерживаются языки: Go, PHP, Javascript, C++, C#, Python.
-
 
 **Вопрос**: Где хранится код ?
 **Ответ**: Код хранится в Git репозитории. Поддерживаются Github, Gitlab и Bitbucket
 
-
 **Вопрос**: Где появляется еда ?
 **Ответ**: Еда появляется в количестве от 1 до 9 в случайных точках карты.
-
