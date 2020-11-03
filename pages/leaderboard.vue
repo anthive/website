@@ -1,5 +1,5 @@
 <template>
-  <section class="leaderboard">
+  <section class="leaderboard page-wrap">
     <v-container>
       <div class="leaderboard__header header">
         <div class="header__img-wrap">

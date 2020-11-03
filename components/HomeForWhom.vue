@@ -9,14 +9,14 @@
         </div>
       </div>
       <div class="for-whom__section">
-        <v-img class="for-whom__img" src="/img/for-developers.svg" />
+        <v-img class="for-whom__img for-developers" src="/img/for-developers.svg" />
         <div class="for-whom__text">
           <h4 class="for-whom__title">{{ $t("home.forWhomDevelopersTitle") }}</h4>
           <p>{{ $t("home.forWhomDevelopersDescription") }}</p>
         </div>
       </div>
       <div class="for-whom__section">
-        <v-img class="for-whom__img" src="/img/for-company.svg" />
+        <v-img class="for-whom__img for-company" src="/img/for-company.svg" />
         <div class="for-whom__text">
           <h4 class="for-whom__title">{{ $t("home.forWhomCompanyTitle") }}</h4>
           <p>{{ $t("home.forWhomCompanyDescription") }}</p>
@@ -52,12 +52,13 @@ export default {
   &__section {
     display: flex;
     height: 180px;
-    margin: 50px 0;
+    margin: 44px 0;
 
     &:nth-child(2n) {
       margin-left: 128px;
     }
     &:nth-child(3n) {
+      margin-top: 70px;
       margin-left: 256px;
     }
   }
@@ -66,6 +67,12 @@ export default {
     z-index: 1;
     max-width: 120px;
     height: 155px;
+    &.for-developers {
+      height: 162px;
+    }
+    &.for-company {
+      height: 144px;
+    }
   }
 
   &__text {
@@ -85,7 +92,7 @@ export default {
     width: 535px;
     left: -188px;
     height: 640px;
-    top: 212px;
+    top: 209px;
     background: url(/img/bg-ornament.svg);
     transform: scaleX(-1);
   }

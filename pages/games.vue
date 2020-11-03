@@ -1,5 +1,5 @@
 <template>
-  <section class="games texture-arrows">
+  <section class="games page-wrap">
       <v-container class="games__container">
         <v-card
           class="games__card white text-xs-left"

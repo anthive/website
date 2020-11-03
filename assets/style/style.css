@@ -69,6 +69,11 @@ strong {
   font-weight: 600 !important;
 }
 
+.page-wrap {
+  padding-top: 120px !important;
+  height: 100%;
+}
+
 a.anthive-btn:hover {
   text-decoration: none !important;
 }
