@@ -6,6 +6,19 @@
   word-break: break-word !important;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 400;
+  color: #4c377f;
+}
+
+a {
+  text-decoration: none;
+}
+
 a:hover {
   text-decoration: underline !important;
 }

@@ -6,7 +6,7 @@
     "sandbox": "Sandbox",
     "login": "Login",
     "buttonJoin": "Get Started",
-    "menu":"menu"
+    "menu": "menu"
   },
 
   "footer": {
@@ -93,10 +93,13 @@
       "title": "Leaderboard - AntHive.IO",
       "description": "The most skillful AntHive players"
     },
-    "title1": "Leaderboard",
-    "title2": "The most skillful AntHive players",
+    "title": "Leaderboard",
+    "description": "The most skillful AntHive players",
+    "languages": "Languages",
+    "countries": "Countries",
+    "city": "City",
     "games": "Games",
-    "wealth": "Wealth",
+    "mmr": "MMR",
     "topBy": "Top by",
     "byGames": "Games",
     "byWealth": "Wealth",
@@ -106,7 +109,7 @@
     "top100hard": "Top 3 hard AntHive players",
     "place": "Place",
     "totalGames": "Total games played",
-    "totalWealth": "Total wealth earned",
+    "totalMmr": "Total MMR",
     "player": "Player"
   },
 

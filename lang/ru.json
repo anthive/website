@@ -93,10 +93,13 @@
       "title": "Таблица лидеров - AntHive.IO",
       "description": "Самые скиловые игроки AntHive"
     },
-    "title1": "Таблица лидеров",
-    "title2": "Самые скиловые игроки AntHive",
+    "title": "Таблица лидеров",
+    "description": "Самые скиловые игроки AntHive",
+    "languages": "Языки программирования",
+    "countries": "Страны",
+    "city": "Город",
     "games": "Игры",
-    "wealth": "Очки",
+    "mmr": "MMR",
     "topBy": "Сортировать по",
     "byGames": "Играм",
     "byWealth": "Очкам",
@@ -106,7 +109,7 @@
     "top100hard": "Топ 100 игроков AntHive по количеству игр",
     "place": "Место",
     "totalGames": "Всего игр",
-    "totalWealth": "Всего очков",
+    "totalMmr": "Итоговый MMR",
     "player": "Игрок"
   },
 

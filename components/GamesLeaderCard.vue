@@ -1,37 +1,50 @@
 <template>
   <div class="px-3">
     <v-row class="leader-card">
+      <!-- TOP 3 -->
       <v-col cols="2" sm="1" class="leader-card__places">
-        <AntHiveIcon
-          color="#362d59"
-          big
+        <img
           v-if="place === 1"
-          >rank1</AnthiveIcon
-        >
-        <AntHiveIcon
-          color="#362d59"
-          big
+          class="filter__lang-icon ml-n3"
+          width="73px"
+          src="/img/leaderboard-top1.svg"
+          alt="Leaderboard TOP1" 
+        />
+        <img
           v-else-if="place === 2"
-          >rank2</AnthiveIcon
-        >
-        <AntHiveIcon
-          color="#362d59"
-          big
+          class="filter__lang-icon"
+          width="50px"
+          src="/img/leaderboard-top2.svg"
+          alt="Leaderboard TOP2" 
+        />
+        <img
           v-else-if="place === 3"
-          >rank3</AnthiveIcon
-        >
+          class="filter__lang-icon"
+          width="50px"
+          src="/img/leaderboard-top3.svg"
+          alt="Leaderboard TOP3" 
+        />
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
-      <v-col cols="7" sm="7">
-        <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
-          <div class="leader-card__avatar-name">
-            <v-img class="leader-card__avatar" :src="us.photoUrl(100)" />
-            <span class="leader-card__name">{{ us.Username }}</span>
-          </div>
-        </router-link>
+
+      <v-col cols="12" sm="11">
+        <v-card tile>
+          <v-row>
+            <v-col cols="12" sm="7">
+              <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
+                <div class="leader-card__avatar-name">
+                  <v-avatar size="65" class="leader-card__avatar">
+                    <v-img :src="us.photoUrl(100)" />
+                  </v-avatar>
+                  <span class="leader-card__name">{{ us.Username }}</span>
+                </div>
+              </router-link>
+            </v-col>
+            <v-col cols="3" sm="3" class="leader-card__score">{{ us.TotalGames }} <div v-if="$vuetify.breakpoint.smAndDown">{{ us.TotalWealth }}</div></v-col>
+            <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
+          </v-row>
+        </v-card>
       </v-col>
-      <v-col cols="3" sm="2" class="leader-card__score">{{ us.TotalGames }} <div v-if="$vuetify.breakpoint.smAndDown">{{ us.TotalWealth }}</div></v-col>
-      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
     </v-row>
   </div>
 </template>
@@ -79,7 +92,6 @@ export default {
   align-items: center;
   box-sizing: border-box;
   margin-bottom: -1px;
-  border-top: 1px solid $color-red-300;
 
   &__place-icon {
     width: 36px;
@@ -88,7 +100,14 @@ export default {
   &__place-text {
     font-size: 22px;
     font-weight: 500;
-    padding-left: 11px;
+    color: $color-violet-650;
+    border: 2px solid $color-violet-650;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: block;
+    text-align: center;
+    padding-top: 2px;
   }
 
   &__avatar-name {
@@ -98,22 +117,13 @@ export default {
 
   &__name {
     font-weight: 500;
-    margin-left: 10px;
+    margin-left: 20px;
     line-height: 60px;
   }
 
-  &__avatar {
-    min-width: 60px;
-    min-height: 60px;
-    max-width: 60px;
-    max-height: 60px;
-    border-radius: $border-radius-default;
-    border: 2px solid $color-red-300;
-    box-sizing: content-box;
-  }
-
   &__score {
-    text-align: right;
+    text-align: center;
+    line-height: 64px;
   }
 }
 @media screen and (max-width: $screen-md) {
