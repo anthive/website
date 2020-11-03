@@ -1,15 +1,13 @@
 <template>
   <v-app-bar
-    height="82"
     class="header"
-    app
-    fixed
+    flat
     :clipped-left="$vuetify.breakpoint.lgAndUp"
   >
-    <v-container class="d-flex align-center">
+    <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <img class="header__logo" src="/img/anthive_logo.svg" alt="Logo" />
+          <img class="header__logo" src="/img/anthive_logo_dark.svg" alt="Logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -124,20 +122,18 @@ export default {
 @import '@/assets/style/global.scss';
 
 .header {
-  background: $color-violet-700 !important;
-  color: $color-white;
+  background: transparent !important;
   position: relative;
 
   &__logo {
-    width: 198px;
-    position: absolute;
-    bottom: 0;
+    width: 144px;
+    padding-top: 16px;
   }
 
   &__link {
     padding: 10px;
+    margin: 0 15px;
     font-weight: 500;
-    color: $color-white;
 
     &:hover {
       text-decoration: none !important;

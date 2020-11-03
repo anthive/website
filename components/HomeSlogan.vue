@@ -60,7 +60,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 40px;
   }
 
   &__actions {

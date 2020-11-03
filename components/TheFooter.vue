@@ -109,7 +109,7 @@ export default {
     AntHiveIcon
   },
   data: () => ({
-    locales: ['English', 'Русский'],
+    locales: ['En', 'Ru'],
     selectedLocale: ''
   }),
   created() {
@@ -119,10 +119,10 @@ export default {
     switchLocale(locale) {
       let localeParam
       switch (locale) {
-        case 'English':
+        case 'En':
           localeParam = 'en'
           break
-        case 'Русский':
+        case 'Ru':
           localeParam = 'ru'
           break
       }
@@ -151,7 +151,7 @@ export default {
   }
   &__locale-select {
     position: relative;
-    max-width: 120px;
+    max-width: 70px;
     margin: 1px 0 2px;
   }
   &__locale-select--earth-icon {
