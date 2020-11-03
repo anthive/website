@@ -11,20 +11,16 @@
       <div :key="index" v-for="(player, index) in players">
         <v-card
           v-if="showPlayerList"
-          @click="showUserCard(player)"
           tile
           class="pa-2 elevation-0"
         >
           <GamesUserChip :player="player" :number="index + 1" />
         </v-card>
-        <v-card v-else @click="showUserCard(player)" tile class="pa-2 elevation-0">
+        <v-card @click="togglePlayerList()" v-else tile class="pa-2 elevation-0">
           <GamesUserIcon :player="player" :number="index + 1" />
         </v-card>
       </div>
     </div>
-     <v-dialog v-model="isShowUserCard" width="380">
-       <GamesUserCard :player="selectedPlayer" />
-    </v-dialog>
   </div>
 </template>
 
@@ -32,7 +28,6 @@
 <script>
 import GamesUserChip from '@/components/GamesUserChip'
 import GamesUserIcon from '@/components/GamesUserIcon'
-import GamesUserCard from '@/components/GamesUserCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
@@ -40,12 +35,10 @@ export default {
   components: {
     GamesUserChip,
     GamesUserIcon,
-    GamesUserCard,
     AntHiveIcon
   },
   data: () => ({
     showPlayerList: false,
-    isShowUserCard: false,
     selectedPlayer: {}
   }),
   props: {

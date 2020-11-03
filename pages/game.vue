@@ -31,8 +31,8 @@
   </section>
 </template>
 
-
 <script>
+import { getGame } from '@/services/Game'
 import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
@@ -72,8 +72,9 @@ export default {
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', dataUrl)
       // eslint-disable-next-line
-      player.on(AnthivePlayer.event.READY, () => {
-        this.players = player.framer.playerList.sort(this.compare)
+      player.on(AnthivePlayer.event.READY, async () => {
+        //this.players = player.framer.playerList.sort(this.compare)
+        this.players = await this.getPlayers()
         this.gameLoaded = true
       })
       // eslint-disable-next-line
@@ -86,6 +87,9 @@ export default {
     }
   },
   methods: {
+    getPlayers() {
+      return getGame(this.gameId).then(game => game.bots)
+    },
     isGameFound(url) {
       const request = new XMLHttpRequest()
       request.open('HEAD', url, false)
