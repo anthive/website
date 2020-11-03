@@ -1,5 +1,5 @@
 <template>
-  <section class="user">
+  <section class="user page-wrap">
     <v-row class="justify-center">
       <v-col cols="11" lg="3">
         <v-card>
@@ -96,7 +96,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '@/assets/style/global.scss';
 .user {
+  background-color: $color-violet-50;
   overflow-x: hidden;
   &__card-text {
     width: 100%;

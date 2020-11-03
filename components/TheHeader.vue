@@ -2,6 +2,7 @@
   <v-app-bar
     class="header"
     flat
+    absolute
     :clipped-left="$vuetify.breakpoint.lgAndUp"
   >
     <v-container class="d-flex align-center pt-8">
