@@ -1,8 +1,8 @@
 <template>
   <section id="inspire" class="docs">
-    <v-card class="card">
+    <div class="card">
       <div v-html="rules" />
-    </v-card>
+    </div>
   </section>
 </template>
 
@@ -41,7 +41,7 @@ export default {
 }
 .card {
   width: 100%;
-  max-width: 950px;
+  max-width: 1200px;
   margin: 20px auto;
   height: 100%;
   padding: 40px;

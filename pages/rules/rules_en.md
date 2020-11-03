@@ -4,36 +4,38 @@
 
 As in real life, ants get **food**, build **anthills**.
 
-[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](//img/game-animation.gif)
+[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](/img/game-animation.gif)
 
 **AntHive** is a game for programmers with different skill levels. Unlike conventional strategies, ants in AntHive respond to events the way you program them.
 
-<br>
+---
 
 ## Basic task
 
-You create a **bot** that controls your colony's ants and runs it in one of the game modes. All games take place on a server without you being involved. 
+You create a **bot** that controls your colony's ants and runs it in one of the game modes. All games take place on a server without you being involved.
 
-<br>
+---
 
 ## Elements of the game
 
 ### Map
 
-The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**. 
+The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**.
 
 [<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
 
 Each of the cells may contain objects:
-* Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-* Anthill [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-* Food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+
+- Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
+- Anthill [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
+- Food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
 ```
 One cell may have both an ant and an anthill and food at the same time
 ```
+
 <br>
 
 ### Ant
@@ -42,35 +44,38 @@ One cell may have both an ant and an anthill and food at the same time
 
 **Health**. Each ant has 9 health points.
 
-**Death**. Every 10 ticks (in the challenge may be another amount) of the server takes 1 health point from all ants on the map - they starve. When all health points expire, the ants die. After death, an ant turns into 1 food.  In order to make up for its health, an ant must eat. 1 meal restores 1 ant health point. 
+**Death**. Every 10 ticks (in the challenge may be another amount) of the server takes 1 health point from all ants on the map - they starve. When all health points expire, the ants die. After death, an ant turns into 1 food. In order to make up for its health, an ant must eat. 1 meal restores 1 ant health point.
 
 <br>
 
 ### Actions(`act`):
-* `STAY` - stay on the cell
-* `MOVE` - move in the specified direction on one cell
-* `EAT` - there is food from the next specified cell
-* `TAKE` - take food from the next specified cell
-* `PUT` - put food on the next specified cell
+
+- `STAY` - stay on the cell
+- `MOVE` - move in the specified direction on one cell
+- `EAT` - there is food from the next specified cell
+- `TAKE` - take food from the next specified cell
+- `PUT` - put food on the next specified cell
 
 <br>
 
 ### Directions(`dir`)
 
 Ants can move in any direction on the neighboring cell.
-* `UP`
-* `DOWN`
-* `LEFT`
-* `RIGHT`
+
+- `UP`
+- `DOWN`
+- `LEFT`
+- `RIGHT`
 
 <br>
 
 ### Food
 
 The food scattered on the map contains **1 to 9 units**. It is visually depicted in three types:
-* Small - up to 3 units of food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-* Average - up to 6 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-* Big - up to 9 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+
+- Small - up to 3 units of food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
+- Average - up to 6 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
+- Big - up to 9 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
 
 <br>
 
@@ -78,7 +83,7 @@ The food scattered on the map contains **1 to 9 units**. It is visually depicted
 
 In order for the map cell to become an anthill, you must put 9 food in it. The size of the anthill is the main indicator of success in competition.
 
-<br>
+---
 
 ## Gaming modes
 
@@ -91,12 +96,11 @@ Battle is an automatic mode, without players involved, where your bot competes w
 The game is played on maps of different set configuration. Each bot has its own starting point - the anthill. Bots start the game with one ant. To increase the population of ants in the colony, you need to get food and bring to the anthill. The new ant will appear when the anthill will accumulate 9 food. Food on the map is not very much, so the ants compete for it.
 The bot wins the game, which will gain more victory points for 1000 ticks server.
 
-
 ### _Challenges (coming soon)_
 
 _Here you have to overcome a series of difficult programming challenges. Which are designed with gradual complication and set tasks for different types of skills that can be useful in the game and in the work. Once you pass the first challenge, the following will open. Pass all the challenges to receive various awards and titles._
 
-<br>
+---
 
 ## Bot
 
@@ -108,30 +112,27 @@ The order contains the ants unique identifier (`antId`), action (`act`) and dire
 
 After receiving an order, the simulation will process it and generate a new game state. The complete cycle from receiving the order to generating the new game state is called **tic**.
 
-<br>.
+---
 
 ## Possible errors
 
-* **food taking error** is an attempt to take food from a cell where there is no food.
-* **feedback error** - an attempt to take food from a cell where there is no food.
-* **wrong eating** - an attempt to eat food from an adjacent cell where there is no food.
-* **collision** - occurs when you illegally move into a cage with another ant, food, out of the map. Each error reduces the number of final points per game.
+- **food taking error** is an attempt to take food from a cell where there is no food.
+- **feedback error** - an attempt to take food from a cell where there is no food.
+- **wrong eating** - an attempt to eat food from an adjacent cell where there is no food.
+- **collision** - occurs when you illegally move into a cage with another ant, food, out of the map. Each error reduces the number of final points per game.
 
-<br>
+---
 
 ## FAQ:
 
 **Question**: What happens when ants from different bots try to move to the same cell during the same tick?
 **Answer**: In this case, the bot that first passes to the simulation the order to move the ants into the cell will perform the movement, and the ants of the other bots will get an error with the deceleration parameter.
 
-
 **Question**: What programming language can I write my bot in ?
 **Answer**: The current version supports Go, PHP, Javascript, C++, C#, Python.
 
-
 **Question**: Where is the code stored ?
 **Answer**: The code is stored in Git repository. Supported by Github, Gitlab and Bitbucket.
-
 
 **Question**: Where does the food appear ?
 **Answer**: The food appears in quantity from 1 to 9 in random points of the map.
