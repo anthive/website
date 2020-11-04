@@ -22,7 +22,7 @@
         >
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
-      <v-col cols="7" sm="7">
+      <v-col cols="6" sm="6">
         <div>
           <div class="leader-card__avatar-name">
             <v-img class="leader-card__avatar" :src="getAvatar(leader.avatar)" />
@@ -30,8 +30,9 @@
           </div>
         </div>
       </v-col>
-      <v-col cols="3" sm="2" class="leader-card__score">{{ leader.gamesPlayed }} <div v-if="$vuetify.breakpoint.smAndDown">{{ leader.score }}</div></v-col>
-      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ leader.score }}</v-col>
+      <v-col cols="2" sm="1" class="leader-card__score">{{ leader.gamesPlayed }} <div v-if="$vuetify.breakpoint.smAndDown">{{ leader.score }}</div></v-col>
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="2" sm="2" class="leader-card__score">{{ leader.score }}</v-col>
+      <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="2" sm="2" class="leader-card__score">{{ leader.v }}</v-col>
     </v-row>
   </div>
 </template>

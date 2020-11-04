@@ -5,10 +5,10 @@
         <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
           <span>{{ $t('leaderboard.place') }}</span>
         </v-col>
-        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="7" class="pl-7">
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="6" class="pl-7">
           <span>{{ $t('leaderboard.player') }}</span>
         </v-col>
-        <v-col cols="6" sm="2"
+        <v-col cols="6" sm="1"
           class="leaderboard__table-score"
         >
           {{ $t(`leaderboard.byGames`) }}
@@ -17,6 +17,11 @@
           class="leaderboard__table-score"
         >
           {{ $t(`leaderboard.byScore`) }}
+        </v-col>
+         <v-col cols="6" sm="2"
+          class="leaderboard__table-score"
+        >
+          {{ $t(`leaderboard.byVersion`) }}
         </v-col>
       </v-row>
       <GamesLeaderCard
