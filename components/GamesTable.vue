@@ -83,12 +83,6 @@
               <div class="games-table__stat-value">{{ game.age }}</div>
               <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
             </div>
-            <div v-if="game.version" class="games-table__stat">
-              <div class="games-table__stat-value">
-                {{ game.version }}
-              </div>
-              <div class="games-table__stat-name">{{ $t("games.version") }}</div>
-            </div>
           </div>
           <div class="games-table__action-container col-12 col-md-2">
             <AntHiveBtn
