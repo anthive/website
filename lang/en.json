@@ -147,6 +147,7 @@
     },
     "loading": "Loading",
     "runSandbox": "Run sandbox",
+    "save": "Save",
     "loginToSave": "Login to save",
     "bot": "Bot Logs",
     "sim": "Sim Logs",

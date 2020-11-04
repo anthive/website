@@ -33,7 +33,7 @@
                   class="action-button"
                   @click="onClickLogin"
                   color="accent"
-                  >{{ $t("sandbox.loginToSave") }}</AntHiveBtn
+                  ><span v-if="getUser && getUser.userName">{{ $t("sandbox.loginToSave") }}</span><span v-else> {{ $t("sandbox.loginToSave") }}</span></AntHiveBtn
                 >
               </div>
               
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
 var player = null
@@ -104,6 +105,7 @@ export default {
     gameId: ''
   }),
   computed: {
+    ...mapGetters(['getUser']),
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
     },
