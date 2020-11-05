@@ -172,7 +172,6 @@ export default {
     },
     getUserBots() {
       if (this.userInfo && this.userInfo.bots && this.userInfo.bots.length) {
-        console.log(this.userInfo.bots, '🙈🙈🙈🙈🙈🙈🙈')
         return this.userInfo.bots
       }
     }
