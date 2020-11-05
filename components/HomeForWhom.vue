@@ -96,5 +96,32 @@ export default {
     background: url(/img/bg-ornament.svg);
     transform: scaleX(-1);
   }
+
+  @media screen and (max-width: $screen-md) {
+    &__section {
+      height: auto;
+      margin: 44px 0 !important;
+    }
+
+    &__text {
+      margin-left: 20px;
+    }
+
+    &__img {
+      max-width: 80px;
+      height: 104px;
+      &.for-developers {
+        height: 109px;
+      }
+      &.for-company {
+        height: 96px;
+      }
+    }
+
+    .bg-ornament {
+      top: 10px;
+      left: -370px;
+    }
+  }
 }
 </style>

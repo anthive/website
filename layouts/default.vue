@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <TheHeader />
-    <v-main>
+    <v-main class="overflow-hidden">
       <nuxt />
     </v-main>
     <TheFooter />

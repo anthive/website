@@ -92,6 +92,7 @@ export default {
   }
 
   &__counter {
+    z-index: 1;
     text-align: center;
     color: $color-white;
     font-size: 22px;
