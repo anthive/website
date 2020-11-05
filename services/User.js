@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const baseURL = 'https://anthive.io/'
 const apiURL = process.env.API_URL
-const devApiURL = process.env.DEV_API_URL
 
 class User {
   constructor() {
@@ -36,7 +35,7 @@ class User {
     if (this.Username === '' || this.Username === undefined) return
 
     const apiAxios = axios.create({
-      baseURL: devApiURL,
+      baseURL: apiURL,
       timeout: 30000
     })
 
