@@ -76,9 +76,7 @@ export default {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 13px 0px #00000021;
-  width: 100%;
   height: 300px;
-  margin: 10px 30px 20px 10px;
 
   &__img {
     background-position: center;
