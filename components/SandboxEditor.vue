@@ -47,6 +47,7 @@ if (process.client) {
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
   require('ace-builds/src-min-noconflict/ext-language_tools')
+  require('ace-builds/webpack-resolver')
 }
 export default {
   props: {

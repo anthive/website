@@ -64,27 +64,29 @@ export default {
     GamePlayer
   },
   mounted() {
-    const base = 'https://storage.googleapis.com/anthive-prod-games/'
-    this.gameId = this.$route.query.id || ''
-    const version = this.$route.query.v || ''
-    const dataUrl = base + version + '/' + this.gameId + '.zip'
-    if (this.isGameFound(dataUrl)) {
-      // eslint-disable-next-line
-      player = new AnthivePlayer('#player', dataUrl)
-      // eslint-disable-next-line
-      player.on(AnthivePlayer.event.READY, async () => {
-        //this.players = player.framer.playerList.sort(this.compare)
-        this.players = await this.getPlayers()
-        this.gameLoaded = true
-      })
-      // eslint-disable-next-line
-      player.on(AnthivePlayer.event.END, () => {
-        this.isGameEnd = true
-      })
-    } else {
-      this.isGameAvailable = false
-      this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
-    }
+    import('../static/js/anthive-5.0.js').then(() => {
+      const base = 'https://storage.googleapis.com/anthive-prod-games/'
+      this.gameId = this.$route.query.id || ''
+      const version = this.$route.query.v || ''
+      const dataUrl = base + version + '/' + this.gameId + '.zip'
+      if (this.isGameFound(dataUrl)) {
+        // eslint-disable-next-line
+        player = new AnthivePlayer('#player', dataUrl)
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.READY, async () => {
+          //this.players = player.framer.playerList.sort(this.compare)
+          this.players = await this.getPlayers()
+          this.gameLoaded = true
+        })
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.END, () => {
+          this.isGameEnd = true
+        })
+      } else {
+        this.isGameAvailable = false
+        this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
+      }
+    })
   },
   methods: {
     getPlayers() {

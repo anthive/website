@@ -84,8 +84,7 @@ module.exports = {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg'
       }
-    ],
-    script: [{ src: '/js/anthive-5.0.js', defer: true }]
+    ]
   },
 
   /*
