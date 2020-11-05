@@ -4,10 +4,10 @@
       <v-row>
         <div class="d-flex">
           <v-avatar size="160">
-            <v-img class="user__avatar" :src="user.avatar" v-if="user.avatar" />
+            <v-img class="user__avatar" :src="getAvatar(getUser && getUser.avatar)" />
           </v-avatar>
           <div class="user__title">
-            <h1 class="user__name">{{ user.fullName }}</h1>
+            <h1 class="user__name">{{ getUserFullName }}</h1>
             <p>Javascript</p>
           </div>
             
@@ -19,59 +19,64 @@
           <p>Hello!<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
           <div class="user__media">
             <a
-              href="https://twitter.com/anthiveio"
-              title="Our Twitter page"
+              class="user__social-link"
+              href="#"
+              title="brandfolder"
               rel="noreferrer"
               target="_blank"
             >
-              <AntHiveIcon color="white" class="footer__social--icon">twitter</AntHiveIcon>
+              <v-img src="/img/brandfolder.png" />
             </a>
             <a
-              href="https://www.instagram.com/anthiveio/"
-              title="Our Instagram accoutn"
+              class="user__social-link"
+              href="#"
+              title="facebook"
               rel="noreferrer"
               target="_blank"
             >
-              <AntHiveIcon color="white" class="footer__social--icon">instagram</AntHiveIcon>
+              <v-img src="/img/facebook.png" />
             </a>
             <a
-              href="https://www.youtube.com/channel/UCP9SHUqnSdGEiEHbqIudMxw"
-              title="Our Youtube channel"
+              class="user__social-link"
+              href="#"
+              title="linkedIn"
               rel="noreferrer"
               target="_blank"
             >
-              <AntHiveIcon color="white" class="footer__social--icon">youtube</AntHiveIcon>
+              <v-img src="/img/linkedIn.png" />
             </a>
             <a
-              href="https://www.twitch.tv/anthiveio"
-              title="Our Twitch accoutn"
+              class="user__social-link"
+              href="#"
+              title="twitter"
               rel="noreferrer"
               target="_blank"
             >
-              <AntHiveIcon color="white" class="footer__social--icon">twitch</AntHiveIcon>
+              <v-img src="/img/twitter.png" />
             </a>
             <a
-              href="https://discord.gg/3Z7KvYv"
-              title="Our Discord channel"
+              class="user__social-link"
+              href="#"
+              title="youtube"
               rel="noreferrer"
               target="_blank"
             >
-              <AntHiveIcon color="white" class="footer__social--icon">discord</AntHiveIcon>
+              <v-img src="/img/youtube.png" />
             </a>
           </div>
         </v-col>
         <v-col class="user__statistic" cols="12" md="5">
-          <h3>Statistic</h3>
+          <h3>{{ $t("userInfo.statistic") }}</h3>
           <v-row>
             <v-col cols="12" class="user__statistic-block" md="6">
-              <p>Rank: <strong>73</strong></p>
-              <p>Total score: <strong>130656</strong></p>
-              <p>Games: <strong>45383</strong></p>
+              <p>{{ $t("userInfo.rank") }}: <strong>73</strong></p>
+              <p>{{ $t("userInfo.totalScore") }}: <strong>130656</strong></p>
+              <p>{{ $t("userInfo.games") }}: <strong>45383</strong></p>
             </v-col>
             <v-col cols="12" md="6">
-              <p>Best game score: <strong>15250</strong></p>
-              <p>Max ants in game: <strong>510</strong></p>
-              <p>Wins: <strong>120</strong></p>
+              <p>{{ $t("userInfo.bestGameScore") }}: <strong>15250</strong></p>
+              <p>{{ $t("userInfo.maxAntInGame") }}: <strong>510</strong></p>
+              <p>{{ $t("userInfo.wins") }}: <strong>120</strong></p>
             </v-col>
           </v-row>
         </v-col>
@@ -79,23 +84,35 @@
       
       <v-row class="justify-space-between mt-10">
         <v-col cols="12" md="5">
-          <h3>Achivements</h3>
+          <h3>{{ $t("userInfo.achivements") }}</h3>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
           <div class="user__achivements">
             <UserAchivementChip
               v-for="(chip, index) in 10"
-              :key="index"
+              :key="index + 'achivement'"
               title="Best bot 2020"
               description="Javascript beginner"
             />
           </div>
         </v-col>
         <v-col cols="12" md="5">
-          <h3>Best bots (4)</h3>
+          <h3>{{ $t("userInfo.bestBots") }} ({{ getUserBots && getUserBots.length }})</h3>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="user__achivements">
-            
-          </div>
+          <v-row class="user__bots">
+            <v-col
+              cols="12" md="6"
+              v-for="(bot, index) in getUserBots"
+              :key="index + 'bot'"
+            >
+              <UserBotChip
+                :lang="bot.lang"
+                :name="bot.displayName"
+                :avatar="getAvatar(bot.avatar)"
+                games="1234514"
+                wins="2331"
+              />
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
@@ -106,12 +123,13 @@
 import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import UserAchivementChip from '@/components/UserAchivementChip'
+import UserBotChip from '@/components/UserBotChip'
 
 export default {
   name: 'user',
   head() {
     return {
-      title: `${this.user.fullName} - AntHive.IO`,
+      title: `${this.getUserFullName} - AntHive.IO`,
       meta: [
         {
           name: 'description',
@@ -122,21 +140,49 @@ export default {
   },
   components: {
     AntHiveIcon,
-    UserAchivementChip
+    UserAchivementChip,
+    UserBotChip
   },
   data: () => ({
     status: null,
+    userInfo: {},
     user: {},
     us: null,
     filters: []
   }),
   created() {
-    const id = this.$route.query.id || 'anthive'
+    const name = this.$route.query.name || 'anthive'
     this.us = new User()
-    this.us.getUserData(id).then(result => {
-      this.user = result
+    this.us.getUserData(name).then(result => {
+      this.userInfo = result
     })
-    this.filters = { term: { 'Players.Username': this.user.username } }
+    // this.filters = { term: { 'Players.Username': this.userInfo.user.username } }
+  },
+  computed: {
+    getUserAvatar() {
+      if (this.userInfo && this.userInfo.user) {
+        return this.us.photoUrl(this.userInfo.user.avatar, 150)
+      }
+    },
+    getUser() {
+      return this.userInfo && this.userInfo.user
+    },
+    getUserFullName() {
+      return this.userInfo && this.userInfo.user && this.userInfo.user.fullName
+    },
+    getUserBots() {
+      if (this.userInfo && this.userInfo.bots && this.userInfo.bots.length) {
+        console.log(this.userInfo.bots, '🙈🙈🙈🙈🙈🙈🙈')
+        return this.userInfo.bots
+      }
+    }
+  },
+  methods: {
+    getAvatar(avatarId) {
+      if (avatarId) {
+        return this.us.photoUrl(avatarId, 150)
+      }
+    }
   }
 }
 </script>
@@ -158,6 +204,15 @@ export default {
     justify-content: center;
   }
 
+  &__media {
+    display: flex;
+  }
+
+  &__social-link {
+    margin: 5px;
+    width: 25px;
+  }
+
   &__statistic {
     border-bottom: 0.5px solid $color-violet-400;
     padding-bottom: 0;
@@ -168,7 +223,8 @@ export default {
     border-right: 0.5px solid $color-violet-400;
   }
 
-  &__achivements {
+  &__achivements,
+  &__bots {
     max-height: 535px;
     overflow-y: scroll;
     &::-webkit-scrollbar {
@@ -180,6 +236,9 @@ export default {
     &::-webkit-scrollbar-thumb {
       background: $color-violet-600;
     }
+  }
+
+  &__bots {
   }
 }
 </style>

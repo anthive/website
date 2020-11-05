@@ -31,7 +31,7 @@
             <div class="filter__langs-icons">
               <img
                 :key="lang.id"
-                v-for="lang in langs"
+                v-for="lang in getLangs"
                 class="filter__lang-icon"
                 width="40px"
                 :src="lang.img"
@@ -143,8 +143,10 @@ export default {
   async fetch() {
     await this.getLeaders()
   },
-  mounted() {
-    this.getLangs()
+  computed: {
+    getLangs() {
+      return langs
+    }
   },
   methods: {
     async getLeaders() {
@@ -155,9 +157,6 @@ export default {
     async doSort(sort) {
       this.sortBy = sort
       await this.getLeaders()
-    },
-    getLangs() {
-      this.langs = langs
     }
   }
 }

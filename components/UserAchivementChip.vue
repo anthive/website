@@ -5,8 +5,8 @@
      <div class="chip__icon-text">Win game</div>
    </div>
    <div class="chip__text">
-    <p><strong>{{ getTitle }}</strong></p>
-    <p>{{ getDescription }}</p>
+    <p><strong>{{ title }}</strong></p>
+    <p>{{ description }}</p>
    </div>
  </div>
 </template>
@@ -16,16 +16,15 @@
 export default {
   name: 'userAchivementChip',
   props: {
-    title: String,
-    description: String
-  },
-  data: () => ({}),
-  computed: {
-    getTitle() {
-      return this.title
+    title: {
+      type: String,
+      required: false,
+      default: ''
     },
-    getDescription() {
-      return this.description
+    description: {
+      type: String,
+      required: false,
+      default: ''
     }
   }
 }

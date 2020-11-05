@@ -2,16 +2,10 @@ import axios from 'axios'
 
 const baseURL = 'https://anthive.io/'
 const apiURL = process.env.API_URL
-// const githubURL = 'https://api.github.com/'
-
-const apiAxios = axios.create({
-  baseURL: apiURL,
-  timeout: 30000
-})
+const devApiURL = process.env.DEV_API_URL
 
 class User {
   constructor() {
-    this.UserId = ''
     this.Username = ''
     this.Lang = ''
     this.Version = ''
@@ -37,27 +31,20 @@ class User {
     this.TotalWealth = user.totalwealth
   }
 
-  async getUserData(id) {
-    this.UserId = id
-    if (this.UserId === '' || this.UserId === undefined) return
+  async getUserData(username) {
+    this.Username = username
+    if (this.Username === '' || this.Username === undefined) return
 
-    return apiAxios.get('users/' + this.UserId).then(res => {
-      const user = res.data
-      this.Username = user.username
-      return {
-        id: user.id,
-        name: user.username != null ? user.username : this.UserId,
-        fullName: user.fullName,
-        avatar: this.photoUrl(160),
-        company: user.company,
-        city: user.city,
-        country: user.country
-      }
+    const apiAxios = axios.create({
+      baseURL: devApiURL,
+      timeout: 30000
     })
+
+    return apiAxios.get('users/' + this.Username).then(res => res.data)
   }
 
-  photoUrl(size = 70) {
-    return `${apiURL}images/${this.Username}/${size}/${size}`
+  photoUrl(avatarId, size = 70) {
+    return `${apiURL}images/${avatarId}/${size}/${size}`
   }
 
   langUrl(lang = this.Lang) {
