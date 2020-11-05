@@ -170,10 +170,6 @@ export default {
     flex-direction: column;
   }
 }
-.user-info-full__statistic-key primary--text {
-}
-.statistic-key user-info-full__statistic-value accent--text {
-}
 .user-info-full__statistic-info-badges {
   position: absolute;
   top: 10px;

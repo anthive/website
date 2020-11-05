@@ -117,7 +117,8 @@
     "meta": {
       "description": "User Profile - AntHive.IO"
     },
-    "games": "User games:",
+    "games": "Games",
+    "wins": "Wins",
     "title": "Bot performance in the last 10 days",
     "botInfo": "Bot info",
     "span": "Span",
@@ -126,7 +127,14 @@
     "hiveSize": "HiveSize",
     "errors": "Errors",
     "earned": "Earned",
-    "profile": "Profile"
+    "profile": "Profile",
+    "rank": "Rank",
+    "totalScore": "Total score",
+    "bestGameScore": "Best game score",
+    "maxAntInGame": "Max ant in game",
+    "achivements": "Achivements",
+    "bestBots": "Best bots",
+    "statistic": "Statistic"
   },
 
   "sandbox": {
