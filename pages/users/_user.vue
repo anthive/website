@@ -151,7 +151,7 @@ export default {
     filters: []
   }),
   created() {
-    const name = this.$route.query.name || 'anthive'
+    const name = this.$route.params.user || 'anthive'
     this.us = new User()
     this.us.getUserData(name).then(result => {
       this.userInfo = result
