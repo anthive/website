@@ -14,7 +14,8 @@ const dynamicRoutes = () => {
   })
 
   return Promise.all([sandboxRoutes, userRoutes]).then(values => {
-    return [...values[0], ...values[1]]
+    const [sandboxRoutes, userRoutes] = values
+    return [...sandboxRoutes, ...userRoutes]
   })
 }
 
