@@ -1,18 +1,18 @@
 <template>
   <v-footer
-    class="footer texture-arrows pa-4 elevation-2 d-flex justify-space-around"
+    class="footer"
     app
     tag="footer"
     absolute
   >
 
     <!-- Copyright -->
-    <div col="12" md="3" class="footer__copyright f-rubik">
+    <div col="12" md="3" class="footer__copyright f-montserrat">
       <span>AntHive.IO &copy; {{ new Date().getFullYear() }}</span>
     </div>
 
     <!-- PP and TOS links -->
-    <div col="12" md="3" class="footer__subscribe f-rubik">
+    <div col="12" md="3" class="footer__subscribe f-montserrat">
       <span class="mr-2">
         <nuxt-link class="accent--text ml-1" to="/tos">
           {{ $t("footer.termsofService") }}
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Report issue -->
-    <div col="12" md="3" class="footer__issue f-rubik">
+    <div col="12" md="3" class="footer__issue f-montserrat">
       <a
         href="https://github.com/anthive/website/issues"
         target="_blank"
@@ -109,7 +109,7 @@ export default {
     AntHiveIcon
   },
   data: () => ({
-    locales: ['English', 'Русский'],
+    locales: ['En', 'Ru'],
     selectedLocale: ''
   }),
   created() {
@@ -119,10 +119,10 @@ export default {
     switchLocale(locale) {
       let localeParam
       switch (locale) {
-        case 'English':
+        case 'En':
           localeParam = 'en'
           break
-        case 'Русский':
+        case 'Ru':
           localeParam = 'ru'
           break
       }
@@ -142,12 +142,16 @@ export default {
 
 .footer {
   margin-top: 30px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-around;
+  background: $color-violet-700 !important;
   @media screen and (max-width: $screen-md) {
     flex-direction: column;
   }
   &__locale-select {
     position: relative;
-    max-width: 120px;
+    max-width: 70px;
     margin: 1px 0 2px;
   }
   &__locale-select--earth-icon {

@@ -6,7 +6,7 @@
     "sandbox": "Sandbox",
     "login": "Login",
     "buttonJoin": "Get Started",
-    "menu":"menu"
+    "menu": "menu"
   },
 
   "footer": {
@@ -22,19 +22,20 @@
     "meta": {
       "title": "AntHive.IO - Your new coding adventure"
     },
-    "slogan1": "Coding game",
-    "slogan2": "AntHive.IO is a platform to learn and practice coding skills in a fun way.",
+    "title": "Coding game",
+    "description": "AntHive.IO is a platform to learn and practice coding skills in a fun way.",
     "loading": "Loading...",
     "sandbox": "Try Sandbox",
-    "Bots": "Bots",
-    "Ants": "Ants",
-    "Games": "Games",
-    "step1Title": "For beginners",
-    "step1Text": "Writing another \"hello world\" or \"todo\" application is boring. Gradually progress not losing the fun of coding. See improvements in my coding skills. Solid statement on my resume for the first job. Whatever is your reason you fond a good place to start. Sandbox ➔ Career ➔ Tournaments ➔ ML/AI",
-    "step2Title": "For software engineers",
-    "step2Text": "Sometimes work projects are not fun. Deadlines are too short for trying various algorithms. Not enough test data to compare strategies. With compute becoming cheaper, clients less care about benchmarking of code. Once for all demonstrate to your coworkers that your code is better regardless of coding language. Compare your skills across the world. Whatever is your reason you found a good place to poke around.",
-    "step3Title": "For IT companies",
-    "step3Text": "Hackathons are good, need another one. The company needs a reliable skills assessment tool. It's biases and time-consuming to judge potential employees based on a \"take-home coding test\". Bind the team in a competitive environment in a fun and company beneficial way. Whatever is your reason we can facilitate with automated tools.",
+    "buttonJoin": "Get Started",
+    "bots": "Bots",
+    "ants": "Ants",
+    "games": "Games",
+    "forWhomBegginerTitle": "For beginners",
+    "forWhomBegginerDescription": "Writing another \"hello world\" or \"todo\" application is boring. Gradually progress not losing the fun of coding. See improvements in my coding skills. Solid statement on my resume for the first job. Whatever is your reason you fond a good place to start. Sandbox ➔ Career ➔ Tournaments ➔ ML/AI",
+    "forWhomDevelopersTitle": "For software engineers",
+    "forWhomDevelopersDescription": "Sometimes work projects are not fun. Deadlines are too short for trying various algorithms. Not enough test data to compare strategies. With compute becoming cheaper, clients less care about benchmarking of code. Once for all demonstrate to your coworkers that your code is better regardless of coding language. Compare your skills across the world. Whatever is your reason you found a good place to poke around.",
+    "forWhomCompanyTitle": "For IT companies",
+    "forWhomCompanyDescription": "Hackathons are good, need another one. The company needs a reliable skills assessment tool. It's biases and time-consuming to judge potential employees based on a \"take-home coding test\". Bind the team in a competitive environment in a fun and company beneficial way. Whatever is your reason we can facilitate with automated tools.",
     "feature1Title": "Learn",
     "feature1Text": "Always wanted to learn to code but didn’t where to start? Start right here. This turn-based strategy game is the most engaging way to learn real code. Pick a language JS, Python, C++, GO, or PHP,  read the rules, and start learning right now.",
     "feature2Title": "Practice",
@@ -42,17 +43,7 @@
     "feature3Title": "Compete",
     "feature3Text": "Demonstrate your skills by competing with other developers in your language of choice. Demonstrate to everyone that your strategy is superior, your code is the most efficient and has no errors. Climb the leaderboard, improving your strategy. Let your bot dominate the tournaments.",
     "sectionTitle": "Get Started!",
-    "videoTitle": "This is a turn-based strategy game for your Bot.",
-    "videoText1": "Compute, contemplate and plan each step of your ants. Send commands to your ants in order for them to collect food, bring it to your hive, and to grow your colony. ",
-    "videoText2": "A player with the biggest colony and least errors wins the game. To start the game please follow three steps below.",
-    "videoText3": "For detailed rules please visit link",
-    "badgesTitle": "Badges and Ranking",
-    "badgesText1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sapien velit, sodales in elementum sed, facilisis suscipit massa.",
-    "badgesText2": "Maecenas efficitur lectus non ligula accumsan euismod in a quam. Vivamus finibus tincidunt tellus vitae aliquet. Suspendisse justo ipsum, pharetra non pretium ut, scelerisque ac mi.",
-    "badgesText3": "Pellentesque hendrerit sodales tortor, in faucibus diam tempus ac. Donec convallis fringilla mauris vitae tristique.",
-    "subscribe": "Subscribe",
-    "feedbackText1": "Stay in touch and get latest news first!",
-    "feedbackText2": "Tell us on our github repo and we will fix it!"
+    "subscribe": "Subscribe"
   },
 
   "games": {
@@ -106,21 +97,21 @@
       "title": "Leaderboard - AntHive.IO",
       "description": "The most skillful AntHive players"
     },
-    "title1": "Leaderboard",
-    "title2": "The most skillful AntHive players",
+    "title": "Leaderboard",
+    "description": "The most skillful AntHive players",
+    "languages": "Languages",
+    "countries": "Countries",
+    "city": "City",
     "games": "Games",
-    "wealth": "Wealth",
+    "mmr": "MMR",
     "topBy": "Top by",
-    "byGames": "Games",
-    "byScore": "Score",
-    "byVersion": "Version",
     "top3wealthy": "Top 3 wealthy AntHive players",
     "top3hard": "Top 3 hard AntHive players",
     "top100wealthy": "Top 3 wealthy AntHive players",
     "top100hard": "Top 3 hard AntHive players",
     "place": "Place",
     "totalGames": "Total games played",
-    "totalWealth": "Total wealth earned",
+    "totalMmr": "Total MMR",
     "player": "Player"
   },
 
@@ -128,7 +119,8 @@
     "meta": {
       "description": "User Profile - AntHive.IO"
     },
-    "games": "User games:",
+    "games": "Games",
+    "wins": "Wins",
     "title": "Bot performance in the last 10 days",
     "botInfo": "Bot info",
     "span": "Span",
@@ -137,7 +129,14 @@
     "hiveSize": "HiveSize",
     "errors": "Errors",
     "earned": "Earned",
-    "profile": "Profile"
+    "profile": "Profile",
+    "rank": "Rank",
+    "totalScore": "Total score",
+    "bestGameScore": "Best game score",
+    "maxAntInGame": "Max ant in game",
+    "achivements": "Achivements",
+    "bestBots": "Best bots",
+    "statistic": "Statistic"
   },
 
   "sandbox": {

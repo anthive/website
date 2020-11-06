@@ -46,6 +46,7 @@
             </div>
 
             <AntHiveBtn
+              tile
               color="accent"
               :to="
                 localePath({
@@ -84,8 +85,9 @@
               <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
             </div>
           </div>
-          <div class="games-table__action-container col-12 col-md-2">
+          <div class="games-table__action-container col-12 col-md-3">
             <AntHiveBtn
+              tile
               :to="
                 localePath({
                   name: 'game',

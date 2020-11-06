@@ -1,10 +1,21 @@
 const pkg = require('./package')
 require('dotenv').config()
+import axios from 'axios'
 
-import data from './static/langs/data.json'
-let sandboxRoutes = () => {
-  return new Promise(resolve => {
-    resolve(data.map(lang => `sandbox/${lang.extention}`))
+import langs from './static/langs/data.json'
+
+const dynamicRoutes = () => {
+  let sandboxRoutes = new Promise(resolve => {
+    resolve(langs.map(lang => `sandbox/${lang.extention}`))
+  })
+
+  let userRoutes = axios.get(`${process.env.API_URL}/users`).then(usersResp => {
+    return usersResp.data.map(user => `users/${user.username}`)
+  })
+
+  return Promise.all([sandboxRoutes, userRoutes]).then(values => {
+    const [sandboxRoutes, userRoutes] = values
+    return [...sandboxRoutes, ...userRoutes]
   })
 }
 
@@ -106,7 +117,7 @@ module.exports = {
 
   webfontloader: {
     google: {
-      families: ['Rubik:300,400,500,600&display=swap']
+      families: ['Montserrat:300,400,500,600,900&display=swap']
     }
   },
   /*
@@ -193,6 +204,6 @@ module.exports = {
   },
 
   generate: {
-    routes: sandboxRoutes
+    routes: dynamicRoutes
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <section class="sandbox">
+  <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <v-card class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
@@ -20,6 +20,7 @@
                   :loading="loading"
                   :disabled="!isCodeChanged"
                   fill
+                  tile
                   class="action-button"
                   @click="onClickRun"
                   :light="!isCodeChanged"
@@ -28,6 +29,7 @@
                 >
                 <AntHiveBtn
                   fill
+                  tile
                   light
                   :disabled="!gameId"
                   class="action-button"
@@ -123,22 +125,24 @@ export default {
     }
   },
   async mounted() {
-    if (this.$route.query.box) {
-      this.gameId = this.$route.query.box
-      this.loading = true
-      this.showLoadingText()
-      await this.getGame()
-        .then(() => {
-          this.initGame()
-          this.initLogs()
-        })
-        .catch(err => {
-          this.botLogs = this.simLogs = err
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    }
+    import('../../static/js/anthive-5.0.js').then(async () => {
+      if (this.$route.query.box) {
+        this.gameId = this.$route.query.box
+        this.loading = true
+        this.showLoadingText()
+        await this.getGame()
+          .then(() => {
+            this.initGame()
+            this.initLogs()
+          })
+          .catch(err => {
+            this.botLogs = this.simLogs = err
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      }
+    })
   },
   methods: {
     handlerClickLogs(logsCategory) {

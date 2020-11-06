@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const baseURL = 'https://anthive.io/'
-const githubURL = 'https://api.github.com/'
+const apiURL = process.env.API_URL
 
 class User {
   constructor() {
@@ -30,32 +30,20 @@ class User {
     this.TotalWealth = user.totalwealth
   }
 
-  async getUserdata(username) {
+  async getUserData(username) {
     this.Username = username
     if (this.Username === '' || this.Username === undefined) return
 
-    var ghAxios = axios.create({
-      baseURL: githubURL,
+    const apiAxios = axios.create({
+      baseURL: apiURL,
       timeout: 30000
     })
 
-    return ghAxios.get('users/' + this.Username).then(res => {
-      var user = res.data
-      return {
-        name: user.name != null ? user.name : this.Username,
-        avatar: this.photoUrl(250),
-        company: user.company,
-        location: user.location,
-        blog: user.blog != '' ? user.blog : null
-      }
-    })
+    return apiAxios.get('users/' + this.Username).then(res => res.data)
   }
 
-  photoUrl(size = 70) {
-    if (this.Username && this.Username.startsWith('sample-')) {
-      return this.langUrl(this.Username.substring(7))
-    }
-    return 'https://github.com/' + this.Username + '.png?size=' + size
+  photoUrl(avatarId, size = 70) {
+    return `${apiURL}images/${avatarId}/${size}/${size}`
   }
 
   langUrl(lang = this.Lang) {
@@ -77,9 +65,11 @@ class User {
   }
 
   scoreString() {
-    var suffixes = ['', 'K', 'M', 'B', 't']
-    var suffixNum = Math.floor((('' + this.Wealth).length - 1) / 3)
-    var shortValue = parseFloat((suffixNum != 0 ? this.Wealth / Math.pow(1000, suffixNum) : this.Wealth).toPrecision(2))
+    const suffixes = ['', 'K', 'M', 'B', 't']
+    const suffixNum = Math.floor((('' + this.Wealth).length - 1) / 3)
+    const shortValue = parseFloat(
+      (suffixNum != 0 ? this.Wealth / Math.pow(1000, suffixNum) : this.Wealth).toPrecision(2)
+    )
     return shortValue + suffixes[suffixNum]
   }
 }

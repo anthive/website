@@ -1,5 +1,5 @@
 <template>
-  <section class="game texture-arrows">
+  <section class="game texture-arrows page-wrap">
 
     <v-row v-if="isGameAvailable" class="texture-scrabble flex-nowrap mx-auto">
       <GamePlayerList

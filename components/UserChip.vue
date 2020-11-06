@@ -28,7 +28,7 @@
         :class="{ opened: isOpened }"
       >
         <div
-          class="statistic-key user-info-full__statistic-value pa-4 pb-1 mx-auto text-left f-rubik f-text primary--text"
+          class="statistic-key user-info-full__statistic-value pa-4 pb-1 mx-auto text-left f-montserrat f-text primary--text"
         >
           {{ us.Username }}
         </div>
@@ -169,10 +169,6 @@ export default {
   .user-info-full__statistic-container {
     flex-direction: column;
   }
-}
-.user-info-full__statistic-key primary--text {
-}
-.statistic-key user-info-full__statistic-value accent--text {
 }
 .user-info-full__statistic-info-badges {
   position: absolute;
