@@ -6,11 +6,14 @@ import langs from './static/langs/data.json'
 
 const dynamicRoutes = () => {
   let sandboxRoutes = new Promise(resolve => {
-    resolve(langs.map(lang => `sandbox/${lang.extention}`))
+    resolve([...langs.map(lang => `/sandbox/${lang.extention}`), ...langs.map(lang => `/ru/sandbox/${lang.extention}`)])
   })
 
   let userRoutes = axios.get(`${process.env.API_URL}/users`).then(usersResp => {
-    return usersResp.data.map(user => `users/${user.username}`)
+    return [
+      ...usersResp.data.map(user => `/users/${user.username}`),
+      ...usersResp.data.map(user => `/ru/users/${user.username}`)
+    ]
   })
 
   return Promise.all([sandboxRoutes, userRoutes]).then(values => {
