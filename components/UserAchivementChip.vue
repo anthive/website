@@ -45,7 +45,7 @@ export default {
   &__icon {
     width: 85px;
     height: 85px;
-    box-shadow: 0px 0px 13px 0px #00000021;
+    box-shadow: $box-shadow-default;
     background-color: $color-white;
     border-radius: 20px;
     display: flex;

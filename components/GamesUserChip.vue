@@ -1,5 +1,30 @@
 <template>
-  <div class="user-chip">
+ <div class="chip">
+   <div class="chip__img" :style="`background: center / cover no-repeat url(${hiveUrl(player.skin)})`">
+     <img
+        class="chip__lang-icon"
+        width="40px"
+        :src="langUrl(player.lang)"
+        :alt="player.lang" 
+      />
+   </div>
+
+   <div class="chip__description">
+    <v-avatar class="chip__user-avatar" size="40">
+      <v-img :src="getAvatar(player.avatar)" />
+    </v-avatar>
+    <p class="mb-5"><strong>{{ player.name }}</strong></p>
+    <div class="chip__statistics">
+      <p>Ants: <strong>{{ player.stats.ants }}</strong></p>
+      <p>Hive size: <strong>{{ player.stats.hive }}</strong></p>
+      <p>{{ $t("game.score") }}: <strong>{{ player.stats.score }}</strong></p>
+      <p>{{ $t("game.errors") }}: <strong>{{ player.stats.errors }}</strong></p>
+      <p>{{ $t("game.art") }}: <strong>{{ player.stats.art }}</strong></p>
+      <p>{{ $t("game.age") }}: <strong>{{ player.stats.age }}</strong></p>
+    </div>
+   </div>
+ </div>
+  <!-- <v-card tile class="user-chip">
     <div>
       <v-avatar tile class="user-chip__avatar" size="32">
         <v-img :src="getAvatar(player.avatar)" />
@@ -33,7 +58,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </v-card> -->
 </template>
 
 <script>
@@ -61,34 +86,46 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
-.user-chip {
-  font-size: $font-small;
-  min-width: 230px;
+.chip {
   display: flex;
-  align-items: center;
-  &__avatar {
-    border: 2px solid $color-red-400;
-    border-radius: $border-radius-default !important;
-    box-sizing: content-box;
+  flex-direction: column;
+  box-shadow: $box-shadow-default;
+  width: 190px;
+  height: 340px;
+
+  &__img {
+    background-position: center;
+    width: 100%;
+    min-height: 130px;
+    background: $color-red-300;
+    padding: 10px;
   }
-  &__info {
-    display: flex;
-    align-items: center;
+
+  &__user-avatar {
+    position: absolute;
+    top: -20px;
+    right: 10px;
   }
-  &__ant-img {
-    background-color: white;
-    background: #e1567c0d;
-    box-sizing: border-box;
+
+  &__lang-icon {
+    margin-right: 10px;
+    border-radius: 10px;
   }
-  &__version {
+
+  &__lang-name {
     font-size: 10px;
-    margin: 0 1px;
+    color: $color-violet-600;
   }
-}
-@media screen and (max-width: $screen-sm) {
-  .user-chip {
-    &__info {
-      flex-direction: column;
+
+  &__description {
+    position: relative;
+    padding: 20px;
+  }
+
+  &__statistics {
+    p {
+      margin-bottom: 0;
+      font-size: 12px;
     }
   }
 }

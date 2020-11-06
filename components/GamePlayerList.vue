@@ -1,23 +1,16 @@
 <template>
-  <div class="players__wrap">
-    <div class="d-flex flex-column players__list">
-      <v-card class="d-flex align-center" @click="togglePlayerList()" tile color="accent"
-        ><AntHiveIcon
-          class="py-3 px-1 text-center mdi"
-          color="white"
-          big
-        >{{ showPlayerList ? 'chevron-left' : 'chevron-right' }}</AnthiveIcon
-      > <v-card-text v-if="showPlayerList" class="pa-3 white--text">{{ $t('game.sidebarTitle') }}</v-card-text></v-card>
-      <div :key="index" v-for="(player, index) in players">
+  <div class="players">
+    <div class="players__wrap">
+      <h4>Players</h4>
+      <p>Please select your type of source</p>
+      <div class="players__list">
         <v-card
-          v-if="showPlayerList"
+          :key="index"
+          v-for="(player, index) in players"
           tile
-          class="pa-2 elevation-0"
+          class="pa-2 mx-3 elevation-0"
         >
           <GamesUserChip :player="player" :number="index + 1" />
-        </v-card>
-        <v-card @click="togglePlayerList()" v-else tile class="pa-2 elevation-0">
-          <GamesUserIcon :player="player" :number="index + 1" />
         </v-card>
       </div>
     </div>
@@ -38,7 +31,6 @@ export default {
     AntHiveIcon
   },
   data: () => ({
-    showPlayerList: false,
     selectedPlayer: {}
   }),
   props: {
@@ -51,10 +43,6 @@ export default {
     showUserCard(player) {
       this.selectedPlayer = player
       this.isShowUserCard = true
-    },
-    togglePlayerList() {
-      this.showPlayerList = !this.showPlayerList
-      this.$emit('togglePlayerList')
     }
   }
 }
@@ -62,47 +50,27 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
-.players__wrap {
-  position: absolute;
-  z-index: 10000;
+.players {
   height: 100%;
-}
-.players__list {
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
   background-color: $color-white;
-  &--toggled {
-    min-width: 250px;
+  box-shadow: $box-shadow-default;
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    background-color: $color-white;
+    &--toggled {
+      min-width: 250px;
+    }
   }
-}
-.players__list-toggle {
-  position: absolute;
-  width: 40px;
-  height: 60px;
-  right: -20px;
-  z-index: 1;
-  background: #341d3d96;
-  border-radius: 0px 8px 8px 0px;
-  cursor: pointer;
-}
-.players__list-toggle-icon {
-  font-size: 40px;
-  margin: 10px;
-  margin-left: 0px;
-  background-color: $color-white;
-}
-.players__list::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: $color-white;
-}
-.players__list::-webkit-scrollbar {
-  width: 5px;
-  background-color: #f5f5f5;
-}
-.players__list::-webkit-scrollbar-thumb {
-  background-color: #362d59;
-  border: none;
+
+  &__list {
+    display: flex;
+  }
 }
 </style>

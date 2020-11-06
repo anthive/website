@@ -13,6 +13,7 @@
     <div id="player">
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
+    <div class="inset-shadow" />
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
         <div class="layout-buttons">
@@ -169,6 +170,7 @@ export default {
 
 #player {
   background-repeat: repeat;
+  position: relative;
 }
 .game__vs-separator {
   position: relative;
@@ -176,6 +178,15 @@ export default {
 }
 .player__section {
   position: relative;
+}
+.inset-shadow {
+  position: absolute;
+  box-shadow: inset 0px 0px 100px 5px $color-violet-600;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);

@@ -1,33 +1,52 @@
 <template>
-  <section class="game texture-arrows page-wrap">
+  <section class="game page-wrap">
+    <v-container>
+      <template v-if="isGameAvailable">
+        <v-row  class="flex-nowrap mx-auto">
+          <v-col cols="12" md="7" class="player-zone__wrap">
+            <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
+          </v-col>
+          <v-col cols="12" md="5" class="game__text-section">
+            <div>
+              <h1>Game</h1>
+              <h4 class="mt-5">Players</h4>
+              <p class="mb-5">Please select your type of source</p>
+              <v-avatar class="mx-1" v-for="(img, index) in 5" :key="index">
+                <v-img width="40" src="/img/for-developers.svg" />
+              </v-avatar>
+              <h3 class="mt-12 mb-4">Login to have all options</h3>
+              <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
+                $t("header.buttonJoin")
+              }}</AntHiveBtn>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <div class="mt-12 mx-auto">
+            <GamePlayerList
+              :players="players"
+            />
+          </div>
+        </v-row>
+      </template>
 
-    <v-row v-if="isGameAvailable" class="texture-scrabble flex-nowrap mx-auto">
-      <GamePlayerList
-        v-show="gameLoaded"
-        v-bind:players="players"
-        @togglePlayerList="showPlayerList = !showPlayerList"
-      />
-      <div class="player-zone__wrap" :class="{ collapsed: showPlayerList }">
-        <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
+      <div v-else class="game__game-not-found">
+        <h2 class="mb-10">{{ $t('game.cantFindGame') }} #{{ gameId }}</h2>
+        <p>{{ $t('game.checkOut') }}</p>
+        <div class="game_games-links">
+          <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
+            <img class="game__game-image" src="/img/game1.png" alt="game">
+          </a>
+          <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
+            <img class="game__game-image" src="/img/game2.png" alt="game">
+          </a>
+          <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
+            <img class="game__game-image" src="/img/game3.png" alt="game">
+          </a>
+        </div>
+        <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
       </div>
-    </v-row>
-
-    <div v-else class="game__game-not-found">
-      <h2 class="mb-10">{{ $t('game.cantFindGame') }} #{{ gameId }}</h2>
-      <p>{{ $t('game.checkOut') }}</p>
-      <div class="game_games-links">
-        <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
-          <img class="game__game-image" src="/img/game1.png" alt="game">
-        </a>
-        <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
-          <img class="game__game-image" src="/img/game2.png" alt="game">
-        </a>
-        <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
-          <img class="game__game-image" src="/img/game3.png" alt="game">
-        </a>
-      </div>
-      <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
-    </div>
+      </v-container>
   </section>
 </template>
 
@@ -55,7 +74,6 @@ export default {
     players: [],
     isGameEnd: false,
     gameLoaded: false,
-    showPlayerList: false,
     gameId: ''
   }),
   components: {
@@ -89,6 +107,10 @@ export default {
     })
   },
   methods: {
+    handlerClickGetStarted() {
+      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'gamepage' })
+      window.location.href = this.profileURL
+    },
     getPlayers() {
       return getGame(this.gameId).then(game => game.bots)
     },
@@ -121,7 +143,6 @@ export default {
 }
 .player-zone__wrap {
   width: 100%;
-  padding-left: 50px;
 }
 </style>
 
@@ -130,6 +151,13 @@ export default {
 .game {
   height: 100%;
   overflow-x: hidden;
+
+  &__text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 
   &__game-not-found {
     width: 100%;
