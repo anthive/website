@@ -61,7 +61,7 @@
     "date": "Date",
     "viewGame": "View Game",
     "sort": "Sort",
-    "monthsAgo": "m ago",
+    "monthsAgo": "months ago",
     "weeksAgo": "w ago",
     "daysAgo": "d ago",
     "hoursAgo": "h ago",
@@ -85,7 +85,11 @@
     "sidebarTitle": "Hide full info",
     "cantFindGame": "Can't find game",
     "checkOut": "Сheck out other games",
-    "goToGames": "or look at all the games"
+    "goToGames": "or look at all the games",
+    "errors": "Errors",
+    "age": "Age",
+    "score": "Score",
+    "art": "ART"
   },
 
   "leaderboard": {
@@ -101,8 +105,6 @@
     "games": "Games",
     "mmr": "MMR",
     "topBy": "Top by",
-    "byGames": "Games",
-    "byWealth": "Wealth",
     "top3wealthy": "Top 3 wealthy AntHive players",
     "top3hard": "Top 3 hard AntHive players",
     "top100wealthy": "Top 3 wealthy AntHive players",
@@ -144,6 +146,7 @@
     },
     "loading": "Loading",
     "runSandbox": "Run sandbox",
+    "save": "Save",
     "loginToSave": "Login to save",
     "bot": "Bot Logs",
     "sim": "Sim Logs",

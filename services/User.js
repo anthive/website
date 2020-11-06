@@ -75,13 +75,13 @@ class User {
 }
 
 function timeAgo(epochStamp) {
-  const diff = Math.round(new Date()) - epochStamp
+  const diff = Math.round(new Date() / 1000) - epochStamp
   const periods = {
-    month: 30 * 24 * 60 * 60 * 1000,
-    week: 7 * 24 * 60 * 60 * 1000,
-    day: 24 * 60 * 60 * 1000,
-    hour: 60 * 60 * 1000,
-    minute: 60 * 1000,
+    month: 30 * 24 * 60 * 60,
+    week: 7 * 24 * 60 * 60,
+    day: 24 * 60 * 60,
+    hour: 60 * 60,
+    minute: 60,
     second: 1000
   }
   if (diff > periods.month) {

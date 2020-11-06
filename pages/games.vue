@@ -11,10 +11,7 @@
             </h1>
           </v-card-title>
           <v-card-text>
-            <GamesTable
-              :PageSize="17"
-              :ShowTitle="false"
-            /> 
+            <GamesTable /> 
           </v-card-text>
         </v-card>
      </v-container>

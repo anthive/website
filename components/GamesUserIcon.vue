@@ -1,34 +1,20 @@
 <template>
   <div>
     <div class="user-icon__avatar">
-      <v-img :src="us.photoUrl(100)" />
+      <v-img :src="getAvatar(player.avatar)" />
     </div>
   </div>
 </template>
 
 <script>
-import { User } from '@/services/User'
-
 export default {
-  name: 'GamesUsersInfo',
+  name: 'GamesUsersIcon',
   props: {
-    player: Object,
-    locale: String
+    player: Object
   },
-  data: () => ({
-    us: null,
-    bot: {}
-  }),
-  created() {
-    this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
-    this.us = new User()
-    this.us.initUser(this.bot)
-  },
-  watch: {
-    player() {
-      this.bot = Object.keys(this.player).reduce((c, k) => ((c[k.toLowerCase()] = this.player[k]), c), {})
-      this.us = new User()
-      this.us.initUser(this.bot)
+  methods: {
+    getAvatar(id) {
+      return `${process.env.API_URL}images/${id}/100/100`
     }
   }
 }

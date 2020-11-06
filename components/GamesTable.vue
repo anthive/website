@@ -1,52 +1,17 @@
 <template>
   <div id="games-table" class="games-table">
-    <v-row class="games-table__sort">
-      <div>
-        <span class="primary--text f-text">Season </span
-        ><v-btn-toggle v-model="version" color="success" dense class="mx-2">
-          <v-btn value="3.0">
-            3
-          </v-btn>
-
-          <v-btn value="4.0">
-            4
-          </v-btn>
-        </v-btn-toggle>
-      </div>
-      <div class="primary--text text-xs-left font-weight-bold">
-        {{ $t("games.sort") }}:
-      </div>
-      <div
-        class="primary--text games-table__sort-item"
-        v-for="(column, index) in columns"
-        :class="dataTableClasses(column)"
-        :key="index"
-        @click="doSort(column)"
-      >
-        {{ $t(column.text) }}
-        <AntHiveIcon
-          small
-          v-if="column.hasOwnProperty('sort') && column.sort == 'desc'"
-          >arrow-up</AntHiveIcon
-        >
-        <AntHiveIcon
-          small
-          v-if="column.hasOwnProperty('sort') && column.sort == 'asc'"
-          >arrow-down</AntHiveIcon
-        >
-      </div>
-    </v-row>
     <v-card
       class="games-table__item"
       :key="index"
-      v-for="(item, index) in items"
-      ><div v-if="item.bots" class="d-flex align-center">
+      v-for="(game, index) in games"
+    >
+      <div class="d-flex align-center">
         <img
           v-if="!$vuetify.breakpoint.smAndDown"
           class="games-table__item-cover"
           height="100"
           width="80"
-          :src="`https://anthive.io/skins/server/${item.map.theme}/background.png`"
+          :src="`https://anthive.io/skins/server/${game.mapSettings.theme}/background.png`"
           alt="Background"
         />
         <div
@@ -58,18 +23,17 @@
           >
             <AuthorChip
               class="ml-md-n13 mr-5"
-              :author="item.author"
-              :date="item.finished"
+              :author="game.author"
+              :date="game.finished"
             />
           </div>
           <div
-            v-if="item.bots && item.bots.length > 4"
+            v-if="game.bots && game.bots.length > 4"
             class="games-table__players-container justify-center col-12 col-md-3"
           >
             <div
               :key="pIndex"
-              v-for="(player, pIndex) in item.bots.slice(0, 4)"
-              @click="openProfile(player.username)"
+              v-for="(player, pIndex) in game.bots.slice(0, 4)"
             >
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -87,22 +51,21 @@
               :to="
                 localePath({
                   name: 'game',
-                  query: { id: item.id, v: item.version },
+                  query: { id: game.id, v: game.version },
                 })
               "
               class="games-table__players-more ml-1"
             >
-              <span>+{{ item.bots.length - 4 }}</span>
+              <span>+{{ game.bots.length - 4 }}</span>
             </AntHiveBtn>
           </div>
           <div
-            v-if="item.bots && item.bots.length <= 4"
+            v-if="game.bots && game.bots.length <= 4"
             class="games-table__players-container justify-center col-12 col-md-3"
           >
             <div
               :key="pIndex"
-              v-for="(player, pIndex) in item.bots.slice(0, 4)"
-              @click="openProfile(player.username)"
+              v-for="(player, pIndex) in game.bots.slice(0, 4)"
             >
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -110,7 +73,7 @@
                     <UserIcon class="ml-1" :player="player" />
                   </div>
                 </template>
-                {{ player.username }}
+                {{ player.name }}, {{ player.spawn }}, {{ player.stats }}
               </v-tooltip>
             </div>
           </div>
@@ -118,14 +81,8 @@
             class="games-table__stats-container justify-center col-12 col-md-3"
           >
             <div class="games-table__stat">
-              <div class="games-table__stat-value">{{ item.age }}</div>
+              <div class="games-table__stat-value">{{ game.age }}</div>
               <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
-            </div>
-            <div v-if="item.wealth" class="games-table__stat">
-              <div class="games-table__stat-value">
-                {{ item.wealth }}
-              </div>
-              <div class="games-table__stat-name">{{ $t("games.wealth") }}</div>
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-3">
@@ -134,7 +91,7 @@
               :to="
                 localePath({
                   name: 'game',
-                  query: { id: item.id, v: item.version },
+                  query: { id: game.id, v: game.version },
                 })
               "
               width="100%"
@@ -143,14 +100,13 @@
             >
           </div>
         </div>
-      </div></v-card
-    >
-    <v-toolbar flat>
+      </div>
+    </v-card>
+        <v-toolbar flat>
       <v-pagination
         class="mx-auto"
-        @input="changePage($event)"
-        v-model="currentPage"
-        :length="pages"
+        :length="totalPages"
+        v-model="selectedPage"
         total-visible="10"
         color="accent"
         next-icon=">"
@@ -166,7 +122,7 @@ import UserChip from '@/components/GamesUserChip'
 import AuthorChip from '@/components/GamesAuthorChip'
 import UserIcon from '@/components/GamesUserIcon'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import { search } from '@/services/Game'
+import { getGames } from '@/services/Game'
 
 export default {
   name: 'GamesTable',
@@ -177,121 +133,27 @@ export default {
     UserCard,
     AntHiveIcon
   },
-  props: {
-    PageSize: {
-      type: Number,
-      required: true,
-      default: () => 10
-    },
-    Username: {
-      type: String,
-      default: ''
-    },
-    Filters: {
-      type: Object,
-      default() {
-        return {
-          match_all: {}
-        }
-      }
-    }
-  },
   data: () => ({
-    // us: userService,
-    loading: false,
-    pages: 0,
-    version: '4.0',
-    currentPage: 1,
-    sort: [],
-    columns: [
-      {
-        text: 'games.ticks',
-        align: 'left',
-        sortable: true,
-        value: 'Age'
-      },
-      {
-        text: 'games.wealth',
-        align: 'right',
-        sortable: true,
-        sort: 'desc',
-        value: 'Wealth'
-      },
-      {
-        text: 'games.date',
-        align: 'right',
-        sortable: true,
-        value: 'Played'
-      }
-    ],
-    items: []
+    searchParams: { page: 1, limit: 10 },
+    totalPages: 0,
+    selectedPage: 1,
+    games: []
   }),
   async fetch() {
-    await this.preapareSort()
     await this.loadGames()
   },
   methods: {
-    changePage(pageNumber) {
-      this.currentPage = pageNumber
-      this.loadGames()
-    },
-    doSort(field) {
-      if (!field.sortable) return
-
-      if (field.sort == null) {
-        field.sort = 'asc'
-      } else if (field.sort == 'asc') {
-        field.sort = 'desc'
-      } else if (field.sort == 'desc') {
-        field.sort = null
-      }
-
-      this.preapareSort()
-      this.loadGames()
-    },
-
-    preapareSort() {
-      this.sort = []
-      this.columns.forEach(col => {
-        if (col.sort != null) {
-          let sr = {}
-          sr[col.value] = col.sort
-          this.sort.push(sr)
-        }
+    loadGames() {
+      return getGames(this.searchParams).then(gamesResp => {
+        this.games = gamesResp.games
+        this.totalPages = Math.ceil(gamesResp.total / this.searchParams.limit)
       })
-    },
-
-    dataTableClasses(column) {
-      return [
-        'column',
-        column.sortable ? 'sortable' : '',
-        //column.sort != null ? "desc" : "asc",
-        column.sort != null ? 'active' : ''
-      ]
-    },
-
-    openGame(data) {
-      this.$router.push('/game/?id=' + data._id + '&v=' + data._source.Version)
-    },
-
-    openProfile(username) {
-      this.$router.push('/user?username=' + username)
-    },
-
-    async loadGames() {
-      this.loading = true
-      const response = await search(this.sort, this.currentPage, this.PageSize, this.version, this.Username)
-      if (!response) return
-      this.pages = Math.ceil(
-        response.total % this.PageSize > 0 ? response.total / this.PageSize : response.total / this.PageSize - 1
-      )
-      this.items = response.games
-      this.loading = false
     }
   },
   watch: {
-    version() {
-      this.loadGames()
+    async selectedPage(pageNumber) {
+      this.searchParams.page = pageNumber
+      await this.loadGames()
     }
   }
 }

@@ -31,17 +31,17 @@
         <v-card tile>
           <v-row>
             <v-col cols="12" sm="7">
-              <router-link :to="localePath({ name: 'user', query: { username: this.us.Username } })">
+              <div>
                 <div class="leader-card__avatar-name">
                   <v-avatar size="65" class="leader-card__avatar">
-                    <v-img :src="us.photoUrl(100)" />
+                    <v-img :src="getAvatar(leader.avatar)" />
                   </v-avatar>
-                  <span class="leader-card__name">{{ us.Username }}</span>
+                  <span class="leader-card__name">{{ leader.displayName }} <span class="leader-card__version">v.{{ leader.v }}</span></span>
                 </div>
-              </router-link>
+              </div>
             </v-col>
-            <v-col cols="3" sm="3" class="leader-card__score">{{ us.TotalGames }} <div v-if="$vuetify.breakpoint.smAndDown">{{ us.TotalWealth }}</div></v-col>
-            <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{ us.TotalWealth }}</v-col>
+            <v-col cols="3" sm="3" class="leader-card__score">{{ leader.gamesPlayed }} <div v-if="$vuetify.breakpoint.smAndDown">{{ leader.score }}</div></v-col>
+            <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{leader.score }}</v-col>
           </v-row>
         </v-card>
       </v-col>
@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
@@ -62,20 +61,9 @@ export default {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
   },
-  data: () => ({
-    us: null,
-    bot: {}
-  }),
-  created() {
-    this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
-    this.us = new User()
-    this.us.initUser(this.bot)
-  },
-  watch: {
-    leader() {
-      this.bot = Object.keys(this.leader).reduce((c, k) => ((c[k.toLowerCase()] = this.leader[k]), c), {})
-      this.us = new User()
-      this.us.initUser(this.bot)
+  methods: {
+    getAvatar(id) {
+      return `${process.env.API_URL}images/${id}/100/100`
     }
   }
 }
@@ -119,6 +107,12 @@ export default {
     font-weight: 500;
     margin-left: 20px;
     line-height: 60px;
+  }
+
+  &__version {
+    color: $color-violet-600;
+    font-weight: 400;
+    font-size: $font-small;
   }
 
   &__score {

@@ -1,11 +1,6 @@
 <template>
   <div class="d-flex align-center">
-    <div>
-      <div class="user-icon__avatar">
-        <v-img class="" :src="photoUrl()" />
-      </div>
-    </div>
-    <div class="ml-2 d-flex flex-column">
+    <div class="ml-12 d-flex flex-column">
       <div class="d-flex align-center">
         <span class="primary--text f-text">{{ author }}</span>
       </div>
@@ -23,11 +18,6 @@ export default {
   props: {
     author: String,
     date: Number
-  },
-  methods: {
-    photoUrl() {
-      return 'https://github.com/' + this.author + '.png?size=50'
-    }
   },
   computed: {
     getTimeAgo() {

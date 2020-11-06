@@ -31,8 +31,8 @@
   </section>
 </template>
 
-
 <script>
+import { getGame } from '@/services/Game'
 import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
@@ -64,28 +64,34 @@ export default {
     GamePlayer
   },
   mounted() {
-    const base = 'https://storage.googleapis.com/anthive-prod-games/'
-    this.gameId = this.$route.query.id || ''
-    const version = this.$route.query.v || ''
-    const dataUrl = base + version + '/' + this.gameId + '.zip'
-    if (this.isGameFound(dataUrl)) {
-      // eslint-disable-next-line
-      player = new AnthivePlayer('#player', dataUrl)
-      // eslint-disable-next-line
-      player.on(AnthivePlayer.event.READY, () => {
-        this.players = player.framer.playerList.sort(this.compare)
-        this.gameLoaded = true
-      })
-      // eslint-disable-next-line
-      player.on(AnthivePlayer.event.END, () => {
-        this.isGameEnd = true
-      })
-    } else {
-      this.isGameAvailable = false
-      this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
-    }
+    import('../static/js/anthive-5.0.js').then(() => {
+      const base = 'https://storage.googleapis.com/anthive-prod-games/'
+      this.gameId = this.$route.query.id || ''
+      const version = this.$route.query.v || ''
+      const dataUrl = base + version + '/' + this.gameId + '.zip'
+      if (this.isGameFound(dataUrl)) {
+        // eslint-disable-next-line
+        player = new AnthivePlayer('#player', dataUrl)
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.READY, async () => {
+          //this.players = player.framer.playerList.sort(this.compare)
+          this.players = await this.getPlayers()
+          this.gameLoaded = true
+        })
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.END, () => {
+          this.isGameEnd = true
+        })
+      } else {
+        this.isGameAvailable = false
+        this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
+      }
+    })
   },
   methods: {
+    getPlayers() {
+      return getGame(this.gameId).then(game => game.bots)
+    },
     isGameFound(url) {
       const request = new XMLHttpRequest()
       request.open('HEAD', url, false)

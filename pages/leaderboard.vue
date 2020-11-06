@@ -1,16 +1,50 @@
 <template>
+
+ <!-- <section class="leaderboard texture-arrows">
+  <v-card class="leaderboard__table">
+      <v-row class="leaderboard__table-head">
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
+          <span>{{ $t('leaderboard.place') }}</span>
+        </v-col>
+        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="6" class="pl-7">
+          <span>{{ $t('leaderboard.player') }}</span>
+        </v-col>
+        <v-col cols="6" sm="1"
+          class="leaderboard__table-score"
+        >
+          {{ $t(`leaderboard.byGames`) }}
+        </v-col>
+          <v-col cols="6" sm="2"
+          class="leaderboard__table-score"
+        >
+          {{ $t(`leaderboard.byScore`) }}
+        </v-col>
+         <v-col cols="6" sm="2"
+          class="leaderboard__table-score"
+        >
+          {{ $t(`leaderboard.byVersion`) }}
+        </v-col>
+      </v-row>
+      <GamesLeaderCard
+        class="leaderboard__table-player"
+        :key="player.displayName + index"
+        v-for="(player, index) in players"
+        :place="index + 1"
+        :leader="player"
+      />
+    </v-card> -->
   <section class="leaderboard page-wrap">
     <v-container>
       <div class="leaderboard__header header">
         <div class="header__img-wrap">
-          <v-img src="/img/leaderboard-title-icon.svg" />
+          <!-- <v-img src="/img/leaderboard-title-icon.svg" /> -->
           <!-- TODO: dynamic -->
           <div class="header__lang">C++</div>
         </div>
         <div class="header__title-wrap">
           <h1 class="header__title">{{ $t('leaderboard.title') }}</h1>
           <!-- TODO: dynamic -->
-          <p class="header__subtitle">Country</p>
+          <p class="header__subtitle">World</p>
           <div class="header__info">
             <v-tooltip right nudge-left>
               <template v-slot:activator="{ on }">
@@ -24,7 +58,7 @@
         </div>
       </div>
 
-      <v-card tile class="leaderboard__filter filter">
+      <!-- <v-card tile class="leaderboard__filter filter">
         <v-row>
           <v-col cols="12" sm="4" class="filter__langs">
             <div class="filter__title">{{ $t('leaderboard.languages') }}:</div>
@@ -57,16 +91,14 @@
             ></v-select>
           </v-col>
         </v-row>
-      </v-card>
+      </v-card> -->
 
       <div class="leaderboard__table">
         <v-row class="leaderboard__table-head">
           <v-col cols="6" sm="2"
-            :class="{ 'accent--text': column.value === sortBy }"
             class="leaderboard__table-score"
             v-for="(column, index) in columns"
             :key="index"
-            @click="doSort(column.value)"
           >
             <div class="leaderboard__table-score-title">{{ $t(`leaderboard.${column.text}`) }}
               <div class="header__info">
@@ -84,7 +116,7 @@
         </v-row>
         <GamesLeaderCard
           class="leaderboard__table-player"
-          :key="player.Username + index"
+          :key="player.displayName + index"
           v-for="(player, index) in players"
           :place="index + 1"
           :leader="player"
@@ -95,7 +127,7 @@
 </template>
 
 <script>
-import { search } from '@/services/Bot'
+import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
 import GamesUserCard from '@/components/GamesUserCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
@@ -124,39 +156,25 @@ export default {
     cities: ['moscow', 'new yourk'], // TODO
     langs: [],
     players: [],
-    sortBy: 'totalWealth',
     columns: [
       {
         text: 'games',
         sortable: true,
-        value: 'totalGames',
         description: 'games' // TODO: add description
       },
       {
         text: 'mmr',
         sortable: true,
-        value: 'totalWealth',
-        description: 'mmr' // TODO: add description
+        description: 'score' // TODO: add description
       }
     ]
   }),
   async fetch() {
-    await this.getLeaders()
+    this.players = await getBotsLeaderboard()
   },
   computed: {
     getLangs() {
       return langs
-    }
-  },
-  methods: {
-    async getLeaders() {
-      let sortQuery = {}
-      sortQuery[this.sortBy] = 'desc'
-      this.players = await search(sortQuery)
-    },
-    async doSort(sort) {
-      this.sortBy = sort
-      await this.getLeaders()
     }
   }
 }

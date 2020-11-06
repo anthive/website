@@ -1,5 +1,5 @@
 <template>
-  <section class="sandbox">
+  <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <v-card class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
@@ -35,7 +35,7 @@
                   class="action-button"
                   @click="onClickLogin"
                   color="accent"
-                  >{{ $t("sandbox.loginToSave") }}</AntHiveBtn
+                  ><span v-if="getUser && getUser.userName">{{ $t("sandbox.loginToSave") }}</span><span v-else> {{ $t("sandbox.loginToSave") }}</span></AntHiveBtn
                 >
               </div>
               
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
 import axios from 'axios'
 var player = null
@@ -106,6 +107,7 @@ export default {
     gameId: ''
   }),
   computed: {
+    ...mapGetters(['getUser']),
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
     },
@@ -122,12 +124,25 @@ export default {
       return text.replace('$rules$', rulesElement).replace('$discord$', discordElement)
     }
   },
-  mounted() {
-    const gameId = this.$route.query.box
-    if (gameId) {
-      this.initGame(gameId)
-      this.initLogs(gameId)
-    }
+  async mounted() {
+    import('../../static/js/anthive-5.0.js').then(async () => {
+      if (this.$route.query.box) {
+        this.gameId = this.$route.query.box
+        this.loading = true
+        this.showLoadingText()
+        await this.getGame()
+          .then(() => {
+            this.initGame()
+            this.initLogs()
+          })
+          .catch(err => {
+            this.botLogs = this.simLogs = err
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      }
+    })
   },
   methods: {
     handlerClickLogs(logsCategory) {
@@ -151,18 +166,25 @@ export default {
       if (player && player.control) player.control.stop()
       this.botLogs = this.simLogs = 'Loading...'
       this.savedCode = this.valueCode.value
+
       const file = this.createFile()
       const formData = this.createData(file)
-      try {
-        this.gameId = await this.sendCodeToSim(formData)
-        this.initGame(this.gameId)
-        this.initLogs(this.gameId)
-        this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-      } catch (err) {
-        console.log(err)
-      } finally {
-        this.loading = false
-      }
+
+      const gameResp = await this.sendCodeToSim(formData)
+      this.gameId = gameResp.id
+
+      await this.getGame()
+        .then(() => {
+          this.initGame()
+          this.initLogs()
+        })
+        .catch(err => {
+          this.botLogs = this.simLogs = err
+        })
+        .finally(() => {
+          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
+          this.loading = false
+        })
     },
     onClickLogin() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
@@ -178,8 +200,37 @@ export default {
       data.append('file', file)
       return data
     },
+    async getGame() {
+      return await new Promise(async (resolve, reject) => {
+        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
+
+        axios
+          .head(gameUrl)
+          //if got the game, then we resolve
+          .then(resolve)
+          .catch(() => {
+            const maxTime = 60000
+            const callInterval = 5000
+            let passedTime = 0
+
+            const interval = setInterval(async () => {
+              passedTime += callInterval
+              //if got 404, create calls by interval until we get 200 status and resolve,
+              axios.head(gameUrl).then(() => {
+                clearInterval(interval)
+                resolve()
+              })
+              //or overcome the maximum interval, then reject
+              if (passedTime >= maxTime) {
+                clearInterval(interval)
+                reject('Please try again later')
+              }
+            }, callInterval)
+          })
+      })
+    },
     async sendCodeToSim(data) {
-      const url = `${process.env.API_URL}sandbox/${this.valueCode.extention}`
+      const url = `${process.env.SANDBOX_API_URL}${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,
@@ -188,17 +239,17 @@ export default {
       })
       return simResp.data
     },
-    initGame(id) {
-      const gameUrl = `${process.env.SANDBOX_BUCKET}${id}.zip`
+    initGame() {
+      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', gameUrl)
     },
-    async initLogs(id) {
-      this.botLogs = await this.getLogs(id, 'bot')
-      this.simLogs = await this.getLogs(id, 'sim')
+    async initLogs() {
+      this.botLogs = await this.getLogs(this.gameId, 'bot')
+      this.simLogs = await this.getLogs(this.gameId, 'sim')
     },
     async getLogs(id, type) {
-      const logsUrl = `${process.env.SANDBOX_BUCKET}${id}-${type}.txt`
+      const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}-${type}.txt`
       const resp = await axios.get(logsUrl)
       return resp.data
     }

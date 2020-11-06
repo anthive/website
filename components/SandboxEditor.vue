@@ -47,6 +47,7 @@ if (process.client) {
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
   require('ace-builds/src-min-noconflict/ext-language_tools')
+  require('ace-builds/webpack-resolver')
 }
 export default {
   props: {
@@ -119,7 +120,9 @@ export default {
       return resp.data
     },
     async getGameCode() {
-      const codeUrl = `${process.env.SANDBOX_BUCKET}${this.$route.query.box}.${this.$route.params.lang}`
+      const codeUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.$route.query.box}.${
+        this.$route.params.lang
+      }`
       const resp = await axios.get(codeUrl)
       return resp.data
     },

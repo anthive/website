@@ -21,13 +21,11 @@ const dynamicRoutes = () => {
 
 module.exports = {
   env: {
+    SIM_VERSION: process.env.SIM_VERSION,
+    PROFILE_URL: process.env.PROFILE_URL,
     API_URL: process.env.API_URL,
-    SIMULATION_URL: process.env.SIMULATION_URL,
-    SANDBOX_BUCKET: process.env.SANDBOX_BUCKET,
-    INDEX_GAMES: process.env.INDEX_GAMES,
-    INDEX_USER: process.env.INDEX_USER,
-    INDEX_STATS: process.env.INDEX_STATS,
-    PROFILE_URL: process.env.PROFILE_URL
+    SANDBOX_STORAGE: process.env.SANDBOX_STORAGE,
+    SANDBOX_API_URL: process.env.SANDBOX_API_URL
   },
   // Doc: https://web.dev/maskable-icon-audit/?utm_source=lighthouse&utm_medium=devtools
   icon: {
@@ -97,8 +95,7 @@ module.exports = {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg'
       }
-    ],
-    script: [{ src: '/js/anthive-4.0.js', defer: true }]
+    ]
   },
 
   /*

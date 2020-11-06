@@ -10,6 +10,15 @@ npm i
 npm run dev
 ```
 
+## .ENV
+```
+API_URL=
+PROFILE_URL=
+SANDBOX_STORAGE=
+SIM_VERSION=5.0
+SANDBOX_API_URL=
+```
+
 ## Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 * Hat tip to anyone whose code was used
