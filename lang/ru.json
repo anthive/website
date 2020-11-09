@@ -77,7 +77,7 @@
     },
     "loading": "Загрузка...",
     "requestRematch": "Рематч",
-    "shareGame": "Поделться игрой",
+    "shareGame": "Поделиться игрой",
     "replay": "Повтор",
     "shareOn": "Поделиться в",
     "sendBy": "Отправить по",
@@ -89,7 +89,11 @@
     "errors": "Ошибки",
     "age": "Длительность",
     "score": "Счет",
-    "art": "ART"
+    "art": "ART",
+    "ants": "Муравьи",
+    "hiveSize": "Размер муравейника",
+    "players": "Игроки",
+    "game": "Игра"
   },
 
   "leaderboard": {

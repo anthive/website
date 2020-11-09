@@ -236,8 +236,5 @@ export default {
       background: $color-violet-600;
     }
   }
-
-  &__bots {
-  }
 }
 </style>

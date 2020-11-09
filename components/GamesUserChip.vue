@@ -1,39 +1,29 @@
 <template>
-  <div class="user-chip">
-    <div>
-      <v-avatar tile class="user-chip__avatar" size="32">
-        <v-img :src="getAvatar(player.avatar)" />
-      </v-avatar>
-    </div>
-    <div class="ml-2 d-flex flex-column">
-      <div class="d-flex align-center">
-        <div>
-          <div class="d-flex align-center">
-             <v-avatar tile class="mr-2" size="23">
-              <v-img :src="langUrl(player.lang)" />
-            </v-avatar>
-            <div class="user-chip__name primary--text">{{ player.name }}</div>
-            <v-avatar class="ml-1" size="23">
-              <span class="user-chip__version">v.{{ player.version }}</span>
-            </v-avatar>
-            <v-avatar tile size="23">
-              <v-img :src="antUrl(player.skin)" />
-            </v-avatar>
-            <span class="mx-1">:{{ player.stats.ants }}</span>
-            <v-avatar tile size="23">
-              <v-img :src="hiveUrl(player.skin)" />
-            </v-avatar>
-            <span class="mx-1">:{{ player.stats.hive }}</span>
-          </div>
+ <div class="chip">
+   <div class="chip__img" :style="`background: url(${hiveUrl(player.skin)})`">
+     <img
+        class="chip__lang-icon"
+        width="40px"
+        :src="langUrl(player.lang)"
+        :alt="player.lang" 
+      />
+   </div>
 
-          <div>
-            {{ $t("game.score") }}: {{ player.stats.score }}, {{ $t("game.errors") }}: {{ player.stats.errors }},
-            {{ $t("game.art") }}: {{ player.stats.art }}, {{ $t("game.age") }}: {{ player.stats.age }}
-          </div>
-        </div>
-      </div>
+   <div class="chip__description">
+    <v-avatar class="chip__user-avatar" size="40">
+      <v-img :src="getAvatar(player.avatar)" />
+    </v-avatar>
+    <p class="mb-5"><strong>{{ player.name }}</strong></p>
+    <div class="chip__statistics">
+      <p>{{ $t("game.ants") }}: <strong>{{ player.stats.ants }}</strong></p>
+      <p>{{ $t("game.hiveSize") }}: <strong>{{ player.stats.hive }}</strong></p>
+      <p>{{ $t("game.score") }}: <strong>{{ player.stats.score }}</strong></p>
+      <p>{{ $t("game.errors") }}: <strong>{{ player.stats.errors }}</strong></p>
+      <p>{{ $t("game.art") }}: <strong>{{ player.stats.art }}</strong></p>
+      <p>{{ $t("game.age") }}: <strong>{{ player.stats.age }}</strong></p>
     </div>
-  </div>
+   </div>
+ </div>
 </template>
 
 <script>
@@ -61,34 +51,46 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
-.user-chip {
-  font-size: $font-small;
-  min-width: 230px;
+.chip {
   display: flex;
-  align-items: center;
-  &__avatar {
-    border: 2px solid $color-red-400;
-    border-radius: $border-radius-default !important;
-    box-sizing: content-box;
+  flex-direction: column;
+  box-shadow: $box-shadow-default;
+  width: 190px;
+  height: 340px;
+
+  &__img {
+    background-position: center;
+    width: 100%;
+    min-height: 130px;
+    background: $color-red-300;
+    padding: 10px;
   }
-  &__info {
-    display: flex;
-    align-items: center;
+
+  &__user-avatar {
+    position: absolute;
+    top: -20px;
+    right: 10px;
   }
-  &__ant-img {
-    background-color: white;
-    background: #e1567c0d;
-    box-sizing: border-box;
+
+  &__lang-icon {
+    margin-right: 10px;
+    border-radius: 10px;
   }
-  &__version {
+
+  &__lang-name {
     font-size: 10px;
-    margin: 0 1px;
+    color: $color-violet-600;
   }
-}
-@media screen and (max-width: $screen-sm) {
-  .user-chip {
-    &__info {
-      flex-direction: column;
+
+  &__description {
+    position: relative;
+    padding: 20px;
+  }
+
+  &__statistics {
+    p {
+      margin-bottom: 0;
+      font-size: 12px;
     }
   }
 }

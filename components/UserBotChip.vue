@@ -75,7 +75,7 @@ export default {
 .chip {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 13px 0px #00000021;
+  box-shadow: $box-shadow-default;
   height: 300px;
 
   &__img {

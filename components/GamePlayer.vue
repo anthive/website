@@ -13,6 +13,7 @@
     <div id="player">
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
+    <div class="inset-shadow" />
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
         <div class="layout-buttons">
@@ -20,8 +21,6 @@
             class="layout-button mb-6"
             color="#00BF70"
             dark
-            width="320"
-            height="72"
             block
             :href="getRematchURL"
             >{{ $t('game.requestRematch') }}</v-btn
@@ -30,8 +29,6 @@
             class="layout-button"
             color="#333333"
             dark
-            width="320"
-            height="72"
             block
             @click="$emit('replay')"
             >{{ $t('game.replay') }}
@@ -43,7 +40,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    class="mx-3"
+                    class="share-button"
                     fab
                     dark
                     color="#333333"
@@ -59,7 +56,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    class="mx-3"
+                    class="share-button"
                     fab
                     dark
                     color="#333333"
@@ -75,7 +72,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    class="mx-3"
+                    class="share-button"
                     fab
                     dark
                     color="#333333"
@@ -91,7 +88,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    class="mx-3"
+                    class="share-button"
                     fab
                     dark
                     color="#333333"
@@ -107,7 +104,7 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    class="mx-3"
+                    class="share-button"
                     fab
                     dark
                     color="#333333"
@@ -169,6 +166,7 @@ export default {
 
 #player {
   background-repeat: repeat;
+  position: relative;
 }
 .game__vs-separator {
   position: relative;
@@ -176,6 +174,15 @@ export default {
 }
 .player__section {
   position: relative;
+}
+.inset-shadow {
+  position: absolute;
+  box-shadow: inset 0px 0px 100px 5px $color-violet-600;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);
@@ -201,21 +208,51 @@ export default {
   justify-content: flex-end;
 }
 .layout-buttons {
+  padding: 10px;
+  width: 60%;
+  height: 80%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: $color-white;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
 }
 .layout-button {
+  max-height: 72px !important;
   text-transform: none;
   font-weight: 600;
   font-size: 24px !important;
   letter-spacing: 1px;
 }
 .social-share {
-  margin-top: 80px;
-  color: white;
+  margin-top: 10%;
   text-align: center;
   font-size: 16px;
+}
+
+.share-button {
+  margin: 0 12px;
+}
+
+@media screen and (max-width: $screen-lg) {
+  .layout-button {
+    max-height: 46px !important;
+    font-size: 14px !important;
+    letter-spacing: 1px;
+  }
+  .social-share {
+    margin-top: 15px;
+    font-size: 12px;
+    p {
+      margin-bottom: 5px;
+    }
+  }
+  .share-button {
+    height: 35px;
+    width: 35px;
+  }
 }
 </style>
