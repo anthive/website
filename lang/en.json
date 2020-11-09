@@ -89,7 +89,11 @@
     "errors": "Errors",
     "age": "Age",
     "score": "Score",
-    "art": "ART"
+    "art": "ART",
+    "ants": "Ants",
+    "hiveSize": "Hive size",
+    "players": "Players",
+    "game": "Game"
   },
 
   "leaderboard": {

@@ -2,30 +2,31 @@
   <section class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
-        <v-row  class="flex-nowrap mx-auto">
+        <v-row  class="mx-auto">
           <v-col cols="12" md="7" class="player-zone__wrap">
             <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
           </v-col>
           <v-col cols="12" md="5" class="game__text-section">
             <div>
-              <h1>Game</h1>
-              <h4 class="mt-5">Players</h4>
-              <p class="mb-5">Please select your type of source</p>
-              <v-avatar class="mx-1" v-for="(img, index) in 5" :key="index">
-                <v-img width="40" src="/img/for-developers.svg" />
+              <h1>{{ $t("game.game") }}</h1>
+              <h4 class="my-5">{{ $t("game.players") }}</h4>
+              <v-avatar class="mx-1" v-for="(player, index) in players" :key="index">
+                <v-img width="40" :src="getAvatar(player.avatar)" />
               </v-avatar>
-              <h3 class="mt-12 mb-4">Login to have all options</h3>
-              <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
-                $t("header.buttonJoin")
-              }}</AntHiveBtn>
+              <div class="mt-10">
+                <AntHiveBtn large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
+                  $t("header.sandbox")
+                }}</AntHiveBtn>
+                <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
+                  $t("header.buttonJoin")
+                }}</AntHiveBtn>
+            </div>
             </div>
           </v-col>
         </v-row>
         <v-row>
           <div class="mt-12 mx-auto">
-            <GamePlayerList
-              :players="players"
-            />
+            <GamePlayerList :players="players" />
           </div>
         </v-row>
       </template>
@@ -110,6 +111,9 @@ export default {
     handlerClickGetStarted() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'gamepage' })
       window.location.href = this.profileURL
+    },
+    getAvatar(id) {
+      return `${process.env.API_URL}images/${id}/100/100`
     },
     getPlayers() {
       return getGame(this.gameId).then(game => game.bots)

@@ -1,8 +1,7 @@
 <template>
   <div class="players">
     <div class="players__wrap">
-      <h4>Players</h4>
-      <p>Please select your type of source</p>
+      <h4>{{ $t("game.players") }}</h4>
       <div class="players__list">
         <v-card
           :key="index"
@@ -71,6 +70,8 @@ export default {
 
   &__list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 </style>
