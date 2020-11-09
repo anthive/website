@@ -95,7 +95,7 @@
 
       <div class="leaderboard__table">
         <v-row class="leaderboard__table-head">
-          <v-col cols="6" sm="2"
+          <v-col cols="6" sm="4"
             class="leaderboard__table-score"
             v-for="(column, index) in columns"
             :key="index"
@@ -158,14 +158,9 @@ export default {
     players: [],
     columns: [
       {
-        text: 'games',
-        sortable: true,
-        description: 'games' // TODO: add description
-      },
-      {
         text: 'mmr',
         sortable: true,
-        description: 'score' // TODO: add description
+        description: 'mmr' // TODO: add description
       }
     ]
   }),

@@ -8,21 +8,21 @@
           class="filter__lang-icon ml-n3"
           width="73px"
           src="/img/leaderboard-top1.svg"
-          alt="Leaderboard TOP1" 
+          alt="Leaderboard TOP1"
         />
         <img
           v-else-if="place === 2"
           class="filter__lang-icon"
           width="50px"
           src="/img/leaderboard-top2.svg"
-          alt="Leaderboard TOP2" 
+          alt="Leaderboard TOP2"
         />
         <img
           v-else-if="place === 3"
           class="filter__lang-icon"
           width="50px"
           src="/img/leaderboard-top3.svg"
-          alt="Leaderboard TOP3" 
+          alt="Leaderboard TOP3"
         />
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
@@ -36,12 +36,18 @@
                   <v-avatar size="65" class="leader-card__avatar">
                     <v-img :src="getAvatar(leader.avatar)" />
                   </v-avatar>
-                  <span class="leader-card__name">{{ leader.displayName }} <span class="leader-card__version">v.{{ leader.v }}</span></span>
+                  <span class="leader-card__name"
+                    >{{ leader.displayName }}
+                    <span class="leader-card__version">v.{{ leader.v }}</span
+                    ><v-avatar tile size="20" class="ml-2"
+                      ><v-img :src="getLangImg(leader.lang)" /></v-avatar
+                  ></span>
                 </div>
               </div>
             </v-col>
-            <v-col cols="3" sm="3" class="leader-card__score">{{ leader.gamesPlayed }} <div v-if="$vuetify.breakpoint.smAndDown">{{ leader.score }}</div></v-col>
-            <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="3" sm="2" class="leader-card__score">{{leader.score }}</v-col>
+            <v-col cols="3" sm="3" class="leader-card__score"
+              ><div>{{ leader.mmr }}</div></v-col
+            >
           </v-row>
         </v-card>
       </v-col>
@@ -51,6 +57,7 @@
 
 <script>
 import AntHiveIcon from '@/components/AntHiveIcon'
+import langs from '../static/langs/data.json'
 
 export default {
   name: 'GamesLeaderCard',
@@ -64,6 +71,10 @@ export default {
   methods: {
     getAvatar(id) {
       return `${process.env.API_URL}images/${id}/100/100`
+    },
+    getLangImg(lang) {
+      const currentLang = langs.find(l => l.id === lang)
+      return currentLang.img
     }
   }
 }
