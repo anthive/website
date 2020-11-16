@@ -74,7 +74,6 @@ export default {
 
   &__lang-icon {
     margin-right: 10px;
-    border-radius: 10px;
   }
 
   &__lang-name {

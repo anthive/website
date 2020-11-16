@@ -1,9 +1,10 @@
 <template>
+  <!-- TODO: use real user datas -->
   <section class="user page-wrap">
     <v-container>
       <v-row>
         <div class="d-flex">
-          <v-avatar size="160">
+          <v-avatar tile size="160">
             <v-img class="user__avatar" :src="getAvatar(getUser && getUser.avatar)" />
           </v-avatar>
           <div class="user__title">

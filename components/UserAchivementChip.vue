@@ -47,7 +47,6 @@ export default {
     height: 85px;
     box-shadow: $box-shadow-default;
     background-color: $color-white;
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
