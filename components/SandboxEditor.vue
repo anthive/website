@@ -3,7 +3,7 @@
     <h4 v-if="currentLangTab.sample"
       >{{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h4
     >
-    <v-card color="#272822" height="80vh">
+    <v-card color="#272822" tile height="80vh">
       <v-tabs
         active-class="editor__active-tab"
         v-model="tab"

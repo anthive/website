@@ -2,6 +2,7 @@
   <section class="games page-wrap">
       <v-container class="games__container">
         <v-card
+          tile
           class="games__card white text-xs-left"
         >
           <v-card-title>
@@ -52,9 +53,6 @@ export default {
   padding: 40px 0;
   &__container {
     padding: 0;
-  }
-  &__card {
-    border-radius: $border-radius-default !important;
   }
 }
 

@@ -86,9 +86,11 @@
       <v-select
         v-model="selectedLocale"
         :items="locales"
+        tile
         dense
         dark
         flat
+        item-color="accent"
         hide-details
         :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"

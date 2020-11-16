@@ -65,7 +65,6 @@ export default {
 <style>
 .user-info-full {
   display: inline-block;
-  border-radius: 5px;
   overflow: hidden;
 }
 

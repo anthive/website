@@ -36,7 +36,7 @@
           <div class="social-share">
             <p>{{ $t('game.shareGame') }}</p>
             <div class="d-flex justify-center">
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="share-button"
@@ -52,7 +52,7 @@
                   </v-btn> </template
                 ><span>{{ $t('game.shareOn') }} Linkedin</span>
               </v-tooltip>
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="share-button"
@@ -68,7 +68,7 @@
                   </v-btn> </template
                 ><span>{{ $t('game.shareOn') }} Facebook</span>
               </v-tooltip>
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="share-button"
@@ -84,7 +84,7 @@
                   </v-btn> </template
                 ><span>{{ $t('game.shareOn') }} Twitter</span>
               </v-tooltip>
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="share-button"
@@ -100,7 +100,7 @@
                   </v-btn> </template
                 ><span>{{ $t('game.sendBy') }} Email</span>
               </v-tooltip>
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
                     class="share-button"

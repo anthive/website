@@ -1,6 +1,7 @@
 <template>
   <div id="games-table" class="games-table">
     <v-card
+      tile
       class="games-table__item"
       :key="index"
       v-for="(game, index) in games"
@@ -35,7 +36,7 @@
               :key="pIndex"
               v-for="(player, pIndex) in game.bots.slice(0, 4)"
             >
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
                     <UserIcon class="ml-1" :player="player" locale="table" />
@@ -67,7 +68,7 @@
               :key="pIndex"
               v-for="(player, pIndex) in game.bots.slice(0, 4)"
             >
-              <v-tooltip bottom>
+              <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
                     <UserIcon class="ml-1" :player="player" />
@@ -102,16 +103,16 @@
         </div>
       </div>
     </v-card>
-        <v-toolbar flat>
+    <v-toolbar flat>
       <v-pagination
-        class="mx-auto"
+        class="mx-auto pagination"
         :length="totalPages"
         v-model="selectedPage"
         total-visible="10"
         color="accent"
         next-icon=">"
         prev-icon="<"
-      ></v-pagination>
+      />
     </v-toolbar>
   </div>
 </template>
@@ -158,7 +159,16 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+.games-table {
+  .pagination {
+    .v-pagination__item,
+    .v-pagination__navigation {
+      border-radius: 0;
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
@@ -174,12 +184,7 @@ export default {
     cursor: pointer;
   }
   &__item {
-    border-radius: $border-radius-default !important;
     margin: 10px 0;
-  }
-  &__item-cover {
-    border-top-left-radius: $border-radius-default;
-    border-bottom-left-radius: $border-radius-default;
   }
   &__players-container {
     display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="user-card">
+  <v-card tile class="user-card">
     <v-img
       class="user-card__img"
       height="125"
@@ -111,7 +111,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .user-card {
-  border-radius: 12px !important;
+  border-radius: $border-radius-tile !important;
   width: 100%;
   max-width: 370px;
   &__img {
@@ -127,7 +127,7 @@ export default {
   &__avatar {
     width: 80px;
     height: 80px;
-    border-radius: $border-radius-default;
+    border-radius: $border-radius-tile;
     background-color: $color-red-300;
     position: relative;
     margin: -50px auto 0 auto;

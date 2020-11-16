@@ -2,7 +2,7 @@
   <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
-        <v-card class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
+        <v-card tile class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />

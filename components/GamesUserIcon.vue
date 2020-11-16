@@ -28,7 +28,6 @@ export default {
     cursor: pointer;
     width: 32px;
     height: 32px;
-    border-radius: $border-radius-default;
     border: 2px solid $color-red-400;
     box-sizing: content-box;
   }

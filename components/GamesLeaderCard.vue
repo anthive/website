@@ -33,7 +33,7 @@
             <v-col cols="12" sm="7">
               <div>
                 <div class="leader-card__avatar-name">
-                  <v-avatar size="65" class="leader-card__avatar">
+                  <v-avatar tile size="65" class="leader-card__avatar">
                     <v-img :src="getAvatar(leader.avatar)" />
                   </v-avatar>
                   <span class="leader-card__name"
