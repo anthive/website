@@ -180,7 +180,7 @@ export default {
   methods: {
     getAvatar(avatarId) {
       if (avatarId) {
-        return this.us.photoUrl(avatarId, 150)
+        return this.us.photoUrl(avatarId, 190)
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
  <div class="chip">
-   <div class="chip__img" :style="`background: url(${hiveUrl(player.skin)})`">
+   <div class="chip__img" :style="`background: center / cover no-repeat url(${getAvatar(player.avatar)})`">
      <img
         class="chip__lang-icon"
         width="40px"
@@ -10,9 +10,10 @@
    </div>
 
    <div class="chip__description">
-    <v-avatar class="chip__user-avatar" size="40">
+     <!-- TODO: user user avatar -->
+    <!-- <v-avatar tile class="chip__user-avatar" size="40">
       <v-img :src="getAvatar(player.avatar)" />
-    </v-avatar>
+    </v-avatar> -->
     <p class="mb-5"><strong>{{ player.name }}</strong></p>
     <div class="chip__statistics">
       <p>{{ $t("game.ants") }}: <strong>{{ player.stats.ants }}</strong></p>
