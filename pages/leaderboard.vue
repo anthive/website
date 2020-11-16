@@ -196,7 +196,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
-  background-color: $color-violet-50;
   padding: 40px 0;
   .header {
     display: flex;
