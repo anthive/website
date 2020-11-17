@@ -46,7 +46,7 @@
           <!-- TODO: dynamic -->
           <p class="header__subtitle">World</p>
           <div class="header__info">
-            <v-tooltip right nudge-left>
+            <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
               <template v-slot:activator="{ on }">
                 <div v-on="on">
                   <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
@@ -102,7 +102,7 @@
           >
             <div class="leaderboard__table-score-title">{{ $t(`leaderboard.${column.text}`) }}
               <div class="header__info">
-                <v-tooltip right nudge-left>
+                <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
                   <template v-slot:activator="{ on }">
                     <div v-on="on">
                       <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
@@ -196,7 +196,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
-  background-color: $color-violet-50;
   padding: 40px 0;
   .header {
     display: flex;
@@ -249,7 +248,6 @@ export default {
 
     &__lang-icon {
       margin-right: 10px;
-      border-radius: 10px;
     }
   }
 

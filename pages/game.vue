@@ -175,7 +175,6 @@ export default {
   &__game-image {
     margin: 0 5px;
     border: 2px solid $color-red-500;
-    border-radius: 2px;
     transform: scale(0.98);
     transition: 0.2s;
 

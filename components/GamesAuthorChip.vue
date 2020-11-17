@@ -29,27 +29,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import '@/assets/style/global.scss';
-
-.user-icon {
-  &__avatar {
-    border-radius: $border-radius-default;
-    width: 50px;
-    height: 50px;
-    border: 2px solid $color-red-400;
-    box-sizing: content-box;
-    background-color: white;
-  }
-  &__ant-img {
-    background-color: white;
-    background: #e1567c0d;
-    box-sizing: border-box;
-  }
-  &__version {
-    font-size: 10px;
-    margin: 0 1px;
-  }
-}
-</style>

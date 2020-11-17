@@ -1,9 +1,10 @@
 <template>
+  <!-- TODO: use real user datas -->
   <section class="user page-wrap">
     <v-container>
       <v-row>
         <div class="d-flex">
-          <v-avatar size="160">
+          <v-avatar tile size="160">
             <v-img class="user__avatar" :src="getAvatar(getUser && getUser.avatar)" />
           </v-avatar>
           <div class="user__title">
@@ -179,7 +180,7 @@ export default {
   methods: {
     getAvatar(avatarId) {
       if (avatarId) {
-        return this.us.photoUrl(avatarId, 150)
+        return this.us.photoUrl(avatarId, 190)
       }
     }
   }

@@ -148,6 +148,7 @@ export default {
 
   &__user-chip {
     margin-left: 10px;
+    border-radius: $border-radius-tile !important;
   }
 }
 </style>
