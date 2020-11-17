@@ -51,7 +51,7 @@
       "title": "Games - AntHive.IO",
       "description": "Explore, watch, replay, learn strategies!"
     },
-    "title1": "All battles:",
+    "title1": "Games",
     "title2": "Explore, watch, replay, learn strategies",
     "version": "Version",
     "loading": "Loading... Please wait",
@@ -93,7 +93,10 @@
     "ants": "Ants",
     "hiveSize": "Hive size",
     "players": "Players",
-    "game": "Game"
+    "game": "Game",
+    "statistics": "Statistics",
+    "spawn": "Spawn",
+    "moreGames": "More games"
   },
 
   "leaderboard": {

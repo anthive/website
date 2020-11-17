@@ -15,8 +15,8 @@
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->
-          <v-btn tile class="accent hidden-md-and-up" v-on="on"
-            >{{ $t("header.menu") }}
+          <v-btn tile class="accent hidden-md-and-up" v-on="on">
+            <AntHiveIcon color="white">menu</AntHiveIcon>
           </v-btn>
         </template>
         <v-list class="hidden-md-and-up pa-2">
@@ -94,10 +94,14 @@
 </template>
 
 <script>
+import AntHiveIcon from '@/components/AntHiveIcon'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'TheHeader',
+  components: {
+    AntHiveIcon
+  },
   data: () => ({
     profileURL: process.env.PROFILE_URL
   }),

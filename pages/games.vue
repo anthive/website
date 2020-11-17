@@ -1,26 +1,27 @@
 <template>
   <section class="games page-wrap">
       <v-container class="games__container">
-        <v-card
-          tile
-          class="games__card white text-xs-left"
-        >
-          <v-card-title>
-            <h1 class="headline">
-              <span class="primary--text font-weight-medium">{{ $t("games.title1") }}</span>
-              <span class="primary--text ml-2">{{ $t("games.title2") }}</span>
-            </h1>
-          </v-card-title>
-          <v-card-text>
-            <GamesTable /> 
-          </v-card-text>
-        </v-card>
+        <div class="games__title-wrap">
+          <h1 class="games__title">{{ $t("games.title1") }}</h1>
+          <div class="games__info">
+            <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
+              <template v-slot:activator="{ on }">
+                <div v-on="on">
+                  <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
+                </div>
+              </template>
+              {{ $t("games.title2") }}
+            </v-tooltip>
+          </div>
+        </div>
+        <GamesTable />
      </v-container>
   </section>
 </template>
 
 <script>
 import GamesTable from '@/components/GamesTable'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'defaultHeader',
@@ -41,7 +42,8 @@ export default {
   }),
 
   components: {
-    GamesTable
+    GamesTable,
+    AntHiveIcon
   }
 }
 </script>
@@ -51,8 +53,17 @@ export default {
 
 .games {
   padding: 40px 0;
-  &__container {
-    padding: 0;
+
+  &__title-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  &__info {
+    position: absolute;
+    top: -5px;
+    right: -26px;
   }
 }
 
