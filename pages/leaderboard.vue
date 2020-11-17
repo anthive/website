@@ -165,6 +165,11 @@ export default {
     ]
   }),
   async fetch() {
+    if (process.server) {
+      this.players = await getBotsLeaderboard()
+    }
+  },
+  async mounted() {
     this.players = await getBotsLeaderboard()
   },
   computed: {
