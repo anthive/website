@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { getGame } from '@/services/Game'
 import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
@@ -80,13 +79,15 @@ export default {
         player = new AnthivePlayer('#player', dataUrl)
         // eslint-disable-next-line
         player.on(AnthivePlayer.event.READY, async () => {
-          //this.players = player.framer.playerList.sort(this.compare)
-          this.players = await this.getPlayers()
           this.gameLoaded = true
         })
         // eslint-disable-next-line
         player.on(AnthivePlayer.event.END, () => {
           this.isGameEnd = true
+        })
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.TICK, data => {
+          this.players = data.bots
         })
       } else {
         this.isGameAvailable = false
@@ -97,9 +98,6 @@ export default {
   methods: {
     getAvatar(id) {
       return `${process.env.API_URL}images/${id}/100/100`
-    },
-    getPlayers() {
-      return getGame(this.gameId).then(game => game.bots)
     },
     isGameFound(url) {
       const request = new XMLHttpRequest()
