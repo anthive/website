@@ -2,12 +2,16 @@
   <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
-        <v-card tile class="white pa-3 elevation-6" min-height="calc(100vh - 64px)">
+        <div class="white pa-3 pb-10" min-height="calc(100vh - 64px)">
+          <ThePageHeader
+            :title="$t('sandbox.sandbox')"
+            :tooltip-text="$t('sandbox.tooltipText')"
+          />
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
               <editor :valueCode.sync="valueCode" />
             </v-col>
-            <v-col class="mt-6" cols="12" md="6">
+            <v-col cols="12" md="6">
               <div class="sandbox__player" :class="{ disable: loading }">
                 <div id="player" />
                 <div class="sandbox__loading-text" v-if="loading && $route.query.box">
@@ -69,7 +73,7 @@
               </div>
             </v-col>
           </v-row>
-        </v-card>
+        </div>
       </v-col>
     </v-row>
   </section>
@@ -78,6 +82,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
+import ThePageHeader from '@/components/ThePageHeader'
 import axios from 'axios'
 var player = null
 export default {
@@ -93,7 +98,8 @@ export default {
     }
   },
   components: {
-    editor
+    editor,
+    ThePageHeader
   },
   data: () => ({
     valueCode: {},
@@ -284,6 +290,7 @@ export default {
   &__actions {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
     margin-bottom: 20px;
 
     .action-button {

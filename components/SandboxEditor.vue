@@ -1,8 +1,5 @@
 <template>
   <div class="editor__wrap">
-    <h4 v-if="currentLangTab.sample"
-      >{{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h4
-    >
     <v-card color="#272822" tile height="80vh">
       <v-tabs
         active-class="editor__active-tab"
@@ -35,6 +32,9 @@
           </v-card>
         </v-tab-item>
       </v-tabs-items>
+      <h3 class="mt-3 mb-10" v-if="currentLangTab.sample"
+        >{{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h3
+      >
     </v-card>
   </div>
 </template>

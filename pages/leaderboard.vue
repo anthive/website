@@ -41,21 +41,11 @@
           <!-- TODO: dynamic -->
           <div class="header__lang">C++</div>
         </div>
-        <div class="header__title-wrap">
-          <h1 class="header__title">{{ $t('leaderboard.title') }}</h1>
-          <!-- TODO: dynamic -->
-          <p class="header__subtitle">World</p>
-          <div class="header__info">
-            <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
-              <template v-slot:activator="{ on }">
-                <div v-on="on">
-                  <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
-                </div>
-              </template>
-              {{ $t('leaderboard.description') }}
-            </v-tooltip>
-          </div>
-        </div>
+        <ThePageHeader
+          :title="$t('leaderboard.title')"
+          subtitle="World"
+          :tooltip-text="$t('leaderboard.description')"
+        />
       </div>
 
       <!-- <v-card tile class="leaderboard__filter filter">
@@ -131,6 +121,7 @@ import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
 import GamesUserCard from '@/components/GamesUserCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import ThePageHeader from '@/components/ThePageHeader'
 import langs from '../static/langs/data.json'
 
 export default {
@@ -148,7 +139,8 @@ export default {
   components: {
     GamesLeaderCard,
     GamesUserCard,
-    AntHiveIcon
+    AntHiveIcon,
+    ThePageHeader
   },
   name: 'Leaderboard',
   data: () => ({

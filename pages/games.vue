@@ -1,19 +1,10 @@
 <template>
   <section class="games page-wrap">
       <v-container class="games__container">
-        <div class="games__title-wrap">
-          <h1 class="games__title">{{ $t("games.title1") }}</h1>
-          <div class="games__info">
-            <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
-              <template v-slot:activator="{ on }">
-                <div v-on="on">
-                  <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
-                </div>
-              </template>
-              {{ $t("games.title2") }}
-            </v-tooltip>
-          </div>
-        </div>
+        <ThePageHeader
+          :title="$t('games.title1')"
+          :tooltip-text="$t('games.title2')"
+        />
         <GamesTable />
      </v-container>
   </section>
@@ -22,6 +13,7 @@
 <script>
 import GamesTable from '@/components/GamesTable'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import ThePageHeader from '@/components/ThePageHeader'
 
 export default {
   name: 'defaultHeader',
@@ -43,7 +35,8 @@ export default {
 
   components: {
     GamesTable,
-    AntHiveIcon
+    AntHiveIcon,
+    ThePageHeader
   }
 }
 </script>
