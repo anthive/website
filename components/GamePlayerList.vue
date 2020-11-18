@@ -2,15 +2,17 @@
   <div class="players">
     <div class="players__wrap">
       <div class="players__list">
-        <v-card
-          :key="index"
-          v-for="(player, index) in players"
-          tile
-          width="100%"
-          class="py-2 elevation-0"
-        >
-          <GamesUserChip :player="player" :number="index + 1" />
-        </v-card>
+        <transition-group name="flip-list">
+          <v-card
+            :key="player.id"
+            v-for="(player, index) in players"
+            tile
+            width="100%"
+            class="py-2 elevation-0"
+          >
+            <GamesUserChip :player="player" :number="index + 1" />
+          </v-card>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -46,7 +48,6 @@ export default {
   }
 }
 </script>
-
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .players {
@@ -69,6 +70,9 @@ export default {
   &__list {
     display: flex;
     flex-wrap: wrap;
+  }
+  .flip-list-move {
+    transition: transform 0.2s;
   }
 }
 </style>

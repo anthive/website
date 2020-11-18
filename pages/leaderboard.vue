@@ -171,7 +171,6 @@ export default {
   },
   async mounted() {
     this.players = await getBotsLeaderboard()
-    console.log(this.players)
   },
   computed: {
     getLangs() {
