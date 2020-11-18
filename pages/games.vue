@@ -1,26 +1,19 @@
 <template>
   <section class="games page-wrap">
       <v-container class="games__container">
-        <v-card
-          tile
-          class="games__card white text-xs-left"
-        >
-          <v-card-title>
-            <h1 class="headline">
-              <span class="primary--text font-weight-medium">{{ $t("games.title1") }}</span>
-              <span class="primary--text ml-2">{{ $t("games.title2") }}</span>
-            </h1>
-          </v-card-title>
-          <v-card-text>
-            <GamesTable /> 
-          </v-card-text>
-        </v-card>
+        <ThePageHeader
+          :title="$t('games.title1')"
+          :tooltip-text="$t('games.title2')"
+        />
+        <GamesTable />
      </v-container>
   </section>
 </template>
 
 <script>
 import GamesTable from '@/components/GamesTable'
+import AntHiveIcon from '@/components/AntHiveIcon'
+import ThePageHeader from '@/components/ThePageHeader'
 
 export default {
   name: 'defaultHeader',
@@ -41,7 +34,9 @@ export default {
   }),
 
   components: {
-    GamesTable
+    GamesTable,
+    AntHiveIcon,
+    ThePageHeader
   }
 }
 </script>
@@ -51,8 +46,17 @@ export default {
 
 .games {
   padding: 40px 0;
-  &__container {
-    padding: 0;
+
+  &__title-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  &__info {
+    position: absolute;
+    top: -5px;
+    right: -26px;
   }
 }
 

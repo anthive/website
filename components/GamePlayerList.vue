@@ -1,16 +1,18 @@
 <template>
   <div class="players">
     <div class="players__wrap">
-      <h4>{{ $t("game.players") }}</h4>
       <div class="players__list">
-        <v-card
-          :key="index"
-          v-for="(player, index) in players"
-          tile
-          class="pa-2 mx-3 elevation-0"
-        >
-          <GamesUserChip :player="player" :number="index + 1" />
-        </v-card>
+        <transition-group name="flip-list">
+          <v-card
+            :key="player.id"
+            v-for="(player, index) in players"
+            tile
+            width="100%"
+            class="py-2 elevation-0"
+          >
+            <GamesUserChip :player="player" :number="index + 1" />
+          </v-card>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -46,18 +48,15 @@ export default {
   }
 }
 </script>
-
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .players {
   height: 100%;
-  background-color: $color-white;
-  box-shadow: $box-shadow-default;
 
   &__wrap {
     display: flex;
     flex-direction: column;
-    padding: 20px 30px;
+    padding: 0 10px;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -71,7 +70,9 @@ export default {
   &__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+  }
+  .flip-list-move {
+    transition: transform 0.2s;
   }
 }
 </style>

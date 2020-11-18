@@ -68,13 +68,30 @@
               :key="pIndex"
               v-for="(player, pIndex) in game.bots.slice(0, 4)"
             >
-              <v-tooltip bottom color="accent" content-class="b-radius-0">
+              <v-tooltip bottom color="accent" content-class="tooltip b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
                     <UserIcon class="ml-1" :player="player" />
                   </div>
                 </template>
-                {{ player.name }}, {{ player.spawn }}, {{ player.stats }}
+                <div class="tooltip__title">
+                  <span><UserIcon class="mr-2" :player="player" /></span>
+                  <span>{{ player.name }}</span>
+                </div>
+                <p>
+                  <strong>{{ $t("game.spawn") }}</strong><br>
+                  X: {{ player.spawn.x }}<br>
+                  Y: {{ player.spawn.y }}
+                </p>
+                <p>
+                  <strong>{{ $t("game.statistics") }}</strong><br>
+                  {{ $t("game.ants") }}: {{ player.stats.ants }}<br>
+                  {{ $t("game.hiveSize") }}: {{ player.stats.hive }}<br>
+                  {{ $t("game.score") }}: {{ player.stats.score }}<br>
+                  {{ $t("game.art") }}: {{ player.stats.art }}<br>
+                  {{ $t("game.age") }}: {{ player.stats.age }}<br>
+                  {{ $t("game.errors") }}: {{ player.stats.errors }}
+                </p>
               </v-tooltip>
             </div>
           </div>
@@ -127,6 +144,13 @@ import { getGames } from '@/services/Game'
 
 export default {
   name: 'GamesTable',
+  props: {
+    gamesLimit: {
+      type: Number,
+      required: false,
+      default: 10
+    }
+  },
   components: {
     UserChip,
     UserIcon,
@@ -135,13 +159,16 @@ export default {
     AntHiveIcon
   },
   data: () => ({
-    searchParams: { page: 1, limit: 10 },
+    searchParams: {},
     totalPages: 0,
     selectedPage: 1,
     games: []
   }),
   async fetch() {
     await this.loadGames()
+  },
+  created() {
+    this.searchParams = { page: 1, limit: this.gamesLimit }
   },
   methods: {
     loadGames() {
@@ -184,7 +211,7 @@ export default {
     cursor: pointer;
   }
   &__item {
-    margin: 10px 0;
+    margin: 24px 0;
   }
   &__players-container {
     display: flex;
@@ -221,7 +248,7 @@ export default {
     display: none;
   }
   &__stat-value {
-    color: $color-red-300;
+    color: $color-violet-650;
   }
   &__stat-name {
     font-weight: 500;
@@ -235,6 +262,20 @@ export default {
   }
   &__players-list {
     width: 560px;
+  }
+}
+
+.tooltip {
+  p {
+    color: $color-white;
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 10px;
+    display: flex;
+    line-height: 38px;
+    margin-bottom: 10px;
   }
 }
 

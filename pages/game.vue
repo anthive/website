@@ -2,33 +2,24 @@
   <section class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
-        <v-row  class="mx-auto">
-          <v-col cols="12" md="7" class="player-zone__wrap">
+        <div class="mx-auto">
+        <ThePageHeader
+          :title="`${$t('game.game')} #${gameId}`"
+          :tooltip-text="$t('game.gameId')"
+        />
+        </div>
+        <v-row class="mx-auto">
+          <v-col cols="12" md="8" class="player-zone__wrap">
             <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
           </v-col>
-          <v-col cols="12" md="5" class="game__text-section">
+          <v-col cols="12" md="4" class="game__players-section">
             <div>
-              <h1>{{ $t("game.game") }}</h1>
-              <h4 class="my-5">{{ $t("game.players") }}</h4>
-              <v-avatar class="mx-1" v-for="(player, index) in players" :key="index">
-                <v-img width="40" :src="getAvatar(player.avatar)" />
-              </v-avatar>
-              <div class="mt-10">
-                <AntHiveBtn large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
-                  $t("header.sandbox")
-                }}</AntHiveBtn>
-                <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
-                  $t("header.buttonJoin")
-                }}</AntHiveBtn>
-            </div>
+              <GamePlayerList :players="players" />
             </div>
           </v-col>
         </v-row>
-        <v-row>
-          <div class="mt-12 mx-auto">
-            <GamePlayerList :players="players" />
-          </div>
-        </v-row>
+        <h3 class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
+        <GamesTable :games-limit="5" />
       </template>
 
       <div v-else class="game__game-not-found">
@@ -47,15 +38,16 @@
         </div>
         <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
       </div>
-      </v-container>
+    </v-container>
   </section>
 </template>
 
 <script>
-import { getGame } from '@/services/Game'
 import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
+import GamesTable from '@/components/GamesTable'
+import ThePageHeader from '@/components/ThePageHeader'
 var player = null
 export default {
   head() {
@@ -80,7 +72,9 @@ export default {
   components: {
     GameLogPanel,
     GamePlayerList,
-    GamePlayer
+    GamePlayer,
+    GamesTable,
+    ThePageHeader
   },
   mounted() {
     import('../static/js/anthive-5.0.js').then(() => {
@@ -93,13 +87,15 @@ export default {
         player = new AnthivePlayer('#player', dataUrl)
         // eslint-disable-next-line
         player.on(AnthivePlayer.event.READY, async () => {
-          //this.players = player.framer.playerList.sort(this.compare)
-          this.players = await this.getPlayers()
           this.gameLoaded = true
         })
         // eslint-disable-next-line
         player.on(AnthivePlayer.event.END, () => {
           this.isGameEnd = true
+        })
+        // eslint-disable-next-line
+        player.on(AnthivePlayer.event.TICK, data => {
+          this.players = data.bots
         })
       } else {
         this.isGameAvailable = false
@@ -108,15 +104,8 @@ export default {
     })
   },
   methods: {
-    handlerClickGetStarted() {
-      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'gamepage' })
-      window.location.href = this.profileURL
-    },
     getAvatar(id) {
       return `${process.env.API_URL}images/${id}/100/100`
-    },
-    getPlayers() {
-      return getGame(this.gameId).then(game => game.bots)
     },
     isGameFound(url) {
       const request = new XMLHttpRequest()
@@ -147,6 +136,7 @@ export default {
 }
 .player-zone__wrap {
   width: 100%;
+  padding: 10px 0 0;
 }
 </style>
 
@@ -155,13 +145,6 @@ export default {
 .game {
   height: 100%;
   overflow-x: hidden;
-
-  &__text-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
 
   &__game-not-found {
     width: 100%;
