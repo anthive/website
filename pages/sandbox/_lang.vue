@@ -194,7 +194,7 @@ export default {
     },
     onClickLogin() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
-      window.location.href = `${process.env.PROFILE_URL}create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
+      window.location.href = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
     },
     createFile() {
       const fileName = `bot.${this.valueCode.extention}`
@@ -208,7 +208,7 @@ export default {
     },
     async getGame() {
       return await new Promise(async (resolve, reject) => {
-        const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
+        const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
 
         axios
           .head(gameUrl)
@@ -236,7 +236,7 @@ export default {
       })
     },
     async sendCodeToSim(data) {
-      const url = `${process.env.SANDBOX_API_URL}${this.valueCode.extention}`
+      const url = `${process.env.SANDBOX_API_URL}/${this.valueCode.extention}`
       const simResp = await axios({
         method: 'post',
         url,
@@ -246,7 +246,7 @@ export default {
       return simResp.data
     },
     initGame() {
-      const gameUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.gameId}.zip`
+      const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
       player = new AnthivePlayer('#player', gameUrl)
     },
@@ -255,7 +255,7 @@ export default {
       this.simLogs = await this.getLogs(this.gameId, 'sim')
     },
     async getLogs(id, type) {
-      const logsUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${id}-${type}.txt`
+      const logsUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${id}-${type}.txt`
       const resp = await axios.get(logsUrl)
       return resp.data
     }

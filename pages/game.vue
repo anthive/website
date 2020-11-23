@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     getAvatar(id) {
-      return `${process.env.API_URL}images/${id}/100/100`
+      return `${process.env.API_URL}/images/${id}/100/100`
     },
     isGameFound(url) {
       const request = new XMLHttpRequest()

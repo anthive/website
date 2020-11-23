@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const IMAGE_HANDLER = process.env.API_URL + 'images'
+const IMAGE_HANDLER = process.env.API_URL + '/images'
 
 class ImageActions {
   static async saveImage(file) {

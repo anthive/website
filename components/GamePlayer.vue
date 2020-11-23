@@ -145,7 +145,7 @@ export default {
       return this.$route.query.id
     },
     getRematchURL() {
-      return `${process.env.PROFILE_URL}new-game/?rematch=${this.gameId}`
+      return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
     }
   },
   methods: {

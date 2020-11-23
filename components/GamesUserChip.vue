@@ -14,7 +14,7 @@
     <!-- <v-avatar tile class="chip__user-avatar" size="40">
       <v-img :src="getAvatar(player.avatar)" />
     </v-avatar> -->
-    <p class="mb-1"><strong>{{ player.name }}</strong></p>
+    <p class="mb-1"><strong>{{ player.displayName }}</strong></p>
     <div class="chip__statistics">
       <div class="mr-5">
         <p>{{ $t("game.ants") }}: <strong>{{ player.stats.ants }}</strong></p>
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     getAvatar(id) {
-      return `${process.env.API_URL}images/${id}/100/100`
+      return `${process.env.API_URL}/images/${id}/100/100`
     },
     langUrl(lang) {
       return '/skins/lang/' + lang + '.png'

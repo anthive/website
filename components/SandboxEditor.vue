@@ -120,7 +120,7 @@ export default {
       return resp.data
     },
     async getGameCode() {
-      const codeUrl = `${process.env.SANDBOX_STORAGE}${process.env.SIM_VERSION}/${this.$route.query.box}.${
+      const codeUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.$route.query.box}.${
         this.$route.params.lang
       }`
       const resp = await axios.get(codeUrl)
