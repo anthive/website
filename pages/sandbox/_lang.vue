@@ -223,10 +223,13 @@ export default {
             const interval = setInterval(async () => {
               passedTime += callInterval
               //if got 404, create calls by interval until we get 200 status and resolve,
-              axios.head(gameUrl).then(() => {
-                clearInterval(interval)
-                resolve()
-              })
+              axios
+                .head(gameUrl)
+                .then(() => {
+                  clearInterval(interval)
+                  resolve()
+                })
+                .catch(e => e)
               //or overcome the maximum interval, then reject
               if (passedTime >= maxTime) {
                 clearInterval(interval)
