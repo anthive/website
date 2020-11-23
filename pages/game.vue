@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     fetchGame() {
-      import('../static/js/anthive-5.0.js').then(() => {
+      import(`../static/js/anthive-${process.env.SIM_VERSION}.js`).then(() => {
         this.gameId = this.$route.query.id || ''
         const version = this.$route.query.v || ''
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
