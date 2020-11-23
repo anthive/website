@@ -76,34 +76,41 @@ export default {
     GamesTable,
     ThePageHeader
   },
+  watch: {
+    $route() {
+      this.fetchGame()
+    }
+  },
   mounted() {
-    import('../static/js/anthive-5.0.js').then(() => {
-      const base = 'https://storage.googleapis.com/anthive-prod-games/'
-      this.gameId = this.$route.query.id || ''
-      const version = this.$route.query.v || ''
-      const dataUrl = base + version + '/' + this.gameId + '.zip'
-      if (this.isGameFound(dataUrl)) {
-        // eslint-disable-next-line
-        player = new AnthivePlayer('#player', dataUrl)
-        // eslint-disable-next-line
-        player.on(AnthivePlayer.event.READY, async () => {
-          this.gameLoaded = true
-        })
-        // eslint-disable-next-line
-        player.on(AnthivePlayer.event.END, () => {
-          this.isGameEnd = true
-        })
-        // eslint-disable-next-line
-        player.on(AnthivePlayer.event.TICK, data => {
-          this.players = data.bots
-        })
-      } else {
-        this.isGameAvailable = false
-        this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
-      }
-    })
+    this.fetchGame()
   },
   methods: {
+    fetchGame() {
+      import('../static/js/anthive-5.0.js').then(() => {
+        this.gameId = this.$route.query.id || ''
+        const version = this.$route.query.v || ''
+        const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
+        if (this.isGameFound(dataUrl)) {
+          // eslint-disable-next-line
+          player = new AnthivePlayer('#player', dataUrl)
+          // eslint-disable-next-line
+          player.on(AnthivePlayer.event.READY, async () => {
+            this.gameLoaded = true
+          })
+          // eslint-disable-next-line
+          player.on(AnthivePlayer.event.END, () => {
+            this.isGameEnd = true
+          })
+          // eslint-disable-next-line
+          player.on(AnthivePlayer.event.TICK, data => {
+            this.players = data.bots
+          })
+        } else {
+          this.isGameAvailable = false
+          this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
+        }
+      })
+    },
     getAvatar(id) {
       return `${process.env.API_URL}/images/${id}/100/100`
     },
