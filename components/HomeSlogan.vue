@@ -33,12 +33,12 @@
 export default {
   name: 'HomeSlogan',
   data: () => ({
-    profileURL: process.env.PROFILE_URL
+    profileUrl: process.env.PROFILE_URL
   }),
   methods: {
     handlerClickGetStarted() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'homepage' })
-      window.location.href = this.profileURL
+      window.location.href = this.profileUrl
     }
   }
 }

@@ -165,6 +165,11 @@ export default {
     games: []
   }),
   async fetch() {
+    if (process.server) {
+      await this.loadGames()
+    }
+  },
+  async mounted() {
     await this.loadGames()
   },
   created() {

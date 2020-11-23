@@ -42,7 +42,7 @@
               <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :href="profileURL">
+          <v-list-item :href="profileUrl">
             <v-list-item-content>
               <v-list-item-title>{{
                 $t("header.buttonJoin")
@@ -103,7 +103,7 @@ export default {
     AntHiveIcon
   },
   data: () => ({
-    profileURL: process.env.PROFILE_URL
+    profileUrl: process.env.PROFILE_URL
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -117,7 +117,7 @@ export default {
   methods: {
     handlerClickGetStarted() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'header' })
-      window.location.href = this.profileURL
+      window.location.href = this.profileUrl
     }
   }
 }

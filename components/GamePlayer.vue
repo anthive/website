@@ -21,7 +21,7 @@
             color="#00BF70"
             dark
             block
-            :href="getRematchURL"
+            :href="getRematchUrl"
             >{{ $t('game.requestRematch') }}</v-btn
           >
           <v-btn
@@ -144,7 +144,7 @@ export default {
     gameId() {
       return this.$route.query.id
     },
-    getRematchURL() {
+    getRematchUrl() {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
     }
   },

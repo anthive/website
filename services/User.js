@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://anthive.io/'
-const apiURL = process.env.API_URL
+const baseUrl = 'https://anthive.io/'
+const apiUrl = process.env.API_URL
 
 class User {
   constructor() {
@@ -35,7 +35,7 @@ class User {
     if (this.Username === '' || this.Username === undefined) return
 
     const apiAxios = axios.create({
-      baseURL: apiURL,
+      baseUrl: apiUrl,
       timeout: 30000
     })
 
@@ -43,25 +43,25 @@ class User {
   }
 
   photoUrl(avatarId, size = 70) {
-    return `${apiURL}images/${avatarId}/${size}/${size}`
+    return `${apiUrl}images/${avatarId}/${size}/${size}`
   }
 
   langUrl(lang = this.Lang) {
-    return baseURL + 'skins/lang/' + lang + '.png'
+    return baseUrl + 'skins/lang/' + lang + '.png'
   }
 
   antUrl(big = false) {
     if (big) {
-      return baseURL + 'skins/client/' + this.Skin + '/antBig.png'
+      return baseUrl + 'skins/client/' + this.Skin + '/antBig.png'
     }
-    return baseURL + 'skins/client/' + this.Skin + '/ant.png'
+    return baseUrl + 'skins/client/' + this.Skin + '/ant.png'
   }
 
   hiveUrl(big = false) {
     if (big) {
-      return baseURL + 'skins/client/' + this.Skin + '/hiveBig.png'
+      return baseUrl + 'skins/client/' + this.Skin + '/hiveBig.png'
     }
-    return baseURL + 'skins/client/' + this.Skin + '/hive.png'
+    return baseUrl + 'skins/client/' + this.Skin + '/hive.png'
   }
 
   scoreString() {
