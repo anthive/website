@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 async function getGames(params) {
-  const gamesURL = `${process.env.API_URL}/games`
-  return axios.get(gamesURL, { params }).then(resp => resp.data)
+  const gamesUrl = `${process.env.API_URL}/games`
+  return axios.get(gamesUrl, { params }).then(resp => resp.data)
 }
 
 async function getGame(id) {
-  const gameURL = `${process.env.API_URL}/games/${id}`
-  return axios.get(gameURL).then(resp => resp.data)
+  const gameUrl = `${process.env.API_URL}/games/${id}`
+  return axios.get(gameUrl).then(resp => resp.data)
 }
 
 export { getGames, getGame }

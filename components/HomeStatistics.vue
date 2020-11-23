@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      profileURL: process.env.PROFILE_URL,
+      profileUrl: process.env.PROFILE_URL,
       delay: 1000,
       endVal: {
         Games: 32156,
@@ -69,7 +69,7 @@ export default {
   methods: {
     handlerClickGetStarted() {
       this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'homepage' })
-      window.location.href = this.profileURL
+      window.location.href = this.profileUrl
     }
   }
 }
