@@ -164,10 +164,14 @@ export default {
   &__locale-select--up-icon {
     position: absolute;
     right: 0;
-    top: 5px;
+    top: 6px;
+    pointer-events: none;
   }
   &__social {
-    margin-top: -3px;
+    display: flex;
+    * {
+      display: inherit;
+    }
   }
   &__social--icon {
     margin: 0 5px;
