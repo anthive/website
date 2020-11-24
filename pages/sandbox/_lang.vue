@@ -110,7 +110,8 @@ export default {
     listOfLoadingText: ['loadingText1', 'loadingText2', 'loadingText3', 'loadingText4', 'loadingText5'],
     loadingText: '',
     savedCode: '',
-    gameId: ''
+    gameId: '',
+    timerId: null
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -220,19 +221,19 @@ export default {
             const callInterval = 5000
             let passedTime = 0
 
-            const interval = setInterval(async () => {
+            this.timerId = setInterval(async () => {
               passedTime += callInterval
               //if got 404, create calls by interval until we get 200 status and resolve,
               axios
                 .head(gameUrl)
                 .then(() => {
-                  clearInterval(interval)
+                  clearInterval(this.timerId)
                   resolve()
                 })
                 .catch(e => e)
               //or overcome the maximum interval, then reject
               if (passedTime >= maxTime) {
-                clearInterval(interval)
+                clearInterval(this.timerId)
                 reject('Please try again later')
               }
             }, callInterval)
@@ -262,6 +263,11 @@ export default {
       const logsUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${id}-${type}.txt`
       const resp = await axios.get(logsUrl)
       return resp.data
+    }
+  },
+  destroyed() {
+    if (this.timerId) {
+      clearInterval(this.timerId)
     }
   }
 }
