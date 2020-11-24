@@ -39,8 +39,10 @@
                   class="action-button"
                   @click="onClickLogin"
                   color="accent"
-                  ><span v-if="getUser && getUser.userName">{{ $t("sandbox.loginToSave") }}</span><span v-else> {{ $t("sandbox.loginToSave") }}</span></AntHiveBtn
-                >
+                  >
+                    <span v-if="getUser && getUser.userName">{{ $t("sandbox.save") }}</span>
+                    <span v-else> {{ $t("sandbox.loginToSave") }}</span>
+                  </AntHiveBtn>
               </div>
               
               <div v-if="simLogs && botLogs">
