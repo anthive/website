@@ -169,7 +169,7 @@ export default {
   }
   &__social {
     display: flex;
-    * {
+    > * {
       display: inherit;
     }
   }
