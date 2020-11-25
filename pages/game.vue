@@ -106,6 +106,7 @@ export default {
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
             this.players = data.bots
+            this.players.sort(({ stats: a }, { stats: b }) => (b.score === a.score ? b.art - a.art : b.score - a.score))
           })
         } else {
           this.isGameAvailable = false

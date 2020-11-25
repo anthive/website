@@ -72,7 +72,7 @@ export default {
     flex-wrap: wrap;
   }
   .flip-list-move {
-    transition: transform 0.2s;
+    transition: transform 0.15s;
   }
 }
 </style>
