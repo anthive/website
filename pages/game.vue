@@ -48,7 +48,6 @@ import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
 import ThePageHeader from '@/components/ThePageHeader'
-var player = null
 export default {
   head() {
     return {
@@ -132,8 +131,8 @@ export default {
       return request.status !== 404
     },
     replay() {
-      player.control.frame = 0
-      player.control.play()
+      this.gamePlayer.control.frame = 0
+      this.gamePlayer.control.play()
       this.isGameEnd = false
     },
     compare(a, b) {
