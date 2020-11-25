@@ -67,7 +67,8 @@ export default {
     players: [],
     isGameEnd: false,
     gameLoaded: false,
-    gameId: ''
+    gameId: '',
+    gamePlayer: null
   }),
   components: {
     GameLogPanel,
@@ -78,6 +79,7 @@ export default {
   },
   watch: {
     $route() {
+      this.gamePlayerDestroy()
       this.fetchGame()
     }
   },
@@ -92,17 +94,17 @@ export default {
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
         if (this.isGameFound(dataUrl)) {
           // eslint-disable-next-line
-          player = new AnthivePlayer('#player', dataUrl)
+          this.gamePlayer = new AnthivePlayer('#player', dataUrl)
           // eslint-disable-next-line
-          player.on(AnthivePlayer.event.READY, async () => {
+          this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
             this.gameLoaded = true
           })
           // eslint-disable-next-line
-          player.on(AnthivePlayer.event.END, () => {
+          this.gamePlayer.on(AnthivePlayer.event.END, () => {
             this.isGameEnd = true
           })
           // eslint-disable-next-line
-          player.on(AnthivePlayer.event.TICK, data => {
+          this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
             this.players = data.bots
           })
         } else {
@@ -110,6 +112,14 @@ export default {
           this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
         }
       })
+    },
+    gamePlayerDestroy() {
+      if (this.gamePlayer) {
+        this.players = []
+        this.gamePlayer.removeAllListeners()
+        this.gamePlayer.container.innerHTML = ''
+        this.gamePlayer = null
+      }
     },
     getAvatar(id) {
       return `${process.env.API_URL}/images/${id}/100/100`
