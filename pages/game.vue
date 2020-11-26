@@ -48,7 +48,6 @@ import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
 import ThePageHeader from '@/components/ThePageHeader'
-var player = null
 export default {
   head() {
     return {
@@ -68,7 +67,8 @@ export default {
     isGameEnd: false,
     gameLoaded: false,
     gameId: '',
-    gamePlayer: null
+    gamePlayer: null,
+    timerId: null
   }),
   components: {
     GameLogPanel,
@@ -103,9 +103,11 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.END, () => {
             this.isGameEnd = true
           })
+          let players = []
+          this.timerId = setInterval(() => (this.players = players), 1000)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-            this.players = data.bots
+            players = data.bots || []
           })
         } else {
           this.isGameAvailable = false
@@ -120,6 +122,7 @@ export default {
         this.gamePlayer.container.innerHTML = ''
         this.gamePlayer = null
       }
+      if (this.timerId) clearInterval(this.timerId)
     },
     getAvatar(id) {
       return `${process.env.API_URL}/images/${id}/100/100`
@@ -131,8 +134,8 @@ export default {
       return request.status !== 404
     },
     replay() {
-      player.control.frame = 0
-      player.control.play()
+      this.gamePlayer.control.frame = 0
+      this.gamePlayer.control.play()
       this.isGameEnd = false
     },
     compare(a, b) {
@@ -143,6 +146,9 @@ export default {
     showActions() {
       this.showActionsState = !this.showActionsState
     }
+  },
+  destroyed() {
+    this.gamePlayerDestroy()
   }
 }
 </script>

@@ -72,7 +72,16 @@ export default {
     flex-wrap: wrap;
   }
   .flip-list-move {
-    transition: transform 0.2s;
+    transition: transform 0.5s;
+  }
+  .flip-list-enter-active,
+  .flip-list-leave-active {
+    transition: all 0.8s;
+  }
+  .flip-list-enter,
+  .flip-list-leave-to {
+    transform: translateX(100px);
+    opacity: 0;
   }
 }
 </style>

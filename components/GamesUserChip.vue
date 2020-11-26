@@ -22,7 +22,7 @@
         <p>{{ $t("game.score") }}: <strong>{{ player.stats.score }}</strong></p>
       </div>
       <div>
-        <p>{{ $t("game.art") }}: <strong>{{ player.stats.art }}</strong></p>
+        <p>{{ $t("game.rt") }}: <strong>{{ getArtInMs(player.stats.art) }}</strong></p>
         <p>{{ $t("game.age") }}: <strong>{{ player.stats.age }}</strong></p>
         <p>{{ $t("game.errors") }}: <strong>{{ player.stats.errors }}</strong></p>
       </div>
@@ -49,6 +49,9 @@ export default {
     },
     hiveUrl(skin) {
       return '/skins/client/' + skin + '/hive.png'
+    },
+    getArtInMs(art) {
+      return Math.round(art / 10) / 100
     }
   }
 }
