@@ -67,7 +67,8 @@ export default {
     isGameEnd: false,
     gameLoaded: false,
     gameId: '',
-    gamePlayer: null
+    gamePlayer: null,
+    timerId: null
   }),
   components: {
     GameLogPanel,
@@ -102,10 +103,11 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.END, () => {
             this.isGameEnd = true
           })
+          let players = []
+          this.timerId = setInterval(() => (this.players = players), 1000)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-            this.players = data.bots
-            this.players.sort(({ stats: a }, { stats: b }) => (b.score === a.score ? a.art - b.art : b.score - a.score))
+            players = data.bots || []
           })
         } else {
           this.isGameAvailable = false
@@ -120,6 +122,7 @@ export default {
         this.gamePlayer.container.innerHTML = ''
         this.gamePlayer = null
       }
+      if (this.timerId) clearInterval(this.timerId)
     },
     getAvatar(id) {
       return `${process.env.API_URL}/images/${id}/100/100`
@@ -143,6 +146,9 @@ export default {
     showActions() {
       this.showActionsState = !this.showActionsState
     }
+  },
+  destroyed() {
+    this.gamePlayerDestroy()
   }
 }
 </script>

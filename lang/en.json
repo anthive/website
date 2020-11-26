@@ -90,6 +90,7 @@
     "age": "Age",
     "score": "Score",
     "art": "ART",
+    "rt": "Response time(ms)",
     "ants": "Ants",
     "hiveSize": "Hive size",
     "players": "Players",
