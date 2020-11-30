@@ -121,7 +121,6 @@ export default {
       return this.valueCode.value !== this.savedCode
     },
     getHelpElement() {
-      const text = this.$t('sandbox.descriptionHelp')
       const rulesElement = `
         <a
           class="accent--text"
@@ -130,7 +129,7 @@ export default {
         >${this.$t('header.rules')}</a>
       `
       const discordElement = `<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>`
-      return text.replace('$rules$', rulesElement).replace('$discord$', discordElement)
+      return this.$t('sandbox.descriptionHelp', { rules: rulesElement, discord: discordElement })
     }
   },
   async mounted() {
