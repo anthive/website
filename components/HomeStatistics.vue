@@ -2,11 +2,7 @@
   <section class="statistics">
     <div
       class="statistics__row d-flex align-center"
-      :class="
-        $vuetify.breakpoint.xsOnly
-          ? 'justify-space-evenly'
-          : 'justify-space-around'
-      "
+      :class="$vuetify.breakpoint.xsOnly ? 'justify-space-evenly' : 'justify-space-around'"
     >
       <v-col md="4" class="statistics__counter">
         <div class="statistics__counter-name">{{ $t("home.ants") }}</div>
@@ -30,12 +26,12 @@
       </v-col>
     </div>
     <div class="statistics__actions">
-      <AntHiveBtn large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
-        $t("header.sandbox")
-      }}</AntHiveBtn>
-      <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
-        $t("header.buttonJoin")
-      }}</AntHiveBtn>
+      <AntHiveButton large tile class="mr-4" color="action" :to="localePath('sandbox')">
+        {{ $t("header.sandbox") }}
+      </AntHiveButton>
+      <AntHiveButton large tile color="accent" @click="handlerClickGetStarted">
+        {{ $t("header.buttonJoin") }}
+      </AntHiveButton>
     </div>
     <div class="bg-ornament" />
   </section>

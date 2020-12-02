@@ -14,8 +14,9 @@
           @change="onChangeTab(lang)"
           v-for="(lang, key) in langs"
           :key="key"
-          >{{ lang.name }}</v-tab
         >
+          {{ lang.name }}
+        </v-tab>
       </v-tabs>
       <v-tabs-items class="editor-content" v-model="tab">
         <v-tab-item
@@ -32,9 +33,9 @@
           </v-card>
         </v-tab-item>
       </v-tabs-items>
-      <h3 class="mt-3 mb-10" v-if="currentLangTab.sample"
-        >{{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a></h3
-      >
+      <h3 class="mt-3 mb-10" v-if="currentLangTab.sample">
+        {{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a>
+      </h3>
     </v-card>
   </div>
 </template>

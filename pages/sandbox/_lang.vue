@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="sandbox__actions">
-                <AntHiveBtn
+                <AntHiveButton
                   :loading="loading"
                   :disabled="!isCodeChanged"
                   fill
@@ -29,9 +29,10 @@
                   @click="onClickRun"
                   :light="!isCodeChanged"
                   color="green"
-                  >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
                 >
-                <AntHiveBtn
+                  {{ $t("sandbox.runSandbox") }}
+                </AntHiveButton>
+                <AntHiveButton
                   fill
                   tile
                   light
@@ -42,7 +43,7 @@
                   >
                     <span v-if="getUser && getUser.userName">{{ $t("sandbox.save") }}</span>
                     <span v-else> {{ $t("sandbox.loginToSave") }}</span>
-                  </AntHiveBtn>
+                  </AntHiveButton>
               </div>
               
               <div v-if="simLogs && botLogs">
