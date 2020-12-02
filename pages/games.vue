@@ -1,7 +1,7 @@
 <template>
   <section class="games page-wrap">
       <v-container class="games__container">
-        <ThePageHeader
+        <AntHivePageHeader
           :title="$t('games.title1')"
           :tooltip-text="$t('games.title2')"
         />
@@ -13,7 +13,7 @@
 <script>
 import GamesTable from '@/components/GamesTable'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import ThePageHeader from '@/components/ThePageHeader'
+import AntHivePageHeader from '@/components/AntHivePageHeader'
 
 export default {
   name: 'defaultHeader',
@@ -36,7 +36,7 @@ export default {
   components: {
     GamesTable,
     AntHiveIcon,
-    ThePageHeader
+    AntHivePageHeader
   }
 }
 </script>
