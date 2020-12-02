@@ -135,7 +135,6 @@
 </template>
 
 <script>
-import UserCard from '@/components/GamesUserCard'
 import UserChip from '@/components/GamesUserChip'
 import AuthorChip from '@/components/GamesAuthorChip'
 import UserIcon from '@/components/GamesUserIcon'
@@ -155,7 +154,6 @@ export default {
     UserChip,
     UserIcon,
     AuthorChip,
-    UserCard,
     AntHiveIcon
   },
   data: () => ({
