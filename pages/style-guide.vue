@@ -189,6 +189,31 @@ import UserBotChip from '@/components/UserBotChip'
 // import GamesUserCard from '@/components/GamesUserCard'
 export default {
   layout: 'blank',
+  components: {
+    AntHiveBtn,
+    AntHiveIcon,
+    // DocsSidebar
+    GameLogPanel,
+    // GamePlayer
+    GamePlayerList,
+    GamesAuthorChip,
+    GamesLeaderCard,
+    // GamesTable,
+    // GamesUserCard
+    GamesUserIcon,
+    GamesUserChip,
+    // HomeForWhom
+    // HomeSlogan,
+    // HomeStatistics,
+    // SandboxEditor,
+    TheFooter,
+    TheHeader,
+    ThePageHeader,
+    UserAchivementChip,
+    UserBotChip
+    // UserChip,
+    // UserInfoFull
+  },
   data: () => ({
     players: [
       {
@@ -220,36 +245,7 @@ export default {
         }
       }
     ]
-  }),
-  components: {
-    AntHiveBtn,
-    AntHiveIcon,
-    // DocsSidebar
-    GameLogPanel,
-    // GamePlayer
-    GamePlayerList,
-    GamesAuthorChip,
-    GamesLeaderCard,
-    // GamesTable,
-    // GamesUserCard
-    GamesUserIcon,
-    GamesUserChip,
-    // HomeForWhom
-    // HomeSlogan,
-    // HomeStatistics,
-    // SandboxEditor,
-    TheFooter,
-    TheHeader,
-    ThePageHeader,
-    UserAchivementChip,
-    UserBotChip
-    // UserChip,
-    // UserInfoFull
-  },
-  created() {
-    // console.log(this.$options.components['AntHiveIcon'])
-  },
-  methods: {}
+  })
 }
 </script>
 
