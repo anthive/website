@@ -1,201 +1,209 @@
 <template>
-  <section class="game page-wrap">
+  <section class="page-wrap">
     <v-container>
-      <template v-if="isGameAvailable">
-        <div class="mx-auto">
-        <AntHivePageHeader
-          :title="`${$t('game.game')} #${gameId}`"
-          :tooltip-text="$t('game.gameId')"
-        />
+      <AntHivePageHeader
+        title="Style guide"
+        subtitle="Components"
+      />
+      <div class="component">
+        <h4>AntHiveButton</h4>
+        <p v-if="$options.components['AntHiveButton'].props">Props: {{ $options.components['AntHiveButton'].props }}</p>
+        <div>
+          <AntHiveButton>Dark</AntHiveButton>
+          <AntHiveButton light>Light</AntHiveButton>
+          <AntHiveButton color="red">Colored</AntHiveButton>
+          <AntHiveButton tile>Tile</AntHiveButton>
         </div>
-        <v-row class="mx-auto">
-          <v-col cols="12" md="8" class="player-zone__wrap">
-            <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
-          </v-col>
-          <v-col cols="12" md="4" class="game__players-section">
-            <div>
-              <GamePlayerList :players="players" />
-            </div>
-          </v-col>
-        </v-row>
-        <h3 class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
-        <GamesTable :games-limit="5" />
-      </template>
-
-      <div v-else class="game__game-not-found">
-        <h2 class="mb-10">{{ $t('game.cantFindGame') }} #{{ gameId }}</h2>
-        <p>{{ $t('game.checkOut') }}</p>
-        <div class="game_games-links">
-          <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
-            <img class="game__game-image" src="/img/game1.png" alt="game">
-          </a>
-          <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
-            <img class="game__game-image" src="/img/game2.png" alt="game">
-          </a>
-          <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
-            <img class="game__game-image" src="/img/game3.png" alt="game">
-          </a>
-        </div>
-        <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
       </div>
+
+      <div class="component">
+        <h4>AntHiveIcon</h4>
+        <p v-if="$options.components['AntHiveIcon'].props">Props: {{ $options.components['AntHiveIcon'].props }}</p>
+        <div>
+          <AntHiveIcon small>twitter</AntHiveIcon>
+          <AntHiveIcon medium>twitter</AntHiveIcon>
+          <AntHiveIcon big>twitter</AntHiveIcon>
+          <AntHiveIcon color="green">twitter</AntHiveIcon>
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHiveBotSmall</h4>
+        <p v-if="$options.components['AntHiveBotSmall'].props">Props: {{ $options.components['AntHiveBotSmall'].props }}</p>
+        <div>
+          <AntHiveBotSmall
+            v-for="(player, index) in players"
+            :key="player.displayName + index"
+            :player="player"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHiveBotHorizontal</h4>
+        <p v-if="$options.components['AntHiveBotHorizontal'].props">Props: {{ $options.components['AntHiveBotHorizontal'].props }}</p>
+        <div class="d-flex">
+          <AntHiveBotHorizontal
+            class="mr-4"
+            v-for="(player, index) in players"
+            :key="player.displayName + index"
+            :player="player"
+            :number="index + 1"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHiveBotVertical</h4>
+        <p v-if="$options.components['AntHiveBotVertical'].props">Props: {{ $options.components['AntHiveBotVertical'].props }}</p>
+        <div class="d-flex">
+          <AntHiveBotVertical
+            class="mr-4"
+            v-for="(player, index) in players"
+            :key="player.displayName + index"
+            :lang="player.lang"
+            :name="player.displayName"
+            :avatar="`https://api.anthive.io/images/${player.avatar}/200/200`"
+            games="1234514"
+            wins="2331"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHiveAuthor</h4>
+        <p v-if="$options.components['AntHiveAuthor'].props">Props: {{ $options.components['AntHiveAuthor'].props }}</p>
+        <div>
+          <AntHiveAuthor author="Player" :date="Date.now()" />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>GamesLeaderCard</h4>
+        <p v-if="$options.components['GamesLeaderCard'].props">Props: {{ $options.components['GamesLeaderCard'].props }}</p>
+        <div>
+          <GamesLeaderCard
+            :key="player.displayName + index"
+            v-for="(player, index) in players"
+            :place="index + 1"
+            :leader="player"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHivePageHeader</h4>
+        <p v-if="$options.components['AntHivePageHeader'].props">Props: {{ $options.components['AntHivePageHeader'].props }}</p>
+        <div>
+          <AntHivePageHeader title="Title" />
+          <br><br>
+          <AntHivePageHeader
+            title="With tooltip and subtitle"
+            tooltip-text="Tooltip text"
+            subtitle="Subtitle text"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>AntHiveAchivement</h4>
+        <p v-if="$options.components['AntHiveAchivement'].props">Props: {{ $options.components['AntHiveAchivement'].props }}</p>
+        <div>
+          <AntHiveAchivement
+              v-for="(chip, index) in 3"
+              :key="index + 'achivement'"
+              :title="`Best bot 202${index}`"
+              description="Javascript beginner"
+            />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>GameLogPanel</h4>
+        <p v-if="$options.components['GameLogPanel'].props">Props: {{ $options.components['GameLogPanel'].props }}</p>
+        <div>
+          <GameLogPanel />
+        </div>
+      </div> 
+
+      <!-- <div class="component">
+        <h4>GamesTable</h4>
+        <p v-if="$options.components['GamesTable'].props">Props: {{ $options.components['GamesTable'].props }}</p>
+        <div class="d-flex">
+          <GamesTable :games-limit="5" />
+        </div>
+      </div> -->
     </v-container>
   </section>
 </template>
 
 <script>
+import AntHiveButton from '@/components/AntHiveButton'
+import AntHiveIcon from '@/components/AntHiveIcon'
 import GameLogPanel from '@/components/GameLogPanel'
-import GamePlayerList from '@/components/GamePlayerList'
-import GamePlayer from '@/components/GamePlayer'
-import GamesTable from '@/components/GamesTable'
+import AntHiveAuthor from '@/components/AntHiveAuthor'
+import GamesLeaderCard from '@/components/GamesLeaderCard'
+// import GamesTable from '@/components/GamesTable'
+import AntHiveBotSmall from '@/components/AntHiveBotSmall'
+import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
+import AntHiveAchivement from '@/components/AntHiveAchivement'
+import AntHiveBotVertical from '@/components/AntHiveBotVertical'
+
 export default {
-  head() {
-    return {
-      title: this.$t('game.meta.title'),
-      meta: [
-        {
-          name: 'description',
-          content: this.$t('game.meta.description')
-        }
-      ]
-    }
+  components: {
+    AntHiveButton,
+    AntHiveIcon,
+    GameLogPanel,
+    AntHiveAuthor,
+    GamesLeaderCard,
+    // GamesTable,
+    AntHiveBotSmall,
+    AntHiveBotHorizontal,
+    AntHivePageHeader,
+    AntHiveAchivement,
+    AntHiveBotVertical
   },
   data: () => ({
-    isGameAvailable: true,
-    theme: 1,
-    players: [],
-    isGameEnd: false,
-    gameLoaded: false,
-    gameId: '',
-    gamePlayer: null,
-    timerId: null
-  }),
-  components: {
-    GameLogPanel,
-    GamePlayerList,
-    GamePlayer,
-    GamesTable,
-    AntHivePageHeader
-  },
-  watch: {
-    $route() {
-      this.gamePlayerDestroy()
-      this.fetchGame()
-    }
-  },
-  mounted() {
-    this.fetchGame()
-  },
-  methods: {
-    fetchGame() {
-      import(`../static/js/anthive-${process.env.SIM_VERSION}.js`).then(() => {
-        this.gameId = this.$route.query.id || ''
-        const version = this.$route.query.v || ''
-        const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
-        if (this.isGameFound(dataUrl)) {
-          // eslint-disable-next-line
-          this.gamePlayer = new AnthivePlayer('#player', dataUrl)
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
-            this.gameLoaded = true
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.END, () => {
-            this.isGameEnd = true
-          })
-          let players = []
-          this.timerId = setInterval(() => (this.players = players), 1000)
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-            players = data.bots || []
-          })
-        } else {
-          this.isGameAvailable = false
-          this.$ga.event({ eventCategory: 'game', eventAction: 'notfound', eventValue: this.gameId })
+    players: [
+      {
+        id: 192,
+        displayName: 'Player1',
+        lang: 'go',
+        avatar: 'ant-195',
+        stats: {
+          ants: 1,
+          age: 1000,
+          art: 116,
+          hive: 1,
+          score: 98,
+          errors: 902
         }
-      })
-    },
-    gamePlayerDestroy() {
-      if (this.gamePlayer) {
-        this.players = []
-        this.gamePlayer.removeAllListeners()
-        this.gamePlayer.container.innerHTML = ''
-        this.gamePlayer = null
+      },
+      {
+        id: 193,
+        displayName: 'Player2',
+        lang: 'js',
+        avatar: 'ant-190',
+        stats: {
+          ants: 21,
+          age: 1000,
+          art: 316,
+          hive: 2,
+          score: 198,
+          errors: 102
+        }
       }
-      if (this.timerId) clearInterval(this.timerId)
-    },
-    getAvatar(id) {
-      return `${process.env.API_URL}/images/${id}/100/100`
-    },
-    isGameFound(url) {
-      const request = new XMLHttpRequest()
-      request.open('HEAD', url, false)
-      request.send()
-      return request.status !== 404
-    },
-    replay() {
-      this.gamePlayer.control.frame = 0
-      this.gamePlayer.control.play()
-      this.isGameEnd = false
-    },
-    compare(a, b) {
-      if (a.Wealth < b.Wealth) return 1
-      if (a.Wealth > b.Wealth) return -1
-      return 0
-    },
-    showActions() {
-      this.showActionsState = !this.showActionsState
-    }
-  },
-  destroyed() {
-    this.gamePlayerDestroy()
-  }
+    ]
+  })
 }
 </script>
 
-<style>
-.v-content__wrap {
-  background: #fff;
-}
-.player-zone__wrap {
-  width: 100%;
-  padding: 10px 0 0;
-}
-</style>
-
 <style lang="scss" scoped>
-@import '@/assets/style/global.scss';
-.game {
-  height: 100%;
-  overflow-x: hidden;
-
-  &__game-not-found {
-    width: 100%;
-    text-align: center;
-    color: $color-white;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &__game-image {
-    margin: 0 5px;
-    border: 2px solid $color-red-500;
-    transform: scale(0.98);
-    transition: 0.2s;
-
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
-  &__link {
-    display: inline-block;
-    color: $color-white;
-    text-decoration: underline;
-    margin-top: 10px;
-    &:hover {
-      text-decoration: none !important;
-    }
-  }
+.component {
+  margin-top: 100px;
+}
+.relative {
+  position: relative;
 }
 </style>

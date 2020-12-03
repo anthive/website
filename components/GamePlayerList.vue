@@ -10,7 +10,7 @@
             width="100%"
             class="py-2 elevation-0"
           >
-            <GamesUserChip :player="player" :number="index + 1" />
+            <AntHiveBotHorizontal :player="player" :number="index + 1" />
           </v-card>
         </transition-group>
       </div>
@@ -20,16 +20,12 @@
 
 
 <script>
-import GamesUserChip from '@/components/GamesUserChip'
-import GamesUserIcon from '@/components/GamesUserIcon'
-import AntHiveIcon from '@/components/AntHiveIcon'
+import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 
 export default {
   name: 'GamePlayersList',
   components: {
-    GamesUserChip,
-    GamesUserIcon,
-    AntHiveIcon
+    AntHiveBotHorizontal
   },
   data: () => ({
     selectedPlayer: {}

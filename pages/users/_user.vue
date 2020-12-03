@@ -88,7 +88,7 @@
           <h3>{{ $t("userInfo.achivements") }}</h3>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
           <div class="user__achivements">
-            <UserAchivementChip
+            <AntHiveAchivement
               v-for="(chip, index) in 10"
               :key="index + 'achivement'"
               title="Best bot 2020"
@@ -105,7 +105,7 @@
               v-for="(bot, index) in getUserBots"
               :key="index + 'bot'"
             >
-              <UserBotChip
+              <AntHiveBotVertical
                 :lang="bot.lang"
                 :name="bot.displayName"
                 :avatar="getAvatar(bot.avatar)"
@@ -123,8 +123,8 @@
 <script>
 import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import UserAchivementChip from '@/components/UserAchivementChip'
-import UserBotChip from '@/components/UserBotChip'
+import AntHiveAchivement from '@/components/AntHiveAchivement'
+import AntHiveBotVertical from '@/components/AntHiveBotVertical'
 
 export default {
   name: 'user',
@@ -141,8 +141,8 @@ export default {
   },
   components: {
     AntHiveIcon,
-    UserAchivementChip,
-    UserBotChip
+    AntHiveAchivement,
+    AntHiveBotVertical
   },
   data: () => ({
     status: null,

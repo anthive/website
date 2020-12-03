@@ -119,7 +119,6 @@
 <script>
 import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
-import GamesUserCard from '@/components/GamesUserCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import langs from '../static/langs/data.json'
@@ -138,7 +137,6 @@ export default {
   },
   components: {
     GamesLeaderCard,
-    GamesUserCard,
     AntHiveIcon,
     AntHivePageHeader
   },

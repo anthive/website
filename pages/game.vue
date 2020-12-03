@@ -3,10 +3,10 @@
     <v-container>
       <template v-if="isGameAvailable">
         <div class="mx-auto">
-        <AntHivePageHeader
-          :title="`${$t('game.game')} #${gameId}`"
-          :tooltip-text="$t('game.gameId')"
-        />
+          <AntHivePageHeader
+            :title="`${$t('game.game')} #${gameId}`"
+            :tooltip-text="$t('game.gameId')"
+          />
         </div>
         <v-row class="mx-auto">
           <v-col cols="12" md="8" class="player-zone__wrap">

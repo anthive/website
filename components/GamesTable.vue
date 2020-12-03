@@ -22,7 +22,7 @@
           <div
             class="col-12 col-md-2 justify-center justify-md-start d-flex align-center"
           >
-            <AuthorChip
+            <AntHiveAuthor
               class="ml-md-n13 mr-5"
               :author="game.author"
               :date="game.finished"
@@ -136,10 +136,9 @@
 </template>
 
 <script>
-import UserCard from '@/components/GamesUserCard'
-import UserChip from '@/components/GamesUserChip'
-import AuthorChip from '@/components/GamesAuthorChip'
-import UserIcon from '@/components/GamesUserIcon'
+import UserChip from '@/components/AntHiveBotHorizontal'
+import AntHiveAuthor from '@/components/AntHiveAuthor'
+import UserIcon from '@/components/AntHiveBotSmall'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import { getGames } from '@/services/Game'
 
@@ -155,8 +154,7 @@ export default {
   components: {
     UserChip,
     UserIcon,
-    AuthorChip,
-    UserCard,
+    AntHiveAuthor,
     AntHiveIcon
   },
   data: () => ({
