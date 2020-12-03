@@ -36,18 +36,19 @@
                   <v-avatar tile size="65" class="leader-card__avatar">
                     <v-img :src="getAvatar(leader.avatar)" />
                   </v-avatar>
-                  <span class="leader-card__name"
-                    >{{ leader.displayName }}
-                    <span class="leader-card__version">v.{{ leader.v }}</span
-                    ><v-avatar tile size="20" class="ml-2"
-                      ><v-img :src="getLangImg(leader.lang)" /></v-avatar
-                  ></span>
+                  <span class="leader-card__name">
+                    {{ leader.displayName }}
+                    <span class="leader-card__version">v.{{ leader.v }}</span>
+                    <v-avatar tile size="20" class="ml-2">
+                      <v-img :src="getLangImg(leader.lang)" />
+                    </v-avatar>
+                  </span>
                 </div>
               </div>
             </v-col>
-            <v-col cols="3" sm="3" class="leader-card__score"
-              ><div>{{ leader.mmr }}</div></v-col
-            >
+            <v-col cols="3" sm="3" class="leader-card__score">
+              <div>{{ leader.mmr }}</div>
+            </v-col>
           </v-row>
         </v-card>
       </v-col>

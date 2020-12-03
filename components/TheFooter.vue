@@ -5,7 +5,6 @@
     tag="footer"
     absolute
   >
-
     <!-- Copyright -->
     <div col="12" md="3" class="footer__copyright f-montserrat">
       <span>AntHive.IO &copy; {{ new Date().getFullYear() }}</span>
@@ -17,9 +16,7 @@
         <nuxt-link class="accent--text ml-1" to="/tos">
           {{ $t("footer.termsofService") }}
         </nuxt-link>
-
         {{ $t("footer.and") }}
-
         <nuxt-link class="accent--text" to="/pp">
           {{ $t("footer.privacyPolicy") }}
         </nuxt-link>
@@ -33,8 +30,9 @@
         target="_blank"
         rel="noreferrer"
         class="accent--text ml-1"
-        >{{ $t("footer.report") }}</a
       >
+        {{ $t("footer.report") }}
+      </a>
     </div>
 
     <!-- Social networks icons -->
@@ -94,7 +92,7 @@
         hide-details
         :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"
-      ></v-select>
+      />
       <AntHiveIcon color="white" class="footer__locale-select--earth-icon">earth</AntHiveIcon>
       <AntHiveIcon color="white" class="footer__locale-select--up-icon">chevron-up</AntHiveIcon>
     </div>

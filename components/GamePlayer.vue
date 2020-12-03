@@ -9,7 +9,7 @@
       @mouseover="showActionsState = true"
       @mouseleave="showActionsState = false"
       ref="playerWrap"
-    ></div>
+    />
     <div id="player">
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
@@ -49,8 +49,9 @@
                     :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                   >
                     <AntHiveIcon color="grey">linkedin</AntHiveIcon>
-                  </v-btn> </template
-                ><span>{{ $t('game.shareOn') }} Linkedin</span>
+                  </v-btn>
+                </template>
+                <span>{{ $t('game.shareOn') }} Linkedin</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -65,8 +66,9 @@
                     :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
                   >
                     <AntHiveIcon color="grey">facebook</AntHiveIcon>
-                  </v-btn> </template
-                ><span>{{ $t('game.shareOn') }} Facebook</span>
+                  </v-btn>
+                </template>
+                <span>{{ $t('game.shareOn') }} Facebook</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -81,8 +83,9 @@
                     :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                   >
                     <AntHiveIcon color="grey">twitter</AntHiveIcon>
-                  </v-btn> </template
-                ><span>{{ $t('game.shareOn') }} Twitter</span>
+                  </v-btn>
+                </template>
+                <span>{{ $t('game.shareOn') }} Twitter</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -97,8 +100,9 @@
                     :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                   >
                     <AntHiveIcon color="grey">email</AntHiveIcon>
-                  </v-btn> </template
-                ><span>{{ $t('game.sendBy') }} Email</span>
+                  </v-btn>
+                </template>
+                <span>{{ $t('game.sendBy') }} Email</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -111,8 +115,9 @@
                     @click="copyToClipboard()"
                   >
                     <AntHiveIcon color="grey">file-document-box-multiple</AntHiveIcon>
-                  </v-btn> </template
-                ><span>{{ $t('game.copyUrl') }}</span>
+                  </v-btn>
+                </template>
+                <span>{{ $t('game.copyUrl') }}</span>
               </v-tooltip>
             </div>
           </div>

@@ -1,37 +1,37 @@
 <template>
   <div class="log-panel__wrap mt-3">
     <div class="log-panel__tabs py-2 accent elevation-6" dark>
-      <AntHiveBtn
+      <AntHiveButton
         tile
         :class="{ 'v-btn--active': currentLogTab == 'request' }"
         @click="currentLogTab = 'request'"
         class="mx-2" primary fill
-        >Requests</AntHiveBtn
+        >Requests</AntHiveButton
       >
-      <AntHiveBtn
+      <AntHiveButton
         tile
         :class="{ 'v-btn--active': currentLogTab == 'response' }"
         @click="currentLogTab = 'response'"
         class="mx-2"
         primary fill
-        >Response</AntHiveBtn
+        >Response</AntHiveButton
       >
-      <AntHiveBtn
+      <AntHiveButton
         tile
         :class="{ 'v-btn--active': currentLogTab == 'logs' }"
         @click="currentLogTab = 'logs'"
         class="mx-2" primary fill
-        >Logs</AntHiveBtn
+        >Logs</AntHiveButton
       >
     </div>
     <div>
       <v-card class="log-panel__tab-block" tile>
         <v-card-text>
-          <pre class="log-panel__text"
-            >{{ panelInfo[currentLogTab] }} {{ currentLogTab }}</pre
-          >
-        </v-card-text></v-card
-      >
+          <pre class="log-panel__text">
+            {{ panelInfo[currentLogTab] }} {{ currentLogTab }}
+          </pre>
+        </v-card-text>
+      </v-card>
     </div>
   </div>
 </template>

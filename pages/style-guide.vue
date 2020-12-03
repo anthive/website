@@ -10,7 +10,7 @@
         </div>
         <v-row class="mx-auto">
           <v-col cols="12" md="8" class="player-zone__wrap">
-            <GamePlayer :is-game-end="isGameEnd"  @replay="replay" />
+            <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
           </v-col>
           <v-col cols="12" md="4" class="game__players-section">
             <div>

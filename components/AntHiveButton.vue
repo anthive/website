@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'AntHiveBtn',
+  name: 'AntHiveButton',
   props: {
     light: { type: Boolean, default: false }
   }

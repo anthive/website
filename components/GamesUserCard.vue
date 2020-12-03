@@ -14,9 +14,9 @@
       </div>
       <!-- Username container -->
       <div class="user-card__user_info">
-        <span class="primary--text f-text-large d-block text-center">{{
-          player.Username
-        }}</span>
+        <span class="primary--text f-text-large d-block text-center">
+          {{ player.Username }}
+        </span>
       </div>
       <!-- Bot settings -->
       <div class="user-card__bot-info">
@@ -33,37 +33,32 @@
       <span
         v-if="player.Stats.Ants"
         class="f-text-large text-center d-block primary--text"
-        >{{ $t("userInfo.botInfo") }}</span
       >
+        {{ $t("userInfo.botInfo") }}
+      </span>
 
       <!-- Games stats -->
       <div v-if="player.Stats.Ants" class="user-card__user-stats">
         <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-            player.Stats.Ants
-          }}</span>
+          <span class="user-card__user-stat-value">
+            {{ player.Stats.Ants }}
+          </span>
           <span class="user-card__user-stat-key">{{ $t("userInfo.ants") }}</span>
         </div>
         <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value"
-            >Y{{ player.Y }}, X{{ player.X }}</span
-          >
+          <span class="user-card__user-stat-value">Y{{ player.Y }}, X{{ player.X }}
+          </span>
           <span class="user-card__user-stat-key">{{ $t("userInfo.span") }}</span>
         </div>
         <div class="user-card__user-stat">
           <span class="user-card__user-stat-value">{{ player.Stats.Age }}</span>
           <span class="user-card__user-stat-key">{{ $t("userInfo.ticks") }}</span>
         </div>
-        <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-            player.Stats.Hive
-          }}</span>
+        <div>
           <span class="user-card__user-stat-key">{{ $t("userInfo.hiveSize") }}</span>
         </div>
         <div class="user-card__user-stat">
-          <span class="user-card__user-stat-value">{{
-            player.Stats.Errors
-          }}</span>
+          <span class="user-card__user-stat-value">{{ player.Stats.Errors }}</span>
           <span class="user-card__user-stat-key">{{ $t("userInfo.errors") }}</span>
         </div>
         <div class="user-card__user-stat">
@@ -73,9 +68,14 @@
       </div>
       <!-- Actions -->
       <div class="user-card__actions">
-        <AntHiveBtn tile :to="localePath({ name: 'user', query: {username: us.Username} })" class="mx-auto my-2" color="accent">{{
-          $t("userInfo.profile")
-        }}</AntHiveBtn>
+        <AntHiveButton
+          tile
+          :to="localePath({ name: 'user', query: {username: us.Username} })"
+          class="mx-auto my-2"
+          color="accent"
+        >
+          {{ $t("userInfo.profile") }}
+        </AntHiveButton>
       </div>
     </div>
   </v-card>

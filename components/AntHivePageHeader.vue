@@ -19,7 +19,7 @@
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'ThePageHeader',
+  name: 'AntHivePageHeader',
   props: {
     title: {
       type: String,

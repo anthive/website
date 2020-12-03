@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import AntHiveBtn from '@/components/AntHiveBtn'
+import AntHiveButton from '@/components/AntHiveButton'
 
-Vue.component('AntHiveBtn', AntHiveBtn)
+Vue.component('AntHiveButton', AntHiveButton)

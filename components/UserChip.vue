@@ -35,67 +35,67 @@
         <div class="pa-4 pt-1 tb-1 subtitle-1 font-weight-medium">
           <div class="d-flex user-info-full__statistic-container">
             <v-col class="col-4 pa-0">
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.span")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text "
-                  >Y{{ player.Y }}, X{{ player.X }}</span
-                ></v-card-text
-              >
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.ticks")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
-                  player.Stats.Age
-                }}</span></v-card-text
-              >
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text mr-1">
+                  {{ $t("userInfo.span") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  Y{{ player.Y }}, X{{ player.X }}
+                </span>
+              </v-card-text>
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text mr-1">
+                  {{ $t("userInfo.ticks") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  {{ player.Stats.Age }}
+                </span>
+              </v-card-text>
             </v-col>
             <v-col class="col-4 pa-0">
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.ants")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
-                  player.Stats.Ants
-                }}</span></v-card-text
-              >
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.hiveSize")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
-                  player.Stats.Hive
-                }}</span></v-card-text
-              >
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text  mr-1">
+                  {{ $t("userInfo.ants") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  {{ player.Stats.Ants }}
+                </span>
+              </v-card-text>
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text mr-1">
+                  {{ $t("userInfo.hiveSize") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  {{ player.Stats.Hive }}
+                </span>
+              </v-card-text>
             </v-col>
             <v-col class="col-4 pa-0">
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.errors")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
-                  player.Stats.Errors
-                }}</span></v-card-text
-              >
-              <v-card-text class="pa-0 body-2"
-                ><span class="user-info-full__statistic-key primary--text  mr-1">{{
-                  $t("userInfo.earned")
-                }}</span
-                ><span class="statistic-key user-info-full__statistic-value accent--text ">{{
-                  player.Wealth
-                }}</span></v-card-text
-              >
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text mr-1">
+                  {{ $t("userInfo.errors") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  {{ player.Stats.Errors }}
+                </span>
+              </v-card-text>
+              <v-card-text class="pa-0 body-2">
+                <span class="user-info-full__statistic-key primary--text mr-1">
+                  {{ $t("userInfo.earned") }}
+                </span>
+                <span class="statistic-key user-info-full__statistic-value accent--text">
+                  {{ player.Wealth }}
+                </span>
+              </v-card-text>
             </v-col>
           </div>
           <div class="user-info-full__statistic-info-badges">
             <v-col class="pa-1">
-              <v-avatar class="elevation-6" size="30" color="white"
-                ><span class="caption font-weight-bold"
-                  >v.{{ us.Version }}</span
-                ></v-avatar
-              >
+              <v-avatar class="elevation-6" size="30" color="white">
+                <span class="caption font-weight-bold">
+                  v.{{ us.Version }}
+                </span>
+              </v-avatar>
             </v-col>
             <v-col class="pa-1">
               <v-avatar class="elevation-6" size="30">
