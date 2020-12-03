@@ -3,7 +3,7 @@
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <div class="white pa-3 pb-10" min-height="calc(100vh - 64px)">
-          <ThePageHeader
+          <AntHivePageHeader
             :title="$t('sandbox.sandbox')"
             :tooltip-text="$t('sandbox.tooltipText')"
           />
@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="sandbox__actions">
-                <AntHiveBtn
+                <AntHiveButton
                   :loading="loading"
                   :disabled="!isCodeChanged"
                   fill
@@ -29,9 +29,10 @@
                   @click="onClickRun"
                   :light="!isCodeChanged"
                   color="green"
-                  >{{ $t("sandbox.runSandbox") }}</AntHiveBtn
                 >
-                <AntHiveBtn
+                  {{ $t("sandbox.runSandbox") }}
+                </AntHiveButton>
+                <AntHiveButton
                   fill
                   tile
                   light
@@ -42,7 +43,7 @@
                   >
                     <span v-if="getUser && getUser.userName">{{ $t("sandbox.save") }}</span>
                     <span v-else> {{ $t("sandbox.loginToSave") }}</span>
-                  </AntHiveBtn>
+                  </AntHiveButton>
               </div>
               
               <div v-if="simLogs && botLogs">
@@ -84,7 +85,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
-import ThePageHeader from '@/components/ThePageHeader'
+import AntHivePageHeader from '@/components/AntHivePageHeader'
 import axios from 'axios'
 var player = null
 export default {
@@ -101,7 +102,7 @@ export default {
   },
   components: {
     editor,
-    ThePageHeader
+    AntHivePageHeader
   },
   data: () => ({
     valueCode: {},

@@ -4,7 +4,6 @@
       <div class="d-flex align-center">
         <span class="primary--text f-text">{{ author }}</span>
       </div>
-
       <span class="accent--text">{{ getTimeAgo + $t(`games.${getTextTimeAgo}`) }}</span>
     </div>
   </div>
@@ -14,7 +13,7 @@
 <script>
 import { timeAgo } from '@/services/User'
 export default {
-  name: 'GamesAuthorChip',
+  name: 'AntHiveAuthor',
   props: {
     author: String,
     date: Number

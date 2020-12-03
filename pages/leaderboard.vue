@@ -41,7 +41,7 @@
           <!-- TODO: dynamic -->
           <div class="header__lang">C++</div>
         </div>
-        <ThePageHeader
+        <AntHivePageHeader
           :title="$t('leaderboard.title')"
           subtitle="World"
           :tooltip-text="$t('leaderboard.description')"
@@ -120,7 +120,7 @@
 import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import ThePageHeader from '@/components/ThePageHeader'
+import AntHivePageHeader from '@/components/AntHivePageHeader'
 import langs from '../static/langs/data.json'
 
 export default {
@@ -138,7 +138,7 @@ export default {
   components: {
     GamesLeaderCard,
     AntHiveIcon,
-    ThePageHeader
+    AntHivePageHeader
   },
   name: 'Leaderboard',
   data: () => ({

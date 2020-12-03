@@ -14,12 +14,12 @@
               {{ $t("home.description") }}
             </h2>
             <div class="header-section__actions">
-              <AntHiveBtn large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
+              <AntHiveButton large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
                 $t("header.sandbox")
-              }}</AntHiveBtn>
-              <AntHiveBtn large tile color="accent" @click="handlerClickGetStarted">{{
+              }}</AntHiveButton>
+              <AntHiveButton large tile color="accent" @click="handlerClickGetStarted">{{
                 $t("header.buttonJoin")
-              }}</AntHiveBtn>
+              }}</AntHiveButton>
             </div>
           </v-col>
         </v-row>

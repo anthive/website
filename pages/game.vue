@@ -3,14 +3,14 @@
     <v-container>
       <template v-if="isGameAvailable">
         <div class="mx-auto">
-        <ThePageHeader
-          :title="`${$t('game.game')} #${gameId}`"
-          :tooltip-text="$t('game.gameId')"
-        />
+          <AntHivePageHeader
+            :title="`${$t('game.game')} #${gameId}`"
+            :tooltip-text="$t('game.gameId')"
+          />
         </div>
         <v-row class="mx-auto">
           <v-col cols="12" md="8" class="player-zone__wrap">
-            <GamePlayer :isGameEnd="isGameEnd"  @replay="replay" />
+            <GamePlayer :is-game-end="isGameEnd"  @replay="replay" />
           </v-col>
           <v-col cols="12" md="4" class="game__players-section">
             <div>
@@ -47,7 +47,7 @@ import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
-import ThePageHeader from '@/components/ThePageHeader'
+import AntHivePageHeader from '@/components/AntHivePageHeader'
 export default {
   head() {
     return {
@@ -75,7 +75,7 @@ export default {
     GamePlayerList,
     GamePlayer,
     GamesTable,
-    ThePageHeader
+    AntHivePageHeader
   },
   watch: {
     $route() {

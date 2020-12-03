@@ -24,7 +24,7 @@
 import langs from '../static/langs/data.json'
 
 export default {
-  name: 'userAchivementChip',
+  name: 'AntHiveBotVertical',
   props: {
     name: {
       type: String,

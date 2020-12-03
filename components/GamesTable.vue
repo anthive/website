@@ -22,7 +22,7 @@
           <div
             class="col-12 col-md-2 justify-center justify-md-start d-flex align-center"
           >
-            <AuthorChip
+            <AntHiveAuthor
               class="ml-md-n13 mr-5"
               :author="game.author"
               :date="game.finished"
@@ -46,7 +46,7 @@
               </v-tooltip>
             </div>
 
-            <AntHiveBtn
+            <AntHiveButton
               tile
               color="accent"
               :to="
@@ -58,7 +58,7 @@
               class="games-table__players-more ml-1"
             >
               <span>+{{ game.bots.length - 4 }}</span>
-            </AntHiveBtn>
+            </AntHiveButton>
           </div>
           <div
             v-if="game.bots && game.bots.length <= 4"
@@ -104,7 +104,7 @@
             </div>
           </div>
           <div class="games-table__action-container col-12 col-md-3">
-            <AntHiveBtn
+            <AntHiveButton
               tile
               :to="
                 localePath({
@@ -114,8 +114,9 @@
               "
               width="100%"
               color="accent"
-              >{{ $t("games.viewGame") }}</AntHiveBtn
             >
+              {{ $t("games.viewGame") }}
+            </AntHiveButton>
           </div>
         </div>
       </div>
@@ -135,9 +136,9 @@
 </template>
 
 <script>
-import UserChip from '@/components/GamesUserChip'
-import AuthorChip from '@/components/GamesAuthorChip'
-import UserIcon from '@/components/GamesUserIcon'
+import UserChip from '@/components/AntHiveBotHorizontal'
+import AntHiveAuthor from '@/components/AntHiveAuthor'
+import UserIcon from '@/components/AntHiveBotSmall'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import { getGames } from '@/services/Game'
 
@@ -153,7 +154,7 @@ export default {
   components: {
     UserChip,
     UserIcon,
-    AuthorChip,
+    AntHiveAuthor,
     AntHiveIcon
   },
   data: () => ({

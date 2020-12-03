@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'userAchivementChip',
+  name: 'AntHiveAchivement',
   props: {
     title: {
       type: String,

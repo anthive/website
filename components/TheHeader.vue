@@ -27,9 +27,9 @@
           </v-list-item>
           <v-list-item :to="localePath('leaderboard')">
             <v-list-item-content>
-              <v-list-item-title>{{
-                $t("header.leaderboard")
-              }}</v-list-item-title>
+              <v-list-item-title>
+                {{ $t("header.leaderboard") }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="localePath('rules')">
@@ -44,26 +44,26 @@
           </v-list-item>
           <v-list-item :href="profileUrl">
             <v-list-item-content>
-              <v-list-item-title>{{
-                $t("header.buttonJoin")
-              }}</v-list-item-title>
+              <v-list-item-title>
+                {{ $t("header.buttonJoin") }}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <nuxt-link class="header__link" :to="localePath('games')">{{
-          $t("header.games")
-        }}</nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('leaderboard')">{{
-          $t("header.leaderboard")
-        }}</nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('rules')">{{
-          $t("header.rules")
-        }}</nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('sandbox')">{{
-          $t("header.sandbox")
-        }}</nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('games')">
+          {{ $t("header.games") }}
+        </nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('leaderboard')">
+          {{ $t("header.leaderboard") }}
+        </nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('rules')">
+          {{ $t("header.rules") }}
+        </nuxt-link>
+        <nuxt-link class="header__link" :to="localePath('sandbox')">
+          {{ $t("header.sandbox") }}
+        </nuxt-link>
 
         <v-chip
           v-show="getUser"
@@ -80,14 +80,15 @@
           {{ getUserName }}
         </v-chip>
 
-        <AntHiveBtn
+        <AntHiveButton
           tile
           v-show="!getUser"
           @click="handlerClickGetStarted"
           color="accent"
           class="ml-3"
-          >{{ $t("header.buttonJoin") }}</AntHiveBtn
         >
+          {{ $t("header.buttonJoin") }}
+        </AntHiveButton>
       </div>
     </v-container>
   </v-app-bar>
