@@ -64,6 +64,7 @@ export default {
   flex-direction: row;
   box-shadow: $box-shadow-default;
   height: 100px;
+  background-color: $color-white;
 
   &__img {
     background-position: center;
