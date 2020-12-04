@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import GameLogPanel from '@/components/GameLogPanel'
 import GamePlayerList from '@/components/GamePlayerList'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
@@ -71,7 +70,6 @@ export default {
     timerId: null
   }),
   components: {
-    GameLogPanel,
     GamePlayerList,
     GamePlayer,
     GamesTable,
