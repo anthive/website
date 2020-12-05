@@ -13,9 +13,15 @@
             <GamePlayer :is-game-end="isGameEnd"  @replay="replay" />
           </v-col>
           <v-col cols="12" md="4" class="game__players-section">
-            <div>
-              <GamePlayerList :players="players" />
-            </div>
+            <transition-group name="flip-list" tag="div">
+              <AntHiveBotHorizontal
+                class="my-2"
+                :key="player.id"
+                v-for="(player, index) in players"
+                :player="player"
+                :number="index + 1"
+              />
+            </transition-group>
           </v-col>
         </v-row>
         <h3 class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
@@ -43,8 +49,7 @@
 </template>
 
 <script>
-import GameLogPanel from '@/components/GameLogPanel'
-import GamePlayerList from '@/components/GamePlayerList'
+import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
@@ -71,8 +76,7 @@ export default {
     timerId: null
   }),
   components: {
-    GameLogPanel,
-    GamePlayerList,
+    AntHiveBotHorizontal,
     GamePlayer,
     GamesTable,
     AntHivePageHeader
@@ -196,6 +200,18 @@ export default {
     &:hover {
       text-decoration: none !important;
     }
+  }
+  .flip-list-move {
+    transition: transform 0.5s;
+  }
+  .flip-list-enter-active,
+  .flip-list-leave-active {
+    transition: all 0.8s;
+  }
+  .flip-list-enter,
+  .flip-list-leave-to {
+    transform: translateX(100px);
+    opacity: 0;
   }
 }
 </style>

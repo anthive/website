@@ -119,20 +119,12 @@
       </div>
 
       <div class="component">
-        <h4>GameLogPanel</h4>
-        <p v-if="$options.components['GameLogPanel'].props">Props: {{ $options.components['GameLogPanel'].props }}</p>
-        <div>
-          <GameLogPanel />
-        </div>
-      </div> 
-
-      <!-- <div class="component">
         <h4>GamesTable</h4>
         <p v-if="$options.components['GamesTable'].props">Props: {{ $options.components['GamesTable'].props }}</p>
         <div class="d-flex">
           <GamesTable :games-limit="5" />
         </div>
-      </div> -->
+      </div>
     </v-container>
   </section>
 </template>
@@ -140,10 +132,9 @@
 <script>
 import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import GameLogPanel from '@/components/GameLogPanel'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
-// import GamesTable from '@/components/GamesTable'
+import GamesTable from '@/components/GamesTable'
 import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
@@ -154,10 +145,9 @@ export default {
   components: {
     AntHiveButton,
     AntHiveIcon,
-    GameLogPanel,
     AntHiveAuthor,
     GamesLeaderCard,
-    // GamesTable,
+    GamesTable,
     AntHiveBotSmall,
     AntHiveBotHorizontal,
     AntHivePageHeader,
