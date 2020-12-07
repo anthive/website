@@ -20,6 +20,7 @@ $color-violet-800: #645574;
 $color-violet-900: #362d59;
 
 // accent
+$color-red-200: #ffa89f;
 $color-red-300: #e1567c;
 $color-red-400: #a75d71;
 $color-red-500: #9d2747;
@@ -38,9 +39,6 @@ $color-grey-900: #222;
 // blue
 $color-blue-900: #1b2432;
 
-// orange
-$color-orange-500: #f77b01;
-
 // green
 $color-green-800: #2f3129;
 $color-green-900: #272822;
@@ -57,6 +55,7 @@ $screen-lg: '1264px';
 // borders
 $border-radius-tile: 0px;
 $border-radius-default: 3px;
+$border-radius-round: 50%;
 
 // shadow
 $box-shadow-default: 0px 0px 13px 0px #00000021;
