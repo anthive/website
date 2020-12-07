@@ -55,3 +55,6 @@ dist
 
 # PWA
 sw.*
+
+# MacOS
+.DS_Store
