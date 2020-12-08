@@ -125,7 +125,7 @@ export default {
       const rulesElement = `
         <a
           class="accent--text"
-          onClick="$ga.event({ eventCategory: 'rules', eventAction: 'redirect', eventLabel: 'fromSandbox' })"
+          onClick="$gtag('event', 'redirect', { event_category: 'rules', event_label: 'fromSandbox' })"
           href="/rules"
         >${this.$t('header.rules')}</a>
       `
@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     handlerClickLogs(logsCategory) {
-      this.$ga.event({ eventCategory: 'game', eventAction: 'logs', eventValue: logsCategory })
+      this.$gtag('event', 'logs', { event_category: 'game', value: logsCategory })
     },
     showLoadingText(i = 0) {
       if (!this.loading) {
@@ -170,7 +170,7 @@ export default {
     },
     async onClickRun() {
       this.loading = true
-      this.$ga.event({ eventCategory: 'sandbox', eventAction: 'run' })
+      this.$gtag('event', 'run', { event_category: 'sandbox' })
       this.showLoadingText()
       if (player && player.control) player.control.stop()
       this.botLogs = this.simLogs = 'Loading...'
@@ -196,7 +196,7 @@ export default {
         })
     },
     onClickLogin() {
-      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'sandbox' })
+      this.$gtag('event', 'redirect', { event_category: 'getstarted', event_label: 'sandbox' })
       const createBotUrl = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
       window.location.href = createBotUrl
     },

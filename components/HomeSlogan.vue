@@ -37,7 +37,7 @@ export default {
   }),
   methods: {
     handlerClickGetStarted() {
-      this.$ga.event({ eventCategory: 'getstarted', eventAction: 'redirect', eventLabel: 'homepage' })
+      this.$gtag('event', 'redirect', { event_category: 'getstarted', event_label: 'homepage' })
       window.location.href = this.profileUrl
     }
   }
