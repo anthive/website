@@ -21,8 +21,7 @@ export default {
   &__text {
     line-height: 1;
     font-weight: 600;
-    font-size: 14px;
-    text-transform: capitalize;
+    text-transform: none;
   }
 }
 </style>
