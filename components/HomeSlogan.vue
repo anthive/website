@@ -37,7 +37,7 @@ export default {
   }),
   methods: {
     handlerClickGetStarted() {
-      this.$gtag('event', 'redirect', { event_category: 'getstarted', event_label: 'homepage' })
+      this.$gtag('event', 'Get started Homepage', { event_category: 'getstarted', event_label: 'homepage' })
       window.location.href = this.profileUrl
     }
   }
