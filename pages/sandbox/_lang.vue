@@ -14,10 +14,12 @@
             <v-col cols="12" md="6">
               <div class="sandbox__player" :class="{ disable: loading }">
                 <div id="player" />
-                <div class="sandbox__loading-text" v-if="loading && $route.query.box">
-                  <h4>{{ $t("sandbox.loading") }}</h4>
-                  <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
-                </div>
+                  <div class="sandbox__loading-text" v-if="loading && $route.query.box">
+                    <h4>{{ $t("sandbox.loading") }}</h4>
+                    <transition name="fade" mode="out-in">
+                      <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
+                    </transition>
+                  </div>
               </div>
               <div class="sandbox__actions">
                 <AntHiveButton
@@ -164,8 +166,11 @@ export default {
       }
       if (i >= this.listOfLoadingText.length) return
       setTimeout(() => {
-        this.loadingText = this.listOfLoadingText[i]
-        this.showLoadingText(i + 1)
+        this.loadingText = ''
+        this.$nextTick(() => {
+          this.loadingText = this.listOfLoadingText[i]
+          this.showLoadingText(i + 1)
+        })
       }, 3000)
     },
     async onClickRun() {
@@ -312,15 +317,25 @@ export default {
   &__loading-text {
     position: absolute;
     z-index: 1;
-    color: $color-white;
     top: 50%;
     text-align: center;
     left: 50%;
     transform: translate(-50%, -50%);
+    & > * {
+      color: $color-white;
+    }
   }
   &__content-logs-wrap {
     overflow-y: scroll;
     max-height: 420px;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>
