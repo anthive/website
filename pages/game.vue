@@ -9,10 +9,10 @@
           />
         </div>
         <v-row class="mx-auto">
-          <v-col cols="12" md="8" class="player-zone__wrap">
+          <v-col cols="12" md="8" class="player-wrap">
             <GamePlayer :is-game-end="isGameEnd"  @replay="replay" />
           </v-col>
-          <v-col cols="12" md="4" class="game__players-section">
+          <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
                 class="my-2"
@@ -25,25 +25,16 @@
           </v-col>
         </v-row>
         <h3 class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
-        <GamesTable :games-limit="5" />
       </template>
 
-      <div v-else class="game__game-not-found">
-        <h2 class="mb-10">{{ $t('game.cantFindGame') }} #{{ gameId }}</h2>
-        <p>{{ $t('game.checkOut') }}</p>
-        <div class="game_games-links">
-          <a :href="`${localePath('game')}?id=1596089763&v=4.0`">
-            <img class="game__game-image" src="/img/game1.png" alt="game">
-          </a>
-          <a :href="`${localePath('game')}?id=1596616511&v=4.0`">
-            <img class="game__game-image" src="/img/game2.png" alt="game">
-          </a>
-          <a :href="`${localePath('game')}?id=1596039187&v=4.0`">
-            <img class="game__game-image" src="/img/game3.png" alt="game">
-          </a>
-        </div>
-        <a class="game__link" :href="localePath('games')">{{ $t('game.goToGames') }}</a>
-      </div>
+      <template v-else>
+        <AntHivePageHeader
+          :title="`${$t('game.cantFindGame')} #${gameId}`"
+          :tooltip-text="$t('game.gameId')"
+        />
+        <h3 class="mt-10 mb-0">{{ $t('game.checkOut') }}:</h3>
+      </template>
+      <GamesTable :games-limit="5" />
     </v-container>
   </section>
 </template>
@@ -161,7 +152,7 @@ export default {
 .v-content__wrap {
   background: #fff;
 }
-.player-zone__wrap {
+.player-wrap {
   width: 100%;
   padding: 10px 0 0;
 }
@@ -173,34 +164,7 @@ export default {
   height: 100%;
   overflow-x: hidden;
 
-  &__game-not-found {
-    width: 100%;
-    text-align: center;
-    color: $color-white;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &__game-image {
-    margin: 0 5px;
-    border: 2px solid $color-red-500;
-    transform: scale(0.98);
-    transition: 0.2s;
-
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
-  &__link {
-    display: inline-block;
-    color: $color-white;
-    text-decoration: underline;
-    margin-top: 10px;
-    &:hover {
-      text-decoration: none !important;
-    }
-  }
+  // loading text animation
   .flip-list-move {
     transition: transform 0.5s;
   }
