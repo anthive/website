@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     handlerClickLogs(logsCategory) {
-      this.$gtag('event', 'logs', { event_category: 'game', value: logsCategory })
+      this.$gtag('event', 'Sim logs', { event_category: 'game', value: logsCategory })
     },
     showLoadingText(i = 0) {
       if (!this.loading) {
@@ -170,7 +170,7 @@ export default {
     },
     async onClickRun() {
       this.loading = true
-      this.$gtag('event', 'run', { event_category: 'sandbox' })
+      this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
       this.showLoadingText()
       if (player && player.control) player.control.stop()
       this.botLogs = this.simLogs = 'Loading...'
@@ -196,7 +196,7 @@ export default {
         })
     },
     onClickLogin() {
-      this.$gtag('event', 'redirect', { event_category: 'getstarted', event_label: 'sandbox' })
+      this.$gtag('event', 'Get started Sandbox', { event_category: 'getstarted', event_label: 'sandbox' })
       const createBotUrl = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
       window.location.href = createBotUrl
     },
