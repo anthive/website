@@ -10,9 +10,24 @@
       @mouseleave="showActionsState = false"
       ref="playerWrap"
     />
-    <div id="player">
+    <div
+      id="player"
+      @mousemove="mouseCoordinates"
+      @mouseover="mouseOnPlayer = true"
+      @mouseleave="mouseOnPlayer = false"
+    >
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
+    <v-tooltip
+      v-model="isShowTooltip"
+      color="accent"
+      content-class="b-radius-0"
+      top
+      :position-x="tooltipPosition.x"
+      :position-y="tooltipPosition.y"
+    >
+      <div class="player-tooltip-content" v-html="getTooltipContent" />
+    </v-tooltip>
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
         <div class="layout-buttons">
@@ -124,6 +139,30 @@
         </div>
       </div>
     </v-slide-y-transition>
+    <div class="debug-panel" v-if="getBots && isDebugMode">
+      <v-tabs v-model="tab" background-color="grey darken-2" dark>
+        <div v-for="(bot, index) in getBots" :key="index">
+          <v-tab class="tab">Request {{ bot.id }} </v-tab>
+          <v-tab class="tab">Response {{ bot.id }} </v-tab>
+        </div>
+      </v-tabs>
+
+      
+      <v-tabs-items v-model="tab">
+        <div v-for="(bot, index) in getBots" :key="index + 10">
+          <v-tab-item :transition="false" :reverse-transition="false">
+            <div class="tab-content">
+              <div>{{ getResponseRequest(bot, 'responses') }}</div>
+            </div>
+          </v-tab-item>
+          <v-tab-item :transition="false" :reverse-transition="false">
+            <div class="tab-content">
+              <div>{{ getResponseRequest(bot, 'requests') }}</div>
+            </div>
+          </v-tab-item>
+        </div>
+      </v-tabs-items>
+    </div>
   </v-col>
 </template>
 
@@ -137,8 +176,37 @@ export default {
     AntHiveIcon
   },
   props: {
-    isGameEnd: Boolean
+    isGameEnd: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    tooltipContent: {
+      type: [Object, null],
+      default: null
+    },
+    responses: {
+      type: Array,
+      default: () => []
+    },
+    requests: {
+      type: Array,
+      default: () => []
+    },
+    bots: {
+      type: Array,
+      default: () => []
+    },
+    isDebugMode: {
+      type: Boolean,
+      default: false
+    }
   },
+  data: () => ({
+    tooltipPosition: { x: 0, y: 0 },
+    mouseOnPlayer: false,
+    tab: 0
+  }),
   computed: {
     currentUrl() {
       return `https://anthive.io${this.$route.fullPath}`
@@ -151,6 +219,63 @@ export default {
     },
     getRematchUrl() {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
+    },
+    isShowTooltip() {
+      return this.tooltipContent && this.mouseOnPlayer && this.isDebugMode
+    },
+    getTooltipContent() {
+      if (!this.tooltipContent) return
+      const isFood = this.tooltipContent.hasOwnProperty('food')
+      const isAnt = this.tooltipContent.hasOwnProperty('ant')
+      const isHive = this.tooltipContent.hasOwnProperty('owner')
+      const { point } = this.tooltipContent
+      const generateRow = content => `<p class="mb-0 white--text">${content}</p>`
+      if (isFood) {
+        return `
+          ${generateRow('<strong>Food</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Size: ${this.tooltipContent.food}`)}
+        `
+      } else if (isAnt) {
+        const { ant } = this.tooltipContent
+        const { order } = ant
+        return `
+          ${generateRow('<strong>Ant</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
+          ${generateRow(`Id: ${ant.id}`)}
+          ${generateRow(`Health: ${ant.health}`)}
+          ${generateRow(`Age: ${ant.age}`)}
+          ${generateRow(`Event: ${ant.event}`)}
+          ${generateRow(`Action: ${order.act}`)}
+          ${generateRow(`Direction: ${order.dir}`)}
+        `
+      } else if (isHive) {
+        return `
+          ${generateRow('<strong>Hive</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
+        `
+      }
+      return `
+          ${generateRow('<strong>Cell</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+        `
+    },
+    getBots() {
+      if (this.bots && this.bots.length) {
+        const bots = this.bots
+        return bots.sort((a, b) => {
+          if (a.id > b.id) {
+            return 1
+          }
+          if (a.id < b.id) {
+            return -1
+          }
+          return 0
+        })
+      }
+      return []
     }
   },
   methods: {
@@ -160,11 +285,18 @@ export default {
       } catch (er) {
         console.error(er)
       }
+    },
+    mouseCoordinates(event) {
+      this.tooltipPosition = event
+    },
+    getResponseRequest(bot, type) {
+      if (this[type] && this[type].length) {
+        return this[type].find(r => r.id === bot.id)
+      }
     }
   }
 }
 </script>
-
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
@@ -172,13 +304,28 @@ export default {
   background-repeat: repeat;
   position: relative;
 }
+.debug-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  .tab {
+    text-transform: none;
+    padding-top: 5px;
+  }
+  .tab-content {
+    padding: 10px;
+    height: 200px;
+    overflow-y: scroll;
+  }
+}
 .game__vs-separator {
   position: relative;
   top: -80px;
 }
 .player__section {
   margin-top: 8px;
-  position: relative;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);
