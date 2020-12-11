@@ -13,6 +13,7 @@
     "start": "nuxt start"
   },
   "dependencies": {
+    "@forked-prs/nuxt-infinite-scroll-module": "^1.0.2",
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/markdownit": "^1.2.9",

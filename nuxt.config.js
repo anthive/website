@@ -141,6 +141,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     'nuxt-clipboard2',
+    '@forked-prs/nuxt-infinite-scroll-module',
     ['@nuxtjs/google-gtag', { id: 'G-WW02YZ0TV0' }],
     [
       'nuxt-i18n',
