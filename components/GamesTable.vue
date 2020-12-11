@@ -86,7 +86,7 @@
                 <p>
                   <strong>{{ $t("game.statistics") }}</strong><br>
                   {{ $t("game.ants") }}: {{ player.stats.ants }}<br>
-                  {{ $t("game.hiveSize") }}: {{ player.stats.hive }}<br>
+                  {{ $t("game.hiveSize") }}: {{ player.stats.hive.length }}<br>
                   {{ $t("game.score") }}: {{ player.stats.score }}<br>
                   {{ $t("game.art") }}: {{ player.stats.art }}<br>
                   {{ $t("game.age") }}: {{ player.stats.age }}<br>
@@ -121,17 +121,7 @@
         </div>
       </div>
     </v-card>
-    <v-toolbar flat>
-      <v-pagination
-        class="mx-auto pagination"
-        :length="totalPages"
-        v-model="selectedPage"
-        total-visible="10"
-        color="accent"
-        next-icon=">"
-        prev-icon="<"
-      />
-    </v-toolbar>
+    <infinite-scroll :enough="enoughLoadGames" @load-more="loadMoreGames" />
   </div>
 </template>
 
@@ -159,9 +149,8 @@ export default {
   },
   data: () => ({
     searchParams: {},
-    totalPages: 0,
-    selectedPage: 1,
-    games: []
+    games: [],
+    enoughLoadGames: false
   }),
   async fetch() {
     if (process.server) {
@@ -172,13 +161,21 @@ export default {
     await this.loadGames()
   },
   created() {
-    this.searchParams = { page: 1, limit: this.gamesLimit }
+    this.searchParams = { offset: 0, limit: this.gamesLimit }
   },
   methods: {
     loadGames() {
       return getGames(this.searchParams).then(gamesResp => {
-        this.games = gamesResp.games
-        this.totalPages = Math.ceil(gamesResp.total / this.searchParams.limit)
+        this.games = gamesResp
+      })
+    },
+    loadMoreGames() {
+      this.enoughLoadGames = true
+      getGames({ offset: this.games.length, limit: this.gamesLimit }).then(games => {
+        if (games.length) {
+          this.games = this.games.concat(games)
+          this.enoughLoadGames = false
+        }
       })
     }
   },
@@ -190,16 +187,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.games-table {
-  .pagination {
-    .v-pagination__item,
-    .v-pagination__navigation {
-      border-radius: 0;
-    }
-  }
-}
-</style>
+
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
