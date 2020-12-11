@@ -10,7 +10,15 @@
         </div>
         <v-row class="mx-auto">
           <v-col cols="12" md="8" class="player-wrap">
-            <GamePlayer :tooltip-content="tooltipContent" :is-game-end="isGameEnd"  @replay="replay" />
+            <GamePlayer
+              :tooltip-content="tooltipContent"
+              :is-game-end="isGameEnd"
+              @replay="replay"
+              :bots="players"
+              :responses="responses"
+              :requests="requests"
+              :is-debug-mode="isDebugMode"
+            />
           </v-col>
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
@@ -24,7 +32,7 @@
             </transition-group>
           </v-col>
         </v-row>
-        <h3 class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
+        <h3 v-if="!isDebugMode" class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
       </template>
 
       <template v-else>
@@ -34,7 +42,7 @@
         />
         <h3 class="mt-10 mb-0">{{ $t('game.checkOut') }}:</h3>
       </template>
-      <GamesTable :games-limit="5" />
+      <GamesTable v-if="!isDebugMode" :games-limit="5" />
     </v-container>
   </section>
 </template>
@@ -65,7 +73,11 @@ export default {
     gameId: '',
     gamePlayer: null,
     timerId: null,
-    tooltipContent: null
+    tooltipContent: null,
+    requests: null,
+    responses: null,
+    fetchPlayerDataTimerId: '',
+    isDebugMode: false
   }),
   components: {
     AntHiveBotHorizontal,
@@ -100,16 +112,26 @@ export default {
             this.isGameEnd = true
           })
           let players = []
-          this.timerId = setInterval(() => (this.players = players), 1000)
+          let requests = []
+          let responses = []
+          this.fetchPlayerDataTimerId = setInterval(() => {
+            this.players = players
+            this.responses = responses
+            this.requests = requests
+          }, 1000)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
+            requests = data.requests || []
+            responses = data.responses || []
             players = data.bots || []
-            // console.log(data, '🙈🙈🙈🙈🙈🙈🙈')
-            // req resp
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
             this.tooltipContent = data
+          })
+          // eslint-disable-next-line
+          this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
+            this.isDebugMode = data
           })
         } else {
           this.isGameAvailable = false
@@ -124,7 +146,7 @@ export default {
         this.gamePlayer.container.innerHTML = ''
         this.gamePlayer = null
       }
-      if (this.timerId) clearInterval(this.timerId)
+      if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
     },
     getAvatar(id) {
       return `${process.env.API_URL}/images/${id}/100/100`

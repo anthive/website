@@ -1,9 +1,6 @@
 <template>
   <v-col
     class="pa-0 player__section"
-    @mousemove="mouseCoordinates"
-    @mouseover="mouseOnPlayer = true"
-    @mouseleave="mouseOnPlayer = false"
     cols="auto"
   >
     <div
@@ -13,7 +10,12 @@
       @mouseleave="showActionsState = false"
       ref="playerWrap"
     />
-    <div id="player">
+    <div
+      id="player"
+      @mousemove="mouseCoordinates"
+      @mouseover="mouseOnPlayer = true"
+      @mouseleave="mouseOnPlayer = false"
+    >
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
     <v-tooltip
@@ -137,6 +139,30 @@
         </div>
       </div>
     </v-slide-y-transition>
+    <div class="debug-panel" v-if="getBots && isDebugMode">
+      <v-tabs v-model="tab" background-color="grey darken-2" dark>
+        <div v-for="(bot, index) in getBots" :key="index">
+          <v-tab class="tab">Request {{ bot.id }} </v-tab>
+          <v-tab class="tab">Response {{ bot.id }} </v-tab>
+        </div>
+      </v-tabs>
+
+      
+      <v-tabs-items v-model="tab">
+        <div v-for="(bot, index) in getBots" :key="index + 10">
+          <v-tab-item :transition="false" :reverse-transition="false">
+            <div class="tab-content">
+              <div>{{ getResponseRequest(bot, 'responses') }}</div>
+            </div>
+          </v-tab-item>
+          <v-tab-item :transition="false" :reverse-transition="false">
+            <div class="tab-content">
+              <div>{{ getResponseRequest(bot, 'requests') }}</div>
+            </div>
+          </v-tab-item>
+        </div>
+      </v-tabs-items>
+    </div>
   </v-col>
 </template>
 
@@ -158,11 +184,28 @@ export default {
     tooltipContent: {
       type: [Object, null],
       default: null
+    },
+    responses: {
+      type: Array,
+      default: () => []
+    },
+    requests: {
+      type: Array,
+      default: () => []
+    },
+    bots: {
+      type: Array,
+      default: () => []
+    },
+    isDebugMode: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
     tooltipPosition: { x: 0, y: 0 },
-    mouseOnPlayer: false
+    mouseOnPlayer: false,
+    tab: 0
   }),
   computed: {
     currentUrl() {
@@ -178,7 +221,7 @@ export default {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
     },
     isShowTooltip() {
-      return this.tooltipContent && this.mouseOnPlayer
+      return this.tooltipContent && this.mouseOnPlayer && this.isDebugMode
     },
     getTooltipContent() {
       if (!this.tooltipContent) return
@@ -218,6 +261,21 @@ export default {
           ${generateRow('<strong>Cell</strong>')}
           ${generateRow(`x: ${point.x}, y: ${point.y}`)}
         `
+    },
+    getBots() {
+      if (this.bots && this.bots.length) {
+        const bots = this.bots
+        return bots.sort((a, b) => {
+          if (a.id > b.id) {
+            return 1
+          }
+          if (a.id < b.id) {
+            return -1
+          }
+          return 0
+        })
+      }
+      return []
     }
   },
   methods: {
@@ -230,6 +288,11 @@ export default {
     },
     mouseCoordinates(event) {
       this.tooltipPosition = event
+    },
+    getResponseRequest(bot, type) {
+      if (this[type] && this[type].length) {
+        return this[type].find(r => r.id === bot.id)
+      }
     }
   }
 }
@@ -241,14 +304,28 @@ export default {
   background-repeat: repeat;
   position: relative;
 }
-
+.debug-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  .tab {
+    text-transform: none;
+    padding-top: 5px;
+  }
+  .tab-content {
+    padding: 10px;
+    height: 200px;
+    overflow-y: scroll;
+  }
+}
 .game__vs-separator {
   position: relative;
   top: -80px;
 }
 .player__section {
   margin-top: 8px;
-  position: relative;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);
