@@ -1,6 +1,9 @@
 <template>
   <v-col
     class="pa-0 player__section"
+    @mousemove="mouseCoordinates"
+    @mouseover="mouseOnPlayer = true"
+    @mouseleave="mouseOnPlayer = false"
     cols="auto"
   >
     <div
@@ -13,6 +16,16 @@
     <div id="player">
       <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
     </div>
+    <v-tooltip
+      v-model="isShowTooltip"
+      color="accent"
+      content-class="b-radius-0"
+      top
+      :position-x="tooltipPosition.x"
+      :position-y="tooltipPosition.y"
+    >
+      <div class="player-tooltip-content" v-html="getTooltipContent" />
+    </v-tooltip>
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
         <div class="layout-buttons">
@@ -137,8 +150,20 @@ export default {
     AntHiveIcon
   },
   props: {
-    isGameEnd: Boolean
+    isGameEnd: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    tooltipContent: {
+      type: [Object, null],
+      default: null
+    }
   },
+  data: () => ({
+    tooltipPosition: { x: 0, y: 0 },
+    mouseOnPlayer: false
+  }),
   computed: {
     currentUrl() {
       return `https://anthive.io${this.$route.fullPath}`
@@ -151,6 +176,48 @@ export default {
     },
     getRematchUrl() {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
+    },
+    isShowTooltip() {
+      return this.tooltipContent && this.mouseOnPlayer
+    },
+    getTooltipContent() {
+      if (!this.tooltipContent) return
+      const isFood = this.tooltipContent.hasOwnProperty('food')
+      const isAnt = this.tooltipContent.hasOwnProperty('ant')
+      const isHive = this.tooltipContent.hasOwnProperty('owner')
+      const { point } = this.tooltipContent
+      const generateRow = content => `<p class="mb-0 white--text">${content}</p>`
+      if (isFood) {
+        return `
+          ${generateRow('<strong>Food</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Size: ${this.tooltipContent.food}`)}
+        `
+      } else if (isAnt) {
+        const { ant } = this.tooltipContent
+        const { order } = ant
+        return `
+          ${generateRow('<strong>Ant</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
+          ${generateRow(`Id: ${ant.id}`)}
+          ${generateRow(`Health: ${ant.health}`)}
+          ${generateRow(`Age: ${ant.age}`)}
+          ${generateRow(`Event: ${ant.event}`)}
+          ${generateRow(`Action: ${order.act}`)}
+          ${generateRow(`Direction: ${order.dir}`)}
+        `
+      } else if (isHive) {
+        return `
+          ${generateRow('<strong>Hive</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
+        `
+      }
+      return `
+          ${generateRow('<strong>Cell</strong>')}
+          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
+        `
     }
   },
   methods: {
@@ -160,11 +227,13 @@ export default {
       } catch (er) {
         console.error(er)
       }
+    },
+    mouseCoordinates(event) {
+      this.tooltipPosition = event
     }
   }
 }
 </script>
-
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
@@ -172,6 +241,7 @@ export default {
   background-repeat: repeat;
   position: relative;
 }
+
 .game__vs-separator {
   position: relative;
   top: -80px;

@@ -10,7 +10,7 @@
         </div>
         <v-row class="mx-auto">
           <v-col cols="12" md="8" class="player-wrap">
-            <GamePlayer :is-game-end="isGameEnd"  @replay="replay" />
+            <GamePlayer :tooltip-content="tooltipContent" :is-game-end="isGameEnd"  @replay="replay" />
           </v-col>
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
@@ -64,7 +64,8 @@ export default {
     gameLoaded: false,
     gameId: '',
     gamePlayer: null,
-    timerId: null
+    timerId: null,
+    tooltipContent: null
   }),
   components: {
     AntHiveBotHorizontal,
@@ -103,6 +104,12 @@ export default {
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
             players = data.bots || []
+            // console.log(data, '🙈🙈🙈🙈🙈🙈🙈')
+            // req resp
+          })
+          // eslint-disable-next-line
+          this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
+            this.tooltipContent = data
           })
         } else {
           this.isGameAvailable = false
