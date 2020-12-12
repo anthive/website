@@ -52,5 +52,14 @@
     "img": "https://anthive.io/skins/lang/php.png",
     "sample": "https://github.com/anthive/php",
     "sampleCode": "https://raw.githubusercontent.com/anthive/php/master/run.php"
+  },
+  {
+    "id": "rust",
+    "extention": "rs",
+    "editor": "rust",
+    "name": "Rust",
+    "img": "https://anthive.io/skins/lang/rust.png",
+    "sample": "https://github.com/anthive/rust",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/rust/master/main.rs"
   }
 ]
