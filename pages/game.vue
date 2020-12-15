@@ -170,7 +170,7 @@ export default {
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
         if (this.isGameFound(dataUrl)) {
           const apiImagesUrl = `${process.env.API_URL}/public/images`
-          const assetsUrl = `${window.location.origin}/skins`
+          const assetsUrl = `${process.env.WEBSITE_URL}/skins`
           // eslint-disable-next-line
           this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, dataUrl)
           // eslint-disable-next-line
