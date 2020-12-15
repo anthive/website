@@ -5,7 +5,7 @@
       <v-row>
         <div class="d-flex">
           <v-avatar tile size="160">
-            <v-img class="user__avatar" :src="getAvatar(getUser && getUser.avatar)" />
+            <v-img class="user__avatar" :src="getAvatar(getUser.avatar, 100)" />
           </v-avatar>
           <div class="user__title">
             <h1 class="user__name">{{ getUserFullName }}</h1>
@@ -125,6 +125,7 @@ import { User } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAchivement from '@/components/AntHiveAchivement'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
+import Image from '@/mixins/image'
 
 export default {
   name: 'user',
@@ -144,6 +145,7 @@ export default {
     AntHiveAchivement,
     AntHiveBotVertical
   },
+  mixins: [Image],
   data: () => ({
     status: null,
     userInfo: {},
@@ -166,21 +168,14 @@ export default {
       }
     },
     getUser() {
-      return this.userInfo && this.userInfo.user
+      if (this.userInfo) return this.userInfo
     },
     getUserFullName() {
-      return this.userInfo && this.userInfo.user && this.userInfo.user.fullName
+      if (this.userInfo && this.userInfo.fullName) return this.userInfo.fullName
     },
     getUserBots() {
       if (this.userInfo && this.userInfo.bots && this.userInfo.bots.length) {
         return this.userInfo.bots
-      }
-    }
-  },
-  methods: {
-    getAvatar(avatarId) {
-      if (avatarId) {
-        return this.us.photoUrl(avatarId, 190)
       }
     }
   }

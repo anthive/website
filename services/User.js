@@ -1,7 +1,7 @@
-import axios from 'axios'
+import publicApi from '../plugins/axios'
+import { getImageById } from '../services/Image'
 
 const baseUrl = 'https://anthive.io/'
-const apiUrl = process.env.API_URL
 
 class User {
   constructor() {
@@ -34,16 +34,11 @@ class User {
     this.Username = username
     if (this.Username === '' || this.Username === undefined) return
 
-    const apiAxios = axios.create({
-      baseUrl: apiUrl,
-      timeout: 30000
-    })
-
-    return apiAxios.get('users/' + this.Username).then(res => res.data)
+    return publicApi.get('/user', { params: { username: this.Username, withBots: true } }).then(res => res.data)
   }
 
   photoUrl(avatarId, size = 70) {
-    return `${apiUrl}images/${avatarId}/${size}/${size}`
+    return getImageById(avatarId, size)
   }
 
   langUrl(lang = this.Lang) {
