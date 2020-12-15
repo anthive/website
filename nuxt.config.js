@@ -1,6 +1,6 @@
 const pkg = require('./package')
 require('dotenv').config()
-import axios from 'axios'
+import publicApi from './plugins/axios'
 
 import langs from './static/langs/data.json'
 
@@ -9,7 +9,7 @@ const dynamicRoutes = () => {
     resolve([...langs.map(lang => `/sandbox/${lang.extention}`), ...langs.map(lang => `/ru/sandbox/${lang.extention}`)])
   })
 
-  let userRoutes = axios.get(`${process.env.API_URL}/users`).then(usersResp => {
+  let userRoutes = publicApi.get('/users').then(usersResp => {
     return [
       ...usersResp.data.map(user => `/users/${user.username}`),
       ...usersResp.data.map(user => `/ru/users/${user.username}`)
