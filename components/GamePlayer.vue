@@ -1,8 +1,5 @@
 <template>
-  <v-col
-    class="pa-0 player__section"
-    cols="auto"
-  >
+  <v-col class="pa-0 player__section" cols="auto">
     <div
       class="player__wrap"
       @click="playPause()"
@@ -10,24 +7,9 @@
       @mouseleave="showActionsState = false"
       ref="playerWrap"
     />
-    <div
-      id="player"
-      @mousemove="mouseCoordinates"
-      @mouseover="mouseOnPlayer = true"
-      @mouseleave="mouseOnPlayer = false"
-    >
-      <h2 class="px-2 white--text loading">{{ $t('game.loading') }}</h2>      
+    <div id="player">
+      <h2 class="px-2 white--text loading">{{ $t("game.loading") }}</h2>
     </div>
-    <v-tooltip
-      v-model="isShowTooltip"
-      color="accent"
-      content-class="b-radius-0"
-      top
-      :position-x="tooltipPosition.x"
-      :position-y="tooltipPosition.y"
-    >
-      <div class="player-tooltip-content" v-html="getTooltipContent" />
-    </v-tooltip>
     <v-slide-y-transition>
       <div class="end-game-layout" v-show="isGameEnd">
         <div class="layout-buttons">
@@ -37,7 +19,7 @@
             dark
             block
             :href="getRematchUrl"
-            >{{ $t('game.requestRematch') }}</v-btn
+            >{{ $t("game.requestRematch") }}</v-btn
           >
           <v-btn
             class="layout-button"
@@ -45,11 +27,11 @@
             dark
             block
             @click="$emit('replay')"
-            >{{ $t('game.replay') }}
+            >{{ $t("game.replay") }}
             <AntHiveIcon class="ml-1" color="white">autorenew</AntHiveIcon>
           </v-btn>
           <div class="social-share">
-            <p>{{ $t('game.shareGame') }}</p>
+            <p>{{ $t("game.shareGame") }}</p>
             <div class="d-flex justify-center">
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -66,7 +48,7 @@
                     <AntHiveIcon color="grey">linkedin</AntHiveIcon>
                   </v-btn>
                 </template>
-                <span>{{ $t('game.shareOn') }} Linkedin</span>
+                <span>{{ $t("game.shareOn") }} Linkedin</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -83,7 +65,7 @@
                     <AntHiveIcon color="grey">facebook</AntHiveIcon>
                   </v-btn>
                 </template>
-                <span>{{ $t('game.shareOn') }} Facebook</span>
+                <span>{{ $t("game.shareOn") }} Facebook</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -100,7 +82,7 @@
                     <AntHiveIcon color="grey">twitter</AntHiveIcon>
                   </v-btn>
                 </template>
-                <span>{{ $t('game.shareOn') }} Twitter</span>
+                <span>{{ $t("game.shareOn") }} Twitter</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -117,7 +99,7 @@
                     <AntHiveIcon color="grey">email</AntHiveIcon>
                   </v-btn>
                 </template>
-                <span>{{ $t('game.sendBy') }} Email</span>
+                <span>{{ $t("game.sendBy") }} Email</span>
               </v-tooltip>
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
@@ -129,10 +111,12 @@
                     v-on="on"
                     @click="copyToClipboard()"
                   >
-                    <AntHiveIcon color="grey">file-document-box-multiple</AntHiveIcon>
+                    <AntHiveIcon color="grey"
+                      >file-document-box-multiple</AntHiveIcon
+                    >
                   </v-btn>
                 </template>
-                <span>{{ $t('game.copyUrl') }}</span>
+                <span>{{ $t("game.copyUrl") }}</span>
               </v-tooltip>
             </div>
           </div>
@@ -142,22 +126,21 @@
     <div class="debug-panel" v-if="getBots && isDebugMode">
       <v-tabs v-model="tab" background-color="grey darken-2" dark>
         <div v-for="(bot, index) in getBots" :key="index">
-          <v-tab class="tab">Request {{ bot.id }} </v-tab>
-          <v-tab class="tab">Response {{ bot.id }} </v-tab>
+          <v-tab class="tab">{{ bot.displayName }} {{ bot.id }}</v-tab>
         </div>
       </v-tabs>
 
-      
       <v-tabs-items v-model="tab">
         <div v-for="(bot, index) in getBots" :key="index + 10">
           <v-tab-item :transition="false" :reverse-transition="false">
-            <div class="tab-content">
-              <div>{{ getResponseRequest(bot, 'responses') }}</div>
-            </div>
-          </v-tab-item>
-          <v-tab-item :transition="false" :reverse-transition="false">
-            <div class="tab-content">
-              <div>{{ getResponseRequest(bot, 'requests') }}</div>
+            <div class="d-flex">
+              <div class="tab-content">
+                <AntHiveButton v-if="isGameStoped" @click="downloadRequest(getResponseRequest(bot, 'requests'), bot.id)" x-large class="accent">Download request</AntHiveButton>
+                <div>{{ getResponseRequest(bot, "requests") }}</div>
+              </div>
+              <div class="tab-content">
+                <div>{{ getResponseRequest(bot, "responses") }}</div>
+              </div>
             </div>
           </v-tab-item>
         </div>
@@ -165,7 +148,6 @@
     </div>
   </v-col>
 </template>
-
 
 <script>
 import AntHiveIcon from '@/components/AntHiveIcon'
@@ -200,6 +182,10 @@ export default {
     isDebugMode: {
       type: Boolean,
       default: false
+    },
+    isGameStoped: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -219,48 +205,6 @@ export default {
     },
     getRematchUrl() {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
-    },
-    isShowTooltip() {
-      return this.tooltipContent && this.mouseOnPlayer && this.isDebugMode
-    },
-    getTooltipContent() {
-      if (!this.tooltipContent) return
-      const isFood = this.tooltipContent.hasOwnProperty('food')
-      const isAnt = this.tooltipContent.hasOwnProperty('ant')
-      const isHive = this.tooltipContent.hasOwnProperty('owner')
-      const { point } = this.tooltipContent
-      const generateRow = content => `<p class="mb-0 white--text">${content}</p>`
-      if (isFood) {
-        return `
-          ${generateRow('<strong>Food</strong>')}
-          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
-          ${generateRow(`Size: ${this.tooltipContent.food}`)}
-        `
-      } else if (isAnt) {
-        const { ant } = this.tooltipContent
-        const { order } = ant
-        return `
-          ${generateRow('<strong>Ant</strong>')}
-          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
-          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
-          ${generateRow(`Id: ${ant.id}`)}
-          ${generateRow(`Health: ${ant.health}`)}
-          ${generateRow(`Age: ${ant.age}`)}
-          ${generateRow(`Event: ${ant.event}`)}
-          ${generateRow(`Action: ${order.act}`)}
-          ${generateRow(`Direction: ${order.dir}`)}
-        `
-      } else if (isHive) {
-        return `
-          ${generateRow('<strong>Hive</strong>')}
-          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
-          ${generateRow(`Owner: ${this.tooltipContent.owner}`)}
-        `
-      }
-      return `
-          ${generateRow('<strong>Cell</strong>')}
-          ${generateRow(`x: ${point.x}, y: ${point.y}`)}
-        `
     },
     getBots() {
       if (this.bots && this.bots.length) {
@@ -286,13 +230,17 @@ export default {
         console.error(er)
       }
     },
-    mouseCoordinates(event) {
-      this.tooltipPosition = event
-    },
     getResponseRequest(bot, type) {
       if (this[type] && this[type].length) {
         return this[type].find(r => r.id === bot.id)
       }
+    },
+    downloadRequest(request, id) {
+      const a = document.createElement('a')
+      const data = JSON.stringify(request)
+      a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }))
+      a.download = `request-${id}`
+      a.click()
     }
   }
 }
@@ -315,9 +263,13 @@ export default {
     padding-top: 5px;
   }
   .tab-content {
+    width: 50%;
     padding: 10px;
     height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    &:first-child {
+      border-right: 2px solid $color-violet-700;
+    }
   }
 }
 .game__vs-separator {

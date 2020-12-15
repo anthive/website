@@ -18,7 +18,9 @@
               :responses="responses"
               :requests="requests"
               :is-debug-mode="isDebugMode"
+              :is-game-stoped="isGameStoped"
             />
+            <v-card class="pa-2" tile v-if="isGameStoped && gameTooltip">{{ gameTooltip }}</v-card>
           </v-col>
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
@@ -77,7 +79,9 @@ export default {
     requests: null,
     responses: null,
     fetchPlayerDataTimerId: '',
-    isDebugMode: false
+    isDebugMode: false,
+    isGameStoped: false,
+    gameTooltip: ''
   }),
   components: {
     AntHiveBotHorizontal,
@@ -133,12 +137,33 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
             this.isDebugMode = data
           })
+          // eslint-disable-next-line
+          this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
+            this.isGameStoped = true
+            this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+          })
+          // eslint-disable-next-line
+          this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
+            this.isGameStoped = false
+            this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
+          })
         } else {
           this.isGameAvailable = false
           this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
         }
       })
     },
+    gameSetTooltipCoords(event) {
+      if (event.target.localName !== 'canvas') return
+      const gameTooltipCoords = {
+        x: Math.floor(event.offsetX / this.gamePlayer.renderer.size),
+        y: Math.floor(event.offsetY / this.gamePlayer.renderer.size)
+      }
+
+      const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
+      this.gameTooltip = `${gameTooltipCoords.x}:${gameTooltipCoords.y} ${JSON.stringify(tooltip)}`
+    },
+
     gamePlayerDestroy() {
       if (this.gamePlayer) {
         this.players = []
