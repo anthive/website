@@ -123,29 +123,6 @@
         </div>
       </div>
     </v-slide-y-transition>
-    <div class="debug-panel" v-if="getBots && isDebugMode">
-      <v-tabs v-model="tab" background-color="grey darken-2" dark>
-        <div v-for="(bot, index) in getBots" :key="index">
-          <v-tab class="tab">{{ bot.displayName }} {{ bot.id }}</v-tab>
-        </div>
-      </v-tabs>
-
-      <v-tabs-items v-model="tab">
-        <div v-for="(bot, index) in getBots" :key="index + 10">
-          <v-tab-item :transition="false" :reverse-transition="false">
-            <div class="d-flex">
-              <div class="tab-content">
-                <AntHiveButton v-if="isGameStoped" @click="downloadRequest(getResponseRequest(bot, 'requests'), bot.id)" x-large class="accent">Download request</AntHiveButton>
-                <div>{{ getResponseRequest(bot, "requests") }}</div>
-              </div>
-              <div class="tab-content">
-                <div>{{ getResponseRequest(bot, "responses") }}</div>
-              </div>
-            </div>
-          </v-tab-item>
-        </div>
-      </v-tabs-items>
-    </div>
   </v-col>
 </template>
 
@@ -190,8 +167,7 @@ export default {
   },
   data: () => ({
     tooltipPosition: { x: 0, y: 0 },
-    mouseOnPlayer: false,
-    tab: 0
+    mouseOnPlayer: false
   }),
   computed: {
     currentUrl() {
@@ -205,21 +181,6 @@ export default {
     },
     getRematchUrl() {
       return `${process.env.PROFILE_URL}/new-game/?rematch=${this.gameId}`
-    },
-    getBots() {
-      if (this.bots && this.bots.length) {
-        const bots = this.bots
-        return bots.sort((a, b) => {
-          if (a.id > b.id) {
-            return 1
-          }
-          if (a.id < b.id) {
-            return -1
-          }
-          return 0
-        })
-      }
-      return []
     }
   },
   methods: {
@@ -229,18 +190,6 @@ export default {
       } catch (er) {
         console.error(er)
       }
-    },
-    getResponseRequest(bot, type) {
-      if (this[type] && this[type].length) {
-        return this[type].find(r => r.id === bot.id)
-      }
-    },
-    downloadRequest(request, id) {
-      const a = document.createElement('a')
-      const data = JSON.stringify(request)
-      a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }))
-      a.download = `request-${id}`
-      a.click()
     }
   }
 }
@@ -252,32 +201,13 @@ export default {
   background-repeat: repeat;
   position: relative;
 }
-.debug-panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  .tab {
-    text-transform: none;
-    padding-top: 5px;
-  }
-  .tab-content {
-    width: 50%;
-    padding: 10px;
-    height: 200px;
-    overflow-y: auto;
-    &:first-child {
-      border-right: 2px solid $color-violet-700;
-    }
-  }
-}
 .game__vs-separator {
   position: relative;
   top: -80px;
 }
 .player__section {
   margin-top: 8px;
+  position: relative;
 }
 .v-btn--disabled {
   background: rgba(255, 255, 255, 0.2);

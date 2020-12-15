@@ -1,5 +1,5 @@
 <template>
-  <section class="game page-wrap">
+  <section :class="{ debug: isDebugMode }" class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
         <div class="mx-auto">
@@ -9,8 +9,9 @@
           />
         </div>
         <v-row class="mx-auto">
-          <v-col cols="12" md="8" class="player-wrap">
+          <v-col cols="12" md="8">
             <GamePlayer
+              class="player-wrap"
               :tooltip-content="tooltipContent"
               :is-game-end="isGameEnd"
               @replay="replay"
@@ -20,8 +21,50 @@
               :is-debug-mode="isDebugMode"
               :is-game-stoped="isGameStoped"
             />
-            <v-card class="pa-2" tile v-if="isGameStoped && gameTooltip">{{ gameTooltip }}</v-card>
+            <v-card
+              class="pa-2"
+              tile
+              v-if="isGameStoped && isDebugMode && gameTooltip"
+              >{{ gameTooltip }}</v-card
+            >
+            <div class="debug-panel" v-if="getBots && isDebugMode">
+              <v-tabs v-model="tab" background-color="primary" dark>
+                <v-tab v-for="(bot, index) in getBots" :key="index" class="tab"
+                  >{{ bot.displayName }} {{ bot.id }}</v-tab
+                >
+              </v-tabs>
+
+              <v-tabs-items v-model="tab">
+                <div v-for="(bot, index) in getBots" :key="index + 10">
+                  <v-tab-item :transition="false" :reverse-transition="false">
+                    <div class="d-flex">
+                      <div class="tab-content">
+                        <AntHiveButton
+                          v-if="isGameStoped"
+                          @click="
+                            downloadRequest(
+                              getResponseRequest(bot, 'requests'),
+                              bot.id
+                            )
+                          "
+                          x-large
+                          class="accent"
+                          >Download request</AntHiveButton
+                        >
+                        <div>{{ getResponseRequest(bot, "requests") }}</div>
+                      </div>
+                      <div class="tab-content">
+                        <div>
+                          <pre>{{ getResponseRequest(bot, "responses") }}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </v-tab-item>
+                </div>
+              </v-tabs-items>
+            </div>
           </v-col>
+
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
@@ -34,7 +77,9 @@
             </transition-group>
           </v-col>
         </v-row>
-        <h3 v-if="!isDebugMode" class="mt-10 mb-0">{{ $t('game.moreGames') }}:</h3>
+        <h3 v-if="!isDebugMode" class="mt-10 mb-0">
+          {{ $t("game.moreGames") }}:
+        </h3>
       </template>
 
       <template v-else>
@@ -42,7 +87,7 @@
           :title="`${$t('game.cantFindGame')} #${gameId}`"
           :tooltip-text="$t('game.gameId')"
         />
-        <h3 class="mt-10 mb-0">{{ $t('game.checkOut') }}:</h3>
+        <h3 class="mt-10 mb-0">{{ $t("game.checkOut") }}:</h3>
       </template>
       <GamesTable v-if="!isDebugMode" :games-limit="5" />
     </v-container>
@@ -69,6 +114,7 @@ export default {
   data: () => ({
     isGameAvailable: true,
     theme: 1,
+    tab: 0,
     players: [],
     isGameEnd: false,
     gameLoaded: false,
@@ -88,6 +134,23 @@ export default {
     GamePlayer,
     GamesTable,
     AntHivePageHeader
+  },
+  computed: {
+    getBots() {
+      if (this.players && this.players.length) {
+        const bots = this.players
+        return bots.sort((a, b) => {
+          if (a.id > b.id) {
+            return 1
+          }
+          if (a.id < b.id) {
+            return -1
+          }
+          return 0
+        })
+      }
+      return []
+    }
   },
   watch: {
     $route() {
@@ -194,6 +257,18 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
+    },
+    getResponseRequest(bot, type) {
+      if (this[type] && this[type].length) {
+        return JSON.stringify(this[type].find(r => r.id === bot.id), null, 2)
+      }
+    },
+    downloadRequest(request, id) {
+      const a = document.createElement('a')
+      const data = JSON.stringify(request)
+      a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }))
+      a.download = `request-${id}`
+      a.click()
     }
   },
   destroyed() {
@@ -217,7 +292,9 @@ export default {
 .game {
   height: 100%;
   overflow-x: hidden;
-
+  &.debug {
+    margin-bottom: 250px;
+  }
   // loading text animation
   .flip-list-move {
     transition: transform 0.5s;
@@ -230,6 +307,28 @@ export default {
   .flip-list-leave-to {
     transform: translateX(100px);
     opacity: 0;
+  }
+}
+
+.debug-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  .tab {
+    text-transform: none;
+    padding-top: 5px;
+  }
+  .tab-content {
+    width: 40%;
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    &:first-child {
+      width: 60%;
+      border-right: 2px solid $color-violet-700;
+    }
   }
 }
 </style>
