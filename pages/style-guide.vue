@@ -63,7 +63,7 @@
             :key="player.displayName + index"
             :lang="player.lang"
             :name="player.displayName"
-            :avatar="`https://api.anthive.io/images/${player.avatar}/200/200`"
+            :avatar="getAvatar(player.avatar, 100)"
             games="1234514"
             wins="2331"
           />
@@ -140,6 +140,7 @@ import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import AntHiveAchivement from '@/components/AntHiveAchivement'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
+import Image from '@/mixins/image'
 
 export default {
   components: {
@@ -185,7 +186,8 @@ export default {
         }
       }
     ]
-  })
+  }),
+  mixins: [Image]
 }
 </script>
 

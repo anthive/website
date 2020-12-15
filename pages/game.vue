@@ -99,6 +99,7 @@ import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
+
 export default {
   head() {
     return {
@@ -235,9 +236,6 @@ export default {
         this.gamePlayer = null
       }
       if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
-    },
-    getAvatar(id) {
-      return `${process.env.API_URL}/images/${id}/100/100`
     },
     isGameFound(url) {
       const request = new XMLHttpRequest()

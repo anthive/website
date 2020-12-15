@@ -1,22 +1,19 @@
 <template>
   <div>
     <div class="user-icon__avatar">
-      <v-img :src="getAvatar(player.avatar)" />
+      <v-img :src="getAvatar(player.avatar, 100)" />
     </div>
   </div>
 </template>
 
 <script>
+import Image from '@/mixins/image'
 export default {
   name: 'GamesUsersIcon',
   props: {
     player: Object
   },
-  methods: {
-    getAvatar(id) {
-      return `${process.env.API_URL}/images/${id}/100/100`
-    }
-  }
+  mixins: [Image]
 }
 </script>
 
