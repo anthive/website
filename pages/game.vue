@@ -169,8 +169,10 @@ export default {
         const version = this.$route.query.v || ''
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
         if (this.isGameFound(dataUrl)) {
+          const apiImagesUrl = `${process.env.API_URL}/public/images`
+          const assetsUrl = `${process.env.WEBSITE_URL}/skins`
           // eslint-disable-next-line
-          this.gamePlayer = new AnthivePlayer('#player', `${process.env.API_URL}/public/images`, dataUrl)
+          this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, dataUrl)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
             this.gameLoaded = true

@@ -26,6 +26,7 @@ module.exports = {
   env: {
     SIM_VERSION: process.env.SIM_VERSION,
     PROFILE_URL: process.env.PROFILE_URL,
+    WEBSITE_URL: process.env.WEBSITE_URL,
     API_URL: process.env.API_URL,
     SANDBOX_STORAGE: process.env.SANDBOX_STORAGE,
     SANDBOX_API_URL: process.env.SANDBOX_API_URL,
