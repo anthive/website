@@ -258,9 +258,11 @@ export default {
       return simResp.data
     },
     initGame() {
+      const apiImagesUrl = `${process.env.API_URL}/public/images`
+      const assetsUrl = `${window.location.origin}/skins`
       const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
-      player = new AnthivePlayer('#player', gameUrl)
+      player = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, gameUrl)
     },
     async initLogs() {
       this.botLogs = await this.getLogs(this.gameId, 'bot')
