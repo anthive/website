@@ -170,7 +170,7 @@ export default {
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
         if (this.isGameFound(dataUrl)) {
           // eslint-disable-next-line
-          this.gamePlayer = new AnthivePlayer('#player', dataUrl)
+          this.gamePlayer = new AnthivePlayer('#player', `${process.env.API_URL}/public/images`, dataUrl)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
             this.gameLoaded = true
