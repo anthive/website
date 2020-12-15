@@ -1,6 +1,6 @@
 <template>
  <div class="chip">
-   <div class="chip__img" :style="`background: center / cover no-repeat url(${getAvatar(player.avatar)})`">
+   <div class="chip__img" :style="`background: center / cover no-repeat url(${getAvatar(player.avatar, 100)})`">
      <img
         class="chip__lang-icon"
         width="30px"
@@ -32,15 +32,14 @@
 </template>
 
 <script>
+import Image from '@/mixins/image'
 export default {
   name: 'GamesUserChip',
   props: {
     player: Object
   },
+  mixins: [Image],
   methods: {
-    getAvatar(id) {
-      return `${process.env.API_URL}/images/${id}/100/100`
-    },
     langUrl(lang) {
       return '/skins/lang/' + lang + '.png'
     },

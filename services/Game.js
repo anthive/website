@@ -1,13 +1,12 @@
-import axios from 'axios'
+import publicApi from '../plugins/axios'
 
 async function getGames(params) {
-  const gamesUrl = `${process.env.API_URL}/games`
-  return axios.get(gamesUrl, { params }).then(resp => resp.data)
+  return publicApi.get('/games', { params }).then(resp => resp.data)
 }
 
 async function getGame(id) {
-  const gameUrl = `${process.env.API_URL}/games/${id}`
-  return axios.get(gameUrl).then(resp => resp.data)
+  const gameUrl = `/games/${id}`
+  return publicApi.get(gameUrl).then(resp => resp.data)
 }
 
 export { getGames, getGame }

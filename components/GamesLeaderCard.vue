@@ -34,7 +34,7 @@
               <div>
                 <div class="leader-card__avatar-name">
                   <v-avatar tile size="65" class="leader-card__avatar">
-                    <v-img :src="getAvatar(leader.avatar)" />
+                    <v-img :src="getAvatar(leader.avatar, 100)" />
                   </v-avatar>
                   <span class="leader-card__name">
                     {{ leader.displayName }}
@@ -59,6 +59,7 @@
 <script>
 import AntHiveIcon from '@/components/AntHiveIcon'
 import langs from '../static/langs/data.json'
+import Image from '@/mixins/image'
 
 export default {
   name: 'GamesLeaderCard',
@@ -69,10 +70,8 @@ export default {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
   },
+  mixins: [Image],
   methods: {
-    getAvatar(id) {
-      return `${process.env.API_URL}/images/${id}/100/100`
-    },
     getLangImg(lang) {
       const currentLang = langs.find(l => l.id === lang)
       return currentLang.img
