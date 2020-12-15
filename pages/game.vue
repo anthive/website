@@ -22,14 +22,24 @@
               :is-game-stoped="isGameStoped"
             />
             <v-card
-              class="pa-2"
+              class="tooltip"
               tile
               v-if="isGameStoped && isDebugMode && gameTooltip"
-              >{{ gameTooltip }}</v-card
+              >x: <span>{{ gameTooltip.x }}</span> y:
+              <span>{{ gameTooltip.y }}</span> food:
+              <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
+              <span>{{ gameTooltip.id }}</span></v-card
             >
             <div class="debug-panel" v-if="getBots && isDebugMode">
               <v-tabs v-model="tab" background-color="primary" dark>
-                <v-tab v-for="(bot, index) in getBots" :key="index" class="tab"
+                <v-tabs-slider />
+                <v-tab
+                  active-class="active"
+                  v-for="(bot, index) in getBots"
+                  :key="index"
+                  class="tab"
+                  ><v-avatar class="mr-2" tile size="20"
+                    ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
                   >{{ bot.displayName }} {{ bot.id }}</v-tab
                 >
               </v-tabs>
@@ -39,23 +49,26 @@
                   <v-tab-item :transition="false" :reverse-transition="false">
                     <div class="d-flex">
                       <div class="tab-content">
-                        <AntHiveButton
-                          v-if="isGameStoped"
-                          @click="
-                            downloadRequest(
-                              getResponseRequest(bot, 'requests'),
-                              bot.id
-                            )
-                          "
-                          x-large
-                          class="accent"
-                          >Download request</AntHiveButton
-                        >
-                        <div>{{ getResponseRequest(bot, "requests") }}</div>
+                        <div class="tab-title">
+                          Request
+                          <AntHiveIcon
+                            v-if="isGameStoped"
+                            class="download"
+                            @click="
+                              downloadRequest(
+                                getResponseRequest(bot, 'requests'),
+                                bot.id
+                              )
+                            "
+                            >download</AntHiveIcon
+                          >
+                        </div>
+                        <div class="tab-text">{{ getResponseRequest(bot, "requests") }}</div>
                       </div>
                       <div class="tab-content">
+                        <div class="tab-title">Response</div>
                         <div>
-                          <pre>{{ getResponseRequest(bot, "responses") }}</pre>
+                          <pre class="tab-text">{{ JSON.stringify(getResponseRequest(bot, "responses"), null, 2) }}</pre>
                         </div>
                       </div>
                     </div>
@@ -99,6 +112,8 @@ import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import GamePlayer from '@/components/GamePlayer'
 import GamesTable from '@/components/GamesTable'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
+import Image from '@/mixins/image'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   head() {
@@ -134,8 +149,10 @@ export default {
     AntHiveBotHorizontal,
     GamePlayer,
     GamesTable,
-    AntHivePageHeader
+    AntHivePageHeader,
+    AntHiveIcon
   },
+  mixins: [Image],
   computed: {
     getBots() {
       if (this.players && this.players.length) {
@@ -227,7 +244,7 @@ export default {
       }
 
       const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
-      this.gameTooltip = `${gameTooltipCoords.x}:${gameTooltipCoords.y} ${JSON.stringify(tooltip)}`
+      this.gameTooltip = { x: gameTooltipCoords.x, y: gameTooltipCoords.y, ...tooltip }
     },
 
     gamePlayerDestroy() {
@@ -260,7 +277,7 @@ export default {
     },
     getResponseRequest(bot, type) {
       if (this[type] && this[type].length) {
-        return JSON.stringify(this[type].find(r => r.id === bot.id), null, 2)
+        return this[type].find(r => r.id === bot.id)
       }
     },
     downloadRequest(request, id) {
@@ -277,13 +294,27 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/assets/style/global.scss';
+.tab-content {
+  &::-webkit-scrollbar {
+    width: 15px;
+    background: $color-violet-450;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 5px solid $color-violet-450;
+    background: $color-violet-350;
+  }
+}
 .v-content__wrap {
   background: #fff;
 }
 .player-wrap {
   width: 100%;
   padding: 10px 0 0;
+}
+.debug-panel .v-tabs-slider-wrapper {
+  display: none;
 }
 </style>
 
@@ -293,7 +324,7 @@ export default {
   height: 100%;
   overflow-x: hidden;
   &.debug {
-    margin-bottom: 250px;
+    margin-bottom: 330px;
   }
   // loading text animation
   .flip-list-move {
@@ -310,25 +341,55 @@ export default {
   }
 }
 
+.tooltip {
+  color: $color-violet-700;
+  padding: 10px;
+  background-color: $color-violet-450;
+  & span {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+}
+
 .debug-panel {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
+  &.v-tabs-slider-wrapper {
+    display: none;
+  }
+  .active {
+    background-color: $color-violet-350;
+  }
+  .download {
+    cursor: pointer;
+    background-color: $color-violet-700 !important;
+    margin-bottom: -5px;
+    margin-left: 5px;
+  }
   .tab {
     text-transform: none;
     padding-top: 5px;
   }
   .tab-content {
+    color: $color-violet-700;
     width: 40%;
-    padding: 10px;
-    height: 200px;
+    height: 296px;
     overflow-y: auto;
     &:first-child {
       width: 60%;
       border-right: 2px solid $color-violet-700;
     }
+  }
+  .tab-title {
+    background-color: $color-violet-350;
+    color: $color-violet-700;
+    padding-left: 10px;
+  }
+  .tab-text {
+    margin: 10px;
   }
 }
 </style>
