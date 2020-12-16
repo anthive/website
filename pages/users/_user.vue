@@ -9,7 +9,6 @@
           </v-avatar>
           <div class="user__title">
             <h1 class="user__name">{{ getUserFullName }}</h1>
-            <p>Javascript</p>
           </div>
             
         </div>
@@ -17,8 +16,8 @@
 
       <v-row class="justify-space-between mt-10">
         <v-col cols="12" md="12">
-          <p>Hello!<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          <div class="user__media">
+          <p v-if="getUser.description">Hello!<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <div v-if="getUser.socials" class="user__media">
             <a
               class="user__social-link"
               href="#"
