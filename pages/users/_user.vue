@@ -16,7 +16,7 @@
       </v-row>
 
       <v-row class="justify-space-between mt-10">
-        <v-col cols="12" md="5">
+        <v-col cols="12" md="12">
           <p>Hello!<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
           <div class="user__media">
             <a
@@ -66,42 +66,14 @@
             </a>
           </div>
         </v-col>
-        <v-col class="user__statistic" cols="12" md="5">
-          <h3>{{ $t("userInfo.statistic") }}</h3>
-          <v-row>
-            <v-col cols="12" class="user__statistic-block" md="6">
-              <p>{{ $t("userInfo.rank") }}: <strong>73</strong></p>
-              <p>{{ $t("userInfo.totalScore") }}: <strong>130656</strong></p>
-              <p>{{ $t("userInfo.games") }}: <strong>45383</strong></p>
-            </v-col>
-            <v-col cols="12" md="6">
-              <p>{{ $t("userInfo.bestGameScore") }}: <strong>15250</strong></p>
-              <p>{{ $t("userInfo.maxAntInGame") }}: <strong>510</strong></p>
-              <p>{{ $t("userInfo.wins") }}: <strong>120</strong></p>
-            </v-col>
-          </v-row>
-        </v-col>
       </v-row>
       
       <v-row class="justify-space-between mt-10">
-        <v-col cols="12" md="5">
-          <h3>{{ $t("userInfo.achivements") }}</h3>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-          <div class="user__achivements">
-            <AntHiveAchivement
-              v-for="(chip, index) in 10"
-              :key="index + 'achivement'"
-              title="Best bot 2020"
-              description="Javascript beginner"
-            />
-          </div>
-        </v-col>
-        <v-col cols="12" md="5">
-          <h3>{{ $t("userInfo.bestBots") }} ({{ getUserBots && getUserBots.length }})</h3>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <v-col cols="12" md="12">
+          <h3>{{ $t("userInfo.bots") }}</h3>
           <v-row class="user__bots">
             <v-col
-              cols="12" md="6"
+              cols="12" md="2"
               v-for="(bot, index) in getUserBots"
               :key="index + 'bot'"
             >
@@ -220,8 +192,6 @@ export default {
 
   &__achivements,
   &__bots {
-    max-height: 535px;
-    overflow-y: scroll;
     &::-webkit-scrollbar {
       width: 6px;
     }
