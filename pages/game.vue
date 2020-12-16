@@ -52,6 +52,7 @@
                         <div class="tab-title">
                           Request
                           <AntHiveIcon
+                            icon="download"
                             v-if="isGameStoped"
                             class="download"
                             @click="
@@ -60,8 +61,7 @@
                                 bot.id
                               )
                             "
-                            >download</AntHiveIcon
-                          >
+                            />
                         </div>
                         <div class="tab-text">{{ getResponseRequest(bot, "requests") }}</div>
                       </div>
@@ -84,7 +84,7 @@
                 class="my-2"
                 :key="player.id"
                 v-for="(player, index) in players"
-                :player="player"
+                :bot="player"
                 :number="index + 1"
               />
             </transition-group>

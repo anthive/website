@@ -20,10 +20,10 @@
         <h4>AntHiveIcon</h4>
         <p v-if="$options.components['AntHiveIcon'].props">Props: {{ $options.components['AntHiveIcon'].props }}</p>
         <div>
-          <AntHiveIcon small>twitter</AntHiveIcon>
-          <AntHiveIcon medium>twitter</AntHiveIcon>
-          <AntHiveIcon big>twitter</AntHiveIcon>
-          <AntHiveIcon color="green">twitter</AntHiveIcon>
+          <AntHiveIcon icon="twitter" small />
+          <AntHiveIcon icon="twitter" medium />
+          <AntHiveIcon icon="twitter" big />
+          <AntHiveIcon icon="twitter" color="green" />
         </div>
       </div>
 
@@ -34,7 +34,7 @@
           <AntHiveBotSmall
             v-for="(player, index) in players"
             :key="player.displayName + index"
-            :player="player"
+            :avatar="player.avatar"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@
             class="mr-4"
             v-for="(player, index) in players"
             :key="player.displayName + index"
-            :player="player"
+            :bot="player"
             :number="index + 1"
           />
         </div>

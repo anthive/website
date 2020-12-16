@@ -39,7 +39,7 @@
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
-                    <UserIcon class="ml-1" :player="player" locale="table" />
+                    <AntHiveBotSmall class="ml-1" :player="player.avatar" locale="table" />
                   </div>
                 </template>
                 {{ player.username }}
@@ -71,11 +71,11 @@
               <v-tooltip bottom color="accent" content-class="tooltip b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
-                    <UserIcon class="ml-1" :player="player" />
+                    <AntHiveBotSmall class="ml-1" :avatar="player.avatar" />
                   </div>
                 </template>
                 <div class="tooltip__title">
-                  <span><UserIcon class="mr-2" :player="player" /></span>
+                  <span><AntHiveBotSmall class="mr-2" :avatar="player.avatar" /></span>
                   <span>{{ player.name }}</span>
                 </div>
                 <p>
@@ -85,8 +85,8 @@
                 </p>
                 <p>
                   <strong>{{ $t("game.statistics") }}</strong><br>
-                  {{ $t("game.ants") }}: {{ player.stats.ants }}<br>
-                  {{ $t("game.hiveSize") }}: {{ player.stats.hive.length }}<br>
+                  {{ $t("game.ant") }}: {{ player.stats.ants }}<br>
+                  {{ $t("game.hive") }}: {{ player.stats.hive.length }}<br>
                   {{ $t("game.score") }}: {{ player.stats.score }}<br>
                   {{ $t("game.art") }}: {{ player.stats.art }}<br>
                   {{ $t("game.age") }}: {{ player.stats.age }}<br>
@@ -126,10 +126,8 @@
 </template>
 
 <script>
-import UserChip from '@/components/AntHiveBotHorizontal'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
-import UserIcon from '@/components/AntHiveBotSmall'
-import AntHiveIcon from '@/components/AntHiveIcon'
+import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import { getGames } from '@/services/Game'
 
 export default {
@@ -142,10 +140,8 @@ export default {
     }
   },
   components: {
-    UserChip,
-    UserIcon,
-    AntHiveAuthor,
-    AntHiveIcon
+    AntHiveBotSmall,
+    AntHiveAuthor
   },
   data: () => ({
     searchParams: {},
@@ -262,7 +258,7 @@ export default {
     color: $color-white;
   }
   &__title {
-    font-size: 16px;
+    font-size: $font-big;
     font-weight: 600;
     padding-top: 10px;
     display: flex;

@@ -1,7 +1,9 @@
 // fonts
+$font-smaller: 10px;
 $font-small: 12px;
-$font-medium: 16px;
-$font-big: 24px;
+$font-medium: 14px;
+$font-big: 16px;
+$font-bigger: 24px;
 
 // colors
 $color-black: #000000;
@@ -29,7 +31,7 @@ $color-red-500: #9d2747;
 
 // grey
 $color-grey-10: #fafafa;
-$color-grey-50: #f0eeed;
+$color-grey-50: #f4f2f7;
 $color-grey-100: #d9d9d9;
 $color-grey-200: #cdcdd2;
 $color-grey-300: #aaa9a8;
@@ -62,3 +64,5 @@ $border-radius-round: 50%;
 // shadow
 $box-shadow-default: 0px 0px 13px 0px #00000021;
 $box-shadow-hover: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
+$box-shadow-selected: 0px 3px 9px -2px $color-violet-500, 0px 2px 8px 0px $color-violet-500,
+  0px 1px 3px 0px $color-violet-500;

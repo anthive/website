@@ -95,7 +95,7 @@
                 <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
                   <template v-slot:activator="{ on }">
                     <div v-on="on">
-                      <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
+                      <AntHiveIcon icon="alert-circle" class="ml-1" small color="#4c377f" />
                     </div>
                   </template>
                   {{ $t(`leaderboard.${column.description}`) }}

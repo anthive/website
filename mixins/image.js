@@ -3,6 +3,15 @@ const Image = {
   methods: {
     getAvatar(id, size) {
       return getImageById(id, size)
+    },
+    getLangImg(lang) {
+      return `/skins/lang/${lang}.png`
+    },
+    getAntSkinImg(skin) {
+      return `/skins/client/${skin}/ant.png`
+    },
+    getHiveSkinImg(skin) {
+      return `/skins/client/${skin}/hive.png`
     }
   }
 }

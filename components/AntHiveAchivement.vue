@@ -60,7 +60,7 @@ export default {
 
   &__icon-text {
     color: $color-white;
-    font-size: 10px;
+    font-size: $font-smaller;
     text-align: center;
     font-weight: 600;
     padding: 4px 0;

@@ -16,7 +16,7 @@
         <template v-slot:activator="{ on }">
           <!-- TODO: open menu-->
           <v-btn tile class="accent hidden-md-and-up" v-on="on">
-            <AntHiveIcon color="white">menu</AntHiveIcon>
+            <AntHiveIcon icon="menu" color="white" />
           </v-btn>
         </template>
         <v-list class="hidden-md-and-up pa-2">
