@@ -36,13 +36,30 @@
               :key="pIndex"
               v-for="(bot, pIndex) in game.bots.slice(0, 4)"
             >
-              <v-tooltip bottom color="accent" content-class="b-radius-0">
+              <v-tooltip bottom color="accent" content-class="tooltip b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
                     <AntHiveBotSmall class="ml-1" :avatar="bot.avatar" locale="table" />
                   </div>
                 </template>
-                {{ bot.username }}
+               <div class="tooltip__title">
+                  <span><AntHiveBotSmall class="mr-2" :avatar="bot.avatar" /></span>
+                  <span>{{ bot.name }}</span>
+                </div>
+                <p>
+                  <strong>{{ $t("game.spawn") }}</strong><br>
+                  X: {{ bot.spawn.x }}<br>
+                  Y: {{ bot.spawn.y }}
+                </p>
+                <p>
+                  <strong>{{ $t("game.statistics") }}</strong><br>
+                  {{ $t("game.ant") }}: {{ bot.stats.ants }}<br>
+                  {{ $t("game.hive") }}: {{ bot.stats.hive.length }}<br>
+                  {{ $t("game.score") }}: {{ bot.stats.score }}<br>
+                  {{ $t("game.art") }}: {{ bot.stats.art }}<br>
+                  {{ $t("game.age") }}: {{ bot.stats.age }}<br>
+                  {{ $t("game.errors") }}: {{ bot.stats.errors }}
+                </p>
               </v-tooltip>
             </div>
 
@@ -112,7 +129,6 @@
                   query: { id: game.id, v: game.version },
                 })
               "
-              width="100%"
               color="accent"
             >
               {{ $t("games.viewGame") }}
