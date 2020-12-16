@@ -1,5 +1,5 @@
 <template>
-  <span class="anthive-icon" :class="{small, medium, big}" :style="getIconStyles" />
+  <span @click="$emit('click')" class="anthive-icon" :class="{small, medium, big}" :style="getIconStyles" />
 </template>
 
 <script>

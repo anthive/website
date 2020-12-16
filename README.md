@@ -2,7 +2,7 @@
 AntHIve.IO is a turn-based coding game. For detailed rules please visit [Rules Section ](https://anthive.io/rules/)
 
 ## Preview
-https://anthive-qa.netlify.app/
+https://anthive.netlify.app/
 
 ## Run locally
 ```
@@ -17,6 +17,8 @@ PROFILE_URL=
 SANDBOX_STORAGE=
 SIM_VERSION=5.0
 SANDBOX_API_URL=
+GAMES_STORAGE=
+WEBSITE_URL=
 ```
 
 ## Contributing

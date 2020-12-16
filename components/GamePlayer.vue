@@ -200,6 +200,7 @@ export default {
 #player {
   background-repeat: repeat;
   position: relative;
+  margin-bottom: -3px;
 }
 .game__vs-separator {
   position: relative;
