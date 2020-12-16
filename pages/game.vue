@@ -239,8 +239,8 @@ export default {
     gameSetTooltipCoords(event) {
       if (event.target.localName !== 'canvas') return
       const gameTooltipCoords = {
-        x: Math.floor(event.offsetX / this.gamePlayer.renderer.size),
-        y: Math.floor(event.offsetY / this.gamePlayer.renderer.size)
+        x: Math.floor(event.offsetX / this.gamePlayer.renderer._size),
+        y: Math.floor(event.offsetY / this.gamePlayer.renderer._size)
       }
 
       const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
