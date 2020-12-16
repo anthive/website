@@ -57,15 +57,11 @@
 </template>
 
 <script>
-import AntHiveIcon from '@/components/AntHiveIcon'
 import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 
 export default {
   name: 'GamesLeaderCard',
-  components: {
-    AntHiveIcon
-  },
   props: {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }

@@ -25,17 +25,18 @@ export default {
       type: String,
       required: false,
       default: 'black'
+    },
+    icon: {
+      type: String,
+      required: true
     }
   },
   computed: {
-    getIconName() {
-      return this.$slots.default[0].text
-    },
     getIconStyles() {
       return `
         background-color: ${this.color};
-        -webkit-mask: url(/img/${this.getIconName}.svg) no-repeat center;
-        mask: url(/img/${this.getIconName}.svg) no-repeat center;
+        -webkit-mask: url(/img/${this.icon}.svg) no-repeat center;
+        mask: url(/img/${this.icon}.svg) no-repeat center;
         mask-size: cover;
       `
     }

@@ -1,6 +1,6 @@
 <template>
-  <v-btn class="anthive-btn" @click="$emit('click')" v-bind="$attrs" fill :dark="!light">
-    <span class="anthive-btn__text"><slot/></span>
+  <v-btn class="anthive-btn" @click="$emit('click')" :tile="tile" :large="large" :color="color" :to="to" fill :disabled="disabled" :dark="!light">
+    <span class="text"><slot/></span>
   </v-btn>
 </template>
 
@@ -8,7 +8,12 @@
 export default {
   name: 'AntHiveButton',
   props: {
-    light: { type: Boolean, default: false }
+    light: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    large: { type: Boolean, default: false },
+    tile: { type: Boolean, default: false },
+    color: { type: String, default: '' },
+    to: { type: String, default: '' }
   }
 }
 </script>
@@ -18,7 +23,7 @@ export default {
 .anthive-btn {
   min-height: 40px;
   box-shadow: none;
-  &__text {
+  .text {
     line-height: 1;
     font-weight: 600;
     text-transform: none;

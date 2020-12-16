@@ -43,7 +43,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <AntHiveIcon color="white" class="footer__social--icon">twitter</AntHiveIcon>
+        <AntHiveIcon icon="twitter" color="white" class="footer__social--icon" />
       </a>
       <a
         href="https://www.instagram.com/anthiveio/"
@@ -51,7 +51,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <AntHiveIcon color="white" class="footer__social--icon">instagram</AntHiveIcon>
+        <AntHiveIcon icon="instagram" color="white" class="footer__social--icon" />
       </a>
       <a
         href="https://www.youtube.com/channel/UCP9SHUqnSdGEiEHbqIudMxw"
@@ -59,7 +59,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <AntHiveIcon color="white" class="footer__social--icon">youtube</AntHiveIcon>
+        <AntHiveIcon icon="youtube" color="white" class="footer__social--icon" />
       </a>
       <a
         href="https://www.twitch.tv/anthiveio"
@@ -67,7 +67,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <AntHiveIcon color="white" class="footer__social--icon">twitch</AntHiveIcon>
+        <AntHiveIcon icon="twitch" color="white" class="footer__social--icon" />
       </a>
       <a
         href="https://discord.gg/3Z7KvYv"
@@ -75,7 +75,7 @@
         rel="noreferrer"
         target="_blank"
       >
-        <AntHiveIcon color="white" class="footer__social--icon">discord</AntHiveIcon>
+        <AntHiveIcon icon="discord" color="white" class="footer__social--icon" />
       </a>
     </div>
 
@@ -93,8 +93,8 @@
         :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"
       />
-      <AntHiveIcon color="white" class="footer__locale-select--earth-icon">earth</AntHiveIcon>
-      <AntHiveIcon color="white" class="footer__locale-select--up-icon">chevron-up</AntHiveIcon>
+      <AntHiveIcon icon="earth" color="white" class="footer__locale-select--earth-icon" />
+      <AntHiveIcon icon="chevron-up" color="white" class="footer__locale-select--up-icon" />
     </div>
 
   </v-footer>

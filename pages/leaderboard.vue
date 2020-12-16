@@ -95,7 +95,7 @@
                 <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
                   <template v-slot:activator="{ on }">
                     <div v-on="on">
-                      <AntHiveIcon class="ml-1" small color="#4c377f">alert-circle</AntHiveIcon>
+                      <AntHiveIcon icon="alert-circle" class="ml-1" small color="#4c377f" />
                     </div>
                   </template>
                   {{ $t(`leaderboard.${column.description}`) }}
@@ -105,11 +105,11 @@
           </v-col>
         </v-row>
         <GamesLeaderCard
-          class="leaderboard__table-player"
-          :key="player.displayName + index"
-          v-for="(player, index) in players"
+          class="leaderboard__table-bot"
+          :key="bot.displayName + index"
+          v-for="(bot, index) in bots"
           :place="index + 1"
-          :leader="player"
+          :leader="bot"
         />
       </div>
     </v-container>
@@ -145,7 +145,7 @@ export default {
     countries: ['russia', 'usa'], // TODO
     cities: ['moscow', 'new yourk'], // TODO
     langs: [],
-    players: [],
+    bots: [],
     columns: [
       {
         text: 'mmr',
@@ -156,11 +156,11 @@ export default {
   }),
   async fetch() {
     if (process.server) {
-      this.players = await getBotsLeaderboard()
+      this.bots = await getBotsLeaderboard()
     }
   },
   async mounted() {
-    this.players = await getBotsLeaderboard()
+    this.bots = await getBotsLeaderboard()
   },
   computed: {
     getLangs() {
@@ -271,7 +271,7 @@ export default {
     display: inline;
     position: relative;
   }
-  &__table-player {
+  &__table-bot {
     margin: 0;
   }
   &__user-card {
@@ -281,7 +281,7 @@ export default {
     margin-left: 10px;
     cursor: pointer;
   }
-  &__top-players {
+  &__top-bots {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -290,7 +290,7 @@ export default {
 
 @media screen and (max-width: $screen-lg) {
   .leaderboard {
-    &__top-players {
+    &__top-bots {
       width: auto;
       flex-direction: column;
     }

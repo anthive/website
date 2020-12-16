@@ -1,7 +1,4 @@
 import publicApi from '../plugins/axios'
-import { getImageById } from '../services/Image'
-
-const baseUrl = 'https://anthive.io/'
 
 class User {
   constructor() {
@@ -35,28 +32,6 @@ class User {
     if (this.Username === '' || this.Username === undefined) return
 
     return publicApi.get('/user', { params: { username: this.Username, withBots: true } }).then(res => res.data)
-  }
-
-  photoUrl(avatarId, size = 70) {
-    return getImageById(avatarId, size)
-  }
-
-  langUrl(lang = this.Lang) {
-    return baseUrl + 'skins/lang/' + lang + '.png'
-  }
-
-  antUrl(big = false) {
-    if (big) {
-      return baseUrl + 'skins/client/' + this.Skin + '/antBig.png'
-    }
-    return baseUrl + 'skins/client/' + this.Skin + '/ant.png'
-  }
-
-  hiveUrl(big = false) {
-    if (big) {
-      return baseUrl + 'skins/client/' + this.Skin + '/hiveBig.png'
-    }
-    return baseUrl + 'skins/client/' + this.Skin + '/hive.png'
   }
 
   scoreString() {

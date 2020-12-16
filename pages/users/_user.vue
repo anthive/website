@@ -122,7 +122,6 @@
 
 <script>
 import { User } from '@/services/User'
-import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAchivement from '@/components/AntHiveAchivement'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
 import Image from '@/mixins/image'
@@ -141,7 +140,6 @@ export default {
     }
   },
   components: {
-    AntHiveIcon,
     AntHiveAchivement,
     AntHiveBotVertical
   },

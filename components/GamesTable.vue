@@ -30,19 +30,36 @@
           </div>
           <div
             v-if="game.bots && game.bots.length > 4"
-            class="games-table__players-container justify-center col-12 col-md-3"
+            class="games-table__bots-container justify-center col-12 col-md-3"
           >
             <div
               :key="pIndex"
-              v-for="(player, pIndex) in game.bots.slice(0, 4)"
+              v-for="(bot, pIndex) in game.bots.slice(0, 4)"
             >
-              <v-tooltip bottom color="accent" content-class="b-radius-0">
+              <v-tooltip bottom color="accent" content-class="tooltip b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
-                    <UserIcon class="ml-1" :player="player" locale="table" />
+                    <AntHiveBotSmall class="ml-1" :avatar="bot.avatar" locale="table" />
                   </div>
                 </template>
-                {{ player.username }}
+               <div class="tooltip__title">
+                  <span><AntHiveBotSmall class="mr-2" :avatar="bot.avatar" /></span>
+                  <span>{{ bot.name }}</span>
+                </div>
+                <p>
+                  <strong>{{ $t("game.spawn") }}</strong><br>
+                  X: {{ bot.spawn.x }}<br>
+                  Y: {{ bot.spawn.y }}
+                </p>
+                <p>
+                  <strong>{{ $t("game.statistics") }}</strong><br>
+                  {{ $t("game.ant") }}: {{ bot.stats.ants }}<br>
+                  {{ $t("game.hive") }}: {{ bot.stats.hive.length }}<br>
+                  {{ $t("game.score") }}: {{ bot.stats.score }}<br>
+                  {{ $t("game.art") }}: {{ bot.stats.art }}<br>
+                  {{ $t("game.age") }}: {{ bot.stats.age }}<br>
+                  {{ $t("game.errors") }}: {{ bot.stats.errors }}
+                </p>
               </v-tooltip>
             </div>
 
@@ -55,42 +72,42 @@
                   query: { id: game.id, v: game.version },
                 })
               "
-              class="games-table__players-more ml-1"
+              class="games-table__bots-more ml-1"
             >
               <span>+{{ game.bots.length - 4 }}</span>
             </AntHiveButton>
           </div>
           <div
             v-if="game.bots && game.bots.length <= 4"
-            class="games-table__players-container justify-center col-12 col-md-3"
+            class="games-table__bots-container justify-center col-12 col-md-3"
           >
             <div
               :key="pIndex"
-              v-for="(player, pIndex) in game.bots.slice(0, 4)"
+              v-for="(bot, pIndex) in game.bots.slice(0, 4)"
             >
               <v-tooltip bottom color="accent" content-class="tooltip b-radius-0">
                 <template v-slot:activator="{ on }">
                   <div v-on="on">
-                    <UserIcon class="ml-1" :player="player" />
+                    <AntHiveBotSmall class="ml-1" :avatar="bot.avatar" />
                   </div>
                 </template>
                 <div class="tooltip__title">
-                  <span><UserIcon class="mr-2" :player="player" /></span>
-                  <span>{{ player.name }}</span>
+                  <span><AntHiveBotSmall class="mr-2" :avatar="bot.avatar" /></span>
+                  <span>{{ bot.name }}</span>
                 </div>
                 <p>
                   <strong>{{ $t("game.spawn") }}</strong><br>
-                  X: {{ player.spawn.x }}<br>
-                  Y: {{ player.spawn.y }}
+                  X: {{ bot.spawn.x }}<br>
+                  Y: {{ bot.spawn.y }}
                 </p>
                 <p>
                   <strong>{{ $t("game.statistics") }}</strong><br>
-                  {{ $t("game.ants") }}: {{ player.stats.ants }}<br>
-                  {{ $t("game.hiveSize") }}: {{ player.stats.hive.length }}<br>
-                  {{ $t("game.score") }}: {{ player.stats.score }}<br>
-                  {{ $t("game.art") }}: {{ player.stats.art }}<br>
-                  {{ $t("game.age") }}: {{ player.stats.age }}<br>
-                  {{ $t("game.errors") }}: {{ player.stats.errors }}
+                  {{ $t("game.ant") }}: {{ bot.stats.ants }}<br>
+                  {{ $t("game.hive") }}: {{ bot.stats.hive.length }}<br>
+                  {{ $t("game.score") }}: {{ bot.stats.score }}<br>
+                  {{ $t("game.art") }}: {{ bot.stats.art }}<br>
+                  {{ $t("game.age") }}: {{ bot.stats.age }}<br>
+                  {{ $t("game.errors") }}: {{ bot.stats.errors }}
                 </p>
               </v-tooltip>
             </div>
@@ -112,7 +129,6 @@
                   query: { id: game.id, v: game.version },
                 })
               "
-              width="100%"
               color="accent"
             >
               {{ $t("games.viewGame") }}
@@ -126,10 +142,8 @@
 </template>
 
 <script>
-import UserChip from '@/components/AntHiveBotHorizontal'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
-import UserIcon from '@/components/AntHiveBotSmall'
-import AntHiveIcon from '@/components/AntHiveIcon'
+import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import { getGames } from '@/services/Game'
 
 export default {
@@ -142,10 +156,8 @@ export default {
     }
   },
   components: {
-    UserChip,
-    UserIcon,
-    AntHiveAuthor,
-    AntHiveIcon
+    AntHiveBotSmall,
+    AntHiveAuthor
   },
   data: () => ({
     searchParams: {},
@@ -205,11 +217,11 @@ export default {
   &__item {
     margin: 24px 0;
   }
-  &__players-container {
+  &__bots-container {
     display: flex;
     align-items: center;
   }
-  &__players-more {
+  &__bots-more {
     padding: 0 !important;
     display: flex !important;
     min-width: 38px !important;
@@ -252,7 +264,7 @@ export default {
   &__meta {
     min-width: 100px;
   }
-  &__players-list {
+  &__bots-list {
     width: 560px;
   }
 }
@@ -262,7 +274,7 @@ export default {
     color: $color-white;
   }
   &__title {
-    font-size: 16px;
+    font-size: $font-big;
     font-weight: 600;
     padding-top: 10px;
     display: flex;

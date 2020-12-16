@@ -1,17 +1,17 @@
 <template>
  <div class="chip">
-   <div class="chip__img" :style="`background: center / cover no-repeat url(${getBotAvatar})`">
+   <div class="img" :style="`background: center / cover no-repeat url(${getBotAvatar})`">
      <img
-        class="chip__lang-icon"
+        class="lang-icon"
         width="40px"
         :src="getLangImg"
         :alt="lang" 
       />
    </div>
-   <div class="chip__description">
+   <div class="description">
     <p class="mb-0"><strong>{{ name }}</strong></p>
-    <p class="chip__lang-name">{{ getLangName }}</p>
-    <div class="chip__statistics">
+    <p class="lang-name">{{ getLangName }}</p>
+    <div class="statistics">
       <p>{{ $t("userInfo.games") }}: <strong>{{ games }}</strong></p>
       <p>{{ $t("userInfo.wins") }}: <strong>{{ wins }}</strong></p>
     </div>
@@ -78,7 +78,7 @@ export default {
   box-shadow: $box-shadow-default;
   height: 300px;
 
-  &__img {
+  .img {
     background-position: center;
     width: 100%;
     height: 130px;
@@ -86,23 +86,23 @@ export default {
     padding: 10px;
   }
 
-  &__lang-icon {
+  .lang-icon {
     margin-right: 10px;
   }
 
-  &__lang-name {
-    font-size: 10px;
+  .lang-name {
+    font-size: $font-smaller;
     color: $color-violet-600;
   }
 
-  &__description {
+  .description {
     padding: 20px;
   }
 
-  &__statistics {
+  .statistics {
     p {
       margin-bottom: 0;
-      font-size: 12px;
+      font-size: $font-small;
     }
   }
 }

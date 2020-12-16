@@ -15,11 +15,9 @@
               :tooltip-content="tooltipContent"
               :is-game-end="isGameEnd"
               @replay="replay"
-              :bots="players"
+              :bots="bots"
               :responses="responses"
               :requests="requests"
-              :is-debug-mode="isDebugMode"
-              :is-game-stoped="isGameStoped"
             />
             <v-card
               class="tooltip"
@@ -52,6 +50,7 @@
                         <div class="tab-title">
                           Request
                           <AntHiveIcon
+                            icon="download"
                             v-if="isGameStoped"
                             class="download"
                             @click="
@@ -60,8 +59,7 @@
                                 bot.id
                               )
                             "
-                            >download</AntHiveIcon
-                          >
+                            />
                         </div>
                         <div class="tab-text">{{ getResponseRequest(bot, "requests") }}</div>
                       </div>
@@ -82,9 +80,9 @@
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
                 class="my-2"
-                :key="player.id"
-                v-for="(player, index) in players"
-                :player="player"
+                :key="bot.id"
+                v-for="(bot, index) in bots"
+                :bot="bot"
                 :number="index + 1"
               />
             </transition-group>
@@ -131,7 +129,7 @@ export default {
     isGameAvailable: true,
     theme: 1,
     tab: 0,
-    players: [],
+    bots: [],
     isGameEnd: false,
     gameLoaded: false,
     gameId: '',
@@ -155,8 +153,8 @@ export default {
   mixins: [Image],
   computed: {
     getBots() {
-      if (this.players && this.players.length) {
-        const bots = this.players
+      if (this.bots && this.bots.length) {
+        const bots = this.bots
         return bots.sort((a, b) => {
           if (a.id > b.id) {
             return 1
@@ -198,11 +196,11 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.END, () => {
             this.isGameEnd = true
           })
-          let players = []
+          let bots = []
           let requests = []
           let responses = []
           this.fetchPlayerDataTimerId = setInterval(() => {
-            this.players = players
+            this.bots = bots
             this.responses = responses
             this.requests = requests
           }, 1000)
@@ -210,7 +208,7 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
             requests = data.requests || []
             responses = data.responses || []
-            players = data.bots || []
+            bots = data.bots || []
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
@@ -223,7 +221,7 @@ export default {
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
             this.isGameStoped = true
-            this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+            if (this.isDebugMode) this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
@@ -239,8 +237,8 @@ export default {
     gameSetTooltipCoords(event) {
       if (event.target.localName !== 'canvas') return
       const gameTooltipCoords = {
-        x: Math.floor(event.offsetX / this.gamePlayer.renderer.size),
-        y: Math.floor(event.offsetY / this.gamePlayer.renderer.size)
+        x: Math.floor(event.offsetX / this.gamePlayer.renderer._size),
+        y: Math.floor(event.offsetY / this.gamePlayer.renderer._size)
       }
 
       const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
@@ -249,7 +247,7 @@ export default {
 
     gamePlayerDestroy() {
       if (this.gamePlayer) {
-        this.players = []
+        this.bots = []
         this.gamePlayer.removeAllListeners()
         this.gamePlayer.container.innerHTML = ''
         this.gamePlayer = null

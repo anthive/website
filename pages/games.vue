@@ -12,7 +12,6 @@
 
 <script>
 import GamesTable from '@/components/GamesTable'
-import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 
 export default {
@@ -35,7 +34,6 @@ export default {
 
   components: {
     GamesTable,
-    AntHiveIcon,
     AntHivePageHeader
   }
 }

@@ -1,30 +1,28 @@
 <template>
  <div class="chip">
-   <div class="chip__img" :style="`background: center / cover no-repeat url(${getAvatar(player.avatar, 100)})`">
+   <div class="img" :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 200)})`">
      <img
-        class="chip__lang-icon"
-        width="30px"
-        :src="langUrl(player.lang)"
-        :alt="player.lang" 
+        class="lang-icon"
+        width="35px"
+        :src="getLangImg(bot.lang)"
+        :alt="bot.lang" 
       />
    </div>
 
-   <div class="chip__description">
+   <div class="description">
      <!-- TODO: user user avatar -->
-    <!-- <v-avatar tile class="chip__user-avatar" size="40">
-      <v-img :src="getAvatar(player.avatar)" />
+    <!-- <v-avatar tile class="user-avatar" size="40">
+      <v-img :src="getAvatar(bot.avatar)" />
     </v-avatar> -->
-    <p class="mb-1"><strong>{{ player.displayName }}</strong></p>
-    <div class="chip__statistics">
-      <div class="mr-5">
-        <p>{{ $t("game.ants") }}: <strong>{{ player.stats.ants }}</strong></p>
-        <p>{{ $t("game.hiveSize") }}: <strong>{{ player.stats.hive }}</strong></p>
-        <p>{{ $t("game.score") }}: <strong>{{ player.stats.score }}</strong></p>
+    <p class="name"><strong>{{ getStringTruncated(bot.displayName, 10) }}</strong> v {{ bot.v }}</p>
+    <div class="statistics">
+      <div class="mr-12">
+        <p>{{ $t("game.ant") }}/{{ $t("game.hive") }}: <strong>{{ bot.stats.ants }}/{{ bot.stats.hive }}</strong></p>
+        <p>{{ $t("game.score") }}: <strong>{{ getNumberTruncatedToThousand(bot.stats.score) }}</strong></p>
       </div>
       <div>
-        <p>{{ $t("game.rt") }}: <strong>{{ getArtInMs(player.stats.art) }}</strong></p>
-        <p>{{ $t("game.age") }}: <strong>{{ player.stats.age }}</strong></p>
-        <p>{{ $t("game.errors") }}: <strong>{{ player.stats.errors }}</strong></p>
+        <p>{{ $t("game.errors") }}: <strong>{{ getNumberTruncatedToThousand(bot.stats.errors) }}</strong></p>
+        <p>{{ $t("game.art") }}: <strong>{{ getArtInMs(bot.stats.art) }} ms</strong></p>
       </div>
     </div>
    </div>
@@ -33,22 +31,15 @@
 
 <script>
 import Image from '@/mixins/image'
+import Truncate from '@/mixins/truncate'
+
 export default {
-  name: 'GamesUserChip',
+  name: 'AntHiveBotHorizontal',
   props: {
-    player: Object
+    bot: Object
   },
-  mixins: [Image],
+  mixins: [Image, Truncate],
   methods: {
-    langUrl(lang) {
-      return '/skins/lang/' + lang + '.png'
-    },
-    antUrl(skin) {
-      return '/skins/client/' + skin + '/ant.png'
-    },
-    hiveUrl(skin) {
-      return '/skins/client/' + skin + '/hive.png'
-    },
     getArtInMs(art) {
       return Math.round(art / 10) / 100
     }
@@ -59,43 +50,51 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .chip {
+  min-width: 450px;
   display: flex;
   flex-direction: row;
   box-shadow: $box-shadow-default;
-  height: 100px;
+  height: 120px;
   background-color: $color-white;
 
-  &__img {
+  .img {
     background-position: center;
-    width: 100px;
+    width: 120px;
     background: $color-red-300;
   }
 
-  &__user-avatar {
+  .user-avatar {
     position: absolute;
     top: -20px;
     right: 10px;
   }
 
-  &__lang-icon {
+  .lang-icon {
+    border-bottom: 2.5px solid white;
+    border-right: 2.5px solid white;
     margin-right: 10px;
   }
 
-  &__lang-name {
-    font-size: 10px;
+  .lang-name {
+    font-size: $font-small;
     color: $color-violet-600;
   }
 
-  &__description {
-    position: relative;
-    padding: 10px;
+  .name {
+    font-size: $font-big;
   }
 
-  &__statistics {
+  .description {
+    position: relative;
+    padding: 20px 13px;
+  }
+
+  .statistics {
+    margin-top: 12px;
     display: flex;
     p {
       margin-bottom: 0;
-      font-size: 12px;
+      font-size: $font-medium;
     }
   }
 }

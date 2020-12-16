@@ -28,7 +28,7 @@
             block
             @click="$emit('replay')"
             >{{ $t("game.replay") }}
-            <AntHiveIcon class="ml-1" color="white">autorenew</AntHiveIcon>
+            <AntHiveIcon icon="autorenew" class="ml-1" color="white" />
           </v-btn>
           <div class="social-share">
             <p>{{ $t("game.shareGame") }}</p>
@@ -45,7 +45,7 @@
                     rel="noreferrer"
                     :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                   >
-                    <AntHiveIcon color="grey">linkedin</AntHiveIcon>
+                    <AntHiveIcon icon="linkedin" color="grey" />
                   </v-btn>
                 </template>
                 <span>{{ $t("game.shareOn") }} Linkedin</span>
@@ -62,7 +62,7 @@
                     rel="noreferrer"
                     :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
                   >
-                    <AntHiveIcon color="grey">facebook</AntHiveIcon>
+                    <AntHiveIcon icon="facebook" color="grey" />
                   </v-btn>
                 </template>
                 <span>{{ $t("game.shareOn") }} Facebook</span>
@@ -79,7 +79,7 @@
                     rel="noreferrer"
                     :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                   >
-                    <AntHiveIcon color="grey">twitter</AntHiveIcon>
+                    <AntHiveIcon icon="twitter" color="grey" />
                   </v-btn>
                 </template>
                 <span>{{ $t("game.shareOn") }} Twitter</span>
@@ -96,7 +96,7 @@
                     rel="noreferrer"
                     :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                   >
-                    <AntHiveIcon color="grey">email</AntHiveIcon>
+                    <AntHiveIcon icon="email" color="grey" />
                   </v-btn>
                 </template>
                 <span>{{ $t("game.sendBy") }} Email</span>
@@ -111,9 +111,7 @@
                     v-on="on"
                     @click="copyToClipboard()"
                   >
-                    <AntHiveIcon color="grey"
-                      >file-document-box-multiple</AntHiveIcon
-                    >
+                    <AntHiveIcon icon="file-document-box-multiple" color="grey"/>
                   </v-btn>
                 </template>
                 <span>{{ $t("game.copyUrl") }}</span>
@@ -155,14 +153,6 @@ export default {
     bots: {
       type: Array,
       default: () => []
-    },
-    isDebugMode: {
-      type: Boolean,
-      default: false
-    },
-    isGameStoped: {
-      type: Boolean,
-      default: false
     }
   },
   data: () => ({
@@ -256,7 +246,7 @@ export default {
 .social-share {
   margin-top: 10%;
   text-align: center;
-  font-size: 16px;
+  font-size: $font-big;
 }
 
 .share-button {
@@ -271,7 +261,7 @@ export default {
   }
   .social-share {
     margin-top: 15px;
-    font-size: 12px;
+    font-size: $font-small;
     p {
       margin-bottom: 5px;
     }
