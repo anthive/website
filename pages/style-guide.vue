@@ -32,9 +32,9 @@
         <p v-if="$options.components['AntHiveBotSmall'].props">Props: {{ $options.components['AntHiveBotSmall'].props }}</p>
         <div>
           <AntHiveBotSmall
-            v-for="(player, index) in players"
-            :key="player.displayName + index"
-            :avatar="player.avatar"
+            v-for="(bot, index) in bots"
+            :key="bot.displayName + index"
+            :avatar="bot.avatar"
           />
         </div>
       </div>
@@ -45,9 +45,9 @@
         <div class="d-flex">
           <AntHiveBotHorizontal
             class="mr-4"
-            v-for="(player, index) in players"
-            :key="player.displayName + index"
-            :bot="player"
+            v-for="(bot, index) in bots"
+            :key="bot.displayName + index"
+            :bot="bot"
             :number="index + 1"
           />
         </div>
@@ -59,11 +59,11 @@
         <div class="d-flex">
           <AntHiveBotVertical
             class="mr-4"
-            v-for="(player, index) in players"
-            :key="player.displayName + index"
-            :lang="player.lang"
-            :name="player.displayName"
-            :avatar="getAvatar(player.avatar, 100)"
+            v-for="(bot, index) in bots"
+            :key="bot.displayName + index"
+            :lang="bot.lang"
+            :name="bot.displayName"
+            :avatar="getAvatar(bot.avatar, 100)"
             games="1234514"
             wins="2331"
           />
@@ -83,10 +83,10 @@
         <p v-if="$options.components['GamesLeaderCard'].props">Props: {{ $options.components['GamesLeaderCard'].props }}</p>
         <div>
           <GamesLeaderCard
-            :key="player.displayName + index"
-            v-for="(player, index) in players"
+            :key="bot.displayName + index"
+            v-for="(bot, index) in bots"
             :place="index + 1"
-            :leader="player"
+            :leader="bot"
           />
         </div>
       </div>
@@ -156,7 +156,7 @@ export default {
     AntHiveBotVertical
   },
   data: () => ({
-    players: [
+    bots: [
       {
         id: 192,
         displayName: 'Player1',

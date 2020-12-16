@@ -15,7 +15,7 @@
               :tooltip-content="tooltipContent"
               :is-game-end="isGameEnd"
               @replay="replay"
-              :bots="players"
+              :bots="bots"
               :responses="responses"
               :requests="requests"
               :is-debug-mode="isDebugMode"
@@ -82,9 +82,9 @@
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
                 class="my-2"
-                :key="player.id"
-                v-for="(player, index) in players"
-                :bot="player"
+                :key="bot.id"
+                v-for="(bot, index) in bots"
+                :bot="bot"
                 :number="index + 1"
               />
             </transition-group>
@@ -131,7 +131,7 @@ export default {
     isGameAvailable: true,
     theme: 1,
     tab: 0,
-    players: [],
+    bots: [],
     isGameEnd: false,
     gameLoaded: false,
     gameId: '',
@@ -155,8 +155,8 @@ export default {
   mixins: [Image],
   computed: {
     getBots() {
-      if (this.players && this.players.length) {
-        const bots = this.players
+      if (this.bots && this.bots.length) {
+        const bots = this.bots
         return bots.sort((a, b) => {
           if (a.id > b.id) {
             return 1
@@ -198,11 +198,11 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.END, () => {
             this.isGameEnd = true
           })
-          let players = []
+          let bots = []
           let requests = []
           let responses = []
           this.fetchPlayerDataTimerId = setInterval(() => {
-            this.players = players
+            this.bots = bots
             this.responses = responses
             this.requests = requests
           }, 1000)
@@ -210,7 +210,7 @@ export default {
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
             requests = data.requests || []
             responses = data.responses || []
-            players = data.bots || []
+            bots = data.bots || []
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
@@ -249,7 +249,7 @@ export default {
 
     gamePlayerDestroy() {
       if (this.gamePlayer) {
-        this.players = []
+        this.bots = []
         this.gamePlayer.removeAllListeners()
         this.gamePlayer.container.innerHTML = ''
         this.gamePlayer = null

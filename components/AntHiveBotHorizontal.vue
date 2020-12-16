@@ -12,7 +12,7 @@
    <div class="description">
      <!-- TODO: user user avatar -->
     <!-- <v-avatar tile class="user-avatar" size="40">
-      <v-img :src="getAvatar(player.avatar)" />
+      <v-img :src="getAvatar(bot.avatar)" />
     </v-avatar> -->
     <p class="name"><strong>{{ getStringTruncated(bot.displayName, 10) }}</strong> v {{ bot.v }}</p>
     <div class="statistics">
