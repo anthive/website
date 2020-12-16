@@ -8,7 +8,7 @@
     <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <img class="header__logo" src="/img/anthive_logo_dark.svg" alt="Logo" />
+          <img class="logo" src="/img/anthive_logo_dark.svg" alt="Logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -52,16 +52,16 @@
         </v-list>
       </v-menu>
       <div class="hidden-sm-and-down mr-6">
-        <nuxt-link class="header__link" :to="localePath('games')">
+        <nuxt-link class="link" :to="localePath('games')">
           {{ $t("header.games") }}
         </nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('leaderboard')">
+        <nuxt-link class="link" :to="localePath('leaderboard')">
           {{ $t("header.leaderboard") }}
         </nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('rules')">
+        <nuxt-link class="link" :to="localePath('rules')">
           {{ $t("header.rules") }}
         </nuxt-link>
-        <nuxt-link class="header__link" :to="localePath('sandbox')">
+        <nuxt-link class="link" :to="localePath('sandbox')">
           {{ $t("header.sandbox") }}
         </nuxt-link>
 
@@ -69,7 +69,7 @@
           v-show="getUser"
           tile
           label
-          class="header__user-chip"
+          class="user-chip"
           color="accent"
           pill
           @click="handlerClickGetStarted"
@@ -131,12 +131,12 @@ export default {
   background: transparent !important;
   position: relative;
 
-  &__logo {
+  .logo {
     width: 144px;
     padding-top: 16px;
   }
 
-  &__link {
+  .link {
     padding: 10px;
     margin: 0 15px;
     font-weight: 500;
@@ -151,7 +151,7 @@ export default {
     }
   }
 
-  &__user-chip {
+  .user-chip {
     margin-left: 10px;
     border-radius: $border-radius-tile !important;
   }
