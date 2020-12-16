@@ -153,14 +153,6 @@ export default {
     bots: {
       type: Array,
       default: () => []
-    },
-    isDebugMode: {
-      type: Boolean,
-      default: false
-    },
-    isGameStoped: {
-      type: Boolean,
-      default: false
     }
   },
   data: () => ({

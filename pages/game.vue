@@ -18,8 +18,6 @@
               :bots="bots"
               :responses="responses"
               :requests="requests"
-              :is-debug-mode="isDebugMode"
-              :is-game-stoped="isGameStoped"
             />
             <v-card
               class="tooltip"
@@ -223,7 +221,7 @@ export default {
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
             this.isGameStoped = true
-            this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+            if (this.isDebugMode) this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
