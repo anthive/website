@@ -342,10 +342,15 @@ export default {
 }
 
 .tooltip {
+  box-shadow: none !important;
+  border-radius: 0 !important;
   color: $color-violet-700;
   padding: 10px;
   background-color: $color-violet-450;
+  display: flex;
   & span {
+    display: block;
+    min-width: 25px;
     font-weight: 600;
     margin-right: 10px;
   }
@@ -384,6 +389,7 @@ export default {
     }
   }
   .tab-title {
+    font-weight: 600;
     background-color: $color-violet-350;
     color: $color-violet-700;
     padding-left: 10px;
