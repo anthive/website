@@ -1,23 +1,30 @@
 <template>
   <div class="editor__wrap">
     <v-card color="#272822" tile height="80vh">
-      <v-tabs
-        active-class="editor__active-tab"
-        v-model="tab"
-        show-arrows
-        background-color="grey darken-2"
-        dark
-      >
-        <v-tabs-slider color="#e1567c" />
-        <v-tab
-          :disabled="!lang.sampleCode"
-          @change="onChangeTab(lang)"
-          v-for="(lang, key) in langs"
-          :key="key"
+      <v-slide-group class="editor__tab-slider" show-arrows v-model="tab">
+        <template v-slot:prev>
+          <AntHiveIcon icon="arrow-left-box" color="white" />
+        </template>
+        <v-slide-item
+          v-for="(lang, index) in langs"
+          :key="index"
+          v-slot:default="{ active }"
         >
-          {{ lang.name }}
-        </v-tab>
-      </v-tabs>
+          <v-btn
+            tile
+            class="editor__tab-slider-item"
+            text
+            :input-value="active"
+            active-class="editor__tab-slider-item--active"
+            @click="onChangeTab(lang, index)"
+          >
+            {{ lang.name }}
+          </v-btn>
+        </v-slide-item>
+        <template v-slot:next>
+          <AntHiveIcon icon="arrow-right-box" color="white" />
+        </template>
+      </v-slide-group>
       <v-tabs-items class="editor-content" v-model="tab">
         <v-tab-item
           :transition="false"
@@ -34,7 +41,10 @@
         </v-tab-item>
       </v-tabs-items>
       <h3 class="mt-3 mb-10" v-if="currentLangTab.sample">
-        {{ $t("sandbox.sourceCode") }}: <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{ currentLangTab.sample }}</a>
+        {{ $t("sandbox.sourceCode") }}:
+        <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{
+          currentLangTab.sample
+        }}</a>
       </h3>
     </v-card>
   </div>
@@ -43,6 +53,7 @@
 <script>
 import axios from 'axios'
 import langs from '../static/langs/data.json'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 if (process.client) {
   var ace = require('ace-builds')
@@ -56,6 +67,9 @@ export default {
       type: Object,
       default: () => {}
     }
+  },
+  components: {
+    AntHiveIcon
   },
   data: () => ({
     langs: {},
@@ -80,7 +94,8 @@ export default {
     }
   },
   methods: {
-    onChangeTab(lang) {
+    onChangeTab(lang, tab) {
+      this.tab = tab
       this.$router.push(`/sandbox/${lang.extention}`)
     },
     async initEditors(lang) {
@@ -151,11 +166,20 @@ export default {
   bottom: 0;
   left: 0;
   overflow: hidden;
+  &__tab-slider {
+    background-color: #616161 !important;
+    &-item {
+      color: hsla(0, 0%, 100%, 0.6) !important;
+      box-sizing: content-box;
+      padding: 5px 15px !important;
+      &--active {
+        color: $color-red-300 !important;
+        border-bottom: 2px solid $color-red-300;
+      }
+    }
+  }
   &__wrap {
     height: 100%;
-  }
-  &__active-tab {
-    color: $color-red-300 !important;
   }
 }
 // editor scrollbar

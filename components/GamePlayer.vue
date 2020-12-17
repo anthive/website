@@ -1,12 +1,5 @@
 <template>
   <v-col class="pa-0 player__section" cols="auto">
-    <div
-      class="player__wrap"
-      @click="playPause()"
-      @mouseover="showActionsState = true"
-      @mouseleave="showActionsState = false"
-      ref="playerWrap"
-    />
     <div id="player">
       <h2 class="px-2 white--text loading">{{ $t("game.loading") }}</h2>
     </div>
@@ -137,28 +130,8 @@ export default {
       type: Boolean,
       required: true,
       default: false
-    },
-    tooltipContent: {
-      type: [Object, null],
-      default: null
-    },
-    responses: {
-      type: Array,
-      default: () => []
-    },
-    requests: {
-      type: Array,
-      default: () => []
-    },
-    bots: {
-      type: Array,
-      default: () => []
     }
   },
-  data: () => ({
-    tooltipPosition: { x: 0, y: 0 },
-    mouseOnPlayer: false
-  }),
   computed: {
     currentUrl() {
       return `https://anthive.io${this.$route.fullPath}`

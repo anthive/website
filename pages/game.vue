@@ -9,7 +9,7 @@
           />
         </div>
         <v-row class="mx-auto">
-          <v-col cols="12" md="8">
+          <v-col class="pa-0" cols="12" md="7">
             <GamePlayer
               class="player-wrap"
               :tooltip-content="tooltipContent"
@@ -28,58 +28,13 @@
               <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
             >
-            <div class="debug-panel" v-if="getBots && isDebugMode">
-              <v-tabs v-model="tab" background-color="primary" dark>
-                <v-tabs-slider />
-                <v-tab
-                  active-class="active"
-                  v-for="(bot, index) in getBots"
-                  :key="index"
-                  class="tab"
-                  ><v-avatar class="mr-2" tile size="20"
-                    ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
-                  >{{ bot.displayName }} {{ bot.id }}</v-tab
-                >
-              </v-tabs>
-
-              <v-tabs-items v-model="tab">
-                <div v-for="(bot, index) in getBots" :key="index + 10">
-                  <v-tab-item :transition="false" :reverse-transition="false">
-                    <div class="d-flex">
-                      <div class="tab-content">
-                        <div class="tab-title">
-                          Request
-                          <AntHiveIcon
-                            icon="download"
-                            v-if="isGameStoped"
-                            class="download"
-                            @click="
-                              downloadRequest(
-                                getResponseRequest(bot, 'requests'),
-                                bot.id
-                              )
-                            "
-                            />
-                        </div>
-                        <div class="tab-text">{{ getResponseRequest(bot, "requests") }}</div>
-                      </div>
-                      <div class="tab-content">
-                        <div class="tab-title">Response</div>
-                        <div>
-                          <pre class="tab-text">{{ JSON.stringify(getResponseRequest(bot, "responses"), null, 2) }}</pre>
-                        </div>
-                      </div>
-                    </div>
-                  </v-tab-item>
-                </div>
-              </v-tabs-items>
-            </div>
+             <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
           </v-col>
 
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="5">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
-                class="my-2"
+                class="mb-2"
                 :key="bot.id"
                 v-for="(bot, index) in bots"
                 :bot="bot"
@@ -108,6 +63,7 @@
 <script>
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import GamePlayer from '@/components/GamePlayer'
+import GameDebugPanel from '@/components/GameDebugPanel'
 import GamesTable from '@/components/GamesTable'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import Image from '@/mixins/image'
@@ -136,8 +92,8 @@ export default {
     gamePlayer: null,
     timerId: null,
     tooltipContent: null,
-    requests: null,
-    responses: null,
+    requests: [],
+    responses: [],
     fetchPlayerDataTimerId: '',
     isDebugMode: false,
     isGameStoped: false,
@@ -146,28 +102,12 @@ export default {
   components: {
     AntHiveBotHorizontal,
     GamePlayer,
+    GameDebugPanel,
     GamesTable,
     AntHivePageHeader,
     AntHiveIcon
   },
   mixins: [Image],
-  computed: {
-    getBots() {
-      if (this.bots && this.bots.length) {
-        const bots = this.bots
-        return bots.sort((a, b) => {
-          if (a.id > b.id) {
-            return 1
-          }
-          if (a.id < b.id) {
-            return -1
-          }
-          return 0
-        })
-      }
-      return []
-    }
-  },
   watch: {
     $route() {
       this.gamePlayerDestroy()
@@ -221,7 +161,7 @@ export default {
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
             this.isGameStoped = true
-            if (this.isDebugMode) this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+            this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
@@ -244,13 +184,10 @@ export default {
       const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
       this.gameTooltip = { x: gameTooltipCoords.x, y: gameTooltipCoords.y, ...tooltip }
     },
-
     gamePlayerDestroy() {
       if (this.gamePlayer) {
         this.bots = []
-        this.gamePlayer.removeAllListeners()
-        this.gamePlayer.container.innerHTML = ''
-        this.gamePlayer = null
+        this.gamePlayer = this.gamePlayer.clearPlayerState()
       }
       if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
     },
@@ -272,18 +209,6 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
-    },
-    getResponseRequest(bot, type) {
-      if (this[type] && this[type].length) {
-        return this[type].find(r => r.id === bot.id)
-      }
-    },
-    downloadRequest(request, id) {
-      const a = document.createElement('a')
-      const data = JSON.stringify(request)
-      a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }))
-      a.download = `request-${id}`
-      a.click()
     }
   },
   destroyed() {
@@ -351,49 +276,6 @@ export default {
     min-width: 25px;
     font-weight: 600;
     margin-right: 10px;
-  }
-}
-
-.debug-panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  &.v-tabs-slider-wrapper {
-    display: none;
-  }
-  .active {
-    background-color: $color-violet-350;
-  }
-  .download {
-    cursor: pointer;
-    background-color: $color-violet-700 !important;
-    margin-bottom: -5px;
-    margin-left: 5px;
-  }
-  .tab {
-    text-transform: none;
-    padding-top: 5px;
-  }
-  .tab-content {
-    color: $color-violet-700;
-    width: 40%;
-    height: 296px;
-    overflow-y: auto;
-    &:first-child {
-      width: 60%;
-      border-right: 2px solid $color-violet-700;
-    }
-  }
-  .tab-title {
-    font-weight: 600;
-    background-color: $color-violet-350;
-    color: $color-violet-700;
-    padding-left: 10px;
-  }
-  .tab-text {
-    margin: 10px;
   }
 }
 </style>
