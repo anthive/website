@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
@@ -174,46 +175,44 @@ export default {
       }, 3000)
     },
     async onClickRun() {
-      this.loading = true
-      this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
-      this.showLoadingText()
-      if (player && player.control) player.control.stop()
-      this.botLogs = this.simLogs = 'Loading...'
       this.savedCode = this.valueCode.value
+      this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
 
-      const file = this.createFile()
-      const formData = this.createData(file)
+      this.gameId = md5(this.savedCode)
+      const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
 
-      const gameResp = await this.sendCodeToSim(formData)
-      this.gameId = gameResp.id
-
-      await this.getGame()
+      axios
+        .head(gameUrl)
         .then(() => {
           this.initGame()
           this.initLogs()
-        })
-        .catch(err => {
-          this.botLogs = this.simLogs = err
-        })
-        .finally(() => {
           this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-          this.loading = false
+        })
+        .catch(async () => {
+          this.loading = true
+          this.showLoadingText()
+          if (player && player.control) player.control.stop()
+          this.botLogs = this.simLogs = 'Loading...'
+
+          await this.sendCodeToSim()
+          await this.getGame()
+            .then(() => {
+              this.initGame()
+              this.initLogs()
+            })
+            .catch(err => {
+              this.botLogs = this.simLogs = err
+            })
+            .finally(() => {
+              this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
+              this.loading = false
+            })
         })
     },
     onClickLogin() {
       this.$gtag('event', 'Get started Sandbox', { event_category: 'getstarted', event_label: 'sandbox' })
       const createBotUrl = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
       window.location.href = createBotUrl
-    },
-    createFile() {
-      const fileName = `bot.${this.valueCode.extention}`
-      const blob = new Blob([this.valueCode.value])
-      return new File([blob], `${fileName}`)
-    },
-    createData(file) {
-      const data = new FormData()
-      data.append('file', file)
-      return data
     },
     async getGame() {
       return await new Promise(async (resolve, reject) => {
@@ -247,14 +246,9 @@ export default {
           })
       })
     },
-    async sendCodeToSim(data) {
-      const url = `${process.env.SANDBOX_API_URL}/${this.valueCode.extention}`
-      const simResp = await axios({
-        method: 'post',
-        url,
-        data,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
+    async sendCodeToSim() {
+      const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}/${this.gameId}`
+      const simResp = await axios.post(url, this.savedCode)
       return simResp.data
     },
     initGame() {
