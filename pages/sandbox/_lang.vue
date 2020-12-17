@@ -21,6 +21,16 @@
                     </transition>
                   </div>
               </div>
+               <v-card
+              class="tooltip"
+              tile
+              v-if="isGameStoped && isDebugMode && gameTooltip"
+              >x: <span>{{ gameTooltip.x }}</span> y:
+              <span>{{ gameTooltip.y }}</span> food:
+              <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
+              <span>{{ gameTooltip.id }}</span></v-card
+            >
+               <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
               <div class="sandbox__actions">
                 <AntHiveButton
                   :loading="loading"
@@ -48,7 +58,7 @@
                   </AntHiveButton>
               </div>
               
-              <div v-if="simLogs && botLogs">
+              <div v-if="!isDebugMode && simLogs && botLogs">
                 <v-tabs v-model="tab" background-color="grey darken-2" dark>
                   <v-tab @click="handlerClickLogs('bot')"> {{ $t("sandbox.bot") }} </v-tab>
                   <v-tab @click="handlerClickLogs('sim')"> {{ $t("sandbox.sim") }} </v-tab>
@@ -72,7 +82,7 @@
                   </v-tab-item>
                 </v-tabs-items>
               </div>
-              <div v-else>
+              <div v-if="!isDebugMode && !simLogs && !botLogs">
                 <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
                 <p v-html="getHelpElement" />
               </div>
@@ -89,6 +99,7 @@ import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
+import GameDebugPanel from '@/components/GameDebugPanel'
 import axios from 'axios'
 var player = null
 export default {
@@ -105,7 +116,8 @@ export default {
   },
   components: {
     editor,
-    AntHivePageHeader
+    AntHivePageHeader,
+    GameDebugPanel
   },
   data: () => ({
     valueCode: {},
@@ -117,6 +129,14 @@ export default {
     loadingText: '',
     savedCode: '',
     gameId: '',
+    gamePlayer: null,
+    responses: [],
+    requests: [],
+    bots: [],
+    gameTooltip: {},
+    isGameStoped: false,
+    isDebugMode: false,
+    fetchPlayerDataTimerId: null,
     timerId: null
   }),
   computed: {
@@ -175,6 +195,7 @@ export default {
       }, 3000)
     },
     async onClickRun() {
+      if (this.gamePlayer) this.gamePlayerDestroy()
       this.savedCode = this.valueCode.value
       this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
 
@@ -256,7 +277,56 @@ export default {
       const assetsUrl = `${process.env.WEBSITE_URL}/skins`
       const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
-      player = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, gameUrl)
+      this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, gameUrl)
+      let bots = []
+      let requests = []
+      let responses = []
+      this.fetchPlayerDataTimerId = setInterval(() => {
+        this.bots = bots
+        this.responses = responses
+        this.requests = requests
+      }, 1000)
+      // eslint-disable-next-line
+      this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
+        this.gamePlayer.control._toggleDebugMode()
+      })
+      // eslint-disable-next-line
+      this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
+        requests = data.requests || []
+        responses = data.responses || []
+        bots = data.bots || []
+      })
+      // eslint-disable-next-line
+      this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
+        this.isDebugMode = data
+      })
+      // eslint-disable-next-line
+      this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
+        this.isGameStoped = true
+        this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+      })
+      // eslint-disable-next-line
+      this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
+        this.isGameStoped = false
+        this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
+      })
+    },
+    gamePlayerDestroy() {
+      if (this.gamePlayer) {
+        this.bots = []
+        this.gamePlayer = this.gamePlayer.clearPlayerState()
+      }
+      if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
+    },
+    gameSetTooltipCoords(event) {
+      if (event.target.localName !== 'canvas') return
+      const gameTooltipCoords = {
+        x: Math.floor(event.offsetX / this.gamePlayer.renderer._size),
+        y: Math.floor(event.offsetY / this.gamePlayer.renderer._size)
+      }
+
+      const tooltip = this.gamePlayer.framer.getCellTooltip(gameTooltipCoords.x, gameTooltipCoords.y)
+      this.gameTooltip = { x: gameTooltipCoords.x, y: gameTooltipCoords.y, ...tooltip }
     },
     async initLogs() {
       this.botLogs = await this.getLogs(this.gameId, 'bot')
@@ -269,9 +339,8 @@ export default {
     }
   },
   destroyed() {
-    if (this.timerId) {
-      clearInterval(this.timerId)
-    }
+    if (this.gamePlayer) this.gamePlayerDestroy()
+    if (this.timerId) clearInterval(this.timerId)
   }
 }
 </script>
@@ -332,6 +401,21 @@ export default {
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
+  }
+}
+
+.tooltip {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: $color-violet-700;
+  padding: 10px;
+  background-color: $color-violet-450;
+  display: flex;
+  & span {
+    display: block;
+    min-width: 25px;
+    font-weight: 600;
+    margin-right: 10px;
   }
 }
 </style>
