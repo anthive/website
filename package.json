@@ -23,6 +23,7 @@
     "cookie-universal-nuxt": "^2.1.4",
     "countup.js": "^2.0.5",
     "markdown-it": "^11.0.0",
+    "md5": "^2.3.0",
     "nuxt": "^2.14.6",
     "nuxt-clipboard2": "^0.2.1",
     "nuxt-i18n": "^6.12.2",
