@@ -70,8 +70,9 @@ export default {
   }
 
   .lang-icon {
-    border-bottom: 2.5px solid white;
-    border-right: 2.5px solid white;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    background-color: white;
     margin-right: 10px;
   }
 
