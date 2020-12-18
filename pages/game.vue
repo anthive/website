@@ -137,18 +137,16 @@ export default {
             this.isGameEnd = true
           })
           let bots = []
-          let requests = []
-          let responses = []
           this.fetchPlayerDataTimerId = setInterval(() => {
             this.bots = bots
-            this.responses = responses
-            this.requests = requests
           }, 1000)
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-            requests = data.requests || []
-            responses = data.responses || []
             bots = data.bots || []
+            if (this.isDebugMode) {
+              this.responses = data.responses
+              this.requests = data.requests
+            }
           })
           // eslint-disable-next-line
           this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
