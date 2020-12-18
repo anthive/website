@@ -1,5 +1,5 @@
 <template>
-  <section class="sandbox page-wrap">
+  <section :class="{ 'sandbox--debug': isDebugMode }" class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <div class="white pa-3 pb-10" min-height="calc(100vh - 64px)">
@@ -273,6 +273,8 @@ export default {
       return simResp.data
     },
     initGame() {
+      this.isGameStoped = false
+      this.isDebugMode = false
       const apiImagesUrl = `${process.env.API_URL}/public/images`
       const assetsUrl = `${process.env.WEBSITE_URL}/skins`
       const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
@@ -346,14 +348,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
-
 .sandbox {
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100%;
+  &--debug {
+    margin-bottom: 100px;
+  }
   &__content {
     position: relative;
   }
   &__player {
+    min-height: 300px;
     position: relative;
     &.disable::after {
       content: '';
