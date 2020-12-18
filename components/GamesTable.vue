@@ -12,7 +12,7 @@
           class="games-table__item-cover"
           height="100"
           width="80"
-          :src="`https://anthive.io/skins/server/${game.mapSettings.theme}/background.png`"
+          :src="getImage(game.mapSettings.theme)"
           alt="Background"
         />
         <div
@@ -145,6 +145,7 @@
 import AntHiveAuthor from '@/components/AntHiveAuthor'
 import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import { getGames } from '@/services/Game'
+import { getImageById } from '@/services/Image'
 
 export default {
   name: 'GamesTable',
@@ -176,6 +177,9 @@ export default {
     this.searchParams = { offset: 0, limit: this.gamesLimit }
   },
   methods: {
+    getImage(id) {
+      return getImageById(`${id}-background.png`, 150, 200)
+    },
     loadGames() {
       return getGames(this.searchParams).then(gamesResp => {
         this.games = gamesResp
