@@ -101,7 +101,6 @@ import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
 import axios from 'axios'
-var player = null
 export default {
   head() {
     return {
@@ -212,7 +211,7 @@ export default {
         .catch(async () => {
           this.loading = true
           this.showLoadingText()
-          if (player && player.control) player.control.stop()
+          if (this.gamePlayer && this.gamePlayer.control) this.gamePlayer.control.stop()
           this.botLogs = this.simLogs = 'Loading...'
 
           await this.sendCodeToSim()
