@@ -101,7 +101,6 @@ import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
 import axios from 'axios'
-var player = null
 export default {
   head() {
     return {
@@ -212,7 +211,7 @@ export default {
         .catch(async () => {
           this.loading = true
           this.showLoadingText()
-          if (player && player.control) player.control.stop()
+          if (this.gamePlayer && this.gamePlayer.control) this.gamePlayer.control.stop()
           this.botLogs = this.simLogs = 'Loading...'
 
           await this.sendCodeToSim()
@@ -281,12 +280,8 @@ export default {
       // eslint-disable-next-line
       this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, gameUrl)
       let bots = []
-      let requests = []
-      let responses = []
       this.fetchPlayerDataTimerId = setInterval(() => {
         this.bots = bots
-        this.responses = responses
-        this.requests = requests
       }, 1000)
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
@@ -294,9 +289,11 @@ export default {
       })
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-        requests = data.requests || []
-        responses = data.responses || []
         bots = data.bots || []
+        if (this.isDebugMode) {
+          this.responses = data.responses
+          this.requests = data.requests
+        }
       })
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
@@ -358,8 +355,10 @@ export default {
     position: relative;
   }
   &__player {
-    min-height: 300px;
     position: relative;
+    &.disable {
+      min-height: 300px;
+    }
     &.disable::after {
       content: '';
       position: absolute;
