@@ -17,7 +17,7 @@
     <p class="name"><strong>{{ getStringTruncated(bot.displayName, 10) }}</strong> v {{ bot.v }}</p>
     <div class="statistics">
       <div class="mr-12">
-        <p>{{ $t("game.size") }}: <strong>{{ bot.stats.ants }}/{{ bot.stats.hive }}</strong></p>
+        <p>{{ $t("game.size") }}: <strong>{{ bot.stats.hive }}/{{ bot.stats.ants }}</strong></p>
         <p>{{ $t("game.score") }}: <strong>{{ getNumberTruncatedToThousand(bot.stats.score) }}</strong></p>
       </div>
       <div>
