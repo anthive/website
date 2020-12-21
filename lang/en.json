@@ -165,7 +165,6 @@
     "loadingText5": "Running the game",
     "descriptionHelp": "Do you have any questions or difficulties ? See the {rules} section or write to us in {discord}",
     "description": "We are deep believers that Games for Developers should be played not with PSEUDO code but actual programming language.\n\nThat way you directly improve your skills that directly apply at your job/hobbi.\n\nWe also not forcing you to use generic boilerplate. Therefore we do not hide infrastructure like http server. Feel free to tune it up for better performance.\n\nWe tend to keep sample code across languages the same. In order not to be biased towards particular coding language.\n\nSample code is NOT written based on best practises. It's NOT well architectured. It's just quick and dirty PoC written on napkin.\n\nIn sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants.\n\nSandbox support only single file with no dependenses. However you can register and link your git repository with bot. Inside of repository you have full freedom. Proper file separation, dependensies, etc., to unleash your coding Ninja!",
-    "sourceCode": "Source code",
     "sandbox": "Sandbox",
     "tooltipText": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants."
   },

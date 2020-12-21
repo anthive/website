@@ -1,6 +1,6 @@
 <template>
   <div class="editor__wrap">
-    <v-card color="#272822" tile height="80vh">
+    <v-card color="#272822" tile height="660px">
       <v-slide-group class="editor__tab-slider" show-arrows v-model="tab">
         <template v-slot:prev>
           <AntHiveIcon icon="arrow-left-box" color="white" />
@@ -33,19 +33,13 @@
           v-for="(lang, key) in langs"
           :key="key"
         >
-          <v-card color="#272822" height="80vh" flat>
+          <v-card color="#272822" height="660px" flat>
             <v-card-text>
               <div class="editor" :id="lang.editor" />
             </v-card-text>
           </v-card>
         </v-tab-item>
       </v-tabs-items>
-      <h3 class="mt-3 mb-10" v-if="currentLangTab.sample">
-        {{ $t("sandbox.sourceCode") }}:
-        <a target="_blank" class="accent--text" :href="currentLangTab.sample">{{
-          currentLangTab.sample
-        }}</a>
-      </h3>
     </v-card>
   </div>
 </template>
@@ -180,6 +174,7 @@ export default {
   }
   &__wrap {
     height: 100%;
+    min-height: 710px;
   }
 }
 // editor scrollbar

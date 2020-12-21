@@ -1,5 +1,5 @@
 <template>
-  <section :class="{ 'sandbox--debug': isDebugMode }" class="sandbox page-wrap">
+  <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <div class="white pa-3 pb-10" min-height="calc(100vh - 64px)">
@@ -30,7 +30,6 @@
               <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
             >
-               <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
               <div class="sandbox__actions">
                 <AntHiveButton
                   :loading="loading"
@@ -88,6 +87,7 @@
               </div>
             </v-col>
           </v-row>
+          <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
         </div>
       </v-col>
     </v-row>
@@ -348,9 +348,6 @@ export default {
 .sandbox {
   overflow: hidden;
   height: 100%;
-  &--debug {
-    margin-bottom: 100px;
-  }
   &__content {
     position: relative;
   }

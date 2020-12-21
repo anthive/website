@@ -28,7 +28,7 @@
               <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
             >
-             <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
+             <GameDebugPanel class="debug-panel" :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
           </v-col>
 
           <v-col cols="12" md="5">
@@ -246,6 +246,13 @@ export default {
   overflow-x: hidden;
   &.debug {
     margin-bottom: 330px;
+  }
+  .debug-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
   }
   // loading text animation
   .flip-list-move {
