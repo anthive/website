@@ -7,9 +7,9 @@
         v-for="(bot, index) in getBots"
         :key="index"
         class="tab"
-        ><v-avatar v-if="!bot.displayName.includes('sandbox')" class="mr-2" tile size="20"
+        ><v-avatar class="avatar" v-if="!bot.displayName.includes('sandbox')" tile size="20"
           ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
-        >{{ bot.displayName }} {{ bot.id }}</v-tab
+        ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
       >
     </v-tabs>
 
@@ -121,11 +121,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .debug-panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 4;
+  font-size: $font-medium;
   &.v-tabs-slider-wrapper {
     display: none;
   }
@@ -136,7 +132,7 @@ export default {
     cursor: pointer;
     background-color: $color-violet-700 !important;
     margin-bottom: -5px;
-    margin-left: 5px;
+    margin-left: 27px;
   }
   .tab {
     text-transform: none;
@@ -153,6 +149,7 @@ export default {
     }
   }
   .tab-title {
+    font-size: $font-big;
     font-weight: 600;
     background-color: $color-violet-350;
     color: $color-violet-700;
@@ -160,6 +157,11 @@ export default {
   }
   .tab-text {
     margin: 10px;
+  }
+  .avatar {
+    border: 1px solid white;
+    margin-right: 10px;
+    box-sizing: content-box;
   }
 }
 </style>

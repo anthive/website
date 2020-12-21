@@ -61,7 +61,7 @@
         <nuxt-link class="link" :to="localePath('rules')">
           {{ $t("header.rules") }}
         </nuxt-link>
-        <nuxt-link class="link" :to="localePath('sandbox')">
+        <nuxt-link class="link" :to="`${localePath('sandbox')}/js`">
           {{ $t("header.sandbox") }}
         </nuxt-link>
 
