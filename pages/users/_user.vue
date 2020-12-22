@@ -17,12 +17,9 @@
       </div>
       <div class="justify-space-between mt-12">
         <p v-if="getUser.description">{{ getUser.description}}</p>
-        <!-- TODO: remove -->
-        <p>Hello!<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-        <!-- TODO: add condition -->
-        <div class="d-flex">
+        <div class="d-flex" v-if="getUserSocials">
           <a
-            v-for="(social, index) in getUser.socials"
+            v-for="(social, index) in getUserSocials"
             :key="index"
             class="social-link"
             :href="social.link"
@@ -31,16 +28,6 @@
             target="_blank"
           >
             <v-img :src="`/img/${social.name}.png`" />
-          </a>
-          <!-- TODO: remove -->
-          <a
-            class="social-link"
-            href="#"
-            title="brandfolder"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <v-img src="/img/brandfolder.png" />
           </a>
         </div>
       </div>
@@ -128,7 +115,6 @@ export default {
       if (this.userInfo) return this.userInfo
     },
     getUserFullName() {
-      console.log(this.userInfo)
       if (this.userInfo && this.userInfo.fullName) return this.userInfo.fullName
     },
     getUserBots() {
@@ -146,6 +132,11 @@ export default {
         return this.userInfo.background
       }
       return '/img/user_background.png'
+    },
+    getUserSocials() {
+      if (this.getUser && this.getUser.socials && this.getUser.socials.length) {
+        return this.getUser.socials
+      }
     }
   }
 }

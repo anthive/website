@@ -4,8 +4,8 @@
      <img
         class="lang-icon"
         width="40px"
-        :src="getLangImg"
-        :alt="lang" 
+        :src="getCurrentLangImg"
+        :alt="getCurrentLang.name" 
       />
    </div>
    <div class="description">
@@ -39,7 +39,7 @@ export default {
     getCurrentLang() {
       return langs.find(lang => lang.id === this.bot.lang)
     },
-    getLangImg() {
+    getCurrentLangImg() {
       return this.getCurrentLang && this.getCurrentLang.img
     }
   }
