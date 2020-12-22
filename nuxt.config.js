@@ -9,7 +9,7 @@ const dynamicRoutes = () => {
     resolve([...langs.map(lang => `/sandbox/${lang.extention}`), ...langs.map(lang => `/ru/sandbox/${lang.extention}`)])
   })
 
-  let userRoutes = publicApi.get('/users').then(usersResp => {
+  let userRoutes = publicApi.get('/users', { params: { bots: true } }).then(usersResp => {
     return [
       ...usersResp.data.map(user => `/users/${user.username}`),
       ...usersResp.data.map(user => `/ru/users/${user.username}`)
