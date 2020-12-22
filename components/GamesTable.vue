@@ -93,7 +93,7 @@
         </div>
       </div>
     </v-card>
-    <infinite-scroll :enough="enoughLoadGames" @load-more="loadMoreGames" />
+    <infinite-scroll :enough="enoughLoadGames" @load-more="loadGames" />
   </div>
 </template>
 
@@ -106,10 +106,10 @@ import { getImageById } from '@/services/Image'
 export default {
   name: 'GamesTable',
   props: {
-    gamesLimit: {
+    pageSize: {
       type: Number,
       required: false,
-      default: 10
+      default: 50
     }
   },
   components: {
@@ -130,31 +130,21 @@ export default {
     await this.loadGames()
   },
   created() {
-    this.searchParams = { offset: 0, limit: this.gamesLimit }
+    this.searchParams = { p: 0, pp: this.pageSize }
   },
   methods: {
     getImage(id) {
       return getImageById(`${id}-background.png`, 150, 200)
     },
     loadGames() {
-      return getGames(this.searchParams).then(gamesResp => {
-        this.games = gamesResp
-      })
-    },
-    loadMoreGames() {
       this.enoughLoadGames = true
-      getGames({ offset: this.games.length, limit: this.gamesLimit }).then(games => {
+      getGames(this.searchParams).then(games => {
         if (games.length) {
+          this.searchParams.p += 1
           this.games = this.games.concat(games)
           this.enoughLoadGames = false
         }
       })
-    }
-  },
-  watch: {
-    async selectedPage(pageNumber) {
-      this.searchParams.page = pageNumber
-      await this.loadGames()
     }
   }
 }
