@@ -42,6 +42,7 @@
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
+                @viewProfile="viewProfile"
                 class="mb-2"
                 :key="bot.id"
                 v-for="(bot, index) in bots"
@@ -77,6 +78,8 @@ import AntHivePageHeader from '@/components/AntHivePageHeader'
 import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
+import { getGame } from '@/services/Game'
+
 export default {
   head() {
     return {
@@ -105,7 +108,8 @@ export default {
     fetchPlayerDataTimerId: '',
     isDebugMode: false,
     isGameStoped: false,
-    gameTooltip: ''
+    gameTooltip: '',
+    game: {}
   }),
   components: {
     AntHiveBotHorizontal,
@@ -122,8 +126,9 @@ export default {
       this.fetchGame()
     }
   },
-  mounted() {
+  async mounted() {
     this.fetchGame()
+    this.game = await getGame(this.$route.query.id)
   },
   methods: {
     fetchGame() {
@@ -215,6 +220,10 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
+    },
+    viewProfile(botDisplayName) {
+      const bot = this.game.bots.find(bot => bot.displayName === botDisplayName)
+      this.$router.push(this.localePath(`/users/${bot.username}`))
     }
   },
   destroyed() {
