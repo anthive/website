@@ -5,15 +5,18 @@ $font-medium: 14px;
 $font-big: 16px;
 $font-bigger: 24px;
 
-$font-weight-bold: 600;
+$font-weight-light: 100;
 $font-weight-normal: 400;
+$font-weight-bold: 600;
+$font-weight-bolder: 900;
 
 // colors
 $color-black: #000000;
+$color-black-opacity: #000000d1;
 $color-white: #ffffff;
 
 // vialet
-$color-violet-50: #fbf7ff;
+$color-violet-50: #f4f2f7;
 $color-violet-100: #c6becf;
 $color-violet-350: #9786bf;
 $color-violet-400: #e1c1ff;

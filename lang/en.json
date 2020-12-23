@@ -95,7 +95,11 @@
     "game": "Game",
     "gameId": "Game Id",
     "statistics": "Statistics",
-    "moreGames": "More games"
+    "moreGames": "More games",
+    "by": "By",
+    "ticks": "ticks",
+    "mapSkin": "Map skin",
+    "viewReplay": "View Replay"
   },
 
   "leaderboard": {
@@ -144,7 +148,10 @@
     "bots": "Bots",
     "bestGames": "Best games",
     "statistic": "Statistic",
-    "mmr": "MMR"
+    "mmr": "MMR",
+    "wl": "W/L",
+    "art": "ART",
+    "challangeMe": "Challange me"
   },
 
   "sandbox": {

@@ -8,7 +8,7 @@
     <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <img class="logo" src="/img/anthive_logo_dark.svg" alt="Logo" />
+          <img class="logo" :src="getLogo" alt="Logo" />
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -51,7 +51,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <div class="hidden-sm-and-down mr-6">
+      <div class="hidden-sm-and-down mr-6" :class="{ profile: isProfilePage }">
         <nuxt-link class="link" :to="localePath('games')">
           {{ $t("header.games") }}
         </nuxt-link>
@@ -84,7 +84,7 @@
           tile
           v-show="!getUser"
           @click="handlerClickGetStarted"
-          color="accent"
+          color="primary"
           class="ml-3"
         >
           {{ $t("header.buttonJoin") }}
@@ -113,6 +113,12 @@ export default {
     },
     getUserName() {
       return this.getUser && this.getUser.userName ? this.getUser.userName : 'anthive'
+    },
+    isProfilePage() {
+      return this.$route.path.startsWith('/users/')
+    },
+    getLogo() {
+      return this.isProfilePage ? '/img/anthive_logo.svg' : '/img/anthive_logo_dark.svg'
     }
   },
   methods: {
@@ -135,7 +141,11 @@ export default {
     width: 144px;
     padding-top: 16px;
   }
-
+  .profile {
+    .link {
+      color: $color-white;
+    }
+  }
   .link {
     padding: 10px;
     margin: 0 15px;

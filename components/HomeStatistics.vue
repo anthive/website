@@ -81,6 +81,7 @@ export default {
   padding: 140px 0 80px;
   position: relative;
   overflow: hidden;
+  background-color: $color-violet-50;
 
   &__row {
     max-width: 600px;

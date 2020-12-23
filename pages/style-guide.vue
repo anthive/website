@@ -60,12 +60,8 @@
           <AntHiveBotVertical
             class="mr-4"
             v-for="(bot, index) in bots"
-            :key="bot.displayName + index"
-            :lang="bot.lang"
-            :name="bot.displayName"
-            :avatar="getAvatar(bot.avatar, 100)"
-            games="1234514"
-            wins="2331"
+            :key="index + 'bot'"
+            :bot="bot"
           />
         </div>
       </div>
@@ -106,19 +102,6 @@
       </div>
 
       <div class="component">
-        <h4>AntHiveAchivement</h4>
-        <p v-if="$options.components['AntHiveAchivement'].props">Props: {{ $options.components['AntHiveAchivement'].props }}</p>
-        <div>
-          <AntHiveAchivement
-              v-for="(chip, index) in 3"
-              :key="index + 'achivement'"
-              :title="`Best bot 202${index}`"
-              description="Javascript beginner"
-            />
-        </div>
-      </div>
-
-      <div class="component">
         <h4>GamesTable</h4>
         <p v-if="$options.components['GamesTable'].props">Props: {{ $options.components['GamesTable'].props }}</p>
         <div class="d-flex">
@@ -138,7 +121,6 @@ import GamesTable from '@/components/GamesTable'
 import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
-import AntHiveAchivement from '@/components/AntHiveAchivement'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
 import Image from '@/mixins/image'
 
@@ -152,7 +134,6 @@ export default {
     AntHiveBotSmall,
     AntHiveBotHorizontal,
     AntHivePageHeader,
-    AntHiveAchivement,
     AntHiveBotVertical
   },
   data: () => ({

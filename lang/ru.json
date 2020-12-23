@@ -95,7 +95,11 @@
     "game": "Игра",
     "gameId": "Id игры",
     "statistics": "Статистика",
-    "moreGames": "Еще игры"
+    "moreGames": "Еще игры",
+    "by": "Автор",
+    "ticks": "тиков",
+    "mapSkin": "Карта",
+    "viewReplay": "Смотреть игру"
   },
 
   "leaderboard": {
@@ -145,7 +149,10 @@
     "bots": "Боты",
     "bestGames": "Лучшие игры",
     "statistic": "Статистика",
-    "mmr": "MMR"
+    "mmr": "MMR",
+    "wl": "В/П",
+    "art": "ART",
+    "challangeMe": "Сыграть со мной"
   },
 
   "sandbox": {

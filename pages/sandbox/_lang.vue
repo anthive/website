@@ -2,7 +2,7 @@
   <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
-        <div class="white pa-3 pb-10" min-height="calc(100vh - 64px)">
+        <div class="pa-3 pb-10" min-height="calc(100vh - 64px)">
           <AntHivePageHeader
             :title="$t('sandbox.sandbox')"
             :tooltip-text="$t('sandbox.tooltipText')"
