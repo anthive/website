@@ -1,69 +1,46 @@
 <template>
  <div class="chip">
-   <div class="img" :style="`background: center / cover no-repeat url(${getBotAvatar})`">
+   <div class="img" :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar)})`">
      <img
         class="lang-icon"
         width="40px"
-        :src="getLangImg"
-        :alt="lang" 
+        :src="getCurrentLangImg"
+        :alt="getCurrentLang.name" 
       />
    </div>
    <div class="description">
-    <p class="mb-0"><strong>{{ name }}</strong></p>
-    <p class="lang-name">{{ getLangName }}</p>
+    <p class="bot-title">{{ getStringTruncated(bot.displayName, 10) }}<span class="version">v {{ bot.v }}</span></p>
     <div class="statistics">
-      <p>{{ $t("userInfo.games") }}: <strong>{{ games }}</strong></p>
-      <p>{{ $t("userInfo.wins") }}: <strong>{{ wins }}</strong></p>
+      <div class="d-flex justify-space-between">
+        <p>{{ $t("userInfo.mmr") }}:</p>
+        <p class="value">{{ bot.mmr }}</p>
+      </div>
     </div>
    </div>
  </div>
 </template>
 
-
 <script>
 import langs from '../static/langs/data.json'
+import Image from '@/mixins/image'
+import Truncate from '@/mixins/truncate'
 
 export default {
   name: 'AntHiveBotVertical',
+  mixins: [Image, Truncate],
   props: {
-    name: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    avatar: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    lang: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    games: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    wins: {
-      type: String,
-      required: false,
-      default: ''
+    bot: {
+      type: Object,
+      required: true,
+      default: () => {}
     }
   },
   computed: {
     getCurrentLang() {
-      return langs.find(lang => lang.id === this.lang)
+      return langs.find(lang => lang.id === this.bot.lang)
     },
-    getLangName() {
-      return this.getCurrentLang && this.getCurrentLang.name
-    },
-    getLangImg() {
+    getCurrentLangImg() {
       return this.getCurrentLang && this.getCurrentLang.img
-    },
-    getBotAvatar() {
-      return this.avatar
     }
   }
 }
@@ -76,18 +53,32 @@ export default {
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  height: 300px;
+  max-height: 300px;
+  margin-bottom: 40px;
+  background-color: $color-white;
 
   .img {
     background-position: center;
     width: 100%;
-    height: 130px;
+    height: 120px;
     background: $color-red-300;
-    padding: 10px;
+  }
+
+  .bot-title {
+    font-weight: $font-weight-bold;
+    margin-bottom: 10px;
+  }
+
+  .version {
+    margin-left: 10px;
+    font-weight: $font-weight-normal;
+    color: $color-violet-350;
   }
 
   .lang-icon {
-    margin-right: 10px;
+    background-color: $color-white;
+    border-right: 2px solid $color-white;
+    border-bottom: 2px solid $color-white;
   }
 
   .lang-name {
@@ -96,13 +87,17 @@ export default {
   }
 
   .description {
-    padding: 20px;
+    padding: 12px 18px;
   }
 
   .statistics {
     p {
       margin-bottom: 0;
-      font-size: $font-small;
+      font-size: $font-medium;
+    }
+
+    .value {
+      font-weight: $font-weight-bold;
     }
   }
 }

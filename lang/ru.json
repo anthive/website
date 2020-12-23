@@ -142,8 +142,10 @@
     "bestGameScore": "Лучший счет за игру",
     "maxAntInGame": "Максимум муравьев за игру",
     "achivements": "Достижения",
-    "bestBots": "Лучшие боты",
-    "statistic": "Статистика"
+    "bots": "Боты",
+    "bestGames": "Лучшие игры",
+    "statistic": "Статистика",
+    "mmr": "MMR"
   },
 
   "sandbox": {

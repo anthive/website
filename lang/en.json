@@ -141,8 +141,10 @@
     "bestGameScore": "Best game score",
     "maxAntInGame": "Max ant in game",
     "achivements": "Achivements",
-    "bestBots": "Best bots",
-    "statistic": "Statistic"
+    "bots": "Bots",
+    "bestGames": "Best games",
+    "statistic": "Statistic",
+    "mmr": "MMR"
   },
 
   "sandbox": {
