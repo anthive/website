@@ -116,6 +116,7 @@ export default {
   }
 
   .time-ago {
+    font-size: $font-small;
     color: $color-violet-350;
   }
 
