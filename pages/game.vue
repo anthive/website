@@ -2,14 +2,15 @@
   <section :class="{ debug: isDebugMode }" class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
-        <div class="mx-auto">
-          <AntHivePageHeader
-            :title="`${$t('game.game')} #${gameId}`"
-            :tooltip-text="$t('game.gameId')"
-          />
-        </div>
-        <v-row class="mx-auto">
-          <v-col class="pa-0" cols="12" md="7">
+        <v-row
+          ><v-col class="mx-auto">
+            <AntHivePageHeader
+              :title="`${$t('game.game')} #${gameId}`"
+              :tooltip-text="$t('game.gameId')"
+            /> </v-col
+        ></v-row>
+        <v-row>
+          <v-col cols="12" md="8">
             <GamePlayer
               class="player-wrap"
               :tooltip-content="tooltipContent"
@@ -28,10 +29,17 @@
               <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
             >
-             <GameDebugPanel class="debug-panel" :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
+            <GameDebugPanel
+              class="debug-panel"
+              :is-game-stoped="isGameStoped"
+              v-if="bots && isDebugMode"
+              :requests="requests"
+              :responses="responses"
+              :bots="bots"
+            />
           </v-col>
 
-          <v-col cols="12" md="5">
+          <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
                 class="mb-2"

@@ -14,15 +14,15 @@
     <!-- <v-avatar tile class="user-avatar" size="40">
       <v-img :src="getAvatar(bot.avatar)" />
     </v-avatar> -->
-    <p class="name"><strong>{{ getStringTruncated(bot.displayName, 10) }}</strong> v {{ bot.v }}</p>
+    <p class="name"><span class="display-name">{{ getStringTruncated(bot.displayName, 10) }}</span> <span>v {{ bot.v }}</span></p>
     <div class="statistics">
-      <div class="mr-12">
-        <p>{{ $t("game.size") }}: <strong>{{ bot.stats.hive }}/{{ bot.stats.ants }}</strong></p>
-        <p>{{ $t("game.score") }}: <strong>{{ getNumberTruncatedToThousand(bot.stats.score) }}</strong></p>
+      <div class="statistic-container">
+        <div class="statistic"><span>{{ $t("game.size") }}:</span> <span class="statistic-value">{{ bot.stats.hive }}/{{ bot.stats.ants }}</span></div>
+        <div class="statistic"><span>{{ $t("game.score") }}:</span> <span class="statistic-value">{{ getNumberTruncatedToThousand(bot.stats.score) }}</span></div>
       </div>
-      <div>
-        <p>{{ $t("game.errors") }}: <strong>{{ getNumberTruncatedToThousand(bot.stats.errors) }}</strong></p>
-        <p>{{ $t("game.rt") }}: <strong>{{ getArtInMs(bot.stats.art) }} ms</strong></p>
+      <div class="statistic-container">
+        <div class="statistic"><span>{{ $t("game.errors") }}:</span> <span class="statistic-value">{{ getNumberTruncatedToThousand(bot.stats.errors) }}</span></div>
+        <div class="statistic"><span>{{ $t("game.rt") }}:</span> <span class="statistic-value">{{ getArtInMs(bot.stats.art) }} ms</span></div>
       </div>
     </div>
    </div>
@@ -50,7 +50,6 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .chip {
-  min-width: 450px;
   display: flex;
   flex-direction: row;
   box-shadow: $box-shadow-default;
@@ -59,7 +58,7 @@ export default {
 
   .img {
     background-position: center;
-    width: 120px;
+    min-width: 120px;
     background: $color-red-300;
   }
 
@@ -83,19 +82,48 @@ export default {
 
   .name {
     font-size: $font-big;
+    margin-bottom: 12px;
+    .display-name {
+      margin-right: 6px;
+      font-weight: $font-weight-bold;
+    }
+    @media (min-width: $screen-md) and (max-width: $screen-lg) {
+      margin-bottom: 0;
+    }
   }
 
   .description {
     position: relative;
-    padding: 20px 13px;
+    padding: 14px 20px 14px 20px;
+    width: 100%;
+    @media (min-width: $screen-md) and (max-width: $screen-lg) {
+      padding: 10px;
+    }
   }
 
   .statistics {
-    margin-top: 12px;
     display: flex;
-    p {
-      margin-bottom: 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .statistic-container {
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .statistic {
+      color: $color-violet-700;
+      margin-bottom: 5px;
       font-size: $font-medium;
+      display: flex;
+      justify-content: space-between;
+      @media (min-width: $screen-md) and (max-width: $screen-lg) {
+        margin-bottom: 0;
+      }
+    }
+    .statistic-value {
+      display: block;
+      font-weight: $font-weight-bold;
     }
   }
 }

@@ -170,7 +170,6 @@ export default {
   top: -80px;
 }
 .player__section {
-  margin-top: 8px;
   position: relative;
 }
 .v-btn--disabled {

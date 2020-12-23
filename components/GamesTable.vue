@@ -12,7 +12,7 @@
           class="games-table__item-cover"
           height="100"
           width="80"
-          :src="getImage(game.map_settings.theme)"
+          :src="getImage(game.mapSettings.theme)"
           alt="Background"
         />
         <div
