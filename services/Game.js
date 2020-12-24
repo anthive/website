@@ -5,7 +5,7 @@ async function getGames(params) {
 }
 
 async function getGame(id) {
-  const gameUrl = `/games/${id}`
+  const gameUrl = `/game/${id}`
   return publicApi.get(gameUrl).then(resp => resp.data)
 }
 

@@ -2,14 +2,15 @@
   <section :class="{ debug: isDebugMode }" class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
-        <div class="mx-auto">
-          <AntHivePageHeader
-            :title="`${$t('game.game')} #${gameId}`"
-            :tooltip-text="$t('game.gameId')"
-          />
-        </div>
-        <v-row class="mx-auto">
-          <v-col class="pa-0" cols="12" md="7">
+        <v-row
+          ><v-col class="mx-auto">
+            <AntHivePageHeader
+              :title="`${$t('game.game')} #${gameId}`"
+              :tooltip-text="$t('game.gameId')"
+            /> </v-col
+        ></v-row>
+        <v-row>
+          <v-col cols="12" md="8">
             <GamePlayer
               class="player-wrap"
               :tooltip-content="tooltipContent"
@@ -28,18 +29,27 @@
               <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
             >
-             <GameDebugPanel class="debug-panel" :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
+            <GameDebugPanel
+              class="debug-panel"
+              :is-game-stoped="isGameStoped"
+              v-if="bots && isDebugMode"
+              :requests="requests"
+              :responses="responses"
+              :bots="bots"
+            />
           </v-col>
 
-          <v-col cols="12" md="5">
+          <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
-              <AntHiveBotHorizontal
+              <div :key="bot.id"
+                 v-for="(bot, index) in game.bots"><AntHiveBotHorizontal
                 class="mb-2"
-                :key="bot.id"
-                v-for="(bot, index) in bots"
+                v-if="bot.stats"
                 :bot="bot"
+                :stats="bot.stats"
+                :is-dead="bot.isDead"
                 :number="index + 1"
-              />
+              /></div>
             </transition-group>
           </v-col>
         </v-row>
@@ -69,6 +79,8 @@ import AntHivePageHeader from '@/components/AntHivePageHeader'
 import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
+import { getGame } from '@/services/Game'
+
 export default {
   head() {
     return {
@@ -97,7 +109,8 @@ export default {
     fetchPlayerDataTimerId: '',
     isDebugMode: false,
     isGameStoped: false,
-    gameTooltip: ''
+    gameTooltip: '',
+    game: {}
   }),
   components: {
     AntHiveBotHorizontal,
@@ -112,9 +125,20 @@ export default {
     $route() {
       this.gamePlayerDestroy()
       this.fetchGame()
+    },
+    bots(value) {
+      this.game.bots = this.game.bots.map(bot => {
+        const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
+        bot.isDead = !gameBot
+        if (gameBot) bot.stats = gameBot.stats
+        return bot
+      })
+
+      this.game.bots.sort(this.compare)
     }
   },
-  mounted() {
+  async mounted() {
+    this.game = await getGame(this.$route.query.id)
     this.fetchGame()
   },
   methods: {
@@ -201,8 +225,9 @@ export default {
       this.isGameEnd = false
     },
     compare(a, b) {
-      if (a.Wealth < b.Wealth) return 1
-      if (a.Wealth > b.Wealth) return -1
+      if (!a.stats || !b.stats) return 0
+      if (a.stats.score < b.stats.score) return 1
+      if (a.stats.score > b.stats.score) return -1
       return 0
     },
     showActions() {
