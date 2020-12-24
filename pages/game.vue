@@ -46,7 +46,6 @@
                 class="mb-2"
                 v-if="bot.stats"
                 :bot="bot"
-                :game="game"
                 :stats="bot.stats"
                 :is-dead="bot.isDead"
                 :number="index + 1"
@@ -226,6 +225,7 @@ export default {
       this.isGameEnd = false
     },
     compare(a, b) {
+      if (!a.stats || !b.stats) return 0
       if (a.stats.score < b.stats.score) return 1
       if (a.stats.score > b.stats.score) return -1
       return 0

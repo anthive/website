@@ -41,7 +41,7 @@ export default {
 @import '@/assets/style/global.scss';
 
 .for-whom {
-  background-color: $color-violet-50;
+  background-color: $color-white;
   padding: 70px 0 20px;
 
   &__container {

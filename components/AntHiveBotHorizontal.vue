@@ -1,13 +1,20 @@
 <template>
   <div class="chip">
-    <div :class="{'show': botIsDead}" class="information">
+    <div :class="{ show: botIsDead }" class="information">
+      <div class="information-user">
+        By {{ bot.username }}
+        <v-avatar class="ml-1" tile size="30"
+          ><v-img :src="getAvatar(bot.userAvatar, 200)"
+        /></v-avatar>
+      </div>
       <div class="information-container">
         <AntHiveButton
+          class="challange"
           tile
-          color="accent"
           :to="this.localePath(`/users/${bot.username}`)"
         >
-          {{ $t("game.challenge") }}
+          <AntHiveIcon class="challange-icon" color="white" icon="challange" />
+          {{ $t("userInfo.challangeMe") }}
         </AntHiveButton>
       </div>
     </div>
@@ -73,12 +80,15 @@
 <script>
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'AntHiveBotHorizontal',
+  components: {
+    AntHiveIcon
+  },
   props: {
     bot: { type: Object, required: true },
-    game: { type: Object, required: true },
     stats: { type: Object, required: true },
     isDead: { type: Boolean, required: true }
   },
@@ -157,12 +167,14 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+
     .statistic-container {
       width: 80px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
+
     .statistic {
       color: $color-violet-700;
       margin-bottom: 5px;
@@ -183,6 +195,7 @@ export default {
     min-width: 100%;
     height: 100%;
     transition: all 0.4s;
+
     &:hover {
       background: $color-black-transparent;
       transition: all 0.4s;
@@ -190,21 +203,50 @@ export default {
         transition: all 0.4s;
         display: block;
       }
+
+      .information-user {
+        transition: all 0.4s;
+        display: block;
+      }
     }
+
     &.show {
       background: $color-black-transparent;
       .information-container {
         display: block;
       }
+      .information-user {
+        display: block;
+      }
     }
+
+    .information-user {
+      font-size: $font-medium;
+      color: white;
+      position: absolute;
+      right: 0;
+      padding: 10px;
+      display: none;
+    }
+
     .information-container {
       padding: 10px;
-      width: 155px;
+      width: fit-content;
       position: absolute;
       right: 0;
       bottom: 0;
       display: none;
       transition: all 0.4s;
+    }
+
+    .challange {
+      background-color: $color-violet-350 !important;
+    }
+
+    .challange-icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 5px;
     }
   }
 }

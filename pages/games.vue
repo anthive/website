@@ -27,11 +27,6 @@ export default {
       ]
     }
   },
-  data: () => ({
-    filters: [],
-    user: {}
-  }),
-
   components: {
     GamesTable,
     AntHivePageHeader
@@ -44,23 +39,5 @@ export default {
 
 .games {
   padding: 40px 0;
-
-  &__title-wrap {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-
-  &__info {
-    position: absolute;
-    top: -5px;
-    right: -26px;
-  }
-}
-
-@media screen and (max-width: $screen-sm) {
-  .headline {
-    text-align: center;
-  }
 }
 </style>

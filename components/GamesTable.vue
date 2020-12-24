@@ -1,107 +1,22 @@
 <template>
-  <div id="games-table" class="games-table">
-    <v-card
-      tile
-      class="games-table__item"
-      :key="index"
-      v-for="(game, index) in games"
-    >
-      <div class="d-flex align-center">
-        <img
-          v-if="!$vuetify.breakpoint.smAndDown"
-          class="games-table__item-cover"
-          height="100"
-          width="80"
-          :src="getImage(game.mapSettings.theme)"
-          alt="Background"
-        />
-        <div
-          :class="{ 'flex-column': $vuetify.breakpoint.smAndDown }"
-          class="d-flex col-12 col-md-11 justify-space-between align-center"
-        >
-          <div
-            class="col-12 col-md-2 justify-center justify-md-start d-flex align-center"
-          >
-            <AntHiveAuthor
-              class="ml-md-n13 mr-5"
-              :author="game.author"
-              :date="game.finished"
-            />
-          </div>
-          <div
-            v-if="game.bots && game.bots.length > 4"
-            class="games-table__bots-container justify-center col-12 col-md-3"
-          >
-            <div
-              :key="pIndex"
-              v-for="(bot, pIndex) in game.bots.slice(0, 4)"
-            >
-             <div>
-                <AntHiveBotSmall class="ml-1" :avatar="bot.avatar" locale="table" />
-              </div>
-            </div>
-
-            <AntHiveButton
-              tile
-              color="accent"
-              :to="
-                localePath({
-                  name: 'game',
-                  query: { id: game.id, v: game.version },
-                })
-              "
-              class="games-table__bots-more ml-1"
-            >
-              <span>+{{ game.bots.length - 4 }}</span>
-            </AntHiveButton>
-          </div>
-          <div
-            v-if="game.bots && game.bots.length <= 4"
-            class="games-table__bots-container justify-center col-12 col-md-3"
-          >
-            <div
-              :key="pIndex"
-              v-for="(bot, pIndex) in game.bots.slice(0, 4)"
-            >
-              <div>
-                <AntHiveBotSmall class="ml-1" :avatar="bot.avatar" />
-              </div>
-            </div>
-          </div>
-          <div
-            class="games-table__stats-container justify-center col-12 col-md-3"
-          >
-            <div class="games-table__stat">
-              <div class="games-table__stat-value">{{ game.age }}</div>
-              <div class="games-table__stat-name">{{ $t("games.ticks") }}</div>
-            </div>
-          </div>
-          <div class="games-table__action-container col-12 col-md-3">
-            <AntHiveButton
-              tile
-              :to="
-                localePath({
-                  name: 'game',
-                  query: { id: game.id, v: game.v },
-                })
-              "
-              color="accent"
-            >
-              {{ $t("games.viewGame") }}
-            </AntHiveButton>
-          </div>
-        </div>
-      </div>
-    </v-card>
+  <div class="games" v-if="games">
+    <v-row>
+      <v-col
+        cols="12"
+        md="2"
+        v-for="(game, index) in games"
+        :key="index + 'game'"
+      >
+        <AntHiveGameVertical :game="game" />
+      </v-col>
+    </v-row>
     <infinite-scroll :enough="enoughLoadGames" @load-more="loadGames" />
   </div>
 </template>
 
 <script>
-import AntHiveAuthor from '@/components/AntHiveAuthor'
-import AntHiveBotSmall from '@/components/AntHiveBotSmall'
+import AntHiveGameVertical from '@/components/AntHiveGameVertical'
 import { getGames } from '@/services/Game'
-import { getImageById } from '@/services/Image'
 
 export default {
   name: 'GamesTable',
@@ -113,8 +28,7 @@ export default {
     }
   },
   components: {
-    AntHiveBotSmall,
-    AntHiveAuthor
+    AntHiveGameVertical
   },
   data: () => ({
     searchParams: {},
@@ -133,9 +47,6 @@ export default {
     this.searchParams = { p: 0, pp: this.pageSize }
   },
   methods: {
-    getImage(id) {
-      return getImageById(`${id}-background.png`, 150, 200)
-    },
     loadGames() {
       this.enoughLoadGames = true
       getGames(this.searchParams).then(games => {

@@ -36,7 +36,8 @@
         <h3 class="mb-2">{{ $t("userInfo.bots") }}</h3>
         <v-row>
           <v-col
-            cols="12" md="2"
+            cols="12"
+            md="2"
             v-for="(bot, index) in getUserBots"
             :key="index + 'bot'"
           >
@@ -44,22 +45,16 @@
           </v-col>
         </v-row>
       </div>
-      <div class="games" v-if="getUserGames">
+      <div class="games" v-if="games">
         <h3 class="mb-2">{{ $t("userInfo.bestGames") }}</h3>
         <v-row>
           <v-col
-            cols="12" md="2"
-            v-for="(game, index) in getUserGames"
+            cols="12"
+            md="2"
+            v-for="(game, index) in games"
             :key="index + 'game'"
           >
-          <!-- TODO: game chip -->
-            <!-- <AntHiveBotVertical
-              :lang="bot.lang"
-              :name="bot.displayName"
-              :avatar="getAvatar(bot.avatar)"
-              games="1234514"
-              wins="2331"
-            /> -->
+            <AntHiveGameVertical :game="game" />
           </v-col>
         </v-row>
       </div>
@@ -69,9 +64,10 @@
 
 <script>
 import { User } from '@/services/User'
-import AntHiveAchivement from '@/components/AntHiveAchivement'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
+import AntHiveGameVertical from '@/components/AntHiveGameVertical'
 import Image from '@/mixins/image'
+import { getGames } from '@/services/Game'
 
 export default {
   name: 'user',
@@ -87,7 +83,7 @@ export default {
     }
   },
   components: {
-    AntHiveAchivement,
+    AntHiveGameVertical,
     AntHiveBotVertical
   },
   mixins: [Image],
@@ -96,8 +92,16 @@ export default {
     userInfo: {},
     user: {},
     us: null,
-    filters: []
+    games: []
   }),
+  async fetch() {
+    if (process.server) {
+      await this.loadGames()
+    }
+  },
+  async mounted() {
+    await this.loadGames()
+  },
   created() {
     const name = this.$route.params.user || 'anthive'
     this.us = new User()
@@ -115,16 +119,11 @@ export default {
       if (this.userInfo) return this.userInfo
     },
     getUserFullName() {
-      if (this.userInfo && this.userInfo.fullName) return this.userInfo.fullName
+      if (this.userInfo && this.userInfo.displayName) return this.userInfo.displayName
     },
     getUserBots() {
       if (this.userInfo && this.userInfo.bots && this.userInfo.bots.length) {
         return this.userInfo.bots
-      }
-    },
-    getUserGames() {
-      if (this.userInfo && this.userInfo.games && this.userInfo.games) {
-        return this.userInfo.games
       }
     },
     getUserBackground() {
@@ -138,6 +137,15 @@ export default {
         return this.getUser.socials
       }
     }
+  },
+  methods: {
+    loadGames() {
+      getGames().then(games => {
+        if (games.length) {
+          this.games = this.games.concat(games)
+        }
+      })
+    }
   }
 }
 </script>
@@ -146,7 +154,6 @@ export default {
 @import '@/assets/style/global.scss';
 
 .user {
-  background-color: $color-violet-50;
   overflow-x: hidden;
 }
 
