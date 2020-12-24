@@ -1,13 +1,13 @@
 <template>
   <div class="chip">
-    <div class="information">
+    <div :class="{'show': botIsDead}" class="information">
       <div class="information-container">
         <AntHiveButton
           tile
           color="accent"
-          @click="viewProfile(bot.displayName)"
+          :to="this.localePath(`/users/${bot.username}`)"
         >
-          {{ $t("game.viewProfile") }}
+          {{ $t("game.challenge") }}
         </AntHiveButton>
       </div>
     </div>
@@ -25,7 +25,6 @@
         :alt="bot.lang"
       />
     </div>
-
     <div class="description">
       <!-- TODO: user user avatar -->
       <!-- <v-avatar tile class="user-avatar" size="40">
@@ -37,18 +36,18 @@
         }}</span>
         <span>v {{ bot.v }}</span>
       </p>
-      <div class="statistics">
+      <div v-if="botStats" class="statistics">
         <div class="statistic-container">
           <div class="statistic">
             <span>{{ $t("game.size") }}:</span>
             <span class="statistic-value"
-              >{{ bot.stats.hive }}/{{ bot.stats.ants }}</span
+              >{{ botStats.hive }}/{{ botStats.ants }}</span
             >
           </div>
           <div class="statistic">
             <span>{{ $t("game.score") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncatedToThousand(bot.stats.score)
+              getNumberTruncatedToThousand(botStats.score)
             }}</span>
           </div>
         </div>
@@ -56,13 +55,13 @@
           <div class="statistic">
             <span>{{ $t("game.errors") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncatedToThousand(bot.stats.errors)
+              getNumberTruncatedToThousand(botStats.errors)
             }}</span>
           </div>
           <div class="statistic">
             <span>{{ $t("game.rt") }}:</span>
             <span class="statistic-value"
-              >{{ getArtInMs(bot.stats.art) }} ms</span
+              >{{ getArtInMs(botStats.art) }} ms</span
             >
           </div>
         </div>
@@ -79,16 +78,22 @@ export default {
   name: 'AntHiveBotHorizontal',
   props: {
     bot: { type: Object, required: true },
-    game: { type: Object, required: true }
+    game: { type: Object, required: true },
+    stats: { type: Object, required: true },
+    isDead: { type: Boolean, required: true }
+  },
+  computed: {
+    botStats() {
+      return this.stats
+    },
+    botIsDead() {
+      return this.isDead
+    }
   },
   mixins: [Image, Truncate],
   methods: {
     getArtInMs(art) {
       return Math.round(art / 10) / 100
-    },
-    viewProfile(botDisplayName) {
-      const bot = this.game.bots.find(bot => bot.displayName === botDisplayName)
-      this.$router.push(this.localePath(`/users/${bot.username}`))
     }
   }
 }
@@ -186,12 +191,18 @@ export default {
         display: block;
       }
     }
+    &.show {
+      background: $color-black-transparent;
+      .information-container {
+        display: block;
+      }
+    }
     .information-container {
       padding: 10px;
       width: 155px;
       position: absolute;
-      top: calc(50% - 30px);
-      left: calc(50% - 80px);
+      right: 0;
+      bottom: 0;
       display: none;
       transition: all 0.4s;
     }

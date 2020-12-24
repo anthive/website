@@ -41,14 +41,16 @@
 
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
-              <AntHiveBotHorizontal
+              <div :key="bot.id"
+                 v-for="(bot, index) in game.bots"><AntHiveBotHorizontal
                 class="mb-2"
-                :key="bot.id"
-                 v-for="(bot, index) in bots"
+                v-if="bot.stats"
                 :bot="bot"
                 :game="game"
+                :stats="bot.stats"
+                :is-dead="bot.isDead"
                 :number="index + 1"
-              />
+              /></div>
             </transition-group>
           </v-col>
         </v-row>
@@ -124,6 +126,16 @@ export default {
     $route() {
       this.gamePlayerDestroy()
       this.fetchGame()
+    },
+    bots(value) {
+      this.game.bots = this.game.bots.map(bot => {
+        const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
+        bot.isDead = !gameBot
+        if (gameBot) bot.stats = gameBot.stats
+        return bot
+      })
+
+      this.game.bots.sort(this.compare)
     }
   },
   async mounted() {
@@ -214,8 +226,8 @@ export default {
       this.isGameEnd = false
     },
     compare(a, b) {
-      if (a.Wealth < b.Wealth) return 1
-      if (a.Wealth > b.Wealth) return -1
+      if (a.stats.score < b.stats.score) return 1
+      if (a.stats.score > b.stats.score) return -1
       return 0
     },
     showActions() {
