@@ -29,7 +29,7 @@
       <AntHiveButton large tile class="mr-4" color="action" :to="localePath('sandbox')">
         {{ $t("header.sandbox") }}
       </AntHiveButton>
-      <AntHiveButton large tile color="accent" @click="handlerClickGetStarted">
+      <AntHiveButton large tile color="primary" @click="handlerClickGetStarted">
         {{ $t("header.buttonJoin") }}
       </AntHiveButton>
     </div>

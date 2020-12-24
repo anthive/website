@@ -32,31 +32,25 @@
         </div>
       </div>
       
-      <div class="bots" v-if="getUserBots">
-        <h3 class="mb-2">{{ $t("userInfo.bots") }}</h3>
-        <v-row>
-          <v-col
-            cols="12"
-            md="2"
+      <div class="bots-section" v-if="getUserBots">
+        <h3>{{ $t("userInfo.bots") }}</h3>
+        <div class="bots">
+          <AntHiveBotVertical
             v-for="(bot, index) in getUserBots"
             :key="index + 'bot'"
-          >
-            <AntHiveBotVertical :bot="bot" />
-          </v-col>
-        </v-row>
+            :bot="bot" :user="getUser"
+          />
+        </div>
       </div>
-      <div class="games" v-if="games">
-        <h3 class="mb-2">{{ $t("userInfo.bestGames") }}</h3>
-        <v-row>
-          <v-col
-            cols="12"
-            md="2"
+      <div class="games-section" v-if="games">
+        <h3>{{ $t("userInfo.bestGames") }}</h3>
+        <div class="games">
+          <AntHiveGameVertical
             v-for="(game, index) in games"
             :key="index + 'game'"
-          >
-            <AntHiveGameVertical :game="game" />
-          </v-col>
-        </v-row>
+            :game="game"
+          />
+        </div>
       </div>
     </v-container>
   </section>
@@ -161,8 +155,16 @@ export default {
   padding: 100px 0 0 20px;
 }
 
-.bots {
+.bots-section,
+.games-section {
   margin-top: 90px;
+
+  .bots,
+  .games {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -20px;
+  }
 }
 
 .games {

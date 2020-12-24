@@ -1,23 +1,5 @@
 <template>
   <div class="chip">
-    <div :class="{ show: botIsDead }" class="information">
-      <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
-        By {{ bot.username }}
-        <v-avatar class="ml-1" tile size="30"
-          ><v-img :src="getAvatar(bot.userAvatar, 200)"
-        /></v-avatar>
-      </nuxt-link>
-      <div class="information-container">
-        <AntHiveButton
-          class="challange"
-          tile
-          @click="challange(bot.id)"
-        >
-          <AntHiveIcon class="challange-icon" color="white" icon="challange" />
-          {{ $t("userInfo.challangeMe") }}
-        </AntHiveButton>
-      </div>
-    </div>
     <div
       class="img"
       :style="`background: center / cover no-repeat url(${getAvatar(
@@ -33,6 +15,24 @@
       />
     </div>
     <div class="description">
+      <div :class="{ show: botIsDead }" class="information">
+        <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
+          {{ $t("game.by") }} {{ bot.username }}
+          <v-avatar class="ml-1" tile size="30"
+            ><v-img :src="getAvatar(bot.userAvatar, 200)"
+          /></v-avatar>
+        </nuxt-link>
+        <div class="information-container">
+          <AntHiveButton
+            class="challange"
+            tile
+            @click="challange(bot.id)"
+          >
+            <AntHiveIcon class="challange-icon" color="white" icon="challange" />
+            {{ $t("userInfo.challangeMe") }}
+          </AntHiveButton>
+        </div>
+      </div>
       <!-- TODO: user user avatar -->
       <!-- <v-avatar tile class="user-avatar" size="40">
       <v-img :src="getAvatar(bot.avatar)" />
@@ -116,11 +116,14 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/style/global.scss';
 .chip {
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  max-height: 120px;
   position: relative;
   display: flex;
   flex-direction: row;
   box-shadow: $box-shadow-default;
-  height: 120px;
   background-color: $color-white;
 
   .img {
@@ -161,6 +164,7 @@ export default {
 
   .description {
     padding: 14px 20px 14px 20px;
+    position: relative;
     width: 100%;
     @media (min-width: $screen-md) and (max-width: $screen-lg) {
       padding: 10px;
@@ -196,42 +200,26 @@ export default {
   }
   .information {
     position: absolute;
+    top: 0;
+    left: 0;
     min-width: 100%;
     height: 100%;
     transition: all 0.4s;
+    opacity: 0;
+    background: $color-black-transparent;
 
-    &:hover {
-      background: $color-black-transparent;
-      transition: all 0.4s;
-      .information-container {
-        transition: all 0.4s;
-        display: block;
-      }
-
-      .information-user {
-        transition: all 0.4s;
-        display: block;
-      }
-    }
-
+    &:hover,
     &.show {
-      background: $color-black-transparent;
-      .information-container {
-        display: block;
-      }
-      .information-user {
-        display: block;
-      }
+      opacity: 1;
     }
 
     .information-user {
       cursor: pointer;
       font-size: $font-medium;
-      color: white;
+      color: $color-white;
       position: absolute;
       right: 0;
       padding: 10px;
-      display: none;
     }
 
     .information-container {
@@ -240,8 +228,6 @@ export default {
       position: absolute;
       right: 0;
       bottom: 0;
-      display: none;
-      transition: all 0.4s;
     }
 
     .challange {
