@@ -11,7 +11,7 @@
         <AntHiveButton
           class="challange"
           tile
-          :to="this.localePath(`/users/${bot.username}`)"
+          :to="localePath(`/users/${bot.username}`)"
         >
           <AntHiveIcon class="challange-icon" color="white" icon="challange" />
           {{ $t("userInfo.challangeMe") }}
