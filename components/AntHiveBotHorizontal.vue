@@ -1,17 +1,17 @@
 <template>
   <div class="chip">
     <div :class="{ show: botIsDead }" class="information">
-      <div class="information-user">
+      <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
         By {{ bot.username }}
         <v-avatar class="ml-1" tile size="30"
           ><v-img :src="getAvatar(bot.userAvatar, 200)"
         /></v-avatar>
-      </div>
+      </nuxt-link>
       <div class="information-container">
         <AntHiveButton
           class="challange"
           tile
-          :to="localePath(`/users/${bot.username}`)"
+          @click="challange(bot.id)"
         >
           <AntHiveIcon class="challange-icon" color="white" icon="challange" />
           {{ $t("userInfo.challangeMe") }}
@@ -104,6 +104,10 @@ export default {
   methods: {
     getArtInMs(art) {
       return Math.round(art / 10) / 100
+    },
+    challange(botId) {
+      const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${botId}`
+      window.open(challangeUrl)
     }
   }
 }
@@ -221,6 +225,7 @@ export default {
     }
 
     .information-user {
+      cursor: pointer;
       font-size: $font-medium;
       color: white;
       position: absolute;
