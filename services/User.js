@@ -30,8 +30,7 @@ class User {
   async getUserData(username) {
     this.Username = username
     if (this.Username === '' || this.Username === undefined) return
-
-    return publicApi.get('/user', { params: { username: this.Username, withBots: true } }).then(res => res.data)
+    return publicApi.get(`/user?username=${this.Username}`).then(res => res.data)
   }
 
   scoreString() {

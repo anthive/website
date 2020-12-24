@@ -9,12 +9,38 @@
       />
    </div>
    <div class="description">
-    <p class="bot-title">{{ getStringTruncated(bot.displayName, 10) }}<span class="version">v {{ bot.v }}</span></p>
-    <div class="statistics">
-      <div class="d-flex justify-space-between">
+    <p class="bot-title">{{ getBotName }}<span class="version">v {{ bot.v }}</span></p>
+    <div class="stats">
+      <div class="stats-row">
+        <p>{{ $t("userInfo.games") }}:</p>
+        <p class="value">{{ bot.games }}</p>
+      </div>
+      <div class="stats-row">
+        <p>{{ $t("userInfo.wl") }}:</p>
+        <p class="value">{{ bot.wins }}/{{ bot.losses }}</p>
+      </div>
+      <div class="stats-row">
         <p>{{ $t("userInfo.mmr") }}:</p>
         <p class="value">{{ bot.mmr }}</p>
       </div>
+      <div class="stats-row">
+        <p>{{ $t("userInfo.art") }}:</p>
+        <p class="value">{{ bot.art }}</p>
+      </div>
+      <div class="stats-row">
+        <p>{{ $t("userInfo.errors") }}:</p>
+        <p class="value">{{ bot.errors }}%</p>
+      </div>
+    </div>
+    <div class="layout">
+      <AntHiveButton
+        class="button"
+        tile
+        color="accent"
+      >
+        <AntHiveIcon icon="challange" class="mx-1" small color="white" />
+        <span>{{ $t("userInfo.challangeMe") }}</span>
+      </AntHiveButton>
     </div>
    </div>
  </div>
@@ -24,9 +50,13 @@
 import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'AntHiveBotVertical',
+  components: {
+    AntHiveIcon
+  },
   mixins: [Image, Truncate],
   props: {
     bot: {
@@ -41,6 +71,11 @@ export default {
     },
     getCurrentLangImg() {
       return this.getCurrentLang && this.getCurrentLang.img
+    },
+    getBotName() {
+      if (this.bot && this.bot.displayName) {
+        return this.getStringTruncated(this.bot.displayName, 10)
+      }
     }
   }
 }
@@ -53,14 +88,14 @@ export default {
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  max-height: 300px;
-  margin-bottom: 40px;
+  height: 100%;
+  max-height: 310px;
   background-color: $color-white;
 
   .img {
     background-position: center;
     width: 100%;
-    height: 120px;
+    min-height: 120px;
     background: $color-red-300;
   }
 
@@ -88,17 +123,47 @@ export default {
 
   .description {
     padding: 12px 18px;
+    height: 100%;
+    position: relative;
+
+    .layout {
+      position: absolute;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 15px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $color-black-transparent;
+    }
   }
 
-  .statistics {
+  &:hover {
+    .layout {
+      display: flex;
+    }
+  }
+
+  .stats {
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
     p {
-      margin-bottom: 0;
+      margin-bottom: 4px;
       font-size: $font-medium;
     }
 
     .value {
       font-weight: $font-weight-bold;
     }
+  }
+
+  .button {
+    letter-spacing: 0;
   }
 }
 </style>
