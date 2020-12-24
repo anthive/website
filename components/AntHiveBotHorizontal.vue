@@ -107,7 +107,7 @@ export default {
     },
     challange(botId) {
       const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${botId}`
-      window.open(challangeUrl)
+      window.location.href = challangeUrl
     }
   }
 }

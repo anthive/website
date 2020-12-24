@@ -41,7 +41,7 @@
 
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
-              <div :key="bot.id"
+              <div :key="bot.spawn"
                  v-for="(bot, index) in game.bots"><AntHiveBotHorizontal
                 class="mb-2"
                 v-if="bot.stats"
@@ -122,11 +122,13 @@ export default {
   },
   mixins: [Image],
   watch: {
-    $route() {
+    async $route() {
       this.gamePlayerDestroy()
+      this.game = await getGame(this.$route.query.id)
       this.fetchGame()
     },
     bots(value) {
+      if (!value || !value.length) return
       this.game.bots = this.game.bots.map(bot => {
         const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
         bot.isDead = !gameBot
@@ -207,6 +209,7 @@ export default {
       this.gameTooltip = { x: gameTooltipCoords.x, y: gameTooltipCoords.y, ...tooltip }
     },
     gamePlayerDestroy() {
+      this.game = {}
       if (this.gamePlayer) {
         this.bots = []
         this.gamePlayer = this.gamePlayer.clearPlayerState()
