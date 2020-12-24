@@ -95,7 +95,8 @@
     "game": "Game",
     "gameId": "Game Id",
     "statistics": "Statistics",
-    "moreGames": "More games"
+    "moreGames": "More games",
+    "viewProfile": "View Profile"
   },
 
   "leaderboard": {

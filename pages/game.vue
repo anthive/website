@@ -42,11 +42,11 @@
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <AntHiveBotHorizontal
-                @viewProfile="viewProfile"
                 class="mb-2"
                 :key="bot.id"
-                v-for="(bot, index) in bots"
+                 v-for="(bot, index) in bots"
                 :bot="bot"
+                :game="game"
                 :number="index + 1"
               />
             </transition-group>
@@ -127,8 +127,8 @@ export default {
     }
   },
   async mounted() {
-    this.fetchGame()
     this.game = await getGame(this.$route.query.id)
+    this.fetchGame()
   },
   methods: {
     fetchGame() {
@@ -220,10 +220,6 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
-    },
-    viewProfile(botDisplayName) {
-      const bot = this.game.bots.find(bot => bot.displayName === botDisplayName)
-      this.$router.push(this.localePath(`/users/${bot.username}`))
     }
   },
   destroyed() {

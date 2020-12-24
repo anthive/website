@@ -5,9 +5,9 @@
         <AntHiveButton
           tile
           color="accent"
-          @click="$emit('viewProfile', bot.displayName)"
+          @click="viewProfile(bot.displayName)"
         >
-          View Profile
+          {{ $t("game.viewProfile") }}
         </AntHiveButton>
       </div>
     </div>
@@ -78,12 +78,17 @@ import Truncate from '@/mixins/truncate'
 export default {
   name: 'AntHiveBotHorizontal',
   props: {
-    bot: Object
+    bot: { type: Object, required: true },
+    game: { type: Object, required: true }
   },
   mixins: [Image, Truncate],
   methods: {
     getArtInMs(art) {
       return Math.round(art / 10) / 100
+    },
+    viewProfile(botDisplayName) {
+      const bot = this.game.bots.find(bot => bot.displayName === botDisplayName)
+      this.$router.push(this.localePath(`/users/${bot.username}`))
     }
   }
 }
@@ -174,7 +179,7 @@ export default {
     height: 100%;
     transition: all 0.4s;
     &:hover {
-      background: #040505b8;
+      background: $color-black-transparent;
       transition: all 0.4s;
       .information-container {
         transition: all 0.4s;
