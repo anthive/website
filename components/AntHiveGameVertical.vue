@@ -15,7 +15,7 @@
     </div>
     <div class="bots">
       <nuxt-link
-        :to="`${localePath('users')}/${bot.username}`"
+        :to="localePath(`/users/${bot.username}`)"
         v-for="(bot, index) in game.bots"
         :key="index"
         class="bot-avatar"
@@ -26,12 +26,12 @@
       </nuxt-link>
     </div>
     <v-row>
-      <v-col class="game-info" cols="12" md="6">{{ $t("game.age") }}:</v-col>
-      <v-col class="game-info ticks" cols="12" md="6">{{ game.age }} {{ $t("game.ticks") }}</v-col>
+      <v-col class="game-info" cols="12" sm="6">{{ $t("game.age") }}:</v-col>
+      <v-col class="game-info ticks" cols="12" sm="6">{{ game.age }} {{ $t("game.ticks") }}</v-col>
     </v-row>
     <v-row class="mb-3">
-      <v-col class="game-info" cols="12" md="6">{{ $t("game.mapSkin") }}:</v-col>
-      <v-col class="game-info" cols="12" md="6">
+      <v-col class="game-info" cols="12" sm="6">{{ $t("game.mapSkin") }}:</v-col>
+      <v-col class="game-info" cols="12" sm="6">
         <v-img
           width="20"
           :src="getImage(game.mapSettings.theme)"
@@ -82,6 +82,9 @@ export default {
 @import '@/assets/style/global.scss';
 
 .chip {
+  width: 100%;
+  max-width: 200px;
+  margin: 20px;
   padding: 10px 20px 20px;
   display: flex;
   flex-direction: column;

@@ -33,10 +33,17 @@
       </div>
     </div>
     <div class="layout">
+      <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
+        {{ $t("game.by") }} {{ getUsername }}
+        <v-avatar class="ml-1" tile size="35">
+          <v-img :src="getAvatar(getUserAvatar, 70)" />
+        </v-avatar>
+      </nuxt-link>
       <AntHiveButton
         class="button"
         tile
-        color="accent"
+        color="primary"
+        @click="challange(bot.id)"
       >
         <AntHiveIcon icon="challange" class="mx-1" small color="white" />
         <span>{{ $t("userInfo.challangeMe") }}</span>
@@ -51,6 +58,7 @@ import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AntHiveBotVertical',
@@ -61,11 +69,16 @@ export default {
   props: {
     bot: {
       type: Object,
-      required: true,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: false,
       default: () => {}
     }
   },
   computed: {
+    ...mapGetters(['getUser']),
     getCurrentLang() {
       return langs.find(lang => lang.id === this.bot.lang)
     },
@@ -76,6 +89,22 @@ export default {
       if (this.bot && this.bot.displayName) {
         return this.getStringTruncated(this.bot.displayName, 10)
       }
+    },
+    getUserAvatar() {
+      return this.user && this.user.avatar
+    },
+    getUsername() {
+      return this.user && this.user.username
+    },
+    isUserProfile() {
+      if (!this.getUser) return false
+      return this.getUsername === this.getUser.userName
+    }
+  },
+  methods: {
+    challange(botId) {
+      const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${botId}`
+      window.open(challangeUrl)
     }
   }
 }
@@ -85,11 +114,14 @@ export default {
 @import '@/assets/style/global.scss';
 
 .chip {
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  max-height: 310px;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  height: 100%;
-  max-height: 310px;
   background-color: $color-white;
 
   .img {
@@ -128,21 +160,30 @@ export default {
 
     .layout {
       position: absolute;
-      display: none;
       flex-direction: column;
       justify-content: flex-end;
+      display: flex;
       padding: 15px;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      transition: all 0.4s;
       background: $color-black-transparent;
+      opacity: 0;
+    }
+
+    .user-info {
+      cursor: pointer;
+      font-size: $font-medium;
+      color: $color-white;
+      margin: 0 auto 30px;
     }
   }
 
   &:hover {
     .layout {
-      display: flex;
+      opacity: 1;
     }
   }
 

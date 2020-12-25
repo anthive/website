@@ -9,4 +9,9 @@ async function getGame(id) {
   return publicApi.get(gameUrl).then(resp => resp.data)
 }
 
-export { getGames, getGame }
+async function getUserGames(username) {
+  const gameUrl = `/games/?u=${username}`
+  return publicApi.get(gameUrl).then(resp => resp.data)
+}
+
+export { getGames, getGame, getUserGames }
