@@ -24,11 +24,12 @@
         </nuxt-link>
         <div class="information-container">
           <AntHiveButton
-            class="challange"
+            class="button"
             tile
+            color="primary"
             @click="challange(bot.id)"
           >
-            <AntHiveIcon class="challange-icon" color="white" icon="challange" />
+            <AntHiveIcon icon="challange" class="mx-1" small color="white" />
             {{ $t("userInfo.challangeMe") }}
           </AntHiveButton>
         </div>
@@ -117,7 +118,6 @@ export default {
 @import '@/assets/style/global.scss';
 .chip {
   width: 100%;
-  max-width: 200px;
   height: 100%;
   max-height: 120px;
   position: relative;
@@ -230,14 +230,8 @@ export default {
       bottom: 0;
     }
 
-    .challange {
-      background-color: $color-violet-350 !important;
-    }
-
-    .challange-icon {
-      width: 18px;
-      height: 18px;
-      margin-top: 5px;
+    .button {
+      letter-spacing: 0;
     }
   }
 }

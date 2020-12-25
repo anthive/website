@@ -34,10 +34,10 @@
     </div>
     <div class="layout">
       <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
-        {{ $t("game.by") }} {{ getUserDisplayName }}
-        <v-avatar class="ml-1" tile size="35"
-          ><v-img :src="getAvatar(getUserAvatar, 70)"
-        /></v-avatar>
+        {{ $t("game.by") }} {{ getUsername }}
+        <v-avatar class="ml-1" tile size="35">
+          <v-img :src="getAvatar(getUserAvatar, 70)" />
+        </v-avatar>
       </nuxt-link>
       <AntHiveButton
         class="button"
@@ -58,6 +58,7 @@ import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AntHiveBotVertical',
@@ -77,8 +78,8 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getUser']),
     getCurrentLang() {
-      console.log(this.bot)
       return langs.find(lang => lang.id === this.bot.lang)
     },
     getCurrentLangImg() {
@@ -92,11 +93,12 @@ export default {
     getUserAvatar() {
       return this.user && this.user.avatar
     },
-    getUserDisplayName() {
-      return this.user && this.user.displayName
-    },
     getUsername() {
       return this.user && this.user.username
+    },
+    isUserProfile() {
+      if (!this.getUser) return false
+      return this.getUsername === this.getUser.userName
     }
   },
   methods: {

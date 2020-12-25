@@ -135,7 +135,6 @@ export default {
 
 .header {
   background: transparent !important;
-  position: relative;
 
   .logo {
     width: 144px;

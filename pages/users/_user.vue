@@ -38,11 +38,12 @@
           <AntHiveBotVertical
             v-for="(bot, index) in getUserBots"
             :key="index + 'bot'"
-            :bot="bot" :user="getUser"
+            :bot="bot"
+            :user="getUser"
           />
         </div>
       </div>
-      <div class="games-section" v-if="games">
+      <div class="games-section" v-if="games.length">
         <h3>{{ $t("userInfo.bestGames") }}</h3>
         <div class="games">
           <AntHiveGameVertical
@@ -61,7 +62,7 @@ import { User } from '@/services/User'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
 import AntHiveGameVertical from '@/components/AntHiveGameVertical'
 import Image from '@/mixins/image'
-import { getGames } from '@/services/Game'
+import { getUserGames } from '@/services/Game'
 
 export default {
   name: 'user',
@@ -86,7 +87,8 @@ export default {
     userInfo: {},
     user: {},
     us: null,
-    games: []
+    games: [],
+    username: ''
   }),
   async fetch() {
     if (process.server) {
@@ -97,9 +99,9 @@ export default {
     await this.loadGames()
   },
   created() {
-    const name = this.$route.params.user || 'anthive'
+    this.username = this.$route.params.user || 'anthive'
     this.us = new User()
-    this.us.getUserData(name).then(result => {
+    this.us.getUserData(this.username).then(result => {
       this.userInfo = result
     })
   },
@@ -134,7 +136,7 @@ export default {
   },
   methods: {
     loadGames() {
-      getGames().then(games => {
+      getUserGames(this.username).then(games => {
         if (games.length) {
           this.games = this.games.concat(games)
         }
