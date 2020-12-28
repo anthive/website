@@ -34,10 +34,6 @@
           </AntHiveButton>
         </div>
       </div>
-      <!-- TODO: user user avatar -->
-      <!-- <v-avatar tile class="user-avatar" size="40">
-      <v-img :src="getAvatar(bot.avatar, 100)" />
-    </v-avatar> -->
       <p class="name">
         <span class="display-name">{{
           getStringTruncated(bot.displayName, 10)
