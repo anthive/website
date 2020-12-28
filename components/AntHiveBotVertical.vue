@@ -1,6 +1,6 @@
 <template>
  <div class="chip">
-   <div class="img" :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar)})`">
+   <div class="img" :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 400)})`">
      <img
         class="lang-icon"
         width="40px"
