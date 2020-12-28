@@ -32,7 +32,7 @@
         <p class="value">{{ bot.errors }}%</p>
       </div>
     </div>
-    <div class="layout">
+    <div v-if="!isUserProfile" class="layout">
       <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
         {{ $t("game.by") }} {{ getUsername }}
         <v-avatar class="ml-1" tile size="35">
