@@ -304,11 +304,12 @@ $animation: ease 0.4s;
   height: 100%;
   padding: 8px 20px;
   right: -110px;
+  opacity: 0;
   background-color: $color-violet-150;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: $animation;
+  transition: right $animation;
   pointer-events: none;
 
   div {
@@ -325,7 +326,7 @@ $animation: ease 0.4s;
   flex-wrap: wrap;
   overflow: hidden;
   height: 185px;
-  margin: -1px -0.5px;
+  margin: -0.6px;
 
   &:hover {
     .ffa-text,
@@ -359,7 +360,7 @@ $animation: ease 0.4s;
   cursor: pointer;
   flex: 1;
   min-width: 24%;
-  margin: 1px 0.5px;
+  margin: 0.6px;
   text-decoration: none !important;
   transition: $animation;
   &:hover {
@@ -372,6 +373,7 @@ $animation: ease 0.4s;
     }
 
     .bot-info {
+      opacity: 1;
       right: 0;
     }
   }
