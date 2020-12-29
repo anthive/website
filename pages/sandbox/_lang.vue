@@ -267,7 +267,7 @@ export default {
       })
     },
     async sendCodeToSim() {
-      const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}`
+      const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}/${this.gameId}`
       const simResp = await axios.post(url, this.savedCode)
       return simResp.data
     },
