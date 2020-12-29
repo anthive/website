@@ -105,11 +105,11 @@ export default {
 .tab-content {
   &::-webkit-scrollbar {
     width: 15px;
-    background: $color-violet-450;
+    background: $lilac;
   }
   &::-webkit-scrollbar-thumb {
-    border: 5px solid $color-violet-450;
-    background: $color-violet-350;
+    border: 5px solid $lilac;
+    background: $violet-light;
   }
 }
 
@@ -126,11 +126,11 @@ export default {
     display: none;
   }
   .active {
-    background-color: $color-violet-350;
+    background-color: $violet-light;
   }
   .download {
     cursor: pointer;
-    background-color: $color-violet-700 !important;
+    background-color: $violet !important;
     margin-bottom: -5px;
     margin-left: 27px;
   }
@@ -139,20 +139,20 @@ export default {
     padding-top: 5px;
   }
   .tab-content {
-    color: $color-violet-700;
+    color: $violet;
     width: 40%;
     height: 296px;
     overflow-y: auto;
     &:first-child {
       width: 60%;
-      border-right: 2px solid $color-violet-700;
+      border-right: 2px solid $violet;
     }
   }
   .tab-title {
     font-size: $font-big;
     font-weight: 600;
-    background-color: $color-violet-350;
-    color: $color-violet-700;
+    background-color: $violet-light;
+    color: $violet;
     padding-left: 10px;
   }
   .tab-text {

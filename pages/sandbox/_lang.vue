@@ -408,9 +408,9 @@ export default {
 .tooltip {
   box-shadow: none !important;
   border-radius: 0 !important;
-  color: $color-violet-700;
+  color: $violet;
   padding: 10px;
-  background-color: $color-violet-450;
+  background-color: $lilac;
   display: flex;
   & span {
     display: block;

@@ -96,7 +96,7 @@ export default {
 .time-ago,
 .game-info {
   font-size: $font-medium;
-  color: $color-violet-700;
+  color: $violet;
   margin: 0;
   line-height: $font-big;
 }
@@ -120,7 +120,7 @@ export default {
 
   .time-ago {
     font-size: $font-small;
-    color: $color-violet-350;
+    color: $violet-light;
   }
 
   .author-avatar {

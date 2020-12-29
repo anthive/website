@@ -81,7 +81,7 @@ export default {
   padding: 140px 0 80px;
   position: relative;
   overflow: hidden;
-  background-color: $color-violet-50;
+  background-color: $lilac-select;
 
   &__row {
     max-width: 600px;
@@ -97,12 +97,9 @@ export default {
     font-weight: 500;
   }
 
-  &__counter-name {
-    color: $color-violet-700;
-  }
-
+  &__counter-name,
   &__counter-number {
-    color: $color-violet-600;
+    color: $violet;
   }
 
   &__actions {

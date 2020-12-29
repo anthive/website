@@ -35,6 +35,6 @@ export default {
 <style lang="scss">
 @import '@/assets/style/global.scss';
 #inspire {
-  background-color: $color-violet-50;
+  background-color: $lilac-select;
 }
 </style>

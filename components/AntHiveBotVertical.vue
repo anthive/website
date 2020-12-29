@@ -128,7 +128,6 @@ export default {
     background-position: center;
     width: 100%;
     min-height: 120px;
-    background: $color-red-300;
   }
 
   .bot-title {
@@ -139,18 +138,13 @@ export default {
   .version {
     margin-left: 10px;
     font-weight: $font-weight-normal;
-    color: $color-violet-350;
+    color: $violet-light;
   }
 
   .lang-icon {
     background-color: $color-white;
     border-right: 2px solid $color-white;
     border-bottom: 2px solid $color-white;
-  }
-
-  .lang-name {
-    font-size: $font-smaller;
-    color: $color-violet-600;
   }
 
   .description {

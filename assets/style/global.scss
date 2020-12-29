@@ -14,47 +14,11 @@ $font-weight-bolder: 900;
 $color-black: #000000;
 $color-black-transparent: #000000d1;
 $color-white: #ffffff;
-
-// vialet
-$color-violet-50: #f4f2f7;
-$color-violet-100: #c6becf;
-$color-violet-350: #9786bf;
-$color-violet-400: #e1c1ff;
-$color-violet-450: #d1cae8;
-$color-violet-500: #9585a3;
-$color-violet-550: #e3d6f5;
-$color-violet-600: #c280ff;
-$color-violet-650: #9a64ff;
-$color-violet-700: #4c377f;
-$color-violet-800: #645574;
-$color-violet-900: #362d59;
-
-// accent
-$color-red-200: #ffa89f;
-$color-red-300: #e1567c;
-$color-red-400: #a75d71;
-$color-red-500: #9d2747;
-
-// grey
-$color-grey-10: #fafafa;
-$color-grey-50: #f4f2f7;
-$color-grey-100: #d9d9d9;
-$color-grey-200: #cdcdd2;
-$color-grey-300: #aaa9a8;
-$color-grey-400: #979797;
-$color-grey-500: #888888;
-$color-grey-800: #595d58;
-$color-grey-900: #222;
-
-// blue
-$color-blue-900: #1b2432;
-
-// green
-$color-green-800: #2f3129;
-$color-green-900: #272822;
-
-// orange
-$color-orange-500: #f77b01;
+$violet: #4d3780;
+$violet-light: #9786bf;
+$lilac: #d1cae8;
+$lilac-select: #f5f2ff;
+$background: #f4f2f7;
 
 // screens
 $screen-xs: '320px';
@@ -70,8 +34,8 @@ $border-radius-round: 50%;
 // shadow
 $box-shadow-default: 0px 0px 13px 0px #00000021;
 $box-shadow-hover: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
-$box-shadow-selected: 0px 3px 9px -2px $color-violet-500, 0px 2px 8px 0px $color-violet-500,
-  0px 1px 3px 0px $color-violet-500;
+$box-shadow-selected: 0px 3px 9px -2px $violet-light, 0px 2px 8px 0px $violet-light,
+  0px 1px 3px 0px $violet-light;
 
 // gradients
 $user-background-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 39%, rgba(0, 0, 0, 0.33) 81%);

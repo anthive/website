@@ -24,7 +24,7 @@ export default {
   cursor: pointer;
   width: 32px;
   height: 32px;
-  border: 2px solid $color-violet-650;
+  border: 2px solid $violet;
   box-sizing: content-box;
 }
 </style>
