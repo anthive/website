@@ -1,5 +1,5 @@
 <template>
-  <v-btn class="anthive-btn" @click="$emit('click')" :tile="tile" :large="large" :color="color" :to="to" fill :disabled="disabled" :dark="!light">
+  <v-btn class="anthive-btn" @click="$emit('click')" :outlined="outlined" :tile="tile" :large="large" :color="color" :to="to" fill :disabled="disabled" :dark="!light">
     <span class="text"><slot/></span>
   </v-btn>
 </template>
@@ -12,6 +12,7 @@ export default {
     disabled: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
     tile: { type: Boolean, default: false },
+    outlined: { type: Boolean, default: false },
     color: { type: String, default: '' },
     to: { type: String, default: '' }
   }
@@ -25,7 +26,7 @@ export default {
   box-shadow: none;
   .text {
     line-height: 1;
-    font-weight: 600;
+    font-weight: $font-weight-bold;
     text-transform: none;
   }
 }
