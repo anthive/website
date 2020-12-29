@@ -68,7 +68,7 @@
           {{ game.age }}
         </v-col>
         <v-col class="info-row" cols="12" sm="6">
-          <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="star" />
+          <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="billiards-rack" />
           {{ game.age }}
         </v-col>
       </v-row>
