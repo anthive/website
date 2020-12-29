@@ -4,7 +4,7 @@
     @mouseover="hoverOnChip = true"
     @mouseleave="hoverOnChip = false"
   >
-    <div class="bots" >
+    <div class="bots">
       <nuxt-link
         :to="localePath(`/users/${bot.username}`)"
         v-for="(bot, index) in game.bots"
@@ -14,9 +14,10 @@
       >
         <div class="gradient" />
         <div class="bot-name">
-          {{ bot.displayName }}
+          {{ bot.displayName }}<span class="bot-version"> v {{ bot.v }}</span>
         </div>
         <div class="bot-icons">
+          <!-- TODO: use bot skin -->
           <img
             class="bot-skin"
             width="40px"
@@ -57,133 +58,18 @@
         </div>
         <div class="vs-text" v-if="getVsText(index)">{{ getVsText(index) }}</div>
       </nuxt-link>
-      <!-- <nuxt-link
-        :to="localePath(`/users/${bot.username}`)"
-        v-for="(bot, index) in game.bots"
-        :key="index + 100"
-        class="bot-avatar"
-        :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
-      >
-        <div class="gradient" />
-        <div class="bot-name">
-          {{ bot.displayName }}
-        </div>
-        <div class="bot-icons">
-          <img
-            class="bot-skin"
-            width="40px"
-            :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
-          <img
-            width="40px"
-            :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
-        </div>
-        <div class="bot-info">
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="summit" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy-broken" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="star" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="timer" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="alert" />
-            100
-          </div>
-        </div>
-        <div class="vs-text" v-if="getVsText(index)">{{ getVsText(index) }}</div>
-      </nuxt-link> -->
-      <!-- <nuxt-link
-        :to="localePath(`/users/${bot.username}`)"
-        v-for="(bot, index) in game.bots"
-        :key="index + 100"
-        class="bot-avatar"
-        :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
-      >
-        <div class="gradient" />
-        <div class="bot-name">
-          {{ bot.displayName }}
-        </div>
-        <div class="bot-icons">
-          <img
-            class="bot-skin"
-            width="40px"
-            :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
-          <img
-            width="40px"
-            :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
-        </div>
-        <div class="bot-info">
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="summit" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy-broken" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="star" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="timer" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="alert" />
-            100
-          </div>
-        </div>
-        <div class="vs-text" v-if="getVsText(index)">{{ getVsText(index) }}</div>
-      </nuxt-link> -->
       <!-- TODO: change to icon -->
       <div class="ffa-text" v-if="getFfaText">{{ getFfaText }}</div>
     </div>
     <div class="game-info">
-      <v-row class="px-3">
-        <v-col class="info-row" cols="12" sm="4">
+      <v-row class="pa-3">
+        <v-col class="info-row" cols="12" sm="6">
           <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="timer" />
           {{ game.age }}
         </v-col>
-        <v-col class="info-row" cols="12" sm="4">
+        <v-col class="info-row" cols="12" sm="6">
           <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="star" />
           {{ game.age }}
-        </v-col>
-        <v-col class="info-row mt-n2" cols="12" sm="4">
-          <AntHiveButton
-            class="button"
-            :outlined="!hoverOnChip"
-            tile
-            :color="hoverOnChip ? 'primary' : '#d1cae8'"
-            :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
-          >
-            <AntHiveIcon :color="hoverOnChip ? 'white' : '#d1cae8'" class="mt-1" icon="play-circle" />
-          </AntHiveButton>
         </v-col>
       </v-row>
       <div class="author-info">
@@ -191,6 +77,14 @@
           {{ $t("game.by") }} <span class="author-name">{{ getAuthorName }}</span>
         </p>
         <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
+      </div>
+      <div class="game-info-layout">
+        <nuxt-link
+          class="text-center d-block"
+          :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
+        >
+          <AntHiveIcon color="white" big class="mt-1" icon="play-circle" />
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -255,17 +149,24 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 $animation: ease 0.4s;
+$bot-info-width: 110px;
 
 .chip {
   width: 100%;
   max-width: 320px;
   height: 100%;
-  min-height: 280px;
   margin: 20px;
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
   background-color: $color-white;
+
+  &:hover {
+    .game-info-layout {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
 
 .author-name,
@@ -277,11 +178,27 @@ $animation: ease 0.4s;
 }
 
 .game-info {
-  padding: 30px 8px 8px;
+  padding: 8px;
+  position: relative;
   .info-row {
     font-weight: $font-weight-bold;
     padding: 5px 12px;
   }
+}
+
+.game-info-layout {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: $animation;
+  opacity: 0;
+  pointer-events: none;
+  background: $color-black-transparent;
 }
 
 .author-info {
@@ -300,10 +217,10 @@ $animation: ease 0.4s;
 
 .bot-info {
   position: absolute;
-  width: 110px;
+  width: $bot-info-width;
   height: 100%;
   padding: 8px 20px;
-  right: -110px;
+  right: -$bot-info-width;
   opacity: 0;
   background-color: $color-violet-150;
   display: flex;
@@ -334,6 +251,10 @@ $animation: ease 0.4s;
       opacity: 0;
     }
 
+    .gradient {
+      opacity: 1;
+    }
+
     & .bot-avatar {
       min-width: 5%;
       flex: 0;
@@ -343,16 +264,23 @@ $animation: ease 0.4s;
 .bot-skin,
 .bot-name {
   opacity: 0;
+  pointer-events: none;
   transition: $animation;
 }
 
 .bot-name {
   position: absolute;
+  width: calc(100% - #{$bot-info-width} - 10px);
   left: 10px;
   top: 5px;
   color: $color-white;
   font-size: $font-big;
   font-weight: $font-weight-bold;
+}
+
+.bot-version {
+  white-space: nowrap;
+  font-weight: $font-weight-normal;
 }
 
 .bot-avatar {
@@ -431,5 +359,7 @@ $animation: ease 0.4s;
   height: 100%;
   background: $user-background-gradient;
   pointer-events: none;
+  opacity: 0;
+  transition: $animation;
 }
 </style>
