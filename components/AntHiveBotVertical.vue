@@ -1,64 +1,68 @@
 <template>
- <div class="chip">
-   <div class="img" :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 400)})`">
-     <img
+  <div class="chip">
+    <div :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 400)})`" class="img">
+      <img
+        :src="getCurrentLangImg"
+        :alt="getCurrentLang.name"
         class="lang-icon"
         width="40px"
-        :src="getCurrentLangImg"
-        :alt="getCurrentLang.name" 
-      />
-   </div>
-   <div class="description">
-    <p class="bot-title">{{ getBotName }}<span class="version">v {{ bot.v }}</span></p>
-    <div class="stats">
-      <div class="stats-row">
-        <p>{{ $t("userInfo.games") }}:</p>
-        <p class="value">{{ bot.games }}</p>
-      </div>
-      <div class="stats-row">
-        <p>{{ $t("userInfo.wl") }}:</p>
-        <p class="value">{{ bot.wins }}/{{ bot.losses }}</p>
-      </div>
-      <div class="stats-row">
-        <p>{{ $t("userInfo.mmr") }}:</p>
-        <p class="value">{{ bot.mmr }}</p>
-      </div>
-      <div class="stats-row">
-        <p>{{ $t("userInfo.art") }}:</p>
-        <p class="value">{{ bot.art }}</p>
-      </div>
-      <div class="stats-row">
-        <p>{{ $t("userInfo.errors") }}:</p>
-        <p class="value">{{ bot.errors }}%</p>
-      </div>
-    </div>
-    <div v-if="!isUserProfile" class="layout">
-      <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
-        {{ $t("game.by") }} {{ getUsername }}
-        <v-avatar class="ml-1" tile size="35">
-          <v-img :src="getAvatar(getUserAvatar, 70)" />
-        </v-avatar>
-      </nuxt-link>
-      <AntHiveButton
-        class="button"
-        tile
-        color="primary"
-        @click="challange(bot.id)"
       >
-        <AntHiveIcon icon="challange" class="mx-1" small color="white" />
-        <span>{{ $t("userInfo.challangeMe") }}</span>
-      </AntHiveButton>
     </div>
-   </div>
- </div>
+    <div class="description">
+      <p class="bot-title">{{ getBotName }}<span class="version">v {{ bot.v }}</span></p>
+      <div class="stats">
+        <div class="stats-row">
+          <p>{{ $t("userInfo.games") }}:</p>
+          <p class="value">{{ bot.games }}</p>
+        </div>
+        <div class="stats-row">
+          <p>{{ $t("userInfo.wl") }}:</p>
+          <p class="value">{{ bot.wins }}/{{ bot.losses }}</p>
+        </div>
+        <div class="stats-row">
+          <p>{{ $t("userInfo.mmr") }}:</p>
+          <p class="value">{{ bot.mmr }}</p>
+        </div>
+        <div class="stats-row">
+          <p>{{ $t("userInfo.art") }}:</p>
+          <p class="value">{{ bot.art }}</p>
+        </div>
+        <div class="stats-row">
+          <p>{{ $t("userInfo.errors") }}:</p>
+          <p class="value">{{ bot.errors }}%</p>
+        </div>
+      </div>
+      <div v-if="!isUserProfile" class="layout">
+        <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
+          {{ $t("game.by") }} {{ getUsername }}
+          <v-avatar class="ml-1" tile size="35">
+            <v-img :src="getAvatar(getUserAvatar, 70)" />
+          </v-avatar>
+        </nuxt-link>
+        <AntHiveButton
+          class="button"
+          tile
+          color="primary"
+          @click="challange(bot.id)"
+        >
+          <AntHiveIcon
+            icon="challange"
+            class="mx-1"
+            small
+            color="white" />
+          <span>{{ $t("userInfo.challangeMe") }}</span>
+        </AntHiveButton>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'AntHiveBotVertical',
@@ -97,7 +101,7 @@ export default {
       return this.user && this.user.username
     },
     isUserProfile() {
-      if (!this.getUser) return false
+      if (!this.getUser) { return false }
       return this.getUsername === this.getUser.userName
     }
   },

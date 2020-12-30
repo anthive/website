@@ -84,13 +84,13 @@
       <v-select
         v-model="selectedLocale"
         :items="locales"
+        :menu-props="{ top: true, offsetY: true }"
         tile
         dense
         dark
         flat
         item-color="accent"
         hide-details
-        :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"
       />
       <AntHiveIcon icon="earth" color="white" class="footer__locale-select--earth-icon" />
@@ -104,7 +104,7 @@
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'defaultFooter',
+  name: 'DefaultFooter',
   components: {
     AntHiveIcon
   },

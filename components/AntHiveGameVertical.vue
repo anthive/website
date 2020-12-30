@@ -1,10 +1,10 @@
 <template>
- <div class="chip">
-   <div class="header">
-     <div class="author-info">
+  <div class="chip">
+    <div class="header">
+      <div class="author-info">
         <p class="time-ago">{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
-     </div>
-     <v-avatar
+      </div>
+      <v-avatar
         v-if="game.author.avatar"
         tile
         class="author-avatar"
@@ -15,8 +15,8 @@
     </div>
     <div class="bots">
       <nuxt-link
-        :to="localePath(`/users/${bot.username}`)"
         v-for="(bot, index) in game.bots"
+        :to="localePath(`/users/${bot.username}`)"
         :key="index"
         class="bot-avatar"
       >
@@ -33,17 +33,17 @@
       <v-col class="game-info" cols="12" sm="6">{{ $t("game.mapSkin") }}:</v-col>
       <v-col class="game-info" cols="12" sm="6">
         <v-img
-          width="20"
           :src="getImage(game.mapSettings.theme)"
+          width="20"
           alt="map theme"
         />
       </v-col>
     </v-row>
     <AntHiveButton
+      :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
       class="button"
       tile
       color="primary"
-      :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
     >
       {{ $t("game.viewReplay") }}
     </AntHiveButton>

@@ -4,15 +4,15 @@
       <h2 class="px-2 white--text loading">{{ $t("game.loading") }}</h2>
     </div>
     <v-slide-y-transition>
-      <div class="end-game-layout" v-show="isGameEnd">
+      <div v-show="isGameEnd" class="end-game-layout">
         <div class="layout-buttons">
           <v-btn
+            :href="getRematchUrl"
             class="layout-button mb-6"
             color="#00BF70"
             dark
             block
-            :href="getRematchUrl"
-            >{{ $t("game.requestRematch") }}</v-btn
+          >{{ $t("game.requestRematch") }}</v-btn
           >
           <v-btn
             class="layout-button"
@@ -20,7 +20,7 @@
             dark
             block
             @click="$emit('replay')"
-            >{{ $t("game.replay") }}
+          >{{ $t("game.replay") }}
             <AntHiveIcon icon="autorenew" class="ml-1" color="white" />
           </v-btn>
           <div class="social-share">
@@ -29,14 +29,14 @@
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
+                    :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
                     class="share-button"
                     fab
                     dark
                     color="#333333"
-                    v-on="on"
                     target="_blank"
                     rel="noreferrer"
-                    :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentEncudeUrl}&title=Anthive.io game`"
+                    v-on="on"
                   >
                     <AntHiveIcon icon="linkedin" color="grey" />
                   </v-btn>
@@ -46,14 +46,14 @@
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
+                    :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
                     class="share-button"
                     fab
                     dark
                     color="#333333"
-                    v-on="on"
                     target="_blank"
                     rel="noreferrer"
-                    :href="`https://www.facebook.com/sharer/sharer.php?u=${currentEncudeUrl}`"
+                    v-on="on"
                   >
                     <AntHiveIcon icon="facebook" color="grey" />
                   </v-btn>
@@ -63,14 +63,14 @@
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
+                    :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
                     class="share-button"
                     fab
                     dark
                     color="#333333"
-                    v-on="on"
                     target="_blank"
                     rel="noreferrer"
-                    :href="`https://twitter.com/share?url=/&text=Anthive.io Game - ${currentEncudeUrl}`"
+                    v-on="on"
                   >
                     <AntHiveIcon icon="twitter" color="grey" />
                   </v-btn>
@@ -80,14 +80,14 @@
               <v-tooltip bottom color="accent" content-class="b-radius-0">
                 <template v-slot:activator="{ on }">
                   <v-btn
+                    :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
                     class="share-button"
                     fab
                     dark
                     color="#333333"
-                    v-on="on"
                     target="_blank"
                     rel="noreferrer"
-                    :href="`mailto:?subject=Anthive.io&body=Game - ${currentEncudeUrl}`"
+                    v-on="on"
                   >
                     <AntHiveIcon icon="email" color="grey" />
                   </v-btn>
@@ -151,7 +151,7 @@ export default {
       try {
         await this.$copyText(this.currentUrl)
       } catch (er) {
-        console.error(er)
+        throw new Error(er)
       }
     }
   }

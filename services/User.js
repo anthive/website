@@ -14,7 +14,7 @@ class User {
     this.TotalWealth = 0
   }
 
-  async initUser(user) {
+  initUser(user) {
     this.Username = user.username
     this.Lang = user.lang
     this.Version = user.version
@@ -27,9 +27,11 @@ class User {
     this.TotalWealth = user.totalwealth
   }
 
-  async getUserData(username) {
+  getUserData(username) {
     this.Username = username
-    if (this.Username === '' || this.Username === undefined) return
+    if (this.Username === '' || this.Username === undefined) {
+      return
+    }
     return publicApi.get(`/user?username=${this.Username}`).then(res => res.data)
   }
 
@@ -37,7 +39,7 @@ class User {
     const suffixes = ['', 'K', 'M', 'B', 't']
     const suffixNum = Math.floor((('' + this.Wealth).length - 1) / 3)
     const shortValue = parseFloat(
-      (suffixNum != 0 ? this.Wealth / Math.pow(1000, suffixNum) : this.Wealth).toPrecision(2)
+      (suffixNum !== 0 ? this.Wealth / 1000 ** suffixNum : this.Wealth).toPrecision(2)
     )
     return shortValue + suffixes[suffixNum]
   }

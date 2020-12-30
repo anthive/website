@@ -1,22 +1,22 @@
-const pkg = require('./package')
-require('dotenv').config()
 import publicApi from './plugins/axios'
 
 import langs from './static/langs/data.json'
+const pkg = require('./package')
+require('dotenv').config()
 
 const dynamicRoutes = () => {
-  let sandboxRoutes = new Promise(resolve => {
+  const sandboxRoutes = new Promise((resolve) => {
     resolve([...langs.map(lang => `/sandbox/${lang.extention}`), ...langs.map(lang => `/ru/sandbox/${lang.extention}`)])
   })
 
-  let userRoutes = publicApi.get('/users', { params: { bots: true } }).then(usersResp => {
+  const userRoutes = publicApi.get('/users', { params: { bots: true } }).then((usersResp) => {
     return [
       ...usersResp.data.map(user => `/users/${user.username}`),
       ...usersResp.data.map(user => `/ru/users/${user.username}`)
     ]
   })
 
-  return Promise.all([sandboxRoutes, userRoutes]).then(values => {
+  return Promise.all([sandboxRoutes, userRoutes]).then((values) => {
     const [sandboxRoutes, userRoutes] = values
     return [...sandboxRoutes, ...userRoutes]
   })
