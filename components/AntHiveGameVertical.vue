@@ -76,7 +76,7 @@
         </v-col>
         <v-col class="info-row" cols="12" sm="6">
           <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="billiards-rack" />
-          {{ game.age }}
+          {{ getGameScore }}
         </v-col>
       </v-row>
       <div class="author-info">
@@ -137,6 +137,9 @@ export default {
     },
     getAuthorName() {
       return this.game.author
+    },
+    getGameScore() {
+      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc += bot.score), 0)
     }
   },
   methods: {
