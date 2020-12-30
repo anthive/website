@@ -9,14 +9,19 @@
   </div>
 </template>
 
-
 <script>
 import { timeAgo } from '@/services/User'
 export default {
   name: 'AntHiveAuthor',
   props: {
-    author: String,
-    date: Number
+    author: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Number,
+      required: true
+    }
   },
   computed: {
     getTimeAgo() {

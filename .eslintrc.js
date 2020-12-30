@@ -3,12 +3,30 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ['plugin:vue/essential', 'plugin:prettier/recommended', 'eslint:recommended'],
+  extends: [
+    '@nuxtjs'
+  ],
   rules: {
-    'no-console': 'off'
+    'vue/html-self-closing': [ 'error', 'never' ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: 3,
+        multiline: 1
+      }
+    ],
+    'max-len': [
+      'error',
+      {
+        code: 120,
+        ignoreTemplateLiterals: true,
+        ignoreStrings: true,
+        ignoreUrls: true
+      }
+    ],
+    'space-before-function-paren': ['error', 'never']
   },
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module'
+    parser: 'babel-eslint'
   }
 }

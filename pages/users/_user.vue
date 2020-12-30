@@ -2,13 +2,13 @@
   <section class="user page-wrap">
     <v-container>
       <v-row class="user-background">
-        <div class="image" :style="`background: center/ cover no-repeat url(${getUserBackground})`" />
+        <div :style="`background: center/ cover no-repeat url(${getUserBackground})`" class="image" />
         <div class="gradient" />
       </v-row>
       <div class="mt-n3">
         <div class="d-flex">
           <v-avatar tile size="200">
-            <v-img class="avatar" :src="getAvatar(getUser.avatar, 400)" />
+            <v-img :src="getAvatar(getUser.avatar, 400)" class="avatar" />
           </v-avatar>
           <div class="title">
             <h1 class="user-name">{{ getUserFullName }}</h1>
@@ -16,14 +16,14 @@
         </div>
       </div>
       <div class="justify-space-between mt-12">
-        <p v-if="getUser.description">{{ getUser.description}}</p>
-        <div class="d-flex" v-if="getUserSocials">
+        <p v-if="getUser.description">{{ getUser.description }}</p>
+        <div v-if="getUserSocials" class="d-flex">
           <a
             v-for="(social, index) in getUserSocials"
             :key="index"
-            class="social-link"
             :href="social.link"
             :title="social.name"
+            class="social-link"
             rel="noreferrer"
             target="_blank"
           >
@@ -31,8 +31,8 @@
           </a>
         </div>
       </div>
-      
-      <div class="bots-section" v-if="getUserBots">
+
+      <div v-if="getUserBots" class="bots-section">
         <h3>{{ $t("userInfo.bots") }}</h3>
         <div class="bots">
           <AntHiveBotVertical
@@ -43,7 +43,7 @@
           />
         </div>
       </div>
-      <div class="games-section" v-if="games.length">
+      <div v-if="games.length" class="games-section">
         <h3>{{ $t("userInfo.bestGames") }}</h3>
         <div class="games">
           <AntHiveGameVertical
@@ -65,7 +65,7 @@ import Image from '@/mixins/image'
 import { getUserGames } from '@/services/Game'
 
 export default {
-  name: 'user',
+  name: 'User',
   head() {
     return {
       title: `${this.getUserFullName} - AntHive.IO`,
@@ -95,16 +95,6 @@ export default {
       await this.loadGames()
     }
   },
-  async mounted() {
-    await this.loadGames()
-  },
-  created() {
-    this.username = this.$route.params.user || 'anthive'
-    this.us = new User()
-    this.us.getUserData(this.username).then(result => {
-      this.userInfo = result
-    })
-  },
   computed: {
     getUserAvatar() {
       if (this.userInfo && this.userInfo.user) {
@@ -112,10 +102,10 @@ export default {
       }
     },
     getUser() {
-      if (this.userInfo) return this.userInfo
+      if (this.userInfo) { return this.userInfo }
     },
     getUserFullName() {
-      if (this.userInfo && this.userInfo.displayName) return this.userInfo.displayName
+      if (this.userInfo && this.userInfo.displayName) { return this.userInfo.displayName }
     },
     getUserBots() {
       if (this.userInfo && this.userInfo.bots && this.userInfo.bots.length) {
@@ -134,9 +124,19 @@ export default {
       }
     }
   },
+  async mounted() {
+    await this.loadGames()
+  },
+  created() {
+    this.username = this.$route.params.user || 'anthive'
+    this.us = new User()
+    this.us.getUserData(this.username).then((result) => {
+      this.userInfo = result
+    })
+  },
   methods: {
     loadGames() {
-      getUserGames(this.username).then(games => {
+      getUserGames(this.username).then((games) => {
         if (games.length) {
           this.games = this.games.concat(games)
         }

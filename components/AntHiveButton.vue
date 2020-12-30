@@ -1,5 +1,14 @@
 <template>
-  <v-btn class="anthive-btn" @click="$emit('click')" :tile="tile" :large="large" :color="color" :to="to" fill :disabled="disabled" :dark="!light">
+  <v-btn
+    :tile="tile"
+    :large="large"
+    :color="color"
+    :to="to"
+    :disabled="disabled"
+    :dark="!light"
+    class="anthive-btn"
+    fill
+    @click="$emit('click')">
     <span class="text"><slot/></span>
   </v-btn>
 </template>

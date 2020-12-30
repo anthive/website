@@ -7,7 +7,9 @@
       />
       <div class="component">
         <h4>AntHiveButton</h4>
-        <p v-if="$options.components['AntHiveButton'].props">Props: {{ $options.components['AntHiveButton'].props }}</p>
+        <p v-if="$options.components['AntHiveButton'].props">
+          Props: {{ $options.components['AntHiveButton'].props }}
+        </p>
         <div>
           <AntHiveButton>Dark</AntHiveButton>
           <AntHiveButton light>Light</AntHiveButton>
@@ -18,7 +20,9 @@
 
       <div class="component">
         <h4>AntHiveIcon</h4>
-        <p v-if="$options.components['AntHiveIcon'].props">Props: {{ $options.components['AntHiveIcon'].props }}</p>
+        <p v-if="$options.components['AntHiveIcon'].props">
+          Props: {{ $options.components['AntHiveIcon'].props }}
+        </p>
         <div>
           <AntHiveIcon icon="twitter" small />
           <AntHiveIcon icon="twitter" medium />
@@ -29,7 +33,9 @@
 
       <div class="component">
         <h4>AntHiveBotSmall</h4>
-        <p v-if="$options.components['AntHiveBotSmall'].props">Props: {{ $options.components['AntHiveBotSmall'].props }}</p>
+        <p v-if="$options.components['AntHiveBotSmall'].props">
+          Props: {{ $options.components['AntHiveBotSmall'].props }}
+        </p>
         <div>
           <AntHiveBotSmall
             v-for="(bot, index) in bots"
@@ -41,27 +47,31 @@
 
       <div class="component">
         <h4>AntHiveBotHorizontal</h4>
-        <p v-if="$options.components['AntHiveBotHorizontal'].props">Props: {{ $options.components['AntHiveBotHorizontal'].props }}</p>
+        <p v-if="$options.components['AntHiveBotHorizontal'].props">
+          Props: {{ $options.components['AntHiveBotHorizontal'].props }}
+        </p>
         <div class="d-flex">
           <AntHiveBotHorizontal
-            class="mr-4"
             v-for="(bot, index) in bots"
             :key="bot.displayName + index"
             :bot="bot"
             :number="index + 1"
+            class="mr-4"
           />
         </div>
       </div>
 
       <div class="component">
         <h4>AntHiveBotVertical</h4>
-        <p v-if="$options.components['AntHiveBotVertical'].props">Props: {{ $options.components['AntHiveBotVertical'].props }}</p>
+        <p v-if="$options.components['AntHiveBotVertical'].props">
+          Props: {{ $options.components['AntHiveBotVertical'].props }}
+        </p>
         <div class="d-flex">
           <AntHiveBotVertical
-            class="mr-4"
             v-for="(bot, index) in bots"
             :key="index + 'bot'"
             :bot="bot"
+            class="mr-4"
           />
         </div>
       </div>
@@ -70,17 +80,19 @@
         <h4>AntHiveAuthor</h4>
         <p v-if="$options.components['AntHiveAuthor'].props">Props: {{ $options.components['AntHiveAuthor'].props }}</p>
         <div>
-          <AntHiveAuthor author="Player" :date="Date.now()" />
+          <AntHiveAuthor :date="Date.now()" author="Player" />
         </div>
       </div>
 
       <div class="component">
         <h4>GamesLeaderCard</h4>
-        <p v-if="$options.components['GamesLeaderCard'].props">Props: {{ $options.components['GamesLeaderCard'].props }}</p>
+        <p v-if="$options.components['GamesLeaderCard'].props">
+          Props: {{ $options.components['GamesLeaderCard'].props }}
+        </p>
         <div>
           <GamesLeaderCard
-            :key="bot.displayName + index"
             v-for="(bot, index) in bots"
+            :key="bot.displayName + index"
             :place="index + 1"
             :leader="bot"
           />
@@ -89,7 +101,9 @@
 
       <div class="component">
         <h4>AntHivePageHeader</h4>
-        <p v-if="$options.components['AntHivePageHeader'].props">Props: {{ $options.components['AntHivePageHeader'].props }}</p>
+        <p v-if="$options.components['AntHivePageHeader'].props">
+          Props: {{ $options.components['AntHivePageHeader'].props }}
+        </p>
         <div>
           <AntHivePageHeader title="Title" />
           <br><br>
@@ -136,6 +150,7 @@ export default {
     AntHivePageHeader,
     AntHiveBotVertical
   },
+  mixins: [Image],
   data: () => ({
     bots: [
       {
@@ -167,8 +182,7 @@ export default {
         }
       }
     ]
-  }),
-  mixins: [Image]
+  })
 }
 </script>
 

@@ -4,7 +4,7 @@
       <v-container>
         <v-row class="header-section__content">
           <v-col class="mb-4" cols="12" md="6">
-            <img src="/img/boy.webp" width="100%" />
+            <img src="/img/boy.webp" width="100%" >
           </v-col>
           <v-col class="header-section__text-content" cols="12" md="5">
             <h1 class="f-title mb-4 f-montserrat primary--text">
@@ -14,12 +14,21 @@
               {{ $t("home.description") }}
             </h2>
             <div class="header-section__actions">
-              <AntHiveButton large tile class="mr-4" color="action" :to="localePath('sandbox')">{{
-                $t("header.sandbox")
-              }}</AntHiveButton>
-              <AntHiveButton large tile color="primary" @click="handlerClickGetStarted">{{
-                $t("header.buttonJoin")
-              }}</AntHiveButton>
+              <AntHiveButton
+                :to="localePath('sandbox')"
+                large
+                tile
+                class="mr-4"
+                color="action">{{
+                  $t("header.sandbox")
+                }}</AntHiveButton>
+              <AntHiveButton
+                large
+                tile
+                color="primary"
+                @click="handlerClickGetStarted">{{
+                  $t("header.buttonJoin")
+                }}</AntHiveButton>
             </div>
           </v-col>
         </v-row>

@@ -3,13 +3,17 @@
     <v-tabs v-model="tab" background-color="primary" dark>
       <v-tabs-slider />
       <v-tab
-        active-class="active"
         v-for="(bot, index) in getBots"
         :key="index"
+        active-class="active"
         class="tab"
-        ><v-avatar class="avatar" v-if="!bot.displayName.includes('sandbox')" tile size="20"
-          ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
-        ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
+      ><v-avatar
+        v-if="!bot.displayName.includes('sandbox')"
+        class="avatar"
+        tile
+        size="20"
+      ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
+      ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
       >
     </v-tabs>
 
@@ -21,8 +25,8 @@
               <div class="tab-title">
                 Request
                 <AntHiveIcon
-                  icon="download"
                   v-if="isGameStoped"
+                  icon="download"
                   class="download"
                   @click="
                     downloadRequest(getResponseRequest(bot, 'requests'), bot.id)
@@ -53,14 +57,15 @@ import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
+  components: {
+    AntHiveIcon
+  },
+  mixins: [Image],
   props: {
     requests: { type: Array, required: true },
     responses: { type: Array, required: true },
     bots: { type: Array, required: true },
     isGameStoped: { type: Boolean, default: false }
-  },
-  components: {
-    AntHiveIcon
   },
   data: () => ({
     tab: 0
@@ -82,7 +87,6 @@ export default {
       return []
     }
   },
-  mixins: [Image],
   methods: {
     getResponseRequest(bot, type) {
       if (this[type] && this[type].length) {

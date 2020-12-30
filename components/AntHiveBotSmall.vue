@@ -10,10 +10,13 @@
 import Image from '@/mixins/image'
 export default {
   name: 'AntHiveBotSmall',
+  mixins: [Image],
   props: {
-    avatar: String
-  },
-  mixins: [Image]
+    avatar: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

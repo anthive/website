@@ -9,9 +9,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import TheHeader from '@/components/TheHeader'
 import TheFooter from '@/components/TheFooter'
-import { mapMutations } from 'vuex'
 import { getImageById } from '@/services/Image'
 
 export default {
@@ -19,15 +19,15 @@ export default {
     TheHeader,
     TheFooter
   },
-  methods: {
-    ...mapMutations(['setUser'])
-  },
   created() {
     const user = {
       userName: this.$cookiz.get('userName'),
       userAvatar: getImageById(this.$cookiz.get('userAvatar'), 32)
     }
     this.setUser(user)
+  },
+  methods: {
+    ...mapMutations(['setUser'])
   }
 }
 </script>

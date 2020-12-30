@@ -17,15 +17,15 @@ import { getGames } from '@/services/Game'
 
 export default {
   name: 'GamesTable',
+  components: {
+    AntHiveGameVertical
+  },
   props: {
     pageSize: {
       type: Number,
       required: false,
       default: 50
     }
-  },
-  components: {
-    AntHiveGameVertical
   },
   data: () => ({
     searchParams: {},
@@ -46,7 +46,7 @@ export default {
   methods: {
     loadGames() {
       this.enoughLoadGames = true
-      getGames(this.searchParams).then(games => {
+      getGames(this.searchParams).then((games) => {
         if (games.length) {
           this.searchParams.p += 1
           this.games = this.games.concat(games)

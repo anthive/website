@@ -1,5 +1,9 @@
 <template>
-  <span @click="$emit('click')" class="anthive-icon" :class="{small, medium, big}" :style="getIconStyles" />
+  <span
+    :class="{small, medium, big}"
+    :style="getIconStyles"
+    class="anthive-icon"
+    @click="$emit('click')" />
 </template>
 
 <script>
