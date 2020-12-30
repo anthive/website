@@ -1,5 +1,15 @@
 <template>
-  <v-btn class="anthive-btn" @click="$emit('click')" :outlined="outlined" :tile="tile" :large="large" :color="color" :to="to" fill :disabled="disabled" :dark="!light">
+  <v-btn
+    :outlined="outlined"
+    :tile="tile"
+    :large="large"
+    :color="color"
+    :to="to"
+    :disabled="disabled"
+    :dark="!light"
+    fill
+    class="anthive-btn"
+    @click="$emit('click')">
     <span class="text"><slot/></span>
   </v-btn>
 </template>

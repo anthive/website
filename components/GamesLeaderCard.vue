@@ -9,21 +9,21 @@
           width="73px"
           src="/img/leaderboard-top1.svg"
           alt="Leaderboard TOP1"
-        />
+        >
         <img
           v-else-if="place === 2"
           class="filter__lang-icon"
           width="50px"
           src="/img/leaderboard-top2.svg"
           alt="Leaderboard TOP2"
-        />
+        >
         <img
           v-else-if="place === 3"
           class="filter__lang-icon"
           width="50px"
           src="/img/leaderboard-top3.svg"
           alt="Leaderboard TOP3"
-        />
+        >
         <span v-else class="leader-card__place-text">{{ place }}</span>
       </v-col>
 
@@ -62,11 +62,11 @@ import Image from '@/mixins/image'
 
 export default {
   name: 'GamesLeaderCard',
+  mixins: [Image],
   props: {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
   },
-  mixins: [Image],
   methods: {
     getLangImg(lang) {
       const currentLang = langs.find(l => l.id === lang)
@@ -95,8 +95,8 @@ export default {
   &__place-text {
     font-size: 22px;
     font-weight: 500;
-    color: $color-violet-650;
-    border: 2px solid $color-violet-650;
+    color: $violet;
+    border: 2px solid $violet;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -117,7 +117,7 @@ export default {
   }
 
   &__version {
-    color: $color-violet-600;
+    color: $violet;
     font-weight: 400;
     font-size: $font-small;
   }

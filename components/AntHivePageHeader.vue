@@ -3,10 +3,18 @@
     <h1 class="page-header__title">{{ title }}</h1>
     <p v-if="subtitle" class="page-header__subtitle">{{ subtitle }}</p>
     <div v-if="tooltipText" class="page-header__info">
-      <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
+      <v-tooltip
+        right
+        nudge-left
+        color="accent"
+        content-class="b-radius-0">
         <template v-slot:activator="{ on }">
           <div v-on="on">
-            <AntHiveIcon icon="alert-circle" class="ml-1" small color="#4c377f" />
+            <AntHiveIcon
+              icon="alert-circle"
+              class="ml-1"
+              small
+              color="#4c377f" />
           </div>
         </template>
         {{ tooltipText }}
@@ -20,6 +28,9 @@ import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'AntHivePageHeader',
+  components: {
+    AntHiveIcon
+  },
   props: {
     title: {
       type: String,
@@ -35,9 +46,6 @@ export default {
       required: false,
       default: ''
     }
-  },
-  components: {
-    AntHiveIcon
   }
 }
 </script>
@@ -49,7 +57,7 @@ export default {
   display: inline-block;
 
   &__subtitle {
-    color: $color-violet-600;
+    color: $violet;
     font-weight: 400;
   }
 

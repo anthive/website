@@ -9,54 +9,54 @@
           />
           <v-row>
             <v-col class="sandbox__content" cols="12" md="6">
-              <editor :valueCode.sync="valueCode" />
+              <editor :value-code.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
-              <div class="sandbox__player" :class="{ disable: loading }">
+              <div :class="{ disable: loading }" class="sandbox__player">
                 <div id="player" />
-                  <div class="sandbox__loading-text" v-if="loading && $route.query.box">
-                    <h4>{{ $t("sandbox.loading") }}</h4>
-                    <transition name="fade" mode="out-in">
-                      <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
-                    </transition>
-                  </div>
+                <div v-if="loading && $route.query.box" class="sandbox__loading-text">
+                  <h4>{{ $t("sandbox.loading") }}</h4>
+                  <transition name="fade" mode="out-in">
+                    <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
+                  </transition>
+                </div>
               </div>
-               <v-card
-              class="tooltip"
-              tile
-              v-if="isGameStoped && isDebugMode && gameTooltip"
+              <v-card
+                v-if="isGameStoped && isDebugMode && gameTooltip"
+                class="tooltip"
+                tile
               >x: <span>{{ gameTooltip.x }}</span> y:
-              <span>{{ gameTooltip.y }}</span> food:
-              <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
+                <span>{{ gameTooltip.y }}</span> food:
+                <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
               <span>{{ gameTooltip.id }}</span></v-card
-            >
+              >
               <div class="sandbox__actions">
                 <AntHiveButton
                   :loading="loading"
                   :disabled="!isCodeChanged"
+                  :light="!isCodeChanged"
                   fill
                   tile
                   class="action-button"
-                  @click="onClickRun"
-                  :light="!isCodeChanged"
                   color="green"
+                  @click="onClickRun"
                 >
                   {{ $t("sandbox.runSandbox") }}
                 </AntHiveButton>
                 <AntHiveButton
+                  :disabled="!gameId"
                   fill
                   tile
                   light
-                  :disabled="!gameId"
                   class="action-button"
-                  @click="onClickLogin"
                   color="accent"
-                  >
-                    <span v-if="getUser && getUser.userName">{{ $t("sandbox.save") }}</span>
-                    <span v-else> {{ $t("sandbox.loginToSave") }}</span>
-                  </AntHiveButton>
+                  @click="onClickLogin"
+                >
+                  <span v-if="getUser && getUser.userName">{{ $t("sandbox.save") }}</span>
+                  <span v-else> {{ $t("sandbox.loginToSave") }}</span>
+                </AntHiveButton>
               </div>
-              
+
               <div v-if="!isDebugMode && simLogs && botLogs">
                 <v-tabs v-model="tab" background-color="grey darken-2" dark>
                   <v-tab @click="handlerClickLogs('bot')"> {{ $t("sandbox.bot") }} </v-tab>
@@ -87,7 +87,12 @@
               </div>
             </v-col>
           </v-row>
-          <GameDebugPanel :is-game-stoped="isGameStoped"  v-if="bots && isDebugMode" :requests="requests" :responses="responses" :bots="bots" />
+          <GameDebugPanel
+            v-if="bots && isDebugMode"
+            :is-game-stoped="isGameStoped"
+            :requests="requests"
+            :responses="responses"
+            :bots="bots" />
         </div>
       </v-col>
     </v-row>
@@ -97,10 +102,10 @@
 <script>
 import md5 from 'md5'
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
-import axios from 'axios'
 export default {
   head() {
     return {
@@ -151,12 +156,12 @@ export default {
           href="/rules"
         >${this.$t('header.rules')}</a>
       `
-      const discordElement = `<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>`
+      const discordElement = '<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>'
       return this.$t('sandbox.descriptionHelp', { rules: rulesElement, discord: discordElement })
     }
   },
-  async mounted() {
-    import('../../static/js/anthive-5.0.js').then(async () => {
+  mounted() {
+    import('../../static/js/anthive-5.0.js').then(async() => {
       if (this.$route.query.box) {
         this.gameId = this.$route.query.box
         this.loading = true
@@ -166,7 +171,7 @@ export default {
             this.initGame()
             this.initLogs()
           })
-          .catch(err => {
+          .catch((err) => {
             this.botLogs = this.simLogs = err
           })
           .finally(() => {
@@ -174,6 +179,10 @@ export default {
           })
       }
     })
+  },
+  destroyed() {
+    if (this.gamePlayer) { this.gamePlayerDestroy() }
+    if (this.timerId) { clearInterval(this.timerId) }
   },
   methods: {
     handlerClickLogs(logsCategory) {
@@ -184,7 +193,7 @@ export default {
         this.loadingText = ''
         return
       }
-      if (i >= this.listOfLoadingText.length) return
+      if (i >= this.listOfLoadingText.length) { return }
       setTimeout(() => {
         this.loadingText = ''
         this.$nextTick(() => {
@@ -193,8 +202,8 @@ export default {
         })
       }, 3000)
     },
-    async onClickRun() {
-      if (this.gamePlayer) this.gamePlayerDestroy()
+    onClickRun() {
+      if (this.gamePlayer) { this.gamePlayerDestroy() }
       this.savedCode = this.valueCode.value
       this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
 
@@ -208,10 +217,10 @@ export default {
           this.initLogs()
           this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
         })
-        .catch(async () => {
+        .catch(async() => {
           this.loading = true
           this.showLoadingText()
-          if (this.gamePlayer && this.gamePlayer.control) this.gamePlayer.control.stop()
+          if (this.gamePlayer && this.gamePlayer.control) { this.gamePlayer.control.stop() }
           this.botLogs = this.simLogs = 'Loading...'
 
           await this.sendCodeToSim()
@@ -220,7 +229,7 @@ export default {
               this.initGame()
               this.initLogs()
             })
-            .catch(err => {
+            .catch((err) => {
               this.botLogs = this.simLogs = err
             })
             .finally(() => {
@@ -235,21 +244,21 @@ export default {
       window.location.href = createBotUrl
     },
     async getGame() {
-      return await new Promise(async (resolve, reject) => {
+      return await new Promise((resolve, reject) => {
         const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
 
         axios
           .head(gameUrl)
-          //if got the game, then we resolve
+          // if got the game, then we resolve
           .then(resolve)
           .catch(() => {
             const maxTime = 60000
             const callInterval = 5000
             let passedTime = 0
 
-            this.timerId = setInterval(async () => {
+            this.timerId = setInterval(() => {
               passedTime += callInterval
-              //if got 404, create calls by interval until we get 200 status and resolve,
+              // if got 404, create calls by interval until we get 200 status and resolve,
               axios
                 .head(gameUrl)
                 .then(() => {
@@ -257,17 +266,17 @@ export default {
                   resolve()
                 })
                 .catch(e => e)
-              //or overcome the maximum interval, then reject
+              // or overcome the maximum interval, then reject
               if (passedTime >= maxTime) {
                 clearInterval(this.timerId)
-                reject('Please try again later')
+                reject(new Error('Please try again later'))
               }
             }, callInterval)
           })
       })
     },
     async sendCodeToSim() {
-      const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}`
+      const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}/${this.gameId}`
       const simResp = await axios.post(url, this.savedCode)
       return simResp.data
     },
@@ -315,10 +324,10 @@ export default {
         this.bots = []
         this.gamePlayer = this.gamePlayer.clearPlayerState()
       }
-      if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
+      if (this.fetchPlayerDataTimerId) { clearInterval(this.fetchPlayerDataTimerId) }
     },
     gameSetTooltipCoords(event) {
-      if (event.target.localName !== 'canvas') return
+      if (event.target.localName !== 'canvas') { return }
       const gameTooltipCoords = {
         x: Math.floor(event.offsetX / this.gamePlayer.renderer._size),
         y: Math.floor(event.offsetY / this.gamePlayer.renderer._size)
@@ -336,10 +345,6 @@ export default {
       const resp = await axios.get(logsUrl)
       return resp.data
     }
-  },
-  destroyed() {
-    if (this.gamePlayer) this.gamePlayerDestroy()
-    if (this.timerId) clearInterval(this.timerId)
   }
 }
 </script>
@@ -363,7 +368,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: $color-black;
+      background-color: $black;
       opacity: 0.5;
     }
   }
@@ -388,7 +393,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     & > * {
-      color: $color-white;
+      color: $white;
     }
   }
   &__content-logs-wrap {
@@ -408,9 +413,9 @@ export default {
 .tooltip {
   box-shadow: none !important;
   border-radius: 0 !important;
-  color: $color-violet-700;
+  color: $violet;
   padding: 10px;
-  background-color: $color-violet-450;
+  background-color: $lilac;
   display: flex;
   & span {
     display: block;

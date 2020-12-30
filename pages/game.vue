@@ -2,54 +2,59 @@
   <section :class="{ debug: isDebugMode }" class="game page-wrap">
     <v-container>
       <template v-if="isGameAvailable">
-        <v-row
-          ><v-col class="mx-auto">
+        <v-row>
+          <v-col class="mx-auto">
             <AntHivePageHeader
               :title="`${$t('game.game')} #${gameId}`"
               :tooltip-text="$t('game.gameId')"
-            /> </v-col
-        ></v-row>
+            />
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="12" md="8">
             <GamePlayer
-              class="player-wrap"
               :tooltip-content="tooltipContent"
               :is-game-end="isGameEnd"
-              @replay="replay"
               :bots="bots"
               :responses="responses"
               :requests="requests"
+              class="player-wrap"
+              @replay="replay"
             />
             <v-card
+              v-if="isGameStoped && isDebugMode && gameTooltip"
               class="tooltip"
               tile
-              v-if="isGameStoped && isDebugMode && gameTooltip"
-              >x: <span>{{ gameTooltip.x }}</span> y:
-              <span>{{ gameTooltip.y }}</span> food:
-              <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span> id:
-              <span>{{ gameTooltip.id }}</span></v-card
-            >
+            >x: <span>{{ gameTooltip.x }}</span>
+              y: <span>{{ gameTooltip.y }}</span>
+              food: <span>{{ gameTooltip.food ? gameTooltip.food : 0 }}</span>
+              id: <span>{{ gameTooltip.id }}</span>
+            </v-card>
             <GameDebugPanel
-              class="debug-panel"
-              :is-game-stoped="isGameStoped"
               v-if="bots && isDebugMode"
+              :is-game-stoped="isGameStoped"
               :requests="requests"
               :responses="responses"
               :bots="bots"
+              class="debug-panel"
             />
           </v-col>
 
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
-              <div :key="bot.spawn"
-                 v-for="(bot, index) in game.bots"><AntHiveBotHorizontal
-                class="mb-2"
-                v-if="bot.stats"
-                :bot="bot"
-                :stats="bot.stats"
-                :is-dead="bot.isDead"
-                :number="index + 1"
-              /></div>
+              <div
+                v-for="(bot, index) in game.bots"
+                :key="bot.spawn"
+              >
+                <AntHiveBotHorizontal
+                  v-if="bot.stats"
+                  :bot="bot"
+                  :stats="bot.stats"
+                  :is-dead="bot.isDead"
+                  :number="index + 1"
+                  class="mb-2"
+                />
+              </div>
             </transition-group>
           </v-col>
         </v-row>
@@ -93,6 +98,15 @@ export default {
       ]
     }
   },
+  components: {
+    AntHiveBotHorizontal,
+    GamePlayer,
+    GameDebugPanel,
+    GamesTable,
+    AntHivePageHeader,
+    AntHiveIcon
+  },
+  mixins: [Image],
   data: () => ({
     isGameAvailable: true,
     theme: 1,
@@ -112,15 +126,6 @@ export default {
     gameTooltip: '',
     game: {}
   }),
-  components: {
-    AntHiveBotHorizontal,
-    GamePlayer,
-    GameDebugPanel,
-    GamesTable,
-    AntHivePageHeader,
-    AntHiveIcon
-  },
-  mixins: [Image],
   watch: {
     async $route() {
       this.gamePlayerDestroy()
@@ -128,11 +133,11 @@ export default {
       this.fetchGame()
     },
     bots(value) {
-      if (!value || !value.length) return
-      this.game.bots = this.game.bots.map(bot => {
+      if (!value || !value.length) { return }
+      this.game.bots = this.game.bots.map((bot) => {
         const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
         bot.isDead = !gameBot
-        if (gameBot) bot.stats = gameBot.stats
+        if (gameBot) { bot.stats = gameBot.stats }
         return bot
       })
 
@@ -142,6 +147,9 @@ export default {
   async mounted() {
     this.game = await getGame(this.$route.query.id)
     this.fetchGame()
+  },
+  destroyed() {
+    this.gamePlayerDestroy()
   },
   methods: {
     fetchGame() {
@@ -199,7 +207,7 @@ export default {
       })
     },
     gameSetTooltipCoords(event) {
-      if (event.target.localName !== 'canvas') return
+      if (event.target.localName !== 'canvas') { return }
       const gameTooltipCoords = {
         x: Math.floor(event.offsetX / this.gamePlayer.renderer._size),
         y: Math.floor(event.offsetY / this.gamePlayer.renderer._size)
@@ -214,7 +222,7 @@ export default {
         this.bots = []
         this.gamePlayer = this.gamePlayer.clearPlayerState()
       }
-      if (this.fetchPlayerDataTimerId) clearInterval(this.fetchPlayerDataTimerId)
+      if (this.fetchPlayerDataTimerId) { clearInterval(this.fetchPlayerDataTimerId) }
     },
     isGameFound(url) {
       const request = new XMLHttpRequest()
@@ -228,17 +236,14 @@ export default {
       this.isGameEnd = false
     },
     compare(a, b) {
-      if (!a.stats || !b.stats) return 0
-      if (a.stats.score < b.stats.score) return 1
-      if (a.stats.score > b.stats.score) return -1
+      if (!a.stats || !b.stats) { return 0 }
+      if (a.stats.score < b.stats.score) { return 1 }
+      if (a.stats.score > b.stats.score) { return -1 }
       return 0
     },
     showActions() {
       this.showActionsState = !this.showActionsState
     }
-  },
-  destroyed() {
-    this.gamePlayerDestroy()
   }
 }
 </script>
@@ -248,11 +253,11 @@ export default {
 .tab-content {
   &::-webkit-scrollbar {
     width: 15px;
-    background: $color-violet-450;
+    background: $lilac;
   }
   &::-webkit-scrollbar-thumb {
-    border: 5px solid $color-violet-450;
-    background: $color-violet-350;
+    border: 5px solid $lilac;
+    background: $violet-light;
   }
 }
 .v-content__wrap {
@@ -300,9 +305,9 @@ export default {
 .tooltip {
   box-shadow: none !important;
   border-radius: 0 !important;
-  color: $color-violet-700;
+  color: $violet;
   padding: 10px;
-  background-color: $color-violet-450;
+  background-color: $lilac;
   display: flex;
   & span {
     display: block;

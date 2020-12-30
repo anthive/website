@@ -1,8 +1,8 @@
 <template>
-  <v-navigation-drawer :clipped='$vuetify.breakpoint.lgAndUp' app>
+  <v-navigation-drawer :clipped="$vuetify.breakpoint.lgAndUp" app>
     <v-list dense>
-      <template v-for='chapter in docs'>
-        <v-list-group :key='chapter.chapterName'>
+      <template v-for="chapter in docs">
+        <v-list-group :key="chapter.chapterName">
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>
@@ -11,10 +11,10 @@
             </v-list-item-content>
           </template>
           <v-list-item
-            v-for='rule in chapter.rules'
-            :key='rule.id'
-            link
+            v-for="rule in chapter.rules"
+            :key="rule.id"
             :to="{ path: `/rules/${rule.id}` }"
+            link
           >
             <v-list-item-content>
               <v-list-item-title class="list-children">

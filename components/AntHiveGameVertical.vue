@@ -6,60 +6,67 @@
   >
     <div class="bots">
       <nuxt-link
-        :to="localePath(`/users/${bot.username}`)"
         v-for="(bot, index) in game.bots"
+        :to="localePath(`/users/${bot.username}`)"
         :key="index"
-        class="bot-avatar"
         :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
+        class="bot-avatar"
       >
         <div class="gradient" />
         <div class="bot-name">
           {{ bot.displayName }}<span class="bot-version"> v {{ bot.v }}</span>
         </div>
         <div class="bot-icons">
-          <!-- TODO: use bot skin -->
           <img
+            :src="getAntSkinImg(bot.skin)"
+            :alt="$t('game.botSkin')"
             class="bot-skin"
             width="40px"
-            :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
+            height="40px"
+          >
           <img
-            width="40px"
             :src="getCurrentLangImg(bot)"
-            :alt="getCurrentLangName(bot)" 
-          />
+            :alt="getCurrentLangName(bot)"
+            width="40px"
+          >
         </div>
         <div class="bot-info">
           <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="summit" />
-            100
+            <span>{{ $t("game.size") }}:</span>
+            <span class="info-value" >{{ bot.hive }}/{{ bot.ants }}</span>
           </div>
           <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy" />
-            100
+            <span>{{ $t("game.score") }}:</span>
+            <span class="info-value">
+              {{ getNumberTruncatedToThousand(bot.score) }}
+            </span>
           </div>
           <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="trophy-broken" />
-            100
+            <span>{{ $t("game.errors") }}:</span>
+            <span class="info-value">
+              {{ getNumberTruncatedToThousand(bot.errors) }} %
+            </span>
           </div>
           <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="star" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="timer" />
-            100
-          </div>
-          <div>
-            <AntHiveIcon class="mb-n1 mr-2" color="#9786bf" icon="alert" />
-            100
+            <span>{{ $t("game.rt") }}:</span>
+            <span class="info-value">
+              {{ getArtInMs(bot.art) }} ms
+            </span>
           </div>
         </div>
-        <div class="vs-text" v-if="getVsText(index)">{{ getVsText(index) }}</div>
+        <v-img
+          v-if="getVsImage(index)"
+          :src="getVsImage(index)"
+          width="45"
+          class="vs-img"
+        />
       </nuxt-link>
-      <!-- TODO: change to icon -->
-      <div class="ffa-text" v-if="getFfaText">{{ getFfaText }}</div>
+      <v-img
+        v-if="getFfaImage"
+        :src="getFfaImage"
+        width="80"
+        class="ffa-img"
+      />
     </div>
     <div class="game-info">
       <v-row class="pa-3">
@@ -80,10 +87,14 @@
       </div>
       <div class="game-info-layout">
         <nuxt-link
-          class="text-center d-block"
           :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
+          class="text-center d-block"
         >
-          <AntHiveIcon color="white" big class="mt-1" icon="play-circle" />
+          <AntHiveIcon
+            color="white"
+            big
+            class="mt-1"
+            icon="play-circle" />
         </nuxt-link>
       </div>
     </div>
@@ -91,10 +102,11 @@
 </template>
 
 <script>
+import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import { getImageById } from '@/services/Image'
 import { timeAgo } from '@/services/User'
-import langs from '../static/langs/data.json'
+import Truncate from '@/mixins/truncate'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
@@ -102,7 +114,7 @@ export default {
   components: {
     AntHiveIcon
   },
-  mixins: [Image],
+  mixins: [Image, Truncate],
   props: {
     game: {
       type: Object,
@@ -118,9 +130,9 @@ export default {
     getTimeAgo() {
       return timeAgo(this.game.finished)
     },
-    getFfaText() {
+    getFfaImage() {
       if (this.game.bots.length > 4) {
-        return 'ffa' // TODO: use icon
+        return '/img/ffa.svg'
       }
     },
     getAuthorName() {
@@ -128,6 +140,9 @@ export default {
     }
   },
   methods: {
+    getArtInMs(art) {
+      return Math.round(art / 10) / 100
+    },
     getImage(id) {
       return getImageById(`${id}-background.png`, 40)
     },
@@ -137,9 +152,9 @@ export default {
     getCurrentLangImg(bot) {
       return langs.find(lang => lang.id === bot.lang).img
     },
-    getVsText(botIndex) {
+    getVsImage(botIndex) {
       if (botIndex !== this.game.bots.length - 1 && this.game.bots.length > 1 && this.game.bots.length < 5) {
-        return 'vs' // TODO: use icon
+        return '/img/vs.svg'
       }
     }
   }
@@ -149,7 +164,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 $animation: ease 0.4s;
-$bot-info-width: 110px;
+$bot-info-width: 140px;
 
 .chip {
   width: 100%;
@@ -159,7 +174,7 @@ $bot-info-width: 110px;
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  background-color: $color-white;
+  background-color: $white;
 
   &:hover {
     .game-info-layout {
@@ -172,7 +187,7 @@ $bot-info-width: 110px;
 .author-name,
 .time-ago {
   font-size: $font-medium;
-  color: $color-violet-700;
+  color: $violet;
   margin: 0;
   line-height: $font-big;
 }
@@ -198,7 +213,7 @@ $bot-info-width: 110px;
   transition: $animation;
   opacity: 0;
   pointer-events: none;
-  background: $color-black-transparent;
+  background: $black-transparent;
 }
 
 .author-info {
@@ -206,12 +221,12 @@ $bot-info-width: 110px;
   justify-content: space-between;
   * {
     font-size: $font-small;
-    color: $color-violet-350;
+    color: $violet-light;
     margin: 0;
   }
   .author-name {
     font-weight: $font-weight-bold;
-    color: $color-violet-700;
+    color: $violet;
   }
 }
 
@@ -219,10 +234,10 @@ $bot-info-width: 110px;
   position: absolute;
   width: $bot-info-width;
   height: 100%;
-  padding: 8px 20px;
+  padding: 20px;
   right: -$bot-info-width;
   opacity: 0;
-  background-color: $color-violet-150;
+  background-color: $lilac-select;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -232,8 +247,11 @@ $bot-info-width: 110px;
   div {
     display: flex;
     justify-content: space-between;
+    color: $violet-light;
+  }
+
+  .info-value {
     font-weight: $font-weight-bold;
-    color: $color-violet-350;
   }
 }
 
@@ -246,8 +264,8 @@ $bot-info-width: 110px;
   margin: -0.6px;
 
   &:hover {
-    .ffa-text,
-    .vs-text {
+    .ffa-img,
+    .vs-img {
       opacity: 0;
     }
 
@@ -273,7 +291,7 @@ $bot-info-width: 110px;
   width: calc(100% - #{$bot-info-width} - 10px);
   left: 10px;
   top: 5px;
-  color: $color-white;
+  color: $white;
   font-size: $font-big;
   font-weight: $font-weight-bold;
 }
@@ -307,28 +325,22 @@ $bot-info-width: 110px;
   }
 }
 
-.ffa-text,
-.vs-text {
-  // TODO: change to icon
+.ffa-img,
+.vs-img {
   transition: $animation;
   opacity: 1;
-  font-size: 60px;
-  font-weight: $font-weight-bolder;
   position: absolute;
-  -webkit-text-fill-color: $color-black;
-  -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: $color-white;
   pointer-events: none;
 }
 
-.vs-text {
+.vs-img {
   top: 50%;
   right: 0;
   transform: translate(50%, -50%);
   z-index: 1;
 }
 
-.ffa-text {
+.ffa-img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -341,9 +353,9 @@ $bot-info-width: 110px;
   display: flex;
   flex-direction: column;
   * {
-    background-color: $color-white;
-    border-right: 2px solid $color-white;
-    border-top: 2px solid $color-white;
+    background-color: $white;
+    border-right: 2px solid $white;
+    border-top: 2px solid $white;
   }
 }
 

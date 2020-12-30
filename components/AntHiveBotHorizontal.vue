@@ -1,25 +1,29 @@
 <template>
   <div class="chip">
     <div
-      class="img"
       :style="`background: center / cover no-repeat url(${getAvatar(
         bot.avatar,
         200
       )})`"
+      class="img"
     >
       <img
-        class="lang-icon"
-        width="35px"
         :src="getLangImg(bot.lang)"
         :alt="bot.lang"
-      />
+        class="lang-icon"
+        width="35px"
+      >
     </div>
     <div class="description">
       <div :class="{ show: botIsDead }" class="information">
         <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
           {{ $t("game.by") }} {{ bot.username }}
-          <v-avatar class="ml-1" tile size="30"
-            ><v-img :src="getAvatar(bot.userAvatar, 200)"
+          <v-avatar
+            class="ml-1"
+            tile
+            size="30"
+          ><v-img
+            :src="getAvatar(bot.userAvatar, 200)"
           /></v-avatar>
         </nuxt-link>
         <div class="information-container">
@@ -29,7 +33,11 @@
             color="primary"
             @click="challange(bot.id)"
           >
-            <AntHiveIcon icon="challange" class="mx-1" small color="white" />
+            <AntHiveIcon
+              icon="challange"
+              class="mx-1"
+              small
+              color="white" />
             {{ $t("userInfo.challangeMe") }}
           </AntHiveButton>
         </div>
@@ -44,8 +52,9 @@
         <div class="statistic-container">
           <div class="statistic">
             <span>{{ $t("game.size") }}:</span>
-            <span class="statistic-value"
-              >{{ botStats.hive }}/{{ botStats.ants }}</span
+            <span
+              class="statistic-value"
+            >{{ botStats.hive }}/{{ botStats.ants }}</span
             >
           </div>
           <div class="statistic">
@@ -64,8 +73,9 @@
           </div>
           <div class="statistic">
             <span>{{ $t("game.rt") }}:</span>
-            <span class="statistic-value"
-              >{{ getArtInMs(botStats.art) }} ms</span
+            <span
+              class="statistic-value"
+            >{{ getArtInMs(botStats.art) }} ms</span
             >
           </div>
         </div>
@@ -84,6 +94,7 @@ export default {
   components: {
     AntHiveIcon
   },
+  mixins: [Image, Truncate],
   props: {
     bot: { type: Object, required: true },
     stats: { type: Object, required: true },
@@ -97,7 +108,6 @@ export default {
       return this.isDead
     }
   },
-  mixins: [Image, Truncate],
   methods: {
     getArtInMs(art) {
       return Math.round(art / 10) / 100
@@ -120,12 +130,11 @@ export default {
   display: flex;
   flex-direction: row;
   box-shadow: $box-shadow-default;
-  background-color: $color-white;
+  background-color: $white;
 
   .img {
     background-position: center;
     min-width: 120px;
-    background: $color-red-300;
   }
 
   .user-avatar {
@@ -139,11 +148,6 @@ export default {
     border-right: 2px solid white;
     background-color: white;
     margin-right: 10px;
-  }
-
-  .lang-name {
-    font-size: $font-small;
-    color: $color-violet-600;
   }
 
   .name {
@@ -180,7 +184,7 @@ export default {
     }
 
     .statistic {
-      color: $color-violet-700;
+      color: $violet;
       margin-bottom: 5px;
       font-size: $font-medium;
       display: flex;
@@ -202,7 +206,7 @@ export default {
     height: 100%;
     transition: all 0.4s;
     opacity: 0;
-    background: $color-black-transparent;
+    background: $black-transparent;
 
     &:hover,
     &.show {
@@ -212,7 +216,7 @@ export default {
     .information-user {
       cursor: pointer;
       font-size: $font-medium;
-      color: $color-white;
+      color: $white;
       position: absolute;
       right: 0;
       padding: 10px;

@@ -3,13 +3,17 @@
     <v-tabs v-model="tab" background-color="primary" dark>
       <v-tabs-slider />
       <v-tab
-        active-class="active"
         v-for="(bot, index) in getBots"
         :key="index"
+        active-class="active"
         class="tab"
-        ><v-avatar class="avatar" v-if="!bot.displayName.includes('sandbox')" tile size="20"
-          ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
-        ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
+      ><v-avatar
+        v-if="!bot.displayName.includes('sandbox')"
+        class="avatar"
+        tile
+        size="20"
+      ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
+      ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
       >
     </v-tabs>
 
@@ -21,8 +25,8 @@
               <div class="tab-title">
                 Request
                 <AntHiveIcon
-                  icon="download"
                   v-if="isGameStoped"
+                  icon="download"
                   class="download"
                   @click="
                     downloadRequest(getResponseRequest(bot, 'requests'), bot.id)
@@ -53,14 +57,15 @@ import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
+  components: {
+    AntHiveIcon
+  },
+  mixins: [Image],
   props: {
     requests: { type: Array, required: true },
     responses: { type: Array, required: true },
     bots: { type: Array, required: true },
     isGameStoped: { type: Boolean, default: false }
-  },
-  components: {
-    AntHiveIcon
   },
   data: () => ({
     tab: 0
@@ -82,7 +87,6 @@ export default {
       return []
     }
   },
-  mixins: [Image],
   methods: {
     getResponseRequest(bot, type) {
       if (this[type] && this[type].length) {
@@ -105,11 +109,11 @@ export default {
 .tab-content {
   &::-webkit-scrollbar {
     width: 15px;
-    background: $color-violet-450;
+    background: $lilac;
   }
   &::-webkit-scrollbar-thumb {
-    border: 5px solid $color-violet-450;
-    background: $color-violet-350;
+    border: 5px solid $lilac;
+    background: $violet-light;
   }
 }
 
@@ -126,11 +130,11 @@ export default {
     display: none;
   }
   .active {
-    background-color: $color-violet-350;
+    background-color: $violet-light;
   }
   .download {
     cursor: pointer;
-    background-color: $color-violet-700 !important;
+    background-color: $violet !important;
     margin-bottom: -5px;
     margin-left: 27px;
   }
@@ -139,20 +143,20 @@ export default {
     padding-top: 5px;
   }
   .tab-content {
-    color: $color-violet-700;
+    color: $violet;
     width: 40%;
     height: 296px;
     overflow-y: auto;
     &:first-child {
       width: 60%;
-      border-right: 2px solid $color-violet-700;
+      border-right: 2px solid $violet;
     }
   }
   .tab-title {
     font-size: $font-big;
     font-weight: 600;
-    background-color: $color-violet-350;
-    color: $color-violet-700;
+    background-color: $violet-light;
+    color: $violet;
     padding-left: 10px;
   }
   .tab-text {

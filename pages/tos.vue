@@ -8,11 +8,8 @@
           flat=""
           tile=""
         >
-          <v-card-title class="primary--text font-weight-bold mb-5"
-            >Terms of Service</v-card-title
-          >
+          <v-card-title class="primary--text font-weight-bold mb-5">Terms of Service</v-card-title>
           <v-card-text class="primary--text white-space">
-            
 
             <p>Welcome to anthive.io!</p>
 
@@ -26,13 +23,14 @@
               conditions. Do not continue to use anthive.io if you do not agree
               to take all of the terms and conditions stated on this page. Our
               Terms and Conditions were created with the help of the
-              <a href="https://www.termsandconditionsgenerator.com"
-                >Terms And Conditions Generator</a
+              <a
+                href="https://www.termsandconditionsgenerator.com"
+              >Terms And Conditions Generator</a
               >
               and the
               <a
                 href="https://www.privacypolicyonline.com/terms-conditions-generator/"
-                >Free Terms & Conditions Generator</a
+              >Free Terms & Conditions Generator</a
               >.
             </p>
 
@@ -222,7 +220,10 @@
             <ul>
               <li>By use of our corporate name; or</li>
               <li>By use of the uniform resource locator being linked to; or</li>
-              <li>By use of any other description of our Website being linked to that makes sense within the context and format of content on thelinking party’s site.</li>
+              <li>
+                By use of any other description of our Website being linked to that
+                makes sense within the context and format of content on thelinking party’s site.
+              </li>
             </ul>
 
             <p>
@@ -320,7 +321,7 @@
               website are provided free of charge, we will not be liable for any
               loss or damage of any nature.
             </p>
-          
+
           </v-card-text>
         </v-card>
       </v-col>

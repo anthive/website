@@ -1,20 +1,20 @@
 <template>
   <div class="editor__wrap">
     <v-card color="#272822" tile height="660px">
-      <v-slide-group class="editor__tab-slider" show-arrows v-model="tab">
+      <v-slide-group v-model="tab" class="editor__tab-slider" show-arrows>
         <template v-slot:prev>
           <AntHiveIcon icon="arrow-left-box" color="white" />
         </template>
         <v-slide-item
+          v-slot:default="{ active }"
           v-for="(lang, index) in langs"
           :key="index"
-          v-slot:default="{ active }"
         >
           <v-btn
+            :input-value="active"
             tile
             class="editor__tab-slider-item"
             text
-            :input-value="active"
             active-class="editor__tab-slider-item--active"
             @click="onChangeTab(lang, index)"
           >
@@ -25,17 +25,17 @@
           <AntHiveIcon icon="arrow-right-box" color="white" />
         </template>
       </v-slide-group>
-      <v-tabs-items class="editor-content" v-model="tab">
+      <v-tabs-items v-model="tab" class="editor-content">
         <v-tab-item
+          v-for="(lang, key) in langs"
           :transition="false"
           :reverse-transition="false"
-          eager
-          v-for="(lang, key) in langs"
           :key="key"
+          eager
         >
           <v-card color="#272822" height="660px" flat>
             <v-card-text>
-              <div class="editor" :id="lang.editor" />
+              <div :id="lang.editor" class="editor" />
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -50,20 +50,21 @@ import langs from '../static/langs/data.json'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 if (process.client) {
+  // eslint-disable-next-line no-var
   var ace = require('ace-builds')
   require('ace-builds/src-min-noconflict/theme-monokai')
   require('ace-builds/src-min-noconflict/ext-language_tools')
   require('ace-builds/webpack-resolver')
 }
 export default {
+  components: {
+    AntHiveIcon
+  },
   props: {
     valueCode: {
       type: Object,
       default: () => {}
     }
-  },
-  components: {
-    AntHiveIcon
   },
   data: () => ({
     langs: {},
@@ -74,10 +75,10 @@ export default {
   }),
   async mounted() {
     await this.fetchLangs()
-    this.currentLangTab = this.langs.find(lang => {
+    this.currentLangTab = this.langs.find((lang) => {
       return lang.extention === this.$route.params.lang
     })
-    this.tab = this.langs.findIndex(lang => {
+    this.tab = this.langs.findIndex((lang) => {
       return lang.extention === this.$route.params.lang
     })
     await this.initEditors(this.currentLangTab.editor)
@@ -92,12 +93,14 @@ export default {
       this.tab = tab
       this.$router.push(`/sandbox/${lang.extention}`)
     },
-    async initEditors(lang) {
-      new Promise(async resolve => {
+    initEditors(lang) {
+      // TODO: fix eslint
+      // eslint-disable-next-line no-async-promise-executor
+      new Promise(async(resolve) => {
         await require(`ace-builds/src-min-noconflict/mode-${lang}`)
         await require(`ace-builds/src-min-noconflict/snippets/${lang}`)
         return resolve()
-      }).then(async () => {
+      }).then(async() => {
         this.editor = ace.edit(lang, {
           theme: 'ace/theme/monokai',
           mode: `ace/mode/${lang}`,
@@ -136,14 +139,14 @@ export default {
       const resp = await axios.get(codeUrl)
       return resp.data
     },
-    async fetchLangs() {
+    fetchLangs() {
       this.langs = langs
     },
     emitValueCode(lang) {
       if (this.currentLangTab.editor === lang && !!this.editors[lang]) {
         this.$emit('update:valueCode', {
           extention: this.currentLangTab.extention,
-          lang: lang,
+          lang,
           value: `${this.editors[lang].getValue()}`
         })
       }
@@ -167,8 +170,8 @@ export default {
       box-sizing: content-box;
       padding: 5px 15px !important;
       &--active {
-        color: $color-red-300 !important;
-        border-bottom: 2px solid $color-red-300;
+        color: $violet !important;
+        border-bottom: 2px solid $violet;
       }
     }
   }
@@ -184,10 +187,10 @@ export default {
     width: 8px;
   }
   &::-webkit-scrollbar-track {
-    background: $color-green-900;
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: $color-red-400;
+    background: $violet;
   }
 }
 
@@ -197,10 +200,10 @@ export default {
     height: 8px;
   }
   &::-webkit-scrollbar-track {
-    background: $color-green-900;
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: $color-red-400;
+    background: $violet;
   }
 }
 </style>

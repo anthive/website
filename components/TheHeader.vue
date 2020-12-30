@@ -1,14 +1,14 @@
 <template>
   <v-app-bar
+    :clipped-left="$vuetify.breakpoint.lgAndUp"
     class="header"
     flat
     absolute
-    :clipped-left="$vuetify.breakpoint.lgAndUp"
   >
     <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <img class="logo" :src="getLogo" alt="Logo" />
+          <img :src="getLogo" class="logo" alt="Logo" >
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -51,17 +51,17 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <div class="hidden-sm-and-down mr-6" :class="{ profile: isProfilePage }">
-        <nuxt-link class="link" :to="localePath('games')">
+      <div :class="{ profile: isProfilePage }" class="hidden-sm-and-down mr-6">
+        <nuxt-link :to="localePath('games')" class="link">
           {{ $t("header.games") }}
         </nuxt-link>
-        <nuxt-link class="link" :to="localePath('leaderboard')">
+        <nuxt-link :to="localePath('leaderboard')" class="link">
           {{ $t("header.leaderboard") }}
         </nuxt-link>
-        <nuxt-link class="link" :to="localePath('rules')">
+        <nuxt-link :to="localePath('rules')" class="link">
           {{ $t("header.rules") }}
         </nuxt-link>
-        <nuxt-link class="link" :to="`${localePath('sandbox')}/js`">
+        <nuxt-link :to="`${localePath('sandbox')}/js`" class="link">
           {{ $t("header.sandbox") }}
         </nuxt-link>
 
@@ -81,11 +81,11 @@
         </v-chip>
 
         <AntHiveButton
-          tile
           v-show="!getUser"
-          @click="handlerClickGetStarted"
+          tile
           color="primary"
           class="ml-3"
+          @click="handlerClickGetStarted"
         >
           {{ $t("header.buttonJoin") }}
         </AntHiveButton>
@@ -95,8 +95,8 @@
 </template>
 
 <script>
-import AntHiveIcon from '@/components/AntHiveIcon'
 import { mapGetters } from 'vuex'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'TheHeader',
@@ -142,7 +142,7 @@ export default {
   }
   .profile {
     .link {
-      color: $color-white;
+      color: $white;
     }
   }
   .link {

@@ -1,35 +1,44 @@
 <template>
   <section class="statistics">
     <div
-      class="statistics__row d-flex align-center"
       :class="$vuetify.breakpoint.xsOnly ? 'justify-space-evenly' : 'justify-space-around'"
+      class="statistics__row d-flex align-center"
     >
       <v-col md="4" class="statistics__counter">
         <div class="statistics__counter-name">{{ $t("home.ants") }}</div>
         <div class="statistics__counter-number">
-          <ICountUp :delay="delay" :endVal="endVal.Ants" :options="options" />
+          <ICountUp :delay="delay" :end-val="endVal.Ants" :options="options" />
         </div>
       </v-col>
 
       <v-col md="4" class="statistics__counter">
         <div class="statistics__counter-name">{{ $t("home.games") }}</div>
         <div class="statistics__counter-number">
-          <ICountUp :delay="delay" :endVal="endVal.Games" :options="options" />
+          <ICountUp :delay="delay" :end-val="endVal.Games" :options="options" />
         </div>
       </v-col>
 
       <v-col md="4" class="statistics__counter">
         <div class="statistics__counter-name">{{ $t("home.bots") }}</div>
         <div class="statistics__counter-number">
-          <ICountUp :delay="delay" :endVal="endVal.Bots" :options="options" />
+          <ICountUp :delay="delay" :end-val="endVal.Bots" :options="options" />
         </div>
       </v-col>
     </div>
     <div class="statistics__actions">
-      <AntHiveButton large tile class="mr-4" color="action" :to="localePath('sandbox')">
+      <AntHiveButton
+        :to="localePath('sandbox')"
+        large
+        tile
+        class="mr-4"
+        color="action">
         {{ $t("header.sandbox") }}
       </AntHiveButton>
-      <AntHiveButton large tile color="primary" @click="handlerClickGetStarted">
+      <AntHiveButton
+        large
+        tile
+        color="primary"
+        @click="handlerClickGetStarted">
         {{ $t("header.buttonJoin") }}
       </AntHiveButton>
     </div>
@@ -81,7 +90,7 @@ export default {
   padding: 140px 0 80px;
   position: relative;
   overflow: hidden;
-  background-color: $color-violet-50;
+  background-color: $lilac-select;
 
   &__row {
     max-width: 600px;
@@ -91,18 +100,15 @@ export default {
   &__counter {
     z-index: 1;
     text-align: center;
-    color: $color-white;
+    color: $white;
     font-size: 22px;
     margin-bottom: 100px;
     font-weight: 500;
   }
 
-  &__counter-name {
-    color: $color-violet-700;
-  }
-
+  &__counter-name,
   &__counter-number {
-    color: $color-violet-600;
+    color: $violet;
   }
 
   &__actions {

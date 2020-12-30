@@ -84,13 +84,13 @@
       <v-select
         v-model="selectedLocale"
         :items="locales"
+        :menu-props="{ top: true, offsetY: true }"
         tile
         dense
         dark
         flat
         item-color="accent"
         hide-details
-        :menu-props="{ top: true, offsetY: true }"
         @input="switchLocale"
       />
       <AntHiveIcon icon="earth" color="white" class="footer__locale-select--earth-icon" />
@@ -104,7 +104,7 @@
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'defaultFooter',
+  name: 'DefaultFooter',
   components: {
     AntHiveIcon
   },
@@ -145,7 +145,7 @@ export default {
   padding: 16px;
   display: flex;
   justify-content: space-around;
-  background: $color-violet-700 !important;
+  background: $violet !important;
   @media screen and (max-width: $screen-md) {
     flex-direction: column;
   }
@@ -173,14 +173,14 @@ export default {
   }
   &__social--icon {
     margin: 0 5px;
-    color: $color-white !important;
+    color: $white !important;
   }
   &__copyright,
   &__subscribe,
   &__issue,
   &__social,
   &__locale-select {
-    color: $color-white;
+    color: $white;
     text-align: center;
     padding: 0 7px;
     @media screen and (max-width: $screen-lg) {

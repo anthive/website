@@ -1,12 +1,12 @@
 <template>
   <section class="games page-wrap">
-      <v-container class="games__container">
-        <AntHivePageHeader
-          :title="$t('games.title1')"
-          :tooltip-text="$t('games.title2')"
-        />
-        <GamesTable />
-     </v-container>
+    <v-container class="games__container">
+      <AntHivePageHeader
+        :title="$t('games.title1')"
+        :tooltip-text="$t('games.title2')"
+      />
+      <GamesTable />
+    </v-container>
   </section>
 </template>
 
@@ -15,7 +15,7 @@ import GamesTable from '@/components/GamesTable'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 
 export default {
-  name: 'defaultHeader',
+  name: 'DefaultHeader',
   head() {
     return {
       title: this.$t('games.meta.title'),

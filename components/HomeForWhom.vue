@@ -41,7 +41,7 @@ export default {
 @import '@/assets/style/global.scss';
 
 .for-whom {
-  background-color: $color-white;
+  background-color: $white;
   padding: 70px 0 20px;
 
   &__container {
@@ -83,7 +83,7 @@ export default {
   &__title {
     font-weight: 600;
     font-size: 22px;
-    color: $color-violet-700;
+    color: $violet;
     margin-bottom: 10px;
   }
 

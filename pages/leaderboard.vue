@@ -1,6 +1,6 @@
 <template>
 
- <!-- <section class="leaderboard texture-arrows">
+  <!-- <section class="leaderboard texture-arrows">
   <v-card class="leaderboard__table">
       <v-row class="leaderboard__table-head">
         <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
@@ -43,8 +43,8 @@
         </div>
         <AntHivePageHeader
           :title="$t('leaderboard.title')"
-          subtitle="World"
           :tooltip-text="$t('leaderboard.description')"
+          subtitle="World"
         />
       </div>
 
@@ -59,7 +59,7 @@
                 class="filter__lang-icon"
                 width="40px"
                 :src="lang.img"
-                :alt="lang.id" 
+                :alt="lang.id"
               />
             </div>
           </v-col>
@@ -85,17 +85,27 @@
 
       <div class="leaderboard__table">
         <v-row class="leaderboard__table-head">
-          <v-col cols="6" sm="4"
-            class="leaderboard__table-score"
+          <v-col
             v-for="(column, index) in columns"
             :key="index"
+            cols="6"
+            sm="4"
+            class="leaderboard__table-score"
           >
             <div class="leaderboard__table-score-title">{{ $t(`leaderboard.${column.text}`) }}
               <div class="header__info">
-                <v-tooltip right nudge-left color="accent" content-class="b-radius-0">
+                <v-tooltip
+                  right
+                  nudge-left
+                  color="accent"
+                  content-class="b-radius-0">
                   <template v-slot:activator="{ on }">
                     <div v-on="on">
-                      <AntHiveIcon icon="alert-circle" class="ml-1" small color="#4c377f" />
+                      <AntHiveIcon
+                        icon="alert-circle"
+                        class="ml-1"
+                        small
+                        color="#4c377f" />
                     </div>
                   </template>
                   {{ $t(`leaderboard.${column.description}`) }}
@@ -105,11 +115,11 @@
           </v-col>
         </v-row>
         <GamesLeaderCard
-          class="leaderboard__table-bot"
-          :key="bot.displayName + index"
           v-for="(bot, index) in bots"
+          :key="bot.displayName + index"
           :place="index + 1"
           :leader="bot"
+          class="leaderboard__table-bot"
         />
       </div>
     </v-container>
@@ -117,11 +127,11 @@
 </template>
 
 <script>
+import langs from '../static/langs/data.json'
 import { getBotsLeaderboard } from '@/services/Bot'
 import GamesLeaderCard from '@/components/GamesLeaderCard'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
-import langs from '../static/langs/data.json'
 
 export default {
   head() {
@@ -135,12 +145,12 @@ export default {
       ]
     }
   },
+  name: 'Leaderboard',
   components: {
     GamesLeaderCard,
     AntHiveIcon,
     AntHivePageHeader
   },
-  name: 'Leaderboard',
   data: () => ({
     countries: ['russia', 'usa'], // TODO
     cities: ['moscow', 'new yourk'], // TODO
@@ -159,13 +169,13 @@ export default {
       this.bots = await getBotsLeaderboard()
     }
   },
-  async mounted() {
-    this.bots = await getBotsLeaderboard()
-  },
   computed: {
     getLangs() {
       return langs
     }
+  },
+  async mounted() {
+    this.bots = await getBotsLeaderboard()
   }
 }
 </script>
@@ -177,14 +187,14 @@ export default {
     background: linear-gradient(0deg, rgba(154, 100, 255, 1) 50%, rgba(154, 100, 255, 0.8) 50%);
   }
   .v-select__selection--comma {
-    color: $color-white !important;
+    color: $white !important;
   }
   .v-input__icon .v-icon.v-icon {
     width: 0;
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 12px solid $color-white;
+    border-top: 12px solid $white;
   }
 }
 </style>
@@ -201,7 +211,7 @@ export default {
     }
     &__lang {
       position: absolute;
-      color: $color-white;
+      color: $white;
       top: 16px;
       font-size: 11px;
       font-weight: 600;
@@ -212,7 +222,7 @@ export default {
       position: relative;
     }
     &__subtitle {
-      color: $color-violet-600;
+      color: $violet;
       font-weight: 400;
     }
     &__info {
@@ -231,12 +241,12 @@ export default {
     }
 
     &__countries {
-      border-left: 2px solid $color-violet-600;
-      border-right: 2px solid $color-violet-600;
+      border-left: 2px solid $violet;
+      border-right: 2px solid $violet;
     }
 
     &__title {
-      color: $color-violet-700;
+      color: $violet;
       font-weight: 500;
       margin-bottom: 10px;
     }
