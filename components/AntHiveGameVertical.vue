@@ -1,63 +1,120 @@
 <template>
-  <div class="chip">
-    <div class="header">
-      <div class="author-info">
-        <p class="time-ago">{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
-      </div>
-      <v-avatar
-        v-if="game.author.avatar"
-        tile
-        class="author-avatar"
-        size="30"
-      >
-        <v-img :src="getAvatar(game.author.avatar, 60)" />
-      </v-avatar>
-    </div>
+  <div
+    class="chip"
+    @mouseover="hoverOnChip = true"
+    @mouseleave="hoverOnChip = false"
+  >
     <div class="bots">
       <nuxt-link
         v-for="(bot, index) in game.bots"
         :to="localePath(`/users/${bot.username}`)"
         :key="index"
+        :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
         class="bot-avatar"
       >
-        <v-avatar tile size="35">
-          <v-img :src="getAvatar(bot.avatar, 70)" />
-        </v-avatar>
-      </nuxt-link>
-    </div>
-    <v-row>
-      <v-col class="game-info" cols="12" sm="6">{{ $t("game.age") }}:</v-col>
-      <v-col class="game-info ticks" cols="12" sm="6">{{ game.age }} {{ $t("game.ticks") }}</v-col>
-    </v-row>
-    <v-row class="mb-3">
-      <v-col class="game-info" cols="12" sm="6">{{ $t("game.mapSkin") }}:</v-col>
-      <v-col class="game-info" cols="12" sm="6">
+        <div class="gradient" />
+        <div class="bot-name">
+          {{ bot.displayName }}<span class="bot-version"> v {{ bot.v }}</span>
+        </div>
+        <div class="bot-icons">
+          <img
+            :src="getAntSkinImg(bot.skin)"
+            :alt="$t('game.botSkin')"
+            class="bot-skin"
+            width="40px"
+            height="40px"
+          >
+          <img
+            :src="getCurrentLangImg(bot)"
+            :alt="getCurrentLangName(bot)"
+            width="40px"
+          >
+        </div>
+        <div class="bot-info">
+          <div>
+            <span>{{ $t("game.size") }}:</span>
+            <span class="info-value" >{{ bot.hive }}/{{ bot.ants }}</span>
+          </div>
+          <div>
+            <span>{{ $t("game.score") }}:</span>
+            <span class="info-value">
+              {{ getNumberTruncatedToThousand(bot.score) }}
+            </span>
+          </div>
+          <div>
+            <span>{{ $t("game.errors") }}:</span>
+            <span class="info-value">
+              {{ getNumberTruncatedToThousand(bot.errors) }} %
+            </span>
+          </div>
+          <div>
+            <span>{{ $t("game.rt") }}:</span>
+            <span class="info-value">
+              {{ getArtInMs(bot.art) }} ms
+            </span>
+          </div>
+        </div>
         <v-img
-          :src="getImage(game.mapSettings.theme)"
-          width="20"
-          alt="map theme"
+          v-if="getVsImage(index)"
+          :src="getVsImage(index)"
+          width="45"
+          class="vs-img"
         />
-      </v-col>
-    </v-row>
-    <AntHiveButton
-      :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
-      class="button"
-      tile
-      color="primary"
-    >
-      {{ $t("game.viewReplay") }}
-    </AntHiveButton>
+      </nuxt-link>
+      <v-img
+        v-if="getFfaImage"
+        :src="getFfaImage"
+        width="80"
+        class="ffa-img"
+      />
+    </div>
+    <div class="game-info">
+      <v-row class="pa-3">
+        <v-col class="info-row" cols="12" sm="6">
+          <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="timer" />
+          {{ game.age }}
+        </v-col>
+        <v-col class="info-row" cols="12" sm="6">
+          <AntHiveIcon class="mb-n1 mr-2" color="#d1cae8" icon="billiards-rack" />
+          {{ getGameScore }}
+        </v-col>
+      </v-row>
+      <div class="author-info">
+        <p>
+          {{ $t("game.by") }} <span class="author-name">{{ getAuthorName }}</span>
+        </p>
+        <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
+      </div>
+      <div class="game-info-layout">
+        <nuxt-link
+          :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
+          class="text-center d-block"
+        >
+          <AntHiveIcon
+            color="white"
+            big
+            class="mt-1"
+            icon="play-circle" />
+        </nuxt-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
 import { getImageById } from '@/services/Image'
 import { timeAgo } from '@/services/User'
+import Truncate from '@/mixins/truncate'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'AntHiveGameVertical',
-  mixins: [Image],
+  components: {
+    AntHiveIcon
+  },
+  mixins: [Image, Truncate],
   props: {
     game: {
       type: Object,
@@ -65,14 +122,43 @@ export default {
       default: () => {}
     }
   },
+  data: () => ({
+    hoverOnChip: false,
+    hoverOnBots: false
+  }),
   computed: {
     getTimeAgo() {
       return timeAgo(this.game.finished)
+    },
+    getFfaImage() {
+      if (this.game.bots.length > 4) {
+        return '/img/ffa.svg'
+      }
+    },
+    getAuthorName() {
+      return this.game.author
+    },
+    getGameScore() {
+      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc += bot.score), 0)
     }
   },
   methods: {
+    getArtInMs(art) {
+      return Math.round(art / 10) / 100
+    },
     getImage(id) {
       return getImageById(`${id}-background.png`, 40)
+    },
+    getCurrentLangName(bot) {
+      return langs.find(lang => lang.id === bot.lang).name
+    },
+    getCurrentLangImg(bot) {
+      return langs.find(lang => lang.id === bot.lang).img
+    },
+    getVsImage(botIndex) {
+      if (botIndex !== this.game.bots.length - 1 && this.game.bots.length > 1 && this.game.bots.length < 5) {
+        return '/img/vs.svg'
+      }
     }
   }
 }
@@ -80,21 +166,29 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
+$animation: ease 0.4s;
+$bot-info-width: 140px;
 
 .chip {
   width: 100%;
-  max-width: 200px;
+  max-width: 320px;
+  height: 100%;
   margin: 20px;
-  padding: 10px 20px 20px;
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  background-color: $color-white;
+  background-color: $white;
+
+  &:hover {
+    .game-info-layout {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
 }
 
 .author-name,
-.time-ago,
-.game-info {
+.time-ago {
   font-size: $font-medium;
   color: $violet;
   margin: 0;
@@ -102,51 +196,185 @@ export default {
 }
 
 .game-info {
-  padding: 5px 12px;
-}
-
-.ticks {
-  font-weight: $font-weight-bold;
-}
-
-.header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-
-  .author-info {
-    text-align: right;
+  padding: 8px;
+  position: relative;
+  .info-row {
+    font-weight: $font-weight-bold;
+    padding: 5px 12px;
   }
+}
 
-  .time-ago {
+.game-info-layout {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: $animation;
+  opacity: 0;
+  pointer-events: none;
+  background: $black-transparent;
+}
+
+.author-info {
+  display: flex;
+  justify-content: space-between;
+  * {
     font-size: $font-small;
+    color: $violet-light;
+    margin: 0;
+  }
+  .author-name {
+    font-weight: $font-weight-bold;
+    color: $violet;
+  }
+}
+
+.bot-info {
+  position: absolute;
+  width: $bot-info-width;
+  height: 100%;
+  padding: 20px;
+  right: -$bot-info-width;
+  opacity: 0;
+  background-color: $lilac-select;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: right $animation;
+  pointer-events: none;
+
+  div {
+    display: flex;
+    justify-content: space-between;
     color: $violet-light;
   }
 
-  .author-avatar {
-    margin-left: 6px;
+  .info-value {
+    font-weight: $font-weight-bold;
   }
 }
 
 .bots {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -6px 8px;
+  overflow: hidden;
+  height: 185px;
+  margin: -0.6px;
 
-  .bot-avatar {
-    margin: 0 5px 10px;
-    cursor: pointer;
+  &:hover {
+    .ffa-img,
+    .vs-img {
+      opacity: 0;
+    }
+
+    .gradient {
+      opacity: 1;
+    }
+
+    & .bot-avatar {
+      min-width: 5%;
+      flex: 0;
+    }
+  }
+}
+.bot-skin,
+.bot-name {
+  opacity: 0;
+  pointer-events: none;
+  transition: $animation;
+}
+
+.bot-name {
+  position: absolute;
+  width: calc(100% - #{$bot-info-width} - 10px);
+  left: 10px;
+  top: 5px;
+  color: $white;
+  font-size: $font-big;
+  font-weight: $font-weight-bold;
+}
+
+.bot-version {
+  white-space: nowrap;
+  font-weight: $font-weight-normal;
+}
+
+.bot-avatar {
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  min-width: 24%;
+  margin: 0.6px;
+  text-decoration: none !important;
+  transition: $animation;
+  &:hover {
+    flex: 3 !important;
+    width: 100% !important;
+
+    .bot-skin,
+    .bot-name {
+      opacity: 1;
+    }
+
+    .bot-info {
+      opacity: 1;
+      right: 0;
+    }
   }
 }
 
-.game-info-row {
+.ffa-img,
+.vs-img {
+  transition: $animation;
+  opacity: 1;
+  position: absolute;
+  pointer-events: none;
+}
+
+.vs-img {
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%);
+  z-index: 1;
+}
+
+.ffa-img {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bot-icons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  * {
+    background-color: $white;
+    border-right: 2px solid $white;
+    border-top: 2px solid $white;
+  }
 }
 
 .button {
   max-width: 145px;
   width: 100%;
   margin: 0 auto;
+}
+
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: $user-background-gradient;
+  pointer-events: none;
+  opacity: 0;
+  transition: $animation;
 }
 </style>

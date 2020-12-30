@@ -193,8 +193,8 @@ export default {
 }
 
 .avatar {
-  background-color: $color-white;
-  border: 7px solid $color-white;
+  background-color: $white;
+  border: 7px solid $white;
 }
 
 .title {

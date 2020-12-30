@@ -99,7 +99,8 @@
     "by": "Автор",
     "ticks": "тиков",
     "mapSkin": "Карта",
-    "viewReplay": "Смотреть игру"
+    "viewReplay": "Смотреть игру",
+    "botSkin": "Скин бота"
   },
 
   "leaderboard": {

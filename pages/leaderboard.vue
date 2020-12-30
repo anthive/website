@@ -187,14 +187,14 @@ export default {
     background: linear-gradient(0deg, rgba(154, 100, 255, 1) 50%, rgba(154, 100, 255, 0.8) 50%);
   }
   .v-select__selection--comma {
-    color: $color-white !important;
+    color: $white !important;
   }
   .v-input__icon .v-icon.v-icon {
     width: 0;
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 12px solid $color-white;
+    border-top: 12px solid $white;
   }
 }
 </style>
@@ -211,7 +211,7 @@ export default {
     }
     &__lang {
       position: absolute;
-      color: $color-white;
+      color: $white;
       top: 16px;
       font-size: 11px;
       font-weight: 600;

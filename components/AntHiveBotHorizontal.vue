@@ -130,7 +130,7 @@ export default {
   display: flex;
   flex-direction: row;
   box-shadow: $box-shadow-default;
-  background-color: $color-white;
+  background-color: $white;
 
   .img {
     background-position: center;
@@ -206,7 +206,7 @@ export default {
     height: 100%;
     transition: all 0.4s;
     opacity: 0;
-    background: $color-black-transparent;
+    background: $black-transparent;
 
     &:hover,
     &.show {
@@ -216,7 +216,7 @@ export default {
     .information-user {
       cursor: pointer;
       font-size: $font-medium;
-      color: $color-white;
+      color: $white;
       position: absolute;
       right: 0;
       padding: 10px;

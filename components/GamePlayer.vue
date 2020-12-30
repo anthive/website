@@ -203,7 +203,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: $color-white;
+  color: $white;
   flex-direction: column;
   justify-content: center;
   display: flex;

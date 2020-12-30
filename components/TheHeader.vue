@@ -142,7 +142,7 @@ export default {
   }
   .profile {
     .link {
-      color: $color-white;
+      color: $white;
     }
   }
   .link {

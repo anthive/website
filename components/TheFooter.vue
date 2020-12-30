@@ -173,14 +173,14 @@ export default {
   }
   &__social--icon {
     margin: 0 5px;
-    color: $color-white !important;
+    color: $white !important;
   }
   &__copyright,
   &__subscribe,
   &__issue,
   &__social,
   &__locale-select {
-    color: $color-white;
+    color: $white;
     text-align: center;
     padding: 0 7px;
     @media screen and (max-width: $screen-lg) {

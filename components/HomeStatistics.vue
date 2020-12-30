@@ -100,7 +100,7 @@ export default {
   &__counter {
     z-index: 1;
     text-align: center;
-    color: $color-white;
+    color: $white;
     font-size: 22px;
     margin-bottom: 100px;
     font-weight: 500;

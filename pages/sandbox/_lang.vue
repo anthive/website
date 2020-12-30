@@ -368,7 +368,7 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: $color-black;
+      background-color: $black;
       opacity: 0.5;
     }
   }
@@ -393,7 +393,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     & > * {
-      color: $color-white;
+      color: $white;
     }
   }
   &__content-logs-wrap {

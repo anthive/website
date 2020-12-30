@@ -126,7 +126,7 @@ export default {
   display: flex;
   flex-direction: column;
   box-shadow: $box-shadow-default;
-  background-color: $color-white;
+  background-color: $white;
 
   .img {
     background-position: center;
@@ -146,9 +146,9 @@ export default {
   }
 
   .lang-icon {
-    background-color: $color-white;
-    border-right: 2px solid $color-white;
-    border-bottom: 2px solid $color-white;
+    background-color: $white;
+    border-right: 2px solid $white;
+    border-bottom: 2px solid $white;
   }
 
   .description {
@@ -167,14 +167,14 @@ export default {
       width: 100%;
       height: 100%;
       transition: all 0.4s;
-      background: $color-black-transparent;
+      background: $black-transparent;
       opacity: 0;
     }
 
     .user-info {
       cursor: pointer;
       font-size: $font-medium;
-      color: $color-white;
+      color: $white;
       margin: 0 auto 30px;
     }
   }
