@@ -145,7 +145,7 @@ export default {
   padding: 16px;
   display: flex;
   justify-content: space-around;
-  background: $color-violet-700 !important;
+  background: $violet !important;
   @media screen and (max-width: $screen-md) {
     flex-direction: column;
   }

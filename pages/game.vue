@@ -248,11 +248,11 @@ export default {
 .tab-content {
   &::-webkit-scrollbar {
     width: 15px;
-    background: $color-violet-450;
+    background: $lilac;
   }
   &::-webkit-scrollbar-thumb {
-    border: 5px solid $color-violet-450;
-    background: $color-violet-350;
+    border: 5px solid $lilac;
+    background: $violet-light;
   }
 }
 .v-content__wrap {
@@ -300,9 +300,9 @@ export default {
 .tooltip {
   box-shadow: none !important;
   border-radius: 0 !important;
-  color: $color-violet-700;
+  color: $violet;
   padding: 10px;
-  background-color: $color-violet-450;
+  background-color: $lilac;
   display: flex;
   & span {
     display: block;

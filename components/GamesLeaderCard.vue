@@ -95,8 +95,8 @@ export default {
   &__place-text {
     font-size: 22px;
     font-weight: 500;
-    color: $color-violet-650;
-    border: 2px solid $color-violet-650;
+    color: $violet;
+    border: 2px solid $violet;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -117,7 +117,7 @@ export default {
   }
 
   &__version {
-    color: $color-violet-600;
+    color: $violet;
     font-weight: 400;
     font-size: $font-small;
   }

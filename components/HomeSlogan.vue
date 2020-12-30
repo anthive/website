@@ -55,7 +55,7 @@ export default {
 
 .header-section {
   overflow: hidden;
-  background-color: $color-violet-50;
+  background-color: $lilac-select;
 
   &__text-content {
     z-index: 1;

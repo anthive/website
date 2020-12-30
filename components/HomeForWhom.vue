@@ -83,7 +83,7 @@ export default {
   &__title {
     font-weight: 600;
     font-size: 22px;
-    color: $color-violet-700;
+    color: $violet;
     margin-bottom: 10px;
   }
 

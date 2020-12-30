@@ -212,7 +212,7 @@ export default {
       position: relative;
     }
     &__subtitle {
-      color: $color-violet-600;
+      color: $violet;
       font-weight: 400;
     }
     &__info {
@@ -231,12 +231,12 @@ export default {
     }
 
     &__countries {
-      border-left: 2px solid $color-violet-600;
-      border-right: 2px solid $color-violet-600;
+      border-left: 2px solid $violet;
+      border-right: 2px solid $violet;
     }
 
     &__title {
-      color: $color-violet-700;
+      color: $violet;
       font-weight: 500;
       margin-bottom: 10px;
     }

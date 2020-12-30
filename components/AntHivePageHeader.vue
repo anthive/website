@@ -49,7 +49,7 @@ export default {
   display: inline-block;
 
   &__subtitle {
-    color: $color-violet-600;
+    color: $violet;
     font-weight: 400;
   }
 

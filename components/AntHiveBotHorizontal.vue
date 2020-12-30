@@ -125,7 +125,6 @@ export default {
   .img {
     background-position: center;
     min-width: 120px;
-    background: $color-red-300;
   }
 
   .user-avatar {
@@ -139,11 +138,6 @@ export default {
     border-right: 2px solid white;
     background-color: white;
     margin-right: 10px;
-  }
-
-  .lang-name {
-    font-size: $font-small;
-    color: $color-violet-600;
   }
 
   .name {
@@ -180,7 +174,7 @@ export default {
     }
 
     .statistic {
-      color: $color-violet-700;
+      color: $violet;
       margin-bottom: 5px;
       font-size: $font-medium;
       display: flex;

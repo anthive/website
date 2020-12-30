@@ -167,8 +167,8 @@ export default {
       box-sizing: content-box;
       padding: 5px 15px !important;
       &--active {
-        color: $color-red-300 !important;
-        border-bottom: 2px solid $color-red-300;
+        color: $violet !important;
+        border-bottom: 2px solid $violet;
       }
     }
   }
@@ -184,10 +184,10 @@ export default {
     width: 8px;
   }
   &::-webkit-scrollbar-track {
-    background: $color-green-900;
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: $color-red-400;
+    background: $violet;
   }
 }
 
@@ -197,10 +197,10 @@ export default {
     height: 8px;
   }
   &::-webkit-scrollbar-track {
-    background: $color-green-900;
+    background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: $color-red-400;
+    background: $violet;
   }
 }
 </style>
