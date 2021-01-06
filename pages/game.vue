@@ -54,6 +54,12 @@
                   :number="index + 1"
                   class="mb-2"
                 />
+                <v-skeleton-loader
+                  v-else
+                  tile
+                  type="list-item-avatar-three-line"
+                  class="mb-2"
+                />
               </div>
             </transition-group>
           </v-col>

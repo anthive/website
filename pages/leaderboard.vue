@@ -114,12 +114,25 @@
             </div>
           </v-col>
         </v-row>
-        <GamesLeaderCard
-          v-for="(bot, index) in bots"
-          :key="bot.displayName + index"
-          :place="index + 1"
-          :leader="bot"
-          class="leaderboard__table-bot"
+        <template v-if="bots">
+          <GamesLeaderCard
+            v-for="(bot, index) in bots"
+            :key="bot.displayName + index"
+            :place="index + 1"
+            :leader="bot"
+            class=""
+          />
+        </template>
+        <v-skeleton-loader
+          v-for="skeleton in 8"
+          v-else
+          :key="skeleton + 'skeleton'"
+          tile
+          width="100%"
+          height="90px"
+          class="ma-5"
+          elevation="2"
+          type="list-item-avatar-three-line"
         />
       </div>
     </v-container>
