@@ -1,7 +1,7 @@
 <template>
   <v-col class="pa-0 player__section" cols="auto">
     <div id="player">
-      <h2 class="px-2 white--text loading">{{ $t("game.loading") }}</h2>
+      <v-skeleton-loader tile type="image, image, list-item" />
     </div>
     <v-slide-y-transition>
       <div v-show="isGameEnd" class="end-game-layout">

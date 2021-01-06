@@ -12,14 +12,22 @@
               <editor :value-code.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
-              <div :class="{ disable: loading }" class="sandbox__player">
-                <div id="player" />
-                <div v-if="loading && $route.query.box" class="sandbox__loading-text">
-                  <h4>{{ $t("sandbox.loading") }}</h4>
-                  <transition name="fade" mode="out-in">
-                    <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
-                  </transition>
-                </div>
+              <div v-if="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
+                <template>
+                  <v-skeleton-loader
+                    width="100%"
+                    height="450px"
+                    tile
+                    type="image, image, list-item"
+                  />
+                  <div class="sandbox__loading-text">
+                    <h4>{{ $t("sandbox.loading") }}</h4>
+                    <transition name="fade" mode="out-in">
+                      <p v-if="loadingText">{{ $t(`sandbox.${loadingText}`) }}</p>
+                    </transition>
+                  </div>
+                </template>
+                <div id="player" class="player" />
               </div>
               <v-card
                 v-if="isGameStoped && isDebugMode && gameTooltip"
@@ -141,7 +149,8 @@ export default {
     isGameStoped: false,
     isDebugMode: false,
     fetchPlayerDataTimerId: null,
-    timerId: null
+    timerId: null,
+    isGameRunned: false
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -203,6 +212,7 @@ export default {
       }, 3000)
     },
     onClickRun() {
+      this.isGameRunned = true
       if (this.gamePlayer) { this.gamePlayerDestroy() }
       this.savedCode = this.valueCode.value
       this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
@@ -358,18 +368,16 @@ export default {
   }
   &__player {
     position: relative;
+    min-height: 300px;
     &.disable {
       min-height: 300px;
     }
-    &.disable::after {
-      content: '';
+    .player {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background-color: $black;
-      opacity: 0.5;
+      z-index: 10;
     }
   }
   &__description {

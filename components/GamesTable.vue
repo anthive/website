@@ -1,13 +1,26 @@
 <template>
-  <div v-if="games">
-    <div class="games">
-      <AntHiveGameVertical
-        v-for="(game, index) in games"
-        :key="index + 'game'"
-        :game="game"
+  <div>
+    <div v-if="games.length">
+      <div class="games">
+        <AntHiveGameVertical
+          v-for="(game, index) in games"
+          :key="index + 'game'"
+          :game="game"
+        />
+      </div>
+      <infinite-scroll :enough="enoughLoadGames" @load-more="loadGames" />
+    </div>
+    <div v-else class="games">
+      <v-skeleton-loader
+        v-for="skeleton in 18"
+        :key="skeleton + 'skeleton'"
+        tile
+        width="320px"
+        height="280px"
+        class="ma-5"
+        type="image, actions"
       />
     </div>
-    <infinite-scroll :enough="enoughLoadGames" @load-more="loadGames" />
   </div>
 </template>
 

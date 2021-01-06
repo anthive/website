@@ -20,7 +20,7 @@
           <img
             :src="getAntSkinImg(bot.skin)"
             :alt="$t('game.botSkin')"
-            class="bot-skin"
+            class="px-1"
             width="40px"
             height="40px"
           >
@@ -282,7 +282,7 @@ $bot-info-width: 140px;
     }
   }
 }
-.bot-skin,
+.bot-icons,
 .bot-name {
   opacity: 0;
   pointer-events: none;
@@ -316,7 +316,7 @@ $bot-info-width: 140px;
     flex: 3 !important;
     width: 100% !important;
 
-    .bot-skin,
+    .bot-icons,
     .bot-name {
       opacity: 1;
     }
