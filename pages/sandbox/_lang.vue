@@ -2,7 +2,7 @@
   <section class="sandbox page-wrap">
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
-        <div class="pa-3 pb-10" min-height="calc(100vh - 64px)">
+        <div v-if="isGameAvailable" class="pa-3 pb-10" min-height="calc(100vh - 64px)">
           <AntHivePageHeader
             :title="$t('sandbox.sandbox')"
             :tooltip-text="$t('sandbox.tooltipText')"
@@ -13,7 +13,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <div v-if="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
-                <template>
+                <template v-if="!isGamePlayed">
                   <v-skeleton-loader
                     width="100%"
                     height="450px"
@@ -27,7 +27,7 @@
                     </transition>
                   </div>
                 </template>
-                <div id="player" class="player" />
+                <div v-else id="player" class="player" />
               </div>
               <v-card
                 v-if="isGameStoped && isDebugMode && gameTooltip"
@@ -102,6 +102,22 @@
             :responses="responses"
             :bots="bots" />
         </div>
+        <div v-else class="pa-3 game-not-found">
+          <AntHivePageHeader :title="$t('sandbox.cantFindSandboxGame')" />
+          <h3 class="mt-10 mb-2">{{ $t("sandbox.checkOut") }}:</h3>
+          <div class="games-links">
+            <nuxt-link
+              v-for="lang in getAllLangs"
+              :key="lang.id"
+              :to="`${localePath('sandbox')}/${lang.extention}`"
+              class="link"
+            >
+              <v-avatar tile size="60" class="ml-2">
+                <v-img :src="lang.img" />
+              </v-avatar>
+            </nuxt-link>
+          </div>
+        </div>
       </v-col>
     </v-row>
   </section>
@@ -111,6 +127,7 @@
 import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
+import langs from '@/static/langs/data.json'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
@@ -150,12 +167,17 @@ export default {
     isDebugMode: false,
     fetchPlayerDataTimerId: null,
     timerId: null,
-    isGameRunned: false
+    isGameRunned: false,
+    isGameAvailable: true,
+    isGamePlayed: false
   }),
   computed: {
     ...mapGetters(['getUser']),
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
+    },
+    getAllLangs() {
+      return langs
     },
     getHelpElement() {
       const rulesElement = `
@@ -167,27 +189,33 @@ export default {
       `
       const discordElement = '<a class="accent--text" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>'
       return this.$t('sandbox.descriptionHelp', { rules: rulesElement, discord: discordElement })
+    },
+    getGameUrl() {
+      return `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
     }
   },
-  mounted() {
-    import('../../static/js/anthive-5.0.js').then(async() => {
-      if (this.$route.query.box) {
-        this.gameId = this.$route.query.box
-        this.loading = true
-        this.showLoadingText()
+  watch: {
+    $route() {
+      this.isGameAvailable = true
+    }
+  },
+  async mounted() {
+    await import('../../static/js/anthive-5.0.js')
+    if (this.$route.query.box) {
+      this.gameId = this.$route.query.box
+      this.loading = true
+      this.showLoadingText()
+      try {
+        await axios.get(this.getGameUrl)
         await this.getGame()
-          .then(() => {
-            this.initGame()
-            this.initLogs()
-          })
-          .catch((err) => {
-            this.botLogs = this.simLogs = err
-          })
-          .finally(() => {
-            this.loading = false
-          })
+        this.initGame()
+        this.initLogs()
+      } catch {
+        this.isGameAvailable = false
+      } finally {
+        this.loading = false
       }
-    })
+    }
   },
   destroyed() {
     if (this.gamePlayer) { this.gamePlayerDestroy() }
@@ -211,42 +239,38 @@ export default {
         })
       }, 3000)
     },
-    onClickRun() {
+    async onClickRun() {
       this.isGameRunned = true
       if (this.gamePlayer) { this.gamePlayerDestroy() }
       this.savedCode = this.valueCode.value
       this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
 
       this.gameId = md5(this.savedCode)
-      const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
+      try {
+        await axios.head(this.getGameUrl)
+        this.initGame()
+        this.initLogs()
+        this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
+      } catch {
+        this.loading = true
+        this.showLoadingText()
+        if (this.gamePlayer && this.gamePlayer.control) {
+          this.gamePlayer.control.stop()
+        }
+        this.botLogs = this.simLogs = 'Loading...'
 
-      axios
-        .head(gameUrl)
-        .then(() => {
-          this.initGame()
-          this.initLogs()
-          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-        })
-        .catch(async() => {
-          this.loading = true
-          this.showLoadingText()
-          if (this.gamePlayer && this.gamePlayer.control) { this.gamePlayer.control.stop() }
-          this.botLogs = this.simLogs = 'Loading...'
-
+        try {
           await this.sendCodeToSim()
           await this.getGame()
-            .then(() => {
-              this.initGame()
-              this.initLogs()
-            })
-            .catch((err) => {
-              this.botLogs = this.simLogs = err
-            })
-            .finally(() => {
-              this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-              this.loading = false
-            })
-        })
+          this.initGame()
+          this.initLogs()
+        } catch (error) {
+          this.botLogs = this.simLogs = error
+        } finally {
+          this.loading = false
+          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
+        }
+      }
     },
     onClickLogin() {
       this.$gtag('event', 'Get started Sandbox', { event_category: 'getstarted', event_label: 'sandbox' })
@@ -255,10 +279,8 @@ export default {
     },
     async getGame() {
       return await new Promise((resolve, reject) => {
-        const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
-
         axios
-          .head(gameUrl)
+          .head(this.getGameUrl)
           // if got the game, then we resolve
           .then(resolve)
           .catch(() => {
@@ -270,7 +292,7 @@ export default {
               passedTime += callInterval
               // if got 404, create calls by interval until we get 200 status and resolve,
               axios
-                .head(gameUrl)
+                .head(this.getGameUrl)
                 .then(() => {
                   clearInterval(this.timerId)
                   resolve()
@@ -295,15 +317,15 @@ export default {
       this.isDebugMode = false
       const apiImagesUrl = `${process.env.API_URL}/public/images`
       const assetsUrl = `${process.env.WEBSITE_URL}/skins`
-      const gameUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${this.gameId}.zip`
       // eslint-disable-next-line
-      this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, gameUrl)
+      this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, this.getGameUrl)
       let bots = []
       this.fetchPlayerDataTimerId = setInterval(() => {
         this.bots = bots
       }, 1000)
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
+        this.isGamePlayed = true
         this.gamePlayer.control._toggleDebugMode()
       })
       // eslint-disable-next-line
@@ -373,9 +395,6 @@ export default {
       min-height: 300px;
     }
     .player {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       z-index: 10;
     }
@@ -415,6 +434,33 @@ export default {
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
+  }
+
+  .game-not-found {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .game-image {
+    margin: 0 5px;
+    border: 2px solid $violet;
+    border-radius: 2px;
+    transform: scale(0.98);
+    transition: 0.2s;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  .link {
+    display: inline-block;
+    text-decoration: underline;
+    margin-top: 10px;
+    &:hover {
+      text-decoration: none !important;
+    }
   }
 }
 

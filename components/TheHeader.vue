@@ -51,7 +51,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <div :class="{ profile: isProfilePage }" class="hidden-sm-and-down mr-6">
+      <div :class="{ profile: isProfilePage }" class="hidden-sm-and-down">
         <nuxt-link :to="localePath('games')" class="link">
           {{ $t("header.games") }}
         </nuxt-link>

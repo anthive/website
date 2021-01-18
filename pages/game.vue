@@ -67,16 +67,28 @@
         <h3 v-if="!isDebugMode" class="mt-10 mb-0">
           {{ $t("game.moreGames") }}:
         </h3>
+        <GamesTable v-if="!isDebugMode" :games-limit="5" />
       </template>
 
-      <template v-else>
+      <div v-else class="game-not-found">
         <AntHivePageHeader
           :title="`${$t('game.cantFindGame')} #${gameId}`"
           :tooltip-text="$t('game.gameId')"
         />
-        <h3 class="mt-10 mb-0">{{ $t("game.checkOut") }}:</h3>
-      </template>
-      <GamesTable v-if="!isDebugMode" :games-limit="5" />
+        <h3 class="mt-10 mb-2">{{ $t("game.checkOut") }}:</h3>
+        <div class="games-links">
+          <a :href="`${localePath('game')}?id=NpKu1B1jOwtTqf&v=5.0`">
+            <img class="game-image" src="img/game1.png" alt="game">
+          </a>
+          <a :href="`${localePath('game')}?id=ncdffi2vxJ5JKP&v=5.0`">
+            <img class="game-image" src="img/game2.png" alt="game">
+          </a>
+          <a :href="`${localePath('game')}?id=mNXLxQdA6ulUX5&v=5.0`">
+            <img class="game-image" src="img/game3.png" alt="game">
+          </a>
+        </div>
+        <a :href="localePath('games')" class="link">{{ $t('game.goToGames') }}</a>
+      </div>
     </v-container>
   </section>
 </template>
@@ -133,10 +145,10 @@ export default {
     game: {}
   }),
   watch: {
-    async $route() {
+    $route() {
       this.gamePlayerDestroy()
-      this.game = await getGame(this.$route.query.id)
       this.fetchGame()
+      this.scrollToTop()
     },
     bots(value) {
       if (!value || !value.length) { return }
@@ -150,66 +162,69 @@ export default {
       this.game.bots.sort(this.compare)
     }
   },
-  async mounted() {
-    this.game = await getGame(this.$route.query.id)
+  mounted() {
     this.fetchGame()
   },
   destroyed() {
     this.gamePlayerDestroy()
   },
   methods: {
-    fetchGame() {
-      import(`../static/js/anthive-${process.env.SIM_VERSION}.js`).then(() => {
+    async fetchGame() {
+      try {
         this.gameId = this.$route.query.id || ''
+        this.game = await getGame(this.$route.query.id)
+        this.fetchPlayer()
+      } catch {
+        this.isGameAvailable = false
+        this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
+      }
+    },
+    fetchPlayer() {
+      import(`../static/js/anthive-${process.env.SIM_VERSION}.js`).then(() => {
         const version = this.$route.query.v || ''
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
-        if (this.isGameFound(dataUrl)) {
-          const apiImagesUrl = `${process.env.API_URL}/public/images`
-          const assetsUrl = `${process.env.WEBSITE_URL}/skins`
-          // eslint-disable-next-line
-          this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, dataUrl)
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
-            this.gameLoaded = true
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.END, () => {
-            this.isGameEnd = true
-          })
-          let bots = []
-          this.fetchPlayerDataTimerId = setInterval(() => {
-            this.bots = bots
-          }, 1000)
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
-            bots = data.bots || []
-            if (this.isDebugMode) {
-              this.responses = data.responses
-              this.requests = data.requests
-            }
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
-            this.tooltipContent = data
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
-            this.isDebugMode = data
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
-            this.isGameStoped = true
-            this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
-          })
-          // eslint-disable-next-line
-          this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
-            this.isGameStoped = false
-            this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
-          })
-        } else {
-          this.isGameAvailable = false
-          this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
-        }
+        const apiImagesUrl = `${process.env.API_URL}/public/images`
+        const assetsUrl = `${process.env.WEBSITE_URL}/skins`
+        // eslint-disable-next-line
+        this.gamePlayer = new AnthivePlayer('#player', apiImagesUrl, assetsUrl, dataUrl)
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
+          this.gameLoaded = true
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.END, () => {
+          this.isGameEnd = true
+        })
+        let bots = []
+        this.fetchPlayerDataTimerId = setInterval(() => {
+          this.bots = bots
+        }, 1000)
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.TICK, data => {
+          bots = data.bots || []
+          if (this.isDebugMode) {
+            this.responses = data.responses
+            this.requests = data.requests
+          }
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.TOOLTIP, data => {
+          this.tooltipContent = data
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
+          this.isDebugMode = data
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
+          this.isGameStoped = true
+          this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
+          this.isGameStoped = false
+          this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
+        })
       })
     },
     gameSetTooltipCoords(event) {
@@ -224,17 +239,12 @@ export default {
     },
     gamePlayerDestroy() {
       this.game = {}
+      this.isGameEnd = false
       if (this.gamePlayer) {
         this.bots = []
         this.gamePlayer = this.gamePlayer.clearPlayerState()
       }
       if (this.fetchPlayerDataTimerId) { clearInterval(this.fetchPlayerDataTimerId) }
-    },
-    isGameFound(url) {
-      const request = new XMLHttpRequest()
-      request.open('HEAD', url, false)
-      request.send()
-      return request.status !== 404
     },
     replay() {
       this.gamePlayer.control.frame = 0
@@ -249,6 +259,13 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
+    },
+    scrollToTop() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }
@@ -267,7 +284,7 @@ export default {
   }
 }
 .v-content__wrap {
-  background: #fff;
+  background: $white;
 }
 .player-wrap {
   width: 100%;
@@ -305,6 +322,32 @@ export default {
   .flip-list-leave-to {
     transform: translateX(100px);
     opacity: 0;
+  }
+  .game-not-found {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .game-image {
+    margin: 0 5px;
+    border: 2px solid $violet;
+    border-radius: 2px;
+    transform: scale(0.98);
+    transition: 0.2s;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  .link {
+    display: inline-block;
+    text-decoration: underline;
+    margin-top: 10px;
+    &:hover {
+      text-decoration: none !important;
+    }
   }
 }
 
