@@ -4,21 +4,21 @@
       <div class="for-whom__section">
         <v-img class="for-whom__img" src="/img/for-begginers.svg" />
         <div class="for-whom__text">
-          <h4 class="for-whom__title">{{ $t("home.forWhomBegginerTitle") }}</h4>
+          <h2 class="for-whom__title">{{ $t("home.forWhomBegginerTitle") }}</h2>
           <p>{{ $t("home.forWhomBegginerDescription") }}</p>
         </div>
       </div>
       <div class="for-whom__section">
         <v-img class="for-whom__img for-developers" src="/img/for-developers.svg" />
         <div class="for-whom__text">
-          <h4 class="for-whom__title">{{ $t("home.forWhomDevelopersTitle") }}</h4>
+          <h2 class="for-whom__title">{{ $t("home.forWhomDevelopersTitle") }}</h2>
           <p>{{ $t("home.forWhomDevelopersDescription") }}</p>
         </div>
       </div>
       <div class="for-whom__section">
         <v-img class="for-whom__img for-company" src="/img/for-company.svg" />
         <div class="for-whom__text">
-          <h4 class="for-whom__title">{{ $t("home.forWhomCompanyTitle") }}</h4>
+          <h2 class="for-whom__title">{{ $t("home.forWhomCompanyTitle") }}</h2>
           <p>{{ $t("home.forWhomCompanyDescription") }}</p>
         </div>
       </div>
