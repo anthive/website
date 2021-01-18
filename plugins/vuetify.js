@@ -17,7 +17,7 @@ export default (ctx) => {
           accent: '#9a64ff',
           danger: '#e03e2f',
           success: '#6c5fc7',
-          action: '#ff596c'
+          action: '#d12104'
         }
       }
     }

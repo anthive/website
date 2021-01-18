@@ -13,11 +13,11 @@
     <!-- PP and TOS links -->
     <div col="12" md="3" class="footer__subscribe f-montserrat">
       <span class="mr-2">
-        <nuxt-link class="accent--text ml-1" to="/tos">
+        <nuxt-link class="white--text ml-1" to="/tos">
           {{ $t("footer.termsofService") }}
         </nuxt-link>
         {{ $t("footer.and") }}
-        <nuxt-link class="accent--text" to="/pp">
+        <nuxt-link class="white--text" to="/pp">
           {{ $t("footer.privacyPolicy") }}
         </nuxt-link>
       </span>
@@ -29,7 +29,7 @@
         href="https://github.com/anthive/website/issues"
         target="_blank"
         rel="noreferrer"
-        class="accent--text ml-1"
+        class="white--text ml-1"
       >
         {{ $t("footer.report") }}
       </a>
@@ -81,18 +81,21 @@
 
     <!-- Languagues -->
     <div col="12" md="2" class="footer__locale-select">
-      <v-select
-        v-model="selectedLocale"
-        :items="locales"
-        :menu-props="{ top: true, offsetY: true }"
-        tile
-        dense
-        dark
-        flat
-        item-color="accent"
-        hide-details
-        @input="switchLocale"
-      />
+      <label for="select">
+        <v-select
+          v-model="selectedLocale"
+          :items="locales"
+          :menu-props="{ top: true, offsetY: true }"
+          name="select"
+          tile
+          dense
+          dark
+          flat
+          item-color="accent"
+          hide-details
+          @input="switchLocale"
+        />
+      </label>
       <AntHiveIcon icon="earth" color="white" class="footer__locale-select--earth-icon" />
       <AntHiveIcon icon="chevron-up" color="white" class="footer__locale-select--up-icon" />
     </div>

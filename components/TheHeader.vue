@@ -8,7 +8,12 @@
     <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
-          <img :src="getLogo" class="logo" alt="Logo" >
+          <img
+            :src="getLogo"
+            class="logo"
+            alt="Logo"
+            width="145px"
+            height="165px">
         </router-link>
       </v-toolbar-title>
       <v-spacer />
@@ -70,7 +75,7 @@
           tile
           label
           class="user-chip"
-          color="accent"
+          color="primary"
           pill
           @click="handlerClickGetStarted"
         >
