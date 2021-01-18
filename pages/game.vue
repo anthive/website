@@ -148,6 +148,7 @@ export default {
     $route() {
       this.gamePlayerDestroy()
       this.fetchGame()
+      this.scrollToTop()
     },
     bots(value) {
       if (!value || !value.length) { return }
@@ -257,6 +258,13 @@ export default {
     },
     showActions() {
       this.showActionsState = !this.showActionsState
+    },
+    scrollToTop() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }
