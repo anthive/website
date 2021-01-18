@@ -145,15 +145,9 @@ export default {
     game: {}
   }),
   watch: {
-    async $route() {
-      try {
-        this.gamePlayerDestroy()
-        this.game = await getGame(this.$route.query.id)
-        this.fetchGame()
-      } catch {
-        this.isGameAvailable = false
-        this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
-      }
+    $route() {
+      this.gamePlayerDestroy()
+      this.fetchGame()
     },
     bots(value) {
       if (!value || !value.length) { return }
@@ -167,21 +161,24 @@ export default {
       this.game.bots.sort(this.compare)
     }
   },
-  async mounted() {
-    this.gameId = this.$route.query.id || ''
-    try {
-      this.game = await getGame(this.$route.query.id)
-      this.fetchGame()
-    } catch {
-      this.isGameAvailable = false
-      this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
-    }
+  mounted() {
+    this.fetchGame()
   },
   destroyed() {
     this.gamePlayerDestroy()
   },
   methods: {
-    fetchGame() {
+    async fetchGame() {
+      try {
+        this.gameId = this.$route.query.id || ''
+        this.game = await getGame(this.$route.query.id)
+        this.fetchPlayer()
+      } catch {
+        this.isGameAvailable = false
+        this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
+      }
+    },
+    fetchPlayer() {
       import(`../static/js/anthive-${process.env.SIM_VERSION}.js`).then(() => {
         const version = this.$route.query.v || ''
         const dataUrl = `${process.env.GAMES_STORAGE}/${version}/${this.gameId}.zip`
