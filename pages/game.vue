@@ -239,6 +239,7 @@ export default {
     },
     gamePlayerDestroy() {
       this.game = {}
+      this.isGameEnd = false
       if (this.gamePlayer) {
         this.bots = []
         this.gamePlayer = this.gamePlayer.clearPlayerState()
