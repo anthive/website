@@ -13,7 +13,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <div v-if="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
-                <template>
+                <template v-if="!isGamePlayed">
                   <v-skeleton-loader
                     width="100%"
                     height="450px"
@@ -27,7 +27,7 @@
                     </transition>
                   </div>
                 </template>
-                <div id="player" class="player" />
+                <div v-else id="player" class="player" />
               </div>
               <v-card
                 v-if="isGameStoped && isDebugMode && gameTooltip"
@@ -168,7 +168,8 @@ export default {
     fetchPlayerDataTimerId: null,
     timerId: null,
     isGameRunned: false,
-    isGameAvailable: true
+    isGameAvailable: true,
+    isGamePlayed: false
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -324,6 +325,7 @@ export default {
       }, 1000)
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
+        this.isGamePlayed = true
         this.gamePlayer.control._toggleDebugMode()
       })
       // eslint-disable-next-line
@@ -393,9 +395,6 @@ export default {
       min-height: 300px;
     }
     .player {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       z-index: 10;
     }
