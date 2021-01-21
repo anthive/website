@@ -15,7 +15,6 @@
               <div v-show="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
                 <template v-if="!isGamePlayed">
                   <v-skeleton-loader
-                    ref="skeletonLoader"
                     class="skeleton"
                     tile
                     type="image, image, list-item"
