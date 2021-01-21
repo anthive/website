@@ -82,7 +82,7 @@
       </v-card> -->
 
       <div class="table">
-        <template v-if="!bots">
+        <template v-if="bots">
           <GamesLeaderCard
             v-for="(bot, index) in bots"
             :key="bot.displayName + index"
