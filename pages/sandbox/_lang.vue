@@ -13,7 +13,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <div v-show="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
-                <template v-if="!isGamePlayed">
+                <template v-if="!isGamePlaying">
                   <v-skeleton-loader
                     class="skeleton"
                     tile
@@ -146,7 +146,7 @@ export default {
     timerId: null,
     isGameRunned: false,
     isGameAvailable: true,
-    isGamePlayed: false,
+    isGamePlaying: false,
     isGameInQueue: false
   }),
   computed: {
@@ -228,7 +228,7 @@ export default {
     },
     async getGame() {
       try {
-        this.isGamePlayed = false
+        this.isGamePlaying = false
         this.isGameRunned = true
         await axios.head(this.getGameUrl)
         this.initGame()
@@ -290,7 +290,7 @@ export default {
       }, 1000)
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
-        this.isGamePlayed = true
+        this.isGamePlaying = true
         this.gamePlayer.control._toggleDebugMode()
       })
       // eslint-disable-next-line

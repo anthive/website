@@ -31,12 +31,7 @@ module.exports = {
     SANDBOX_STORAGE: process.env.SANDBOX_STORAGE,
     GAMES_STORAGE: process.env.GAMES_STORAGE,
     LOGS_STORAGE: process.env.LOGS_STORAGE,
-
-    API_KEY: process.env.API_KEY,
-    AUTH_DOMAIN: process.env.AUTH_DOMAIN,
-    DB_URL: process.env.DB_URL,
-    PROJECT_ID: process.env.PROJECT_ID,
-    STORAGE_BUCKET: process.env.STORAGE_BUCKET
+    DB_URL: process.env.DB_URL
   },
   // Doc: https://web.dev/maskable-icon-audit/?utm_source=lighthouse&utm_medium=devtools
   icon: {
