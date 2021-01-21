@@ -189,10 +189,10 @@ $bot-info-width: 140px;
 
 .author-name,
 .time-ago {
-  font-size: $font-medium;
+  font-size: $font-small;
   color: $violet;
   margin: 0;
-  line-height: $font-big;
+  line-height: $font-medium;
 }
 
 .game-info {
@@ -295,7 +295,7 @@ $bot-info-width: 140px;
   left: 10px;
   top: 5px;
   color: $white;
-  font-size: $font-big;
+  font-size: $font-medium;
   font-weight: $font-weight-bold;
 }
 

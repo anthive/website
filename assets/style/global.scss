@@ -1,14 +1,12 @@
 // fonts
-$font-smaller: 10px;
-$font-small: 12px;
-$font-medium: 14px;
-$font-big: 16px;
+$font-small: 14px;
+$font-medium: 16px;
+$font-big: 20px;
 $font-bigger: 24px;
 
-$font-weight-light: 100;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
-$font-weight-bolder: 900;
+$font-weight-bolder: 700;
 
 // colors
 $black: #000000;
@@ -37,3 +35,4 @@ $box-shadow-selected: 0px 3px 9px -2px $violet-light, 0px 2px 8px 0px $violet-li
 
 // gradients
 $user-background-gradient: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 39%, rgba(0, 0, 0, 0.33) 81%);
+$horizontal-background-gradient: linear-gradient(270deg, rgba(0, 0, 0, 0.3) 0%, rgba(255, 255, 255, 0) 84%);

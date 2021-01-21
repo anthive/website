@@ -23,7 +23,7 @@
             tile
             size="30"
           ><v-img
-            :src="getAvatar(bot.userAvatar, 200)"
+            :src="getAvatar(bot.userAvatar, 60)"
           /></v-avatar>
         </nuxt-link>
         <div class="information-container">
@@ -151,7 +151,7 @@ export default {
   }
 
   .name {
-    font-size: $font-big;
+    font-size: $font-medium;
     margin-bottom: 12px;
     .display-name {
       margin-right: 6px;
@@ -186,7 +186,7 @@ export default {
     .statistic {
       color: $violet;
       margin-bottom: 5px;
-      font-size: $font-medium;
+      font-size: $font-small;
       display: flex;
       justify-content: space-between;
       @media (min-width: $screen-md) and (max-width: $screen-lg) {
@@ -215,7 +215,7 @@ export default {
 
     .information-user {
       cursor: pointer;
-      font-size: $font-medium;
+      font-size: $font-small;
       color: $white;
       position: absolute;
       right: 0;
