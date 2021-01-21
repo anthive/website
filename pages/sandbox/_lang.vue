@@ -27,7 +27,7 @@
                     </transition>
                   </div>
                 </template>
-                <div v-else id="player" class="player" />
+                <div id="player" class="player" />
               </div>
               <v-card
                 v-if="isGameStoped && isDebugMode && gameTooltip"
