@@ -99,6 +99,8 @@
             :is-game-stoped="isGameStoped"
             :requests="requests"
             :responses="responses"
+            :sim-logs="simLogs"
+            :sandbox-bot-logs="botLogs"
             :bots="bots" />
         </div>
         <div v-else class="pa-3 game-not-found">
