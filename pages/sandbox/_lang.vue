@@ -63,31 +63,6 @@
                   <span v-else> {{ $t("sandbox.loginToSave") }}</span>
                 </AntHiveButton>
               </div>
-
-              <div v-if="!isDebugMode && simLogs && botLogs">
-                <v-tabs v-model="tab" background-color="grey darken-2" dark>
-                  <v-tab @click="handlerClickLogs('bot')"> {{ $t("sandbox.bot") }} </v-tab>
-                  <v-tab @click="handlerClickLogs('sim')"> {{ $t("sandbox.sim") }} </v-tab>
-                </v-tabs>
-
-                <v-tabs-items v-model="tab">
-                  <v-tab-item>
-                    <v-card class="sandbox__content-logs-wrap" flat>
-                      <v-card-text>
-                        <pre>{{ botLogs }}</pre>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-
-                  <v-tab-item>
-                    <v-card class="sandbox__content-logs-wrap" flat>
-                      <v-card-text>
-                        <pre>{{ simLogs }}</pre>
-                      </v-card-text>
-                    </v-card>
-                  </v-tab-item>
-                </v-tabs-items>
-              </div>
               <div v-if="!isDebugMode && !simLogs && !botLogs">
                 <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
                 <p v-html="getHelpElement" />
@@ -128,6 +103,7 @@
 import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
+import Fire from '@/plugins/firebase'
 import langs from '@/static/langs/data.json'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
@@ -170,7 +146,8 @@ export default {
     timerId: null,
     isGameRunned: false,
     isGameAvailable: true,
-    isGamePlayed: false
+    isGamePlayed: false,
+    isGameInQueue: false
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -208,7 +185,7 @@ export default {
       this.showLoadingText()
       try {
         await axios.get(this.getGameUrl)
-        await this.getGame()
+        this.isGameRunned = true
         this.initGame()
         this.initLogs()
       } catch {
@@ -241,72 +218,59 @@ export default {
       }, 3000)
     },
     async onClickRun() {
-      this.isGameRunned = true
       if (this.gamePlayer) { this.gamePlayerDestroy() }
       this.savedCode = this.valueCode.value
       this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
 
       this.gameId = md5(this.savedCode)
+      this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
+      await this.getGame()
+    },
+    async getGame() {
       try {
+        this.isGamePlayed = false
+        this.isGameRunned = true
         await axios.head(this.getGameUrl)
         this.initGame()
         this.initLogs()
-        this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
       } catch {
         this.loading = true
         this.showLoadingText()
+        await this.sendCodeToSim()
+
         if (this.gamePlayer && this.gamePlayer.control) {
           this.gamePlayer.control.stop()
         }
         this.botLogs = this.simLogs = 'Loading...'
 
-        try {
-          await this.sendCodeToSim()
-          await this.getGame()
-          this.initGame()
-          this.initLogs()
-        } catch (error) {
-          this.botLogs = this.simLogs = error
-        } finally {
-          this.loading = false
-          this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
-        }
+        const sandboxRef = Fire.database().ref('sandbox')
+        sandboxRef.on('value', async(snapshot) => {
+          const games = snapshot.val() ? Object.values(snapshot.val()) : []
+          const hasGame = games.findIndex(game => game.sum === this.gameId) !== -1
+
+          if (this.isGameInQueue && !hasGame) {
+            this.loading = false
+            sandboxRef.off()
+
+            const isGameExist = await axios.head(this.getGameUrl)
+            if (!isGameExist) {
+              // TODO: Handle this error
+              return
+            }
+
+            this.initGame()
+            this.initLogs()
+            return
+          }
+
+          this.isGameInQueue = hasGame
+        })
       }
     },
     onClickLogin() {
       this.$gtag('event', 'Get started Sandbox', { event_category: 'getstarted', event_label: 'sandbox' })
       const createBotUrl = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
       window.location.href = createBotUrl
-    },
-    async getGame() {
-      return await new Promise((resolve, reject) => {
-        axios
-          .head(this.getGameUrl)
-          // if got the game, then we resolve
-          .then(resolve)
-          .catch(() => {
-            const maxTime = 60000
-            const callInterval = 5000
-            let passedTime = 0
-
-            this.timerId = setInterval(() => {
-              passedTime += callInterval
-              // if got 404, create calls by interval until we get 200 status and resolve,
-              axios
-                .head(this.getGameUrl)
-                .then(() => {
-                  clearInterval(this.timerId)
-                  resolve()
-                })
-                .catch(e => e)
-              // or overcome the maximum interval, then reject
-              if (passedTime >= maxTime) {
-                clearInterval(this.timerId)
-                reject(new Error('Please try again later'))
-              }
-            }, callInterval)
-          })
-      })
     },
     async sendCodeToSim() {
       const url = `${process.env.API_URL}/public/sandbox/${this.valueCode.extention}/${this.gameId}`

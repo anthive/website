@@ -108,9 +108,6 @@ export default {
       return []
     }
   },
-  mounted() {
-    console.log(this.simLogs, this.sandboxBotLogs)
-  },
   methods: {
     getResponseRequest(bot, type) {
       if (this[type] && this[type].length) {
