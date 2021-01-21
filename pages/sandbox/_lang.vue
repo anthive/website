@@ -12,11 +12,11 @@
               <editor :value-code.sync="valueCode" />
             </v-col>
             <v-col cols="12" md="6">
-              <div v-if="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
+              <div v-show="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
                 <template v-if="!isGamePlayed">
                   <v-skeleton-loader
-                    width="100%"
-                    height="450px"
+                    ref="skeletonLoader"
+                    class="skeleton"
                     tile
                     type="image, image, list-item"
                   />
@@ -382,6 +382,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
+.skeleton {
+  width: 100%;
+  height: Calc(100% * 9 / 16);
+}
+
 .sandbox {
   overflow: hidden;
   height: 100%;
