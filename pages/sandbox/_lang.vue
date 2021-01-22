@@ -145,8 +145,7 @@ export default {
     fetchPlayerDataTimerId: null,
     timerId: null,
     isGameRunned: false,
-    isGameAvailable: true,
-    isGameInQueue: false
+    isGameAvailable: true
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -241,12 +240,14 @@ export default {
         }
         this.botLogs = this.simLogs = 'Loading...'
 
+        let isGameWasInQueue = false
         const sandboxRef = Fire.database().ref('sandbox')
         sandboxRef.on('value', async(snapshot) => {
-          const games = snapshot.val() ? Object.values(snapshot.val()) : []
-          const hasGame = games.findIndex(game => game.sum === this.gameId) !== -1
+          const snapshotValue = snapshot.val()
+          const gamesInQueue = snapshotValue ? Object.values(snapshotValue) : []
+          const isGameStillInQueue = gamesInQueue.findIndex(game => game.sum === this.gameId) !== -1
 
-          if (this.isGameInQueue && !hasGame) {
+          if (isGameWasInQueue && !isGameStillInQueue) {
             this.loading = false
             sandboxRef.off()
 
@@ -261,7 +262,7 @@ export default {
             return
           }
 
-          this.isGameInQueue = hasGame
+          isGameWasInQueue = isGameStillInQueue
         })
       }
     },
