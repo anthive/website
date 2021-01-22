@@ -13,11 +13,11 @@
             </v-col>
             <v-col cols="12" md="6">
               <div v-show="isGameRunned" :class="{ disable: loading }" class="sandbox__player">
-                <template v-if="!isGamePlaying">
+                <template>
                   <v-skeleton-loader
                     class="skeleton"
                     tile
-                    type="image, image, list-item"
+                    type="image, image, image"
                   />
                   <div class="sandbox__loading-text">
                     <h4>{{ $t("sandbox.loading") }}</h4>
@@ -146,7 +146,6 @@ export default {
     timerId: null,
     isGameRunned: false,
     isGameAvailable: true,
-    isGamePlaying: false,
     isGameInQueue: false
   }),
   computed: {
@@ -228,7 +227,6 @@ export default {
     },
     async getGame() {
       try {
-        this.isGamePlaying = false
         this.isGameRunned = true
         await axios.head(this.getGameUrl)
         this.initGame()
@@ -290,7 +288,6 @@ export default {
       }, 1000)
       // eslint-disable-next-line
       this.gamePlayer.on(AnthivePlayer.event.READY, async () => {
-        this.isGamePlaying = true
         this.gamePlayer.control._toggleDebugMode()
       })
       // eslint-disable-next-line
@@ -349,7 +346,7 @@ export default {
 @import '@/assets/style/global.scss';
 .skeleton {
   width: 100%;
-  height: Calc(100% * 9 / 16);
+  height: Calc(100vw * 1 / 3.7);
 }
 
 .sandbox {
@@ -365,7 +362,9 @@ export default {
       min-height: 300px;
     }
     .player {
+      top:0;
       width: 100%;
+      position: absolute;
       z-index: 10;
     }
   }
