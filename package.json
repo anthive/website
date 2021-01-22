@@ -32,7 +32,8 @@
     "vue-countup-v2": "^4.0.0",
     "vue-google-charts": "^0.3.3",
     "vue-resource": "^1.5.1",
-    "vuetify": "^2.3.2"
+    "vuetify": "^2.3.2",
+    "firebase": "^7.24.0"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

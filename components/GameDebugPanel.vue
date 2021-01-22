@@ -2,6 +2,8 @@
   <div class="debug-panel">
     <v-tabs v-model="tab" background-color="primary" dark>
       <v-tabs-slider />
+      <v-tab v-if="simLogs" class="tab">Sim Logs</v-tab>
+      <v-tab v-if="sandboxBotLogs" class="tab">Bot Logs</v-tab>
       <v-tab
         v-for="(bot, index) in getBots"
         :key="index"
@@ -19,6 +21,17 @@
 
     <v-tabs-items v-model="tab">
       <div v-for="(bot, index) in getBots" :key="index + 10">
+        <v-tab-item v-if="simLogs" :transition="false" :reverse-transition="false">
+          <div class="tab-text">
+            <pre>{{ simLogs }}</pre>
+          </div>
+        </v-tab-item>
+
+        <v-tab-item v-if="sandboxBotLogs" :transition="false" :reverse-transition="false">
+          <div class="tab-text">
+            <pre>{{ sandboxBotLogs }}</pre>
+          </div>
+        </v-tab-item>
         <v-tab-item :transition="false" :reverse-transition="false">
           <div class="d-flex">
             <div class="tab-content">
@@ -65,7 +78,15 @@ export default {
     requests: { type: Array, required: true },
     responses: { type: Array, required: true },
     bots: { type: Array, required: true },
-    isGameStoped: { type: Boolean, default: false }
+    isGameStoped: { type: Boolean, default: false },
+    simLogs: {
+      type: String,
+      default: ''
+    },
+    sandboxBotLogs: {
+      type: String,
+      default: ''
+    }
   },
   data: () => ({
     tab: 0
@@ -160,7 +181,7 @@ export default {
     padding-left: 10px;
   }
   .tab-text {
-    margin: 10px;
+    padding: 10px;
   }
   .avatar {
     border: 1px solid white;
