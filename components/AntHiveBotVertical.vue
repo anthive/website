@@ -173,7 +173,7 @@ export default {
 
     .user-info {
       cursor: pointer;
-      font-size: $font-medium;
+      font-size: $font-small;
       color: $white;
       margin: 0 auto 30px;
     }
@@ -193,7 +193,7 @@ export default {
 
     p {
       margin-bottom: 4px;
-      font-size: $font-medium;
+      font-size: $font-small;
     }
 
     .value {

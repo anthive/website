@@ -218,7 +218,7 @@ export default {
 .social-share {
   margin-top: 10%;
   text-align: center;
-  font-size: $font-big;
+  font-size: $font-medium;
 }
 
 .share-button {

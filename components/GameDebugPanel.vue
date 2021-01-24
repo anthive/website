@@ -146,7 +146,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .debug-panel {
-  font-size: $font-medium;
+  font-size: $font-small;
   &.v-tabs-slider-wrapper {
     display: none;
   }
@@ -174,7 +174,7 @@ export default {
     }
   }
   .tab-title {
-    font-size: $font-big;
+    font-size: $font-medium;
     font-weight: 600;
     background-color: $violet-light;
     color: $violet;

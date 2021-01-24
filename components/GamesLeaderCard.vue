@@ -1,67 +1,130 @@
 <template>
-  <div class="px-3">
-    <v-row class="leader-card">
+  <v-row class="leader-card">
+    <v-col
+      cols="12"
+      sm="1"
+      class="text-center">
       <!-- TOP 3 -->
-      <v-col cols="2" sm="1" class="leader-card__places">
-        <img
-          v-if="place === 1"
-          class="filter__lang-icon ml-n3"
-          width="73px"
-          src="/img/leaderboard-top1.svg"
-          alt="Leaderboard TOP1"
-        >
-        <img
-          v-else-if="place === 2"
-          class="filter__lang-icon"
-          width="50px"
-          src="/img/leaderboard-top2.svg"
-          alt="Leaderboard TOP2"
-        >
-        <img
-          v-else-if="place === 3"
-          class="filter__lang-icon"
-          width="50px"
-          src="/img/leaderboard-top3.svg"
-          alt="Leaderboard TOP3"
-        >
-        <span v-else class="leader-card__place-text">{{ place }}</span>
-      </v-col>
+      <span v-if="place === 1" class="place">{{ place }}</span>
+      <span v-else-if="place === 2" class="place">{{ place }}</span>
+      <span v-else-if="place === 3" class="place">{{ place }}</span>
 
-      <v-col cols="12" sm="11">
-        <v-card tile>
-          <v-row>
-            <v-col cols="12" sm="7">
+      <span v-else class="place">{{ place }}</span>
+    </v-col>
+
+    <v-col cols="12" sm="11" class="py-0">
+      <v-card tile>
+        <div class="d-flex">
+          <div class="avatar">
+            <v-avatar
+              tile
+              width="120px"
+              height="100%"
+              class="avatar">
+              <v-img :src="getAvatar(leader.avatar, 240)" />
+            </v-avatar>
+            <v-avatar tile size="40" class="lang-img">
+              <v-img :src="getLangImg(leader.lang)" />
+            </v-avatar>
+          </div>
+          <div class="information">
+            <div>
+              {{ leader.displayName }}
+              <span class="version">v.{{ leader.v }}</span>
+            </div>
+            <nuxt-link :to="localePath(`/users/${leader.username}`)" class="information-user">
+              {{ $t("game.by") }} {{ leader.username }}
+              <v-avatar class="ml-1" tile size="30">
+                <v-img :src="getAvatar(leader.userAvatar, 60)" />
+              </v-avatar>
+            </nuxt-link>
+            <div class="statistic">
               <div>
-                <div class="leader-card__avatar-name">
-                  <v-avatar tile size="65" class="leader-card__avatar">
-                    <v-img :src="getAvatar(leader.avatar, 100)" />
-                  </v-avatar>
-                  <span class="leader-card__name">
-                    {{ leader.displayName }}
-                    <span class="leader-card__version">v.{{ leader.v }}</span>
-                    <v-avatar tile size="20" class="ml-2">
-                      <v-img :src="getLangImg(leader.lang)" />
-                    </v-avatar>
-                  </span>
-                </div>
+                <AntHiveIcon
+                  icon="challange"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.mmr }}
               </div>
-            </v-col>
-            <v-col cols="3" sm="3" class="leader-card__score">
-              <div>{{ leader.mmr }}</div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+              <div>
+                <AntHiveIcon
+                  icon="trophy"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.wins }}
+              </div>
+              <div>
+                <AntHiveIcon
+                  icon="trophy-broken"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.loses }}
+              </div>
+              <div>
+                <AntHiveIcon
+                  icon="trophy-award"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.score }}
+              </div>
+              <div>
+                <AntHiveIcon
+                  icon="timer"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.art }}ms
+              </div>
+              <div>
+                <AntHiveIcon
+                  icon="alert"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.errors }}%
+              </div>
+              <div class="gradient-layout" />
+              <AntHiveButton
+                class="button"
+                tile
+                color="primary"
+                @click="goToChallangePage(leader.id)"
+              >
+                <AntHiveIcon
+                  icon="challange"
+                  class="mx-1"
+                  small
+                  color="white" />
+                {{ $t("userInfo.challangeMe") }}
+              </AntHiveButton>
+            </div>
+          </div>
+        </div>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 import langs from '../static/langs/data.json'
 import Image from '@/mixins/image'
+import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
   name: 'GamesLeaderCard',
+  components: {
+    AntHiveIcon
+  },
   mixins: [Image],
   props: {
     leader: { type: Object, required: true },
@@ -71,6 +134,10 @@ export default {
     getLangImg(lang) {
       const currentLang = langs.find(l => l.id === lang)
       return currentLang.img
+    },
+    goToChallangePage(id) {
+      const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${id}`
+      window.location.href = challangeUrl
     }
   }
 }
@@ -88,54 +155,90 @@ export default {
   box-sizing: border-box;
   margin-bottom: -1px;
 
-  &__place-icon {
-    width: 36px;
-  }
-
-  &__place-text {
-    font-size: 22px;
-    font-weight: 500;
+  .place {
+    font-size: $font-bigger;
+    font-weight: $font-weight-bold;
     color: $violet;
-    border: 2px solid $violet;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: block;
-    text-align: center;
-    padding-top: 2px;
   }
 
-  &__avatar-name {
-    display: flex;
-    padding-left: 20px;
+  .avatar {
+    position: relative;
   }
 
-  &__name {
-    font-weight: 500;
-    margin-left: 20px;
-    line-height: 60px;
+  .lang-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $white;
+    border-right: 2px solid $white;
+    border-bottom: 2px solid $white;
   }
 
-  &__version {
+  .information {
+    width: 100%;
+    position: relative;
+    padding: 20px 20px 20px 40px;
     color: $violet;
-    font-weight: 400;
+    font-size: $font-medium;
+    font-weight: $font-weight-bold;
+  }
+
+  .information-user {
+    cursor: pointer;
     font-size: $font-small;
+    color: $violet-light;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
-  &__score {
-    text-align: center;
-    line-height: 64px;
+  .statistic {
+    margin-top: 10px;
+    line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .version {
+    padding-left: 5px;
+    color: $violet-light;
+    font-weight: $font-weight-normal;
+    font-size: $font-medium;
+  }
+
+  .gradient-layout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: $black;
+    background: $horizontal-background-gradient;
+    opacity: 0;
+    transition: all 0.4s;
+    pointer-events: none;
+  }
+
+  .button {
+    opacity: 0;
+    transition: all 0.4s;
+    letter-spacing: 0;
+  }
+
+  &:hover .button,
+  &:hover .gradient-layout {
+    opacity: 1;
   }
 }
 @media screen and (max-width: $screen-md) {
   .leader-card {
-    &__score {
+    .score {
       text-align: center;
     }
-    &__avatar-name {
+    .avatar-name {
       padding-left: 0;
     }
-    &__name {
+    .name {
       line-height: normal;
       padding-top: 12px;
     }

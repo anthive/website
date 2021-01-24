@@ -35,16 +35,14 @@
     </v-card> -->
   <section class="leaderboard page-wrap">
     <v-container>
-      <div class="leaderboard__header header">
-        <div class="header__img-wrap">
-          <!-- <v-img src="/img/leaderboard-title-icon.svg" /> -->
-          <!-- TODO: dynamic -->
+      <div class="header">
+        <!-- <div class="header__img-wrap">
+          <v-img src="/img/leaderboard-title-icon.svg" />
           <div class="header__lang">C++</div>
-        </div>
+        </div> -->
         <AntHivePageHeader
           :title="$t('leaderboard.title')"
           :tooltip-text="$t('leaderboard.description')"
-          subtitle="World"
         />
       </div>
 
@@ -83,37 +81,7 @@
         </v-row>
       </v-card> -->
 
-      <div class="leaderboard__table">
-        <v-row class="leaderboard__table-head">
-          <v-col
-            v-for="(column, index) in columns"
-            :key="index"
-            cols="6"
-            sm="4"
-            class="leaderboard__table-score"
-          >
-            <div class="leaderboard__table-score-title">{{ $t(`leaderboard.${column.text}`) }}
-              <div class="header__info">
-                <v-tooltip
-                  right
-                  nudge-left
-                  color="accent"
-                  content-class="b-radius-0">
-                  <template v-slot:activator="{ on }">
-                    <div v-on="on">
-                      <AntHiveIcon
-                        icon="alert-circle"
-                        class="ml-1"
-                        small
-                        color="#4c377f" />
-                    </div>
-                  </template>
-                  {{ $t(`leaderboard.${column.description}`) }}
-                </v-tooltip>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
+      <div class="table">
         <template v-if="bots">
           <GamesLeaderCard
             v-for="(bot, index) in bots"
@@ -129,8 +97,8 @@
           :key="skeleton + 'skeleton'"
           tile
           width="100%"
-          height="90px"
-          class="ma-5"
+          height="120px"
+          class="skeleton"
           elevation="2"
           type="list-item-avatar-three-line"
         />
@@ -217,6 +185,7 @@ export default {
   padding: 40px 0;
   .header {
     display: flex;
+    margin-bottom: 38px;
     &__img-wrap {
       position: relative;
       max-width: 50px;
@@ -272,7 +241,7 @@ export default {
   &__card {
     padding: 0 10px 10px;
   }
-  &__table {
+  .table {
     margin: 0 auto;
   }
   &__table-head {
@@ -308,6 +277,10 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+  }
+  .skeleton {
+    background-color: $white;
+    padding-top: 20px;
   }
 }
 
