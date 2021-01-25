@@ -107,7 +107,7 @@ import { getGame } from '@/services/Game'
 export default {
   head() {
     return {
-      title: this.$t('game.meta.title'),
+      title: `${this.$t('game.meta.title')} #${this.gameId}`,
       meta: [
         {
           name: 'description',

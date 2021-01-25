@@ -48,7 +48,7 @@
 
   "games": {
     "meta": {
-      "title": "Games - AntHive.IO",
+      "title": "AntHive.IO - Games",
       "description": "Explore, watch, replay, learn strategies!"
     },
     "title1": "Games",
@@ -72,7 +72,7 @@
 
   "game": {
     "meta": {
-      "title": "Game - AntHive.IO",
+      "title": "AntHive.IO - Game",
       "description": "Explore, watch, replay, learn strategies!"
     },
     "loading": "Loading...",
@@ -105,7 +105,7 @@
 
   "leaderboard": {
     "meta": {
-      "title": "Leaderboard - AntHive.IO",
+      "title": "AntHive.IO - Leaderboard",
       "description": "The most skillful AntHive players"
     },
     "title": "Leaderboard",
@@ -128,7 +128,7 @@
 
   "userInfo": {
     "meta": {
-      "description": "User Profile - AntHive.IO"
+      "description": "AntHive.IO - User Profile"
     },
     "games": "Games",
     "wins": "Wins",
@@ -157,7 +157,7 @@
 
   "sandbox": {
     "meta": {
-      "title": "Sandbox - AntHive.IO",
+      "title": "AntHive.IO - Sandbox",
       "description": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants"
     },
     "loading": "Loading",
@@ -181,20 +181,20 @@
 
   "rules": {
     "meta": {
-      "title": "Rules - AntHive.IO",
+      "title": "AntHive.IO - Rules",
       "description": "Terminology and how AntHive works"
     }
   },
 
   "pp": {
     "meta": {
-      "title": "Privacy policy - AntHive.IO"
+      "title": "AntHive.IO - Privacy policy"
     }
   },
 
   "tos": {
     "meta": {
-      "title": "Terms of Service - AntHive.IO"
+      "title": "AntHive.IO - Terms of Service"
     }
   }
 }

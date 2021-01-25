@@ -111,7 +111,7 @@ import GameDebugPanel from '@/components/GameDebugPanel'
 export default {
   head() {
     return {
-      title: this.$t('sandbox.meta.title'),
+      title: `${this.$t('sandbox.meta.title')} - ${this.currentLangName}`,
       meta: [
         {
           name: 'description',
@@ -149,6 +149,12 @@ export default {
   }),
   computed: {
     ...mapGetters(['getUser']),
+    currentLangName() {
+      const currentLang = this.getAllLangs.find((lang) => {
+        return lang.extention === this.$route.params.lang
+      })
+      return currentLang.name
+    },
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
     },

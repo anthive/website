@@ -22,6 +22,8 @@ const dynamicRoutes = () => {
   })
 }
 
+const isProd = process.env.WEBSITE_URL === 'https://anthhive.io'
+
 module.exports = {
   env: {
     SIM_VERSION: process.env.SIM_VERSION,
@@ -143,7 +145,11 @@ module.exports = {
     '@nuxtjs/axios',
     'nuxt-clipboard2',
     '@forked-prs/nuxt-infinite-scroll-module',
-    ['@nuxtjs/google-gtag', { id: 'G-WW02YZ0TV0' }],
+    ['@nuxtjs/google-gtag', {
+      id: 'G-WW02YZ0TV0',
+      config: { traffic_type: isProd ? 'external' : 'internal' }
+    }
+    ],
     [
       'nuxt-i18n',
       {
