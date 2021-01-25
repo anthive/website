@@ -13,70 +13,65 @@
     <!-- PP and TOS links -->
     <div col="12" md="3" class="footer__subscribe f-montserrat">
       <span class="mr-2">
-        <nuxt-link class="white--text ml-1" to="/tos">
+        <span class="white--text ml-1 link" @click="handlerClickTerms">
           {{ $t("footer.termsofService") }}
-        </nuxt-link>
+        </span>
         {{ $t("footer.and") }}
-        <nuxt-link class="white--text" to="/pp">
+        <span class="white--text link" @click="handlerClickPolicy">
           {{ $t("footer.privacyPolicy") }}
-        </nuxt-link>
+        </span>
       </span>
     </div>
 
     <!-- Report issue -->
     <div col="12" md="3" class="footer__issue f-montserrat">
-      <a
+      <span
         href="https://github.com/anthive/website/issues"
         target="_blank"
         rel="noreferrer"
-        class="white--text ml-1"
+        class="white--text ml-1 link"
       >
         {{ $t("footer.report") }}
-      </a>
+      </span>
     </div>
 
     <!-- Social networks icons -->
     <div col="12" md="2" class="footer__social">
-      <a
-        href="https://twitter.com/anthiveio"
+      <span
         title="Our Twitter page"
-        rel="noreferrer"
-        target="_blank"
+        class="link"
+        @click="handlerClickSocial('https://twitter.com/anthiveio', 'Twitter')"
       >
         <AntHiveIcon icon="twitter" color="white" class="footer__social--icon" />
-      </a>
-      <a
-        href="https://www.instagram.com/anthiveio/"
+      </span>
+      <span
         title="Our Instagram accoutn"
-        rel="noreferrer"
-        target="_blank"
+        class="link"
+        @click="handlerClickSocial('https://www.instagram.com/anthiveio', 'Instagram')"
       >
         <AntHiveIcon icon="instagram" color="white" class="footer__social--icon" />
-      </a>
-      <a
-        href="https://www.youtube.com/channel/UCP9SHUqnSdGEiEHbqIudMxw"
+      </span>
+      <span
         title="Our Youtube channel"
-        rel="noreferrer"
-        target="_blank"
+        class="link"
+        @click="handlerClickSocial('https://www.youtube.com/channel/UCP9SHUqnSdGEiEHbqIudMxw', 'Youtube')"
       >
         <AntHiveIcon icon="youtube" color="white" class="footer__social--icon" />
-      </a>
-      <a
-        href="https://www.twitch.tv/anthiveio"
+      </span>
+      <span
         title="Our Twitch accoutn"
-        rel="noreferrer"
-        target="_blank"
+        class="link"
+        @click="handlerClickSocial('https://www.twitch.tv/anthiveio', 'Twitch')"
       >
         <AntHiveIcon icon="twitch" color="white" class="footer__social--icon" />
-      </a>
-      <a
-        href="https://discord.gg/3Z7KvYv"
+      </span>
+      <span
         title="Our Discord channel"
-        rel="noreferrer"
-        target="_blank"
+        class="link"
+        @click="handlerClickSocial('https://discord.gg/3Z7KvYv', 'Discrod')"
       >
         <AntHiveIcon icon="discord" color="white" class="footer__social--icon" />
-      </a>
+      </span>
     </div>
 
     <!-- Languagues -->
@@ -129,7 +124,24 @@ export default {
           localeParam = 'ru'
           break
       }
+      this.$gtag('event', `Change locale to ${locale}`, { event_category: 'locale', event_label: 'footer' })
       this.$router.push(this.switchLocalePath(localeParam))
+    },
+    handlerClickTerms() {
+      this.$gtag('event', 'Go to Terms page', { event_category: 'terms', event_label: 'footer' })
+      this.$router.push(this.localePath('tos'))
+    },
+    handlerClickPolicy() {
+      this.$gtag('event', 'Go to Policy page', { event_category: 'policy', event_label: 'footer' })
+      this.$router.push(this.localePath('pp'))
+    },
+    handlerClickReportIssue() {
+      this.$gtag('event', 'Go to Policy page', { event_category: 'policy', event_label: 'footer' })
+      this.$router.push(this.localePath('pp'))
+    },
+    handlerClickSocial(link, socialName) {
+      this.$gtag('event', `Go to ${socialName}`, { event_category: 'socials', event_label: 'footer' })
+      window.open(link, '_blank', 'noreferrer')
     }
   }
 }
@@ -189,6 +201,9 @@ export default {
     @media screen and (max-width: $screen-lg) {
       margin: 3px 0;
     }
+  }
+  .link {
+    cursor: pointer;
   }
 }
 </style>

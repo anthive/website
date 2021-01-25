@@ -111,7 +111,7 @@ import GameDebugPanel from '@/components/GameDebugPanel'
 export default {
   head() {
     return {
-      title: `${this.$t('sandbox.meta.title')} - ${this.currentLangName}`,
+      title: `${this.$t('sandbox.meta.title')}:${this.currentLangName}`,
       meta: [
         {
           name: 'description',

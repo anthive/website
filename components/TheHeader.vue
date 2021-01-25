@@ -7,14 +7,14 @@
   >
     <v-container class="d-flex align-center pt-8">
       <v-toolbar-title>
-        <router-link :to="localePath('index')">
-          <img
-            :src="getLogo"
-            class="logo"
-            alt="Logo"
-            width="145px"
-            height="165px">
-        </router-link>
+        <img
+          :src="getLogo"
+          class="logo"
+          alt="Logo"
+          width="145px"
+          height="165px"
+          @click="handlerClickMenuItem('index')"
+        >
       </v-toolbar-title>
       <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
@@ -25,24 +25,24 @@
           </v-btn>
         </template>
         <v-list class="hidden-md-and-up pa-2">
-          <v-list-item :to="localePath('games')">
+          <v-list-item @click="handlerClickMenuItem('games')">
             <v-list-item-content>
               <v-list-item-title>{{ $t("header.games") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="localePath('leaderboard')">
+          <v-list-item @click="handlerClickMenuItem('leaderboard')">
             <v-list-item-content>
               <v-list-item-title>
                 {{ $t("header.leaderboard") }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="localePath('rules')">
+          <v-list-item @click="handlerClickMenuItem('rules')">
             <v-list-item-content>
               <v-list-item-title>{{ $t("header.rules") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="localePath('sandbox')">
+          <v-list-item @click="handlerClickMenuItem('sandbox')">
             <v-list-item-content>
               <v-list-item-title>{{ $t("header.sandbox") }}</v-list-item-title>
             </v-list-item-content>
@@ -57,18 +57,18 @@
         </v-list>
       </v-menu>
       <div :class="{ profile: isProfilePage }" class="hidden-sm-and-down">
-        <nuxt-link :to="localePath('games')" class="link">
+        <span class="link" @click="handlerClickMenuItem('games')">
           {{ $t("header.games") }}
-        </nuxt-link>
-        <nuxt-link :to="localePath('leaderboard')" class="link">
+        </span>
+        <span class="link" @click="handlerClickMenuItem('leaderboard')">
           {{ $t("header.leaderboard") }}
-        </nuxt-link>
-        <nuxt-link :to="localePath('rules')" class="link">
+        </span>
+        <span class="link" @click="handlerClickMenuItem('rules')">
           {{ $t("header.rules") }}
-        </nuxt-link>
-        <nuxt-link :to="`${localePath('sandbox')}/js`" class="link">
+        </span>
+        <span class="link" @click="handlerClickMenuItem('sandbox')">
           {{ $t("header.sandbox") }}
-        </nuxt-link>
+        </span>
 
         <v-chip
           v-show="getUser"
@@ -108,9 +108,11 @@ export default {
   components: {
     AntHiveIcon
   },
-  data: () => ({
-    profileUrl: process.env.PROFILE_URL
-  }),
+  data() {
+    return {
+      profileUrl: process.env.PROFILE_URL
+    }
+  },
   computed: {
     ...mapGetters(['getUser']),
     getUserAvatar() {
@@ -126,10 +128,18 @@ export default {
       return this.isProfilePage ? '/img/anthive_logo.svg' : '/img/anthive_logo_dark.svg'
     }
   },
+  mounted() {
+    const eventCategory = this.getUser ? 'logened_user' : 'not_logened_user'
+    this.$gtag('event', 'Home page visit', { event_category: eventCategory, event_label: 'home_page' })
+  },
   methods: {
     handlerClickGetStarted() {
-      this.$gtag('event', 'Get started Header', { event_category: 'getstarted', event_label: 'header' })
+      this.$gtag('event', 'Get started Header', { event_category: 'get_started', event_label: 'header' })
       window.location.href = this.profileUrl
+    },
+    handlerClickMenuItem(itemName) {
+      this.$gtag('event', `Go to ${itemName} page`, { event_category: itemName, event_label: 'header' })
+      this.$router.push(this.localePath(itemName))
     }
   }
 }
@@ -142,6 +152,7 @@ export default {
   background: transparent !important;
 
   .logo {
+    cursor: pointer;
     width: 144px;
     padding-top: 16px;
   }
@@ -153,7 +164,9 @@ export default {
   .link {
     padding: 10px;
     margin: 0 15px;
-    font-weight: 500;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    color: $violet;
 
     &:hover {
       text-decoration: none !important;
