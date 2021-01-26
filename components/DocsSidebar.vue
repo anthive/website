@@ -72,7 +72,8 @@ export default {
     width: 100% !important;
   }
   .v-list-item__icon {
-    display: none;
+    position: absolute;
+    content: 'okok';
   }
   .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
     color: $violet !important;
