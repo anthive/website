@@ -150,10 +150,10 @@ export default {
   computed: {
     ...mapGetters(['getUser']),
     currentLangName() {
-      const currentLang = this.getAllLangs.find((lang) => {
+      const { name } = this.getAllLangs.find((lang) => {
         return lang.extention === this.$route.params.lang
       })
-      return currentLang.name
+      return name || ''
     },
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
