@@ -39,24 +39,26 @@
 <script>
 export default {
   name: 'DocsSidebar',
-  data: () => ({
-    docs: [
-      {
-        name: 'introduction',
-        rules: ['beginners', 'professionals', 'scientist']
-      },
-      {
-        name: 'terminology',
-        rules: ['sim', 'bot', 'map', 'cell', 'ant', 'order']
-      },
-      {
-        name: 'rules',
-        rules: ['score']
-      },
-      { name: 'errors' },
-      { name: 'faq' }
-    ]
-  })
+  data() {
+    return {
+      docs: [
+        {
+          name: 'introduction',
+          rules: ['beginners', 'professionals', 'scientist']
+        },
+        {
+          name: 'terminology',
+          rules: ['sim', 'bot', 'map', 'cell', 'ant', 'order']
+        },
+        {
+          name: 'rules',
+          rules: ['score']
+        },
+        { name: 'errors' },
+        { name: 'faq' }
+      ]
+    }
+  }
 }
 </script>
 
