@@ -85,6 +85,9 @@ export default {
   padding-top: 70px;
   max-height: 100% !important;
   text-transform: capitalize;
+  a {
+    text-decoration: none !important;
+  }
 }
 .list-children {
   padding-left: 25px;
