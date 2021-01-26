@@ -4,6 +4,7 @@
     app
     class="sidebar"
     width="200"
+    color="transparent"
   >
     <v-list dense>
       <template v-for="chapter in docs">
@@ -81,7 +82,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   z-index: 0;
-  padding-top: 80px;
+  padding-top: 70px;
   max-height: 100% !important;
   text-transform: capitalize;
 }
