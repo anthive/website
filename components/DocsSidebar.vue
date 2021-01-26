@@ -8,32 +8,29 @@
   >
     <v-list dense>
       <template v-for="chapter in docs">
-        <v-list-group :key="chapter.name">
-          <template v-slot:activator >
+        <v-list-item-content :key="chapter.name" class="pa-0">
+          <v-list-item
+            :to="{ path: `#${chapter.name}` }"
+            class="py-0"
+            link
+          >
+            {{ chapter.name }}
+          </v-list-item>
+        </v-list-item-content>
+        <template v-if="chapter.rules">
+          <v-list-item
+            v-for="rule in chapter.rules"
+            :key="rule"
+            :to="{ path: `#${rule}` }"
+            link
+          >
             <v-list-item-content>
-              <v-list-item
-                :to="{ path: `#${chapter.name}` }"
-                link
-              >
-                {{ chapter.name }}
-              </v-list-item>
+              <v-list-item-title class="children">
+                {{ rule }}
+              </v-list-item-title>
             </v-list-item-content>
-          </template>
-          <template v-if="chapter.rules">
-            <v-list-item
-              v-for="rule in chapter.rules"
-              :key="rule"
-              :to="{ path: `#${rule}` }"
-              link
-            >
-              <v-list-item-content>
-                <v-list-item-title class="list-children">
-                  {{ rule }}
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-        </v-list-group>
+          </v-list-item>
+        </template>
       </template>
     </v-list>
   </v-navigation-drawer>
@@ -62,25 +59,10 @@ export default {
   })
 }
 </script>
-<style lang="scss">
+
+<style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
-.sidebar {
-  .v-list-group__header,
-  .v-list-item__content {
-    padding: 0 !important;
-    width: 100% !important;
-  }
-  .v-list-item__icon {
-    position: absolute;
-    content: 'okok';
-  }
-  .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
-    color: $violet !important;
-  }
-}
-</style>
-<style lang="scss" scoped>
 .sidebar {
   z-index: 0;
   padding-top: 70px;
@@ -89,8 +71,13 @@ export default {
   a {
     text-decoration: none !important;
   }
+  // chapter color
+  ::v-deep .theme--light.v-list-item {
+    color: $violet !important;
+  }
 }
-.list-children {
+.children {
   padding-left: 25px;
+  color: $violet;
 }
 </style>

@@ -39,12 +39,14 @@ Sim or Simulation is a game engine that responsible for controlling virtual envi
 
 <h3 id="bot">Bot</h3>
 
-Bot is your code that runs in docker container on private network. [<img src="/img/bot-rules.jpg" title="anthive map" alt="anthive map" width="150px" style="margin-left: 20px;" align="right"/>](/img/bot-rules.jpg)
+[<img src="/img/bot-rules.jpg" title="anthive map" alt="anthive map" width="200px" style="margin-left: 20px;" align="right"/>](/img/bot-rules.jpg)
+
+Bot is your code that runs in docker container on private network.
 
 Your bot must listen for calls from [Sim](#sim). When creating a bot you specify a coding language. If you want to switch or try another codding language, you should create a new bot. Bot can be created from git repository or from <a href="https://anthive.io/sandbox" target="_blank">Sandbox</a>
 
 Calculate orders for each ant - is the main responsibility of your bot. You have full freedom to do it your way applying strategies; algorithm; or random action. Each bot have versions (commits). For each game you can choose which version of your bot will battle. Each version accumulate statistic from battles. Error percentage; Average response time;  You can choose a name and avatar for your bot. When your bot is active it’s plays robin round with other bots to determining rank in leaderboard.
-<br><br><br>
+<br><br><br><br>
 
 <h3 id="map">Map</h3>
 
