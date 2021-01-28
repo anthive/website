@@ -14,8 +14,8 @@
         width="35px"
       >
     </div>
-    <div class="description">
-      <div :class="{ show: botIsDead }" class="information">
+    <div :class="{fade: isDead}" class="description">
+      <div class="information">
         <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
           {{ $t("game.by") }} {{ bot.username }}
           <v-avatar
@@ -166,8 +166,18 @@ export default {
     padding: 14px 20px 14px 20px;
     position: relative;
     width: 100%;
+    transition: all 0.4s;
     @media (min-width: $screen-md) and (max-width: $screen-lg) {
       padding: 10px;
+    }
+
+    &.fade {
+      opacity: 0.3;
+    }
+
+    &:hover,
+    &:hover .information {
+      opacity: 1;
     }
   }
 
@@ -207,11 +217,6 @@ export default {
     transition: all 0.4s;
     opacity: 0;
     background: $black-transparent;
-
-    &:hover,
-    &.show {
-      opacity: 1;
-    }
 
     .information-user {
       cursor: pointer;
