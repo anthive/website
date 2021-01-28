@@ -166,6 +166,7 @@ export default {
     padding: 14px 20px 14px 20px;
     position: relative;
     width: 100%;
+    transition: all 0.4s;
     @media (min-width: $screen-md) and (max-width: $screen-lg) {
       padding: 10px;
     }
