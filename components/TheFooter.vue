@@ -26,10 +26,10 @@
     <!-- Report issue -->
     <div col="12" md="3" class="footer__issue f-montserrat">
       <span
-        href="https://github.com/anthive/website/issues"
         target="_blank"
         rel="noreferrer"
         class="white--text ml-1 link"
+        @click="handlerClickReportIssue"
       >
         {{ $t("footer.report") }}
       </span>
@@ -136,8 +136,8 @@ export default {
       this.$router.push(this.localePath('pp'))
     },
     handlerClickReportIssue() {
-      this.$gtag('event', 'Go to Policy page', { event_category: 'policy', event_label: 'footer' })
-      this.$router.push(this.localePath('pp'))
+      this.$gtag('event', 'Go to report issue', { event_category: 'report_issue', event_label: 'footer' })
+      window.open('https://github.com/anthive/website/issues', '_blank', 'noreferrer')
     },
     handlerClickSocial(link, socialName) {
       this.$gtag('event', `Go to ${socialName}`, { event_category: 'socials', event_label: 'footer' })
