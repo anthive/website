@@ -8,14 +8,7 @@
   >
     <v-container class="d-flex align-center pt-2">
       <v-toolbar-title>
-        <img
-          :src="getLogo"
-          class="logo"
-          alt="Logo"
-          width="145px"
-          height="165px"
-          @click="handlerClickMenuItem('index')"
-        >
+        <TheLogo @click="handlerClickMenuItem('index')" />
       </v-toolbar-title>
       <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
@@ -103,11 +96,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import TheLogo from '@/components/TheLogo'
 
 export default {
   name: 'TheHeader',
   components: {
-    AntHiveIcon
+    AntHiveIcon,
+    TheLogo
   },
   data() {
     return {
