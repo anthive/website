@@ -1,120 +1,122 @@
-## Introduction
+<h2 id="introduction">Introduction</h2>
 
-**AntHive** is a multiplayer competitive strategy in which each player creates his own colony of ants.
+The idea came from watching ants and wondering if it possible to reproduce ants movements and hive mind with code. If statements; Algorithms;  Goals; Strategies; and eventually Machine Learning ML. AntHive platform is made for you to test your codding skills, explore new strategies, benchmark algorithms and conducts science experiments with hive mind.
 
-As in real life, ants get **food**, build **anthills**.
+AnthHive.IO platform is free and the majority of it is open source. <a href="https://github.com/anthive/website/projects/15" target="_blank">Ideas</a>, <a href="https://github.com/anthive/website/issues/new" target="_blank">suggestions</a> and <a href="https://github.com/anthive/website/issues" target="_blank">contributions</a> are welcomed! <a href="https://github.com/anthive" target="_blank">GitHub page</a>.
 
-[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](/img/game-animation.gif)
-
-**AntHive** is a game for programmers with different skill levels. Unlike conventional strategies, ants in AntHive respond to events the way you program them.
-
----
-
-## Basic task
-
-You create a **bot** that controls your colony's ants and runs it in one of the game modes. All games take place on a server without you being involved.
+**Platform capability:**
+- Language agnostic - Bots written in different programming languages battle against each other in one map with fair resource allocation.
+- ML/AI training ground. Ability for bot to play against itself or different versions of itself to identify and learn effective strategies.
+- Leaderboards and ranking - Each active bot battle against others offline to gain rank and climb leaderboard.
+- Tournaments - Joining one of our regional tournaments or create your own custom one.
+- License your ML/AI - Submitting your trained model to marketplace.
 
 ---
 
-## Elements of the game
+<h3 id="beginners">Beginners</h3>
 
-### Map
+You never coded before but eager to try. It’s going to be a bit hard to get started, don’t let it stop you. The learning curve is steep, but results will yelled understanding of main tool in programming like if statement; loop; function; object. Levels progression will force you to optimize your code for performance. Most importantly this platform will teach you to **think ahead and predict your program behavior** - which is the most important skill for Software Engineer.
 
-The game map is a plane consisting of **cells**, each of which has its own **X** and **Y** coordinates. The coordinate countdown starts **in the top left corner of the map**.
 
-[<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
+<h3 id="professionals">Professionals</h3>
 
-Each of the cells may contain objects:
+You know your way around 1s and 0s. Want to try a new codding language that you heard so much about it. Maybe you want to demonstrate how well you can optimize your code. Battles between codding languages become more vivid like. JS vs Golang vs PHP in one map with equal rules.
+Have multiple versions of your bot battle against each other on one map will identify which strategy is superior. Or could be used and training ground for your ML/AI bot.
 
-- Ant [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-- Anthill [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-- Food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+<h3 id="scientist">Scientist</h3>
 
-<br>
+We love since and here to support it at no cost. Famous experiments like <a href="https://en.wikipedia.org/wiki/Prisoner%27s_dilemma" target="_blank">prisoner's dilemma</a> or <a href="https://en.wikipedia.org/wiki/Chicken_(game)" target="_blank">hawk–dove</a> game motivates us to explore and learn from Hive Mind. If you want to propose an experiment contact us at <a href="mailto:science@anthive.io" target="_blank">science@anthive.io</a> We can customize parameters and create any virtual environment that suits your needs.
+
+
+---
+
+<h2 id="terminology">Terminology</h2>
+
+<h3 id="sim">Sim</h3>
+
+Sim or Simulation is a game engine that responsible for controlling virtual environment. Sim runs in docker container and makes web request to your [bot](#bot) with **JSON**** payload. Expecting response with orders for each ant. Web request made over **HTTP** protocol as **POST** request on port **:7070**. Each request times out in **500 ms**. Therefore, your bot has limited amount of time to calculate [order](#order) for each ant. When Sim receive response from your bot it validates and applies orders according to [Rules](#rules). Then Sim generates a new state of the [map](#map). That way the cycle (tick) continues until the limit of the game is reach.
+
+
+<h3 id="bot">Bot</h3>
+
+[<img src="/img/bot-rules.jpg" title="anthive map" alt="anthive map" width="200px" style="margin-left: 20px;" align="right"/>](/img/bot-rules.jpg)
+
+Bot is your code that runs in docker container on private network.
+
+Your bot must listen for calls from [Sim](#sim). When creating a bot you specify a coding language. If you want to switch or try another codding language, you should create a new bot. Bot can be created from git repository or from <a href="https://anthive.io/sandbox" target="_blank">Sandbox</a>
+
+Calculate orders for each ant - is the main responsibility of your bot. You have full freedom to do it your way applying strategies; algorithm; or random action. Each bot have versions (commits). For each game you can choose which version of your bot will battle. Each version accumulate statistic from battles. Error percentage; Average response time;  You can choose a name and avatar for your bot. When your bot is active it’s plays robin round with other bots to determining rank in leaderboard.
+<br><br><br><br>
+
+<h3 id="map">Map</h3>
+
+The JSON payload of each request to your bot contains information about current state of the map: **width**; **height**; and **cells** (array of cells). The map visually represented as two-dimensional Canvas. With coordinates **x** and **y** starts from **0** from the **top left corner**. In code, it’s a 2d array of [cell](#cell) objects with **x** and **y** are indexes of the array. 
+
+[<img src="/img/map-rules.jpg" title="anthive map" alt="anthive map" width="500px" style="margin: 0 auto; display: block;" />](/img/map-rules.jpg)
+
+As an example the cell marked green on the image with coordinates `x=2` and `y=3` could be accessed by index `canvas.cells[y][x]` or `canvas.cells[3][2] `
 
 ```
-One cell may have both an ant and an anthill and food at the same time
+Note: For empty cells in JSON object properties are omitted and represented as '{}'
+```
+<br>
+
+
+<h3 id="cell">Cell</h3>
+
+Cell is an object with three properties: **ant**; **hive**; **food**. Properties `canvas.cells[y][x].ant` and `canvas.cells[y][x].hive` simply represent **id** of bot for current game. So you can identify your ants and hive on the map. Property canvas.`cells[y][x].food` represent amount of food in the cell. It can vary from 0-9.
+
+Note in near future cell will also have property **terrain** of the tile like: water; stone; fog of war. 
+If you have suggestions or would like to be involved in game development, join our Discord.
+
+<h3 id="ant">Ant</h3>
+
+Image on the left of JSON object: Ant is an object with six properties: **id**; **event**; **age**; **health**; **cargo**; **point**. 
+- Property **and.id** is your bot id for current game.
+- Property **ant.event** describe what happened with ant in prior tick. Possible options are: (list of event) link to the order with bad move
+- Property **ant.health** represent amount of HP of your ant. When Ant is born it get 9hp, every 15 ticks - (based on game style) ant loses 1hp. When the health of the ant drops to 0 hp it will die and become 1 food. To gain health ant must eat. Each food eaten by the ant will recover 1hp. (link to order example)
+- Property **ant.cargo** represent amount of food that has been carried by ant. Each ant can carry from 0 to 9 food. In order to carry food and should give order with action=“take” and point the direction of the cell that located next to the ant location and has food property more than 1. (link to order example)
+- Property **ant.point** is an object with X and Y coordinates that represent ant current location on the map.
+For example if  ant tried to move to  an error ant.event = “badmove”. 
+
+<h3 id="order">Order</h3>
+
+Order is a json object with three properties
+
+---
+
+<h2 id="rules">Rules</h2>
+
+The main goal of the game is to collect food on the map and bring it to the hive. When you collect 7 food in one cell of your hive it will be converted to a new ant for your colony. The size of your hive will grow as well to match the amount of ants. It will not shrink when your ant die. The game ends when a limit of ticks is reached or no hives left on the map. The Bot with the highest score is a winner.
+
+- Each tick your ant can do only one action to the cell next to it.
+- Ant can’t can not skip cells.
+- Ant can’t move outside the map.
+- Ant can’t move to the other bots hive.
+- Ant can’t move to the cell that contain food.
+- Ant can’t move to the cell that occupied by another ant.
+- If two ants moved to the same cell. The Bot with slower RT (response time) will get collision error.
+- Ant can’t “take” from the cell that does not contain food
+- Ant can’t “take” from another ant. 
+- Ant can’t “put” to the cell that already has 9 food
+- Ant can’t “put” to the cell that occupied by ant
+
+	
+<h3 id="score">Score</h3>
+
+Within a game your bot have parameters that represent it performance **for each tick**.
+- RT 34.56ms - is response time in milliseconds. Howling it took for your bot to calculate orders and send back response.
+- Size 12/10 - the size of your hive and amount of live ants.
+- Errors 3 - amount of errors made.
+- Score - amount of points earned.
+
+```
+VALID ORDER: your bot can not give orders in advance. Only for the next move. Orders will apply only to the cell next to your ant current position.
 ```
 
-<br>
-
-### Ant
-
-**Birth**. To get a new ant you need to put 7 of food (in the challenge may be another amount) in the anthill, after which the food in the anthill is replaced by a new ant.
-
-**Health**. Each ant has 9 health points.
-
-**Death**. Every 10 ticks (in the challenge may be another amount) of the server takes 1 health point from all ants on the map - they starve. When all health points expire, the ants die. After death, an ant turns into 1 food. In order to make up for its health, an ant must eat. 1 meal restores 1 ant health point.
-
-<br>
-
-### Actions(`act`):
-
-- `STAY` - stay on the cell
-- `MOVE` - move in the specified direction on one cell
-- `EAT` - there is food from the next specified cell
-- `TAKE` - take food from the next specified cell
-- `PUT` - put food on the next specified cell
-
-<br>
-
-### Directions(`dir`)
-
-Ants can move in any direction on the neighboring cell.
-
-- `UP`
-- `DOWN`
-- `LEFT`
-- `RIGHT`
-
-<br>
-
-### Food
-
-The food scattered on the map contains **1 to 9 units**. It is visually depicted in three types:
-
-- Small - up to 3 units of food [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-- Average - up to 6 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-- Big - up to 9 food units [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
-
-<br>
-
-### Anthill
-
-In order for the map cell to become an anthill, you must put 9 food in it. The size of the anthill is the main indicator of success in competition.
-
 ---
 
-## Gaming modes
-
-### Battle
-
-Battle is an automatic mode, without players involved, where your bot competes with each opponent in a circle. This round of games is called **sprint**. The bot gets rating points when it wins the game and when it loses. The system automatically selects opponents close to you by level. It's important that the bot makes as many wins as possible in a single sprint, because in addition to the bot's points, it also raises the rating of its creator. At the end of the Sprint you will get the result and will be able to watch all the games played, analyze them and edit the bot.
-
-#### Battle mode rules
-
-The game is played on maps of different set configuration. Each bot has its own starting point - the anthill. Bots start the game with one ant. To increase the population of ants in the colony, you need to get food and bring to the anthill. The new ant will appear when the anthill will accumulate 9 food. Food on the map is not very much, so the ants compete for it.
-The bot wins the game, which will gain more victory points for 1000 ticks server.
-
-### _Challenges (coming soon)_
-
-_Here you have to overcome a series of difficult programming challenges. Which are designed with gradual complication and set tasks for different types of skills that can be useful in the game and in the work. Once you pass the first challenge, the following will open. Pass all the challenges to receive various awards and titles._
-
----
-
-## Bot
-
-**Bot** is a server code that expects requests from a simulation on port:`7070`. Inside the request is information about each ants, their position on the map, as well as the location of food on the map. The bot manages the ants by responding to HTTP requests from **simulation** that it "listens" on the port. Based on the data from the request, **bot** decides the next **step** for **every** ant and sends it to the simulation. Each bot's response is an array with orders as to which action to take **ever ants** and in which direction. Ants can only **interact** with those **cells** on the card that are around them-left, right, top, and bottom.
-
-The order contains the ants unique identifier (`antId`), action (`act`) and direction (`dir`), for example:
-
-`{ "antId": 1, "act": "unload", "dir": "up" } }`,
-
-After receiving an order, the simulation will process it and generate a new game state. The complete cycle from receiving the order to generating the new game state is called **tic**.
-
----
-
-## Possible errors
+<h2 id="errors">Possible errors</h2>
 
 - **food taking error** is an attempt to take food from a cell where there is no food.
 - **feedback error** - an attempt to take food from a cell where there is no food.
@@ -123,13 +125,13 @@ After receiving an order, the simulation will process it and generate a new game
 
 ---
 
-## FAQ:
+<h2 id="faq">FAQ</h2>:
 
 **Question**: What happens when ants from different bots try to move to the same cell during the same tick?
 **Answer**: In this case, the bot that first passes to the simulation the order to move the ants into the cell will perform the movement, and the ants of the other bots will get an error with the deceleration parameter.
 
 **Question**: What programming language can I write my bot in ?
-**Answer**: The current version supports Go, PHP, Javascript, C++, C#, Python.
+**Answer**: The current version supports Go, PHP, Javascript, C++, C#, Python, Rust.
 
 **Question**: Where is the code stored ?
 **Answer**: The code is stored in Git repository. Supported by Github, Gitlab and Bitbucket.

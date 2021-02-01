@@ -1,8 +1,7 @@
 <template>
-  <section id="inspire" class="docs">
-    <div class="card">
-      <div v-html="rules" />
-    </div>
+  <section id="inspire">
+    <DocsSidebar />
+    <div class="docs" v-html="rules" />
   </section>
 </template>
 
@@ -33,20 +32,11 @@ export default {
 </script>
 
 <style scoped>
-.rules {
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-.card {
+.docs {
   width: 100%;
   max-width: 1200px;
   margin: 20px auto;
   height: 100%;
   padding: 40px;
-}
-.rules .list-children {
-  padding-left: 58px;
 }
 </style>

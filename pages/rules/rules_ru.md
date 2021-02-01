@@ -1,120 +1,122 @@
-## Введение
+<h2 id="introduction">Introduction</h2>
 
-**AntHive** это многопользовательская соревновательная стратегия, в которой каждый игрок создает собственную колонию муравьев.
+The idea came from watching ants and wondering if it possible to reproduce ants movements and hive mind with code. If statements; Algorithms;  Goals; Strategies; and eventually Machine Learning ML. AntHive platform is made for you to test your codding skills, explore new strategies, benchmark algorithms and conducts science experiments with hive mind.
 
-Как и в реальной жизни, муравьи добывают **еду**, строят **муравейники**.
+AnthHive.IO platform is free and the majority of it is open source. <a href="https://github.com/anthive/website/projects/15" target="_blank">Ideas</a>, <a href="https://github.com/anthive/website/issues/new" target="_blank">suggestions</a> and <a href="https://github.com/anthive/website/issues" target="_blank">contributions</a> are welcomed! <a href="https://github.com/anthive" target="_blank">GitHub page</a>.
 
-[<img src="/img/game-animation.gif" alt="ants" title="ants" width="100%"/>](/img/game-animation.gif)
-
-**AntHive** - игра для программистов с разным уровнем навыков. В отличие от обычных стратегий, муравьи в AntHive реагируют на события так, как вы их запрограммируете.
-
----
-
-## Основная задача
-
-Вы создаете **бота**, который управляет муравьями вашей колонии и запускаете его в одном из игровых режимов. Все игры происходят на сервере без вашего участия.
+**Platform capability:**
+- Language agnostic - Bots written in different programming languages battle against each other in one map with fair resource allocation.
+- ML/AI training ground. Ability for bot to play against itself or different versions of itself to identify and learn effective strategies.
+- Leaderboards and ranking - Each active bot battle against others offline to gain rank and climb leaderboard.
+- Tournaments - Joining one of our regional tournaments or create your own custom one.
+- License your ML/AI - Submitting your trained model to marketplace.
 
 ---
 
-## Элементы игры
+<h3 id="beginners">Beginners</h3>
 
-### Карта
+You never coded before but eager to try. It’s going to be a bit hard to get started, don’t let it stop you. The learning curve is steep, but results will yelled understanding of main tool in programming like if statement; loop; function; object. Levels progression will force you to optimize your code for performance. Most importantly this platform will teach you to **think ahead and predict your program behavior** - which is the most important skill for Software Engineer.
 
-Игровая карта это плоскость состоящая из **ячеек**, каждая из которых имеет свои собственные координаты **X** и **Y**. Отсчет координат начинается **в верхнем левом углу карты**.
 
-[<img src="/img/map-debug-mode.png" title="anthive map" alt="anthive map" width="100%"/>](/img/map-debug-mode.png)
+<h3 id="professionals">Professionals</h3>
 
-На каждой из ячеек могут находится объекты:
+You know your way around 1s and 0s. Want to try a new codding language that you heard so much about it. Maybe you want to demonstrate how well you can optimize your code. Battles between codding languages become more vivid like. JS vs Golang vs PHP in one map with equal rules.
+Have multiple versions of your bot battle against each other on one map will identify which strategy is superior. Or could be used and training ground for your ML/AI bot.
 
-- Муравей [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png" title="ant" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/ant.png)
-- Муравейник [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png" title="anthive" alt="ant" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/client/1/hive.png)
-- Еда [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="ant food" alt="ant food" width="20"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
+<h3 id="scientist">Scientist</h3>
 
-<br>
+We love since and here to support it at no cost. Famous experiments like <a href="https://en.wikipedia.org/wiki/Prisoner%27s_dilemma" target="_blank">prisoner's dilemma</a> or <a href="https://en.wikipedia.org/wiki/Chicken_(game)" target="_blank">hawk–dove</a> game motivates us to explore and learn from Hive Mind. If you want to propose an experiment contact us at <a href="mailto:science@anthive.io" target="_blank">science@anthive.io</a> We can customize parameters and create any virtual environment that suits your needs.
+
+
+---
+
+<h2 id="terminology">Terminology</h2>
+
+<h3 id="sim">Sim</h3>
+
+Sim or Simulation is a game engine that responsible for controlling virtual environment. Sim runs in docker container and makes web request to your [bot](#bot) with **JSON**** payload. Expecting response with orders for each ant. Web request made over **HTTP** protocol as **POST** request on port **:7070**. Each request times out in **500 ms**. Therefore, your bot has limited amount of time to calculate [order](#order) for each ant. When Sim receive response from your bot it validates and applies orders according to [Rules](#rules). Then Sim generates a new state of the [map](#map). That way the cycle (tick) continues until the limit of the game is reach.
+
+
+<h3 id="bot">Bot</h3>
+
+[<img src="/img/bot-rules.jpg" title="anthive map" alt="anthive map" width="200px" style="margin-left: 20px;" align="right"/>](/img/bot-rules.jpg)
+
+Bot is your code that runs in docker container on private network.
+
+Your bot must listen for calls from [Sim](#sim). When creating a bot you specify a coding language. If you want to switch or try another codding language, you should create a new bot. Bot can be created from git repository or from <a href="https://anthive.io/sandbox" target="_blank">Sandbox</a>
+
+Calculate orders for each ant - is the main responsibility of your bot. You have full freedom to do it your way applying strategies; algorithm; or random action. Each bot have versions (commits). For each game you can choose which version of your bot will battle. Each version accumulate statistic from battles. Error percentage; Average response time;  You can choose a name and avatar for your bot. When your bot is active it’s plays robin round with other bots to determining rank in leaderboard.
+<br><br><br><br>
+
+<h3 id="map">Map</h3>
+
+The JSON payload of each request to your bot contains information about current state of the map: **width**; **height**; and **cells** (array of cells). The map visually represented as two-dimensional Canvas. With coordinates **x** and **y** starts from **0** from the **top left corner**. In code, it’s a 2d array of [cell](#cell) objects with **x** and **y** are indexes of the array. 
+
+[<img src="/img/map-rules.jpg" title="anthive map" alt="anthive map" width="500px" style="margin: 0 auto; display: block;" />](/img/map-rules.jpg)
+
+As an example the cell marked green on the image with coordinates `x=2` and `y=3` could be accessed by index `canvas.cells[y][x]` or `canvas.cells[3][2] `
 
 ```
-На одной ячейке может быть и муравей и муравейник и еда одновременно
+Note: For empty cells in JSON object properties are omitted and represented as '{}'
+```
+<br>
+
+
+<h3 id="cell">Cell</h3>
+
+Cell is an object with three properties: **ant**; **hive**; **food**. Properties `canvas.cells[y][x].ant` and `canvas.cells[y][x].hive` simply represent **id** of bot for current game. So you can identify your ants and hive on the map. Property canvas.`cells[y][x].food` represent amount of food in the cell. It can vary from 0-9.
+
+Note in near future cell will also have property **terrain** of the tile like: water; stone; fog of war. 
+If you have suggestions or would like to be involved in game development, join our Discord.
+
+<h3 id="ant">Ant</h3>
+
+Image on the left of JSON object: Ant is an object with six properties: **id**; **event**; **age**; **health**; **cargo**; **point**. 
+- Property **and.id** is your bot id for current game.
+- Property **ant.event** describe what happened with ant in prior tick. Possible options are: (list of event) link to the order with bad move
+- Property **ant.health** represent amount of HP of your ant. When Ant is born it get 9hp, every 15 ticks - (based on game style) ant loses 1hp. When the health of the ant drops to 0 hp it will die and become 1 food. To gain health ant must eat. Each food eaten by the ant will recover 1hp. (link to order example)
+- Property **ant.cargo** represent amount of food that has been carried by ant. Each ant can carry from 0 to 9 food. In order to carry food and should give order with action=“take” and point the direction of the cell that located next to the ant location and has food property more than 1. (link to order example)
+- Property **ant.point** is an object with X and Y coordinates that represent ant current location on the map.
+For example if  ant tried to move to  an error ant.event = “badmove”. 
+
+<h3 id="order">Order</h3>
+
+Order is a json object with three properties
+
+---
+
+<h2 id="rules">Rules</h2>
+
+The main goal of the game is to collect food on the map and bring it to the hive. When you collect 7 food in one cell of your hive it will be converted to a new ant for your colony. The size of your hive will grow as well to match the amount of ants. It will not shrink when your ant die. The game ends when a limit of ticks is reached or no hives left on the map. The Bot with the highest score is a winner.
+
+- Each tick your ant can do only one action to the cell next to it.
+- Ant can’t can not skip cells.
+- Ant can’t move outside the map.
+- Ant can’t move to the other bots hive.
+- Ant can’t move to the cell that contain food.
+- Ant can’t move to the cell that occupied by another ant.
+- If two ants moved to the same cell. The Bot with slower RT (response time) will get collision error.
+- Ant can’t “take” from the cell that does not contain food
+- Ant can’t “take” from another ant. 
+- Ant can’t “put” to the cell that already has 9 food
+- Ant can’t “put” to the cell that occupied by ant
+
+	
+<h3 id="score">Score</h3>
+
+Within a game your bot have parameters that represent it performance **for each tick**.
+- RT 34.56ms - is response time in milliseconds. Howling it took for your bot to calculate orders and send back response.
+- Size 12/10 - the size of your hive and amount of live ants.
+- Errors 3 - amount of errors made.
+- Score - amount of points earned.
+
+```
+VALID ORDER: your bot can not give orders in advance. Only for the next move. Orders will apply only to the cell next to your ant current position.
 ```
 
-<br>
-
-### Муравей
-
-**Рождение**. Для получения нового муравья необходимо положить 7 еды (может отличаться в зависимости от испытания) в муравейник, после чего еда в муравейнике заменяется на нового муравья.
-
-**Здоровье**. У каждого муравья 9 очков здоровья.
-
-**Смерть**. Каждые 10 тиков (может отличаться в зависимости от испытания) сервера у всех муравьев на карте отнимается 1 очко здоровья - они голодают. По истечению всех очков здоровья муравей умирает. После смерти муравей превращается в 1 еду. Для того, чтобы восполнить здоровье, муравей должен поесть. 1 еда восстанавливает 1 очко здоровья муравья.
-
-<br>
-
-### Действия(`act`):
-
-- `STAY` - оставаться на клетке
-- `MOVE` - двигаться в указанном направлении на одну клетку
-- `EAT` - есть еду с соседней указанной клетки
-- `TAKE`- взять еду с соседней указанной клетки
-- `PUT` - положить еду на соседнюю указанную клетку
-
-<br>
-
-### Направления(`dir`)
-
-Муравьи могут двигаться в любом направлении на соседнюю клеточку.
-
-- `UP` - вверх
-- `DOWN` - вниз
-- `LEFT` - влево
-- `RIGHT` - вправо
-
-<br>
-
-### Еда
-
-Еда, разбросанная по карте, содержит **от 1 до 9 единиц**. Визуально она изображена тремя типами:
-
-- Маленькая - до 3 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png" title="small food" alt="small food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodsmall.png)
-- Средняя - до 6 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png" title="mid food" alt="mid food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodmid.png)
-- Большая - до 9 единиц еды [<img src="https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png" title="big food" alt="big food"/>](https://raw.githubusercontent.com/anthive/website/master/static/skins/server/1/foodbig.png)
-
-<br>
-
-### Муравейник
-
-Для того что бы ячейка карты стала муравейником в нее необходимо положить 9 еды. Размер муравейника - основной показатель успеха в соперничестве.
-
 ---
 
-## Игровые режимы
-
-### Схватка
-
-Схватка это автоматический режим, без участия игроков где ваш бот соревнуется с каждым соперником по кругу. Такой круг игр называется **спринт**. Бот получает очки рейтинга когда побеждает в игре, а когда проигрывает теряет. Система автоматически подбирает близких по уровню противников. Важно, чтобы бот сделал как можно больше побед за один спринт, потому что в дополнение к очкам бота, это поднимает и рейтинг его создателя. В конце спринта вы получите результат и сможете посмотреть все сыгранные игры, проанализировать их и отредактировать бота.
-
-#### Правила режима Схватка
-
-Игра идет на картах разной заданной конфигурации. У каждого бота есть своя стартовая точка - муравейник. Боты начинают игру с одним муравьем. Чтобы популяция муравьев в колонии росла, необходимо добывать еду и приносить в муравейник. Новый муравей появится когда в муравейнике накопится 9 еды. Еды на карте не очень много, поэтому муравьи конкурируют за нее.
-В игре побеждает бот, который наберет больше победных очков за 1000 тиков сервера.
-
-### _Испытания (скоро появится)_
-
-_Здесь вам предстоит преодолеть череду сложных программистских испытаний. Которые спроектированы с постепенным усложнением и ставят задачи для разных видов навыков, которые могут пригодиться в игре и в работе. Как только вы пройдете первое испытание, откроется следующее. Пройдите все испытания, чтобы получить различные награды и звания._
-
----
-
-## Бот
-
-**Бот** - это серверный код, который ожидает запросы от симуляции на порту:`7070`. Внутри запроса находится информация о каждом муравье, его положении на карте, а также расположение еды на карте. Бот осуществляет управление муравьями за счет ответов на HTTP запросы от **симуляции**, которые он “слушает” на порту. На основе данных из запроса **бот** принимает решение о следующем **шаге** для **каждого** муравья и отправляет его в симуляцию. Каждый ответ бота это массив с приказами, какое действие необходимо выполнить **каждому муравью** и в каком направлении. Муравьи могут взаимодействовать **только** с теми **ячейками** (клеточками) на карте, которые находятся вокруг них - слева, справа, сверху и снизу.
-
-Приказ содержит в себе уникальный идентификатор муравья (`antId`), действие (`act`) и направление действия (`dir`), например:
-
-`{ "antId": 1, "act": "unload", "dir": "up" }`,
-
-После получения приказа симуляция обработает его, и сгенерирует новое состояние игры. Полный цикл от получения приказа до формирования нового состояния игры называется **тиком**.
-
----
-
-## Возможные ошибки
+<h2 id="errors">Возможные ошибки</h2>
 
 - **ошибка взятия еды** - попытка взять еду из ячейки, в которой еда отсутствует.
 - **ошибка отдачи еды** - попытка положить еду в момент, когда у муравья отсутствует еда.
@@ -123,13 +125,13 @@ _Здесь вам предстоит преодолеть череду слож
 
 ---
 
-## FAQ:
+<h2 id="faq">FAQ</h2>
 
 **Вопрос**: Что происходит когда муравьи разных ботов пытаются передвинуться на одну и ту же клетку в течение одного тика?
 **Ответ**: В данном случае бот, который первым передаст в симуляцию приказ о движении муравья в ячейку выполнит движение, а муравьи остальных ботов получат ошибку с параметром замедление.
 
 **Вопрос**: На каком языке программирования можно написать своего бота ?
-**Ответ**: В текущей версии поддерживаются языки: Go, PHP, Javascript, C++, C#, Python.
+**Ответ**: В текущей версии поддерживаются языки: Go, PHP, Javascript, C++, C#, Python, Rust.
 
 **Вопрос**: Где хранится код ?
 **Ответ**: Код хранится в Git репозитории. Поддерживаются Github, Gitlab и Bitbucket

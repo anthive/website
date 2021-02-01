@@ -151,6 +151,18 @@ a.anthive-btn:hover {
   white-space: break-spaces !important;
 }
 
+.docs .card a {
+  text-decoration: underline;
+}
+
+.docs .card a:hover {
+  text-decoration: none !important;
+}
+
+.docs ul {
+  margin-bottom: 16px;
+}
+
 .docs pre > code {
   display: block;
   color: #423b87 !important;
@@ -181,7 +193,7 @@ a.anthive-btn:hover {
 }
 
 .docs h3 {
-  margin-bottom: 20px;
+  margin: 40px 0 10px;
 }
 
 .b-radius-0,

@@ -2,10 +2,11 @@
   <v-app-bar
     :clipped-left="$vuetify.breakpoint.lgAndUp"
     class="header"
+    height="80px"
     flat
     absolute
   >
-    <v-container class="d-flex align-center pt-8">
+    <v-container class="d-flex align-center pt-2">
       <v-toolbar-title>
         <router-link :to="localePath('index')">
           <img
@@ -134,12 +135,11 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 
 .header {
-  background: transparent !important;
+  background: $lilac-select !important;
 
   .logo {
     width: 144px;

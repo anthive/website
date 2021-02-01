@@ -44,7 +44,7 @@
           <div>
             <span>{{ $t("game.errors") }}:</span>
             <span class="info-value">
-              {{ getNumberTruncatedToThousand(bot.errors) }} %
+              {{ bot.err }}%
             </span>
           </div>
           <div>
@@ -167,7 +167,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 $animation: ease 0.4s;
-$bot-info-width: 140px;
+$bot-info-width: 150px;
 
 .chip {
   width: 100%;
