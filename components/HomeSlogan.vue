@@ -7,7 +7,6 @@
             <img
               src="/img/boy.webp"
               width="100%"
-              height="100%"
               alt="boy">
           </v-col>
           <v-col class="header-section__text-content" cols="12" md="5">

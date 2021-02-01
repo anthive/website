@@ -215,7 +215,7 @@ module.exports = {
     transpile: ['countup.js', 'vue-countup-v2'],
     quiet: false
   },
-
+  devtool: 'source-map',
   generate: {
     routes: dynamicRoutes
   }
