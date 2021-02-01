@@ -19,11 +19,11 @@
             </h2>
             <div class="header-section__actions">
               <AntHiveButton
-                :to="localePath('sandbox')"
                 large
                 tile
                 class="mr-4"
-                color="action">{{
+                color="action"
+                @click="handlerClickSandbox">{{
                   $t("header.sandbox")
                 }}</AntHiveButton>
               <AntHiveButton
@@ -50,8 +50,12 @@ export default {
   }),
   methods: {
     handlerClickGetStarted() {
-      this.$gtag('event', 'Get started Homepage', { event_category: 'getstarted', event_label: 'homepage' })
+      this.$gtag('event', 'Get started Homepage (top)', { event_category: 'get_started', event_label: 'homepage' })
       window.location.href = this.profileUrl
+    },
+    handlerClickSandbox() {
+      this.$gtag('event', 'Go to Sandbox page (top)', { event_category: 'sandbox', event_label: 'homepage' })
+      this.$router.push(this.localePath('sandbox'))
     }
   }
 }

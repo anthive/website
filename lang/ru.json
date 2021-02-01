@@ -48,7 +48,7 @@
 
   "games": {
     "meta": {
-      "title": "Игры - AntHive.IO",
+      "title": "AntHive.IO - Игры",
       "description": "Исследуй, смотри, воспроизводи, учись новым стратегиям!"
     },
     "title1": "Игры",
@@ -72,7 +72,7 @@
 
   "game": {
     "meta": {
-      "title": "Игра - AntHive.IO",
+      "title": "AntHive.IO - Игра",
       "description": "Исследуй, смотри, воспроизводи, учись новым стратегиям!"
     },
     "loading": "Загрузка...",
@@ -105,7 +105,7 @@
 
   "leaderboard": {
     "meta": {
-      "title": "Таблица лидеров - AntHive.IO",
+      "title": "AntHive.IO - Таблица лидеров",
       "description": "Самые скиловые игроки AntHive"
     },
     "title": "Таблица лидеров",
@@ -129,7 +129,7 @@
 
   "userInfo": {
     "meta": {
-      "description": "Профайл пользователя - AntHive.IO"
+      "description": "AntHive.IO - Профайл пользователя"
     },
     "games": "Игры",
     "wins": "Победы",
@@ -158,7 +158,7 @@
 
   "sandbox": {
     "meta": {
-      "title": "Песочница - AntHive.IO",
+      "title": "AntHive.IO - Песочница",
       "description": "В песочнице вы можете улучшить образцы ботов так, как вам нравится, также вы можете начать писать основные стратегии для вашей колонии муравьев"
     },
     "loading": "Загрузка",
@@ -182,20 +182,20 @@
 
   "rules": {
     "meta": {
-      "title": "Правила - AntHive.IO",
+      "title": "AntHive.IO - Правила",
       "description": "Терминология и правила игры"
     }
   },
 
   "pp": {
     "meta": {
-      "title": "Политика конфиденциальности - AntHive.IO"
+      "title": "AntHive.IO - Политика конфиденциальности"
     }
   },
 
   "tos": {
     "meta": {
-      "title": "Условия использования - AntHive.IO"
+      "title": "AntHive.IO - Условия использования"
     }
   }
 }

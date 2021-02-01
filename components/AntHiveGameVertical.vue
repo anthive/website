@@ -1,16 +1,19 @@
 <template>
   <div
     class="chip"
-    @mouseover="hoverOnChip = true"
+    @mouseover="handlerChipMouseOver"
     @mouseleave="hoverOnChip = false"
   >
-    <div class="bots">
-      <nuxt-link
+    <div
+      class="bots"
+      @mouseover="handlerBotsMousseOver"
+    >
+      <div
         v-for="(bot, index) in game.bots"
-        :to="localePath(`/users/${bot.username}`)"
         :key="index"
         :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
         class="bot-avatar"
+        @click="handlerClickUser(bot.username)"
       >
         <div class="gradient" />
         <div class="bot-name">
@@ -60,7 +63,7 @@
           width="45"
           class="vs-img"
         />
-      </nuxt-link>
+      </div>
       <v-img
         v-if="getFfaImage"
         :src="getFfaImage"
@@ -85,17 +88,15 @@
         </p>
         <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
       </div>
-      <div class="game-info-layout">
-        <nuxt-link
-          :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
-          class="text-center d-block"
-        >
-          <AntHiveIcon
-            color="white"
-            big
-            class="mt-1"
-            icon="play-circle" />
-        </nuxt-link>
+      <div
+        class="game-info-layout"
+        @click="handlerGoToGame(game)"
+      >
+        <AntHiveIcon
+          color="white"
+          big
+          class="mt-1 play-btn"
+          icon="play-circle" />
       </div>
     </div>
   </div>
@@ -159,6 +160,21 @@ export default {
       if (botIndex !== this.game.bots.length - 1 && this.game.bots.length > 1 && this.game.bots.length < 5) {
         return '/img/vs.svg'
       }
+    },
+    handlerChipMouseOver() {
+      this.$gtag('event', 'Vertical game chip hover', { event_category: 'game_chip', event_label: 'games' })
+      this.hoverOnChip = true
+    },
+    handlerBotsMousseOver() {
+      this.$gtag('event', 'Vertical game chip bots section hover', { event_category: 'game_chip', event_label: 'games' })
+    },
+    handlerGoToGame(game) {
+      this.$gtag('event', 'Go to game page', { event_category: 'game_chip', event_label: 'games' })
+      this.$router.push({ path: this.localePath('game'), query: { id: game.id, v: game.v } })
+    },
+    handlerClickUser(username) {
+      this.$gtag('event', 'Go to user profile page', { event_category: 'game_chip', event_label: 'games' })
+      this.$router.push(this.localePath(`/users/${username}`))
     }
   }
 }
@@ -202,6 +218,10 @@ $bot-info-width: 150px;
     font-weight: $font-weight-bold;
     padding: 5px 12px;
   }
+  .play-btn {
+    pointer-events: none;
+    margin: 0 auto;
+  }
 }
 
 .game-info-layout {
@@ -216,6 +236,7 @@ $bot-info-width: 150px;
   transition: $animation;
   opacity: 0;
   pointer-events: none;
+  cursor: pointer;
   background: $black-transparent;
 }
 

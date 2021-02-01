@@ -68,7 +68,7 @@ export default {
   name: 'User',
   head() {
     return {
-      title: `${this.getUserFullName} - AntHive.IO`,
+      title: `AntHive.IO - ${this.getUserFullName}`,
       meta: [
         {
           name: 'description',
