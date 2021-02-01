@@ -3,7 +3,7 @@ import 'firebase/database'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
-    databaseURL: process.env.DB_URL
+    databaseURL: process.env.RDB_URL
   })
 }
 
