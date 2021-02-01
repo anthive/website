@@ -8,12 +8,12 @@
       class="bots"
       @mouseover="handlerBotsMousseOver"
     >
-      <nuxt-link
+      <div
         v-for="(bot, index) in game.bots"
-        :to="localePath(`/users/${bot.username}`)"
         :key="index"
         :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
         class="bot-avatar"
+        @click="handlerClickUser(bot.username)"
       >
         <div class="gradient" />
         <div class="bot-name">
@@ -63,7 +63,7 @@
           width="45"
           class="vs-img"
         />
-      </nuxt-link>
+      </div>
       <v-img
         v-if="getFfaImage"
         :src="getFfaImage"
@@ -88,18 +88,16 @@
         </p>
         <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
       </div>
-      <nuxt-link
-        :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
-        class="text-center d-block"
+      <div
+        class="game-info-layout"
+        @click="handlerGoToGame(game)"
       >
-        <div class="game-info-layout">
-          <AntHiveIcon
-            color="white"
-            big
-            class="mt-1 play-btn"
-            icon="play-circle" />
-        </div>
-      </nuxt-link>
+        <AntHiveIcon
+          color="white"
+          big
+          class="mt-1 play-btn"
+          icon="play-circle" />
+      </div>
     </div>
   </div>
 </template>
@@ -169,6 +167,14 @@ export default {
     },
     handlerBotsMousseOver() {
       this.$gtag('event', 'Vertical game chip bots section hover', { event_category: 'game_chip', event_label: 'games' })
+    },
+    handlerGoToGame(game) {
+      this.$gtag('event', 'Go to game page', { event_category: 'game_chip', event_label: 'games' })
+      this.$router.push({ path: this.localePath('game'), query: { id: game.id, v: game.v } })
+    },
+    handlerClickUser(username) {
+      this.$gtag('event', 'Go to user profile page', { event_category: 'game_chip', event_label: 'games' })
+      this.$router.push(this.localePath(`/users/${username}`))
     }
   }
 }
@@ -230,6 +236,7 @@ $bot-info-width: 140px;
   transition: $animation;
   opacity: 0;
   pointer-events: none;
+  cursor: pointer;
   background: $black-transparent;
 }
 
