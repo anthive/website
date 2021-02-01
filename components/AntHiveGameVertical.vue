@@ -1,10 +1,13 @@
 <template>
   <div
     class="chip"
-    @mouseover="hoverOnChip = true"
+    @mouseover="handlerChipMouseOver"
     @mouseleave="hoverOnChip = false"
   >
-    <div class="bots">
+    <div
+      class="bots"
+      @mouseover="handlerBotsMousseOver"
+    >
       <nuxt-link
         v-for="(bot, index) in game.bots"
         :to="localePath(`/users/${bot.username}`)"
@@ -85,18 +88,18 @@
         </p>
         <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
       </div>
-      <div class="game-info-layout">
-        <nuxt-link
-          :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
-          class="text-center d-block"
-        >
+      <nuxt-link
+        :to="localePath({ name: 'game', query: { id: game.id, v: game.v }})"
+        class="text-center d-block"
+      >
+        <div class="game-info-layout">
           <AntHiveIcon
             color="white"
             big
-            class="mt-1"
+            class="mt-1 play-btn"
             icon="play-circle" />
-        </nuxt-link>
-      </div>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -159,6 +162,13 @@ export default {
       if (botIndex !== this.game.bots.length - 1 && this.game.bots.length > 1 && this.game.bots.length < 5) {
         return '/img/vs.svg'
       }
+    },
+    handlerChipMouseOver() {
+      this.$gtag('event', 'Vertical game chip hover', { event_category: 'game_chip', event_label: 'games' })
+      this.hoverOnChip = true
+    },
+    handlerBotsMousseOver() {
+      this.$gtag('event', 'Vertical game chip bots section hover', { event_category: 'game_chip', event_label: 'games' })
     }
   }
 }
@@ -201,6 +211,10 @@ $bot-info-width: 140px;
   .info-row {
     font-weight: $font-weight-bold;
     padding: 5px 12px;
+  }
+  .play-btn {
+    pointer-events: none;
+    margin: 0 auto;
   }
 }
 

@@ -130,7 +130,7 @@ export default {
   },
   mounted() {
     const eventCategory = this.getUser ? 'logened_user' : 'not_logened_user'
-    this.$gtag('event', 'Home page visit', { event_category: eventCategory, event_label: 'home_page' })
+    this.$gtag('event', 'Home page visit', { event_category: eventCategory, event_label: 'homepage' })
   },
   methods: {
     handlerClickGetStarted() {
