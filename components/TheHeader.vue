@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     :clipped-left="$vuetify.breakpoint.lgAndUp"
+    :class="{ profile: isProfilePage }"
     class="header"
     height="80px"
     flat
@@ -8,7 +9,7 @@
   >
     <v-container class="d-flex align-center pt-2">
       <v-toolbar-title>
-        <TheLogo @click="handlerClickMenuItem('index')" />
+        <TheLogo :light="isProfilePage" @click="handlerClickMenuItem('index')" />
       </v-toolbar-title>
       <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
@@ -50,7 +51,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <div :class="{ profile: isProfilePage }" class="hidden-sm-and-down">
+      <div class="hidden-sm-and-down">
         <span class="link" @click="handlerClickMenuItem('games')">
           {{ $t("header.games") }}
         </span>
@@ -145,13 +146,15 @@ export default {
 
 .header {
   background: $lilac-select !important;
-
+  &.profile {
+    background: transparent !important;
+  }
   .logo {
     cursor: pointer;
     width: 144px;
     padding-top: 16px;
   }
-  .profile {
+  &.profile {
     .link {
       color: $white;
     }
