@@ -96,10 +96,6 @@ module.exports = {
         href: '/apple-touch-icon.png'
       },
       {
-        rel: 'manifest',
-        href: '/site.webmanifest'
-      },
-      {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg'
       }
@@ -218,5 +214,12 @@ module.exports = {
   devtool: 'source-map',
   generate: {
     routes: dynamicRoutes
+  },
+  pwa: {
+    manifest: {
+      name: 'AntHive.IO',
+      lang: 'en',
+      useWebmanifestExtension: false
+    }
   }
 }
