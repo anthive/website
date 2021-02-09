@@ -73,8 +73,7 @@ function timeAgo(epochStamp) {
 }
 
 function getUsersLeaderboard() {
-  // TODO: use users api '/users'
-  const botsUrl = '/leaderboard/bots'
+  const botsUrl = '/users'
   return publicApi.get(botsUrl).then(resp => resp.data)
 }
 

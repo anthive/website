@@ -1,8 +1,7 @@
 import publicApi from '../plugins/axios'
 
 function getBotsLeaderboard() {
-  // TODO: use new bots api '/bots'
-  const botsUrl = '/leaderboard/bots'
+  const botsUrl = '/bots'
   return publicApi.get(botsUrl).then(resp => resp.data)
 }
 

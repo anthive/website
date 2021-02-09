@@ -107,7 +107,7 @@
         <div>
           <LeaderboardUserChip
             v-for="(user, index) in users"
-            :key="user.displayName"
+            :key="user.username"
             :place="index + 1"
             :leader="user"
           />
