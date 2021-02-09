@@ -64,7 +64,7 @@
                   small
                   color="#d1cae8"
                 />
-                {{ leader.loses }}
+                {{ leader.losses }}
               </div>
               <div>
                 <AntHiveIcon
@@ -121,7 +121,7 @@ import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'GamesLeaderCard',
+  name: 'LeaderboardBotChip',
   components: {
     AntHiveIcon
   },

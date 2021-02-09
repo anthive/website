@@ -71,4 +71,11 @@ function timeAgo(epochStamp) {
   }
   return { time: null, text: 'justNow' }
 }
-export { User, timeAgo }
+
+function getUsersLeaderboard() {
+  // TODO: use users api '/users'
+  const botsUrl = '/leaderboard/bots'
+  return publicApi.get(botsUrl).then(resp => resp.data)
+}
+
+export { User, timeAgo, getUsersLeaderboard }
