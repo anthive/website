@@ -66,13 +66,15 @@ export default {
       default: () => {}
     }
   },
-  data: () => ({
-    langs: {},
-    editor: null,
-    tab: 0,
-    editors: {},
-    currentLangTab: {}
-  }),
+  data() {
+    return {
+      langs: {},
+      editor: null,
+      tab: 0,
+      editors: {},
+      currentLangTab: {}
+    }
+  },
   async mounted() {
     await this.fetchLangs()
     this.currentLangTab = this.langs.find((lang) => {
@@ -90,8 +92,10 @@ export default {
   },
   methods: {
     onChangeTab(lang, tab) {
+      const { extention } = lang
       this.tab = tab
-      this.$router.push(`/sandbox/${lang.extention}`)
+      this.$gtag('event', `sandbox_lang_to_${extention}`)
+      this.$router.push(`/sandbox/${extention}`)
     },
     initEditors(lang) {
       // TODO: fix eslint

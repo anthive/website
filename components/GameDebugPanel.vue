@@ -2,13 +2,14 @@
   <div class="debug-panel">
     <v-tabs v-model="tab" background-color="primary" dark>
       <v-tabs-slider />
-      <v-tab v-if="simLogs" class="tab">Sim Logs</v-tab>
-      <v-tab v-if="sandboxBotLogs" class="tab">Bot Logs</v-tab>
+      <v-tab v-if="simLogs" class="tab" @click="$gtag('event', 'sandbox_sim_logs')">Sim Logs</v-tab>
+      <v-tab v-if="sandboxBotLogs" class="tab" @click="$gtag('event', 'sandbox_bot_logs')">Bot Logs</v-tab>
       <v-tab
         v-for="(bot, index) in getBots"
         :key="index"
         active-class="active"
         class="tab"
+        @click="$gtag('event', 'sandbox_bot_tab')"
       ><v-avatar
         v-if="!bot.displayName.includes('sandbox')"
         class="avatar"
