@@ -19,7 +19,7 @@
             <v-avatar
               tile
               width="120px"
-              height="100%"
+              height="120px"
               class="avatar">
               <v-img :src="getAvatar(leader.avatar, 240)" />
             </v-avatar>

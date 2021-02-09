@@ -1,8 +1,10 @@
 import publicApi from '../plugins/axios'
 
-function getBotsLeaderboard() {
-  const botsUrl = '/bots'
-  return publicApi.get(botsUrl).then(resp => resp.data)
+export const getBotsLeaderboard = async() => {
+  try {
+    const { data } = await publicApi.get('/bots')
+    return data
+  } catch ({ response }) {
+    if (response && response.data && response.data.error) { return null }
+  }
 }
-
-export { getBotsLeaderboard }

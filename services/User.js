@@ -71,10 +71,13 @@ function timeAgo(epochStamp) {
   }
   return { time: null, text: 'justNow' }
 }
-
-function getUsersLeaderboard() {
-  const botsUrl = '/users'
-  return publicApi.get(botsUrl).then(resp => resp.data)
+const getUsersLeaderboard = async() => {
+  try {
+    const { data } = await publicApi.get('/users')
+    return data
+  } catch ({ response }) {
+    if (response && response.data && response.data.error) { return null }
+  }
 }
 
 export { User, timeAgo, getUsersLeaderboard }
