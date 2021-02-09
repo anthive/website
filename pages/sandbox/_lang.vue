@@ -205,7 +205,7 @@ export default {
   },
   methods: {
     handlerClickLogs(logsCategory) {
-      this.$gtag('event', 'Sim logs', { event_category: 'game', value: logsCategory })
+      this.$gtag('event', `click_logs_${logsCategory}`)
     },
     showLoadingText(i = 0) {
       if (!this.loading) {
@@ -224,7 +224,7 @@ export default {
     async onClickRun() {
       if (this.gamePlayer) { this.gamePlayerDestroy() }
       this.savedCode = this.valueCode.value
-      this.$gtag('event', 'Run Sandbox', { event_category: 'sandbox' })
+      this.$gtag('event', 'run_sandbox')
 
       this.gameId = md5(this.savedCode)
       this.$router.push({ path: this.$route.path, query: { box: this.gameId } })
@@ -273,7 +273,7 @@ export default {
       }
     },
     onClickLogin() {
-      this.$gtag('event', 'Get started Sandbox', { event_category: 'getstarted', event_label: 'sandbox' })
+      this.$gtag('event', 'sandbox_get_started')
       const createBotUrl = `${process.env.PROFILE_URL}/create-bot?box=${this.gameId}&lang=${this.$route.params.lang}`
       window.location.href = createBotUrl
     },

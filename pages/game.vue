@@ -176,7 +176,7 @@ export default {
         this.fetchPlayer()
       } catch {
         this.isGameAvailable = false
-        this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
+        this.$gtag('event', 'game_not_found')
       }
     },
     fetchPlayer() {

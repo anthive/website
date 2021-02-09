@@ -49,11 +49,11 @@ export default {
   }),
   methods: {
     handlerClickGetStarted() {
-      this.$gtag('event', 'Get started Homepage (top)', { event_category: 'get_started', event_label: 'homepage' })
+      this.$gtag('event', 'homepage_get_started')
       window.location.href = this.profileUrl
     },
     handlerClickSandbox() {
-      this.$gtag('event', 'Go to Sandbox page (top)', { event_category: 'sandbox', event_label: 'homepage' })
+      this.$gtag('event', 'homepage_to_sandbox')
       this.$router.push(this.localePath('sandbox'))
     }
   }
