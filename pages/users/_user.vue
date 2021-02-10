@@ -10,9 +10,11 @@ export default {
   components: {
     UserProfile
   },
-  data: () => ({
-    username: ''
-  }),
+  data() {
+    return {
+      username: ''
+    }
+  },
   created() {
     this.username = this.$route.params.user || 'anthive'
   }
