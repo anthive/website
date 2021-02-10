@@ -83,18 +83,18 @@
       <AntHiveButton
         :disabled="isDisplayBots"
         :light="isDisplayBots"
+        :to="localePath('/leaderboard/bots')"
         class="button"
         tile
         color="primary"
-        @click="setDisplaedLeaders('bots')"
       >{{ $t('leaderboard.bots') }}</AntHiveButton>
       <AntHiveButton
         :disabled="isDisplayUsers"
         :light="isDisplayUsers"
+        :to="localePath('/leaderboard/users')"
         class="button"
         tile
         color="primary"
-        @click="setDisplaedLeaders('users')"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="table">
         <template v-if="isDisplayBots">
@@ -104,7 +104,7 @@
             :place="index + 1"
             :leader="bot"
           />
-          <infinite-scroll :enough="enoughLoadBots" @load-more="fetchBots" />
+          <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
         </template>
         <template v-if="isDisplayUsers">
           <LeaderboardUserChip
@@ -113,6 +113,7 @@
             :place="index + 1"
             :leader="user"
           />
+          <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
         </template>
 
         <template v-if="(isDisplayUsers && !users) || (isDisplayBots && !bots)">
@@ -133,7 +134,7 @@
 </template>
 
 <script>
-import langs from '../static/langs/data.json'
+import langs from '@/static/langs/data.json'
 import { getBotsLeaderboard } from '@/services/Bot'
 import { getUsersLeaderboard } from '@/services/User'
 import LeaderboardBotChip from '@/components/LeaderboardBotChip'
@@ -174,46 +175,56 @@ export default {
           description: 'mmr' // TODO: add description
         }
       ],
-      isDisplayUsers: false,
-      isDisplayBots: true,
-      enoughLoadBots: false,
-      searchParams: { p: 0, pp: 20 }
-    }
-  },
-  async fetch() {
-    if (process.server) {
-      await this.fetchBots()
+      enoughLoadLeaders: false,
+      pageSize: 20,
+      searchParams: {}
     }
   },
   computed: {
     getLangs() {
       return langs
+    },
+    isDisplayBots() {
+      return this.$route.params.leaders === 'bots'
+    },
+    isDisplayUsers() {
+      return this.$route.params.leaders === 'users'
     }
   },
-  async mounted() {
-    await this.fetchBots()
+  fetch() {
+    if (process.server) {
+      this.fetchLeaders()
+    }
+  },
+  mounted() {
+    this.searchParams = { p: 0, pp: this.pageSize }
+    this.fetchLeaders()
   },
   methods: {
-    fetchBots() {
-      this.enoughLoadBots = true
-      getBotsLeaderboard(this.searchParams).then((bots) => {
-        if (bots.length) {
-          this.searchParams.p += 1
-          this.bots = this.bots.concat(bots)
-          this.enoughLoadBots = false
-        }
-      })
+    fetchLeaders() {
+      if (this.isDisplayBots) {
+        this.fetchBots()
+      }
+      if (this.isDisplayUsers) {
+        this.fetchUsers()
+      }
     },
-    async setDisplaedLeaders(leadersType) {
-      if (leadersType === 'bots') {
-        this.isDisplayUsers = false
-        this.isDisplayBots = true
-      } else {
-        if (!this.users.length) {
-          this.users = await getUsersLeaderboard()
-        }
-        this.isDisplayUsers = true
-        this.isDisplayBots = false
+    async fetchBots() {
+      this.enoughLoadLeaders = true
+      const bots = await getBotsLeaderboard(this.searchParams)
+      if (bots.length) {
+        this.searchParams.p += 1
+        this.bots = this.bots.concat(bots)
+        this.enoughLoadLeaders = false
+      }
+    },
+    async fetchUsers() {
+      this.enoughLoadLeaders = true
+      const users = await getUsersLeaderboard(this.searchParams)
+      if (users.length) {
+        this.searchParams.p += 1
+        this.users = this.users.concat(users)
+        this.enoughLoadLeaders = false
       }
     }
   }

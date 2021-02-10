@@ -71,9 +71,9 @@ function timeAgo(epochStamp) {
   }
   return { time: null, text: 'justNow' }
 }
-const getUsersLeaderboard = async() => {
+const getUsersLeaderboard = async(params) => {
   try {
-    const { data } = await publicApi.get('/users')
+    const { data } = await publicApi.get('/users', { params })
     return data
   } catch ({ response }) {
     if (response && response.data && response.data.error) { return null }
