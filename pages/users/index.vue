@@ -14,7 +14,7 @@ export default {
     username: ''
   }),
   created() {
-    this.username = this.$route.params.user || 'anthive'
+    this.username = this.$route.query.username || 'anthive'
   }
 }
 </script>
