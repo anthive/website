@@ -88,16 +88,18 @@ export default {
       ]
     }
   },
-  data: () => ({
-    status: null,
-    userInfo: {},
-    user: {},
-    us: null,
-    games: []
-  }),
-  async fetch() {
+  data() {
+    return {
+      status: null,
+      userInfo: {},
+      user: {},
+      us: null,
+      games: []
+    }
+  },
+  fetch() {
     if (process.server) {
-      await this.loadGames()
+      this.loadGames()
     }
   },
   computed: {
@@ -129,14 +131,13 @@ export default {
       }
     }
   },
-  async mounted() {
-    await this.loadGames()
+  mounted() {
+    this.loadGames()
   },
-  created() {
+  async created() {
     this.us = new User()
-    this.us.getUserData(this.username).then((result) => {
-      this.userInfo = result
-    })
+    const result = await this.us.getUserData(this.username)
+    if (result) { this.userInfo = result }
   },
   methods: {
     loadGames() {
