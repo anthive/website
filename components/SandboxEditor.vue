@@ -91,7 +91,7 @@ export default {
   methods: {
     onChangeTab(lang, tab) {
       this.tab = tab
-      this.$router.push(`/sandbox/${lang.extention}`)
+      this.$router.push(this.localePath(`/sandbox/${lang.extention}`))
     },
     initEditors(lang) {
       // TODO: fix eslint

@@ -85,16 +85,31 @@
       </div>
 
       <div class="component">
-        <h4>GamesLeaderCard</h4>
-        <p v-if="$options.components['GamesLeaderCard'].props">
-          Props: {{ $options.components['GamesLeaderCard'].props }}
+        <h4>LeaderboardBotChip</h4>
+        <p v-if="$options.components['LeaderboardBotChip'].props">
+          Props: {{ $options.components['LeaderboardBotChip'].props }}
         </p>
         <div>
-          <GamesLeaderCard
+          <LeaderboardBotChip
             v-for="(bot, index) in bots"
-            :key="bot.displayName + index"
+            :key="bot.displayName"
             :place="index + 1"
             :leader="bot"
+          />
+        </div>
+      </div>
+
+      <div class="component">
+        <h4>LeaderboardUserChip</h4>
+        <p v-if="$options.components['LeaderboardUserChip'].props">
+          Props: {{ $options.components['LeaderboardUserChip'].props }}
+        </p>
+        <div>
+          <LeaderboardUserChip
+            v-for="(user, index) in users"
+            :key="user.username"
+            :place="index + 1"
+            :leader="user"
           />
         </div>
       </div>
@@ -130,7 +145,8 @@
 import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
-import GamesLeaderCard from '@/components/GamesLeaderCard'
+import LeaderboardBotChip from '@/components/LeaderboardBotChip'
+import LeaderboardUserChip from '@/components/LeaderboardUserChip'
 import GamesTable from '@/components/GamesTable'
 import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
@@ -143,7 +159,8 @@ export default {
     AntHiveButton,
     AntHiveIcon,
     AntHiveAuthor,
-    GamesLeaderCard,
+    LeaderboardBotChip,
+    LeaderboardUserChip,
     GamesTable,
     AntHiveBotSmall,
     AntHiveBotHorizontal,
@@ -154,32 +171,92 @@ export default {
   data: () => ({
     bots: [
       {
-        id: 192,
-        displayName: 'Player1',
-        lang: 'go',
-        avatar: 'ant-195',
-        stats: {
-          ants: 1,
-          age: 1000,
-          art: 116,
-          hive: 1,
-          score: 98,
-          errors: 902
-        }
+        id: 325,
+        skin: 1,
+        v: 1,
+        displayName: 'Unplausive-Efficience',
+        avatar: 'ant-234',
+        userId: 234,
+        lang: 'php',
+        isActive: false,
+        games: 0,
+        wins: 0,
+        losses: 0,
+        mmr: 0,
+        score: 100,
+        art: 0,
+        errors: 0
       },
       {
-        id: 193,
-        displayName: 'Player2',
+        id: 326,
+        skin: 1,
+        v: 1,
+        displayName: 'Oaken-Exploder',
+        avatar: 'ant-234',
+        userId: 234,
+        lang: 'go',
+        isActive: false,
+        games: 0,
+        wins: 0,
+        losses: 0,
+        mmr: 0,
+        score: 100,
+        art: 0,
+        errors: 0
+      },
+      {
+        id: 418,
+        skin: 1,
+        v: 1,
+        displayName: 'court-turn',
+        avatar: '37ca8fa5-db28-4892-8ec4-bf78e33c236f',
+        userId: 225,
         lang: 'js',
-        avatar: 'ant-190',
-        stats: {
-          ants: 21,
-          age: 1000,
-          art: 316,
-          hive: 2,
-          score: 198,
-          errors: 102
-        }
+        isActive: true,
+        games: 9,
+        wins: 1,
+        losses: 2,
+        mmr: 99,
+        score: 100,
+        art: 820,
+        errors: 27
+      }
+    ],
+    users: [
+      {
+        id: 1,
+        avatar: '27418530-f184-4693-8e56-8333d8546944',
+        background: '',
+        username: 'anthive',
+        displayName: 'AntHive.IO',
+        description: '',
+        socials: {},
+        score: 100,
+        mmr: 200,
+        bots: []
+      },
+      {
+        id: 225,
+        avatar: '8d207be3-2ecb-4363-b735-32d2c3653d64',
+        background: '',
+        username: 'ant-225',
+        displayName: 'Vitaly Kezlya',
+        description: '',
+        socials: {},
+        score: 100,
+        mmr: 200,
+        bots: []
+      },
+      {
+        id: 283,
+        avatar: 'ant-283',
+        background: '',
+        username: 'ant-283',
+        displayName: '234',
+        description: 'asdf',
+        score: 100,
+        mmr: 200,
+        socials: {}
       }
     ]
   })
