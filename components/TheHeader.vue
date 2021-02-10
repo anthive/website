@@ -8,8 +8,8 @@
     absolute
   >
     <v-container class="d-flex align-center pt-2">
-      <v-toolbar-title>
-        <TheLogo :light="isProfilePage" @click="handlerClickMenuItem('index')" />
+      <v-toolbar-title @click="handlerClickMenuItem('index')">
+        <TheLogo :light="isProfilePage" />
       </v-toolbar-title>
       <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
