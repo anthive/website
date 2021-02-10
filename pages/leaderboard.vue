@@ -104,6 +104,7 @@
             :place="index + 1"
             :leader="bot"
           />
+          <infinite-scroll :enough="enoughLoadBots" @load-more="fetchBots" />
         </template>
         <template v-if="isDisplayUsers">
           <LeaderboardUserChip
@@ -113,6 +114,7 @@
             :leader="user"
           />
         </template>
+
         <template v-if="(isDisplayUsers && !users) || (isDisplayBots && !bots)">
           <v-skeleton-loader
             v-for="skeleton in 8"
@@ -173,12 +175,14 @@ export default {
         }
       ],
       isDisplayUsers: false,
-      isDisplayBots: true
+      isDisplayBots: true,
+      enoughLoadBots: false,
+      searchParams: { p: 0, pp: 20 }
     }
   },
   async fetch() {
     if (process.server) {
-      this.bots = await getBotsLeaderboard()
+      await this.fetchBots()
     }
   },
   computed: {
@@ -187,9 +191,19 @@ export default {
     }
   },
   async mounted() {
-    this.bots = await getBotsLeaderboard()
+    await this.fetchBots()
   },
   methods: {
+    fetchBots() {
+      this.enoughLoadBots = true
+      getBotsLeaderboard(this.searchParams).then((bots) => {
+        if (bots.length) {
+          this.searchParams.p += 1
+          this.bots = this.bots.concat(bots)
+          this.enoughLoadBots = false
+        }
+      })
+    },
     async setDisplaedLeaders(leadersType) {
       if (leadersType === 'bots') {
         this.isDisplayUsers = false
