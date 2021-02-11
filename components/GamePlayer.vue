@@ -12,6 +12,7 @@
             color="#00BF70"
             dark
             block
+            @click="$gtag('event', 'player_rematch')"
           >{{ $t("game.requestRematch") }}</v-btn
           >
           <v-btn
@@ -19,7 +20,7 @@
             color="#333333"
             dark
             block
-            @click="$emit('replay')"
+            @click="handlerClickReplay"
           >{{ $t("game.replay") }}
             <AntHiveIcon icon="autorenew" class="ml-1" color="white" />
           </v-btn>
@@ -36,6 +37,7 @@
                     color="#333333"
                     target="_blank"
                     rel="noreferrer"
+                    @click="$gtag('event', 'player_share_linkedin')"
                     v-on="on"
                   >
                     <AntHiveIcon icon="linkedin" color="grey" />
@@ -53,6 +55,7 @@
                     color="#333333"
                     target="_blank"
                     rel="noreferrer"
+                    @click="$gtag('event', 'player_share_facebook')"
                     v-on="on"
                   >
                     <AntHiveIcon icon="facebook" color="grey" />
@@ -70,6 +73,7 @@
                     color="#333333"
                     target="_blank"
                     rel="noreferrer"
+                    @click="$gtag('event', 'player_share_twitter')"
                     v-on="on"
                   >
                     <AntHiveIcon icon="twitter" color="grey" />
@@ -87,6 +91,7 @@
                     color="#333333"
                     target="_blank"
                     rel="noreferrer"
+                    @click="$gtag('event', 'player_share_mail')"
                     v-on="on"
                   >
                     <AntHiveIcon icon="email" color="grey" />
@@ -102,7 +107,7 @@
                     dark
                     color="#333333"
                     v-on="on"
-                    @click="copyToClipboard()"
+                    @click="copyToClipboard"
                   >
                     <AntHiveIcon icon="file-document-box-multiple" color="grey"/>
                   </v-btn>
@@ -147,7 +152,12 @@ export default {
     }
   },
   methods: {
+    handlerClickReplay() {
+      this.$gtag('event', 'player_replay')
+      this.$emit('replay')
+    },
     async copyToClipboard() {
+      this.$gtag('event', 'player_copy_link')
       try {
         await this.$copyText(this.currentUrl)
       } catch (er) {

@@ -179,6 +179,11 @@ export default {
   watch: {
     $route() {
       this.isGameAvailable = true
+    },
+    isCodeChanged() {
+      if (this.isCodeChanged) {
+        this.$gtag('event', 'sandbox_type_code')
+      }
     }
   },
   async mounted() {

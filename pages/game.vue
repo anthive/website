@@ -213,15 +213,26 @@ export default {
         })
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
+          this.$gtag('event', 'player_debug')
           this.isDebugMode = data
         })
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
+          if (this.isDebugMode) {
+            this.$gtag('event', 'player_debug_stop')
+          } else {
+            this.$gtag('event', 'player_stop')
+          }
           this.isGameStoped = true
           this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
         })
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
+          if (this.isDebugMode) {
+            this.$gtag('event', 'player_debug_play')
+          } else {
+            this.$gtag('event', 'player_play')
+          }
           this.isGameStoped = false
           this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
         })

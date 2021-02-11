@@ -1,5 +1,7 @@
 <template>
-  <div class="chip">
+  <div
+    class="chip"
+    @mouseover="$gtag('event', 'hbot_hover')">
     <div
       :style="`background: center / cover no-repeat url(${getAvatar(
         bot.avatar,
@@ -16,7 +18,10 @@
     </div>
     <div :class="{fade: isDead}" class="description">
       <div class="information">
-        <nuxt-link :to="localePath(`/users/${bot.username}`)" class="information-user">
+        <nuxt-link
+          :to="localePath(`/users/${bot.username}`)"
+          class="information-user"
+          @click.native="$gtag('event', 'hbot_to_author')">
           {{ $t("game.by") }} {{ bot.username }}
           <v-avatar
             class="ml-1"
@@ -113,6 +118,7 @@ export default {
       return Math.round(art / 10) / 100
     },
     challange(botId) {
+      this.$gtag('event', 'hbot_challange')
       const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${botId}`
       window.location.href = challangeUrl
     }

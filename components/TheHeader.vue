@@ -146,6 +146,7 @@ export default {
 
 .header {
   background: $lilac-select !important;
+  overflow: hidden;
   &.profile {
     background: transparent !important;
   }
