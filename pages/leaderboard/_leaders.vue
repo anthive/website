@@ -25,7 +25,7 @@
           {{ $t(`leaderboard.byVersion`) }}
         </v-col>
       </v-row>
-      <GamesLeaderCard
+      <LeaderboardBotChip
         class="leaderboard__table-player"
         :key="player.displayName + index"
         v-for="(player, index) in players"
@@ -80,38 +80,66 @@
           </v-col>
         </v-row>
       </v-card> -->
-
+      <AntHiveButton
+        :disabled="isDisplayBots"
+        :light="isDisplayBots"
+        :to="localePath('/leaderboard/bots')"
+        class="button"
+        tile
+        color="primary"
+      >{{ $t('leaderboard.bots') }}</AntHiveButton>
+      <AntHiveButton
+        :disabled="isDisplayUsers"
+        :light="isDisplayUsers"
+        :to="localePath('/leaderboard/users')"
+        class="button"
+        tile
+        color="primary"
+      >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="table">
-        <template v-if="bots">
-          <GamesLeaderCard
+        <template v-if="isDisplayBots">
+          <LeaderboardBotChip
             v-for="(bot, index) in bots"
-            :key="bot.displayName + index"
+            :key="bot.displayName"
             :place="index + 1"
             :leader="bot"
-            class=""
+          />
+          <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
+        </template>
+        <template v-if="isDisplayUsers">
+          <LeaderboardUserChip
+            v-for="(user, index) in users"
+            :key="user.username"
+            :place="index + 1"
+            :leader="user"
+          />
+          <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
+        </template>
+
+        <template v-if="(isDisplayUsers && !users) || (isDisplayBots && !bots)">
+          <v-skeleton-loader
+            v-for="skeleton in 8"
+            :key="skeleton + 'skeleton'"
+            tile
+            width="100%"
+            height="120px"
+            class="skeleton"
+            elevation="2"
+            type="list-item-avatar-three-line"
           />
         </template>
-        <v-skeleton-loader
-          v-for="skeleton in 8"
-          v-else
-          :key="skeleton + 'skeleton'"
-          tile
-          width="100%"
-          height="120px"
-          class="skeleton"
-          elevation="2"
-          type="list-item-avatar-three-line"
-        />
       </div>
     </v-container>
   </section>
 </template>
 
 <script>
-import langs from '../static/langs/data.json'
+import langs from '@/static/langs/data.json'
 import { getBotsLeaderboard } from '@/services/Bot'
-import GamesLeaderCard from '@/components/GamesLeaderCard'
+import { getUsersLeaderboard } from '@/services/User'
+import LeaderboardBotChip from '@/components/LeaderboardBotChip'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import LeaderboardUserChip from '@/components/LeaderboardUserChip'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 
 export default {
@@ -128,35 +156,79 @@ export default {
   },
   name: 'Leaderboard',
   components: {
-    GamesLeaderCard,
+    LeaderboardUserChip,
+    LeaderboardBotChip,
     AntHiveIcon,
     AntHivePageHeader
   },
-  data: () => ({
-    countries: ['russia', 'usa'], // TODO
-    cities: ['moscow', 'new yourk'], // TODO
-    langs: [],
-    bots: [],
-    columns: [
-      {
-        text: 'mmr',
-        sortable: true,
-        description: 'mmr' // TODO: add description
-      }
-    ]
-  }),
-  async fetch() {
-    if (process.server) {
-      this.bots = await getBotsLeaderboard()
+  data() {
+    return {
+      countries: ['russia', 'usa'], // TODO
+      cities: ['moscow', 'new yourk'], // TODO
+      langs: [],
+      bots: [],
+      users: [],
+      columns: [
+        {
+          text: 'mmr',
+          sortable: true,
+          description: 'mmr' // TODO: add description
+        }
+      ],
+      enoughLoadLeaders: false,
+      pageSize: 20,
+      searchParams: {}
     }
   },
   computed: {
     getLangs() {
       return langs
+    },
+    isDisplayBots() {
+      return this.$route.params.leaders === 'bots'
+    },
+    isDisplayUsers() {
+      return this.$route.params.leaders === 'users'
     }
   },
-  async mounted() {
-    this.bots = await getBotsLeaderboard()
+  fetch() {
+    if (process.server) {
+      this.fetchLeaders()
+    }
+  },
+  mounted() {
+    this.searchParams = { p: 0, pp: this.pageSize }
+    this.fetchLeaders()
+  },
+  methods: {
+    fetchLeaders() {
+      if (this.isDisplayBots) {
+        this.$gtag('event', 'leaderboard_bots')
+        this.fetchBots()
+      }
+      if (this.isDisplayUsers) {
+        this.$gtag('event', 'leaderboard_users')
+        this.fetchUsers()
+      }
+    },
+    async fetchBots() {
+      this.enoughLoadLeaders = true
+      const bots = await getBotsLeaderboard(this.searchParams)
+      if (bots.length) {
+        this.searchParams.p += 1
+        this.bots = this.bots.concat(bots)
+        this.enoughLoadLeaders = false
+      }
+    },
+    async fetchUsers() {
+      this.enoughLoadLeaders = true
+      const users = await getUsersLeaderboard(this.searchParams)
+      if (users.length) {
+        this.searchParams.p += 1
+        this.users = this.users.concat(users)
+        this.enoughLoadLeaders = false
+      }
+    }
   }
 }
 </script>

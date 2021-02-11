@@ -95,7 +95,7 @@ export default {
       const { extention } = lang
       this.tab = tab
       this.$gtag('event', `sandbox_lang_to_${extention}`)
-      this.$router.push(`/sandbox/${extention}`)
+      this.$router.push(this.localePath(`/sandbox/${extention}`))
     },
     initEditors(lang) {
       // TODO: fix eslint

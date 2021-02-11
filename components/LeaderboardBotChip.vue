@@ -19,7 +19,7 @@
             <v-avatar
               tile
               width="120px"
-              height="100%"
+              height="120px"
               class="avatar">
               <v-img :src="getAvatar(leader.avatar, 240)" />
             </v-avatar>
@@ -32,7 +32,10 @@
               {{ leader.displayName }}
               <span class="version">v.{{ leader.v }}</span>
             </div>
-            <nuxt-link :to="localePath(`/users/${leader.username}`)" class="information-user">
+            <nuxt-link
+              :to="localePath(`/users/${leader.username}`)"
+              class="information-user"
+              @click.native="this.$gtag('event', 'leaderboard_to_author')">
               {{ $t("game.by") }} {{ leader.username }}
               <v-avatar class="ml-1" tile size="30">
                 <v-img :src="getAvatar(leader.userAvatar, 60)" />
@@ -64,7 +67,7 @@
                   small
                   color="#d1cae8"
                 />
-                {{ leader.loses }}
+                {{ leader.losses }}
               </div>
               <div>
                 <AntHiveIcon
@@ -121,7 +124,7 @@ import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 export default {
-  name: 'GamesLeaderCard',
+  name: 'LeaderboardBotChip',
   components: {
     AntHiveIcon
   },
@@ -136,6 +139,7 @@ export default {
       return currentLang.img
     },
     goToChallangePage(id) {
+      this.$gtag('event', 'leaderboard_challange')
       const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${id}`
       window.location.href = challangeUrl
     }
