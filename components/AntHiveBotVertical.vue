@@ -1,5 +1,7 @@
 <template>
-  <div class="chip">
+  <div
+    class="chip"
+    @mouseover="$gtag('event', 'vbot_hover')">
     <div :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 400)})`" class="img">
       <img
         :src="getCurrentLangImg"
@@ -29,11 +31,14 @@
         </div>
         <div class="stats-row">
           <p>{{ $t("userInfo.errors") }}:</p>
-          <p class="value">{{ bot.errors }}%</p>
+          <p class="value">{{ bot.err }}%</p>
         </div>
       </div>
       <div v-if="!isUserProfile" class="layout">
-        <nuxt-link :to="localePath(`/users/${getUsername}`)" class="user-info">
+        <nuxt-link
+          :to="localePath(`/users/${getUsername}`)"
+          class="user-info"
+          @click.native="$gtag('event', 'vbot_to_author')">
           {{ $t("game.by") }} {{ getUsername }}
           <v-avatar class="ml-1" tile size="35">
             <v-img :src="getAvatar(getUserAvatar, 70)" />
@@ -107,6 +112,7 @@ export default {
   },
   methods: {
     challange(botId) {
+      this.$gtag('event', 'vbot_challange')
       const challangeUrl = `${process.env.PROFILE_URL}/new-game?challange=${botId}`
       window.open(challangeUrl)
     }

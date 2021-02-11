@@ -6,7 +6,7 @@
   >
     <div
       class="bots"
-      @mouseover="handlerBotsMousseOver"
+      @mouseover="handlerBotsMouseOver"
     >
       <div
         v-for="(bot, index) in game.bots"
@@ -162,18 +162,18 @@ export default {
       }
     },
     handlerChipMouseOver() {
-      this.$gtag('event', 'Vertical game chip hover', { event_category: 'game_chip', event_label: 'games' })
+      this.$gtag('event', 'gamechip_hover')
       this.hoverOnChip = true
     },
-    handlerBotsMousseOver() {
-      this.$gtag('event', 'Vertical game chip bots section hover', { event_category: 'game_chip', event_label: 'games' })
+    handlerBotsMouseOver() {
+      this.$gtag('event', 'gamechip_bots_hover')
     },
     handlerGoToGame(game) {
-      this.$gtag('event', 'Go to game page', { event_category: 'game_chip', event_label: 'games' })
+      this.$gtag('event', 'gamechip_to_game')
       this.$router.push({ path: this.localePath('game'), query: { id: game.id, v: game.v } })
     },
     handlerClickUser(username) {
-      this.$gtag('event', 'Go to user profile page', { event_category: 'game_chip', event_label: 'games' })
+      this.$gtag('event', 'gamechip_to_user')
       this.$router.push(this.localePath(`/users/${username}`))
     }
   }

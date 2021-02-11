@@ -203,9 +203,11 @@ export default {
   methods: {
     fetchLeaders() {
       if (this.isDisplayBots) {
+        this.$gtag('event', 'leaderboard_bots')
         this.fetchBots()
       }
       if (this.isDisplayUsers) {
+        this.$gtag('event', 'leaderboard_users')
         this.fetchUsers()
       }
     },

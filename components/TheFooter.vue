@@ -124,23 +124,23 @@ export default {
           localeParam = 'ru'
           break
       }
-      this.$gtag('event', `Change locale to ${locale}`, { event_category: 'locale', event_label: 'footer' })
+      this.$gtag('event', `locale_to_${locale}`)
       this.$router.push(this.switchLocalePath(localeParam))
     },
     handlerClickTerms() {
-      this.$gtag('event', 'Go to Terms page', { event_category: 'terms', event_label: 'footer' })
+      this.$gtag('event', 'to_terms')
       this.$router.push(this.localePath('tos'))
     },
     handlerClickPolicy() {
-      this.$gtag('event', 'Go to Policy page', { event_category: 'policy', event_label: 'footer' })
+      this.$gtag('event', 'to_policy')
       this.$router.push(this.localePath('pp'))
     },
     handlerClickReportIssue() {
-      this.$gtag('event', 'Go to report issue', { event_category: 'report_issue', event_label: 'footer' })
+      this.$gtag('event', 'report_issue')
       window.open('https://github.com/anthive/website/issues', '_blank', 'noreferrer')
     },
     handlerClickSocial(link, socialName) {
-      this.$gtag('event', `Go to ${socialName}`, { event_category: 'socials', event_label: 'footer' })
+      this.$gtag('event', `to_${socialName}`)
       window.open(link, '_blank', 'noreferrer')
     }
   }

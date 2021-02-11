@@ -8,8 +8,8 @@
     absolute
   >
     <v-container class="d-flex align-center pt-2">
-      <v-toolbar-title>
-        <TheLogo :light="isProfilePage" @click="handlerClickMenuItem('index')" />
+      <v-toolbar-title @click="handlerClickMenuItem('index')">
+        <TheLogo :light="isProfilePage" />
       </v-toolbar-title>
       <v-spacer />
       <v-menu class="hidden-md-and-up" offset-y transition="scale-transition">
@@ -127,15 +127,15 @@ export default {
   },
   mounted() {
     const eventCategory = this.getUser ? 'logened_user' : 'not_logened_user'
-    this.$gtag('event', 'Home page visit', { event_category: eventCategory, event_label: 'homepage' })
+    this.$gtag('event', `visitor_${eventCategory}`)
   },
   methods: {
     handlerClickGetStarted() {
-      this.$gtag('event', 'Get started Header', { event_category: 'get_started', event_label: 'header' })
+      this.$gtag('event', 'header_get_started')
       window.location.href = this.profileUrl
     },
     handlerClickMenuItem(itemName) {
-      this.$gtag('event', `Go to ${itemName} page`, { event_category: itemName, event_label: 'header' })
+      this.$gtag('event', `to_${itemName}_page`)
       this.$router.push(this.localePath(itemName))
     }
   }
@@ -146,6 +146,7 @@ export default {
 
 .header {
   background: $lilac-select !important;
+  overflow: hidden;
   &.profile {
     background: transparent !important;
   }

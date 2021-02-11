@@ -1,5 +1,5 @@
 <template>
-  <section id="inspire">
+  <section>
     <DocsSidebar />
     <div class="docs" v-html="rules" />
   </section>

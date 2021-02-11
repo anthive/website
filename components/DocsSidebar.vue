@@ -13,6 +13,7 @@
             :to="{ path: `#${chapter.name}` }"
             class="py-0"
             link
+            @click="$gtag('event', `rules_${chapter.name}`)"
           >
             {{ chapter.name }}
           </v-list-item>
@@ -23,6 +24,7 @@
             :key="rule"
             :to="{ path: `#${rule}` }"
             link
+            @click="$gtag('event', `rules_${rule}`)"
           >
             <v-list-item-content>
               <v-list-item-title class="children">

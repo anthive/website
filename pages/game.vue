@@ -125,25 +125,32 @@ export default {
     AntHiveIcon
   },
   mixins: [Image],
-  data: () => ({
-    isGameAvailable: true,
-    theme: 1,
-    tab: 0,
-    bots: [],
-    isGameEnd: false,
-    gameLoaded: false,
-    gameId: '',
-    gamePlayer: null,
-    timerId: null,
-    tooltipContent: null,
-    requests: [],
-    responses: [],
-    fetchPlayerDataTimerId: '',
-    isDebugMode: false,
-    isGameStoped: false,
-    gameTooltip: '',
-    game: {}
-  }),
+  data() {
+    return {
+      isGameAvailable: true,
+      theme: 1,
+      tab: 0,
+      bots: [],
+      isGameEnd: false,
+      gameLoaded: false,
+      gameId: '',
+      gamePlayer: null,
+      timerId: null,
+      tooltipContent: null,
+      requests: [],
+      responses: [],
+      fetchPlayerDataTimerId: '',
+      isDebugMode: false,
+      isGameStoped: false,
+      gameTooltip: '',
+      game: {}
+    }
+  },
+  computed: {
+    getModeString() {
+      return this.isDebugMode ? 'debug' : 'normal'
+    }
+  },
   watch: {
     $route() {
       this.gamePlayerDestroy()
@@ -176,7 +183,7 @@ export default {
         this.fetchPlayer()
       } catch {
         this.isGameAvailable = false
-        this.$gtag('event', 'Not found game', { event_category: 'game', value: this.gameId })
+        this.$gtag('event', 'game_not_found')
       }
     },
     fetchPlayer() {
@@ -214,16 +221,35 @@ export default {
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.DEBUG, data => {
           this.isDebugMode = data
+          this.$gtag('event', `player_${this.getModeString}`)
         })
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.STOP, () => {
+          this.$gtag('event', `player_${this.getModeString}_stop`)
           this.isGameStoped = true
           this.gamePlayer.container.addEventListener('mousemove', this.gameSetTooltipCoords)
         })
         // eslint-disable-next-line
         this.gamePlayer.on(AnthivePlayer.event.PLAY, () => {
+          this.$gtag('event', `player_${this.getModeString}_play`)
           this.isGameStoped = false
           this.gamePlayer.container.removeEventListener('mousemove', this.gameSetTooltipCoords)
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.PREV, () => {
+          this.$gtag('event', `player_${this.getModeString}_prev`)
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.NEXT, () => {
+          this.$gtag('event', `player_${this.getModeString}_next`)
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.SPEED, () => {
+          this.$gtag('event', `player_${this.getModeString}_speed`)
+        })
+        // eslint-disable-next-line
+        this.gamePlayer.on(AnthivePlayer.event.FULLSCREEN, () => {
+          this.$gtag('event', `player_${this.getModeString}_fullscreen`)
         })
       })
     },

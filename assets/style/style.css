@@ -151,11 +151,11 @@ a.anthive-btn:hover {
   white-space: break-spaces !important;
 }
 
-.docs .card a {
+.docs a {
   text-decoration: underline;
 }
 
-.docs .card a:hover {
+.docs a:hover {
   text-decoration: none !important;
 }
 
