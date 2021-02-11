@@ -169,7 +169,7 @@ export default {
           href="/rules"
         >${this.$t('header.rules')}</a>
       `
-      const discordElement = '<a class="accent--text" tonClick="$gtag(\'event\', \'sandbox_to_discord\');" arget="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>'
+      const discordElement = '<a class="accent--text" onClick="$gtag(\'event\', \'sandbox_to_discord\');" target="_blank" href="https://discord.gg/3Z7KvYv">Discord</a>'
       return this.$t('sandbox.descriptionHelp', { rules: rulesElement, discord: discordElement })
     },
     getGameUrl() {
