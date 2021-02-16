@@ -73,7 +73,7 @@ function timeAgo(epochStamp) {
 }
 const getUsersLeaderboard = async(params) => {
   try {
-    const { data } = await publicApi.get('/users', { params })
+    const { data } = await publicApi.get('/leaderboard/users', { params })
     return data
   } catch ({ response }) {
     if (response && response.data && response.data.error) { return null }
