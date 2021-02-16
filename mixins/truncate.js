@@ -5,21 +5,15 @@ const Truncate = {
       return truncatedString
     },
     getNumberTruncated(number) {
-      let truncatedNumber
-      switch (true) {
-        case number >= 1000 && number < 1000000:
-          truncatedNumber = `${Math.floor(number / 1000)}K`
-          break
-
-        case number >= 1000000:
-          truncatedNumber = `${Math.floor(number / 1000000)}M`
-          break
-
-        default:
-          truncatedNumber = number
-          break
+      if (number >= 1000) {
+        number = `${Math.floor(number / 1000)}K`
       }
-      return truncatedNumber
+
+      if (number >= 1000000) {
+        number = `${Math.floor(number / 1000000)}M`
+      }
+
+      return number
     }
   }
 }
