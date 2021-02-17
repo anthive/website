@@ -35,6 +35,15 @@
             <div class="statistic">
               <div>
                 <AntHiveIcon
+                  icon="star"
+                  class="mx-1"
+                  small
+                  color="#d1cae8"
+                />
+                {{ leader.games }}
+              </div>
+              <div>
+                <AntHiveIcon
                   icon="challange"
                   class="mx-1"
                   small
