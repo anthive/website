@@ -94,7 +94,7 @@
                   small
                   color="#d1cae8"
                 />
-                {{ leader.errors }}%
+                {{ leader.err }}%
               </div>
               <div class="gradient-layout" />
               <AntHiveButton

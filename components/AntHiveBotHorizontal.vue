@@ -65,7 +65,7 @@
           <div class="statistic">
             <span>{{ $t("game.score") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncatedToThousand(botStats.score)
+              getNumberTruncated(botStats.score)
             }}</span>
           </div>
         </div>
@@ -73,7 +73,7 @@
           <div class="statistic">
             <span>{{ $t("game.errors") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncatedToThousand(botStats.errors)
+              getNumberTruncated(botStats.errors)
             }}</span>
           </div>
           <div class="statistic">

@@ -30,7 +30,7 @@
           </div>
           <div class="information">
             <div>
-              {{ leader.displayName }}
+              {{ leader.username }}
             </div>
             <div class="statistic">
               <div>
@@ -40,16 +40,16 @@
                   small
                   color="#d1cae8"
                 />
-                {{ leader.mmr }}
+                {{ leader.rank }}
               </div>
-              <div>
+              <div class="score">
                 <AntHiveIcon
                   icon="trophy-award"
                   class="mx-1"
                   small
                   color="#d1cae8"
                 />
-                {{ leader.score }}
+                {{ getNumberTruncated(leader.score) }}
               </div>
             </div>
           </div>
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import Truncate from '@/mixins/truncate'
+
 import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
@@ -68,7 +70,7 @@ export default {
   components: {
     AntHiveIcon
   },
-  mixins: [Image],
+  mixins: [Image, Truncate],
   props: {
     leader: { type: Object, required: true },
     place: { type: Number, required: true }
@@ -119,6 +121,10 @@ export default {
     justify-content: space-between;
     & > div {
       margin-left: 90px;
+    }
+
+    .score {
+      min-width: 75px;
     }
   }
 }

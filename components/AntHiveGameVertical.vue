@@ -41,7 +41,7 @@
           <div>
             <span>{{ $t("game.score") }}:</span>
             <span class="info-value">
-              {{ getNumberTruncatedToThousand(bot.score) }}
+              {{ getNumberTruncated(bot.score) }}
             </span>
           </div>
           <div>
