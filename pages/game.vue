@@ -32,6 +32,7 @@
             </v-card>
             <GameDebugPanel
               v-if="bots && isDebugMode"
+              :game-sha="gameId"
               :is-game-stoped="isGameStoped"
               :requests="requests"
               :responses="responses"
