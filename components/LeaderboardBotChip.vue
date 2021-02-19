@@ -35,7 +35,7 @@
             <nuxt-link
               :to="localePath(`/users/${leader.username}`)"
               class="information-user"
-              @click.native="this.$gtag('event', 'leaderboard_to_author')">
+              @click.native="$gtag('event', 'leaderboard_to_author')">
               {{ $t("game.by") }} {{ leader.username }}
               <v-avatar class="ml-1" tile size="30">
                 <v-img :src="getAvatar(leader.userAvatar, 60)" />

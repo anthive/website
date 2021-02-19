@@ -1,112 +1,28 @@
 <template>
-
-  <!-- <section class="leaderboard texture-arrows">
-  <v-card class="leaderboard__table">
-      <v-row class="leaderboard__table-head">
-        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
-          <span>{{ $t('leaderboard.place') }}</span>
-        </v-col>
-        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="6" class="pl-7">
-          <span>{{ $t('leaderboard.player') }}</span>
-        </v-col>
-        <v-col cols="6" sm="1"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byGames`) }}
-        </v-col>
-          <v-col cols="6" sm="2"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byScore`) }}
-        </v-col>
-         <v-col cols="6" sm="2"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byVersion`) }}
-        </v-col>
-      </v-row>
-      <LeaderboardBotChip
-        class="leaderboard__table-player"
-        :key="player.displayName + index"
-        v-for="(player, index) in players"
-        :place="index + 1"
-        :leader="player"
-      />
-    </v-card> -->
   <section class="leaderboard page-wrap">
     <v-container>
       <div class="header">
-        <!-- <div class="header__img-wrap">
-          <v-img src="/img/leaderboard-title-icon.svg" />
-          <div class="header__lang">C++</div>
-        </div> -->
         <AntHivePageHeader
           :title="$t('leaderboard.title')"
           :tooltip-text="$t('leaderboard.description')"
         />
       </div>
-
-      <!-- <v-card tile class="leaderboard__filter filter">
-        <v-row>
-          <v-col cols="12" sm="4" class="filter__langs">
-            <div class="filter__title">{{ $t('leaderboard.languages') }}:</div>
-            <div class="filter__langs-icons">
-              <img
-                :key="lang.id"
-                v-for="lang in getLangs"
-                class="filter__lang-icon"
-                width="40px"
-                :src="lang.img"
-                :alt="lang.id"
-              />
-            </div>
-          </v-col>
-          <v-col cols="12" sm="5" class="filter__countries">
-            <div class="filter__title">{{ $t('leaderboard.countries') }}:</div>
-            <v-select
-              :menu-props="{ offsetY: true }"
-              class="anthive-select"
-              :items="countries"
-            ></v-select>
-          </v-col>
-          <v-col cols="12" sm="3" class="filter__cities">
-            <div class="filter__title">{{ $t('leaderboard.city') }}:</div>
-            <v-select
-              :menu-props="{ offsetY: true }"
-              item-color="red"
-              class="anthive-select"
-              :items="cities"
-            ></v-select>
-          </v-col>
-        </v-row>
-      </v-card> -->
       <AntHiveButton
-        :disabled="isDisplayBots"
-        :light="isDisplayBots"
         :to="localePath('/leaderboard/bots')"
         class="button"
         tile
         color="primary"
       >{{ $t('leaderboard.bots') }}</AntHiveButton>
       <AntHiveButton
-        :disabled="isDisplayUsers"
-        :light="isDisplayUsers"
         :to="localePath('/leaderboard/users')"
+        disabled
+        light
         class="button"
         tile
         color="primary"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="table">
-        <template v-if="isDisplayBots">
-          <LeaderboardBotChip
-            v-for="(bot, index) in bots"
-            :key="bot.displayName"
-            :place="index + 1"
-            :leader="bot"
-          />
-          <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
-        </template>
-        <template v-if="isDisplayUsers">
+        <template>
           <LeaderboardUserChip
             v-for="(user, index) in users"
             :key="user.username"
@@ -116,7 +32,7 @@
           <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
         </template>
 
-        <template v-if="(isDisplayUsers && !users) || (isDisplayBots && !bots)">
+        <template v-if="!users">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -134,10 +50,7 @@
 </template>
 
 <script>
-import langs from '@/static/langs/data.json'
-import { getBotsLeaderboard } from '@/services/Bot'
 import { getUsersLeaderboard } from '@/services/User'
-import LeaderboardBotChip from '@/components/LeaderboardBotChip'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import LeaderboardUserChip from '@/components/LeaderboardUserChip'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
@@ -157,7 +70,6 @@ export default {
   name: 'Leaderboard',
   components: {
     LeaderboardUserChip,
-    LeaderboardBotChip,
     AntHiveIcon,
     AntHivePageHeader
   },
@@ -166,7 +78,6 @@ export default {
       countries: ['russia', 'usa'], // TODO
       cities: ['moscow', 'new yourk'], // TODO
       langs: [],
-      bots: [],
       users: [],
       columns: [
         {
@@ -180,46 +91,17 @@ export default {
       searchParams: {}
     }
   },
-  computed: {
-    getLangs() {
-      return langs
-    },
-    isDisplayBots() {
-      return this.$route.params.leaders === 'bots'
-    },
-    isDisplayUsers() {
-      return this.$route.params.leaders === 'users'
-    }
-  },
   fetch() {
     if (process.server) {
-      this.fetchLeaders()
+      this.fetchUsers()
     }
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
-    this.fetchLeaders()
+    this.fetchUsers()
+    this.$gtag('event', 'leaderboard_users')
   },
   methods: {
-    fetchLeaders() {
-      if (this.isDisplayBots) {
-        this.$gtag('event', 'leaderboard_bots')
-        this.fetchBots()
-      }
-      if (this.isDisplayUsers) {
-        this.$gtag('event', 'leaderboard_users')
-        this.fetchUsers()
-      }
-    },
-    async fetchBots() {
-      this.enoughLoadLeaders = true
-      const bots = await getBotsLeaderboard(this.searchParams)
-      if (bots.length) {
-        this.searchParams.p += 1
-        this.bots = this.bots.concat(bots)
-        this.enoughLoadLeaders = false
-      }
-    },
     async fetchUsers() {
       this.enoughLoadLeaders = true
       const users = await getUsersLeaderboard(this.searchParams)
@@ -335,20 +217,12 @@ export default {
     display: inline;
     position: relative;
   }
-  &__table-bot {
-    margin: 0;
-  }
   &__user-card {
     margin-bottom: 15px;
   }
   &__sort-item {
     margin-left: 10px;
     cursor: pointer;
-  }
-  &__top-bots {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
   }
   .skeleton {
     background-color: $white;
@@ -358,10 +232,6 @@ export default {
 
 @media screen and (max-width: $screen-lg) {
   .leaderboard {
-    &__top-bots {
-      width: auto;
-      flex-direction: column;
-    }
     .headline {
       width: 100%;
       text-align: center;
