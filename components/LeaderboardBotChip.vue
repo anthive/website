@@ -33,7 +33,7 @@
               <span class="version">v.{{ leader.v }}</span>
             </div>
             <nuxt-link
-              :to="localePath(`/users/${leader.username}`)"
+              :to="localePath(`/users?username=${leader.username}`)"
               class="information-user"
               @click.native="this.$gtag('event', 'leaderboard_to_author')">
               {{ $t("game.by") }} {{ leader.username }}
