@@ -63,7 +63,7 @@
                   <span v-else> {{ $t("sandbox.loginToSave") }}</span>
                 </AntHiveButton>
               </div>
-              <div v-if="!isDebugMode && !simLogs && !botLogs">
+              <div v-if="!isDebugMode && !botLogs">
                 <p class="sandbox__description">{{ $t("sandbox.description") }}</p>
                 <p v-html="getHelpElement" />
               </div>
@@ -71,10 +71,10 @@
           </v-row>
           <GameDebugPanel
             v-if="bots && isDebugMode"
+            :game-sha="gameId"
             :is-game-stoped="isGameStoped"
             :requests="requests"
             :responses="responses"
-            :sim-logs="simLogs"
             :sandbox-bot-logs="botLogs"
             :bots="bots" />
         </div>
@@ -127,7 +127,6 @@ export default {
   },
   data: () => ({
     valueCode: {},
-    simLogs: '',
     botLogs: '',
     tab: 0,
     loading: false,
@@ -249,7 +248,7 @@ export default {
         if (this.gamePlayer && this.gamePlayer.control) {
           this.gamePlayer.control.stop()
         }
-        this.botLogs = this.simLogs = 'Loading...'
+        this.botLogs = 'Loading...'
 
         let isGameWasInQueue = false
         const sandboxRef = Fire.database().ref('sandbox')
@@ -344,7 +343,6 @@ export default {
     },
     async initLogs() {
       this.botLogs = await this.getLogs(this.gameId, 'bot')
-      this.simLogs = await this.getLogs(this.gameId, 'sim')
     },
     async getLogs(id, type) {
       const logsUrl = `${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/${id}-${type}.txt`

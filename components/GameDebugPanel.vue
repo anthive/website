@@ -2,8 +2,6 @@
   <div class="debug-panel">
     <v-tabs v-model="tab" background-color="primary" dark>
       <v-tabs-slider />
-      <v-tab v-if="simLogs" class="tab" @click="$gtag('event', 'sandbox_sim_logs')">Sim Logs</v-tab>
-      <v-tab v-if="sandboxBotLogs" class="tab" @click="$gtag('event', 'sandbox_bot_logs')">Bot Logs</v-tab>
       <v-tab
         v-for="(bot, index) in getBots"
         :key="index"
@@ -22,17 +20,6 @@
 
     <v-tabs-items v-model="tab">
       <div v-for="(bot, index) in getBots" :key="index + 10">
-        <v-tab-item v-if="simLogs" :transition="false" :reverse-transition="false">
-          <div class="tab-text">
-            <pre>{{ simLogs }}</pre>
-          </div>
-        </v-tab-item>
-
-        <v-tab-item v-if="sandboxBotLogs" :transition="false" :reverse-transition="false">
-          <div class="tab-text">
-            <pre>{{ sandboxBotLogs }}</pre>
-          </div>
-        </v-tab-item>
         <v-tab-item :transition="false" :reverse-transition="false">
           <div class="d-flex">
             <div class="tab-content">
@@ -57,6 +44,22 @@
                 }}</pre>
               </div>
             </div>
+            <div v-if="sandboxBotLogs" class="tab-content">
+              <div class="tab-title">Logs</div>
+              <div>
+                <pre class="tab-text">{{
+                  sandboxBotLogs
+                }}</pre>
+              </div>
+            </div>
+            <div v-else class="tab-content">
+              <div class="tab-title">Logs</div>
+              <div>
+                <pre class="tab-text">{{
+                  currentBotLogs
+                }}</pre>
+              </div>
+            </div>
           </div>
         </v-tab-item>
       </div>
@@ -65,6 +68,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Image from '@/mixins/image'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
@@ -78,17 +82,18 @@ export default {
     responses: { type: Array, required: true },
     bots: { type: Array, required: true },
     isGameStoped: { type: Boolean, default: false },
-    simLogs: {
-      type: String,
-      default: ''
-    },
     sandboxBotLogs: {
       type: String,
       default: ''
+    },
+    gameSha: {
+      type: String,
+      required: true
     }
   },
   data: () => ({
-    tab: 0
+    tab: 0,
+    currentBotLogs: null
   }),
   computed: {
     getBots() {
@@ -107,12 +112,38 @@ export default {
       return []
     }
   },
+  watch: {
+    tab() {
+      if (!this.sandboxBotLogs) {
+        this.getBotLogs()
+      }
+    }
+  },
+  async mounted() {
+    if (!this.sandboxBotLogs) {
+      await this.getBotLogs()
+    }
+  },
   methods: {
     getResponseRequest(bot, type) {
       // this[type] - requests/responses from props
       if (this[type] && this[type].length) {
-        return this[type].find(r => r.id === bot.id)
+        const log = this[type].find(r => r.id === bot.id)
+
+        if (!log) {
+          return ''
+        }
+
+        const orders = log.orders
+        const text = type === 'responses' ? orders : log
+        return text
       }
+    },
+    async getBotLogs() {
+      const currentBotId = this.bots[this.tab].id
+      const url = `${process.env.LOGS_STORAGE}/${process.env.SIM_VERSION}/${this.gameSha}-${currentBotId}.txt`
+      const resp = await axios.get(url)
+      this.currentBotLogs = resp.data
     },
     downloadRequest(request, id) {
       this.$gtag('event', 'download_request')
@@ -169,9 +200,9 @@ export default {
     width: 40%;
     height: 296px;
     overflow-y: auto;
-    &:first-child {
-      width: 60%;
-      border-right: 2px solid $violet;
+    border-right: 2px solid $violet;
+    &:nth-child(2) {
+      width: 20%;
     }
   }
   .tab-title {
