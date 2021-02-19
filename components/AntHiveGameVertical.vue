@@ -174,7 +174,7 @@ export default {
     },
     handlerClickUser(username) {
       this.$gtag('event', 'gamechip_to_user')
-      this.$router.push(this.localePath(`/users/${username}`))
+      this.$router.push(this.localePath(`/users?username=${username}`))
     }
   }
 }

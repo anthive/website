@@ -36,7 +36,7 @@
       </div>
       <div v-if="!isUserProfile" class="layout">
         <nuxt-link
-          :to="localePath(`/users/${getUsername}`)"
+          :to="localePath(`/users?username=${getUsername}`)"
           class="user-info"
           @click.native="$gtag('event', 'vbot_to_author')">
           {{ $t("game.by") }} {{ getUsername }}

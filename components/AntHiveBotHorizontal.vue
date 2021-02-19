@@ -19,7 +19,7 @@
     <div :class="{fade: isDead}" class="description">
       <div class="information">
         <nuxt-link
-          :to="localePath(`/users/${bot.username}`)"
+          :to="localePath(`/users?username=${bot.username}`)"
           class="information-user"
           @click.native="$gtag('event', 'hbot_to_author')">
           {{ $t("game.by") }} {{ bot.username }}

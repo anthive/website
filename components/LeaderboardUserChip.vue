@@ -14,10 +14,10 @@
 
     <v-col cols="12" sm="11" class="py-0">
       <v-card
-        :to="localePath(`/users/${leader.username}`)"
+        :to="localePath(`/users?username=${leader.username}`)"
         class="card"
         tile
-        @click.native="this.$gtag('event', 'leaderboard_to_user')">
+        @click.native="$gtag('event', 'leaderboard_to_user')">
         <div class="d-flex">
           <div class="avatar">
             <v-avatar
