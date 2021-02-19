@@ -115,7 +115,6 @@ export default {
   watch: {
     tab() {
       if (!this.sandboxBotLogs) {
-        console.log('bot change')
         this.getBotLogs()
       }
     }
