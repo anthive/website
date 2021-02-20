@@ -24,7 +24,7 @@
     "name": "C#",
     "img": "https://anthive.io/skins/lang/csharp.png",
     "sample": "https://github.com/anthive/csharp",
-    "sampleCode": "https://raw.githubusercontent.com/anthive/csharp/master/Program.cs"
+    "sampleCode": "https://raw.githubusercontent.com/anthive/csharp/master/Bot.cs"
   },
   {
     "id": "go",
