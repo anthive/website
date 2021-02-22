@@ -139,15 +139,15 @@ export default {
     getResponseRequest(bot, type) {
       // this[type] - requests/responses from props
       if (this[type] && this[type].length) {
-        const log = this[type].find(r => r.id === bot.id)
+        const botLog = this[type].find(r => r.id === bot.id)
 
-        if (!log) {
+        if (!botLog) {
           return ''
         }
 
-        const orders = { orders: log.orders }
-        const text = type === 'responses' ? orders : log
-        return text
+        const orders = { orders: botLog.orders }
+        const logContent = type === 'responses' ? orders : botLog
+        return logContent
       }
     },
     async getBotLogs() {
