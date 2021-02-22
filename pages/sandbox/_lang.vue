@@ -83,7 +83,7 @@
           <h3 class="mt-10 mb-2">{{ $t("sandbox.checkOut") }}:</h3>
           <div class="games-links">
             <nuxt-link
-              v-for="lang in getAllLangs"
+              v-for="lang in langs"
               :key="lang.id"
               :to="`${localePath('sandbox')}/${lang.extention}`"
               class="link"
@@ -104,7 +104,6 @@ import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Fire from '@/plugins/firebase'
-import langs from '@/static/langs/data.json'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
@@ -144,21 +143,20 @@ export default {
     fetchPlayerDataTimerId: null,
     timerId: null,
     isGameRunned: false,
-    isGameAvailable: true
+    isGameAvailable: true,
+    langs: null
   }),
   computed: {
     ...mapGetters(['getUser']),
     currentLangName() {
-      const { name } = this.getAllLangs.find((lang) => {
+      if (!this.langs) { return '' }
+      const { name } = this.langs.find((lang) => {
         return lang.extention === this.$route.params.lang
       })
       return name || ''
     },
     isCodeChanged() {
       return this.valueCode.value !== this.savedCode
-    },
-    getAllLangs() {
-      return langs
     },
     getHelpElement() {
       const rulesElement = `
@@ -186,6 +184,9 @@ export default {
     }
   },
   async mounted() {
+    const resp = await axios.get(`${process.env.WEBSITE_URL}/langs/data.json`)
+    this.langs = resp.data
+
     await import('../../static/js/anthive-5.0.js')
     if (this.$route.query.box) {
       this.gameId = this.$route.query.box
