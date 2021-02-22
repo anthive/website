@@ -261,16 +261,14 @@ export default {
             this.loading = false
             sandboxRef.off()
 
-            try {
-              await axios.head(this.getGameUrl)
-              this.initGame()
-            } catch {
-              console.log('POISON')
-            } finally {
-              this.isDebugMode = true
-              this.initLogs()
+            const isGameExist = await axios.head(this.getGameUrl)
+            if (!isGameExist) {
+              // TODO: Handle this error
+              return
             }
 
+            this.initGame()
+            this.initLogs()
             return
           }
 
