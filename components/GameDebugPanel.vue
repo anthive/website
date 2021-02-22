@@ -1,21 +1,32 @@
 <template>
   <div class="debug-panel">
-    <v-tabs v-model="tab" background-color="primary" dark>
+    <v-tabs
+
+      v-model="tab"
+      background-color="primary"
+      dark>
       <v-tabs-slider />
-      <v-tab
+      <div
         v-for="(bot, index) in getBots"
         :key="index"
-        active-class="active"
-        class="tab"
-        @click="$gtag('event', 'sandbox_bot_tab')"
-      ><v-avatar
-        v-if="!bot.displayName.includes('sandbox')"
-        class="avatar"
-        tile
-        size="20"
-      ><v-img :src="getAvatar(bot.avatar, 100)" /></v-avatar
-      ><span>{{ bot.displayName }} {{ bot.id }}</span></v-tab
       >
+        <v-tab
+          v-if="!sandboxBotLogs"
+          class="tab"
+          active-class="active"
+          @click="$gtag('event', 'sandbox_bot_tab')"
+        >
+          <v-avatar
+            v-if="!bot.displayName.includes('sandbox')"
+            class="avatar"
+            tile
+            size="20"
+          ><v-img :src="getAvatar(bot.avatar, 100)" />
+          </v-avatar>
+          <span>{{ bot.displayName }} {{ bot.id }}</span>
+        </v-tab>
+      </div>
+
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -134,13 +145,16 @@ export default {
           return ''
         }
 
-        const orders = log.orders
+        const orders = { orders: log.orders }
         const text = type === 'responses' ? orders : log
         return text
       }
     },
     async getBotLogs() {
-      const currentBotId = this.bots[this.tab].id
+      const currentBot = this.bots[this.tab]
+      if (!currentBot) { return }
+
+      const currentBotId = currentBot.id
       const url = `${process.env.LOGS_STORAGE}/${process.env.SIM_VERSION}/${this.gameSha}-${currentBotId}.txt`
       const resp = await axios.get(url)
       this.currentBotLogs = resp.data
@@ -193,7 +207,7 @@ export default {
   }
   .tab {
     text-transform: none;
-    padding-top: 5px;
+    height: 100%;
   }
   .tab-content {
     color: $violet;

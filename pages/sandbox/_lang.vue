@@ -70,7 +70,7 @@
             </v-col>
           </v-row>
           <GameDebugPanel
-            v-if="bots && isDebugMode"
+            v-if="isDebugMode"
             :game-sha="gameId"
             :is-game-stoped="isGameStoped"
             :requests="requests"
