@@ -266,7 +266,7 @@ export default {
               await axios.head(this.getGameUrl)
               this.initGame()
             } catch {
-              console.log('POISON')
+              this.loadingText = this.$t('sandbox.errorCompile')
             } finally {
               this.isDebugMode = true
               this.initLogs()

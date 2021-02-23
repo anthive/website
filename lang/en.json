@@ -178,7 +178,8 @@
     "sandbox": "Sandbox",
     "tooltipText": "In sandbox you can improve sample code the way you like it, also you can start writing basic strategies for your colony of ants.",
     "cantFindSandboxGame": "Can't find sandbox game",
-    "checkOut": "Сheck out sample bots"
+    "checkOut": "Сheck out sample bots",
+    "errorCompile": "Something is wrong…. We can not compile your code."
   },
 
   "rules": {
