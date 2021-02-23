@@ -4,6 +4,9 @@ const Image = {
     getAvatar(id, size) {
       return id && getImageById(id, size)
     },
+    getUserBackgroundImage(id, widht, height) {
+      return id && getImageById(id, widht, height)
+    },
     getLangImg(lang) {
       return `/skins/lang/${lang}.png`
     },
