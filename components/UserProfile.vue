@@ -121,7 +121,7 @@ export default {
     },
     getUserBackground() {
       if (this.userInfo && this.userInfo.background) {
-        return this.userInfo.background
+        return this.getUserBackgroundImage(this.userInfo.background, 1440, 220)
       }
       return '/img/user_background.png'
     },

@@ -119,7 +119,7 @@ export default {
       return this.getUser && this.getUser.userName ? this.getUser.userName : 'anthive'
     },
     isProfilePage() {
-      return this.$route.path.startsWith('/users/')
+      return this.$route.path.startsWith('/users')
     },
     getLogo() {
       return this.isProfilePage ? '/img/anthive_logo.svg' : '/img/anthive_logo_dark.svg'
