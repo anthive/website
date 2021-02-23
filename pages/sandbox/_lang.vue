@@ -262,14 +262,16 @@ export default {
             this.loading = false
             sandboxRef.off()
 
-            const isGameExist = await axios.head(this.getGameUrl)
-            if (!isGameExist) {
-              // TODO: Handle this error
-              return
+            try {
+              await axios.head(this.getGameUrl)
+              this.initGame()
+            } catch {
+              this.loadingText = this.$t('sandbox.errorCompile')
+            } finally {
+              this.isDebugMode = true
+              this.initLogs()
             }
 
-            this.initGame()
-            this.initLogs()
             return
           }
 

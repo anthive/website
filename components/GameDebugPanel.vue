@@ -1,7 +1,6 @@
 <template>
   <div class="debug-panel">
     <v-tabs
-
       v-model="tab"
       background-color="primary"
       dark>
@@ -11,7 +10,7 @@
         :key="index"
       >
         <v-tab
-          v-if="!sandboxBotLogs"
+          v-show="!sandboxBotLogs"
           class="tab"
           active-class="active"
           @click="$gtag('event', 'sandbox_bot_tab')"
@@ -26,7 +25,6 @@
           <span>{{ bot.displayName }} {{ bot.id }}</span>
         </v-tab>
       </div>
-
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -75,6 +73,29 @@
         </v-tab-item>
       </div>
     </v-tabs-items>
+
+    <div v-if="!getBots.length && sandboxBotLogs" class="d-flex">
+      <div class="log-tab-content">
+        <div class="tab-title">
+          Logs
+        </div>
+        <div class="tab-text">
+          {{ sandboxBotLogs }}
+        </div>
+      </div>
+    </div>
+
+    <div v-if="!getBots.length && !sandboxBotLogs" class="d-flex">
+      <div class="log-tab-content">
+        <div class="tab-title">
+          Logs
+        </div>
+        <div class="tab-text">
+          {{ currentBotLogs }}
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -219,6 +240,16 @@ export default {
       width: 20%;
     }
   }
+
+  .log-tab-content {
+    width: 100%;
+    color: $violet;
+    height: 296px;
+    overflow-y: auto;
+    border-right: 2px solid $violet;
+    background-color: $white;
+  }
+
   .tab-title {
     font-size: $font-medium;
     font-weight: 600;
