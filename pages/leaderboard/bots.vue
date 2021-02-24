@@ -1,110 +1,72 @@
 <template>
-
-  <!-- <section class="leaderboard texture-arrows">
-  <v-card class="leaderboard__table">
-      <v-row class="leaderboard__table-head">
-        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="1" class="leader-card__places">
-          <span>{{ $t('leaderboard.place') }}</span>
-        </v-col>
-        <v-col v-if="!$vuetify.breakpoint.smAndDown" cols="6" sm="6" class="pl-7">
-          <span>{{ $t('leaderboard.player') }}</span>
-        </v-col>
-        <v-col cols="6" sm="1"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byGames`) }}
-        </v-col>
-          <v-col cols="6" sm="2"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byScore`) }}
-        </v-col>
-         <v-col cols="6" sm="2"
-          class="leaderboard__table-score"
-        >
-          {{ $t(`leaderboard.byVersion`) }}
-        </v-col>
-      </v-row>
-      <LeaderboardBotChip
-        class="leaderboard__table-player"
-        :key="player.displayName + index"
-        v-for="(player, index) in players"
-        :place="index + 1"
-        :leader="player"
-      />
-    </v-card> -->
   <section class="leaderboard page-wrap">
     <v-container>
       <div class="header">
-        <!-- <div class="header__img-wrap">
-          <v-img src="/img/leaderboard-title-icon.svg" />
-          <div class="header__lang">C++</div>
-        </div> -->
         <AntHivePageHeader
           :title="$t('leaderboard.title')"
           :tooltip-text="$t('leaderboard.description')"
         />
       </div>
-
-      <!-- <v-card tile class="leaderboard__filter filter">
-        <v-row>
-          <v-col cols="12" sm="4" class="filter__langs">
-            <div class="filter__title">{{ $t('leaderboard.languages') }}:</div>
-            <div class="filter__langs-icons">
-              <img
-                :key="lang.id"
-                v-for="lang in getLangs"
-                class="filter__lang-icon"
-                width="40px"
-                :src="lang.img"
-                :alt="lang.id"
-              />
-            </div>
-          </v-col>
-          <v-col cols="12" sm="5" class="filter__countries">
-            <div class="filter__title">{{ $t('leaderboard.countries') }}:</div>
-            <v-select
-              :menu-props="{ offsetY: true }"
-              class="anthive-select"
-              :items="countries"
-            ></v-select>
-          </v-col>
-          <v-col cols="12" sm="3" class="filter__cities">
-            <div class="filter__title">{{ $t('leaderboard.city') }}:</div>
-            <v-select
-              :menu-props="{ offsetY: true }"
-              item-color="red"
-              class="anthive-select"
-              :items="cities"
-            ></v-select>
-          </v-col>
-        </v-row>
-      </v-card> -->
       <AntHiveButton
         :to="localePath('/leaderboard/bots')"
-        disabled
-        light
         class="button"
         tile
-        color="primary"
-      >{{ $t('leaderboard.bots') }}</AntHiveButton>
+        color="white"
+      ><span class="primary--text">{{ $t('leaderboard.bots') }}</span></AntHiveButton>
       <AntHiveButton
         :to="localePath('/leaderboard/users')"
         class="button"
         tile
-        color="primary"
+        color="#cdcad5"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
-      <div class="table">
-        <template>
-          <LeaderboardBotChip
-            v-for="(bot, index) in bots"
-            :key="bot.displayName"
-            :place="index + 1"
-            :leader="bot"
-          />
-          <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
-        </template>
-        <template v-if="!bots">
+      <div class="overflow-hidden">
+        <client-only>
+          <v-data-table
+            :headers="headers"
+            :items="bots"
+            disable-pagination
+            sort-by="mmr"
+            sort-desc
+            hide-default-footer
+            class="table"
+          >
+            <template v-slot:[`item.avatar`]="{ item }">
+              <v-avatar
+                tile
+                width="120px"
+                height="120px">
+                <v-img :src="getAvatar(item.avatar, 240)" />
+              </v-avatar>
+            </template>
+            <template v-slot:[`item.err`]="{ item }">
+              {{ item.err }}%
+            </template>
+            <template v-slot:[`item.score`]="{ item }">
+              {{ getNumberTruncated(item.score) }}
+            </template>
+            <template v-slot:[`item.art`]="{ item }">
+              {{ getNumberTruncated(item.art) }} ms
+            </template>
+            <template v-slot:[`item.lang`]="{ item }">
+              <v-avatar tile size="40">
+                <v-img :src="getLangImg(item.lang)" />
+              </v-avatar>
+            </template>
+            <template v-slot:[`item.author`]="{ item }">
+              <nuxt-link
+                :to="localePath(`/users?username=${item.username}`)"
+                class="information-user"
+                @click.native="$gtag('event', 'leaderboard_to_author')">
+                <v-avatar class="ml-1" tile size="30">
+                  <v-img :src="getAvatar(item.userAvatar, 60)" />
+                </v-avatar>
+                {{ item.username }}
+              </nuxt-link>
+            </template>
+          </v-data-table>
+        </client-only>
+        <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
+        <template v-if="!bots.length">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -124,8 +86,9 @@
 <script>
 import langs from '@/static/langs/data.json'
 import { getBotsLeaderboard } from '@/services/Bot'
-import LeaderboardBotChip from '@/components/LeaderboardBotChip'
 import AntHiveIcon from '@/components/AntHiveIcon'
+import Image from '@/mixins/image'
+import Truncate from '@/mixins/truncate'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 
 export default {
@@ -142,16 +105,27 @@ export default {
   },
   name: 'Leaderboard',
   components: {
-    LeaderboardBotChip,
     AntHiveIcon,
     AntHivePageHeader
   },
+  mixins: [Image, Truncate],
   data() {
     return {
-      countries: ['russia', 'usa'], // TODO
-      cities: ['moscow', 'new yourk'], // TODO
       langs: [],
       bots: [],
+      headers: [
+        { text: '', value: 'avatar' },
+        { text: this.$t('leaderboard.language'), value: 'lang' },
+        { text: this.$t('leaderboard.name'), value: 'displayName' },
+        { text: this.$t('leaderboard.version'), value: 'v' },
+        { text: this.$t('leaderboard.mmr'), value: 'mmr' },
+        { text: this.$t('leaderboard.wins'), value: 'wins' },
+        { text: this.$t('leaderboard.losses'), value: 'losses' },
+        { text: this.$t('leaderboard.score'), value: 'score' },
+        { text: this.$t('leaderboard.art'), value: 'art' },
+        { text: this.$t('leaderboard.errors'), value: 'err' },
+        { text: this.$t('leaderboard.author'), value: 'author' }
+      ],
       columns: [
         {
           text: 'mmr',
@@ -194,6 +168,9 @@ export default {
 </script>
 <style lang="scss">
 @import '@/assets/style/global.scss';
+.table {
+  margin-left: -16px!important;
+}
 .anthive-select {
   .v-input__slot {
     padding: 0 10px;

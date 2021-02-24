@@ -8,7 +8,6 @@
     "buttonJoin": "Get Started",
     "menu": "menu"
   },
-
   "footer": {
     "and": "&",
     "privacyPolicy": "Policy",
@@ -17,7 +16,6 @@
     "ru": "Ru",
     "report": "Report an issue"
   },
-
   "home": {
     "meta": {
       "title": "AntHive.IO - Your new coding adventure"
@@ -45,7 +43,6 @@
     "sectionTitle": "Get Started!",
     "subscribe": "Subscribe"
   },
-
   "games": {
     "meta": {
       "title": "AntHive.IO - Games",
@@ -69,7 +66,6 @@
     "secondsAgo": "s ago",
     "justNow": "Just now"
   },
-
   "game": {
     "meta": {
       "title": "AntHive.IO - Game",
@@ -102,7 +98,6 @@
     "viewReplay": "View Replay",
     "botSkin": "Bot skin"
   },
-
   "leaderboard": {
     "meta": {
       "title": "AntHive.IO - Leaderboard",
@@ -125,9 +120,18 @@
     "place": "Place",
     "totalGames": "Total games played",
     "totalMmr": "Total MMR",
-    "player": "Player"
+    "player": "Player",
+    "name": "Name",
+    "score": "Score",
+    "rank": "Rank",
+    "language": "Language",
+    "version": "Version",
+    "wins": "Wins",
+    "losses": "Losses",
+    "art": "ART",
+    "errors": "Errors",
+    "author": "Author"
   },
-
   "userInfo": {
     "meta": {
       "description": "AntHive.IO - User Profile"
@@ -156,7 +160,6 @@
     "art": "ART",
     "challangeMe": "Challange me"
   },
-
   "sandbox": {
     "meta": {
       "title": "AntHive.IO - Sandbox",
@@ -181,20 +184,17 @@
     "checkOut": "Сheck out sample bots",
     "errorCompile": "Something is wrong…. We can not compile your code."
   },
-
   "rules": {
     "meta": {
       "title": "AntHive.IO - Rules",
       "description": "Terminology and how AntHive works"
     }
   },
-
   "pp": {
     "meta": {
       "title": "AntHive.IO - Privacy policy"
     }
   },
-
   "tos": {
     "meta": {
       "title": "AntHive.IO - Terms of Service"

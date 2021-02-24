@@ -8,7 +8,6 @@
     "buttonJoin": "Начать",
     "menu": "меню"
   },
-
   "footer": {
     "and": "и",
     "privacyPolicy": "Конфинденциальность",
@@ -17,7 +16,6 @@
     "ru": "Рус",
     "report": "Сообщить об ошибке"
   },
-
   "home": {
     "meta": {
       "title": "AntHive.IO - Твое кодинг приключение"
@@ -45,7 +43,6 @@
     "sectionTitle": "Начни прямо сейчас!",
     "subscribe": "Подписаться"
   },
-
   "games": {
     "meta": {
       "title": "AntHive.IO - Игры",
@@ -69,7 +66,6 @@
     "secondsAgo": "с назад",
     "justNow": "Только что"
   },
-
   "game": {
     "meta": {
       "title": "AntHive.IO - Игра",
@@ -102,7 +98,6 @@
     "viewReplay": "Смотреть игру",
     "botSkin": "Скин бота"
   },
-
   "leaderboard": {
     "meta": {
       "title": "AntHive.IO - Таблица лидеров",
@@ -126,9 +121,18 @@
     "place": "Место",
     "totalGames": "Всего игр",
     "totalMmr": "Итоговый MMR",
-    "player": "Игрок"
+    "player": "Игрок",
+    "name": "Имя",
+    "score": "Счет",
+    "rank": "Ранг",
+    "language": "Язык",
+    "version": "Версия",
+    "wins": "Победы",
+    "losses": "Поражения",
+    "art": "ART",
+    "errors": "Ошибоки",
+    "author": "Автор"
   },
-
   "userInfo": {
     "meta": {
       "description": "AntHive.IO - Профайл пользователя"
@@ -157,7 +161,6 @@
     "art": "ART",
     "challangeMe": "Сыграть со мной"
   },
-
   "sandbox": {
     "meta": {
       "title": "AntHive.IO - Песочница",
@@ -182,20 +185,17 @@
     "checkOut": "Попробуйте один из наших образцов бота",
     "errorCompile": "Что-то пошло не так…. Мы не можем скомпилировать Ваш код."
   },
-
   "rules": {
     "meta": {
       "title": "AntHive.IO - Правила",
       "description": "Терминология и правила игры"
     }
   },
-
   "pp": {
     "meta": {
       "title": "AntHive.IO - Политика конфиденциальности"
     }
   },
-
   "tos": {
     "meta": {
       "title": "AntHive.IO - Условия использования"
