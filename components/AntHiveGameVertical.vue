@@ -86,7 +86,12 @@
         <p>
           {{ $t("game.by") }} <span class="author-name">{{ getAuthorName }}</span>
         </p>
-        <p>{{ getTimeAgo.time + $t(`games.${getTimeAgo.text}`) }}</p>
+        <p>
+          <span v-if="getTimeAgo.time">
+            {{ getTimeAgo.time }}
+          </span>
+          {{ $t(`games.${getTimeAgo.text}`) }}
+        </p>
       </div>
       <div
         class="game-info-layout"
