@@ -9,9 +9,9 @@ const Truncate = {
         return number
       }
       if (number < 1000000) {
-        return `${Math.floor(number / 1000)}K`
+        return `${Math.floor(number / 10) / 100}K`
       }
-      return `${Math.floor(number / 1000000)}M`
+      return `${Math.floor(number / 10000) / 100}M`
     }
   }
 }
