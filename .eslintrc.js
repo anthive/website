@@ -24,7 +24,8 @@ module.exports = {
         ignoreUrls: true
       }
     ],
-    'space-before-function-paren': ['error', 'never']
+    'space-before-function-paren': ['error', 'never'],
+    'no-param-reassign': ['error']
   },
   parserOptions: {
     parser: 'babel-eslint'

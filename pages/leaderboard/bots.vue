@@ -45,7 +45,7 @@
               {{ getNumberTruncated(item.score) }}
             </template>
             <template v-slot:[`item.art`]="{ item }">
-              {{ getNumberTruncated(item.art) }} ms
+              {{ item.art / 1000 }} ms
             </template>
             <template v-slot:[`item.lang`]="{ item }">
               <v-avatar tile size="40">
@@ -114,7 +114,7 @@ export default {
       langs: [],
       bots: [],
       headers: [
-        { text: '', value: 'avatar' },
+        { text: '', value: 'avatar', sortable: false },
         { text: this.$t('leaderboard.language'), value: 'lang' },
         { text: this.$t('leaderboard.name'), value: 'displayName' },
         { text: this.$t('leaderboard.version'), value: 'v' },
@@ -126,15 +126,8 @@ export default {
         { text: this.$t('leaderboard.errors'), value: 'err' },
         { text: this.$t('leaderboard.author'), value: 'author' }
       ],
-      columns: [
-        {
-          text: 'mmr',
-          sortable: true,
-          description: 'mmr' // TODO: add description
-        }
-      ],
       enoughLoadLeaders: false,
-      pageSize: 20,
+      pageSize: 40,
       searchParams: {}
     }
   },
@@ -169,22 +162,19 @@ export default {
 <style lang="scss">
 @import '@/assets/style/global.scss';
 .table {
-  margin-left: -16px!important;
-}
-.anthive-select {
-  .v-input__slot {
-    padding: 0 10px;
-    background: linear-gradient(0deg, rgba(154, 100, 255, 1) 50%, rgba(154, 100, 255, 0.8) 50%);
+  .text-start.sortable {
+    font-weight: $font-weight-bold;
+    font-size: $font-small;
   }
-  .v-select__selection--comma {
-    color: $white !important;
-  }
-  .v-input__icon .v-icon.v-icon {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 12px solid $white;
+  .text-start.active {
+    font-weight: $font-weight-bolder;
+    color: $violet!important;
+    &.asc::after {
+      content: '⬇'
+    }
+    &.desc::after {
+      content: '⬆'
+    }
   }
 }
 </style>
@@ -195,118 +185,14 @@ export default {
   .header {
     display: flex;
     margin-bottom: 38px;
-    &__img-wrap {
-      position: relative;
-      max-width: 50px;
-      margin: 8px 20px 0 0;
-    }
-    &__lang {
-      position: absolute;
-      color: $white;
-      top: 16px;
-      font-size: 11px;
-      font-weight: 600;
-      width: 50%;
-      text-align: center;
-    }
-    &__title-wrap {
-      position: relative;
-    }
-    &__subtitle {
-      color: $violet;
-      font-weight: 400;
-    }
-    &__info {
-      position: absolute;
-      top: -5px;
-      right: -26px;
-    }
-  }
-  .filter {
-    margin-top: 40px;
-    padding: 20px;
-    display: flex;
-
-    & > div {
-      padding: 0 20px;
-    }
-
-    &__countries {
-      border-left: 2px solid $violet;
-      border-right: 2px solid $violet;
-    }
-
-    &__title {
-      color: $violet;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    &__lang-icon {
-      margin-right: 10px;
-    }
-  }
-
-  &__card {
-    padding: 0 10px 10px;
   }
   .table {
-    margin: 0 auto;
-  }
-  &__table-head {
-    justify-content: flex-end;
-    padding: 0 12px;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  &__table-score {
-    text-align: center;
-    cursor: pointer;
-    &:first-child {
-      text-align: left;
-      padding-left: 40px;
-    }
-  }
-  &__table-score-title {
-    display: inline;
-    position: relative;
-  }
-  &__table-bot {
-    margin: 0;
-  }
-  &__sort-item {
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  &__top-bots {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    margin-left: -16px!important;
+
   }
   .skeleton {
     background-color: $white;
     padding-top: 20px;
-  }
-}
-
-@media screen and (max-width: $screen-lg) {
-  .leaderboard {
-    &__top-bots {
-      width: auto;
-      flex-direction: column;
-    }
-    .headline {
-      width: 100%;
-      text-align: center;
-    }
-  }
-}
-@media screen and (max-width: $screen-md) {
-  .leaderboard {
-    &__table-score {
-      text-align: center;
-    }
   }
 }
 </style>
