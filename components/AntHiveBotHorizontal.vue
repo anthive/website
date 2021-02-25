@@ -12,9 +12,20 @@
       <img
         :src="getLangImg(bot.lang)"
         :alt="bot.lang"
-        class="lang-icon"
+        class="bot-stat-icon lang-icon"
         width="35px"
       >
+      <div
+        :style="`background: center / cover no-repeat url(${getHiveSkinImg(
+          bot.skin,
+        )})`"
+        class="bot-stat-icon">
+        <img
+          :src="getAntSkinImg(bot.skin)"
+          :alt="bot.skin"
+          class="bot-stat-icon"
+          width="25px"
+      ></div>
     </div>
     <div :class="{fade: isDead}" class="description">
       <div class="information">
@@ -141,6 +152,8 @@ export default {
   .img {
     background-position: center;
     min-width: 120px;
+    display: flex;
+    flex-direction: column;
   }
 
   .user-avatar {
@@ -149,11 +162,16 @@ export default {
     right: 10px;
   }
 
-  .lang-icon {
+  .bot-stat-icon {
     border-bottom: 2px solid white;
     border-right: 2px solid white;
-    background-color: white;
     margin-right: 10px;
+    width: 35px;
+    height: 35px;
+
+    &.lang-icon {
+      background-color: $white;
+    }
   }
 
   .name {
@@ -193,7 +211,7 @@ export default {
     flex-wrap: wrap;
 
     .statistic-container {
-      width: 80px;
+      width: 90px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
