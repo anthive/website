@@ -140,7 +140,7 @@ export default {
       return this.game.author
     },
     getGameScore() {
-      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc += bot.score), 0)
+      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc + bot.score), 0)
     }
   },
   methods: {

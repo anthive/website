@@ -85,36 +85,6 @@
       </div>
 
       <div class="component">
-        <h4>LeaderboardBotChip</h4>
-        <p v-if="$options.components['LeaderboardBotChip'].props">
-          Props: {{ $options.components['LeaderboardBotChip'].props }}
-        </p>
-        <div>
-          <LeaderboardBotChip
-            v-for="(bot, index) in bots"
-            :key="bot.displayName"
-            :place="index + 1"
-            :leader="bot"
-          />
-        </div>
-      </div>
-
-      <div class="component">
-        <h4>LeaderboardUserChip</h4>
-        <p v-if="$options.components['LeaderboardUserChip'].props">
-          Props: {{ $options.components['LeaderboardUserChip'].props }}
-        </p>
-        <div>
-          <LeaderboardUserChip
-            v-for="(user, index) in users"
-            :key="user.username"
-            :place="index + 1"
-            :leader="user"
-          />
-        </div>
-      </div>
-
-      <div class="component">
         <h4>AntHivePageHeader</h4>
         <p v-if="$options.components['AntHivePageHeader'].props">
           Props: {{ $options.components['AntHivePageHeader'].props }}
@@ -145,8 +115,6 @@
 import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
-import LeaderboardBotChip from '@/components/LeaderboardBotChip'
-import LeaderboardUserChip from '@/components/LeaderboardUserChip'
 import GamesTable from '@/components/GamesTable'
 import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
@@ -159,8 +127,6 @@ export default {
     AntHiveButton,
     AntHiveIcon,
     AntHiveAuthor,
-    LeaderboardBotChip,
-    LeaderboardUserChip,
     GamesTable,
     AntHiveBotSmall,
     AntHiveBotHorizontal,

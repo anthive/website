@@ -5,15 +5,13 @@ const Truncate = {
       return truncatedString
     },
     getNumberTruncated(number) {
-      if (number >= 1000) {
-        number = `${Math.floor(number / 1000)}K`
+      if (number < 1000) {
+        return number
       }
-
-      if (number >= 1000000) {
-        number = `${Math.floor(number / 1000000)}M`
+      if (number < 1000000) {
+        return `${Math.floor(number / 1000)}K`
       }
-
-      return number
+      return `${Math.floor(number / 1000000)}M`
     }
   }
 }
