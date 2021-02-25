@@ -11,28 +11,40 @@
         :to="localePath('/leaderboard/bots')"
         class="button"
         tile
-        color="primary"
+        color="#cdcad5"
       >{{ $t('leaderboard.bots') }}</AntHiveButton>
       <AntHiveButton
         :to="localePath('/leaderboard/users')"
-        disabled
-        light
         class="button"
         tile
-        color="primary"
-      >{{ $t('leaderboard.users') }}</AntHiveButton>
-      <div class="table">
-        <template>
-          <LeaderboardUserChip
-            v-for="(user, index) in users"
-            :key="user.username"
-            :place="index + 1"
-            :leader="user"
-          />
-          <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
-        </template>
-
-        <template v-if="!users">
+        color="white"
+      ><span class="primary--text">{{ $t('leaderboard.users') }}</span></AntHiveButton>
+      <div class="overflow-hidden">
+        <client-only>
+          <v-data-table
+            :headers="headers"
+            :items="users"
+            disable-pagination
+            sort-by="rank"
+            sort-desc
+            hide-default-footer
+            class="table"
+          >
+            <template v-slot:[`item.avatar`]="{ item }">
+              <v-avatar
+                tile
+                width="120px"
+                height="120px">
+                <v-img :src="getAvatar(item.avatar, 240)" />
+              </v-avatar>
+            </template>
+            <template v-slot:[`item.score`]="{ item }">
+              {{ getNumberTruncated(item.score) }}
+            </template>
+          </v-data-table>
+        </client-only>
+        <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
+        <template v-if="!users.length">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -52,8 +64,9 @@
 <script>
 import { getUsersLeaderboard } from '@/services/User'
 import AntHiveIcon from '@/components/AntHiveIcon'
-import LeaderboardUserChip from '@/components/LeaderboardUserChip'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
+import Image from '@/mixins/image'
+import Truncate from '@/mixins/truncate'
 
 export default {
   head() {
@@ -69,10 +82,10 @@ export default {
   },
   name: 'Leaderboard',
   components: {
-    LeaderboardUserChip,
     AntHiveIcon,
     AntHivePageHeader
   },
+  mixins: [Image, Truncate],
   data() {
     return {
       countries: ['russia', 'usa'], // TODO
@@ -88,7 +101,14 @@ export default {
       ],
       enoughLoadLeaders: false,
       pageSize: 20,
-      searchParams: {}
+      searchParams: {},
+      headers: [
+        { text: '', value: 'avatar' },
+        { text: this.$t('leaderboard.name'), value: 'username' },
+        { text: this.$t('leaderboard.games'), value: 'games' },
+        { text: this.$t('leaderboard.score'), value: 'score' },
+        { text: this.$t('leaderboard.rank'), value: 'rank' }
+      ]
     }
   },
   fetch() {
@@ -134,6 +154,9 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.table {
+  margin-left: -16px!important;
+}
 @import '@/assets/style/global.scss';
 .leaderboard {
   padding: 40px 0;
