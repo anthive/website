@@ -66,8 +66,8 @@
     "secondsAgo": "s ago",
     "justNow": "Just now",
     "bestScore": "Best score",
-    "longest": "Longest games",
-    "recent": "Recent games"
+    "longestGames": "Longest games",
+    "recentGames": "Recent games"
   },
   "game": {
     "meta": {

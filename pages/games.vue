@@ -91,11 +91,11 @@ export default {
         },
         {
           type: 'longest',
-          label: 'longest'
+          label: 'longestGames'
         },
         {
           type: '',
-          label: 'recent'
+          label: 'recentGames'
         }
       ]
     }

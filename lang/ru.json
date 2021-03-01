@@ -66,8 +66,8 @@
     "secondsAgo": "с назад",
     "justNow": "Только что",
     "bestScore": "Лучший счет",
-    "longest": "Самые долгие игры",
-    "recent": "Последние игры"
+    "longestGames": "Самые долгие игры",
+    "recentGames": "Последние игры"
   },
   "game": {
     "meta": {
