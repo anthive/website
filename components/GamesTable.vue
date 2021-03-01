@@ -38,6 +38,11 @@ export default {
       type: Number,
       required: false,
       default: 50
+    },
+    sort: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data: () => ({
@@ -50,11 +55,20 @@ export default {
       await this.loadGames()
     }
   },
+  watch: {
+    sort() {
+      this.games = []
+      this.searchParams.p = 0
+      this.searchParams.sb = this.sort
+      this.enoughLoadGames = false
+      this.loadGames()
+    }
+  },
   async mounted() {
     await this.loadGames()
   },
   created() {
-    this.searchParams = { p: 0, pp: this.pageSize }
+    this.searchParams = { p: 0, pp: this.pageSize, sb: this.sort }
   },
   methods: {
     loadGames() {
