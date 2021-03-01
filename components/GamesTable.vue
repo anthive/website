@@ -39,7 +39,7 @@ export default {
       required: false,
       default: 50
     },
-    sort: {
+    sortType: {
       type: String,
       required: false,
       default: ''
@@ -56,10 +56,10 @@ export default {
     }
   },
   watch: {
-    sort() {
+    sortType() {
       this.games = []
       this.searchParams.p = 0
-      this.searchParams.sb = this.sort
+      this.searchParams.sb = this.sortType
       this.enoughLoadGames = false
       this.loadGames()
     }
@@ -68,7 +68,7 @@ export default {
     await this.loadGames()
   },
   created() {
-    this.searchParams = { p: 0, pp: this.pageSize, sb: this.sort }
+    this.searchParams = { p: 0, pp: this.pageSize, sb: this.sortType }
   },
   methods: {
     loadGames() {

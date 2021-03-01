@@ -64,7 +64,10 @@
     "hoursAgo": "ч назад",
     "minutesAgo": "м назад",
     "secondsAgo": "с назад",
-    "justNow": "Только что"
+    "justNow": "Только что",
+    "bestScore": "Лучший счет",
+    "longest": "Самые долгие игры",
+    "recent": "Последние игры"
   },
   "game": {
     "meta": {
