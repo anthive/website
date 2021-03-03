@@ -112,7 +112,6 @@ module.exports = {
   */
 
   css: [
-    '~/assets/style/app.styl',
     '~/assets/style/style.css',
     '~/assets/style/fonts.css',
     '~/assets/style/global.scss',
