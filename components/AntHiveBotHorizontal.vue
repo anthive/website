@@ -88,7 +88,7 @@
             }}</span>
           </div>
           <div class="statistic">
-            <span>{{ $t("game.rt") }}:</span>
+            <span>{{ $t("game.art") }}:</span>
             <span
               class="statistic-value"
             >{{ getArtInMs(botStats.art) }} ms</span
