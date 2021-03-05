@@ -126,7 +126,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['@/plugins/vuetify', '@/plugins/anthive'],
+  plugins: ['@/plugins/vuetify', '@/plugins/anthive', { src: '@/plugins/chartjs.js', ssr: false }],
 
   /*
   ** Nuxt.js modules

@@ -65,10 +65,42 @@
             </transition-group>
           </v-col>
         </v-row>
-        <h3 v-if="!isDebugMode" class="mt-10 mb-0">
-          {{ $t("game.moreGames") }}:
-        </h3>
-        <GamesTable v-if="!isDebugMode" :games-limit="5" />
+        <template v-if="chartData">
+          <AntHiveButton
+            :disabled="chartStatType === 'score'"
+            :light="chartStatType === 'score'"
+            tile
+            color="primary"
+            @click="setChartsStatsType('score')"
+          >{{ $t("game.score") }}</AntHiveButton>
+          <AntHiveButton
+            :disabled="chartStatType === 'rt'"
+            :light="chartStatType === 'rt'"
+            tile
+            color="primary"
+            @click="setChartsStatsType('rt')"
+          >{{ $t("global.rt") }}</AntHiveButton>
+          <AntHiveButton
+            :disabled="chartStatType === 'ants'"
+            :light="chartStatType === 'ants'"
+            tile
+            color="primary"
+            @click="setChartsStatsType('ants')"
+          >{{ $t("game.ants") }}</AntHiveButton>
+          <AntHiveButton
+            :disabled="chartStatType === 'errors'"
+            :light="chartStatType === 'errors'"
+            tile
+            color="primary"
+            @click="setChartsStatsType('errors')"
+          >{{ $t("game.errors") }}</AntHiveButton>
+          <AntHiveChart
+            :title="$t(`game.${chartStatType}`)"
+            :chart-data="chartData"
+            :height="200"
+            class="mt-10"
+          />
+        </template>
       </template>
 
       <div v-else class="game-not-found">
@@ -106,6 +138,14 @@ import AntHiveIcon from '@/components/AntHiveIcon'
 import { getGame } from '@/services/Game'
 
 export default {
+  components: {
+    AntHiveBotHorizontal,
+    GamePlayer,
+    GameDebugPanel,
+    GamesTable,
+    AntHivePageHeader,
+    AntHiveIcon
+  },
   head() {
     return {
       title: this.$t('game.meta.title'),
@@ -116,14 +156,6 @@ export default {
         }
       ]
     }
-  },
-  components: {
-    AntHiveBotHorizontal,
-    GamePlayer,
-    GameDebugPanel,
-    GamesTable,
-    AntHivePageHeader,
-    AntHiveIcon
   },
   mixins: [Image],
   data() {
@@ -144,12 +176,30 @@ export default {
       isDebugMode: false,
       isGameStoped: false,
       gameTooltip: '',
-      game: {}
+      game: {},
+      botsChartStats: null,
+      chartStatType: 'score',
+      gameTicks: [],
+      currentTick: 0
     }
   },
   computed: {
     getModeString() {
       return this.isDebugMode ? 'debug' : 'normal'
+    },
+    chartData() {
+      if (!this.game || !this.game.bots || !this.game.bots[0].stats || !this.botsChartStats) { return }
+      const datasets = this.game.bots.map((bot) => {
+        const { botId } = bot
+        this.updateBotsTicksList(bot)
+        return {
+          fill: false,
+          label: bot.displayName,
+          data: this.botsChartStats[botId].ticks,
+          backgroundColor: this.botsChartStats[botId].color
+        }
+      })
+      return { labels: this.gameTicks, datasets }
     }
   },
   watch: {
@@ -163,20 +213,65 @@ export default {
       this.game.bots = this.game.bots.map((bot) => {
         const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
         bot.isDead = !gameBot
-        if (gameBot) { bot.stats = gameBot.stats }
+        if (gameBot) {
+          bot.stats = {
+            rt: gameBot.response.time,
+            age: gameBot.age,
+            score: gameBot.score,
+            errors: gameBot.errors,
+            ants: gameBot.ants.length
+          }
+        }
         return bot
       })
 
-      this.game.bots.sort(this.compare)
+      // this.game.bots.sort(this.compare)
     }
   },
-  mounted() {
-    this.fetchGame()
+  async mounted() {
+    await this.fetchGame()
+    if (this.game && this.game.bots) {
+      this.gameTicks = Array.from(Array(this.game.age).keys())
+      this.botsChartStats = {}
+      this.game.bots.forEach((bot) => {
+        const { botId } = bot
+        this.botsChartStats[botId] = {}
+        this.botsChartStats[botId].color = this.getRandomColor()
+        this.botsChartStats[botId].ticks = []
+      })
+    }
   },
   destroyed() {
     this.gamePlayerDestroy()
   },
   methods: {
+    setChartsStatsType(type) {
+      this.game.bots.forEach((bot) => {
+        this.botsChartStats[bot.botId].ticks = []
+      })
+      this.chartStatType = type
+    },
+    getRandomColor() {
+      return `#${Math.random().toString(16).substr(-6)}`
+    },
+    updateBotsTicksList(bot) {
+      const { botId } = bot
+      // dates before update ticks list
+      const oldLength = this.botsChartStats[botId].ticks.length - 1
+      const lastValue = this.botsChartStats[botId].ticks[oldLength]
+
+      // set new ticks length
+      this.botsChartStats[botId].ticks.length = bot.stats.age
+      // fill all empty items
+      this.botsChartStats[botId].ticks.fill(lastValue, oldLength)
+
+      // set ants count to the last ticks array item
+      const botStatValue = this.chartStatType === 'rt' ? this.getArtInMs(bot.stats[this.chartStatType]) : bot.stats[this.chartStatType]
+      this.botsChartStats[botId].ticks[bot.stats.age] = botStatValue
+    },
+    getArtInMs(art) {
+      return Math.round(art / 10) / 100
+    },
     async fetchGame() {
       try {
         this.gameId = this.$route.query.id || ''

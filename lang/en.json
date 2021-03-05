@@ -1,4 +1,8 @@
 {
+  "global": {
+    "rt": "RT",
+    "art": "ART"
+  },
   "header": {
     "games": "Games",
     "leaderboard": "Leaderboard",
@@ -88,8 +92,9 @@
     "errors": "Errors",
     "age": "Age",
     "score": "Score",
-    "rt": "RT",
+    "ants": "Ants",
     "size": "Size",
+    "hive": "Hive",
     "players": "Players",
     "game": "Game",
     "gameId": "Game Id",
@@ -131,7 +136,6 @@
     "version": "Version",
     "wins": "Wins",
     "losses": "Losses",
-    "art": "ART",
     "errors": "Errors",
     "author": "Author"
   },
@@ -160,7 +164,6 @@
     "statistic": "Statistic",
     "mmr": "MMR",
     "wl": "W/L",
-    "art": "ART",
     "challangeMe": "Challange me"
   },
   "sandbox": {

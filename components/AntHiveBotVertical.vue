@@ -26,7 +26,7 @@
           <p class="value">{{ bot.mmr }}</p>
         </div>
         <div class="stats-row">
-          <p>{{ $t("userInfo.art") }}:</p>
+          <p>{{ $t("global.art") }}:</p>
           <p class="value">{{ bot.art }}</p>
         </div>
         <div class="stats-row">
