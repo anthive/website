@@ -83,7 +83,10 @@ export default {
   },
   data() {
     return {
-      gamesSortType: {},
+      gamesSortType: {
+        type: 'best-score',
+        label: 'bestScore'
+      },
       sortOptions: [
         {
           type: 'best-score',
@@ -99,9 +102,6 @@ export default {
         }
       ]
     }
-  },
-  mounted() {
-    this.gamesSortType = this.sortOptions[0]
   }
 }
 </script>
