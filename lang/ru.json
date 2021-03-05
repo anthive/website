@@ -1,4 +1,8 @@
 {
+  "global": {
+    "rt": "RT",
+    "art": "ART"
+  },
   "header": {
     "games": "Игры",
     "leaderboard": "Таблица лидеров",
@@ -88,7 +92,7 @@
     "errors": "Ошибки",
     "age": "Длительность",
     "score": "Счет",
-    "art": "RT",
+    "rt": "RT",
     "size": "Размер",
     "hive": "Муравейник",
     "ants": "Муравьи",
@@ -134,7 +138,6 @@
     "version": "Версия",
     "wins": "Победы",
     "losses": "Поражения",
-    "art": "ART",
     "errors": "Ошибки",
     "author": "Автор"
   },
@@ -163,7 +166,6 @@
     "statistic": "Статистика",
     "mmr": "MMR",
     "wl": "В/П",
-    "art": "ART",
     "challangeMe": "Сыграть со мной"
   },
   "sandbox": {

@@ -70,7 +70,7 @@
             <span>{{ $t("game.size") }}:</span>
             <span
               class="statistic-value"
-            >{{ botStats.hive }}/{{ botStats.ants }}</span
+            >{{ botStats.ants }}</span
             >
           </div>
           <div class="statistic">
@@ -88,10 +88,10 @@
             }}</span>
           </div>
           <div class="statistic">
-            <span>{{ $t("game.art") }}:</span>
+            <span>{{ $t("global.rt") }}:</span>
             <span
               class="statistic-value"
-            >{{ getArtInMs(botStats.art) }} ms</span
+            >{{ getArtInMs(botStats.rt) }} ms</span
             >
           </div>
         </div>

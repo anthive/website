@@ -51,7 +51,7 @@
             </span>
           </div>
           <div>
-            <span>{{ $t("game.art") }}:</span>
+            <span>{{ $t("global.art") }}:</span>
             <span class="info-value">
               {{ getArtInMs(bot.art) }} ms
             </span>

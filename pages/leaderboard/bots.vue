@@ -122,7 +122,7 @@ export default {
         { text: this.$t('leaderboard.wins'), value: 'wins' },
         { text: this.$t('leaderboard.losses'), value: 'losses' },
         { text: this.$t('leaderboard.score'), value: 'score' },
-        { text: this.$t('leaderboard.art'), value: 'art' },
+        { text: this.$t('global.art'), value: 'art' },
         { text: this.$t('leaderboard.errors'), value: 'err' },
         { text: this.$t('leaderboard.author'), value: 'author' }
       ],

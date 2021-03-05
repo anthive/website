@@ -74,12 +74,12 @@
             @click="setChartsStatsType('score')"
           >{{ $t("game.score") }}</AntHiveButton>
           <AntHiveButton
-            :disabled="chartStatType === 'art'"
-            :light="chartStatType === 'art'"
+            :disabled="chartStatType === 'rt'"
+            :light="chartStatType === 'rt'"
             tile
             color="primary"
-            @click="setChartsStatsType('art')"
-          >{{ $t("game.art") }}</AntHiveButton>
+            @click="setChartsStatsType('rt')"
+          >{{ $t("global.rt") }}</AntHiveButton>
           <AntHiveButton
             :disabled="chartStatType === 'ants'"
             :light="chartStatType === 'ants'"
@@ -87,13 +87,6 @@
             color="primary"
             @click="setChartsStatsType('ants')"
           >{{ $t("game.ants") }}</AntHiveButton>
-          <AntHiveButton
-            :disabled="chartStatType === 'hive'"
-            :light="chartStatType === 'hive'"
-            tile
-            color="primary"
-            @click="setChartsStatsType('hive')"
-          >{{ $t("game.hive") }}</AntHiveButton>
           <AntHiveButton
             :disabled="chartStatType === 'errors'"
             :light="chartStatType === 'errors'"
@@ -220,11 +213,19 @@ export default {
       this.game.bots = this.game.bots.map((bot) => {
         const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
         bot.isDead = !gameBot
-        if (gameBot) { bot.stats = gameBot.stats }
+        if (gameBot) {
+          bot.stats = {
+            rt: gameBot.response.time,
+            age: gameBot.age,
+            score: gameBot.score,
+            errors: gameBot.errors,
+            ants: gameBot.ants.length
+          }
+        }
         return bot
       })
 
-      this.game.bots.sort(this.compare)
+      // this.game.bots.sort(this.compare)
     }
   },
   async mounted() {
@@ -258,12 +259,18 @@ export default {
       // dates before update ticks list
       const oldLength = this.botsChartStats[botId].ticks.length - 1
       const lastValue = this.botsChartStats[botId].ticks[oldLength]
+
       // set new ticks length
       this.botsChartStats[botId].ticks.length = bot.stats.age
       // fill all empty items
       this.botsChartStats[botId].ticks.fill(lastValue, oldLength)
+
       // set ants count to the last ticks array item
-      this.botsChartStats[botId].ticks[bot.stats.age] = bot.stats[this.chartStatType]
+      const botStatValue = this.chartStatType === 'rt' ? this.getArtInMs(bot.stats[this.chartStatType]) : bot.stats[this.chartStatType]
+      this.botsChartStats[botId].ticks[bot.stats.age] = botStatValue
+    },
+    getArtInMs(art) {
+      return Math.round(art / 10) / 100
     },
     async fetchGame() {
       try {
