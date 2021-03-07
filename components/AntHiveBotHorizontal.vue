@@ -60,7 +60,7 @@
       </div>
       <p class="name">
         <span class="display-name">{{
-          getStringTruncated(bot.displayName, 10)
+          getStringTruncated(bot.displayName, 9)
         }}</span>
         <span>v {{ bot.v }}</span>
       </p>
