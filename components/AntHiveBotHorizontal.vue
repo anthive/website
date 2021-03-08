@@ -11,7 +11,7 @@
     >
       <img
         v-if="bot"
-        :src="getLangImg(bot)"
+        :src="getLangImg(bot.lang)"
         alt="Bot Lang"
         class="bot-stat-icon lang-icon"
         width="35px"
@@ -19,12 +19,11 @@
       <div
         v-if="bot"
         :style="`background: center / cover no-repeat url(${getHiveSkinImg(
-          bot,
+          bot.skin,
         )})`"
         class="bot-stat-icon">
         <img
-          v-if="bot"
-          :src="getAntSkinImg(bot)"
+          :src="getAntSkinImg(bot.skin)"
           alt="Bot Skin"
           class="bot-stat-icon"
           width="25px"

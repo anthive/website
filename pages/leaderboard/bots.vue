@@ -20,7 +20,7 @@
         color="#cdcad5"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="overflow-hidden">
-        <client-only>
+        <client-only v-if="bots.length">
           <v-data-table
             :headers="headers"
             :items="bots"
@@ -49,7 +49,7 @@
             </template>
             <template v-slot:[`item.lang`]="{ item }">
               <v-avatar tile size="40">
-                <v-img :src="getLangImg(item)" />
+                <v-img :src="getLangImg(item.lang)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.author`]="{ item }">

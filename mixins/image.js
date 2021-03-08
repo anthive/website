@@ -15,17 +15,14 @@ const Image = {
     getUserBackgroundImage(id, widht, height) {
       return id && getImageById(id, widht, height)
     },
-    getLangImg(bot) {
-      if (!bot) { return }
-      return bot.lang && `/skins/lang/${bot.lang}.png`
+    getLangImg(lang) {
+      return lang && `/skins/lang/${lang}.png`
     },
-    getAntSkinImg(bot) {
-      if (!bot) { return }
-      return bot.skin && `/skins/client/${bot.skin}/ant.png`
+    getAntSkinImg(skin) {
+      return skin && `/skins/client/${skin}/ant.png`
     },
-    getHiveSkinImg(bot) {
-      if (!bot) { return }
-      return bot.skin && `/skins/client/${bot.skin}/hive.png`
+    getHiveSkinImg(skin) {
+      return skin && `/skins/client/${skin}/hive.png`
     }
   }
 }

@@ -16,13 +16,13 @@
         @click="handlerClickUser(bot)"
       >
         <div class="gradient" />
-        <div class="bot-name">
-          {{ bot ? bot.displayName : NA }}<span class="bot-version"> v {{ bot ? bot.v : NA }}</span>
+        <div v-if="bot" class="bot-name">
+          {{ bot.displayName }}<span class="bot-version"> v {{ bot.v }}</span>
         </div>
         <div class="bot-icons">
           <img
             v-if="bot"
-            :src="getAntSkinImg(bot)"
+            :src="getAntSkinImg(bot.skin)"
             :alt="$t('game.botSkin')"
             class="px-1"
             width="40px"
