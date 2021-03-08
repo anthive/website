@@ -43,8 +43,8 @@
             </template>
           </v-data-table>
         </client-only>
-        <infinite-scroll v-if="users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
-        <template v-if="!users.length">
+        <infinite-scroll v-if="users && users.length >= pageSize" :enough="enoughLoadLeaders" @load-more="fetchUsers" />
+        <template v-if="!users">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       langs: [],
-      users: [],
+      users: null,
       enoughLoadLeaders: false,
       pageSize: 20,
       searchParams: {},
@@ -104,11 +104,13 @@ export default {
   },
   fetch() {
     if (process.server) {
+      this.users = []
       this.fetchUsers()
     }
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
+    this.users = []
     this.fetchUsers()
     this.$gtag('event', 'leaderboard_users')
   },

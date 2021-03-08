@@ -20,7 +20,7 @@
         color="#cdcad5"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="overflow-hidden">
-        <client-only v-if="bots.length">
+        <client-only >
           <v-data-table
             :headers="headers"
             :items="bots"
@@ -66,7 +66,7 @@
           </v-data-table>
         </client-only>
         <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
-        <template v-if="!bots.length">
+        <template v-if="!bots">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       langs: [],
-      bots: [],
+      bots: null,
       headers: [
         { text: '', value: 'avatar', sortable: false },
         { text: this.$t('leaderboard.language'), value: 'lang' },
@@ -143,6 +143,7 @@ export default {
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
+    this.bots = []
     this.fetchBots()
     this.$gtag('event', 'leaderboard_bots')
   },
