@@ -199,7 +199,7 @@ export default {
             backgroundColor: this.botsChartStats[botId].color
           }
         })
-      return datasets.lengt ? { labels: this.gameTicks, datasets } : null
+      return datasets.length ? { labels: this.gameTicks, datasets } : null
     }
   },
   watch: {

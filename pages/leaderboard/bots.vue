@@ -20,7 +20,7 @@
         color="#cdcad5"
       >{{ $t('leaderboard.users') }}</AntHiveButton>
       <div class="overflow-hidden">
-        <client-only >
+        <client-only>
           <v-data-table
             :headers="headers"
             :items="bots"
@@ -138,6 +138,7 @@ export default {
   },
   fetch() {
     if (process.server) {
+      this.bots = []
       this.fetchBots()
     }
   },
