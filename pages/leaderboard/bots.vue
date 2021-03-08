@@ -160,20 +160,25 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import '@/assets/style/global.scss';
 .table {
   .text-start.sortable {
     font-weight: $font-weight-bold;
     font-size: $font-small;
+    & > span {
+
+  word-break: normal!important;
+    }
   }
   .text-start.active {
     font-weight: $font-weight-bolder;
     color: $violet!important;
-    &.asc::after {
+    &.asc>span::after {
       content: '⬇'
     }
-    &.desc::after {
+    &.desc>span::after {
       content: '⬆'
     }
   }
