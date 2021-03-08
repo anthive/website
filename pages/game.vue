@@ -52,12 +52,12 @@
                   :number="index + 1"
                   class="mb-2"
                 />
-                <!-- <v-skeleton-loader
-                  v-else
+                <v-skeleton-loader
+                  v-if="!game.bots.length"
                   tile
                   type="list-item-avatar-three-line"
                   class="mb-2"
-                /> -->
+                />
               </div>
             </transition-group>
           </v-col>

@@ -127,6 +127,11 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.table th span {
+  word-break: normal!important;
+}
+</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
