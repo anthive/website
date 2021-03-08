@@ -1,6 +1,6 @@
 import { getImageById } from '@/services/Image'
-const defaultBotAvatar = '/skins/img/default-bot-avatar.png'
-const defaultUserAvatar = '/skins/img/default-user-avatar.png'
+const defaultBotAvatar = '/img/default-bot-avatar.png'
+const defaultUserAvatar = '/img/default-user-avatar.png'
 const Image = {
   methods: {
     getBotAvatar(bot, size) {
@@ -15,14 +15,17 @@ const Image = {
     getUserBackgroundImage(id, widht, height) {
       return id && getImageById(id, widht, height)
     },
-    getLangImg(lang) {
-      return `/skins/lang/${lang}.png`
+    getLangImg(bot) {
+      if (!bot) { return }
+      return bot.lang && `/skins/lang/${bot.lang}.png`
     },
-    getAntSkinImg(skin) {
-      return `/skins/client/${skin}/ant.png`
+    getAntSkinImg(bot) {
+      if (!bot) { return }
+      return bot.skin && `/skins/client/${bot.skin}/ant.png`
     },
-    getHiveSkinImg(skin) {
-      return `/skins/client/${skin}/hive.png`
+    getHiveSkinImg(bot) {
+      if (!bot) { return }
+      return bot.skin && `/skins/client/${bot.skin}/hive.png`
     }
   }
 }

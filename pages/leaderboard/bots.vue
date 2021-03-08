@@ -49,7 +49,7 @@
             </template>
             <template v-slot:[`item.lang`]="{ item }">
               <v-avatar tile size="40">
-                <v-img :src="getLangImg(item.lang)" />
+                <v-img :src="getLangImg(item)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.author`]="{ item }">

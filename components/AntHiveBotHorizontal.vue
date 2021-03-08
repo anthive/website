@@ -10,26 +10,30 @@
       class="img"
     >
       <img
-        :src="getLangImg(bot.lang)"
-        :alt="bot.lang"
+        v-if="bot"
+        :src="getLangImg(bot)"
+        alt="Bot Lang"
         class="bot-stat-icon lang-icon"
         width="35px"
       >
       <div
+        v-if="bot"
         :style="`background: center / cover no-repeat url(${getHiveSkinImg(
-          bot.skin,
+          bot,
         )})`"
         class="bot-stat-icon">
         <img
-          :src="getAntSkinImg(bot.skin)"
-          :alt="bot.skin"
+          v-if="bot"
+          :src="getAntSkinImg(bot)"
+          alt="Bot Skin"
           class="bot-stat-icon"
           width="25px"
       ></div>
     </div>
-    <div :class="{fade: isDead}" class="description">
+    <div :class="{fade: botIsDead}" class="description">
       <div class="information">
         <nuxt-link
+          v-if="bot"
           :to="localePath(`/users?username=${bot.username}`)"
           class="information-user"
           @click.native="$gtag('event', 'hbot_to_author')">
@@ -42,7 +46,18 @@
             :src="getBotAuthorAvatar(bot, 60)"
           /></v-avatar>
         </nuxt-link>
-        <div class="information-container">
+        <div v-else class="information-user">
+          {{ NA }}
+          <v-avatar
+            class="ml-1"
+            tile
+            size="30"
+          ><v-img
+            :src="getBotAuthorAvatar(bot, 60)"
+          /></v-avatar>
+
+        </div>
+        <div v-if="bot" class="information-container">
           <AntHiveButton
             class="button"
             tile
@@ -60,9 +75,9 @@
       </div>
       <p class="name">
         <span class="display-name">{{
-          getStringTruncated(bot.displayName, 9)
+          bot ? getStringTruncated(bot.displayName, 9) : NA
         }}</span>
-        <span>v {{ bot.v }}</span>
+        <span v-if="bot">v {{ bot.v }}</span>
       </p>
       <div v-if="botStats" class="statistics">
         <div class="statistic-container">
@@ -112,16 +127,19 @@ export default {
   },
   mixins: [Image, Truncate],
   props: {
-    bot: { type: Object, required: true },
-    stats: { type: Object, required: true },
-    isDead: { type: Boolean, required: true }
+    bot: { type: Object, required: false, default: null }
+  },
+  data() {
+    return {
+      NA: 'N/A'
+    }
   },
   computed: {
     botStats() {
-      return this.stats
+      return this.bot && this.bot.stats
     },
     botIsDead() {
-      return this.isDead
+      return this.bot && this.bot.isDead
     }
   },
   methods: {
@@ -142,6 +160,7 @@ export default {
 .chip {
   width: 100%;
   height: 100%;
+  min-height: 115px;
   max-height: 120px;
   position: relative;
   display: flex;

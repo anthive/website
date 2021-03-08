@@ -13,21 +13,23 @@
         :key="index"
         :style="`background: center / cover no-repeat url(${getBotAvatar(bot, 600)})`"
         class="bot-avatar"
-        @click="handlerClickUser(bot.username)"
+        @click="handlerClickUser(bot)"
       >
         <div class="gradient" />
         <div class="bot-name">
-          {{ bot.displayName }}<span class="bot-version"> v {{ bot.v }}</span>
+          {{ bot ? bot.displayName : NA }}<span class="bot-version"> v {{ bot ? bot.v : NA }}</span>
         </div>
         <div class="bot-icons">
           <img
-            :src="getAntSkinImg(bot.skin)"
+            v-if="bot"
+            :src="getAntSkinImg(bot)"
             :alt="$t('game.botSkin')"
             class="px-1"
             width="40px"
             height="40px"
           >
           <img
+            v-if="bot"
             :src="getCurrentLangImg(bot)"
             :alt="getCurrentLangName(bot)"
             width="40px"
@@ -36,24 +38,46 @@
         <div class="bot-info">
           <div>
             <span>{{ $t("game.size") }}:</span>
-            <span class="info-value" >{{ bot.hive }}/{{ bot.ants }}</span>
+            <span class="info-value" >
+              <template v-if="bot">
+                {{ bot.hive }}/{{ bot.ants }}
+              </template>
+              <template v-else>
+                {{ NA }}
+              </template>
+            </span>
           </div>
           <div>
             <span>{{ $t("game.score") }}:</span>
             <span class="info-value">
-              {{ getNumberTruncated(bot.score) }}
+              <template v-if="bot">
+                {{ getNumberTruncated(bot.score) }}
+              </template>
+              <template v-else>
+                {{ NA }}
+              </template>
             </span>
           </div>
           <div>
             <span>{{ $t("game.errors") }}:</span>
             <span class="info-value">
-              {{ bot.err }}%
+              <template v-if="bot">
+                {{ bot.err }}%
+              </template>
+              <template v-else>
+                {{ NA }}
+              </template>
             </span>
           </div>
           <div>
             <span>{{ $t("global.art") }}:</span>
             <span class="info-value">
-              {{ getArtInMs(bot.art) }} ms
+              <template v-if="bot">
+                {{ getArtInMs(bot.art) }} ms
+              </template>
+              <template v-else>
+                {{ NA }}
+              </template>
             </span>
           </div>
         </div>
@@ -128,10 +152,13 @@ export default {
       default: () => {}
     }
   },
-  data: () => ({
-    hoverOnChip: false,
-    hoverOnBots: false
-  }),
+  data() {
+    return {
+      hoverOnChip: false,
+      hoverOnBots: false,
+      NA: 'N/A'
+    }
+  },
   computed: {
     getTimeAgo() {
       return timeAgo(this.game.finished)
@@ -145,7 +172,7 @@ export default {
       return this.game.author
     },
     getGameScore() {
-      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc + bot.score), 0)
+      return this.game.bots && this.game.bots.reduce((acc, bot) => (acc + bot ? bot.score : 0), 0)
     }
   },
   methods: {
@@ -156,10 +183,12 @@ export default {
       return getImageById(`${id}-background.png`, 40)
     },
     getCurrentLangName(bot) {
-      return langs.find(lang => lang.id === bot.lang).name
+      const currentLang = langs.find(lang => lang.id === bot.lang)
+      return currentLang ? currentLang.name : null
     },
     getCurrentLangImg(bot) {
-      return langs.find(lang => lang.id === bot.lang).img
+      const currentLang = langs.find(lang => lang.id === bot.lang)
+      return currentLang ? currentLang.img : null
     },
     getVsImage(botIndex) {
       if (botIndex !== this.game.bots.length - 1 && this.game.bots.length > 1 && this.game.bots.length < 5) {
@@ -177,9 +206,10 @@ export default {
       this.$gtag('event', 'gamechip_to_game')
       this.$router.push({ path: this.localePath('game'), query: { id: game.id, v: game.v } })
     },
-    handlerClickUser(username) {
+    handlerClickUser(bot) {
       this.$gtag('event', 'gamechip_to_user')
-      this.$router.push(this.localePath(`/users?username=${username}`))
+      if (!bot) { return }
+      this.$router.push(this.localePath(`/users?username=${bot.username}`))
     }
   }
 }

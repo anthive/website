@@ -8,7 +8,7 @@
       <div class="mt-n3">
         <div class="d-flex">
           <v-avatar tile size="200">
-            <v-img :src="getAvatar(getUser.avatar, 400)" class="avatar" />
+            <v-img :src="getUserAvatar(getUser, 400)" class="avatar" />
           </v-avatar>
           <div class="title">
             <h1 class="user-name">{{ getUserFullName }}</h1>
