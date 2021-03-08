@@ -11,7 +11,7 @@
       <div
         v-for="(bot, index) in game.bots"
         :key="index"
-        :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 600)})`"
+        :style="`background: center / cover no-repeat url(${getBotAvatar(bot, 600)})`"
         class="bot-avatar"
         @click="handlerClickUser(bot.username)"
       >

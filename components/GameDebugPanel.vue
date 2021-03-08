@@ -20,7 +20,7 @@
             class="avatar"
             tile
             size="20"
-          ><v-img :src="getAvatar(bot.avatar, 100)" />
+          ><v-img :src="getBotAvatar(bot, 100)" />
           </v-avatar>
           <span>{{ bot.displayName }} {{ bot.id }}</span>
         </v-tab>

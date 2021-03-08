@@ -35,7 +35,7 @@
                 tile
                 width="120px"
                 height="120px">
-                <v-img :src="getAvatar(item.avatar, 240)" />
+                <v-img :src="getBotAvatar(item, 240)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.err`]="{ item }">
@@ -58,7 +58,7 @@
                 class="information-user"
                 @click.native="$gtag('event', 'leaderboard_to_author')">
                 <v-avatar class="ml-1" tile size="30">
-                  <v-img :src="getAvatar(item.userAvatar, 60)" />
+                  <v-img :src="getBotAuthorAvatar(item, 60)" />
                 </v-avatar>
                 {{ item.username }}
               </nuxt-link>

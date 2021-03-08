@@ -35,7 +35,7 @@
                 tile
                 width="120px"
                 height="120px">
-                <v-img :src="getAvatar(item.avatar, 240)" />
+                <v-img :src="getUserAvatar(item, 240)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.score`]="{ item }">

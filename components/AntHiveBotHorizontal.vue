@@ -3,8 +3,8 @@
     class="chip"
     @mouseover="$gtag('event', 'hbot_hover')">
     <div
-      :style="`background: center / cover no-repeat url(${getAvatar(
-        bot.avatar,
+      :style="`background: center / cover no-repeat url(${getBotAvatar(
+        bot,
         200
       )})`"
       class="img"
@@ -39,7 +39,7 @@
             tile
             size="30"
           ><v-img
-            :src="getAvatar(bot.userAvatar, 60)"
+            :src="getBotAuthorAvatar(bot, 60)"
           /></v-avatar>
         </nuxt-link>
         <div class="information-container">

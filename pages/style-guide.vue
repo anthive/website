@@ -32,20 +32,6 @@
       </div>
 
       <div class="component">
-        <h4>AntHiveBotSmall</h4>
-        <p v-if="$options.components['AntHiveBotSmall'].props">
-          Props: {{ $options.components['AntHiveBotSmall'].props }}
-        </p>
-        <div>
-          <AntHiveBotSmall
-            v-for="(bot, index) in bots"
-            :key="bot.displayName + index"
-            :avatar="bot.avatar"
-          />
-        </div>
-      </div>
-
-      <div class="component">
         <h4>AntHiveBotHorizontal</h4>
         <p v-if="$options.components['AntHiveBotHorizontal'].props">
           Props: {{ $options.components['AntHiveBotHorizontal'].props }}
@@ -116,7 +102,6 @@ import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
 import GamesTable from '@/components/GamesTable'
-import AntHiveBotSmall from '@/components/AntHiveBotSmall'
 import AntHiveBotHorizontal from '@/components/AntHiveBotHorizontal'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import AntHiveBotVertical from '@/components/AntHiveBotVertical'
@@ -128,7 +113,6 @@ export default {
     AntHiveIcon,
     AntHiveAuthor,
     GamesTable,
-    AntHiveBotSmall,
     AntHiveBotHorizontal,
     AntHivePageHeader,
     AntHiveBotVertical
