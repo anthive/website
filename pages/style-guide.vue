@@ -104,7 +104,6 @@
 </template>
 
 <script>
-/* eslint-disable max-len */
 import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
