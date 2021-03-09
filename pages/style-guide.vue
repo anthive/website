@@ -1,4 +1,3 @@
-<!-- eslint-disable max-len -->
 <template>
   <section class="page-wrap">
     <v-container>
@@ -129,13 +128,21 @@ export default {
   data() {
     return {
       chartdata: {
-        labels: Array.from(new Array(100).keys()),
+        labels: Array.from(new Array(50).keys()),
         datasets: [
           {
             fill: false,
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: new Array(100).fill().map(n => (Math.random() * 10))
+            label: 'Bot One',
+            backgroundColor: 'red',
+            borderColor: 'red',
+            data: new Array(50).fill().map(n => (Math.random() * 10))
+          },
+          {
+            fill: false,
+            label: 'Bot Two',
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            data: new Array(50).fill().map(n => (Math.random() * 10))
           }
         ]
       },
@@ -229,13 +236,6 @@ export default {
           socials: {}
         }
       ]
-    }
-  },
-  computed: {
-    getArrayWithRandomNumbers() {
-      const a = new Array(1000).fill(1).map(n => (Math.random() * 10))
-      console.log(a)
-      return a
     }
   }
 }

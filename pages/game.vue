@@ -193,28 +193,32 @@ export default {
         const { id } = bot
         this.updateBotsTicksList(bot)
         score.push({
-          fill: true,
+          fill: false,
           label: bot.displayName,
           data: this.botsChartStats[id] ? this.botsChartStats[id].score : null,
-          backgroundColor: this.colors[index]
+          backgroundColor: this.colors[index],
+          borderColor: this.colors[index]
         })
         ants.push({
           fill: false,
           label: bot.displayName,
           data: this.botsChartStats[id] ? this.botsChartStats[id].ants : null,
-          backgroundColor: this.colors[index]
+          backgroundColor: this.colors[index],
+          borderColor: this.colors[index]
         })
         errors.push({
           fill: false,
           label: bot.displayName,
           data: this.botsChartStats[id] ? this.botsChartStats[id].errors : null,
-          backgroundColor: this.colors[index]
+          backgroundColor: this.colors[index],
+          borderColor: this.colors[index]
         })
         rt.push({
           fill: false,
           label: bot.displayName,
           data: this.botsChartStats[id] ? this.botsChartStats[id].rt : null,
-          backgroundColor: this.colors[index]
+          backgroundColor: this.colors[index],
+          borderColor: this.colors[index]
         })
       })
       return {
