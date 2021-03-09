@@ -35,7 +35,7 @@
                 tile
                 width="120px"
                 height="120px">
-                <v-img :src="getAvatar(item.avatar, 240)" />
+                <v-img :src="getBotAvatar(item, 240)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.err`]="{ item }">
@@ -58,7 +58,7 @@
                 class="information-user"
                 @click.native="$gtag('event', 'leaderboard_to_author')">
                 <v-avatar class="ml-1" tile size="30">
-                  <v-img :src="getAvatar(item.userAvatar, 60)" />
+                  <v-img :src="getBotAuthorAvatar(item, 60)" />
                 </v-avatar>
                 {{ item.username }}
               </nuxt-link>
@@ -66,7 +66,7 @@
           </v-data-table>
         </client-only>
         <infinite-scroll :enough="enoughLoadLeaders" @load-more="fetchBots" />
-        <template v-if="!bots.length">
+        <template v-if="!bots">
           <v-skeleton-loader
             v-for="skeleton in 8"
             :key="skeleton + 'skeleton'"
@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       langs: [],
-      bots: [],
+      bots: null,
       headers: [
         { text: '', value: 'avatar', sortable: false },
         { text: this.$t('leaderboard.language'), value: 'lang' },
@@ -138,11 +138,13 @@ export default {
   },
   fetch() {
     if (process.server) {
+      this.bots = []
       this.fetchBots()
     }
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
+    this.bots = []
     this.fetchBots()
     this.$gtag('event', 'leaderboard_bots')
   },
@@ -159,20 +161,25 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 @import '@/assets/style/global.scss';
 .table {
   .text-start.sortable {
     font-weight: $font-weight-bold;
     font-size: $font-small;
+    & > span {
+
+  word-break: normal!important;
+    }
   }
   .text-start.active {
     font-weight: $font-weight-bolder;
     color: $violet!important;
-    &.asc::after {
+    &.asc>span::after {
       content: '⬇'
     }
-    &.desc::after {
+    &.desc>span::after {
       content: '⬆'
     }
   }

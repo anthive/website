@@ -45,18 +45,15 @@
             <transition-group name="flip-list" tag="div">
               <div
                 v-for="(bot, index) in game.bots"
-                :key="bot.spawn"
+                :key="bot ? bot.score : index"
               >
                 <AntHiveBotHorizontal
-                  v-if="bot.stats"
                   :bot="bot"
-                  :stats="bot.stats"
-                  :is-dead="bot.isDead"
                   :number="index + 1"
                   class="mb-2"
                 />
                 <v-skeleton-loader
-                  v-else
+                  v-if="!game.bots.length"
                   tile
                   type="list-item-avatar-three-line"
                   class="mb-2"
@@ -188,18 +185,21 @@ export default {
       return this.isDebugMode ? 'debug' : 'normal'
     },
     chartData() {
-      if (!this.game || !this.game.bots || !this.game.bots[0].stats || !this.botsChartStats) { return }
-      const datasets = this.game.bots.map((bot) => {
-        const { botId } = bot
-        this.updateBotsTicksList(bot)
-        return {
-          fill: false,
-          label: bot.displayName,
-          data: this.botsChartStats[botId].ticks,
-          backgroundColor: this.botsChartStats[botId].color
-        }
-      })
-      return { labels: this.gameTicks, datasets }
+      if (!this.game || !this.game.bots || !this.botsChartStats) { return }
+      const datasets = this.game.bots
+        .filter(bot => bot)
+        .map((bot) => {
+          if (!bot) { return }
+          const { botId } = bot
+          this.updateBotsTicksList(bot)
+          return {
+            fill: false,
+            label: bot.displayName,
+            data: this.botsChartStats[botId].ticks,
+            backgroundColor: this.botsChartStats[botId].color
+          }
+        })
+      return datasets.length ? { labels: this.gameTicks, datasets } : null
     }
   },
   watch: {
@@ -211,6 +211,7 @@ export default {
     bots(value) {
       if (!value || !value.length) { return }
       this.game.bots = this.game.bots.map((bot) => {
+        if (!bot) { return }
         const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
         bot.isDead = !gameBot
         if (gameBot) {
@@ -224,8 +225,6 @@ export default {
         }
         return bot
       })
-
-      // this.game.bots.sort(this.compare)
     }
   },
   async mounted() {
@@ -234,6 +233,7 @@ export default {
       this.gameTicks = Array.from(Array(this.game.age).keys())
       this.botsChartStats = {}
       this.game.bots.forEach((bot) => {
+        if (!bot) { return }
         const { botId } = bot
         this.botsChartStats[botId] = {}
         this.botsChartStats[botId].color = this.getRandomColor()

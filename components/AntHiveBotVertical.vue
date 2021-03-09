@@ -2,7 +2,7 @@
   <div
     class="chip"
     @mouseover="$gtag('event', 'vbot_hover')">
-    <div :style="`background: center / cover no-repeat url(${getAvatar(bot.avatar, 400)})`" class="img">
+    <div :style="`background: center / cover no-repeat url(${getBotAvatar(bot, 400)})`" class="img">
       <img
         :src="getCurrentLangImg"
         :alt="getCurrentLang.name"
@@ -41,7 +41,7 @@
           @click.native="$gtag('event', 'vbot_to_author')">
           {{ $t("game.by") }} {{ getUsername }}
           <v-avatar class="ml-1" tile size="35">
-            <v-img :src="getAvatar(getUserAvatar, 70)" />
+            <v-img :src="getUserAvatar(user, 70)" />
           </v-avatar>
         </nuxt-link>
         <AntHiveButton
@@ -98,9 +98,6 @@ export default {
       if (this.bot && this.bot.displayName) {
         return this.getStringTruncated(this.bot.displayName, 10)
       }
-    },
-    getUserAvatar() {
-      return this.user && this.user.avatar
     },
     getUsername() {
       return this.user && this.user.username
