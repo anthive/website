@@ -1,9 +1,16 @@
+<!-- eslint-disable max-len -->
 <template>
   <section class="page-wrap">
     <v-container>
       <AntHivePageHeader
         title="Style guide"
         subtitle="Components"
+      />
+      <AntHiveChart
+        :chart-data="chartdata"
+        :height="200"
+        title="AntHive Chart plugin"
+        class="mt-10"
       />
       <div class="component">
         <h4>AntHiveButton</h4>
@@ -98,6 +105,7 @@
 </template>
 
 <script>
+/* eslint-disable max-len */
 import AntHiveButton from '@/components/AntHiveButton'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import AntHiveAuthor from '@/components/AntHiveAuthor'
@@ -118,98 +126,118 @@ export default {
     AntHiveBotVertical
   },
   mixins: [Image],
-  data: () => ({
-    bots: [
-      {
-        id: 325,
-        skin: 1,
-        v: 1,
-        displayName: 'Unplausive-Efficience',
-        avatar: 'ant-234',
-        userId: 234,
-        lang: 'php',
-        isActive: false,
-        games: 0,
-        wins: 0,
-        losses: 0,
-        mmr: 0,
-        score: 100,
-        art: 0,
-        errors: 0
+  data() {
+    return {
+      chartdata: {
+        labels: Array.from(new Array(100).keys()),
+        datasets: [
+          {
+            fill: false,
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: new Array(100).fill().map(n => (Math.random() * 10))
+          }
+        ]
       },
-      {
-        id: 326,
-        skin: 1,
-        v: 1,
-        displayName: 'Oaken-Exploder',
-        avatar: 'ant-234',
-        userId: 234,
-        lang: 'go',
-        isActive: false,
-        games: 0,
-        wins: 0,
-        losses: 0,
-        mmr: 0,
-        score: 100,
-        art: 0,
-        errors: 0
-      },
-      {
-        id: 418,
-        skin: 1,
-        v: 1,
-        displayName: 'court-turn',
-        avatar: '37ca8fa5-db28-4892-8ec4-bf78e33c236f',
-        userId: 225,
-        lang: 'js',
-        isActive: true,
-        games: 9,
-        wins: 1,
-        losses: 2,
-        mmr: 99,
-        score: 100,
-        art: 820,
-        errors: 27
-      }
-    ],
-    users: [
-      {
-        id: 1,
-        avatar: '27418530-f184-4693-8e56-8333d8546944',
-        background: '',
-        username: 'anthive',
-        displayName: 'AntHive.IO',
-        description: '',
-        socials: {},
-        score: 100,
-        mmr: 200,
-        bots: []
-      },
-      {
-        id: 225,
-        avatar: '8d207be3-2ecb-4363-b735-32d2c3653d64',
-        background: '',
-        username: 'ant-225',
-        displayName: 'Vitaly Kezlya',
-        description: '',
-        socials: {},
-        score: 100,
-        mmr: 200,
-        bots: []
-      },
-      {
-        id: 283,
-        avatar: 'ant-283',
-        background: '',
-        username: 'ant-283',
-        displayName: '234',
-        description: 'asdf',
-        score: 100,
-        mmr: 200,
-        socials: {}
-      }
-    ]
-  })
+      bots: [
+        {
+          id: 325,
+          skin: 1,
+          v: 1,
+          displayName: 'Unplausive-Efficience',
+          avatar: 'ant-234',
+          userId: 234,
+          lang: 'php',
+          isActive: false,
+          games: 0,
+          wins: 0,
+          losses: 0,
+          mmr: 0,
+          score: 100,
+          art: 0,
+          errors: 0
+        },
+        {
+          id: 326,
+          skin: 1,
+          v: 1,
+          displayName: 'Oaken-Exploder',
+          avatar: 'ant-234',
+          userId: 234,
+          lang: 'go',
+          isActive: false,
+          games: 0,
+          wins: 0,
+          losses: 0,
+          mmr: 0,
+          score: 100,
+          art: 0,
+          errors: 0
+        },
+        {
+          id: 418,
+          skin: 1,
+          v: 1,
+          displayName: 'court-turn',
+          avatar: '37ca8fa5-db28-4892-8ec4-bf78e33c236f',
+          userId: 225,
+          lang: 'js',
+          isActive: true,
+          games: 9,
+          wins: 1,
+          losses: 2,
+          mmr: 99,
+          score: 100,
+          art: 820,
+          errors: 27
+        }
+      ],
+      users: [
+        {
+          id: 1,
+          avatar: '27418530-f184-4693-8e56-8333d8546944',
+          background: '',
+          username: 'anthive',
+          displayName: 'AntHive.IO',
+          description: '',
+          socials: {},
+          score: 100,
+          mmr: 200,
+          bots: []
+        },
+        {
+          id: 225,
+          avatar: '8d207be3-2ecb-4363-b735-32d2c3653d64',
+          background: '',
+          username: 'ant-225',
+          displayName: 'Vitaly Kezlya',
+          description: '',
+          socials: {},
+          score: 100,
+          mmr: 200,
+          bots: []
+        },
+        {
+          id: 283,
+          avatar: 'ant-283',
+          background: '',
+          username: 'ant-283',
+          displayName: '234',
+          description: 'asdf',
+          score: 100,
+          mmr: 200,
+          socials: {}
+        }
+      ]
+    }
+  },
+  computed: {
+    getArrayWithRandomNumbers() {
+      const a = new Array(1000).fill(1).map(n => (Math.random() * 10))
+      console.log(a)
+      return a
+    }
+  }
 }
 </script>
 

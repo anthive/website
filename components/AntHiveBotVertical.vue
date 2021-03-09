@@ -86,6 +86,11 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      NA: 'N/A'
+    }
+  },
   computed: {
     ...mapGetters(['getUser']),
     getCurrentLang() {
@@ -100,7 +105,10 @@ export default {
       }
     },
     getUsername() {
-      return this.user && this.user.username
+      if (this.user && this.user.username) {
+        return this.user.username
+      }
+      return this.NA
     },
     isUserProfile() {
       if (!this.getUser) { return false }

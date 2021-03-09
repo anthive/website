@@ -44,56 +44,53 @@
           <v-col cols="12" md="4">
             <transition-group name="flip-list" tag="div">
               <div
-                v-for="(bot, index) in game.bots"
-                :key="bot ? bot.score : index"
+                v-for="(bot, index) in bots"
+                :key="bot.id"
               >
                 <AntHiveBotHorizontal
                   :bot="bot"
                   :number="index + 1"
                   class="mb-2"
                 />
-                <v-skeleton-loader
-                  v-if="!game.bots.length"
-                  tile
-                  type="list-item-avatar-three-line"
-                  class="mb-2"
-                />
               </div>
             </transition-group>
+            <template v-if="!bots.length">
+              <v-skeleton-loader
+                v-for="n in 3"
+                :key="n"
+                tile
+                type="list-item-avatar-three-line"
+                class="mb-2"
+              />
+            </template>
           </v-col>
         </v-row>
         <template v-if="chartData">
-          <AntHiveButton
-            :disabled="chartStatType === 'score'"
-            :light="chartStatType === 'score'"
-            tile
-            color="primary"
-            @click="setChartsStatsType('score')"
-          >{{ $t("game.score") }}</AntHiveButton>
-          <AntHiveButton
-            :disabled="chartStatType === 'rt'"
-            :light="chartStatType === 'rt'"
-            tile
-            color="primary"
-            @click="setChartsStatsType('rt')"
-          >{{ $t("global.rt") }}</AntHiveButton>
-          <AntHiveButton
-            :disabled="chartStatType === 'ants'"
-            :light="chartStatType === 'ants'"
-            tile
-            color="primary"
-            @click="setChartsStatsType('ants')"
-          >{{ $t("game.ants") }}</AntHiveButton>
-          <AntHiveButton
-            :disabled="chartStatType === 'errors'"
-            :light="chartStatType === 'errors'"
-            tile
-            color="primary"
-            @click="setChartsStatsType('errors')"
-          >{{ $t("game.errors") }}</AntHiveButton>
           <AntHiveChart
-            :title="$t(`game.${chartStatType}`)"
-            :chart-data="chartData"
+            v-if="chartData.score"
+            :title="$t('game.score')"
+            :chart-data="chartData.score"
+            :height="200"
+            class="mt-10"
+          />
+          <AntHiveChart
+            v-if="chartData.errors"
+            :title="$t('game.ants')"
+            :chart-data="chartData.ants"
+            :height="200"
+            class="mt-10"
+          />
+          <AntHiveChart
+            v-if="chartData.errors"
+            :title="$t('game.errors')"
+            :chart-data="chartData.errors"
+            :height="200"
+            class="mt-10"
+          />
+          <AntHiveChart
+            v-if="chartData.rt"
+            :title="$t('global.rt')"
+            :chart-data="chartData.rt"
             :height="200"
             class="mt-10"
           />
@@ -177,7 +174,9 @@ export default {
       botsChartStats: null,
       chartStatType: 'score',
       gameTicks: [],
-      currentTick: 0
+      currentTick: 0,
+      croppedNumber: 20,
+      colors: ['red', 'blue', 'green', 'orange', 'black', 'purple', 'yellow', 'teal']
     }
   },
   computed: {
@@ -185,21 +184,45 @@ export default {
       return this.isDebugMode ? 'debug' : 'normal'
     },
     chartData() {
-      if (!this.game || !this.game.bots || !this.botsChartStats) { return }
-      const datasets = this.game.bots
-        .filter(bot => bot)
-        .map((bot) => {
-          if (!bot) { return }
-          const { botId } = bot
-          this.updateBotsTicksList(bot)
-          return {
-            fill: false,
-            label: bot.displayName,
-            data: this.botsChartStats[botId].ticks,
-            backgroundColor: this.botsChartStats[botId].color
-          }
+      if (!this.bots || !this.botsChartStats) { return }
+      const score = []
+      const ants = []
+      const errors = []
+      const rt = []
+      this.bots.forEach((bot, index) => {
+        const { id } = bot
+        this.updateBotsTicksList(bot)
+        score.push({
+          fill: true,
+          label: bot.displayName,
+          data: this.botsChartStats[id] ? this.botsChartStats[id].score : null,
+          backgroundColor: this.colors[index]
         })
-      return datasets.length ? { labels: this.gameTicks, datasets } : null
+        ants.push({
+          fill: false,
+          label: bot.displayName,
+          data: this.botsChartStats[id] ? this.botsChartStats[id].ants : null,
+          backgroundColor: this.colors[index]
+        })
+        errors.push({
+          fill: false,
+          label: bot.displayName,
+          data: this.botsChartStats[id] ? this.botsChartStats[id].errors : null,
+          backgroundColor: this.colors[index]
+        })
+        rt.push({
+          fill: false,
+          label: bot.displayName,
+          data: this.botsChartStats[id] ? this.botsChartStats[id].rt : null,
+          backgroundColor: this.colors[index]
+        })
+      })
+      return {
+        score: { labels: this.gameTicks, datasets: score },
+        ants: { labels: this.gameTicks, datasets: ants },
+        errors: { labels: this.gameTicks, datasets: errors },
+        rt: { labels: this.gameTicks, datasets: rt }
+      }
     }
   },
   watch: {
@@ -207,67 +230,54 @@ export default {
       this.gamePlayerDestroy()
       this.fetchGame()
       this.scrollToTop()
-    },
-    bots(value) {
-      if (!value || !value.length) { return }
-      this.game.bots = this.game.bots.map((bot) => {
-        if (!bot) { return }
-        const gameBot = value.find(gameBot => gameBot.id === bot.spawn)
-        bot.isDead = !gameBot
-        if (gameBot) {
-          bot.stats = {
-            rt: gameBot.response.time,
-            age: gameBot.age,
-            score: gameBot.score,
-            errors: gameBot.errors,
-            ants: gameBot.ants.length
-          }
-        }
-        return bot
-      })
     }
   },
   async mounted() {
     await this.fetchGame()
     if (this.game && this.game.bots) {
-      this.gameTicks = Array.from(Array(this.game.age).keys())
+      const croppedTicksLength = Math.round(this.game.age / this.croppedNumber)
+      const ticksValues = Array.from(Array(croppedTicksLength).keys())
+      this.gameTicks = ticksValues.map(k => k * this.croppedNumber)
       this.botsChartStats = {}
-      this.game.bots.forEach((bot) => {
-        if (!bot) { return }
-        const { botId } = bot
-        this.botsChartStats[botId] = {}
-        this.botsChartStats[botId].color = this.getRandomColor()
-        this.botsChartStats[botId].ticks = []
-      })
     }
   },
   destroyed() {
     this.gamePlayerDestroy()
   },
   methods: {
-    setChartsStatsType(type) {
-      this.game.bots.forEach((bot) => {
-        this.botsChartStats[bot.botId].ticks = []
-      })
-      this.chartStatType = type
-    },
-    getRandomColor() {
-      return `#${Math.random().toString(16).substr(-6)}`
-    },
     updateBotsTicksList(bot) {
-      const { botId } = bot
+      const { id } = bot
+      let botStats = this.botsChartStats[id]
+      if (!botStats) {
+        botStats = {}
+        botStats.score = []
+        botStats.ants = []
+        botStats.errors = []
+        botStats.rt = []
+      }
       // dates before update ticks list
-      const oldLength = this.botsChartStats[botId].ticks.length - 1
-      const lastValue = this.botsChartStats[botId].ticks[oldLength]
-
+      const oldLength = botStats.score.length - 1
+      const lastScoreValue = botStats.score[oldLength]
+      const lastAntsValue = botStats.ants[oldLength]
+      const lastErrorsValue = botStats.errors[oldLength]
+      const lastRtValue = botStats.rt[oldLength]
+      const croppedBotAge = Math.round(bot.age / this.croppedNumber)
       // set new ticks length
-      this.botsChartStats[botId].ticks.length = bot.stats.age
+      botStats.score.length = botStats.ants.length = botStats.errors.length = botStats.rt.length = croppedBotAge
+
       // fill all empty items
-      this.botsChartStats[botId].ticks.fill(lastValue, oldLength)
+      botStats.score.fill(lastScoreValue, oldLength)
+      botStats.ants.fill(lastAntsValue, oldLength)
+      botStats.errors.fill(lastErrorsValue, oldLength)
+      botStats.rt.fill(lastRtValue, oldLength)
 
       // set ants count to the last ticks array item
-      const botStatValue = this.chartStatType === 'rt' ? this.getArtInMs(bot.stats[this.chartStatType]) : bot.stats[this.chartStatType]
-      this.botsChartStats[botId].ticks[bot.stats.age] = botStatValue
+      botStats.score[croppedBotAge] = bot.score
+      botStats.ants[croppedBotAge] = bot.ants.length
+      botStats.errors[croppedBotAge] = bot.errors
+      botStats.rt[croppedBotAge] = this.getArtInMs(bot.response.time)
+
+      this.botsChartStats[id] = botStats
     },
     getArtInMs(art) {
       return Math.round(art / 10) / 100
