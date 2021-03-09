@@ -14,7 +14,6 @@ Vue.component('AntHiveChart', {
   data() {
     return {
       options: {
-        fill: false,
         responsive: true,
         title: {
           display: true,

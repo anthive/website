@@ -74,7 +74,7 @@
             class="mt-10"
           />
           <AntHiveChart
-            v-if="chartData.errors"
+            v-if="chartData.ants"
             :title="$t('game.ants')"
             :chart-data="chartData.ants"
             :height="200"
@@ -175,7 +175,7 @@ export default {
       chartStatType: 'score',
       gameTicks: [],
       currentTick: 0,
-      croppedNumber: 20,
+      cropNumber: 20,
       colors: ['red', 'blue', 'green', 'orange', 'black', 'purple', 'yellow', 'teal']
     }
   },
@@ -191,35 +191,19 @@ export default {
       const rt = []
       this.bots.forEach((bot, index) => {
         const { id } = bot
+        const botColor = this.colors[index]
+        const botStats = this.botsChartStats[id] || {}
         this.updateBotsTicksList(bot)
-        score.push({
+        const dataset = {
           fill: false,
           label: bot.displayName,
-          data: this.botsChartStats[id] ? this.botsChartStats[id].score : null,
-          backgroundColor: this.colors[index],
-          borderColor: this.colors[index]
-        })
-        ants.push({
-          fill: false,
-          label: bot.displayName,
-          data: this.botsChartStats[id] ? this.botsChartStats[id].ants : null,
-          backgroundColor: this.colors[index],
-          borderColor: this.colors[index]
-        })
-        errors.push({
-          fill: false,
-          label: bot.displayName,
-          data: this.botsChartStats[id] ? this.botsChartStats[id].errors : null,
-          backgroundColor: this.colors[index],
-          borderColor: this.colors[index]
-        })
-        rt.push({
-          fill: false,
-          label: bot.displayName,
-          data: this.botsChartStats[id] ? this.botsChartStats[id].rt : null,
-          backgroundColor: this.colors[index],
-          borderColor: this.colors[index]
-        })
+          backgroundColor: botColor,
+          borderColor: botColor
+        }
+        score.push({ ...dataset, data: botStats.score })
+        ants.push({ ...dataset, data: botStats.ants })
+        errors.push({ ...dataset, data: botStats.errots })
+        rt.push({ ...dataset, data: botStats.rt })
       })
       return {
         score: { labels: this.gameTicks, datasets: score },
@@ -239,9 +223,9 @@ export default {
   async mounted() {
     await this.fetchGame()
     if (this.game && this.game.bots) {
-      const croppedTicksLength = Math.round(this.game.age / this.croppedNumber)
+      const croppedTicksLength = Math.round(this.game.age / this.cropNumber)
       const ticksValues = Array.from(Array(croppedTicksLength).keys())
-      this.gameTicks = ticksValues.map(k => k * this.croppedNumber)
+      this.gameTicks = ticksValues.map(k => k * this.cropNumber)
       this.botsChartStats = {}
     }
   },
@@ -265,7 +249,7 @@ export default {
       const lastAntsValue = botStats.ants[oldLength]
       const lastErrorsValue = botStats.errors[oldLength]
       const lastRtValue = botStats.rt[oldLength]
-      const croppedBotAge = Math.round(bot.age / this.croppedNumber)
+      const croppedBotAge = Math.round(bot.age / this.cropNumber)
       // set new ticks length
       botStats.score.length = botStats.ants.length = botStats.errors.length = botStats.rt.length = croppedBotAge
 
