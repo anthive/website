@@ -212,5 +212,12 @@
     "meta": {
       "title": "AntHive.IO - Terms of Service"
     }
+  },
+  "error": {
+    "meta": {
+      "title": "AntHive.IO - 404 Page not found"
+    },
+    "title": "This is not the page you're looking for",
+    "subtitle": "You may have mistyped the address or the page may have moved"
   }
 }
