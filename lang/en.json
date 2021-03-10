@@ -108,7 +108,10 @@
     "ticks": "ticks",
     "mapSkin": "Map skin",
     "viewReplay": "View Replay",
-    "botSkin": "Bot skin"
+    "botSkin": "Bot skin",
+    "response": "Response",
+    "request": "Request",
+    "logs": "Logs"
   },
   "leaderboard": {
     "meta": {

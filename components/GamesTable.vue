@@ -15,9 +15,8 @@
         v-for="skeleton in 18"
         :key="skeleton + 'skeleton'"
         tile
-        width="320px"
         height="280px"
-        class="ma-5"
+        class="skeleton"
         type="image, actions"
       />
     </div>
@@ -93,5 +92,19 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 -20px;
+  @media screen and (max-width: $screen-sm) {
+    justify-content: center;
+  }
+  .skeleton {
+    width: 100%;
+    max-width: 320px;
+    margin: 20px;
+    @media screen and (max-width: $screen-md) {
+      max-width: 260px;
+    }
+    @media screen and (max-width: $screen-sm) {
+      max-width: 100%;
+    }
+  }
 }
 </style>

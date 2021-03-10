@@ -28,13 +28,10 @@
             sort-by="rank"
             sort-desc
             hide-default-footer
-            class="table"
+            class="users-table"
           >
             <template v-slot:[`item.avatar`]="{ item }">
-              <v-avatar
-                tile
-                width="120px"
-                height="120px">
+              <v-avatar tile class="avatar">
                 <v-img :src="getUserAvatar(item, 240)" />
               </v-avatar>
             </template>
@@ -110,8 +107,48 @@ export default {
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
-    this.users = []
-    this.fetchUsers()
+    this.users = [
+      {
+        id: 1,
+        avatar: '27418530-f184-4693-8e56-8333d8546944',
+        background: '',
+        username: 'anthive',
+        displayName: 'AntHive.IO',
+        description: '',
+        socials: {},
+        score: 100,
+        games: 200,
+        rank: 1200,
+        bots: []
+      },
+      {
+        id: 225,
+        avatar: '8d207be3-2ecb-4363-b735-32d2c3653d64',
+        background: '',
+        username: 'ant-225',
+        displayName: 'Vitaly Kezlya',
+        description: '',
+        socials: {},
+        score: 100,
+        games: 200,
+        rank: 1200,
+        bots: []
+      },
+      {
+        id: 283,
+        avatar: 'ant-283',
+        background: '',
+        username: 'ant-283',
+        displayName: '234',
+        description: 'asdf',
+        score: 100,
+        games: 200,
+        rank: 1200,
+        socials: {}
+      }
+    ]
+    // this.users = []
+    // this.fetchUsers()
     this.$gtag('event', 'leaderboard_users')
   },
   methods: {
@@ -127,6 +164,33 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '@/assets/style/global.scss';
+.users-table {
+  @media screen and (min-width: $screen-sm) {
+    margin-left: -16px;
+  }
+  .text-start.sortable {
+    font-weight: $font-weight-bold;
+    font-size: $font-small;
+    & > span {
+      word-break: normal!important;
+    }
+  }
+  .text-start.active {
+    font-weight: $font-weight-bolder;
+    color: $violet!important;
+    &.asc>span::after {
+      position: absolute;
+      content: '⬇'
+    }
+    &.desc>span::after {
+      position: absolute;
+      content: '⬆'
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
@@ -135,12 +199,15 @@ export default {
     display: flex;
     margin-bottom: 38px;
   }
-  .table {
-    margin-left: -16px!important;
-  }
   .skeleton {
     background-color: $white;
     padding-top: 20px;
+  }
+  @media screen and (min-width: $screen-sm) {
+    .avatar {
+      width: 120px!important;
+      height: 120px!important;
+    }
   }
 }
 </style>

@@ -230,6 +230,12 @@ $bot-info-width: 150px;
   box-shadow: $box-shadow-default;
   background-color: $white;
 
+  @media screen and (max-width: $screen-md) {
+    max-width: 260px;
+  }
+  @media screen and (max-width: $screen-sm) {
+    max-width: 100%;
+  }
   &:hover {
     .game-info-layout {
       opacity: 1;

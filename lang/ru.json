@@ -108,7 +108,10 @@
     "ticks": "тиков",
     "mapSkin": "Карта",
     "viewReplay": "Смотреть игру",
-    "botSkin": "Скин бота"
+    "botSkin": "Скин бота",
+    "response": "Ответ",
+    "request": "Запрос",
+    "logs": "Логи"
   },
   "leaderboard": {
     "meta": {

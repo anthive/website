@@ -28,13 +28,10 @@
             sort-by="mmr"
             sort-desc
             hide-default-footer
-            class="table"
+            class="bots-table"
           >
             <template v-slot:[`item.avatar`]="{ item }">
-              <v-avatar
-                tile
-                width="120px"
-                height="120px">
+              <v-avatar tile class="avatar">
                 <v-img :src="getBotAvatar(item, 240)" />
               </v-avatar>
             </template>
@@ -48,7 +45,7 @@
               {{ item.art / 1000 }} ms
             </template>
             <template v-slot:[`item.lang`]="{ item }">
-              <v-avatar tile size="40">
+              <v-avatar tile size="48">
                 <v-img :src="getLangImg(item.lang)" />
               </v-avatar>
             </template>
@@ -144,8 +141,61 @@ export default {
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
-    this.bots = []
-    this.fetchBots()
+    this.bots = [
+      {
+        id: 325,
+        skin: 1,
+        v: 1,
+        displayName: 'Unplausive-Efficience',
+        avatar: 'ant-234',
+        userId: 234,
+        lang: 'php',
+        isActive: false,
+        games: 0,
+        wins: 0,
+        losses: 0,
+        mmr: 0,
+        score: 100,
+        art: 0,
+        errors: 0
+      },
+      {
+        id: 326,
+        skin: 1,
+        v: 1,
+        displayName: 'Oaken-Exploder',
+        avatar: 'ant-234',
+        userId: 234,
+        lang: 'go',
+        isActive: false,
+        games: 0,
+        wins: 0,
+        losses: 0,
+        mmr: 0,
+        score: 100,
+        art: 0,
+        errors: 0
+      },
+      {
+        id: 418,
+        skin: 1,
+        v: 1,
+        displayName: 'court-turn',
+        avatar: '37ca8fa5-db28-4892-8ec4-bf78e33c236f',
+        userId: 225,
+        lang: 'js',
+        isActive: true,
+        games: 9,
+        wins: 1,
+        losses: 2,
+        mmr: 99,
+        score: 100,
+        art: 820,
+        errors: 27
+      }
+    ]
+    // this.bots = []
+    // this.fetchBots()
     this.$gtag('event', 'leaderboard_bots')
   },
   methods: {
@@ -164,22 +214,26 @@ export default {
 
 <style lang="scss">
 @import '@/assets/style/global.scss';
-.table {
+.bots-table {
+  @media screen and (min-width: $screen-sm) {
+    margin-left: -16px;
+  }
   .text-start.sortable {
     font-weight: $font-weight-bold;
     font-size: $font-small;
     & > span {
-
-  word-break: normal!important;
+      word-break: normal!important;
     }
   }
   .text-start.active {
     font-weight: $font-weight-bolder;
     color: $violet!important;
     &.asc>span::after {
+      position: absolute;
       content: '⬇'
     }
     &.desc>span::after {
+      position: absolute;
       content: '⬆'
     }
   }
@@ -193,13 +247,15 @@ export default {
     display: flex;
     margin-bottom: 38px;
   }
-  .table {
-    margin-left: -16px!important;
-
-  }
   .skeleton {
     background-color: $white;
     padding-top: 20px;
+  }
+  @media screen and (min-width: $screen-sm) {
+    .avatar {
+      width: 120px!important;
+      height: 120px!important;
+    }
   }
 }
 </style>
