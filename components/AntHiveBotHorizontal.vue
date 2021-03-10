@@ -10,14 +10,13 @@
       class="img"
     >
       <img
-        v-if="bot"
         :src="getLangImg(bot.lang)"
         alt="Bot Lang"
         class="bot-stat-icon lang-icon"
         width="35px"
       >
       <div
-        v-if="bot"
+        v-if="bot.skin"
         :style="`background: center / cover no-repeat url(${getHiveSkinImg(
           bot.skin,
         )})`"
@@ -32,7 +31,7 @@
     <div :class="{fade: botIsDead}" class="description">
       <div class="information">
         <nuxt-link
-          v-if="bot"
+          v-if="bot.username"
           :to="localePath(`/users?username=${bot.username}`)"
           class="information-user"
           @click.native="$gtag('event', 'hbot_to_author')">
@@ -56,7 +55,7 @@
           /></v-avatar>
 
         </div>
-        <div v-if="bot" class="information-container">
+        <div class="information-container">
           <AntHiveButton
             class="button"
             tile
@@ -74,23 +73,24 @@
       </div>
       <p class="name">
         <span class="display-name">{{
-          bot ? getStringTruncated(bot.displayName, 9) : NA
+          getStringTruncated(bot.displayName, 9)
         }}</span>
-        <span v-if="bot">v {{ bot.v }}</span>
+        <span>v {{ bot.v }}</span>
       </p>
-      <div v-if="botStats" class="statistics">
+      <div class="statistics">
         <div class="statistic-container">
           <div class="statistic">
             <span>{{ $t("game.size") }}:</span>
             <span
+              v-if="bot.ants"
               class="statistic-value"
-            >{{ botStats.ants }}</span
+            >{{ bot.ants.length }}</span
             >
           </div>
           <div class="statistic">
             <span>{{ $t("game.score") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncated(botStats.score)
+              getNumberTruncated(bot.score)
             }}</span>
           </div>
         </div>
@@ -98,14 +98,15 @@
           <div class="statistic">
             <span>{{ $t("game.errors") }}:</span>
             <span class="statistic-value">{{
-              getNumberTruncated(botStats.errors)
+              getNumberTruncated(bot.errors)
             }}</span>
           </div>
           <div class="statistic">
             <span>{{ $t("global.rt") }}:</span>
             <span
+              v-if="bot.response"
               class="statistic-value"
-            >{{ getArtInMs(botStats.rt) }} ms</span
+            >{{ getArtInMs(bot.response.time) }} ms</span
             >
           </div>
         </div>
@@ -134,11 +135,11 @@ export default {
     }
   },
   computed: {
-    botStats() {
-      return this.bot && this.bot.stats
-    },
     botIsDead() {
-      return this.bot && this.bot.isDead
+      if (this.bot && this.bot.isDead) {
+        return this.bot.isDead
+      }
+      return false
     }
   },
   methods: {

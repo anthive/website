@@ -100,7 +100,10 @@ export default {
       }
     },
     getUsername() {
-      return this.user && this.user.username
+      if (this.user && this.user.username) {
+        return this.user.username
+      }
+      return 'N/A'
     },
     isUserProfile() {
       if (!this.getUser) { return false }

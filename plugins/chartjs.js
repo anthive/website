@@ -5,15 +5,27 @@ const { reactiveProp } = mixins
 Vue.component('AntHiveChart', {
   extends: Line,
   mixins: [reactiveProp],
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    xLabel: {
+      type: String,
+      required: true
+    },
+    yLabel: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       options: {
         responsive: true,
-        borderWidth: 3,
-        fill: true,
-        pointBorderWidth: 1,
         legend: {
-          display: false
+          display: true,
+          position: 'right'
         },
         tooltips: {
           backgroundColor: '#4d3780'
@@ -23,16 +35,29 @@ Vue.component('AntHiveChart', {
             {
               gridLines: {
                 display: false
+              },
+              scaleLabel: {
+                display: true,
+                labelString: this.xLabel,
+                fontSize: 16,
+                fontColor: '#4d3780'
               }
             }
           ],
           yAxes: [
             {
               ticks: {
-                beginAtZero: true
+                beginAtZero: false,
+                stepSize: 1
               },
               gridLines: {
-                display: false
+                display: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: this.yLabel,
+                fontSize: 16,
+                fontColor: '#4d3780'
               }
             }
           ]

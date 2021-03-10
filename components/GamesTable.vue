@@ -91,6 +91,7 @@ export default {
 .games {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin: 0 -20px;
 }
 </style>
