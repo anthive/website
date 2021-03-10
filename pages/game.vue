@@ -202,7 +202,7 @@ export default {
         }
         score.push({ ...dataset, data: botStats.score })
         ants.push({ ...dataset, data: botStats.ants })
-        errors.push({ ...dataset, data: botStats.errots })
+        errors.push({ ...dataset, data: botStats.errors })
         rt.push({ ...dataset, data: botStats.rt })
       })
       return {
