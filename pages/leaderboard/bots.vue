@@ -36,7 +36,7 @@
               </v-avatar>
             </template>
             <template v-slot:[`item.err`]="{ item }">
-              {{ item.err }}%
+              {{ item.err || 0 }}%
             </template>
             <template v-slot:[`item.score`]="{ item }">
               {{ getNumberTruncated(item.score) }}
@@ -141,61 +141,8 @@ export default {
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
-    this.bots = [
-      {
-        id: 325,
-        skin: 1,
-        v: 1,
-        displayName: 'Unplausive-Efficience',
-        avatar: 'ant-234',
-        userId: 234,
-        lang: 'php',
-        isActive: false,
-        games: 0,
-        wins: 0,
-        losses: 0,
-        mmr: 0,
-        score: 100,
-        art: 0,
-        errors: 0
-      },
-      {
-        id: 326,
-        skin: 1,
-        v: 1,
-        displayName: 'Oaken-Exploder',
-        avatar: 'ant-234',
-        userId: 234,
-        lang: 'go',
-        isActive: false,
-        games: 0,
-        wins: 0,
-        losses: 0,
-        mmr: 0,
-        score: 100,
-        art: 0,
-        errors: 0
-      },
-      {
-        id: 418,
-        skin: 1,
-        v: 1,
-        displayName: 'court-turn',
-        avatar: '37ca8fa5-db28-4892-8ec4-bf78e33c236f',
-        userId: 225,
-        lang: 'js',
-        isActive: true,
-        games: 9,
-        wins: 1,
-        losses: 2,
-        mmr: 99,
-        score: 100,
-        art: 820,
-        errors: 27
-      }
-    ]
-    // this.bots = []
-    // this.fetchBots()
+    this.bots = []
+    this.fetchBots()
     this.$gtag('event', 'leaderboard_bots')
   },
   methods: {
@@ -214,7 +161,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/style/global.scss';
-.bots-table {
+.leaderboard .bots-table {
   @media screen and (min-width: $screen-sm) {
     margin-left: -16px;
   }
@@ -226,7 +173,7 @@ export default {
     }
   }
   .text-start.active {
-    font-weight: $font-weight-bolder;
+    text-shadow: 0px 0px 1px $violet, 0px 0px 1px $violet;
     color: $violet!important;
     &.asc>span::after {
       position: absolute;

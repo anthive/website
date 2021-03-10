@@ -107,48 +107,8 @@ export default {
   },
   mounted() {
     this.searchParams = { p: 0, pp: this.pageSize }
-    this.users = [
-      {
-        id: 1,
-        avatar: '27418530-f184-4693-8e56-8333d8546944',
-        background: '',
-        username: 'anthive',
-        displayName: 'AntHive.IO',
-        description: '',
-        socials: {},
-        score: 100,
-        games: 200,
-        rank: 1200,
-        bots: []
-      },
-      {
-        id: 225,
-        avatar: '8d207be3-2ecb-4363-b735-32d2c3653d64',
-        background: '',
-        username: 'ant-225',
-        displayName: 'Vitaly Kezlya',
-        description: '',
-        socials: {},
-        score: 100,
-        games: 200,
-        rank: 1200,
-        bots: []
-      },
-      {
-        id: 283,
-        avatar: 'ant-283',
-        background: '',
-        username: 'ant-283',
-        displayName: '234',
-        description: 'asdf',
-        score: 100,
-        games: 200,
-        rank: 1200,
-        socials: {}
-      }
-    ]
-    // this.users = []
-    // this.fetchUsers()
+    this.users = []
+    this.fetchUsers()
     this.$gtag('event', 'leaderboard_users')
   },
   methods: {
@@ -166,7 +126,7 @@ export default {
 </script>
 <style lang="scss">
 @import '@/assets/style/global.scss';
-.users-table {
+.leaderboard .users-table {
   @media screen and (min-width: $screen-sm) {
     margin-left: -16px;
   }
@@ -178,7 +138,7 @@ export default {
     }
   }
   .text-start.active {
-    font-weight: $font-weight-bolder;
+    text-shadow: 0px 0px 1px $violet, 0px 0px 1px $violet;
     color: $violet!important;
     &.asc>span::after {
       position: absolute;
