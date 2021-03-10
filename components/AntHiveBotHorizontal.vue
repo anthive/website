@@ -106,7 +106,7 @@
             <span
               v-if="bot.response"
               class="statistic-value"
-            >{{ getArtInMs(bot.response.time) }} ms</span
+            >{{ bot.response ? getArtInMs(bot.response.time) : 0 }} ms</span
             >
           </div>
         </div>
@@ -136,10 +136,7 @@ export default {
   },
   computed: {
     botIsDead() {
-      if (this.bot && this.bot.isDead) {
-        return this.bot.isDead
-      }
-      return false
+      return this.bot && !this.bot.response
     }
   },
   methods: {

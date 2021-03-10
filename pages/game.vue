@@ -267,7 +267,7 @@ export default {
       botStats.score[croppedBotAge] = bot.score
       botStats.ants[croppedBotAge] = bot.ants.length
       botStats.errors[croppedBotAge] = bot.errors
-      botStats.rt[croppedBotAge] = this.getArtInMs(bot.response.time)
+      botStats.rt[croppedBotAge] = bot.response ? this.getArtInMs(bot.response.time) : 0
 
       this.botsChartStats[id] = botStats
     },

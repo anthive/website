@@ -6,10 +6,6 @@ Vue.component('AntHiveChart', {
   extends: Line,
   mixins: [reactiveProp],
   props: {
-    title: {
-      type: String,
-      required: true
-    },
     xLabel: {
       type: String,
       required: true
