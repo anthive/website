@@ -68,31 +68,35 @@
         <template v-if="chartData">
           <AntHiveChart
             v-if="chartData.score"
-            :title="$t('game.score')"
+            :x-label="$t('games.ticks')"
+            :y-label="$t('game.scorePoints')"
             :chart-data="chartData.score"
             :height="200"
-            class="mt-10"
+            class="mt-12 pt-12"
           />
           <AntHiveChart
             v-if="chartData.ants"
-            :title="$t('game.ants')"
+            :x-label="$t('games.ticks')"
+            :y-label="$t('game.antCount')"
             :chart-data="chartData.ants"
             :height="200"
-            class="mt-10"
+            class="mt-12 pt-12"
           />
           <AntHiveChart
             v-if="chartData.errors"
-            :title="$t('game.errors')"
+            :x-label="$t('games.ticks')"
+            :y-label="$t('game.errors%')"
             :chart-data="chartData.errors"
             :height="200"
-            class="mt-10"
+            class="mt-12 pt-12"
           />
           <AntHiveChart
             v-if="chartData.rt"
-            :title="$t('global.rt')"
+            :x-label="$t('games.ticks')"
+            :y-label="$t('game.responseTimeMs')"
             :chart-data="chartData.rt"
             :height="200"
-            class="mt-10"
+            class="mt-12 pt-12"
           />
         </template>
       </template>

@@ -9,20 +9,23 @@ Vue.component('AntHiveChart', {
     title: {
       type: String,
       required: true
+    },
+    xLabel: {
+      type: String,
+      required: true
+    },
+    yLabel: {
+      type: String,
+      required: true
     }
   },
   data() {
     return {
       options: {
         responsive: true,
-        title: {
-          display: true,
-          text: this.title,
-          fontSize: 24,
-          fontColor: '#4d3780'
-        },
         legend: {
-          display: true
+          display: true,
+          position: 'right'
         },
         tooltips: {
           backgroundColor: '#4d3780'
@@ -32,6 +35,12 @@ Vue.component('AntHiveChart', {
             {
               gridLines: {
                 display: false
+              },
+              scaleLabel: {
+                display: true,
+                labelString: this.xLabel,
+                fontSize: 16,
+                fontColor: '#4d3780'
               }
             }
           ],
@@ -39,10 +48,16 @@ Vue.component('AntHiveChart', {
             {
               ticks: {
                 beginAtZero: false,
-                maxTicksLimit: 100
+                stepSize: 1
               },
               gridLines: {
                 display: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: this.yLabel,
+                fontSize: 16,
+                fontColor: '#4d3780'
               }
             }
           ]
