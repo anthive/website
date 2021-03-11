@@ -267,12 +267,12 @@ export default {
       botStats.score[croppedBotAge] = bot.score
       botStats.ants[croppedBotAge] = bot.ants.length
       botStats.errors[croppedBotAge] = bot.errors
-      botStats.rt[croppedBotAge] = bot.response ? this.getArtInMs(bot.response.time) : 0
+      botStats.rt[croppedBotAge] = this.getArtInMs(bot.response)
 
       this.botsChartStats[id] = botStats
     },
-    getArtInMs(art) {
-      return Math.round(art / 10) / 100
+    getArtInMs(response) {
+      return response ? Math.round(response.time / 10) / 100 : 0
     },
     async fetchGame() {
       try {
