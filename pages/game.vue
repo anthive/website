@@ -72,7 +72,7 @@
             :y-label="$t('game.scorePoints')"
             :chart-data="chartData.score"
             :height="200"
-            class="mt-12 pt-12"
+            class="my-12 py-12"
           />
           <AntHiveChart
             v-if="chartData.ants"
@@ -80,7 +80,7 @@
             :y-label="$t('game.antCount')"
             :chart-data="chartData.ants"
             :height="200"
-            class="mt-12 pt-12"
+            class="my-12 py-12"
           />
           <AntHiveChart
             v-if="chartData.errors"
@@ -88,7 +88,7 @@
             :y-label="$t('game.errors%')"
             :chart-data="chartData.errors"
             :height="200"
-            class="mt-12 pt-12"
+            class="my-12 py-12"
           />
           <AntHiveChart
             v-if="chartData.rt"
@@ -96,7 +96,7 @@
             :y-label="$t('game.responseTimeMs')"
             :chart-data="chartData.rt"
             :height="200"
-            class="mt-12 pt-12"
+            class="my-12 py-12"
           />
         </template>
       </template>

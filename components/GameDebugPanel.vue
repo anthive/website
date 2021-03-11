@@ -30,10 +30,10 @@
     <v-tabs-items v-model="tab">
       <div v-for="(bot, index) in getBots" :key="index + 10">
         <v-tab-item :transition="false" :reverse-transition="false">
-          <div class="d-flex">
+          <div class="d-flex flex-wrap">
             <div class="tab-content">
               <div class="tab-title">
-                Request
+                {{ $t('game.request') }}
                 <AntHiveIcon
                   v-if="isGameStoped"
                   icon="download"
@@ -45,8 +45,8 @@
                 {{ getResponseRequest(bot, "requests") }}
               </div>
             </div>
-            <div class="tab-content">
-              <div class="tab-title">Response</div>
+            <div class="tab-content response">
+              <div class="tab-title">{{ $t('game.response') }}</div>
               <div>
                 <pre class="tab-text">{{
                   JSON.stringify(getResponseRequest(bot, "responses"), null, 2)
@@ -54,7 +54,7 @@
               </div>
             </div>
             <div v-if="sandboxBotLogs" class="tab-content">
-              <div class="tab-title">Logs</div>
+              <div class="tab-title">{{ $t('game.logs') }}</div>
               <div>
                 <pre class="tab-text">{{
                   sandboxBotLogs
@@ -62,7 +62,7 @@
               </div>
             </div>
             <div v-else class="tab-content">
-              <div class="tab-title">Logs</div>
+              <div class="tab-title">{{ $t('game.logs') }}</div>
               <div>
                 <pre class="tab-text">{{
                   currentBotLogs
@@ -77,7 +77,7 @@
     <div v-if="!getBots.length && sandboxBotLogs" class="d-flex">
       <div class="log-tab-content">
         <div class="tab-title">
-          Logs
+          {{ $t('game.logs') }}
         </div>
         <div class="tab-text">
           {{ sandboxBotLogs }}
@@ -88,7 +88,7 @@
     <div v-if="!getBots.length && !sandboxBotLogs" class="d-flex">
       <div class="log-tab-content">
         <div class="tab-title">
-          Logs
+          {{ $t('game.logs') }}
         </div>
         <div class="tab-text">
           {{ currentBotLogs }}
@@ -223,13 +223,17 @@ export default {
   }
   .tab-content {
     color: $violet;
-    width: 40%;
     height: 296px;
+    width: 100%;
+    flex: 2;
     overflow-y: auto;
     border-right: 2px solid $violet;
-    &:nth-child(2) {
-      width: 20%;
+    &.response {
+      flex: 1;
     }
+     @media screen and (max-width: $screen-md) {
+        flex: none!important;
+      }
   }
 
   .log-tab-content {

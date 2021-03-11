@@ -28,13 +28,10 @@
             sort-by="rank"
             sort-desc
             hide-default-footer
-            class="table"
+            class="users-table"
           >
             <template v-slot:[`item.avatar`]="{ item }">
-              <v-avatar
-                tile
-                width="120px"
-                height="120px">
+              <v-avatar tile class="avatar">
                 <v-img :src="getUserAvatar(item, 240)" />
               </v-avatar>
             </template>
@@ -127,6 +124,33 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '@/assets/style/global.scss';
+.leaderboard .users-table {
+  @media screen and (min-width: $screen-sm) {
+    margin-left: -16px;
+  }
+  .text-start.sortable {
+    font-weight: $font-weight-bold;
+    font-size: $font-small;
+    & > span {
+      word-break: normal!important;
+    }
+  }
+  .text-start.active {
+    text-shadow: 0px 0px 1px $violet, 0px 0px 1px $violet;
+    color: $violet!important;
+    &.asc>span::after {
+      position: absolute;
+      content: '⬇'
+    }
+    &.desc>span::after {
+      position: absolute;
+      content: '⬆'
+    }
+  }
+}
+</style>
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 .leaderboard {
@@ -135,12 +159,15 @@ export default {
     display: flex;
     margin-bottom: 38px;
   }
-  .table {
-    margin-left: -16px!important;
-  }
   .skeleton {
     background-color: $white;
     padding-top: 20px;
+  }
+  @media screen and (min-width: $screen-sm) {
+    .avatar {
+      width: 120px!important;
+      height: 120px!important;
+    }
   }
 }
 </style>

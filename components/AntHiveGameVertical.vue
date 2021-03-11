@@ -3,6 +3,7 @@
     class="chip"
     @mouseover="handlerChipMouseOver"
     @mouseleave="hoverOnChip = false"
+    @click="$vuetify.breakpoint.xsOnly ? handlerGoToGame(game) : false"
   >
     <div
       class="bots"
@@ -230,10 +231,18 @@ $bot-info-width: 150px;
   box-shadow: $box-shadow-default;
   background-color: $white;
 
+  @media screen and (max-width: $screen-md) {
+    max-width: 260px;
+  }
+  @media screen and (max-width: $screen-sm) {
+    max-width: 100%;
+  }
   &:hover {
-    .game-info-layout {
-      opacity: 1;
-      pointer-events: auto;
+    @media screen and (min-width: $screen-sm) {
+      .game-info-layout {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
   }
 }
@@ -323,18 +332,20 @@ $bot-info-width: 150px;
   margin: -0.6px;
 
   &:hover {
-    .ffa-img,
-    .vs-img {
-      opacity: 0;
-    }
+    @media screen and (min-width: $screen-sm) {
+      .ffa-img,
+      .vs-img {
+        opacity: 0;
+      }
 
-    .gradient {
-      opacity: 1;
-    }
+      .gradient {
+        opacity: 1;
+      }
 
-    & .bot-avatar {
-      min-width: 5%;
-      flex: 0;
+      & .bot-avatar {
+        min-width: 5%;
+        flex: 0;
+      }
     }
   }
 }
@@ -369,17 +380,19 @@ $bot-info-width: 150px;
   text-decoration: none !important;
   transition: $animation;
   &:hover {
-    flex: 3 !important;
-    width: 100% !important;
+    @media screen and (min-width: $screen-sm) {
+      flex: 3 !important;
+      width: 100% !important;
 
-    .bot-icons,
-    .bot-name {
-      opacity: 1;
-    }
+      .bot-icons,
+      .bot-name {
+        opacity: 1;
+      }
 
-    .bot-info {
-      opacity: 1;
-      right: 0;
+      .bot-info {
+        opacity: 1;
+        right: 0;
+      }
     }
   }
 }

@@ -1,7 +1,8 @@
 <template>
   <div
     class="chip"
-    @mouseover="$gtag('event', 'vbot_hover')">
+    @mouseover="$gtag('event', 'vbot_hover')"
+    @click="$vuetify.breakpoint.xsOnly ? challange(bot.id) : false">
     <div :style="`background: center / cover no-repeat url(${getBotAvatar(bot, 400)})`" class="img">
       <img
         :src="getCurrentLangImg"
@@ -175,6 +176,7 @@ export default {
       transition: all 0.4s;
       background: $black-transparent;
       opacity: 0;
+      pointer-events: none;
     }
 
     .user-info {
@@ -186,8 +188,11 @@ export default {
   }
 
   &:hover {
-    .layout {
-      opacity: 1;
+    @media screen and (min-width: $screen-sm) {
+      .layout {
+        pointer-events: auto;
+        opacity: 1;
+      }
     }
   }
 

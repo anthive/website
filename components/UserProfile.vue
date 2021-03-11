@@ -103,11 +103,6 @@ export default {
     }
   },
   computed: {
-    getUserAvatar() {
-      if (this.userInfo && this.userInfo.user) {
-        return this.us.photoUrl(this.userInfo.user.avatar, 150)
-      }
-    },
     getUser() {
       if (this.userInfo) { return this.userInfo }
     },
@@ -171,6 +166,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -20px;
+    justify-content: center;
   }
 }
 

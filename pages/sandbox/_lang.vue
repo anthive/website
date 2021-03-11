@@ -359,7 +359,10 @@ export default {
 @import '@/assets/style/global.scss';
 .skeleton {
   width: 100%;
-  height: Calc(100vw * 1 / 3.7);
+  height: calc(100vw * 1 / 3.66);
+  @media screen and (max-width: $screen-md) {
+    height: calc(100vw * 1 / 1.82);
+  }
 }
 
 .sandbox {
@@ -370,10 +373,6 @@ export default {
   }
   &__player {
     position: relative;
-    min-height: 300px;
-    &.disable {
-      min-height: 300px;
-    }
     .player {
       top:0;
       width: 100%;

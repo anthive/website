@@ -28,18 +28,15 @@
             sort-by="mmr"
             sort-desc
             hide-default-footer
-            class="table"
+            class="bots-table"
           >
             <template v-slot:[`item.avatar`]="{ item }">
-              <v-avatar
-                tile
-                width="120px"
-                height="120px">
+              <v-avatar tile class="avatar">
                 <v-img :src="getBotAvatar(item, 240)" />
               </v-avatar>
             </template>
             <template v-slot:[`item.err`]="{ item }">
-              {{ item.err }}%
+              {{ item.err || 0 }}%
             </template>
             <template v-slot:[`item.score`]="{ item }">
               {{ getNumberTruncated(item.score) }}
@@ -48,7 +45,7 @@
               {{ item.art / 1000 }} ms
             </template>
             <template v-slot:[`item.lang`]="{ item }">
-              <v-avatar tile size="40">
+              <v-avatar tile size="48">
                 <v-img :src="getLangImg(item.lang)" />
               </v-avatar>
             </template>
@@ -164,22 +161,26 @@ export default {
 
 <style lang="scss">
 @import '@/assets/style/global.scss';
-.table {
+.leaderboard .bots-table {
+  @media screen and (min-width: $screen-sm) {
+    margin-left: -16px;
+  }
   .text-start.sortable {
     font-weight: $font-weight-bold;
     font-size: $font-small;
     & > span {
-
-  word-break: normal!important;
+      word-break: normal!important;
     }
   }
   .text-start.active {
-    font-weight: $font-weight-bolder;
+    text-shadow: 0px 0px 1px $violet, 0px 0px 1px $violet;
     color: $violet!important;
     &.asc>span::after {
+      position: absolute;
       content: '⬇'
     }
     &.desc>span::after {
+      position: absolute;
       content: '⬆'
     }
   }
@@ -193,13 +194,15 @@ export default {
     display: flex;
     margin-bottom: 38px;
   }
-  .table {
-    margin-left: -16px!important;
-
-  }
   .skeleton {
     background-color: $white;
     padding-top: 20px;
+  }
+  @media screen and (min-width: $screen-sm) {
+    .avatar {
+      width: 120px!important;
+      height: 120px!important;
+    }
   }
 }
 </style>
