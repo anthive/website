@@ -28,7 +28,7 @@
           width="25px"
       ></div>
     </div>
-    <div :class="{fade: botIsDead}" class="description">
+    <div :class="{ fade: bot.isDead }" class="description">
       <div class="information">
         <nuxt-link
           v-if="bot.username"
@@ -132,11 +132,6 @@ export default {
   data() {
     return {
       NA: 'N/A'
-    }
-  },
-  computed: {
-    botIsDead() {
-      return this.bot && !this.bot.response
     }
   },
   methods: {
