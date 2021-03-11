@@ -136,10 +136,7 @@ export default {
   },
   computed: {
     botIsDead() {
-      if (this.bot && this.bot.isDead) {
-        return this.bot.isDead
-      }
-      return false
+      return this.bot && !this.bot.response
     }
   },
   methods: {
