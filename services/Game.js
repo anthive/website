@@ -10,7 +10,7 @@ function getGame(id) {
 }
 
 function getUserGames(username) {
-  const gameUrl = `/games/?username=${username}`
+  const gameUrl = `/games/?un=${username}`
   return publicApi.get(gameUrl).then(resp => resp.data)
 }
 
