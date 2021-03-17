@@ -16,7 +16,7 @@ export default {
     }
   },
   created() {
-    this.username = this.$route.query.username || 'anthive'
+    this.username = this.$route.query.username
   }
 }
 </script>
