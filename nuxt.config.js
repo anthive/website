@@ -22,7 +22,7 @@ const dynamicRoutes = () => {
   })
 }
 
-const isProd = process.env.WEBSITE_URL === 'https://anthhive.io'
+const isProd = process.env.WEBSITE_URL === 'https://anthive.io'
 
 module.exports = {
   env: {
