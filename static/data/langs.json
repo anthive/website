@@ -18,13 +18,13 @@
     "sampleCode": "https://raw.githubusercontent.com/anthive/cpp/master/bot.cpp"
   },
   {
-    "id": "csharp",
+    "id": "cs",
     "extention": "cs",
     "editor": "csharp",
     "name": "C#",
-    "img": "https://anthive.io/skins/lang/csharp.png",
-    "sample": "https://github.com/anthive/csharp",
-    "sampleCode": "https://raw.githubusercontent.com/anthive/csharp/master/Bot.cs"
+    "img": "https://anthive.io/skins/lang/cs.png",
+    "sample": "https://github.com/anthive/cs",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/cs/master/Bot.cs"
   },
   {
     "id": "go",
@@ -36,13 +36,13 @@
     "sampleCode": "https://raw.githubusercontent.com/anthive/go/master/main.go"
   },
   {
-    "id": "python",
+    "id": "py",
     "extention": "py",
     "editor": "python",
     "name": "Python",
-    "img": "https://anthive.io/skins/lang/python.png",
-    "sample": "https://github.com/anthive/python",
-    "sampleCode": "https://raw.githubusercontent.com/anthive/python/master/run.py"
+    "img": "https://anthive.io/skins/lang/py.png",
+    "sample": "https://github.com/anthive/py",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/py/master/run.py"
   },
   {
     "id": "php",
@@ -54,12 +54,12 @@
     "sampleCode": "https://raw.githubusercontent.com/anthive/php/master/run.php"
   },
   {
-    "id": "rust",
+    "id": "rs",
     "extention": "rs",
     "editor": "rust",
     "name": "Rust",
-    "img": "https://anthive.io/skins/lang/rust.png",
-    "sample": "https://github.com/anthive/rust",
-    "sampleCode": "https://raw.githubusercontent.com/anthive/rust/master/main.rs"
+    "img": "https://anthive.io/skins/lang/rs.png",
+    "sample": "https://github.com/anthive/rs",
+    "sampleCode": "https://raw.githubusercontent.com/anthive/rs/master/main.rs"
   }
 ]

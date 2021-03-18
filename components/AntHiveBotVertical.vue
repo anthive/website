@@ -65,7 +65,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import langs from '../static/langs/data.json'
+import langs from '../static/data/langs.json'
 import Image from '@/mixins/image'
 import Truncate from '@/mixins/truncate'
 import AntHiveIcon from '@/components/AntHiveIcon'

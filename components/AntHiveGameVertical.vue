@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import langs from '../static/langs/data.json'
+import langs from '../static/data/langs.json'
 import Image from '@/mixins/image'
 import { getImageById } from '@/services/Image'
 import { timeAgo } from '@/services/User'
