@@ -192,6 +192,9 @@ module.exports = {
   */
   build: {
     buildModules: ['nuxt-webfontloader'],
+    babel: {
+      compact: true
+    },
     /*
     ** You can extend webpack config here
     */
