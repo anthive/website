@@ -109,13 +109,13 @@
         <h3 class="mt-10 mb-2">{{ $t("game.checkOut") }}:</h3>
         <div class="games-links">
           <a :href="`${localePath('game')}?id=NpKu1B1jOwtTqf&v=5.0`">
-            <img class="game-image" src="img/game1.png" alt="game">
+            <img class="game-image" src="/img/game1.png" alt="game">
           </a>
           <a :href="`${localePath('game')}?id=ncdffi2vxJ5JKP&v=5.0`">
-            <img class="game-image" src="img/game2.png" alt="game">
+            <img class="game-image" src="/img/game2.png" alt="game">
           </a>
           <a :href="`${localePath('game')}?id=mNXLxQdA6ulUX5&v=5.0`">
-            <img class="game-image" src="img/game3.png" alt="game">
+            <img class="game-image" src="/img/game3.png" alt="game">
           </a>
         </div>
         <a :href="localePath('games')" class="link">{{ $t('game.goToGames') }}</a>
