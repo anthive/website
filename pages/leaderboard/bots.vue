@@ -175,13 +175,21 @@ export default {
   .text-start.active {
     text-shadow: 0px 0px 1px $violet, 0px 0px 1px $violet;
     color: $violet!important;
-    &.asc>span::after {
-      position: absolute;
-      content: '⬇'
+    &.asc>span {
+      position: relative;
+      &::after {
+        position: absolute;
+        right: -15px;
+        content: '⬇'
+      }
     }
-    &.desc>span::after {
-      position: absolute;
-      content: '⬆'
+    &.desc>span {
+      position: relative;
+      &::after {
+        position: absolute;
+        right: -15px;
+        content: '⬆'
+      }
     }
   }
 }
