@@ -184,7 +184,7 @@ export default {
     }
   },
   async mounted() {
-    const resp = await axios.get(`${process.env.WEBSITE_URL}/langs/data.json`)
+    const resp = await axios.get(`${process.env.WEBSITE_URL}/data/langs.json`)
     this.langs = resp.data
 
     await import('../../static/js/anthive-5.0.js')

@@ -1,6 +1,6 @@
 import publicApi from './plugins/axios'
 
-import langs from './static/langs/data.json'
+import langs from './static/data/langs.json'
 const pkg = require('./package')
 require('dotenv').config()
 

@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import langs from '@/static/langs/data.json'
+import langs from '@/static/data/langs.json'
 import { getBotsLeaderboard } from '@/services/Bot'
 import AntHiveIcon from '@/components/AntHiveIcon'
 import Image from '@/mixins/image'

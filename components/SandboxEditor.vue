@@ -46,7 +46,7 @@
 
 <script>
 import axios from 'axios'
-import langs from '../static/langs/data.json'
+import langs from '../static/data/langs.json'
 import AntHiveIcon from '@/components/AntHiveIcon'
 
 if (process.client) {
