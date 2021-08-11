@@ -23,64 +23,10 @@
         <div class="bot-icons">
           <img
             v-if="bot"
-            :src="getAntSkinImg(bot.skin)"
-            :alt="$t('game.botSkin')"
-            class="px-1"
-            width="40px"
-            height="40px"
-          >
-          <img
-            v-if="bot"
             :src="getCurrentLangImg(bot)"
             :alt="getCurrentLangName(bot)"
             width="40px"
           >
-        </div>
-        <div class="bot-info">
-          <div>
-            <span>{{ $t("game.size") }}:</span>
-            <span class="info-value" >
-              <template v-if="bot">
-                {{ bot.hive }}/{{ bot.ants }}
-              </template>
-              <template v-else>
-                {{ NA }}
-              </template>
-            </span>
-          </div>
-          <div>
-            <span>{{ $t("game.score") }}:</span>
-            <span class="info-value">
-              <template v-if="bot">
-                {{ getNumberTruncated(bot.score) }}
-              </template>
-              <template v-else>
-                {{ NA }}
-              </template>
-            </span>
-          </div>
-          <div>
-            <span>{{ $t("game.errors") }}:</span>
-            <span class="info-value">
-              <template v-if="bot">
-                {{ bot.err }}%
-              </template>
-              <template v-else>
-                {{ NA }}
-              </template>
-            </span>
-          </div>
-          <div>
-            <span>{{ $t("global.art") }}:</span>
-            <span class="info-value">
-              <template v-if="bot">
-                {{ getArtInMs(bot.art) }} ms
-              </template>
-              <template v-else>
-                {{ NA }}
-              </template>
-            </span>
-          </div>
         </div>
         <v-img
           v-if="getVsImage(index)"
@@ -219,7 +165,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/global.scss';
 $animation: ease 0.4s;
-$bot-info-width: 150px;
 
 .chip {
   width: 100%;
@@ -298,31 +243,6 @@ $bot-info-width: 150px;
   }
 }
 
-.bot-info {
-  position: absolute;
-  width: $bot-info-width;
-  height: 100%;
-  padding: 20px;
-  right: -$bot-info-width;
-  opacity: 0;
-  background-color: $lilac-select;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: right $animation;
-  pointer-events: none;
-
-  div {
-    display: flex;
-    justify-content: space-between;
-    color: $violet-light;
-  }
-
-  .info-value {
-    font-weight: $font-weight-bold;
-  }
-}
-
 .bots {
   position: relative;
   display: flex;
@@ -333,36 +253,25 @@ $bot-info-width: 150px;
 
   &:hover {
     @media screen and (min-width: $screen-sm) {
-      .ffa-img,
-      .vs-img {
-        opacity: 0;
-      }
-
       .gradient {
         opacity: 1;
-      }
-
-      & .bot-avatar {
-        min-width: 5%;
-        flex: 0;
       }
     }
   }
 }
 .bot-icons,
 .bot-name {
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   transition: $animation;
 }
 
 .bot-name {
   position: absolute;
-  width: calc(100% - #{$bot-info-width} - 10px);
   left: 10px;
   top: 5px;
   color: $white;
-  font-size: $font-medium;
+  font-size: $font-small;
   font-weight: $font-weight-bold;
 }
 
@@ -381,17 +290,10 @@ $bot-info-width: 150px;
   transition: $animation;
   &:hover {
     @media screen and (min-width: $screen-sm) {
-      flex: 3 !important;
-      width: 100% !important;
 
       .bot-icons,
       .bot-name {
         opacity: 1;
-      }
-
-      .bot-info {
-        opacity: 1;
-        right: 0;
       }
     }
   }
@@ -443,7 +345,7 @@ $bot-info-width: 150px;
   height: 100%;
   background: $user-background-gradient;
   pointer-events: none;
-  opacity: 0;
+  opacity: 0.7;
   transition: $animation;
 }
 </style>
