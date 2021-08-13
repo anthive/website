@@ -254,6 +254,7 @@ export default {
       const lastErrorsValue = botStats.errors[oldLength]
       const lastRtValue = botStats.rt[oldLength]
       const croppedBotAge = Math.round(bot.age / this.cropNumber)
+
       // set new ticks length
       botStats.score.length = botStats.ants.length = botStats.errors.length = botStats.rt.length = croppedBotAge
 
