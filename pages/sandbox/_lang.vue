@@ -239,7 +239,7 @@ export default {
     async getGame() {
       try {
         this.isGameRunned = true
-        await axios.head(`${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/asd`)
+        await axios.head(this.getGameUrl)
         this.initGame()
         this.initLogs()
       } catch {
@@ -257,7 +257,7 @@ export default {
 
         this.fetchInitGameInterval = setInterval(async() => {
           try {
-            await axios.head(`${process.env.SANDBOX_STORAGE}/${process.env.SIM_VERSION}/asd`)
+            await axios.head(this.getGameUrl)
             this.initGame()
           } catch {
             this.loadingText = this.$t('sandbox.errorCompile')
