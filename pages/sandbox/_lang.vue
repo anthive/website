@@ -1,5 +1,6 @@
 <template>
   <section class="sandbox page-wrap">
+    {{ initGameIntervalDelay }}
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <div v-if="isGameAvailable" class="pa-3 pb-10" min-height="calc(100vh - 64px)">
@@ -145,6 +146,7 @@ export default {
     isGameAvailable: true,
     langs: null,
     fetchInitGameInterval: null,
+    initGameIntervalDelay: 3000,
     gameQueueMaxTimer: 120000
   }),
   computed: {
@@ -253,8 +255,6 @@ export default {
 
         this.botLogs = 'Loading...'
 
-        let initGameIntervalDelay = 3000
-
         this.fetchInitGameInterval = setInterval(async() => {
           try {
             await axios.head(this.getGameUrl)
@@ -264,9 +264,9 @@ export default {
             this.isDebugMode = true
             await this.initLogs()
 
-            initGameIntervalDelay += 3000
+            this.initGameIntervalDelay += 3000
 
-            if (initGameIntervalDelay > this.gameQueueMaxTimer) {
+            if (this.initGameIntervalDelay > this.gameQueueMaxTimer) {
               clearInterval(this.fetchInitGameInterval)
             }
 
@@ -274,7 +274,7 @@ export default {
           }
 
           clearInterval(this.fetchInitGameInterval)
-        }, initGameIntervalDelay)
+        }, this.initGameIntervalDelay)
       }
     },
     onClickLogin() {
