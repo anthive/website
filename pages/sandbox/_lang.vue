@@ -1,6 +1,5 @@
 <template>
   <section class="sandbox page-wrap">
-    {{ initGameIntervalDelay }}
     <v-row class="px-2">
       <v-col class="pa-0" cols="12">
         <div v-if="isGameAvailable" class="pa-3 pb-10" min-height="calc(100vh - 64px)">
