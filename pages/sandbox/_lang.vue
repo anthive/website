@@ -103,7 +103,6 @@
 import md5 from 'md5'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
-import Fire from '@/plugins/firebase'
 import editor from '@/components/SandboxEditor.vue'
 import AntHivePageHeader from '@/components/AntHivePageHeader'
 import GameDebugPanel from '@/components/GameDebugPanel'
@@ -144,7 +143,10 @@ export default {
     timerId: null,
     isGameRunned: false,
     isGameAvailable: true,
-    langs: null
+    langs: null,
+    fetchInitGameInterval: null,
+    initGameIntervalDelay: 3000,
+    gameQueueMaxTimer: 120000
   }),
   computed: {
     ...mapGetters(['getUser']),
@@ -249,34 +251,29 @@ export default {
         if (this.gamePlayer && this.gamePlayer.control) {
           this.gamePlayer.control.stop()
         }
+
         this.botLogs = 'Loading...'
 
-        let isGameWasInQueue = false
-        const sandboxRef = Fire.database().ref('sandbox')
-        sandboxRef.on('value', async(snapshot) => {
-          const snapshotValue = snapshot.val()
-          const gamesInQueue = snapshotValue ? Object.values(snapshotValue) : []
-          const isGameStillInQueue = gamesInQueue.findIndex(game => game.sum === this.gameId) !== -1
+        this.fetchInitGameInterval = setInterval(async() => {
+          try {
+            await axios.head(this.getGameUrl)
+            this.initGame()
+          } catch {
+            this.loadingText = this.$t('sandbox.errorCompile')
+            this.isDebugMode = true
+            await this.initLogs()
 
-          if (isGameWasInQueue && !isGameStillInQueue) {
-            this.loading = false
-            sandboxRef.off()
+            this.initGameIntervalDelay += 3000
 
-            try {
-              await axios.head(this.getGameUrl)
-              this.initGame()
-            } catch {
-              this.loadingText = this.$t('sandbox.errorCompile')
-            } finally {
-              this.isDebugMode = true
-              this.initLogs()
+            if (this.initGameIntervalDelay > this.gameQueueMaxTimer) {
+              clearInterval(this.fetchInitGameInterval)
             }
 
             return
           }
 
-          isGameWasInQueue = isGameStillInQueue
-        })
+          clearInterval(this.fetchInitGameInterval)
+        }, this.initGameIntervalDelay)
       }
     },
     onClickLogin() {
@@ -333,6 +330,7 @@ export default {
         this.gamePlayer = this.gamePlayer.clearPlayerState()
       }
       if (this.fetchPlayerDataTimerId) { clearInterval(this.fetchPlayerDataTimerId) }
+      if (this.fetchInitGameInterval) { clearInterval(this.fetchInitGameInterval) }
     },
     gameSetTooltipCoords(event) {
       if (event.target.localName !== 'canvas') { return }
